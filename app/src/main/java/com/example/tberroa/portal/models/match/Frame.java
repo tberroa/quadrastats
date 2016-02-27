@@ -1,5 +1,6 @@
 package com.example.tberroa.portal.models.match;
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
@@ -10,7 +11,7 @@ import java.util.Map;
 // This object contains game frame information
 
 @Table(name = "Frame")
-public class Frame {
+public class Frame extends Model {
 
     @Expose
     @Column(name = "events")

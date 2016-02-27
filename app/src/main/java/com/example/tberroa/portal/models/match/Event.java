@@ -4,12 +4,13 @@ package com.example.tberroa.portal.models.match;
 // values documented below are valid for all games. Event data evolves over time
 // and certain values may be relevant only for older or newer games.
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @Table(name = "Event")
-public class Event {
+public class Event extends Model {
 
     @Expose
     @Column(name = "ascended_type")

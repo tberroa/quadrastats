@@ -2,6 +2,7 @@ package com.example.tberroa.portal.models.match;
 
 // This object contains match participant information
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
@@ -9,7 +10,7 @@ import com.google.gson.annotations.Expose;
 import java.util.List;
 
 @Table(name = "Participant")
-public class Participant {
+public class Participant extends Model {
 
     @Expose
     @Column(name = "champion_id")

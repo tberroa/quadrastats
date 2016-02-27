@@ -2,12 +2,13 @@ package com.example.tberroa.portal.models.match;
 
 // This object contains participant frame information
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @Table(name = "ParticipantFrame")
-public class ParticipantFrame {
+public class ParticipantFrame  extends Model {
 
     @Expose                                 // Participant's current gold
     @Column(name = "current_gold")

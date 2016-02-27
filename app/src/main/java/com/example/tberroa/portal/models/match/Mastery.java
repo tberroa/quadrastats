@@ -6,7 +6,7 @@ import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @Table(name = "Mastery")
-public class Mastery extends Model {
+public class Mastery  extends Model {
 
     @Expose
     @Column(name = "mastery_id")        // mastery id
