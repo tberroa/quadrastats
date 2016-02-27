@@ -3,6 +3,7 @@ package com.example.tberroa.portal.activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +19,14 @@ import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.database.RiotAPI;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,9 +62,18 @@ public class HomeActivity extends AppCompatActivity
         new UserInfo().setRegion(this, Params.REGION_NA);
 
         // get my data
-        SummonerDto Frosiph = new RiotAPI(this).getSummoner("Frosiph");
-        long frosiphId = Frosiph.id;
+        List<String> summonerNames = new ArrayList<String>();
+        summonerNames.add("Frosiph");
+        summonerNames.add("Acruz");
+        summonerNames.add("Luciaron");
+        Map<String, SummonerDto> summoners = new RiotAPI(this).getSummoners(summonerNames);
 
+        Type summonerMap = new TypeToken<Map<String, SummonerDto>>(){}.getType();
+
+        // log block
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String myMap =   gson.toJson(summoners, summonerMap);
+        Log.d(Params.TAG_DEBUG, "summoner map: "+myMap);
 
     }
 

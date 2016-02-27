@@ -18,3 +18,5 @@ public class BannedChampion extends Model {
     @Column(name = "pick_turn")         // Turn during which the champion was banned
     public int pickTurn;
 }
+
+

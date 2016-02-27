@@ -25,5 +25,4 @@ public class Frame extends Model {
     @Expose
     @Column(name = "timestamp")
     public long timestamp;              // Represents how many milliseconds into the game the frame occurred.
-
 }

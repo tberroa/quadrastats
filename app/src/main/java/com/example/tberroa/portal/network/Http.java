@@ -1,6 +1,8 @@
 package com.example.tberroa.portal.network;
 
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
@@ -21,6 +23,9 @@ public class Http {
                 .build();
 
         Response response = client.newCall(request).execute();
+        // =================== TEST BLOCK =================
+        Log.d("test1", "http response: " + response.body().toString());
+        // ===============================================
         return response.body().string();
     }
 }
