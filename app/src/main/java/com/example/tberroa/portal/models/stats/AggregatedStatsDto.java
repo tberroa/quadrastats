@@ -3,12 +3,13 @@ package com.example.tberroa.portal.models.stats;
 // This object contains aggregated stat information.
 // I'm purposely ignoring Dominion only stats
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @Table(name = "AggregatedStatsDto")
-public class AggregatedStatsDto {
+public class AggregatedStatsDto extends Model {
 
     @Expose
     @Column(name = "bot_games_played")

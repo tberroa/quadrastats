@@ -2,12 +2,13 @@ package com.example.tberroa.portal.models.matchlist;
 
 // This object contains match reference information
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @Table(name = "MatchReference")
-public class MatchReference {
+public class MatchReference extends Model {
 
     @Expose
     @Column(name = "champion")

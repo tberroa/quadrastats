@@ -2,12 +2,13 @@ package com.example.tberroa.portal.models.match;
 
 // This object contains all timeline information
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @Table(name = "ParticipantTimeline")
-public class ParticipantTimeline {
+public class ParticipantTimeline extends Model {
 
     @Expose
     @Column(name = "ancient_golem_assists_per_min_counts")

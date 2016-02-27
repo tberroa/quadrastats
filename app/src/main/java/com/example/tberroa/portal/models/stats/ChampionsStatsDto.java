@@ -2,12 +2,13 @@ package com.example.tberroa.portal.models.stats;
 
 // This object contains a collection of champion stats information.
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @Table(name = "ChampionsStatsDto")
-public class ChampionsStatsDto {
+public class ChampionsStatsDto extends Model {
 
     @Expose
     @Column(name = "id")                        // Champion ID.  Note that champion ID 0 represents

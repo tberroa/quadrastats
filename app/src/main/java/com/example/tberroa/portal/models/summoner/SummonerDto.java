@@ -8,6 +8,10 @@ import com.google.gson.annotations.Expose;
 @Table(name = "SummonerDto")
 public class SummonerDto extends Model {
 
+    public SummonerDto(){
+
+    }
+
     @Expose
     @Column(name = "summoner_id")
     public long id;             // SummonerDto ID

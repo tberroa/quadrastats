@@ -2,12 +2,13 @@ package com.example.tberroa.portal.models.match;
 
 // This object contains participant statistics information
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @Table(name = "ParticipantStats")
-public class ParticipantStats {
+public class ParticipantStats extends Model {
 
     @Expose
     @Column(name = "assists")                   // Number of assists

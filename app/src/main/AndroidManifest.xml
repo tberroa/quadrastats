@@ -18,7 +18,33 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.example.tberroa.girodicerapp.model.Summoner" />
+            android:value="com.example.tberroa.portal.models.summoner.SummonerDto,
+            com.example.tberroa.portal.models.summoner.MasteryPagesDto,
+            com.example.tberroa.portal.models.summoner.MasteryPageDto,
+            com.example.tberroa.portal.models.summoner.MasteryDto,
+            com.example.tberroa.portal.models.stats.RankedStatsDto,
+            com.example.tberroa.portal.models.stats.PlayerStatsSummaryListDto,
+            com.example.tberroa.portal.models.stats.PlayerStatsSummaryDto,
+            com.example.tberroa.portal.models.stats.ChampionsStatsDto,
+            com.example.tberroa.portal.models.stats.AggregatedStatsDto,
+            com.example.tberroa.portal.models.matchlist.MatchReference,
+            com.example.tberroa.portal.models.matchlist.MatchList,
+            com.example.tberroa.portal.models.matches.Timeline,
+            com.example.tberroa.portal.models.matches.Team,
+            com.example.tberroa.portal.models.matches.Rune,
+            com.example.tberroa.portal.models.matches.Position,
+            com.example.tberroa.portal.models.matches.Player,
+            com.example.tberroa.portal.models.matches.ParticipantTimelineData,
+            com.example.tberroa.portal.models.matches.ParticipantTimeline,
+            com.example.tberroa.portal.models.matches.ParticipantStats,
+            com.example.tberroa.portal.models.matches.ParticipantIdentity,
+            com.example.tberroa.portal.models.matches.ParticipantFrame,
+            com.example.tberroa.portal.models.matches.Participant,
+            com.example.tberroa.portal.models.matches.MatchDetail,
+            com.example.tberroa.portal.models.matches.Mastery,
+            com.example.tberroa.portal.models.matches.Frame,
+            com.example.tberroa.portal.models.matches.Event,
+            com.example.tberroa.portal.models.matches.BannedChampion" />
 
 
         <activity
