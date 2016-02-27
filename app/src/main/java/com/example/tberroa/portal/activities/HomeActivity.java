@@ -20,11 +20,7 @@ import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.database.RiotAPI;
 import com.example.tberroa.portal.helpers.ModelSerializer;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +59,7 @@ public class HomeActivity extends AppCompatActivity
         new UserInfo().setRegion(this, Params.REGION_NA);
 
         // get my data
-        List<String> summonerNames = new ArrayList<String>();
+        List<String> summonerNames = new ArrayList<>();
         summonerNames.add("Frosiph");
         summonerNames.add("Acruz");
         summonerNames.add("Luciaron");
@@ -78,7 +74,6 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-	// testing
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

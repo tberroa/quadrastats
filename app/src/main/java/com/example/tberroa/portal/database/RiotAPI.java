@@ -6,16 +6,11 @@ import android.util.Log;
 
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.helpers.ModelSerializer;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.Http;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +24,6 @@ public class RiotAPI {
     }
 
     public Map<String, SummonerDto> getSummoners(List<String> summonerNames){
-
         // construct names field
         String names = "";
         for (int i=0; i < summonerNames.size(); i++){
@@ -55,27 +49,19 @@ public class RiotAPI {
 
         Log.d(Params.TAG_DEBUG, "Http().get output: "+ summonerMapJson);
 
-        // deserialize and return summoner map
-        Type summonerMap = new TypeToken<Map<String, SummonerDto>>(){}.getType();
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        return  gson.fromJson(summonerMapJson, summonerMap);
+        //return summoner map
+        return new ModelSerializer<Map<String,SummonerDto>>().fromJson(summonerMapJson);
     }
 
     class AttemptPost extends AsyncTask<Void, Void, String> {
-
-        private String postResponse;
-
         @Override
         protected String doInBackground(Void... params) {
-            // get map of summoners in json format
-            postResponse = "";
+            String postResponse = "";
             try{
                 postResponse = new Http().get(url);
             }catch(IOException e){
-                Log.d("test1", "entered catch block");
-                // do stuff
+                Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
             }
-
             return postResponse;
         }
     }
