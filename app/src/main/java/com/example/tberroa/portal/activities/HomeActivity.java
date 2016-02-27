@@ -18,6 +18,7 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.database.RiotAPI;
+import com.example.tberroa.portal.helpers.ModelSerializer;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -68,12 +69,12 @@ public class HomeActivity extends AppCompatActivity
         summonerNames.add("Luciaron");
         Map<String, SummonerDto> summoners = new RiotAPI(this).getSummoners(summonerNames);
 
-        Type summonerMap = new TypeToken<Map<String, SummonerDto>>(){}.getType();
-
         // log block
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        String myMap =   gson.toJson(summoners, summonerMap);
-        Log.d(Params.TAG_DEBUG, "summoner map: "+myMap);
+        String mapJson = new ModelSerializer<Map<String, SummonerDto>>().toJson(summoners);
+        Log.d(Params.TAG_DEBUG, "summoner map: "+mapJson);
+
+        // get Frosiph
+        SummonerDto Frosiph = summoners.get("Frosiph");
 
     }
 

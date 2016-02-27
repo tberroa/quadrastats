@@ -61,16 +61,6 @@ public class RiotAPI {
         return  gson.fromJson(summonerMapJson, summonerMap);
     }
 
-
-
-
-
-
-
-
-
-
-
     class AttemptPost extends AsyncTask<Void, Void, String> {
 
         private String postResponse;
@@ -89,8 +79,4 @@ public class RiotAPI {
             return postResponse;
         }
     }
-
-
-
-
 }
