@@ -23,6 +23,7 @@ import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.database.RiotAPI;
 import com.example.tberroa.portal.database.URLConstructor;
+import com.example.tberroa.portal.helpers.CircleTransform;
 import com.example.tberroa.portal.models.matchlist.MatchList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.NetworkUtil;
@@ -77,7 +78,10 @@ public class HomeActivity extends AppCompatActivity
             View headerLayout = navigationView.getHeaderView(0);
             ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
             String url = new URLConstructor().summonerIcon(summoner.profileIconId);
-            Picasso.with(this).load(url).into(summonerIcon);
+            Picasso.with(this)
+                    .load(url)
+                    .fit()
+                    .transform(new CircleTransform()).into(summonerIcon);
 
             // load summoner name
             TextView summonerName = (TextView) headerLayout.findViewById(R.id.summoner_name);

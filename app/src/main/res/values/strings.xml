@@ -1,7 +1,7 @@
 <resources>
-    <!-- general -->
     <string name="app_name">Portal</string>
     <string name="summoner_name">Summoner Name</string>
+    <string name="summoner_icon_description">image of the summoners icon</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
