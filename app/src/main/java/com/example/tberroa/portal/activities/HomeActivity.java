@@ -138,17 +138,17 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.view_profile) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.manage_inner_circle) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.dynamic_queue) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.solo_queue) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.team_5) {
+
+        } else if (id == R.id.team_3) {
 
         }
 
