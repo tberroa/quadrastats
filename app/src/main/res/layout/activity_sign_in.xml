@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignInActivity" >
+
+    <ImageView
+        android:id="@+id/logo"
+        android:src="@drawable/app_logo2"
+        android:contentDescription="@string/app_logo_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="45dp"
+        />
+
+    <EditText
+        android:id="@+id/summoner_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:ems="12"
+        android:focusable="true"
+        android:hint="@string/summoner_name"
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
+        />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/summoner_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:ems="12"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:imeOptions="actionGo"
+        />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/password"
+        android:layout_alignEnd="@id/password"
+        android:layout_below="@id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="@string/sign_in_button"
+        />
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/register"
+        android:layout_below="@id/login"
+        android:textSize="16sp"
+        />
+</RelativeLayout>

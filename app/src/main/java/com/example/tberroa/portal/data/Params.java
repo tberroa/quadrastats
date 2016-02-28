@@ -5,7 +5,11 @@ public class Params {
     private Params(){
     }
 
-    // types
+    // authentication
+    public static final String LOGIN_URL = "http://portalapp.altervista.org/login.php";
+
+    // network parameters
+    final public static String POST_MEDIA_TYPE = "application/x-www-form-urlencoded; charset=utf-8";
 
     // riot api requirements
     public static final String RIOT_BASE_URL = "https://na.api.pvp.net";
