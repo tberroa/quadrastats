@@ -3,7 +3,6 @@ package com.example.tberroa.portal.activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
@@ -20,6 +20,7 @@ import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.database.RiotAPI;
 import com.example.tberroa.portal.models.matchlist.MatchList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.network.NetworkUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,27 +59,30 @@ public class HomeActivity extends AppCompatActivity
         // set region
         UserInfo userInfo = new UserInfo();
         userInfo.setRegion(this, Params.REGION_NA);
-        // log
-        String region = userInfo.getRegion(this);
 
         // initialize riot api
         RiotAPI riotAPI = new RiotAPI(this);
 
-        // get summoners
-        List<String> summonerNames = new ArrayList<>();
-        summonerNames.add("frosiph");
-        summonerNames.add("acruz");
-        summonerNames.add("luciaron");
-        Map<String, SummonerDto> summoners = riotAPI.getSummoners(summonerNames);
+        if (NetworkUtil.isInternetAvailable(this)){
+            // get summoners
+            List<String> summonerNames = new ArrayList<>();
+            summonerNames.add("frosiph");
+            summonerNames.add("acruz");
+            summonerNames.add("luciaron");
+            Map<String, SummonerDto> summoners = riotAPI.getSummoners(summonerNames);
 
-        // get summoner
-        SummonerDto summoner = summoners.get("acruz");
+            // get summoner
+            SummonerDto summoner = summoners.get("acruz");
 
-        // get his/her matches
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("seasons", Params.SEASON_2016);
-        parameters.put("queue", Params.TEAM_BUILDER_DRAFT_RANKED_5);
-        MatchList matches = riotAPI.getMatches(summoner.id, parameters);
+            // get his/her matches
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put("seasons", Params.SEASON_2016);
+            parameters.put("queue", Params.TEAM_BUILDER_DRAFT_RANKED_5);
+            MatchList matches = riotAPI.getMatches(summoner.id, parameters);
+        }
+        else{
+            Toast.makeText(this, "internet not available", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
