@@ -14,7 +14,7 @@ import okhttp3.Response;
 
 public class Http {
 
-    private OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client = new OkHttpClient();
     private final MediaType mediaType = MediaType.parse(Params.POST_MEDIA_TYPE);
 
     public Http(){
@@ -22,16 +22,19 @@ public class Http {
 
     public String get(String url) throws IOException {
         Request request = new Request.Builder().url(url).build();
-        Response response = client.newCall(request).execute();
-        Log.d(Params.TAG_DEBUG, "http response: " + response.body().toString());
-        return response.body().string();
+        Response rawResponse = client.newCall(request).execute();
+        String response = rawResponse.body().string().trim();
+        Log.d(Params.TAG_DEBUG, "http response: " + response);
+        return response;
     }
 
     public String post(String url, String keyValuePairs) throws IOException {
         RequestBody body = RequestBody.create(mediaType, keyValuePairs);
         Request request = new Request.Builder().url(url).post(body).build();
-        Response response = client.newCall(request).execute();
-        return response.body().string().trim();
+        Response rawResponse = client.newCall(request).execute();
+        String response = rawResponse.body().string().trim();
+        Log.d(Params.TAG_DEBUG, "http response: " + response);
+        return response;
     }
 
 }

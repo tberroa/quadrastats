@@ -81,6 +81,16 @@ public class HomeActivity extends AppCompatActivity
             TextView summonerName = (TextView) headerLayout.findViewById(R.id.summoner_name);
             summonerName.setText(summoner.name);
 
+            // load image menu
+            ImageView dynamicQueue = (ImageView) findViewById(R.id.splash_dynamic_queue);
+            ImageView soloQueue = (ImageView) findViewById(R.id.splash_solo_queue);
+            ImageView team5 = (ImageView) findViewById(R.id.splash_team_5);
+            ImageView team3 = (ImageView) findViewById(R.id.splash_team3);
+            Picasso.with(this).load(R.drawable.splash_akali).centerCrop().fit().into(dynamicQueue);
+            Picasso.with(this).load(R.drawable.splash_amumu).centerCrop().fit().into(soloQueue);
+            Picasso.with(this).load(R.drawable.splash_shyvana).centerCrop().fit().into(team5);
+            Picasso.with(this).load(R.drawable.splash_jarvan).centerCrop().fit().into(team3);
+
             // get his/her matches
             Map<String, String> parameters = new HashMap<>();
             parameters.put("seasons", Params.SEASON_2016);

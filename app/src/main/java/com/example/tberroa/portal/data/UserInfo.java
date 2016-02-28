@@ -8,7 +8,7 @@ public class UserInfo extends Application {
 
     private final String REGION = "region";
     private final String SUMMONER_NAME = "summoner_name";
-    private final String IS_LOGGED_IN = "is_logged_in";
+    private final String IS_SIGNED_IN = "is_logged_in";
 
     private SharedPreferences getSharedPreferences(Context context){
         return context.getSharedPreferences("user_info", MODE_PRIVATE);
@@ -22,8 +22,8 @@ public class UserInfo extends Application {
         return getSharedPreferences(context).getString(SUMMONER_NAME, "");
     }
 
-    public Boolean isLoggedIn(Context context){
-        return getSharedPreferences(context).getBoolean(IS_LOGGED_IN, false);
+    public Boolean isSignedIn(Context context){
+        return getSharedPreferences(context).getBoolean(IS_SIGNED_IN, false);
     }
 
     public void setRegion(Context context, String region) {
@@ -40,7 +40,7 @@ public class UserInfo extends Application {
 
     public void setUserStatus(Context context, Boolean bool) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putBoolean(IS_LOGGED_IN, bool);
+        editor.putBoolean(IS_SIGNED_IN, bool);
         editor.apply();
     }
 

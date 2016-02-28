@@ -21,7 +21,8 @@ import java.util.Map;
 
 public class RiotAPI {
 
-    private String region, url;
+    private final String region;
+    private String url;
 
     public RiotAPI(Context context){
         region = new UserInfo().getRegion(context);
@@ -98,7 +99,7 @@ public class RiotAPI {
         return new ModelSerializer().fromJson(matches, MatchList.class);
     }
 
-    class AttemptPost extends AsyncTask<Void, Void, String> {
+    private class AttemptPost extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... params) {
             String postResponse = "";

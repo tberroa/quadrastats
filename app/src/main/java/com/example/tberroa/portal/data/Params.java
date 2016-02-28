@@ -6,10 +6,11 @@ public class Params {
     }
 
     // authentication
-    public static final String LOGIN_URL = "http://portalapp.altervista.org/login.php";
+    public static final String SIGN_IN_URL = "http://portalapp.altervista.org/signin.php";
+    public static final String REGISTER_URL = "http://portalapp.altervista.org/register.php";
 
     // network parameters
-    final public static String POST_MEDIA_TYPE = "application/x-www-form-urlencoded; charset=utf-8";
+    final public static String POST_MEDIA_TYPE = "application/x-www-form-urlencoded;charset=utf-8";
 
     // riot api requirements
     public static final String RIOT_BASE_URL = "https://na.api.pvp.net";

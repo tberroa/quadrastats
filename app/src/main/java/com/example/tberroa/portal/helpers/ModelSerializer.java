@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 
 public class ModelSerializer {
 
-    private Gson gson;
+    private final Gson gson;
 
     public ModelSerializer(){
         gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();

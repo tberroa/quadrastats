@@ -24,7 +24,7 @@ public class Utilities {
 
         if (summonerName != null){
             boolean tooShort = summonerName.length() < 3;
-            boolean tooLong = summonerName.length() > 15;
+            boolean tooLong = summonerName.length() > 16;
             if (!summonerName.matches("[a-zA-Z0-9]+") || tooShort || tooLong ) {
                 validation = validation.concat("summoner_name");
             }
@@ -32,7 +32,7 @@ public class Utilities {
 
         if (password != null){
             if (password.length() < 6 || password.length() > 20) {
-                validation = validation.concat("password");
+                validation = validation.concat("pass_word");
             }
         }
 
