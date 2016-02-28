@@ -14,11 +14,11 @@ public class SummonerDto extends Model {
 
     @Expose
     @Column(name = "summoner_id")
-    public long id;             // SummonerDto ID
+    public long id;             // Summoner ID
 
     @Expose
     @Column(name = "name")
-    public String name;         // SummonerDto name
+    public String name;         // Summoner name
 
     @Expose
     @Column(name = "profile_icon_id")
@@ -28,10 +28,10 @@ public class SummonerDto extends Model {
     @Column(name = "revision_date")
     public long revisionDate;   // Date summoner was last modified specified as epoch milliseconds.
                                 // The following events will update this timestamp:
-                                    // profile icon change, playing the tutorial or advanced tutorial,
-                                    // finishing a game, summoner name change
+                                // profile icon change, playing the tutorial or advanced tutorial,
+                                // finishing a game, summoner name change
 
     @Expose
     @Column(name = "summoner_level")
-    public long summonerLevel;	//SummonerDto level associated with the summoner.
+    public long summonerLevel;	// summoner level associated with the summoner.
 }

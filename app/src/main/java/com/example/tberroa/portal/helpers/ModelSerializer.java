@@ -2,25 +2,20 @@ package com.example.tberroa.portal.helpers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-
-public class ModelSerializer<T> {
+public class ModelSerializer {
 
     private Gson gson;
-    private Type type;
 
     public ModelSerializer(){
         gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        type = new TypeToken<T>(){}.getType();
     }
 
-    public String toJson(T object){
-        return gson.toJson(object, type);
+    public <T> String toJson(T object, Class<T> clazz){
+        return gson.toJson(object, clazz);
     }
 
-    public T fromJson(String json){
-        return gson.fromJson(json, type);
+    public <T> T fromJson(String jsonString, Class<T> clazz) {
+        return gson.fromJson(jsonString, clazz);
     }
 }

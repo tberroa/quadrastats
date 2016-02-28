@@ -18,10 +18,11 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.database.RiotAPI;
-import com.example.tberroa.portal.helpers.ModelSerializer;
+import com.example.tberroa.portal.models.matchlist.MatchList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,25 +55,33 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //=======================================================================================
-
         // set region
-        new UserInfo().setRegion(this, Params.REGION_NA);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setRegion(this, Params.REGION_NA);
+        // log
+        String region = userInfo.getRegion(this);
 
-        // get my data
+        // initialize riot api
+        RiotAPI riotAPI = new RiotAPI(this);
+
+        // get summoners
         List<String> summonerNames = new ArrayList<>();
-        summonerNames.add("Frosiph");
-        summonerNames.add("Acruz");
-        summonerNames.add("Luciaron");
-        Map<String, SummonerDto> summoners = new RiotAPI(this).getSummoners(summonerNames);
+        summonerNames.add("frosiph");
+        summonerNames.add("acruz");
+        summonerNames.add("luciaron");
+        Map<String, SummonerDto> summoners = riotAPI.getSummoners(summonerNames);
 
-        // log block
-        String mapJson = new ModelSerializer<Map<String, SummonerDto>>().toJson(summoners);
-        Log.d(Params.TAG_DEBUG, "summoner map: "+mapJson);
+        // get summoner
+        SummonerDto summoner = summoners.get("acruz");
 
-        // get Frosiph
-        SummonerDto Frosiph = summoners.get("Frosiph");
-
+        // get his/her matches
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("seasons", Params.SEASON_2016);
+        parameters.put("queue", Params.TEAM_BUILDER_DRAFT_RANKED_5);
+        MatchList matches = riotAPI.getMatches(summoner.id, parameters);
     }
+
+
 
     @Override
     public void onBackPressed() {
