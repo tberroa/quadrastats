@@ -9,6 +9,7 @@ public class Params {
 
     // riot api requirements
     public static final String RIOT_BASE_URL = "https://na.api.pvp.net";
+    public static final String DATA_DRAGON_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/";
     public static final String REGION_NA = "na";
     public static final String API_KEY = "f5ee63d2-54d8-466d-ae42-df491f8eabc5";
 

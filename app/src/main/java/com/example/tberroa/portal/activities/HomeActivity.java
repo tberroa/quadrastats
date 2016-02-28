@@ -12,15 +12,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.database.RiotAPI;
+import com.example.tberroa.portal.database.URLConstructor;
 import com.example.tberroa.portal.models.matchlist.MatchList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.NetworkUtil;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,15 +45,6 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,6 +72,16 @@ public class HomeActivity extends AppCompatActivity
 
             // get summoner
             SummonerDto summoner = summoners.get("acruz");
+
+            // load summoner icon
+            View headerLayout = navigationView.getHeaderView(0);
+            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
+            String url = new URLConstructor().summonerIcon(summoner.profileIconId);
+            Picasso.with(this).load(url).into(summonerIcon);
+
+            // load summoner name
+            TextView summonerName = (TextView) headerLayout.findViewById(R.id.summoner_name);
+            summonerName.setText(summoner.name);
 
             // get his/her matches
             Map<String, String> parameters = new HashMap<>();
