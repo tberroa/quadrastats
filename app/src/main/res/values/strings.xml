@@ -38,4 +38,5 @@
     <string name="thumbnail_team_5">thumbnail for ranked team 5v5</string>
     <string name="thumbnail_team_3">thumbnail for ranked team 3v3</string>
     <string name="thumbnail_summoner_icon">image of the summoners icon</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

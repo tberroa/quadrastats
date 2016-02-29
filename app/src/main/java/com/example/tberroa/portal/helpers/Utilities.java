@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.tberroa.portal.activities.HomeActivity;
+import com.example.tberroa.portal.activities.SignInActivity;
 import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.database.LocalDB;
 
 public class Utilities {
 
@@ -69,6 +71,21 @@ public class Utilities {
         }
     }
 
+    public static void SignOut(Context context){
+        UserInfo userInfo = new UserInfo();
+
+        // clear shared preferences of old data
+        userInfo.clear(context);
+
+        // clear database
+        new LocalDB().Clear(context);
+
+        // go to sign in page
+        context.startActivity(new Intent(context, SignInActivity.class));
+        if(context instanceof Activity){
+            ((Activity)context).finish();
+        }
+    }
 
 
 }

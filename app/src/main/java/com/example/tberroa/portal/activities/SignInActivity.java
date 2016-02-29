@@ -68,7 +68,8 @@ public class SignInActivity extends AppCompatActivity {
 
     private final OnClickListener goToRegisterButtonListener = new OnClickListener() {
         public void onClick(View v) {
-            startActivity(new Intent(SignInActivity.this, RegisterActivity.class));
+            Intent goToRegister = new Intent(SignInActivity.this, RegisterActivity.class);
+            startActivity(goToRegister.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
             finish();
         }
     };

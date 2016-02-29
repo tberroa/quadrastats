@@ -1,5 +1,6 @@
 package com.example.tberroa.portal.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -54,19 +55,18 @@ public class HomeActivity extends AppCompatActivity
         UserInfo userInfo = new UserInfo();
         userInfo.setRegion(this, Params.REGION_NA);
 
-        // initialize riot api
-        RiotAPI riotAPI = new RiotAPI(this);
+        // get summoner name
+        String summonerName = userInfo.getSummonerName(this);
 
         if (NetworkUtil.isInternetAvailable(this)){
-            // get summoners
-            List<String> summonerNames = new ArrayList<>();
-            summonerNames.add("frosiph");
-            summonerNames.add("acruz");
-            summonerNames.add("luciaron");
-            Map<String, SummonerDto> summoners = riotAPI.getSummoners(summonerNames);
+            // initialize riot api
+            RiotAPI riotAPI = new RiotAPI(this);
 
             // get summoner
-            SummonerDto summoner = summoners.get("acruz");
+            List<String> summonerNames = new ArrayList<>();
+            summonerNames.add(summonerName);
+            Map<String, SummonerDto> summoners = riotAPI.getSummoners(summonerNames);
+            SummonerDto summoner = summoners.get(summonerName);
 
             // load summoner icon
             View headerLayout = navigationView.getHeaderView(0);
@@ -78,8 +78,8 @@ public class HomeActivity extends AppCompatActivity
                     .transform(new CircleTransform()).into(summonerIcon);
 
             // load summoner name
-            TextView summonerName = (TextView) headerLayout.findViewById(R.id.summoner_name);
-            summonerName.setText(summoner.name);
+            TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
+            summonerNameView.setText(summoner.name);
 
             // load image menu
             ImageView dynamicQueue = (ImageView) findViewById(R.id.splash_dynamic_queue);
@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity
             Picasso.with(this).load(R.drawable.splash_shyvana).centerCrop().fit().into(team5);
             Picasso.with(this).load(R.drawable.splash_jarvan).centerCrop().fit().into(team3);
 
-            // get his/her matches
+            // get summoners matches
             Map<String, String> parameters = new HashMap<>();
             parameters.put("seasons", Params.SEASON_2016);
             parameters.put("queue", Params.TEAM_BUILDER_DRAFT_RANKED_5);
@@ -101,7 +101,6 @@ public class HomeActivity extends AppCompatActivity
             Toast.makeText(this, "internet not available", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     @Override
@@ -143,7 +142,8 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.view_profile) {
-
+            startActivity(new Intent(this, ProfileActivity.class));
+            finish();
         } else if (id == R.id.manage_inner_circle) {
 
         } else if (id == R.id.dynamic_queue) {

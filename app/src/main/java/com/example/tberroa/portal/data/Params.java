@@ -5,6 +5,9 @@ public class Params {
     private Params(){
     }
 
+    // database
+    public static final String LOCAL_DB_NAME = "Portal.db";
+
     // authentication
     public static final String SIGN_IN_URL = "http://portalapp.altervista.org/signin.php";
     public static final String REGISTER_URL = "http://portalapp.altervista.org/register.php";
