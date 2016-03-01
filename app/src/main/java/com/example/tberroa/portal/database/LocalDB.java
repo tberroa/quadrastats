@@ -9,7 +9,7 @@ public class LocalDB {
     public LocalDB(){
     }
 
-    public void Clear(Context context){
+    public void clear(Context context){
         context.deleteDatabase(Params.LOCAL_DB_NAME);
     }
 }

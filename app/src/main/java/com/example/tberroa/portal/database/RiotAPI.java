@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.tberroa.portal.data.MostRecentError;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.helpers.ModelSerializer;
+import com.example.tberroa.portal.models.Error;
 import com.example.tberroa.portal.models.matchlist.MatchList;
+import com.example.tberroa.portal.models.summoner.RunePagesDto;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.Http;
 import com.google.gson.Gson;
@@ -16,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,13 +27,34 @@ public class RiotAPI {
 
     private final String region;
     private String url;
+    private Context context;
 
     public RiotAPI(Context context){
+        this.context = context;
         region = new UserInfo().getRegion(context);
-        Log.d(Params.TAG_DEBUG, "region: " + region);
+        Log.d(Params.TAG_DEBUG, "@RAPI Constructor: region is " + region);
     }
 
-    // get summoner objects mapped by standardized summoner name for a given list of summoner names
+    public boolean summonerExists(String summonerName){
+        // construct url
+        url = Params.RIOT_BASE_URL + "/api/lol/"+region+"/v1.4/summoner/by-name/" +
+                summonerName +
+                "?api_key=" + Params.API_KEY;
+        Log.d(Params.TAG_DEBUG, "@summonerExists: url is " + url);
+
+        // get summoner map
+        String summonerMap = "";
+        try{
+            summonerMap =  new AttemptPost().execute().get();
+        }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
+            Log.e(Params.TAG_EXCEPTIONS,"@summonerExists: " + e.getMessage() );
+        }
+        Log.d(Params.TAG_DEBUG, "@summonerExists: summonerMap is " + summonerMap);
+
+        // validate response
+        return (validResponse(summonerMap));
+    }
+
     public Map<String, SummonerDto> getSummoners(List<String> summonerNames){
         // construct names field
         String names = "";
@@ -46,21 +71,57 @@ public class RiotAPI {
         url = Params.RIOT_BASE_URL + "/api/lol/"+region+"/v1.4/summoner/by-name/" +
                 names +
                 "?api_key=" + Params.API_KEY;
-        Log.d(Params.TAG_DEBUG, "get summoner url: " + url);
+        Log.d(Params.TAG_DEBUG, "@getSummoners: url is " + url);
 
         // get summoner map
         String summonerMap = "";
         try{
             summonerMap =  new AttemptPost().execute().get();
         }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
-            Log.e(Params.TAG_EXCEPTIONS, e.getMessage() );
+            Log.e(Params.TAG_EXCEPTIONS,"@getSummoners: " + e.getMessage() );
         }
-        Log.d(Params.TAG_DEBUG, "http get output: " + summonerMap);
+        Log.d(Params.TAG_DEBUG, "@getSummoners: summonerMap is " + summonerMap);
 
-        // return summoner map
-        Type typeMap = new TypeToken<Map<String, SummonerDto>>(){}.getType();
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        return gson.fromJson(summonerMap, typeMap);
+        // validate response
+        if (validResponse(summonerMap)){
+            // return summoner map
+            Type typeMap = new TypeToken<Map<String, SummonerDto>>(){}.getType();
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            return gson.fromJson(summonerMap, typeMap);
+        }
+        else{
+            return null;
+        }
+    }
+
+    public RunePagesDto getRunePages(String summonerName){
+        List<String> summonerNames = new ArrayList<>();
+        summonerNames.add(summonerName);
+        long id = getSummoners(summonerNames).get(summonerName).id;
+        url = Params.RIOT_BASE_URL + "/api/lol/" +
+                region + "/v1.4/summoner/" + id +"/runes?api_key="+Params.API_KEY;
+        Log.d(Params.TAG_DEBUG, "@getRunePages: url is " + url);
+
+        // get rune pages map
+        String runePagesMap = "";
+        try{
+            runePagesMap =  new AttemptPost().execute().get();
+        }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
+            Log.e(Params.TAG_EXCEPTIONS,"@getRunePages: " + e.getMessage() );
+        }
+        Log.d(Params.TAG_DEBUG, "@getRunePages: runePagesMap is " + runePagesMap);
+
+        // validate response
+        if (validResponse(runePagesMap)){
+            // return individual summoners rune pages
+            Type typeMap = new TypeToken<Map<String, RunePagesDto>>(){}.getType();
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            Map<String, RunePagesDto> runePagesDtoMap = gson.fromJson(runePagesMap, typeMap);
+            return runePagesDtoMap.get(Long.toString(id));
+        }
+        else{
+            return null;
+        }
     }
 
     public MatchList getMatches(long id, Map<String, String> parameters){
@@ -84,19 +145,25 @@ public class RiotAPI {
                 "&beginIndex=" + beginIndex +
                 "&endIndex=" + endIndex +
                 "&api_key=" + Params.API_KEY;
-        Log.d(Params.TAG_DEBUG, "get matches url: " + url);
+        Log.d(Params.TAG_DEBUG, "@getMatches: url is " + url);
 
         // get matches
         String matches = "";
         try{
             matches =  new AttemptPost().execute().get();
         }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
-            Log.e(Params.TAG_EXCEPTIONS, e.getMessage() );
+            Log.e(Params.TAG_EXCEPTIONS,"@getMatches: " + e.getMessage() );
         }
-        Log.d(Params.TAG_DEBUG, "http get output: " + matches);
+        Log.d(Params.TAG_DEBUG, "@getMatches: matches is " + matches);
 
-        //return matches
-        return new ModelSerializer().fromJson(matches, MatchList.class);
+        // validate response
+        if (validResponse(matches)){
+            //return matches
+            return new ModelSerializer().fromJson(matches, MatchList.class);
+        }
+        else{
+            return null;
+        }
     }
 
     private class AttemptPost extends AsyncTask<Void, Void, String> {
@@ -106,9 +173,30 @@ public class RiotAPI {
             try{
                 postResponse = new Http().get(url);
             }catch(IOException e){
-                Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
+                Log.d(Params.TAG_EXCEPTIONS,"@RAPI AttemptPost: " + e.getMessage());
             }
             return postResponse;
         }
     }
+
+    private boolean validResponse(String response){
+        if (response.contains("status_code")){
+            // deserialize the response
+            Type errorMapType = new TypeToken<Map<String, Error>>(){}.getType();
+            Map<String, Error> errorMap = new Gson().fromJson(response, errorMapType);
+            // get the code and corresponding message
+            int code = errorMap.get("status").status_code;
+            String message = errorMap.get("status").message;
+            // save the code and message
+            MostRecentError mostRecentError = new MostRecentError();
+            mostRecentError.setMessage(context, message);
+            mostRecentError.setCode(context, code);
+            Log.d(Params.TAG_DEBUG, "@validResponse: error code is " + Integer.toString(code));
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 }

@@ -60,13 +60,13 @@
 
     <Button
         android:id="@+id/sign_in"
-        android:layout_width="118dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@id/password"
         android:layout_alignEnd="@id/password"
         android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="35dp"
         android:text="@string/sign_in_button"
         android:background="@color/logo2_faded"
         />

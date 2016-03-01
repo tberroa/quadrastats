@@ -9,7 +9,6 @@ import com.google.gson.annotations.Expose;
 public class SummonerDto extends Model {
 
     public SummonerDto(){
-
     }
 
     @Expose

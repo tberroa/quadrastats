@@ -24,7 +24,7 @@ public class Http {
         Request request = new Request.Builder().url(url).build();
         Response rawResponse = client.newCall(request).execute();
         String response = rawResponse.body().string().trim();
-        Log.d(Params.TAG_DEBUG, "http response: " + response);
+        Log.d(Params.TAG_DEBUG, "@HttpGet: response is " + response);
         return response;
     }
 
@@ -33,7 +33,7 @@ public class Http {
         Request request = new Request.Builder().url(url).post(body).build();
         Response rawResponse = client.newCall(request).execute();
         String response = rawResponse.body().string().trim();
-        Log.d(Params.TAG_DEBUG, "http response: " + response);
+        Log.d(Params.TAG_DEBUG, "@HttpPost: response is " + response);
         return response;
     }
 

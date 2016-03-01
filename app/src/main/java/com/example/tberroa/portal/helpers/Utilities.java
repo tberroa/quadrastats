@@ -22,7 +22,6 @@ public class Utilities {
         String summonerName = enteredInfo.getString("summoner_name", null);
         String password = enteredInfo.getString("password", null);
         String confirmPassword = enteredInfo.getString("confirm_password", null);
-        String email = enteredInfo.getString("email", null);
 
         if (summonerName != null){
             boolean tooShort = summonerName.length() < 3;
@@ -43,16 +42,10 @@ public class Utilities {
                 validation = validation.concat("confirm_password");
             }
         }
-
-        if (email != null){
-            if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                validation = validation.concat("email");
-            }
-        }
         return validation;
     }
 
-    public static void SignIn(Context context, String summonerName){
+    public static void signIn(Context context, String summonerName){
         UserInfo userInfo = new UserInfo();
 
         // clear shared preferences of old data
@@ -71,14 +64,14 @@ public class Utilities {
         }
     }
 
-    public static void SignOut(Context context){
+    public static void signOut(Context context){
         UserInfo userInfo = new UserInfo();
 
         // clear shared preferences of old data
         userInfo.clear(context);
 
         // clear database
-        new LocalDB().Clear(context);
+        new LocalDB().clear(context);
 
         // go to sign in page
         context.startActivity(new Intent(context, SignInActivity.class));
@@ -87,5 +80,30 @@ public class Utilities {
         }
     }
 
-
+    public static String decodeRegion(int position){
+        switch(position){
+            case 1:
+                return "br";
+            case 2:
+                return "eune";
+            case 3:
+                return "euw";
+            case 4:
+                return "kr";
+            case 5:
+                return "lan";
+            case 6:
+                return "las";
+            case 7:
+                return "na";
+            case 8:
+                return "oce";
+            case 9:
+                return "ru";
+            case 10:
+                return "tr";
+            default:
+                return "";
+        }
+    }
 }

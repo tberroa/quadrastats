@@ -22,6 +22,9 @@
         <meta-data
             android:name="AA_MODELS"
             android:value="com.example.tberroa.portal.models.summoner.SummonerDto,
+            com.example.tberroa.portal.models.summoner.RunePagesDto,
+            com.example.tberroa.portal.models.summoner.RunePageDto,
+            com.example.tberroa.portal.models.summoner.RuneSlotDto,
             com.example.tberroa.portal.models.summoner.MasteryPagesDto,
             com.example.tberroa.portal.models.summoner.MasteryPageDto,
             com.example.tberroa.portal.models.summoner.MasteryDto,

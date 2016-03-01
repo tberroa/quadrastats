@@ -25,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity{
 
     private final View.OnClickListener signOutButtonListener = new View.OnClickListener() {
         public void onClick(View v) {
-            Utilities.SignOut(ProfileActivity.this);
+            Utilities.signOut(ProfileActivity.this);
         }
     };
 }

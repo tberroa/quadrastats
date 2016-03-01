@@ -72,28 +72,26 @@
         android:imeOptions="actionNext"
         />
 
-    <EditText
-        android:id="@+id/email"
+    <Spinner
+        android:id="@+id/region_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/confirm_password"
         android:layout_centerHorizontal="true"
+        android:layout_alignStart="@id/confirm_password"
+        android:layout_alignEnd="@id/confirm_password"
         android:layout_marginBottom="15dp"
-        android:ems="12"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:imeOptions="actionGo"
         />
 
     <Button
         android:id="@+id/register"
-        android:layout_width="118dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@id/password"
         android:layout_alignEnd="@id/password"
-        android:layout_below="@id/email"
+        android:layout_below="@id/region_spinner"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="35dp"
         android:text="@string/register_button"
         android:background="@color/logo2_faded"
         />

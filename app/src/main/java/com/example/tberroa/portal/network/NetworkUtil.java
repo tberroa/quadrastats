@@ -21,7 +21,7 @@ public class NetworkUtil {
                 isInternetAvailable  = true;
             }
         } catch(Exception e) {
-            Log.e(Params.TAG_EXCEPTIONS, e.getMessage());
+            Log.e(Params.TAG_EXCEPTIONS,"@isNetAvailable: " + e.getMessage());
         }
         return isInternetAvailable;
     }

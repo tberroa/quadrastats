@@ -46,7 +46,7 @@ public class SignInActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_GO) {
-                    SignIn();
+                    signIn();
                     handled = true;
                 }
                 return handled;
@@ -62,7 +62,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private final OnClickListener signInButtonListener = new OnClickListener() {
         public void onClick(View v) {
-            SignIn();
+            signIn();
         }
     };
 
@@ -74,7 +74,7 @@ public class SignInActivity extends AppCompatActivity {
         }
     };
 
-    private void SignIn(){
+    private void signIn(){
         String enteredSummonerName = summonerName.getText().toString();
         String enteredPassword = password.getText().toString();
 
@@ -125,7 +125,7 @@ public class SignInActivity extends AppCompatActivity {
                 String url = Params.SIGN_IN_URL;
                 postResponse = new Http().post(url, keyValuePairs);
             } catch(java.io.IOException e){
-                Log.e(Params.TAG_EXCEPTIONS, e.getMessage());
+                Log.e(Params.TAG_EXCEPTIONS,"@SignInActivity: " + e.getMessage());
             }
             return null;
         }
@@ -133,7 +133,7 @@ public class SignInActivity extends AppCompatActivity {
         protected void onPostExecute(Void param) {
             if (postResponse.equals("success")) {
                 // sign in
-                Utilities.SignIn(SignInActivity.this, summonerName);
+                Utilities.signIn(SignInActivity.this, summonerName);
             }
             else{ // display error
                 Toast.makeText(SignInActivity.this, postResponse, Toast.LENGTH_SHORT).show();

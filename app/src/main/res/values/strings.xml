@@ -19,6 +19,28 @@
     <!-- text links -->
     <string name="go_to_register">No account yet? Create one</string>
     <string name="go_to_sign_in">Already have an account? Sign In</string>
+    <!-- region selection -->
+    <string-array name="select_region">
+        <item>Select Region</item>
+        <item>Brazil</item>
+        <item>Europe Nordic &amp; East</item>
+        <item>Europe West</item>
+        <item>Korea</item>
+        <item>Latin America North</item>
+        <item>Latin America South</item>
+        <item>North America</item>
+        <item>Oceania</item>
+        <item>Russia</item>
+        <item>Turkey</item>
+    </string-array>
+
+    <!-- dialogs -->
+    <string name="validate_ownership_title">Validate Ownership</string>
+    <string name="validate_ownership">
+        Please change one of your rune pages to the number below.
+        The number is only active while this dialog is up.
+    </string>
+    <string name="done">Done</string>
 
     <!-- menu items -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
