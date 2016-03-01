@@ -50,10 +50,18 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ImageView dynamicQueue = (ImageView) findViewById(R.id.splash_dynamic_queue);
+        ImageView soloQueue = (ImageView) findViewById(R.id.splash_solo_queue);
+        ImageView team5 = (ImageView) findViewById(R.id.splash_team_5);
+        ImageView team3 = (ImageView) findViewById(R.id.splash_team3);
+        Picasso.with(this).load(R.drawable.splash_akali).centerCrop().fit().into(dynamicQueue);
+        Picasso.with(this).load(R.drawable.splash_amumu).centerCrop().fit().into(soloQueue);
+        Picasso.with(this).load(R.drawable.splash_shyvana).centerCrop().fit().into(team5);
+        Picasso.with(this).load(R.drawable.splash_jarvan).centerCrop().fit().into(team3);
         //=======================================================================================
-        // set region
+        // initialize user info
         UserInfo userInfo = new UserInfo();
-        userInfo.setRegion(this, Params.REGION_NA);
 
         // get summoner name
         String summonerName = userInfo.getSummonerName(this);
@@ -62,43 +70,37 @@ public class HomeActivity extends AppCompatActivity
             // initialize riot api
             RiotAPI riotAPI = new RiotAPI(this);
 
-            // get summoner
+            // query riot api for summoner dto
             List<String> summonerNames = new ArrayList<>();
             summonerNames.add(summonerName);
-            Map<String, SummonerDto> summoners = riotAPI.getSummoners(summonerNames);
-            SummonerDto summoner = summoners.get(summonerName);
+            Map<String, SummonerDto> summoners = riotAPI.getSummonersByName(summonerNames);
+            if (summoners != null){
+                SummonerDto summoner = summoners.get(summonerName);
+                // load summoner icon
+                View headerLayout = navigationView.getHeaderView(0);
+                ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
+                String url = new URLConstructor().summonerIcon(summoner.profileIconId);
+                Picasso.with(this)
+                        .load(url)
+                        .fit()
+                        .transform(new CircleTransform()).into(summonerIcon);
 
-            // load summoner icon
-            View headerLayout = navigationView.getHeaderView(0);
-            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
-            String url = new URLConstructor().summonerIcon(summoner.profileIconId);
-            Picasso.with(this)
-                    .load(url)
-                    .fit()
-                    .transform(new CircleTransform()).into(summonerIcon);
+                // load summoner name
+                TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
+                summonerNameView.setText(summoner.name);
 
-            // load summoner name
-            TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
-            summonerNameView.setText(summoner.name);
-
-            // load image menu
-            ImageView dynamicQueue = (ImageView) findViewById(R.id.splash_dynamic_queue);
-            ImageView soloQueue = (ImageView) findViewById(R.id.splash_solo_queue);
-            ImageView team5 = (ImageView) findViewById(R.id.splash_team_5);
-            ImageView team3 = (ImageView) findViewById(R.id.splash_team3);
-            Picasso.with(this).load(R.drawable.splash_akali).centerCrop().fit().into(dynamicQueue);
-            Picasso.with(this).load(R.drawable.splash_amumu).centerCrop().fit().into(soloQueue);
-            Picasso.with(this).load(R.drawable.splash_shyvana).centerCrop().fit().into(team5);
-            Picasso.with(this).load(R.drawable.splash_jarvan).centerCrop().fit().into(team3);
-
-            // get summoners matches
-            Map<String, String> parameters = new HashMap<>();
-            parameters.put("seasons", Params.SEASON_2016);
-            parameters.put("queue", Params.TEAM_BUILDER_DRAFT_RANKED_5);
-            MatchList matches = riotAPI.getMatches(summoner.id, parameters);
+                // get summoners matches
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("seasons", Params.SEASON_2016);
+                parameters.put("queue", Params.TEAM_BUILDER_DRAFT_RANKED_5);
+                MatchList matches = riotAPI.getMatches(summoner.id, parameters);
+            }
+            else{
+                Toast.makeText(this, getString(R.string.riot_api_error), Toast.LENGTH_SHORT).show();
+            }
         }
         else{
-            Toast.makeText(this, "internet not available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
     }
 

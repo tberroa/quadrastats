@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "BannedChampion")
 public class BannedChampion extends Model {
 
+    public BannedChampion(){
+    }
+
     @Expose
     @Column(name = "champion_id")       // Banned champion ID
     public int championId;

@@ -11,6 +11,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "AggregatedStatsDto")
 public class AggregatedStatsDto extends Model {
 
+    public AggregatedStatsDto(){
+    }
+
     @Expose
     @Column(name = "bot_games_played")
     public int botGamesPlayed;
@@ -25,7 +28,7 @@ public class AggregatedStatsDto extends Model {
 
     @Expose
     @Column(name = "max_largest_critical_strike")
-    public int maxLargestCriticalStirke;
+    public int maxLargestCriticalStrike;
 
     @Expose
     @Column(name = "max_largest_killing_spree")

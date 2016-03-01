@@ -12,6 +12,9 @@ import java.util.List;
 @Table(name = "Team")
 public class Team extends Model {
 
+    public Team(){
+    }
+
     @Expose
     @Column(name = "bans")
     public List<BannedChampion> bans;      // If game was draft mode, contains banned champion data, otherwise null

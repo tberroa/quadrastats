@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "ParticipantIdentity")
 public class ParticipantIdentity extends Model {
 
+    public ParticipantIdentity(){
+    }
+
     @Expose
     @Column(name = "participant_id")
     public int participantId;           // participant id

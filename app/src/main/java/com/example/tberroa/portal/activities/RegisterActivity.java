@@ -27,7 +27,6 @@ import com.example.tberroa.portal.models.summoner.RunePagesDto;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.network.NetworkUtil;
 
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -130,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     new AttemptRegister().execute();
                                 }
                                 else{
-                                    Toast.makeText(RegisterActivity.this, "rune page code not found", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterActivity.this, getString(R.string.code_not_found), Toast.LENGTH_SHORT).show();
                                 }
                                 dialog.dismiss();
                             }
@@ -138,15 +137,15 @@ public class RegisterActivity extends AppCompatActivity {
                         builder.create().show();
                     }
                     else{
-                        Toast.makeText(this, "invalid summoner name", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.invalid_summoner_name), Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
-                    Toast.makeText(this, "please select a region", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
                 }
             }
             else{
-                Toast.makeText(this, "internet not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
             }
 
         }

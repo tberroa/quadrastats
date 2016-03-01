@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "Rune")
 public class Rune extends Model {
 
+    public Rune(){
+    }
+
     @Expose
     @Column(name = "rank")
     public long rank;               // rune rank

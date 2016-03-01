@@ -7,30 +7,18 @@ import android.content.SharedPreferences;
 public class MostRecentError extends Application {
 
     private final String CODE = "code";
-    private final String MESSAGE = "message";
 
     private SharedPreferences getSharedPreferences(Context context){
         return context.getSharedPreferences("most_recent_error", MODE_PRIVATE);
     }
 
-    public int getCode(Context context){
-        return getSharedPreferences(context).getInt(CODE, 0);
+    public String getCode(Context context){
+        return getSharedPreferences(context).getString(CODE, "");
     }
 
-    public String getMessage(Context context){
-        return getSharedPreferences(context).getString(MESSAGE, "");
-    }
-
-    public void setCode(Context context, int code) {
+    public void setCode(Context context, String code) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putInt(CODE, code);
+        editor.putString(CODE, code);
         editor.apply();
     }
-
-    public void setMessage(Context context, String message) {
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(MESSAGE, message);
-        editor.apply();
-    }
-
 }

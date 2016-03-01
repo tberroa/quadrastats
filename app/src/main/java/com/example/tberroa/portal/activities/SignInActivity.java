@@ -88,7 +88,7 @@ public class SignInActivity extends AppCompatActivity {
                 new AttemptSignIn().execute();
             }
             else{
-                Toast.makeText(this, "internet not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
             }
         }
         else{

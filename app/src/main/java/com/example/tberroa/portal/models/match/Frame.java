@@ -13,6 +13,9 @@ import java.util.Map;
 @Table(name = "Frame")
 public class Frame extends Model {
 
+    public Frame(){
+    }
+
     @Expose
     @Column(name = "events")
     public List<Event> events;          // List of events for this frame.

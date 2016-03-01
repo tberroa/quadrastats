@@ -12,6 +12,9 @@ import java.util.List;
 @Table(name = "MasteryPageDto")
 public class MasteryPageDto extends Model {
 
+    public MasteryPageDto(){
+    }
+
     @Expose
     @Column(name = "current")
     public boolean current;     // Indicates if the mastery page is the current mastery page.

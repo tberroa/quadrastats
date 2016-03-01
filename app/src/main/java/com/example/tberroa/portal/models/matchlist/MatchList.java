@@ -12,6 +12,9 @@ import java.util.List;
 @Table(name = "MatchList")
 public class MatchList extends Model {
 
+    public MatchList(){
+    }
+
     @Expose
     @Column(name = "end_index")
     public int endIndex;

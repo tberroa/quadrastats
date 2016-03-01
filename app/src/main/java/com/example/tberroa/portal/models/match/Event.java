@@ -12,6 +12,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "Event")
 public class Event extends Model {
 
+    public Event(){
+    }
+
     @Expose
     @Column(name = "ascended_type")
     public String ascendedType;

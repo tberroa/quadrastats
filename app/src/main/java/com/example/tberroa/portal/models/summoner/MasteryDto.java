@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "MasteryDto")
 public class MasteryDto extends Model {
 
+    public MasteryDto(){
+    }
+
     @Expose
     @Column(name = "mastery_id")    // Mastery ID. For static information correlating to
     public int id;                  // masteries, please refer to the LoL Static Data API.

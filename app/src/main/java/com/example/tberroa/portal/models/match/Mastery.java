@@ -8,6 +8,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "Mastery")
 public class Mastery  extends Model {
 
+    public Mastery(){
+    }
+
     @Expose
     @Column(name = "mastery_id")        // mastery id
     public long masteryId;
@@ -15,6 +18,4 @@ public class Mastery  extends Model {
     @Expose
     @Column(name = "rank")              // mastery rank
     public long rank;
-
-
 }

@@ -12,6 +12,8 @@ import java.util.List;
 @Table(name = "MatchDetail")
 public class MatchDetail extends Model {
 
+    public MatchDetail(){
+    }
 
     @Expose
     @Column(name = "map_id")

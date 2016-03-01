@@ -7,12 +7,10 @@
     <!-- field hints -->
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
-    <string name="email">Email</string>
     <!-- input validation -->
     <string name="summoner_name_format">3 to 16 alphanumeric characters</string>
     <string name="password_format">Between 6 and 20 characters</string>
     <string name="password_mismatch">Password mismatch</string>
-    <string name="enter_valid_email">Enter a valid email address</string>
     <!-- submit buttons -->
     <string name="sign_in_button">Sign In</string>
     <string name="register_button">Register</string>
@@ -55,10 +53,18 @@
     <string name="team_5">Ranked Team 5v5</string>
     <string name="team_3">Ranked Team 3v3</string>
     <string name="action_settings">Settings</string>
-    <string name="thumbnail_dynamic_queue">thumbnail for dynamic queue</string>
-    <string name="thumbnail_solo_que">thumbnail for solo queue</string>
-    <string name="thumbnail_team_5">thumbnail for ranked team 5v5</string>
-    <string name="thumbnail_team_3">thumbnail for ranked team 3v3</string>
-    <string name="thumbnail_summoner_icon">image of the summoners icon</string>
+    <string name="thumbnail_dynamic_queue">Thumbnail for dynamic queue</string>
+    <string name="thumbnail_solo_que">Thumbnail for solo queue</string>
+    <string name="thumbnail_team_5">Thumbnail for ranked team 5v5</string>
+    <string name="thumbnail_team_3">Thumbnail for ranked team 3v3</string>
+    <string name="thumbnail_summoner_icon">Image of the summoners icon</string>
     <string name="sign_out">Sign Out</string>
+
+    <!-- error messages -->
+    <string name="select_region">Please select a region</string>
+    <string name="internet_not_available">Internet not available</string>
+    <string name="riot_api_error">Error occurred when trying to query the Riot servers</string>
+    <string name="invalid_summoner_name">Invalid summoner name</string>
+    <string name="code_not_found">Rune page code not found</string>
+
 </resources>

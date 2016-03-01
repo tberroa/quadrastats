@@ -12,6 +12,9 @@ import java.util.List;
 @Table(name = "RankedStatsDto")
 public class RankedStatsDto extends Model {
 
+    public RankedStatsDto(){
+    }
+
     @Expose
     @Column(name = "champions")
     public List<ChampionsStatsDto> champions;   // Collection of aggregated stats summarized by champion.

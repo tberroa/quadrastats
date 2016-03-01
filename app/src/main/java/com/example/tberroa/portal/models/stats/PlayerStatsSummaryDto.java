@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "PlayerStatsSummaryDto")
 public class PlayerStatsSummaryDto extends Model {
 
+    public PlayerStatsSummaryDto(){
+    }
+
     @Expose
     @Column(name = "aggregated_stats")              // 	Aggregated stats.
     public AggregatedStatsDto aggregatedStatsDto;

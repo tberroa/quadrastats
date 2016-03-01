@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "ParticipantTimelineData")
 public class ParticipantTimelineData extends Model {
 
+    public ParticipantTimelineData(){
+    }
+
     @Expose
     @Column(name = "ten_to_twenty")        // Value per minute from 10 min to 20 min
     public double tenToTwenty;

@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "ParticipantStats")
 public class ParticipantStats extends Model {
 
+    public ParticipantStats(){
+    }
+
     @Expose
     @Column(name = "assists")                   // Number of assists
     public long assists;

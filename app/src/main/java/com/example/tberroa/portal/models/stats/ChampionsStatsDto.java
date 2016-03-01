@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "ChampionsStatsDto")
 public class ChampionsStatsDto extends Model {
 
+    public ChampionsStatsDto(){
+    }
+
     @Expose
     @Column(name = "champion_id")               // Champion ID.  Note that champion ID 0 represents
     public int id;                              // the combined stats for all champions

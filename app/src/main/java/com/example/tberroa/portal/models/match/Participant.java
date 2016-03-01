@@ -12,6 +12,9 @@ import java.util.List;
 @Table(name = "Participant")
 public class Participant extends Model {
 
+    public Participant(){
+    }
+
     @Expose
     @Column(name = "champion_id")
     public int championId;                          // champion id

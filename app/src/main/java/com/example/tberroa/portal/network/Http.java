@@ -20,14 +20,17 @@ public class Http {
     public Http(){
     }
 
-    public String get(String url) throws IOException {
+    // used to query riot api
+    public String[] get(String url) throws IOException {
         Request request = new Request.Builder().url(url).build();
         Response rawResponse = client.newCall(request).execute();
-        String response = rawResponse.body().string().trim();
-        Log.d(Params.TAG_DEBUG, "@HttpGet: response is " + response);
-        return response;
+        String code = Integer.toString(rawResponse.code());
+        String body = rawResponse.body().string().trim();
+        Log.d(Params.TAG_DEBUG, "@HttpGet: response body is " + body);
+        return new String[]{code, body};
     }
 
+    // used to query altervista servers for signin/register authentication
     public String post(String url, String keyValuePairs) throws IOException {
         RequestBody body = RequestBody.create(mediaType, keyValuePairs);
         Request request = new Request.Builder().url(url).post(body).build();

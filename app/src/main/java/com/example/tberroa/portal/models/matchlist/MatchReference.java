@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "MatchReference")
 public class MatchReference extends Model {
 
+    public MatchReference(){
+    }
+
     @Expose
     @Column(name = "champion")
     public long champion;
