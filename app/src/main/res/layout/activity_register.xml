@@ -69,7 +69,7 @@
         android:focusable="true"
         android:hint="@string/confirm_password"
         android:inputType="textPassword"
-        android:imeOptions="actionNext"
+        android:imeOptions="actionDone"
         />
 
     <Spinner

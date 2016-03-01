@@ -54,6 +54,9 @@ public class Utilities {
         // save summoner name
         userInfo.setSummonerName(context, summonerName);
 
+        // save region (default is na for now, need to update sign in page & backend/altervista)
+        userInfo.setRegion(context, "na");
+
         // update user sign in status
         userInfo.setUserStatus(context, true);
 

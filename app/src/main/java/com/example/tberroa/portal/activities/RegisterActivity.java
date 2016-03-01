@@ -212,7 +212,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         protected void onPostExecute(Void param) {
             if (postResponse.contains("success")) {
-                // get region
                 // sign in
                 Utilities.signIn(RegisterActivity.this, summonerName);
             }

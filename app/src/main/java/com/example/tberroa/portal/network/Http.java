@@ -36,8 +36,7 @@ public class Http {
         Request request = new Request.Builder().url(url).post(body).build();
         Response rawResponse = client.newCall(request).execute();
         String response = rawResponse.body().string().trim();
-        Log.d(Params.TAG_DEBUG, "@HttpPost: response is " + response);
+        Log.d(Params.TAG_DEBUG, "@HttpPost: response body is " + response);
         return response;
     }
-
 }
