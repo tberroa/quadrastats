@@ -14,9 +14,9 @@
         android:layout_height="match_parent" >
 
         <include layout="@layout/header"
-            android:id="@+id/header_layout" />
+                 android:id="@+id/header_layout" />
 
-        <ScrollView
+        <HorizontalScrollView
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             tools:context="com.example.tberroa.portal.activities.HomeActivity"
@@ -25,15 +25,15 @@
             android:layout_height="match_parent" >
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/splash_dynamic_queue"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginStart="3dp"
                     android:contentDescription="@string/thumbnail_dynamic_queue" />
 
                 <TextView
@@ -52,11 +52,11 @@
                     android:textColor="@color/white" />
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginEnd="3dp"
                     android:id="@+id/splash_solo_queue"
-                    android:layout_below="@id/splash_dynamic_queue"
+                    android:layout_toEndOf="@id/splash_dynamic_queue"
                     android:contentDescription="@string/thumbnail_solo_que" />
 
                 <TextView
@@ -75,11 +75,11 @@
                     android:textColor="@color/white" />
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginEnd="3dp"
                     android:id="@+id/splash_team_5"
-                    android:layout_below="@id/splash_solo_queue"
+                    android:layout_toEndOf="@id/splash_solo_queue"
                     android:contentDescription="@string/thumbnail_team_5" />
 
                 <TextView
@@ -98,11 +98,11 @@
                     android:textColor="@color/white" />
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginEnd="3dp"
                     android:id="@+id/splash_team3"
-                    android:layout_below="@id/splash_team_5"
+                    android:layout_toEndOf="@id/splash_team_5"
                     android:contentDescription="@string/thumbnail_team_3" />
 
                 <TextView
@@ -120,7 +120,7 @@
                     android:textSize="25sp"
                     android:textColor="@color/white" />
             </RelativeLayout>
-        </ScrollView>
+        </HorizontalScrollView>
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

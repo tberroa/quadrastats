@@ -16,18 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.database.RiotAPI;
 import com.example.tberroa.portal.database.URLConstructor;
 import com.example.tberroa.portal.helpers.CircleTransform;
-import com.example.tberroa.portal.models.matchlist.MatchList;
+import com.example.tberroa.portal.helpers.Utilities;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.NetworkUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +53,34 @@ public class HomeActivity extends AppCompatActivity
         ImageView soloQueue = (ImageView) findViewById(R.id.splash_solo_queue);
         ImageView team5 = (ImageView) findViewById(R.id.splash_team_5);
         ImageView team3 = (ImageView) findViewById(R.id.splash_team3);
+
+        int screenWidth = Utilities.getScreenWidth(this);
+        int screenHeight = Utilities.getScreenHeight(this);
+        int width, height;
+
+        if (!Utilities.isLandscape(this)){
+            width = screenWidth;
+            height = screenHeight / 4;
+        }
+        else {
+            width = screenWidth / 2;
+            height = screenHeight;
+        }
+
+        dynamicQueue.getLayoutParams().width = width;
+        dynamicQueue.getLayoutParams().height = height;
+        soloQueue.getLayoutParams().width = width;
+        soloQueue.getLayoutParams().height = height;
+        team5.getLayoutParams().width = width;
+        team5.getLayoutParams().height = height;
+        team3.getLayoutParams().width = width;
+        team3.getLayoutParams().height = height;
+
+        dynamicQueue.requestLayout();
+        soloQueue.requestLayout();
+        team5.requestLayout();
+        team3.requestLayout();
+
         Picasso.with(this).load(R.drawable.splash_akali).centerCrop().fit().into(dynamicQueue);
         Picasso.with(this).load(R.drawable.splash_amumu).centerCrop().fit().into(soloQueue);
         Picasso.with(this).load(R.drawable.splash_shyvana).centerCrop().fit().into(team5);
@@ -88,12 +114,6 @@ public class HomeActivity extends AppCompatActivity
                 // load summoner name
                 TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
                 summonerNameView.setText(summoner.name);
-
-                // get summoners matches
-                Map<String, String> parameters = new HashMap<>();
-                parameters.put("seasons", Params.SEASON_2016);
-                parameters.put("queue", Params.TEAM_BUILDER_DRAFT_RANKED_5);
-                MatchList matches = riotAPI.getMatches(summoner.id, parameters);
             }
             else{
                 Toast.makeText(this, getString(R.string.riot_api_error), Toast.LENGTH_SHORT).show();
