@@ -64,10 +64,10 @@
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.SplashActivity" />
         <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.ProfileActivity"
+                  android:parentActivityName="com.example.tberroa.portal.activities.HomeActivity" />
+
 
         <service android:name=".services.UpdateService" />
-
     </application>
-
 </manifest>

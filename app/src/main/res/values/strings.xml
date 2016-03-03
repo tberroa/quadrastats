@@ -39,7 +39,7 @@
     <string name="validate_ownership">
         Almost done! Just change one of your rune pages to the number below in order
         to prove ownership of the summoner account. After changing your rune page, wait
-        a few seconds and press done to complete registration.
+        about 5 seconds before pressing Done to allow for the Riot servers to update.
     </string>
     <string name="done">Done</string>
 
@@ -51,16 +51,24 @@
     <string name="view_profile">View Profile</string>
     <string name="manage_inner_circle">Manage Inner Circle</string>
     <string name="stats">Stats</string>
+    <!-- =================================================================== -->
+    <!-- vertical -->
     <string name="dynamic_queue">Dynamic Queue</string>
     <string name="solo_queue">Solo Queue</string>
     <string name="team_5">Ranked Team 5v5</string>
     <string name="team_3">Ranked Team 3v3</string>
-    <string name="action_settings">Settings</string>
+    <!-- landscape -->
+    <string name="dynamic_queue_land">Dynamic\nQueue</string>
+    <string name="solo_queue_land">Solo\nQueue</string>
+    <string name="team_5_land">Ranked\nTeam 5v5</string>
+    <string name="team_3_land">Ranked\nTeam 3v3</string>
+    <!-- =================================================================== -->
     <string name="thumbnail_dynamic_queue">Thumbnail for dynamic queue</string>
     <string name="thumbnail_solo_que">Thumbnail for solo queue</string>
     <string name="thumbnail_team_5">Thumbnail for ranked team 5v5</string>
     <string name="thumbnail_team_3">Thumbnail for ranked team 3v3</string>
     <string name="thumbnail_summoner_icon">Image of the summoners icon</string>
+    <string name="action_settings">Settings</string>
     <string name="sign_out">Sign Out</string>
 
     <!-- error messages -->

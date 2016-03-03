@@ -37,6 +37,8 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
         // check if update service needs to be started up
         int state = updateServiceState.get(this);
         if (state == 0){
@@ -44,8 +46,7 @@ public class HomeActivity extends AppCompatActivity
         }
         Log.d(Params.TAG_DEBUG, "@HomeActivity: updateServiceState is " + Integer.toString(state));
 
-        // =================== view initialization ==============================================
-        setContentView(R.layout.activity_home);
+        // ============ general drawer layout & navigation view initializations ===================
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,6 +59,24 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerLayout = navigationView.getHeaderView(0);
+
+        String stylizedName = summonerInfo.getStylizedName(this);
+        Log.d(Params.TAG_DEBUG, "@HomeActivity: stylized name is " + stylizedName);
+
+        TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
+        summonerNameView.setText(stylizedName);
+
+        SummonerDto summoner = localDB.getSummoner(stylizedName);
+        if (summoner != null){
+            Log.d(Params.TAG_DEBUG, "@HomeActivity: summoner dto is not null");
+            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
+            String url = new URLConstructor().summonerIcon(summoner.profileIconId);
+            Picasso.with(this)
+                    .load(url)
+                    .fit()
+                    .transform(new CircleTransform()).into(summonerIcon);
+        }
+        //=========================================================================================
 
         ImageView dynamicQueue = (ImageView) findViewById(R.id.splash_dynamic_queue);
         ImageView soloQueue = (ImageView) findViewById(R.id.splash_solo_queue);
@@ -95,29 +114,6 @@ public class HomeActivity extends AppCompatActivity
         Picasso.with(this).load(R.drawable.splash_amumu).centerCrop().fit().into(soloQueue);
         Picasso.with(this).load(R.drawable.splash_shyvana).centerCrop().fit().into(team5);
         Picasso.with(this).load(R.drawable.splash_jarvan).centerCrop().fit().into(team3);
-        //=======================================================================================
-        // get stylized summoner name
-        String stylizedName = summonerInfo.getStylizedName(this);
-        Log.d(Params.TAG_DEBUG, "@HomeActivity: stylized name is " + stylizedName);
-
-        // load stylized summoner name into drawer header
-        TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
-        summonerNameView.setText(stylizedName);
-
-        // get summoner dto
-        SummonerDto summoner = localDB.getSummoner(stylizedName);
-
-        if (summoner != null){
-            Log.d(Params.TAG_DEBUG, "@HomeActivity: summoner dto is not null");
-
-            // load summoner icon
-            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
-            String url = new URLConstructor().summonerIcon(summoner.profileIconId);
-            Picasso.with(this)
-                    .load(url)
-                    .fit()
-                    .transform(new CircleTransform()).into(summonerIcon);
-        }
     }
 
     @Override
