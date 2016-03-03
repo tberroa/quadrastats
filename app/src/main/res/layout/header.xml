@@ -5,7 +5,7 @@
     android:id="@+id/header_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.AppBarOverlay">
+    android:theme="@style/AppTheme.AppBarOverlay" >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

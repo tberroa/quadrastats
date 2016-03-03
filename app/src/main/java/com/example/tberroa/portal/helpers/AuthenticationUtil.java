@@ -3,19 +3,18 @@ package com.example.tberroa.portal.helpers;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
-import android.view.WindowManager;
 
-import com.example.tberroa.portal.activities.HomeActivity;
+import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.activities.SignInActivity;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.activities.SplashActivity;
+import com.example.tberroa.portal.data.SummonerInfo;
+import com.example.tberroa.portal.data.UpdateServiceState;
 import com.example.tberroa.portal.database.LocalDB;
 
-public class Utilities {
+public class AuthenticationUtil {
 
-    private Utilities(){
+    private AuthenticationUtil(){
     }
 
     public static String validate(Bundle enteredInfo){
@@ -48,36 +47,41 @@ public class Utilities {
         return validation;
     }
 
-    public static void signIn(Context context, String summonerName){
-        UserInfo userInfo = new UserInfo();
+    public static void signIn(Context context, String summonerName, String region){
+        SummonerInfo summonerInfo = new SummonerInfo();
 
         // clear shared preferences of old data
-        userInfo.clear(context);
+        summonerInfo.clear(context);
 
         // save summoner name
-        userInfo.setSummonerName(context, summonerName);
+        summonerInfo.setBasicName(context, summonerName.toLowerCase());
 
-        // save region (default is na for now, need to update sign in page & backend/altervista)
-        userInfo.setRegion(context, "na");
+        // save region
+        summonerInfo.setRegion(context, region);
 
-        // update user sign in status
-        userInfo.setUserStatus(context, true);
+        // update summoner sign in status
+        summonerInfo.setSummonerStatus(context, true);
 
-        // go to home page
-        context.startActivity(new Intent(context, HomeActivity.class));
+        // go to splash page
+        context.startActivity(new Intent(context, SplashActivity.class));
+
         if(context instanceof Activity){
+            ((Activity)context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
             ((Activity)context).finish();
         }
     }
 
     public static void signOut(Context context){
-        UserInfo userInfo = new UserInfo();
+        SummonerInfo summonerInfo = new SummonerInfo();
 
         // clear shared preferences of old data
-        userInfo.clear(context);
+        summonerInfo.clear(context);
 
         // clear database
         new LocalDB().clear(context);
+
+        // reset update service state
+        new UpdateServiceState().set(context, 0);
 
         // go to sign in page
         context.startActivity(new Intent(context, SignInActivity.class));
@@ -111,29 +115,5 @@ public class Utilities {
             default:
                 return "";
         }
-    }
-
-    private static Point getScreenDimensions(Context context){
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point screenDimensions = new Point();
-        display.getSize(screenDimensions);
-        return screenDimensions;
-    }
-
-    public static int getScreenWidth(Context context){
-        return getScreenDimensions(context).x;
-    }
-
-    public static int getScreenHeight(Context context){
-        return getScreenDimensions(context).y;
-    }
-
-    public static boolean isLandscape(Context context){
-        boolean bool = false;
-        if (getScreenWidth(context) > getScreenHeight(context)){
-            bool = true;
-        }
-        return bool;
     }
 }

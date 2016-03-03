@@ -5,75 +5,78 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.UserInfo;
-import com.example.tberroa.portal.helpers.Utilities;
+import com.example.tberroa.portal.data.SummonerInfo;
+import com.example.tberroa.portal.helpers.AuthenticationUtil;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.network.NetworkUtil;
 
 public class SignInActivity extends AppCompatActivity {
 
     private EditText summonerName, password;
+    private Spinner region;
+    private Button signInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        // check if user is already signed in
-        if (new UserInfo().isSignedIn(this)){
+        // no animation if coming from register activity
+        if (getIntent().getAction() != null){
+            overridePendingTransition(0, 0);
+        }
+
+        // check if summoner is already signed in
+        if (new SummonerInfo().isSignedIn(this)){
             startActivity(new Intent(SignInActivity.this, HomeActivity.class));
             finish();
         }
 
-        // initialize text boxes for user to enter their information
+        // initialize summoner input fields
         summonerName = (EditText)findViewById(R.id.summoner_name);
         password = (EditText)findViewById(R.id.password);
-
-        // allow user to submit form via keyboard
-        password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_GO) {
-                    signIn();
-                    handled = true;
-                }
-                return handled;
-            }
-        });
+        region = (Spinner)findViewById(R.id.region_spinner);
 
         // declare and initialize buttons
-        Button signInButton = (Button)findViewById(R.id.sign_in);
+        signInButton = (Button)findViewById(R.id.sign_in);
         signInButton.setOnClickListener(signInButtonListener);
         TextView goToRegisterButton = (TextView)findViewById(R.id.register);
         goToRegisterButton.setOnClickListener(goToRegisterButtonListener);
+
+        // set up region spinner
+        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource
+                (this, R.array.select_region, android.R.layout.simple_spinner_item);
+        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        region.setAdapter(staticAdapter);
     }
 
     private final OnClickListener signInButtonListener = new OnClickListener() {
         public void onClick(View v) {
+            signInButton.setEnabled(false);
             signIn();
         }
     };
 
     private final OnClickListener goToRegisterButtonListener = new OnClickListener() {
         public void onClick(View v) {
-            Intent goToRegister = new Intent(SignInActivity.this, RegisterActivity.class);
-            startActivity(goToRegister.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+            startActivity(new Intent(SignInActivity.this, RegisterActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD));
             finish();
         }
     };
 
+    // validation process
     private void signIn(){
         String enteredSummonerName = summonerName.getText().toString();
         String enteredPassword = password.getText().toString();
@@ -82,12 +85,20 @@ public class SignInActivity extends AppCompatActivity {
         enteredInfo.putString("summoner_name", enteredSummonerName);
         enteredInfo.putString("password", enteredPassword);
 
-        String response = Utilities.validate(enteredInfo);
+        String response = AuthenticationUtil.validate(enteredInfo);
         if (response.matches("")){
             if (NetworkUtil.isInternetAvailable(this)){
-                new AttemptSignIn().execute();
+                int regionSelection = region.getSelectedItemPosition();
+                if (regionSelection > 0){
+                    new AttemptSignIn().execute();
+                }
+                else{
+                    Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
+                    signInButton.setEnabled(true);
+                }
             }
             else{
+                signInButton.setEnabled(true);
                 Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
             }
         }
@@ -104,19 +115,22 @@ public class SignInActivity extends AppCompatActivity {
             else{
                 password.setError(null);
             }
+            signInButton.setEnabled(true);
         }
     }
 
+    // attempts to sign in via http
     class AttemptSignIn extends AsyncTask<Void, Void, Void> {
 
-        private String summonerName, password, keyValuePairs, postResponse;
+        private String summonerName, password, region, keyValuePairs, postResponse;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             summonerName = SignInActivity.this.summonerName.getText().toString();
             password = SignInActivity.this.password.getText().toString();
-            keyValuePairs = "username="+summonerName+"&password="+password;
+            region = AuthenticationUtil.decodeRegion(SignInActivity.this.region.getSelectedItemPosition());
+            keyValuePairs = "app_name="+summonerName+"&password="+password+"&region="+region;
         }
 
         @Override
@@ -133,11 +147,13 @@ public class SignInActivity extends AppCompatActivity {
         protected void onPostExecute(Void param) {
             if (postResponse.equals("success")) {
                 // sign in
-                Utilities.signIn(SignInActivity.this, summonerName);
+                Log.d(Params.TAG_DEBUG, "@SignInActivity: successful sign in");
+                AuthenticationUtil.signIn(SignInActivity.this, summonerName, region);
             }
             else{ // display error
                 Toast.makeText(SignInActivity.this, postResponse, Toast.LENGTH_SHORT).show();
             }
+            signInButton.setEnabled(true);
         }
     }
 }

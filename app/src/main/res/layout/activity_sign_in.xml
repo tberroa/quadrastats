@@ -16,8 +16,7 @@
         android:layout_marginBottom="5dp"
         android:text="@string/app_name"
         android:textSize="75sp"
-        android:textColor="@color/logo1"
-        />
+        android:textColor="@color/logo1" />
 
     <TextView
         android:id="@+id/app_slogan"
@@ -28,8 +27,7 @@
         android:layout_marginBottom="25dp"
         android:text="@string/app_slogan"
         android:textSize="20sp"
-        android:textColor="@color/logo2"
-        />
+        android:textColor="@color/logo2" />
 
     <EditText
         android:id="@+id/summoner_name"
@@ -42,8 +40,7 @@
         android:focusable="true"
         android:hint="@string/summoner_name"
         android:inputType="text"
-        android:imeOptions="actionNext"
-        />
+        android:imeOptions="actionNext" />
 
     <EditText
         android:id="@+id/password"
@@ -55,8 +52,17 @@
         android:ems="12"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:imeOptions="actionGo"
-        />
+        android:imeOptions="actionDone" />
+
+    <Spinner
+        android:id="@+id/region_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@id/password"
+        android:layout_alignEnd="@id/password"
+        android:layout_marginBottom="15dp" />
 
     <Button
         android:id="@+id/sign_in"
@@ -64,12 +70,10 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@id/password"
         android:layout_alignEnd="@id/password"
-        android:layout_below="@id/password"
+        android:layout_below="@id/region_spinner"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
-        android:text="@string/sign_in_button"
-        android:background="@color/logo2_faded"
-        />
+        android:text="@string/sign_in_button" />
 
     <TextView
         android:id="@+id/register"
@@ -78,6 +82,5 @@
         android:layout_centerHorizontal="true"
         android:text="@string/go_to_register"
         android:layout_below="@id/sign_in"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
 </RelativeLayout>

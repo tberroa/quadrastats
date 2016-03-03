@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                     android:background="#80000000"
                     android:text="@string/dynamic_queue"
                     android:gravity="start"
-                    android:textSize="25sp"
+                    android:textSize="40sp"
                     android:textColor="@color/white" />
 
                 <ImageView
@@ -71,7 +71,7 @@
                     android:background="#80000000"
                     android:text="@string/solo_queue"
                     android:gravity="start"
-                    android:textSize="25sp"
+                    android:textSize="40sp"
                     android:textColor="@color/white" />
 
                 <ImageView
@@ -94,7 +94,7 @@
                     android:background="#80000000"
                     android:text="@string/team_5"
                     android:gravity="start"
-                    android:textSize="25sp"
+                    android:textSize="40sp"
                     android:textColor="@color/white" />
 
                 <ImageView
@@ -117,7 +117,7 @@
                     android:background="#80000000"
                     android:text="@string/team_3"
                     android:gravity="start"
-                    android:textSize="25sp"
+                    android:textSize="40sp"
                     android:textColor="@color/white" />
             </RelativeLayout>
         </HorizontalScrollView>

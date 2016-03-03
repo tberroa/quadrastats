@@ -8,9 +8,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "SummonerDto")
 public class SummonerDto extends Model {
 
-    public SummonerDto(){
-    }
-
     @Expose
     @Column(name = "summoner_id")
     public long id;             // Summoner ID
@@ -33,4 +30,17 @@ public class SummonerDto extends Model {
     @Expose
     @Column(name = "summoner_level")
     public long summonerLevel;	// summoner level associated with the summoner.
+
+    public SummonerDto(){
+        super();
+    }
+
+    public SummonerDto(long id, String name, int profileIconId, long revisionDate, long summonerLevel){
+        super();
+        this.id = id;
+        this.name = name;
+        this.profileIconId = profileIconId;
+        this.revisionDate = revisionDate;
+        this.summonerLevel = summonerLevel;
+    }
 }

@@ -11,22 +11,19 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
     android:id="@+id/nav_header_layout"
-    android:gravity="bottom">
+    android:gravity="bottom" >
 
     <ImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:id="@+id/summoner_icon"
-        android:contentDescription="@string/thumbnail_summoner_icon"
-        />
+        android:contentDescription="@string/thumbnail_summoner_icon" />
 
     <TextView
-    android:id="@+id/summoner_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/summoner_name"
-    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-    android:textSize="20sp"
-    />
-
+        android:id="@+id/summoner_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summoner_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp" />
 </LinearLayout>

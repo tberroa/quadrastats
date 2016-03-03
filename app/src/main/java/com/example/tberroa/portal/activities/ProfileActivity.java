@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.helpers.Utilities;
+import com.example.tberroa.portal.helpers.AuthenticationUtil;
 
 public class ProfileActivity extends AppCompatActivity{
 
@@ -25,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity{
 
     private final View.OnClickListener signOutButtonListener = new View.OnClickListener() {
         public void onClick(View v) {
-            Utilities.signOut(ProfileActivity.this);
+            AuthenticationUtil.signOut(ProfileActivity.this);
         }
     };
 }

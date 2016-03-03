@@ -6,5 +6,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="logo1">#FFC5E8EB</color>
     <color name="logo2">#FFF69729</color>
-    <color name="logo2_faded">#B3F69729</color>
+    <color name="logo2_faded">#FFb86200</color>
+    <color name="transparent">#00000000</color>
 </resources>

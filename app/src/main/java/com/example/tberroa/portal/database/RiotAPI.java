@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.example.tberroa.portal.data.MostRecentError;
 import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.helpers.ModelSerializer;
 import com.example.tberroa.portal.models.matchlist.MatchList;
 import com.example.tberroa.portal.models.summoner.RunePagesDto;
@@ -31,7 +31,7 @@ public class RiotAPI {
 
     public RiotAPI(Context context){
         this.context = context;
-        region = new UserInfo().getRegion(context);
+        region = new SummonerInfo().getRegion(context);
         Log.d(Params.TAG_DEBUG, "@RAPI Constructor: region is " + region);
     }
 
@@ -156,25 +156,6 @@ public class RiotAPI {
         }
     }
 
-    public boolean summonerExists(String summonerName){
-        // construct url
-        url = Params.RIOT_API_BASE_URL + region + Params.API_SUMMONER + "by-name/" +
-                summonerName + "?api_key=" + Params.API_KEY;
-        Log.d(Params.TAG_DEBUG, "@summonerExists: url is " + url);
-
-        // query riot api
-        String[] response = {Params.HTTP_GET_FAILED, ""};
-        try{
-            response =  new AttemptGet().execute().get();
-        }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
-            Log.e(Params.TAG_EXCEPTIONS,"@summonerExists: " + e.getMessage() );
-        }
-        Log.d(Params.TAG_DEBUG, "@summonerExists: response body is " + response[1]);
-
-        // return validation result
-        return (validResponse(response[0]));
-    }
-
     private class AttemptGet extends AsyncTask<Void, Void, String[]> {
         @Override
         protected String[] doInBackground(Void... params) {
@@ -184,7 +165,6 @@ public class RiotAPI {
             }catch(IOException e){
                 Log.d(Params.TAG_EXCEPTIONS,"@RAPI AttemptGet: " + e.getMessage());
             }
-
             return response;
         }
     }

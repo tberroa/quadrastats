@@ -2,6 +2,7 @@ package com.example.tberroa.portal.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,28 +14,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.data.UserInfo;
-import com.example.tberroa.portal.database.RiotAPI;
+import com.example.tberroa.portal.data.Params;
+import com.example.tberroa.portal.data.SummonerInfo;
+import com.example.tberroa.portal.data.UpdateServiceState;
+import com.example.tberroa.portal.database.LocalDB;
 import com.example.tberroa.portal.database.URLConstructor;
 import com.example.tberroa.portal.helpers.CircleTransform;
-import com.example.tberroa.portal.helpers.Utilities;
+import com.example.tberroa.portal.helpers.ScreenUtil;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
-import com.example.tberroa.portal.network.NetworkUtil;
+import com.example.tberroa.portal.services.UpdateService;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    final private LocalDB localDB = new LocalDB();
+    final private SummonerInfo summonerInfo = new SummonerInfo();
+    final private UpdateServiceState updateServiceState = new UpdateServiceState();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // check if update service needs to be started up
+        int state = updateServiceState.get(this);
+        if (state == 0){
+            startService(new Intent(this, UpdateService.class));
+        }
+        Log.d(Params.TAG_DEBUG, "@HomeActivity: updateServiceState is " + Integer.toString(state));
+
         // =================== view initialization ==============================================
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -48,17 +57,18 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerLayout = navigationView.getHeaderView(0);
 
         ImageView dynamicQueue = (ImageView) findViewById(R.id.splash_dynamic_queue);
         ImageView soloQueue = (ImageView) findViewById(R.id.splash_solo_queue);
         ImageView team5 = (ImageView) findViewById(R.id.splash_team_5);
         ImageView team3 = (ImageView) findViewById(R.id.splash_team3);
 
-        int screenWidth = Utilities.getScreenWidth(this);
-        int screenHeight = Utilities.getScreenHeight(this);
+        int screenWidth = ScreenUtil.getScreenWidth(this);
+        int screenHeight = ScreenUtil.getScreenHeight(this);
         int width, height;
 
-        if (!Utilities.isLandscape(this)){
+        if (!ScreenUtil.isLandscape(this)){
             width = screenWidth;
             height = screenHeight / 4;
         }
@@ -86,51 +96,27 @@ public class HomeActivity extends AppCompatActivity
         Picasso.with(this).load(R.drawable.splash_shyvana).centerCrop().fit().into(team5);
         Picasso.with(this).load(R.drawable.splash_jarvan).centerCrop().fit().into(team3);
         //=======================================================================================
-        // initialize user info
-        UserInfo userInfo = new UserInfo();
+        // get stylized summoner name
+        String stylizedName = summonerInfo.getStylizedName(this);
+        Log.d(Params.TAG_DEBUG, "@HomeActivity: stylized name is " + stylizedName);
 
-        // get summoner name
-        String summonerName = userInfo.getSummonerName(this);
+        // load stylized summoner name into drawer header
+        TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
+        summonerNameView.setText(stylizedName);
 
-        if (NetworkUtil.isInternetAvailable(this)){
-            // initialize riot api
-            RiotAPI riotAPI = new RiotAPI(this);
+        // get summoner dto
+        SummonerDto summoner = localDB.getSummoner(stylizedName);
 
-            // query riot api for summoner dto
-            List<String> summonerNames = new ArrayList<>();
-            summonerNames.add(summonerName);
-            Map<String, SummonerDto> summoners = riotAPI.getSummonersByName(summonerNames);
-            if (summoners != null){
-                SummonerDto summoner = summoners.get(summonerName);
-                // load summoner icon
-                View headerLayout = navigationView.getHeaderView(0);
-                ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
-                String url = new URLConstructor().summonerIcon(summoner.profileIconId);
-                Picasso.with(this)
-                        .load(url)
-                        .fit()
-                        .transform(new CircleTransform()).into(summonerIcon);
+        if (summoner != null){
+            Log.d(Params.TAG_DEBUG, "@HomeActivity: summoner dto is not null");
 
-                // load summoner name
-                TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
-                summonerNameView.setText(summoner.name);
-            }
-            else{
-                Toast.makeText(this, getString(R.string.riot_api_error), Toast.LENGTH_SHORT).show();
-            }
-        }
-        else{
-            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+            // load summoner icon
+            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
+            String url = new URLConstructor().summonerIcon(summoner.profileIconId);
+            Picasso.with(this)
+                    .load(url)
+                    .fit()
+                    .transform(new CircleTransform()).into(summonerIcon);
         }
     }
 
@@ -180,5 +166,15 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            moveTaskToBack(true);
+        }
     }
 }

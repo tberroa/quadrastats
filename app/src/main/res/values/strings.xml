@@ -31,6 +31,8 @@
         <item>Russia</item>
         <item>Turkey</item>
     </string-array>
+    <string name="initializing_data">Initializing your data &#8230;</string>
+    <string name="cancel">Cancel</string>
 
     <!-- dialogs -->
     <string name="validate_ownership_title">Validate Ownership</string>
@@ -64,8 +66,6 @@
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
     <string name="internet_not_available">Internet not available</string>
-    <string name="riot_api_error">Error occurred when trying to query the Riot servers</string>
     <string name="invalid_summoner_name">Invalid summoner name</string>
     <string name="code_not_found">Rune page code not found</string>
-
 </resources>

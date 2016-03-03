@@ -4,22 +4,27 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class UserInfo extends Application {
+public class SummonerInfo extends Application {
 
     private final String REGION = "region";
-    private final String SUMMONER_NAME = "summoner_name";
+    private final String BASIC_NAME = "basic_name";
+    private final String STYLIZED_NAME = "stylized_name";
     private final String IS_SIGNED_IN = "is_logged_in";
 
     private SharedPreferences getSharedPreferences(Context context){
-        return context.getSharedPreferences("user_info", MODE_PRIVATE);
+        return context.getSharedPreferences("summoner_info", MODE_PRIVATE);
     }
 
     public String getRegion(Context context){
         return getSharedPreferences(context).getString(REGION, "");
     }
 
-    public String getSummonerName(Context context){
-        return getSharedPreferences(context).getString(SUMMONER_NAME, "");
+    public String getBasicName(Context context){
+        return getSharedPreferences(context).getString(BASIC_NAME, "");
+    }
+
+    public String getStylizedName(Context context) {
+        return getSharedPreferences(context).getString(STYLIZED_NAME, "");
     }
 
     public Boolean isSignedIn(Context context){
@@ -32,13 +37,19 @@ public class UserInfo extends Application {
         editor.apply();
     }
 
-    public void setSummonerName(Context context, String name) {
+    public void setBasicName(Context context, String name) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(SUMMONER_NAME, name);
+        editor.putString(BASIC_NAME, name);
         editor.apply();
     }
 
-    public void setUserStatus(Context context, Boolean bool) {
+    public void setStylizedName(Context context, String name) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(STYLIZED_NAME, name);
+        editor.apply();
+    }
+
+    public void setSummonerStatus(Context context, Boolean bool) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putBoolean(IS_SIGNED_IN, bool);
         editor.apply();
@@ -46,7 +57,8 @@ public class UserInfo extends Application {
 
     public void clear(Context context){
         setRegion(context, "");
-        setSummonerName(context, "");
-        setUserStatus(context, false);
+        setBasicName(context, "");
+        setStylizedName(context, "");
+        setSummonerStatus(context, false);
     }
 }
