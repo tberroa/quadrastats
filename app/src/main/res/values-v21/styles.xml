@@ -5,4 +5,7 @@
         parent="Theme.AppCompat.NoActionBar" >
         <item name="android:colorButtonNormal">@color/logo2_faded</item>
     </style>
+    <style name="TwoWayView">
+        <item name="android:orientation">horizontal</item>
+    </style>
 </resources>

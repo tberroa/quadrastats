@@ -71,10 +71,10 @@ public class RegisterActivity extends AppCompatActivity {
         goToSignInButton.setOnClickListener(goToSignInButtonListener);
 
         // set up region spinner
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource
-                (this, R.array.select_region, android.R.layout.simple_spinner_item);
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        region.setAdapter(staticAdapter);
+        ArrayAdapter<CharSequence> adapter;
+        adapter = ArrayAdapter.createFromResource(this, R.array.select_region, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        region.setAdapter(adapter);
     }
 
     private final View.OnClickListener registerButtonListener = new View.OnClickListener() {
@@ -86,8 +86,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private final View.OnClickListener goToSignInButtonListener = new View.OnClickListener() {
         public void onClick(View v) {
-            startActivity(new Intent(RegisterActivity.this, SignInActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD));
+            Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
+            startActivity(intent);
             finish();
         }
     };
@@ -148,8 +149,10 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 if (validOwnership(enteredSummonerName, keyString)) {
                                     new AttemptRegister().execute();
-                                } else {
-                                    Toast.makeText(RegisterActivity.this, getString(R.string.code_not_found), Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    String toastMessage = getString(R.string.code_not_found);
+                                    Toast.makeText(RegisterActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
                                     registerButton.setEnabled(true);
                                 }
                                 dialog.dismiss();

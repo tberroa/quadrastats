@@ -55,10 +55,10 @@ public class SignInActivity extends AppCompatActivity {
         goToRegisterButton.setOnClickListener(goToRegisterButtonListener);
 
         // set up region spinner
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource
-                (this, R.array.select_region, android.R.layout.simple_spinner_item);
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        region.setAdapter(staticAdapter);
+        ArrayAdapter<CharSequence> adapter;
+        adapter = ArrayAdapter.createFromResource(this, R.array.select_region, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        region.setAdapter(adapter);
     }
 
     private final OnClickListener signInButtonListener = new OnClickListener() {
@@ -70,8 +70,9 @@ public class SignInActivity extends AppCompatActivity {
 
     private final OnClickListener goToRegisterButtonListener = new OnClickListener() {
         public void onClick(View v) {
-            startActivity(new Intent(SignInActivity.this, RegisterActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD));
+            Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
+            startActivity(intent);
             finish();
         }
     };
