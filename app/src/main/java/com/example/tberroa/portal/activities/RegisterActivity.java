@@ -1,10 +1,13 @@
 package com.example.tberroa.portal.activities;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
@@ -41,6 +44,10 @@ public class RegisterActivity extends AppCompatActivity {
     private String stylizedName;
     private Spinner region;
     private Button registerButton;
+    private TextView goToSignInButton;
+    private AlertDialog.Builder builder;
+    private String enteredSummonerName;
+    private boolean inView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
         // declare and initialize buttons
         registerButton = (Button)findViewById(R.id.register);
         registerButton.setOnClickListener(registerButtonListener);
-        TextView goToSignInButton = (TextView)findViewById(R.id.go_to_sign_in);
+        goToSignInButton = (TextView)findViewById(R.id.go_to_sign_in);
         goToSignInButton.setOnClickListener(goToSignInButtonListener);
 
         // set up region spinner
@@ -95,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // validation process
     private void Register(){
-        final String enteredSummonerName = summonerName.getText().toString();
+        enteredSummonerName = summonerName.getText().toString();
         final String enteredPassword = password.getText().toString();
         final String enteredConfirmPassword = confirmPassword.getText().toString();
 
@@ -113,57 +120,30 @@ public class RegisterActivity extends AppCompatActivity {
                     String region = AuthenticationUtil.decodeRegion(regionSelection);
                     // save region
                     summonerInfo.setRegion(this, region);
-                    // make sure its a valid summoner name
-                    List<String> summonerList = new ArrayList<>();
-                    summonerList.add(enteredSummonerName);
-                    Map<String, SummonerDto> summoner = new RiotAPI(this).getSummonersByName(summonerList);
-                    if (summoner != null){
-                        // save the stylized name
-                        stylizedName = summoner.get(enteredSummonerName).name;
 
-                        // make sure this person owns that summoner account
-                        // initialize validation key
-                        int key = new Random().nextInt(80000 - 65000) + 15000;
-                        final String keyString = Integer.toString(key);
+                    // validate summoner name in separate thread
+                    new Thread(new Runnable() {
+                        public void run() {
+                            List<String> summonerList = new ArrayList<>();
+                            summonerList.add(enteredSummonerName);
+                            Map<String, SummonerDto> summoner;
+                            summoner = new RiotAPI(RegisterActivity.this).getSummonersByName(summonerList);
+                            Message msg = new Message();
+                            if (summoner != null){
+                                // save the stylized name
+                                stylizedName = summoner.get(enteredSummonerName).name;
 
-                        // construct text view to format message
-                        TextView dialogMessage = new TextView(this);
-                        dialogMessage.setPadding(15, 15, 15, 0);
-                        dialogMessage.setGravity(Gravity.CENTER);
-                        dialogMessage.setText(Html.fromHtml(
-                                "<h2>"+getString(R.string.validate_ownership_title)+"</h2>" +
-                                "<p>"+getString(R.string.validate_ownership)+"</p>" +
-                                keyString
-                        ));
+                                // construct dialog
+                                constructDialog();
 
-                        // construct and show dialog
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setView(dialogMessage);
-                        builder.setCancelable(false);
-                        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id){
-                                registerButton.setEnabled(true);
+                                msg.arg1 = 2;
                             }
-                        });
-                        builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                if (validOwnership(enteredSummonerName, keyString)) {
-                                    new AttemptRegister().execute();
-                                }
-                                else {
-                                    String toastMessage = getString(R.string.code_not_found);
-                                    Toast.makeText(RegisterActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
-                                    registerButton.setEnabled(true);
-                                }
-                                dialog.dismiss();
+                            else{
+                                msg.arg1 = 1;
                             }
-                        });
-                        builder.create().show();
-                    }
-                    else{
-                        Toast.makeText(this, getString(R.string.invalid_summoner_name), Toast.LENGTH_SHORT).show();
-                        registerButton.setEnabled(true);
-                    }
+                            handler.sendMessage(msg);
+                        }
+                    }).start();
                 }
                 else{
                     Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
@@ -199,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    // part of validation process, method to verify summoner account ownership
+    //method to verify summoner account ownership, called in dialog
     private boolean validOwnership(String summonerName, String keyString){
         RunePagesDto runePagesDto = new RiotAPI(this).getRunePages(summonerName);
         Set<RunePageDto> pages = runePagesDto.pages;
@@ -212,6 +192,81 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    // dialog for validating ownership
+    private void constructDialog(){
+        // initialize validation key
+        int key = new Random().nextInt(80000 - 65000) + 15000;
+        final String keyString = Integer.toString(key);
+
+        // construct text view to format message
+        TextView dialogMessage = new TextView(RegisterActivity.this);
+        dialogMessage.setPadding(15, 15, 15, 0);
+        dialogMessage.setGravity(Gravity.CENTER);
+        dialogMessage.setText(Html.fromHtml(
+                "<h2>"+getString(R.string.validate_ownership_title)+"</h2>" +
+                        "<p>"+getString(R.string.validate_ownership)+"</p>" +
+                        keyString
+        ));
+
+        // construct dialog
+        builder = new AlertDialog.Builder(RegisterActivity.this);
+        builder.setView(dialogMessage);
+        builder.setCancelable(false);
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                registerButton.setEnabled(true);
+            }
+        });
+        builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // validate ownership in separate thread
+                new Thread(new Runnable() {
+                    public void run() {
+                        Message msg = new Message();
+                        msg.arg1 = (validOwnership(enteredSummonerName, keyString)) ? 4 : 3;
+                        handler.sendMessage(msg);
+                    }
+                }).start();
+                goToSignInButton.setEnabled(false);
+                dialog.dismiss();
+            }
+        });
+    }
+
+    // handler used to respond to validation process which occurs in separate thread
+    @SuppressLint("HandlerLeak")
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int flag = msg.arg1;
+            switch (flag){
+                case 4:
+                    new AttemptRegister().execute();
+                    break;
+                case 3:
+                    if (inView){
+                        String toastMsg = getString(R.string.code_not_found);
+                        Toast.makeText(RegisterActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    goToSignInButton.setEnabled(true);
+                    registerButton.setEnabled(true);
+                    break;
+                case 2:
+                    if (inView){
+                        builder.create().show();
+                    }
+                    break;
+                case 1:
+                    if (inView){
+                        String toastMsg = getString(R.string.invalid_summoner_name);
+                        Toast.makeText(RegisterActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    registerButton.setEnabled(true);
+                    break;
+            }
+        }
+    };
 
     // attempts to register via http
     class AttemptRegister extends AsyncTask<Void, Void, Void> {
@@ -244,12 +299,25 @@ public class RegisterActivity extends AppCompatActivity {
             if (postResponse.contains("success")) {
                 // sign in
                 Log.d(Params.TAG_DEBUG, "@RegisterActivity: successful register");
-                AuthenticationUtil.signIn(RegisterActivity.this, summonerName, region);
+                AuthenticationUtil.signIn(RegisterActivity.this, summonerName, region, inView);
             }
             else{ // display error
                 Toast.makeText(RegisterActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+                goToSignInButton.setEnabled(true);
+                registerButton.setEnabled(true);
             }
-            registerButton.setEnabled(true);
         }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        inView = true;
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        inView = false;
     }
 }

@@ -26,6 +26,8 @@ public class SignInActivity extends AppCompatActivity {
     private EditText summonerName, password;
     private Spinner region;
     private Button signInButton;
+    private TextView goToRegisterButton;
+    private boolean inView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class SignInActivity extends AppCompatActivity {
         // declare and initialize buttons
         signInButton = (Button)findViewById(R.id.sign_in);
         signInButton.setOnClickListener(signInButtonListener);
-        TextView goToRegisterButton = (TextView)findViewById(R.id.register);
+        goToRegisterButton = (TextView)findViewById(R.id.register);
         goToRegisterButton.setOnClickListener(goToRegisterButtonListener);
 
         // set up region spinner
@@ -91,6 +93,7 @@ public class SignInActivity extends AppCompatActivity {
             if (NetworkUtil.isInternetAvailable(this)){
                 int regionSelection = region.getSelectedItemPosition();
                 if (regionSelection > 0){
+                    goToRegisterButton.setEnabled(false);
                     new AttemptSignIn().execute();
                 }
                 else{
@@ -99,8 +102,8 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
             else{
-                signInButton.setEnabled(true);
                 Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+                signInButton.setEnabled(true);
             }
         }
         else{
@@ -149,12 +152,25 @@ public class SignInActivity extends AppCompatActivity {
             if (postResponse.equals("success")) {
                 // sign in
                 Log.d(Params.TAG_DEBUG, "@SignInActivity: successful sign in");
-                AuthenticationUtil.signIn(SignInActivity.this, summonerName, region);
+                AuthenticationUtil.signIn(SignInActivity.this, summonerName, region, inView);
             }
             else{ // display error
                 Toast.makeText(SignInActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+                goToRegisterButton.setEnabled(true);
+                signInButton.setEnabled(true);
             }
-            signInButton.setEnabled(true);
         }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        inView = true;
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        inView = false;
     }
 }

@@ -11,6 +11,13 @@ import com.example.tberroa.portal.activities.SplashActivity;
 import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.data.UpdateServiceState;
 import com.example.tberroa.portal.database.LocalDB;
+import com.example.tberroa.portal.database.RiotAPI;
+import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.services.UpdateService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class AuthenticationUtil {
 
@@ -47,7 +54,7 @@ public class AuthenticationUtil {
         return validation;
     }
 
-    public static void signIn(Context context, String summonerName, String region){
+    public static void signIn(final Context context, String summonerName, String region, boolean inView){
         SummonerInfo summonerInfo = new SummonerInfo();
 
         // clear shared preferences of old data
@@ -62,9 +69,31 @@ public class AuthenticationUtil {
         // update summoner sign in status
         summonerInfo.setSummonerStatus(context, true);
 
-        // go to splash page
-        context.startActivity(new Intent(context, SplashActivity.class));
+        // start update service
+        context.startService(new Intent(context, UpdateService.class));
 
+        // save stylized summoner name
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                RiotAPI riotAPI = new RiotAPI(context);
+                SummonerInfo summonerInfo = new SummonerInfo();
+                String basicName = summonerInfo.getBasicName(context);
+                List<String> nameList = new ArrayList<>();
+                nameList.add(basicName);
+                Map<String, SummonerDto> summonerMap = riotAPI.getSummonersByName(nameList);
+                if (summonerMap != null){
+                    summonerInfo.setStylizedName(context, summonerMap.get(basicName).name);
+                }
+            }
+        }).start();
+
+        // go to splash page if app is in view
+        if (inView){
+            context.startActivity(new Intent(context, SplashActivity.class));
+        }
+
+        // destroy activity
         if(context instanceof Activity){
             ((Activity)context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
             ((Activity)context).finish();
