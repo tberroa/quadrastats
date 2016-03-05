@@ -12,9 +12,6 @@ import java.util.List;
 @Table(name = "Participant")
 public class Participant extends Model {
 
-    public Participant(){
-    }
-
     @Expose
     @Column(name = "champion_id")
     public int championId;                          // champion id
@@ -60,5 +57,7 @@ public class Participant extends Model {
                                                     // of the game versus the second 20 minutes of the game. Diffs
                                                     // fields refer to the deltas versus the calculated lane opponent(s).
 
-
+    public Participant(){
+        super();
+    }
 }

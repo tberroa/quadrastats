@@ -11,9 +11,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "AggregatedStatsDto")
 public class AggregatedStatsDto extends Model {
 
-    public AggregatedStatsDto(){
-    }
-
     @Expose
     @Column(name = "bot_games_played")
     public int botGamesPlayed;
@@ -149,4 +146,8 @@ public class AggregatedStatsDto extends Model {
     @Expose
     @Column(name = "total_unreal_kills")
     public int totalUnrealKills;
+
+    public AggregatedStatsDto(){
+        super();
+    }
 }

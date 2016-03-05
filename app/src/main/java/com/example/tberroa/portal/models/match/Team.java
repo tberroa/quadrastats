@@ -12,9 +12,6 @@ import java.util.List;
 @Table(name = "Team")
 public class Team extends Model {
 
-    public Team(){
-    }
-
     @Expose
     @Column(name = "bans")
     public List<BannedChampion> bans;      // If game was draft mode, contains banned champion data, otherwise null
@@ -80,8 +77,7 @@ public class Team extends Model {
     @Column(name = "winner")
     public boolean winner;                  // 	Flag indicating whether or not the team won
 
-
-
-
-
+    public Team(){
+        super();
+    }
 }

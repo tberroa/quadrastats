@@ -10,9 +10,6 @@ import java.util.List;
 @Table(name = "Timeline")
 public class Timeline extends Model {
 
-    public Timeline(){
-    }
-
     @Expose
     @Column(name = "frameInterval")
     public long frameInterval;      // time between each returned frame in milliseconds
@@ -21,4 +18,7 @@ public class Timeline extends Model {
     @Column(name = "frames")
     public List<Frame> frames;       // list of timeline frames for the game
 
+    public Timeline(){
+        super();
+    }
 }

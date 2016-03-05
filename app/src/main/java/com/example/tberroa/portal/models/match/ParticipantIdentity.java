@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "ParticipantIdentity")
 public class ParticipantIdentity extends Model {
 
-    public ParticipantIdentity(){
-    }
-
     @Expose
     @Column(name = "participant_id")
     public int participantId;           // participant id
@@ -21,4 +18,7 @@ public class ParticipantIdentity extends Model {
     @Column(name = "player")
     public Player player;               // player information
 
+    public ParticipantIdentity(){
+        super();
+    }
 }

@@ -12,16 +12,15 @@ import java.util.Set;
 @Table(name = "MasteryPagesDto")
 public class MasteryPagesDto extends Model {
 
-    public MasteryPagesDto(){
-
-    }
-
     @Expose
-    @Column(name = "pages")                 // Collection of mastery pages associated with the summoner.
+    @Column(name = "pages")
     public Set<MasteryPageDto> pages;
 
     @Expose
     @Column(name = "summoner_id")
     public long summonerId;
 
+    public MasteryPagesDto(){
+        super();
+    }
 }

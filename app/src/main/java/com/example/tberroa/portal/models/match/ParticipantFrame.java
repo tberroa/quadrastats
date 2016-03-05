@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "ParticipantFrame")
 public class ParticipantFrame  extends Model {
 
-    public ParticipantFrame(){
-    }
-
     @Expose                                 // Participant's current gold
     @Column(name = "current_gold")
     public int currentGold;
@@ -52,4 +49,8 @@ public class ParticipantFrame  extends Model {
     @Expose
     @Column(name = "xp")                    // Experience earned by participant
     public int xp;
+
+    public ParticipantFrame(){
+        super();
+    }
 }

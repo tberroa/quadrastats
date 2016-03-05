@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "Position")
 public class Position extends Model {
 
-    public Position(){
-    }
-
     @Expose
     @Column(name = "x")
     public int x;
@@ -21,4 +18,7 @@ public class Position extends Model {
     @Column(name = "y")
     public int y;
 
+    public Position(){
+        super();
+    }
 }

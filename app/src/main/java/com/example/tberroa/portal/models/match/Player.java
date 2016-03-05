@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "Player")
 public class Player extends Model {
 
-    public Player(){
-    }
-
     @Expose
     @Column(name = "match_history_uri")
     public String matchHistoryUri;
@@ -29,4 +26,7 @@ public class Player extends Model {
     @Column(name = "summoner_name")
     public long summonerName;
 
+    public Player(){
+        super();
+    }
 }

@@ -12,9 +12,6 @@ import java.util.List;
 @Table(name = "PlayerStatsSummaryListDto")
 public class PlayerStatsSummaryListDto extends Model {
 
-    public PlayerStatsSummaryListDto(){
-    }
-
     @Expose
     @Column(name = "player_stat_summaries")
     public List<PlayerStatsSummaryDto> playerStatSummaries; // Collection of player stats summaries associated with the summoner.
@@ -23,4 +20,7 @@ public class PlayerStatsSummaryListDto extends Model {
     @Column(name = "summoner_id")
     public long summonerId;
 
+    public PlayerStatsSummaryListDto(){
+        super();
+    }
 }

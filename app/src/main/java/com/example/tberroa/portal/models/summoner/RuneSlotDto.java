@@ -8,9 +8,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "RuneSlotDto")
 public class RuneSlotDto extends Model{
 
-    public RuneSlotDto(){
-    }
-
     @Expose
     @Column(name = "rune_id")
     public int runeId;
@@ -18,4 +15,8 @@ public class RuneSlotDto extends Model{
     @Expose
     @Column(name = "rune_slot_id")
     public int runeSlotId;
+
+    public RuneSlotDto(){
+        super();
+    }
 }

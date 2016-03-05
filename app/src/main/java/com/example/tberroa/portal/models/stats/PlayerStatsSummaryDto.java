@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "PlayerStatsSummaryDto")
 public class PlayerStatsSummaryDto extends Model {
 
-    public PlayerStatsSummaryDto(){
-    }
-
     @Expose
     @Column(name = "aggregated_stats")              // 	Aggregated stats.
     public AggregatedStatsDto aggregatedStatsDto;
@@ -38,4 +35,7 @@ public class PlayerStatsSummaryDto extends Model {
     @Column(name = "wins")                          // Number of wins for this queue type.
     public int wins;
 
+    public PlayerStatsSummaryDto(){
+        super();
+    }
 }

@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "ParticipantTimeline")
 public class ParticipantTimeline extends Model {
 
-    public ParticipantTimeline(){
-    }
-
     @Expose
     @Column(name = "ancient_golem_assists_per_min_counts")
     public ParticipantTimelineData ancientGolemAssistsPerMinCounts;
@@ -113,4 +110,7 @@ public class ParticipantTimeline extends Model {
     @Column(name = "xp_per_min_deltas")
     public ParticipantTimelineData xpPerMinDeltas;
 
+    public ParticipantTimeline(){
+        super();
+    }
 }

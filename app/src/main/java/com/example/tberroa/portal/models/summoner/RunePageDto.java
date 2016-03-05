@@ -10,9 +10,6 @@ import java.util.Set;
 @Table(name = "RunePageDto")
 public class RunePageDto extends Model {
 
-    public RunePageDto(){
-    }
-
     @Expose
     @Column(name = "current")
     public boolean current;
@@ -28,4 +25,8 @@ public class RunePageDto extends Model {
     @Expose
     @Column(name = "slots")
     public Set<RuneSlotDto> slots;
+
+    public RunePageDto(){
+        super();
+    }
 }

@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "ParticipantStats")
 public class ParticipantStats extends Model {
 
-    public ParticipantStats(){
-    }
-
     @Expose
     @Column(name = "assists")                   // Number of assists
     public long assists;
@@ -267,4 +264,8 @@ public class ParticipantStats extends Model {
     @Expose
     @Column(name = "winner")                    // Flag indicating whether or not the participant won
     public boolean winner;
+
+    public ParticipantStats(){
+        super();
+    }
 }

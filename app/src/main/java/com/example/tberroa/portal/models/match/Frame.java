@@ -13,9 +13,6 @@ import java.util.Map;
 @Table(name = "Frame")
 public class Frame extends Model {
 
-    public Frame(){
-    }
-
     @Expose
     @Column(name = "events")
     public List<Event> events;          // List of events for this frame.
@@ -28,4 +25,8 @@ public class Frame extends Model {
     @Expose
     @Column(name = "timestamp")
     public long timestamp;              // Represents how many milliseconds into the game the frame occurred.
+
+    public Frame(){
+        super();
+    }
 }

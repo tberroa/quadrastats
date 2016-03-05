@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "MatchReference")
 public class MatchReference extends Model {
 
-    public MatchReference(){
-    }
-
     @Expose
     @Column(name = "champion")
     public long champion;
@@ -49,4 +46,7 @@ public class MatchReference extends Model {
     @Column(name = "timestamp")
     public long timestamp;
 
+    public MatchReference(){
+        super();
+    }
 }

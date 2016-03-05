@@ -12,9 +12,6 @@ import java.util.List;
 @Table(name = "MatchDetail")
 public class MatchDetail extends Model {
 
-    public MatchDetail(){
-    }
-
     @Expose
     @Column(name = "map_id")
     public int mapId;                   // Match map ID
@@ -86,4 +83,7 @@ public class MatchDetail extends Model {
     @Column(name = "timeline")
     public Timeline timeline;           // match timeline data (not included by default)
 
+    public MatchDetail(){
+        super();
+    }
 }

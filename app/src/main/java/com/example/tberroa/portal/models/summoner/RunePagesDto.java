@@ -10,9 +10,6 @@ import java.util.Set;
 @Table(name = "RunePagesDto")
 public class RunePagesDto extends Model {
 
-    public RunePagesDto(){
-    }
-
     @Expose
     @Column(name = "pages")
     public Set<RunePageDto> pages;
@@ -20,4 +17,8 @@ public class RunePagesDto extends Model {
     @Expose
     @Column(name = "summoner_id")
     public long summonerId;
+
+    public RunePagesDto(){
+        super();
+    }
 }

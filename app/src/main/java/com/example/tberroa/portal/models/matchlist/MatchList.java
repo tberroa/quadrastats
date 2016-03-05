@@ -12,9 +12,6 @@ import java.util.List;
 @Table(name = "MatchList")
 public class MatchList extends Model {
 
-    public MatchList(){
-    }
-
     @Expose
     @Column(name = "end_index")
     public int endIndex;
@@ -31,5 +28,7 @@ public class MatchList extends Model {
     @Column(name = "total_games")
     public int totalGames;
 
-
+    public MatchList(){
+        super();
+    }
 }
