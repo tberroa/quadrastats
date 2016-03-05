@@ -47,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }).start();
 
-        // go to home activity after 3 seconds have passed
+        // go to activity_profile activity after 3 seconds have passed
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {

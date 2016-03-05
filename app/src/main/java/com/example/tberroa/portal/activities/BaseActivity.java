@@ -4,13 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -30,6 +28,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private SmoothActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
+    public Toolbar toolbar;
 
     @SuppressLint("InflateParams")
     @Override
@@ -42,7 +41,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getLayoutInflater().inflate(layoutResID, content, true);
         super.setContentView(drawer);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
@@ -69,25 +68,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                     .fit()
                     .transform(new CircleTransform()).into(summonerIcon);
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.action_settings:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
