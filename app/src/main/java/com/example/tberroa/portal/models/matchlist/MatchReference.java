@@ -7,15 +7,21 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "MatchReference")
 public class MatchReference extends Model {
+
+    // parent
+    @Expose
+    @Column(name = "match_list")
+    public MatchList matchList;
 
     @Expose
     @Column(name = "champion")
     public long champion;
 
     @Expose
-    @Column(name = "lane")          // Legal values: MID, MIDDLE, TOP, JUNGLE, BOT, BOTTOM
+    @Column(name = "lane")
     public String lane;
 
     @Expose
@@ -27,20 +33,20 @@ public class MatchReference extends Model {
     public String platformId;
 
     @Expose
-    @Column(name = "queue")         // Legal values: TEAM_BUILDER_DRAFT_RANKED_5x5, RANKED_SOLO_5x5,
-    public String queue;            // RANKED_TEAM_3x3, RANKED_TEAM_5x5
+    @Column(name = "queue")
+    public String queue;
 
     @Expose
     @Column(name = "region")
     public String region;
 
     @Expose
-    @Column(name = "role")          // Legal values: DUO, NONE, SOLO, DUO_CARRY, DUO_SUPPORT
+    @Column(name = "role")
     public String role;
 
     @Expose
-    @Column(name = "season")        // Legal values: PRESEASON3, SEASON3, PRESEASON2014, SEASON2014,
-    public String season;           // PRESEASON2015, SEASON2015, PRESEASON2016, SEASON2016
+    @Column(name = "season")
+    public String season;
 
     @Expose
     @Column(name = "timestamp")

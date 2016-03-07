@@ -5,42 +5,31 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "SummonerDto")
 public class SummonerDto extends Model {
 
     @Expose
     @Column(name = "summoner_id")
-    public long id;             // Summoner ID
+    public long id;
 
     @Expose
     @Column(name = "name")
-    public String name;         // Summoner name
+    public String name;
 
     @Expose
     @Column(name = "profile_icon_id")
-    public int profileIconId;   // ID of the summoner icon associated with the summoner.
+    public int profileIconId;
 
     @Expose
     @Column(name = "revision_date")
-    public long revisionDate;   // Date summoner was last modified specified as epoch milliseconds.
-                                // The following events will update this timestamp:
-                                // profile icon change, playing the tutorial or advanced tutorial,
-                                // finishing a game, summoner name change
+    public long revisionDate;
 
     @Expose
     @Column(name = "summoner_level")
-    public long summonerLevel;	// summoner level associated with the summoner.
+    public long summonerLevel;
 
     public SummonerDto(){
         super();
-    }
-
-    public SummonerDto(long id, String name, int profileIconId, long revisionDate, long summonerLevel){
-        super();
-        this.id = id;
-        this.name = name;
-        this.profileIconId = profileIconId;
-        this.revisionDate = revisionDate;
-        this.summonerLevel = summonerLevel;
     }
 }

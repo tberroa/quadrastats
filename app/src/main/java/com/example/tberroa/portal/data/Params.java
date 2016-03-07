@@ -26,6 +26,7 @@ public class Params {
     public static final String RIOT_API_BASE_URL = "https://na.api.pvp.net/api/lol/";
     public static final String API_SUMMONER = "/v1.4/summoner/";
     public static final String API_MATCHLIST = "/v2.2/matchlist/";
+    public static final String API_MATCH = "/v2.2/match/";
     public static final String DATA_DRAGON_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/";
     public static final String API_KEY = "f5ee63d2-54d8-466d-ae42-df491f8eabc5";
 

@@ -7,15 +7,21 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "MasteryDto")
 public class MasteryDto extends Model {
 
+    // parent
     @Expose
-    @Column(name = "mastery_id")    // Mastery ID. For static information correlating to
-    public int id;                  // masteries, please refer to the LoL Static Data API.
+    @Column(name = "mastery_page")
+    MasteryPageDto masteryPageDto;
 
     @Expose
-    @Column(name = "rank")          // Mastery rank (i.e., the number of points put into this mastery).
+    @Column(name = "mastery_id")
+    public int id;
+
+    @Expose
+    @Column(name = "rank")
     public int rank;
 
     public MasteryDto(){

@@ -5,15 +5,21 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "Mastery")
 public class Mastery  extends Model {
 
+    // parent
     @Expose
-    @Column(name = "mastery_id")        // mastery id
+    @Column(name = "participant")
+    Participant participant;
+
+    @Expose
+    @Column(name = "mastery_id")
     public long masteryId;
 
     @Expose
-    @Column(name = "rank")              // mastery rank
+    @Column(name = "rank")
     public long rank;
 
     public Mastery(){

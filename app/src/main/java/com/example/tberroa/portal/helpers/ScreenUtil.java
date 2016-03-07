@@ -25,12 +25,4 @@ public class ScreenUtil {
     public static int getScreenHeight(Context context){
         return getScreenDimensions(context).y;
     }
-
-    public static boolean isLandscape(Context context){
-        boolean bool = false;
-        if (getScreenWidth(context) > getScreenHeight(context)){
-            bool = true;
-        }
-        return bool;
-    }
 }

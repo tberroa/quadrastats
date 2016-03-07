@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 public class SummonerInfo extends Application {
 
     private final String REGION = "region";
+    private final String ID = "id";
     private final String BASIC_NAME = "basic_name";
     private final String STYLIZED_NAME = "stylized_name";
     private final String IS_SIGNED_IN = "is_logged_in";
@@ -17,6 +18,10 @@ public class SummonerInfo extends Application {
 
     public String getRegion(Context context){
         return getSharedPreferences(context).getString(REGION, "");
+    }
+
+    public long getId(Context context) {
+        return getSharedPreferences(context).getLong(ID, 0);
     }
 
     public String getBasicName(Context context){
@@ -34,6 +39,12 @@ public class SummonerInfo extends Application {
     public void setRegion(Context context, String region) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString(REGION, region);
+        editor.apply();
+    }
+
+    public void setId(Context context, long id) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putLong(ID, id);
         editor.apply();
     }
 

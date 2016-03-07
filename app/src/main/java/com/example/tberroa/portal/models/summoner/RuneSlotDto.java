@@ -5,8 +5,14 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "RuneSlotDto")
 public class RuneSlotDto extends Model{
+
+    // parent
+    @Expose
+    @Column(name = "rune_page")
+    RunePageDto runePageDto;
 
     @Expose
     @Column(name = "rune_id")

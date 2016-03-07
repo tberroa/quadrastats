@@ -236,7 +236,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // handler used to respond to validation process which occurs in separate thread
     @SuppressLint("HandlerLeak")
-    Handler handler = new Handler() {
+    private final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             int flag = msg.arg1;

@@ -8,6 +8,7 @@ import com.example.tberroa.portal.data.MostRecentError;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.helpers.ModelSerializer;
+import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.matchlist.MatchList;
 import com.example.tberroa.portal.models.summoner.RunePagesDto;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
@@ -115,11 +116,11 @@ public class RiotAPI {
         }
     }
 
-    public MatchList getMatches(long id, Map<String, String> parameters){
+    public MatchList getMatchList(long id, Map<String, String> parameters){
         // declare and initialize parameters
-        String queue, season, beginTime, endTime, beginIndex, endIndex;
+        String queue, seasons, beginTime, endTime, beginIndex, endIndex;
         queue = (parameters.get("queue") != null) ? parameters.get("queue") : "";
-        season = (parameters.get("season") != null) ? parameters.get("season") : "";
+        seasons = (parameters.get("seasons") != null) ? parameters.get("seasons") : "";
         beginTime = (parameters.get("begin_time") != null) ? parameters.get("begin_time") : "";
         endTime = (parameters.get("end_time") != null) ? parameters.get("end_time") : "";
         beginIndex = (parameters.get("begin_index") != null) ? parameters.get("begin_index") : "";
@@ -129,27 +130,51 @@ public class RiotAPI {
         url = Params.RIOT_API_BASE_URL + region + Params.API_MATCHLIST + "by-summoner/" +
                 id +
                 "?rankedQueues=" + queue +
-                "&seasons=" + season +
+                "&seasons=" + seasons +
                 "&beginTime=" + beginTime +
                 "&endTime=" + endTime +
                 "&beginIndex=" + beginIndex +
                 "&endIndex=" + endIndex +
                 "&api_key=" + Params.API_KEY;
-        Log.d(Params.TAG_DEBUG, "@getMatches: url is " + url);
+        Log.d(Params.TAG_DEBUG, "@getMatchList: url is " + url);
 
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
         try{
             response =  new AttemptGet().execute().get();
         }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
-            Log.e(Params.TAG_EXCEPTIONS,"@getMatches: " + e.getMessage() );
+            Log.e(Params.TAG_EXCEPTIONS,"@getMatchList: " + e.getMessage() );
         }
-        Log.d(Params.TAG_DEBUG, "@getMatches: response body is " + response[1]);
+        Log.d(Params.TAG_DEBUG, "@getMatchList: response body is " + response[1]);
 
         // validate response
         if (validResponse(response[0])){
             //return matches
             return new ModelSerializer().fromJson(response[1], MatchList.class);
+        }
+        else{
+            return null;
+        }
+    }
+
+    public MatchDetail getMatchDetail(long matchId){
+        // construct url
+        url = Params.RIOT_API_BASE_URL + region + Params.API_MATCH + matchId + "?includeTimeline=1&api_key=" + Params.API_KEY;
+        Log.d(Params.TAG_DEBUG, "@getMatchDetail: url is " + url);
+
+        // query riot api
+        String[] response = {Params.HTTP_GET_FAILED, ""};
+        try{
+            response =  new AttemptGet().execute().get();
+        }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
+            Log.e(Params.TAG_EXCEPTIONS,"@getMatchDetail: " + e.getMessage() );
+        }
+        Log.d(Params.TAG_DEBUG, "@getMatchDetail: response body is " + response[1]);
+
+        // validate response
+        if (validResponse(response[0])){
+            //return matches
+            return new ModelSerializer().fromJson(response[1], MatchDetail.class);
         }
         else{
             return null;

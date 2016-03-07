@@ -52,13 +52,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         View headerLayout = navigationView.getHeaderView(0);
 
-        String stylizedName = new SummonerInfo().getStylizedName(this);
+        // get summoner info
+        SummonerInfo summonerInfo = new SummonerInfo();
+        String stylizedName = summonerInfo.getStylizedName(this);
+        long summonerId = summonerInfo.getId(this);
         Log.d(Params.TAG_DEBUG, "@HomeActivity: stylized name is " + stylizedName);
 
+        // display the stylized summoner name
         TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
         summonerNameView.setText(stylizedName);
 
-        SummonerDto summoner = new LocalDB().getSummoner(stylizedName);
+        // get the summoner dto in order to display the summoner icon
+        SummonerDto summoner = new LocalDB().getSummoner(summonerId);
         if (summoner != null){
             Log.d(Params.TAG_DEBUG, "@HomeActivity: summoner dto is not null");
             ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
@@ -74,15 +79,27 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.view_profile) {
-            toggle.runWhenIdle(new Runnable() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(BaseActivity.this, ProfileActivity.class));
-                    finish();
-                }
-            });
-            drawer.closeDrawers();
+        switch (id){
+            case R.id.view_profile:
+                toggle.runWhenIdle(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(BaseActivity.this, ProfileActivity.class));
+                        finish();
+                    }
+                });
+                drawer.closeDrawers();
+                break;
+            case R.id.dynamic_queue:
+                toggle.runWhenIdle(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(BaseActivity.this, DynamicQueueActivity.class));
+                        finish();
+                    }
+                });
+                drawer.closeDrawers();
+                break;
         }
         return true;
     }

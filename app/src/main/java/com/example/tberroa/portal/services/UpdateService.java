@@ -11,10 +11,13 @@ import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.data.UpdateServiceState;
 import com.example.tberroa.portal.database.RiotAPI;
+import com.example.tberroa.portal.models.match.MatchDetail;
+import com.example.tberroa.portal.models.matchlist.MatchList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.NetworkUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,11 +52,40 @@ public class UpdateService extends Service {
                                 List<String> summonerNames = new ArrayList<>();
                                 summonerNames.add(summonerName);
                                 Map<String, SummonerDto> summoners = riotAPI.getSummonersByName(summonerNames);
+
+                                // if a proper response was received, begin gathering data
                                 if (summoners != null){
                                     Log.d(Params.TAG_DEBUG, "@UpdateService: summoners map not null");
+
+                                    // save summoner locally
                                     SummonerDto summoner = summoners.get(summonerName);
                                     summoner.save();
                                     Log.d(Params.TAG_DEBUG, "@UpdateService: stylized name is:" + summoner.name);
+
+                                    // get match list for summoner
+                                    Map<String, String> matchParameters = new HashMap<>();
+                                    matchParameters.put("seasons", Params.PRESEASON_2016 + "," + Params.SEASON_2016);
+
+                                    MatchList matchlist;
+                                    matchlist = riotAPI.getMatchList(summoner.id, matchParameters);
+                                    matchlist.summonerId = summoner.id;
+
+                                    if (matchlist != null){
+                                        matchlist.cascadeSave();
+
+                                        // get match detail for last 5 games
+                                        for (int i=0; i < matchlist.totalGames && i < 5; i++){
+                                            long matchId = matchlist.matches.get(i).matchId;
+                                            MatchDetail match = riotAPI.getMatchDetail(matchId);
+                                            match.cascadeSave();
+                                            try{
+                                                Thread.sleep(1200);
+                                            } catch (InterruptedException e){
+                                                Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
+                                            }
+
+                                        }
+                                    }
                                 }
                             }
                             // set state to 1, service was just recently ran

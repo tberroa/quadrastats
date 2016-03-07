@@ -58,7 +58,6 @@
     <string name="thumbnail">Image thumbnail</string>
     <string name="thumbnail_label">Thumbnail label</string>
     <string name="thumbnail_summoner_icon">Image of the summoners icon</string>
-    <string name="action_settings">Settings</string>
     <string name="sign_out">Sign Out</string>
 
     <!-- activity titles -->

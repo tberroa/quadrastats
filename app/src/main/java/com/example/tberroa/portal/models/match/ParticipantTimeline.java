@@ -2,13 +2,20 @@ package com.example.tberroa.portal.models.match;
 
 // This object contains all timeline information
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "ParticipantTimeline")
 public class ParticipantTimeline extends Model {
+
+    // parent
+    @Expose
+    @Column(name = "participant")
+    Participant participant;
 
     @Expose
     @Column(name = "ancient_golem_assists_per_min_counts")
@@ -59,6 +66,10 @@ public class ParticipantTimeline extends Model {
     public ParticipantTimelineData dragonKillsPerMinCounts;
 
     @Expose
+    @Column(name = "elder_lizard_assists_per_min_counts")
+    public ParticipantTimelineData elderLizardAssistsPerMinCounts;
+
+    @Expose
     @Column(name = "elder_lizard_kills_per_min_counts")
     public ParticipantTimelineData elderLizardKillsPerMinCounts;
 
@@ -75,11 +86,11 @@ public class ParticipantTimeline extends Model {
     public ParticipantTimelineData inhibitorKillsPerMinCounts;
 
     @Expose
-    @Column(name = "lane")          // Participant's lane (Legal values: MID, MIDDLE, TOP, JUNGLE, BOT, BOTTOM)
+    @Column(name = "lane")
     public String lane;
 
     @Expose
-    @Column(name = "role")          // Participant's role (Legal values: DUO, NONE, SOLO, DUO_CARRY, DUO_SUPPORT)
+    @Column(name = "role")
     public String role;
 
     @Expose
@@ -89,6 +100,10 @@ public class ParticipantTimeline extends Model {
     @Expose
     @Column(name = "tower_kills_per_min_counts")
     public ParticipantTimelineData towerKillsPerMinCounts;
+
+    @Expose
+    @Column(name = "tower_kills_per_min_deltas")
+    public ParticipantTimelineData towerKillsPerMinDeltas;
 
     @Expose
     @Column(name = "vilemaw_assists_per_min_counts")
@@ -112,5 +127,90 @@ public class ParticipantTimeline extends Model {
 
     public ParticipantTimeline(){
         super();
+    }
+
+    public void cascadeSave(){
+        ActiveAndroid.beginTransaction();
+        try{
+            save();
+            if (ancientGolemAssistsPerMinCounts != null){
+                ancientGolemAssistsPerMinCounts.save();
+            }
+            if (ancientGolemKillsPerMinCounts != null){
+                ancientGolemKillsPerMinCounts.save();
+            }
+            if (assistedLaneDeathsPerMinDeltas != null){
+                assistedLaneDeathsPerMinDeltas.save();
+            }
+            if (assistedLaneKillsPerMinDeltas != null){
+                assistedLaneKillsPerMinDeltas.save();
+            }
+            if (baronAssistsPerMinCounts != null){
+                baronAssistsPerMinCounts.save();
+            }
+            if (baronKillsPerMinCounts != null){
+                baronKillsPerMinCounts.save();
+            }
+            if (creepsPerMinDeltas != null){
+                creepsPerMinDeltas.save();
+            }
+            if (csDiffPerMinDeltas != null){
+                csDiffPerMinDeltas.save();
+            }
+            if (damageTakenDiffPerMinDeltas != null){
+                damageTakenDiffPerMinDeltas.save();
+            }
+            if (damageTakenPerMinDeltas != null){
+                damageTakenPerMinDeltas.save();
+            }
+            if (dragonAssistsPerMinCounts != null){
+                dragonAssistsPerMinCounts.save();
+            }
+            if (dragonKillsPerMinCounts != null){
+                dragonKillsPerMinCounts.save();
+            }
+            if (elderLizardAssistsPerMinCounts != null){
+                elderLizardAssistsPerMinCounts.save();
+            }
+            if (elderLizardKillsPerMinCounts != null){
+                elderLizardKillsPerMinCounts.save();
+            }
+            if (goldPerMinDeltas != null){
+                goldPerMinDeltas.save();
+            }
+            if (inhibitorAssistsPerMinCounts != null){
+                inhibitorAssistsPerMinCounts.save();
+            }
+            if (inhibitorKillsPerMinCounts != null){
+                inhibitorKillsPerMinCounts.save();
+            }
+            if (towerAssistsPerMinCounts != null){
+                towerAssistsPerMinCounts.save();
+            }
+            if (towerKillsPerMinCounts != null){
+                towerKillsPerMinCounts.save();
+            }
+            if (towerKillsPerMinDeltas != null){
+                towerKillsPerMinDeltas.save();
+            }
+            if (vilemawAssistsPerMinCounts != null){
+                vilemawAssistsPerMinCounts.save();
+            }
+            if (vilemawKillsPerMinCounts != null){
+                vilemawKillsPerMinCounts.save();
+            }
+            if (wardsPerMinDeltas != null){
+                wardsPerMinDeltas.save();
+            }
+            if (xpDiffPerMinDeltas != null){
+                xpDiffPerMinDeltas.save();
+            }
+            if (xpPerMinDeltas != null){
+                xpPerMinDeltas.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }finally {
+            ActiveAndroid.endTransaction();
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.example.tberroa.portal.models.match;
 
 // This object contains team information
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -9,75 +10,100 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "Team")
 public class Team extends Model {
 
+    // parent
+    @Expose
+    @Column(name = "match_detail")
+    MatchDetail matchDetail;
+
     @Expose
     @Column(name = "bans")
-    public List<BannedChampion> bans;      // If game was draft mode, contains banned champion data, otherwise null
+    public List<BannedChampion> bans;
+
+    public List<BannedChampion> getBans(){
+        return getMany(BannedChampion.class, "team");
+    }
 
     @Expose
     @Column(name = "baron_kills")
-    public int baronKills;                  // number of times the team killed baron
+    public int baronKills;
 
     @Expose
     @Column(name = "dominion_victory_score")
-    public long dominionVictoryScore;       // If game was a dominion game, specifies the points the team had at
-                                            // game end, otherwise null
+    public long dominionVictoryScore;
 
     @Expose
     @Column(name = "dragon_kills")
-    public int dragonKills;                 // number of times the team killed dragon
+    public int dragonKills;
 
     @Expose
     @Column(name = "first_baron")
-    public boolean firstBaron;              // Flag indicating whether or not the team got the first baron kill
+    public boolean firstBaron;
 
     @Expose
-    @Column(name = "first_blood")           // Flag indicating whether or not the team got first blood
+    @Column(name = "first_blood")
     public boolean firstBlood;
 
     @Expose
-    @Column(name = "first_dragon")          // Flag indicating whether or not the team got the first dragon kill
+    @Column(name = "first_dragon")
     public boolean firstDragon;
 
     @Expose
-    @Column(name = "first_inhibitor")       // Flag indicating whether or not the team destroyed the first inhibitor
+    @Column(name = "first_inhibitor")
     public boolean firstInhibitor;
 
     @Expose
     @Column(name = "first_rift_herald")
-    public boolean firstRiftHerald;         // Flag indicating whether or not the team got the first rift herald kill
+    public boolean firstRiftHerald;
 
     @Expose
     @Column(name = "first_tower")
-    public boolean firstTower;              // 	Flag indicating whether or not the team destroyed the first tower
+    public boolean firstTower;
 
     @Expose
     @Column(name = "inhibitor_kills")
-    public int inhibitorKills;              // Number of inhibitors the team destroyed
+    public int inhibitorKills;
 
     @Expose
     @Column(name = "rift_herald_kills")
-    public int riftHeraldKills;             // Number of times the team killed rift herald
+    public int riftHeraldKills;
 
     @Expose
     @Column(name = "team_id")
-    public int teamId;                      // Team ID
+    public int teamId;
 
     @Expose
     @Column(name = "tower_kills")
-    public int towerKills;                  // Number of towers the team destroyed
+    public int towerKills;
 
     @Expose
     @Column(name = "vilemaw_kills")
-    public int vilemawKills;                // Number of times the team killed vilemaw
+    public int vilemawKills;
 
     @Expose
     @Column(name = "winner")
-    public boolean winner;                  // 	Flag indicating whether or not the team won
+    public boolean winner;
 
     public Team(){
         super();
+    }
+
+    public void cascadeSave(){
+        ActiveAndroid.beginTransaction();
+        try{
+            save();
+            if (bans != null){
+                for (BannedChampion ban : bans){
+                    ban.team = this;
+                    ban.save();
+                }
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        } finally {
+            ActiveAndroid.endTransaction();
+        }
     }
 }

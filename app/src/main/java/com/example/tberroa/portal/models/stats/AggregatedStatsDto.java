@@ -8,8 +8,19 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "AggregatedStatsDto")
 public class AggregatedStatsDto extends Model {
+
+    // parent
+    @Expose
+    @Column(name = "player_stats_summary")
+    PlayerStatsSummaryDto playerStatsSummaryDto;
+
+    // parent
+    @Expose
+    @Column(name = "champion_stats")
+    ChampionsStatsDto championsStatsDto;
 
     @Expose
     @Column(name = "bot_games_played")
@@ -32,7 +43,7 @@ public class AggregatedStatsDto extends Model {
     public int maxLargestKillingSpree;
 
     @Expose
-    @Column(name = "max_num_deaths")            // Only returned for ranked statistics.
+    @Column(name = "max_num_deaths")
     public int maxNumDeaths;
 
     @Expose
@@ -80,7 +91,7 @@ public class AggregatedStatsDto extends Model {
     public int totalDamageTaken;
 
     @Expose
-    @Column(name = "total_deaths_per_session")  // Only returned for ranked statistics.
+    @Column(name = "total_deaths_per_session")
     public int totalDeathsPerSession;
 
     @Expose

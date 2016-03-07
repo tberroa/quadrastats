@@ -2,6 +2,7 @@ package com.example.tberroa.portal.models.summoner;
 
 // This object contains mastery information.
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -9,26 +10,52 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "MasteryPageDto")
 public class MasteryPageDto extends Model {
 
+    // parent
+    @Expose
+    @Column(name = "mastery_pages")
+    MasteryPagesDto masteryPagesDto;
+
     @Expose
     @Column(name = "current")
-    public boolean current;     // Indicates if the mastery page is the current mastery page.
+    public boolean current;
 
     @Expose
     @Column(name = "mastery_page_id")
     public long id;
 
     @Expose
-    @Column(name = "masteries") // Collection of masteries associated with the mastery page.
+    @Column(name = "masteries")
     public List<MasteryDto> masteries;
+
+    public List<MasteryDto> getMasteries(){
+        return getMany(MasteryDto.class, "mastery_page");
+    }
 
     @Expose
     @Column(name = "name")
-    public String name;         // Mastery page name.
+    public String name;
 
     public MasteryPageDto(){
         super();
+    }
+
+    public void cascadeSave(){
+        ActiveAndroid.beginTransaction();
+        try{
+            save();
+            if (masteries != null){
+                for (MasteryDto mastery : masteries){
+                    mastery.masteryPageDto = this;
+                    mastery.save();
+                }
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        } finally {
+            ActiveAndroid.endTransaction();
+        }
     }
 }

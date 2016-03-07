@@ -36,22 +36,22 @@
             com.example.tberroa.portal.models.stats.AggregatedStatsDto,
             com.example.tberroa.portal.models.matchlist.MatchReference,
             com.example.tberroa.portal.models.matchlist.MatchList,
-            com.example.tberroa.portal.models.matches.Timeline,
-            com.example.tberroa.portal.models.matches.Team,
-            com.example.tberroa.portal.models.matches.Rune,
-            com.example.tberroa.portal.models.matches.Position,
-            com.example.tberroa.portal.models.matches.Player,
-            com.example.tberroa.portal.models.matches.ParticipantTimelineData,
-            com.example.tberroa.portal.models.matches.ParticipantTimeline,
-            com.example.tberroa.portal.models.matches.ParticipantStats,
-            com.example.tberroa.portal.models.matches.ParticipantIdentity,
-            com.example.tberroa.portal.models.matches.ParticipantFrame,
-            com.example.tberroa.portal.models.matches.Participant,
-            com.example.tberroa.portal.models.matches.MatchDetail,
-            com.example.tberroa.portal.models.matches.Mastery,
-            com.example.tberroa.portal.models.matches.Frame,
-            com.example.tberroa.portal.models.matches.Event,
-            com.example.tberroa.portal.models.matches.BannedChampion" />
+            com.example.tberroa.portal.models.match.Timeline,
+            com.example.tberroa.portal.models.match.Team,
+            com.example.tberroa.portal.models.match.Rune,
+            com.example.tberroa.portal.models.match.Position,
+            com.example.tberroa.portal.models.match.Player,
+            com.example.tberroa.portal.models.match.ParticipantTimelineData,
+            com.example.tberroa.portal.models.match.ParticipantTimeline,
+            com.example.tberroa.portal.models.match.ParticipantStats,
+            com.example.tberroa.portal.models.match.ParticipantIdentity,
+            com.example.tberroa.portal.models.match.ParticipantFrame,
+            com.example.tberroa.portal.models.match.Participant,
+            com.example.tberroa.portal.models.match.MatchDetail,
+            com.example.tberroa.portal.models.match.Mastery,
+            com.example.tberroa.portal.models.match.Frame,
+            com.example.tberroa.portal.models.match.Event,
+            com.example.tberroa.portal.models.match.BannedChampion" />
 
         <activity
             android:name=".activities.SignInActivity"
@@ -63,16 +63,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.RegisterActivity"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait" />
         <activity android:name=".activities.SplashActivity"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait" />
         <activity android:name=".activities.BaseActivity"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait" />
         <activity android:name=".activities.HomeActivity"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait" />
         <activity android:name=".activities.ProfileActivity"
-                  android:screenOrientation="portrait"
-                  android:parentActivityName="com.example.tberroa.portal.activities.HomeActivity" />
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.DynamicQueueActivity"
+                  android:screenOrientation="portrait"/>
 
         <service android:name=".services.UpdateService" />
     </application>

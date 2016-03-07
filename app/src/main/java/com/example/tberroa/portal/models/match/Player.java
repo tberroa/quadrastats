@@ -7,8 +7,14 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @Table(name = "Player")
 public class Player extends Model {
+
+    // parent
+    @Expose
+    @Column(name = "participant_identity")
+    ParticipantIdentity participantIdentity;
 
     @Expose
     @Column(name = "match_history_uri")
@@ -24,7 +30,7 @@ public class Player extends Model {
 
     @Expose
     @Column(name = "summoner_name")
-    public long summonerName;
+    public String summonerName;
 
     public Player(){
         super();

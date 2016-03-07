@@ -72,7 +72,7 @@ public class AuthenticationUtil {
         // start update service
         context.startService(new Intent(context, UpdateService.class));
 
-        // save stylized summoner name
+        // save summoner id and stylized summoner name
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -83,6 +83,7 @@ public class AuthenticationUtil {
                 nameList.add(basicName);
                 Map<String, SummonerDto> summonerMap = riotAPI.getSummonersByName(nameList);
                 if (summonerMap != null){
+                    summonerInfo.setId(context, summonerMap.get(basicName).id);
                     summonerInfo.setStylizedName(context, summonerMap.get(basicName).name);
                 }
             }
