@@ -159,7 +159,8 @@ public class RiotAPI {
 
     public MatchDetail getMatchDetail(long matchId){
         // construct url
-        url = Params.RIOT_API_BASE_URL + region + Params.API_MATCH + matchId + "?includeTimeline=1&api_key=" + Params.API_KEY;
+        url = Params.RIOT_API_BASE_URL + region + Params.API_MATCH + matchId +
+                "?includeTimeline=true&api_key=" + Params.API_KEY;
         Log.d(Params.TAG_DEBUG, "@getMatchDetail: url is " + url);
 
         // query riot api

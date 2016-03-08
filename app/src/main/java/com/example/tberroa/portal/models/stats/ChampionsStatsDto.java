@@ -5,16 +5,16 @@ package com.example.tberroa.portal.models.stats;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "ChampionsStatsDto")
 public class ChampionsStatsDto extends Model {
 
     // parent
-    @Expose
     @Column(name = "ranked_stats")
-    RankedStatsDto rankedStatsDto;
+    public RankedStatsDto rankedStatsDto;
 
     @Expose
     @Column(name = "champion_id")
@@ -22,10 +22,17 @@ public class ChampionsStatsDto extends Model {
 
     @Expose
     @Column(name = "aggregated_stats")
-    public AggregatedStatsDto aggregatedStatsDto;
+    private AggregatedStatsDto aggregatedStatsDto;
 
     public ChampionsStatsDto(){
         super();
+    }
+
+    public AggregatedStatsDto getAggregatedStatsDto(){
+        return new Select()
+                .from(AggregatedStatsDto.class)
+                .where("champion_stats = ?", getId())
+                .executeSingle();
     }
 
     public void cascadeSave(){

@@ -8,19 +8,17 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "AggregatedStatsDto")
 public class AggregatedStatsDto extends Model {
 
     // parent
-    @Expose
     @Column(name = "player_stats_summary")
-    PlayerStatsSummaryDto playerStatsSummaryDto;
+    public PlayerStatsSummaryDto playerStatsSummaryDto;
 
     // parent
-    @Expose
     @Column(name = "champion_stats")
-    ChampionsStatsDto championsStatsDto;
+    public ChampionsStatsDto championsStatsDto;
 
     @Expose
     @Column(name = "bot_games_played")

@@ -5,16 +5,16 @@ package com.example.tberroa.portal.models.match;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "ParticipantIdentity")
 public class ParticipantIdentity extends Model {
 
     // parent
-    @Expose
     @Column(name = "match_detail")
-    MatchDetail matchDetail;
+    public MatchDetail matchDetail;
 
     @Expose
     @Column(name = "participant_id")
@@ -22,10 +22,17 @@ public class ParticipantIdentity extends Model {
 
     @Expose
     @Column(name = "player")
-    public Player player;
+    private Player player;
 
     public ParticipantIdentity(){
         super();
+    }
+
+    public Player getPlayer(){
+        return new Select()
+                .from(Player.class)
+                .where("participant_identity = ?", getId())
+                .executeSingle();
     }
 
     public void cascadeSave(){

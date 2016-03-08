@@ -2,30 +2,18 @@ package com.example.tberroa.portal.models.match;
 
 // This object contains team information
 
-import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
-import java.util.List;
-
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "Team")
 public class Team extends Model {
 
     // parent
-    @Expose
     @Column(name = "match_detail")
-    MatchDetail matchDetail;
-
-    @Expose
-    @Column(name = "bans")
-    public List<BannedChampion> bans;
-
-    public List<BannedChampion> getBans(){
-        return getMany(BannedChampion.class, "team");
-    }
+    public MatchDetail matchDetail;
 
     @Expose
     @Column(name = "baron_kills")
@@ -89,21 +77,5 @@ public class Team extends Model {
 
     public Team(){
         super();
-    }
-
-    public void cascadeSave(){
-        ActiveAndroid.beginTransaction();
-        try{
-            save();
-            if (bans != null){
-                for (BannedChampion ban : bans){
-                    ban.team = this;
-                    ban.save();
-                }
-            }
-            ActiveAndroid.setTransactionSuccessful();
-        } finally {
-            ActiveAndroid.endTransaction();
-        }
     }
 }

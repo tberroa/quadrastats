@@ -7,13 +7,13 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "Rune")
 public class Rune extends Model {
 
-    @Expose
+    // parent
     @Column(name = "participant")
-    Participant participant;
+    public Participant participant;
 
     @Expose
     @Column(name = "rank")

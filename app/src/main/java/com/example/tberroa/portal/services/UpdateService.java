@@ -74,8 +74,8 @@ public class UpdateService extends Service {
                                         matchlist.cascadeSave();
 
                                         // get match detail for last 5 games
-                                        for (int i=0; i < matchlist.totalGames && i < 5; i++){
-                                            long matchId = matchlist.matches.get(i).matchId;
+                                        for (int i=0; i<5 && i<matchlist.totalGames; i++){
+                                            long matchId = matchlist.getMatchReferences().get(i).matchId;
                                             MatchDetail match = riotAPI.getMatchDetail(matchId);
                                             match.cascadeSave();
                                             try{
@@ -100,7 +100,6 @@ public class UpdateService extends Service {
                     UpdateService.this.stopSelf();
                 }
             }).start();
-        Log.d(Params.TAG_DEBUG, "@UpdateService: line after thread initialization");
     }
 
     @Override

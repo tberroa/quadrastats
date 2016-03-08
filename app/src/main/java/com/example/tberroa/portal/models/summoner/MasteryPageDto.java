@@ -10,7 +10,7 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "MasteryPageDto")
 public class MasteryPageDto extends Model {
 

@@ -7,14 +7,13 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "Player")
 public class Player extends Model {
 
     // parent
-    @Expose
     @Column(name = "participant_identity")
-    ParticipantIdentity participantIdentity;
+    public ParticipantIdentity participantIdentity;
 
     @Expose
     @Column(name = "match_history_uri")

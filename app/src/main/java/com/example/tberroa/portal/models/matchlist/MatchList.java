@@ -10,7 +10,7 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "MatchList")
 public class MatchList extends Model {
 
@@ -24,11 +24,7 @@ public class MatchList extends Model {
 
     @Expose
     @Column(name = "matches")
-    public List<MatchReference> matches;
-
-    public List<MatchReference> getMatchReferences(){
-        return getMany(MatchReference.class, "match_list");
-    }
+    private List<MatchReference> matches;
 
     @Expose
     @Column(name = "start_index")
@@ -40,6 +36,10 @@ public class MatchList extends Model {
 
     public MatchList(){
         super();
+    }
+
+    public List<MatchReference> getMatchReferences(){
+        return getMany(MatchReference.class, "match_list");
     }
 
     public void cascadeSave(){

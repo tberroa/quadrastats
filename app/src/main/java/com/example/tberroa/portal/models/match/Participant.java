@@ -6,15 +6,16 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "Participant")
 public class Participant extends Model {
 
-    @Expose
+    // parent
     @Column(name = "match_detail")
     public MatchDetail matchDetail;
 
@@ -28,11 +29,7 @@ public class Participant extends Model {
 
     @Expose
     @Column(name = "masteries")
-    public List<Mastery> masteries;
-
-    public List<Mastery> getMasteries(){
-        return getMany(Mastery.class, "participant");
-    }
+    private List<Mastery> masteries;
 
     @Expose
     @Column(name = "participant_id")
@@ -40,11 +37,7 @@ public class Participant extends Model {
 
     @Expose
     @Column(name = "runes")
-    public List<Rune> runes;
-
-    public List<Rune> getRunes(){
-        return getMany(Rune.class, "participant");
-    }
+    private List<Rune> runes;
 
     @Expose
     @Column(name = "spell_1_id")
@@ -56,7 +49,7 @@ public class Participant extends Model {
 
     @Expose
     @Column(name = "stats")
-    public ParticipantStats stats;
+    private ParticipantStats stats;
 
     @Expose
     @Column(name = "team_id")
@@ -64,7 +57,29 @@ public class Participant extends Model {
 
     @Expose
     @Column(name = "timeline")
-    public ParticipantTimeline timeline;
+    private ParticipantTimeline timeline;
+
+    public List<Mastery> getMasteries(){
+        return getMany(Mastery.class, "participant");
+    }
+
+    public List<Rune> getRunes(){
+        return getMany(Rune.class, "participant");
+    }
+
+    public ParticipantStats getParticipantStats(){
+        return new Select()
+                .from(ParticipantStats.class)
+                .where("participant = ?", getId())
+                .executeSingle();
+    }
+
+    public ParticipantTimeline getParticipantTimeline(){
+        return new Select()
+                .from(ParticipantTimeline.class)
+                .where("participant = ?", getId())
+                .executeSingle();
+    }
 
     public Participant(){
         super();

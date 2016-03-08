@@ -28,7 +28,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private SmoothActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
-    public Toolbar toolbar;
+    Toolbar toolbar;
 
     @SuppressLint("InflateParams")
     @Override

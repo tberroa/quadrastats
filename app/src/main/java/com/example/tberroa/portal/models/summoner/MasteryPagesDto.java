@@ -11,7 +11,7 @@ import com.google.gson.annotations.Expose;
 import java.util.List;
 import java.util.Set;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "MasteryPagesDto")
 public class MasteryPagesDto extends Model {
 

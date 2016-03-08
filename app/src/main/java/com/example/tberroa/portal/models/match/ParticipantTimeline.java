@@ -8,14 +8,13 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "ParticipantTimeline")
 public class ParticipantTimeline extends Model {
 
     // parent
-    @Expose
     @Column(name = "participant")
-    Participant participant;
+    public Participant participant;
 
     @Expose
     @Column(name = "ancient_golem_assists_per_min_counts")
@@ -132,7 +131,6 @@ public class ParticipantTimeline extends Model {
     public void cascadeSave(){
         ActiveAndroid.beginTransaction();
         try{
-            save();
             if (ancientGolemAssistsPerMinCounts != null){
                 ancientGolemAssistsPerMinCounts.save();
             }
@@ -208,6 +206,7 @@ public class ParticipantTimeline extends Model {
             if (xpPerMinDeltas != null){
                 xpPerMinDeltas.save();
             }
+            save();
             ActiveAndroid.setTransactionSuccessful();
         }finally {
             ActiveAndroid.endTransaction();

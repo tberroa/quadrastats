@@ -9,7 +9,7 @@ import com.google.gson.annotations.Expose;
 import java.util.List;
 import java.util.Set;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "RunePagesDto")
 public class RunePagesDto extends Model {
 

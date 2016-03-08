@@ -10,17 +10,13 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "PlayerStatsSummaryListDto")
 public class PlayerStatsSummaryListDto extends Model {
 
     @Expose
     @Column(name = "player_stat_summaries")
-    public List<PlayerStatsSummaryDto> playerStatSummaries;
-
-    public List<PlayerStatsSummaryDto> getPlayerStatSummaries(){
-        return getMany(PlayerStatsSummaryDto.class, "player_stats_summary_list");
-    }
+    private List<PlayerStatsSummaryDto> playerStatSummaries;
 
     @Expose
     @Column(name = "summoner_id")
@@ -28,6 +24,10 @@ public class PlayerStatsSummaryListDto extends Model {
 
     public PlayerStatsSummaryListDto(){
         super();
+    }
+
+    public List<PlayerStatsSummaryDto> getPlayerStatSummaries(){
+        return getMany(PlayerStatsSummaryDto.class, "player_stats_summary_list");
     }
 
     public void cascadeSave(){

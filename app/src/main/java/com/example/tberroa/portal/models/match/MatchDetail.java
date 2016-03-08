@@ -10,7 +10,7 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "MatchDetail")
 public class MatchDetail extends Model {
 
@@ -44,19 +44,11 @@ public class MatchDetail extends Model {
 
     @Expose
     @Column(name = "participant_identities")
-    public List<ParticipantIdentity> participantIdentities;
-
-    public List<ParticipantIdentity> getParticipantIdentities(){
-        return getMany(ParticipantIdentity.class, "match_detail");
-    }
+    private List<ParticipantIdentity> participantIdentities;
 
     @Expose
     @Column(name = "participants")
-    public List<Participant> participants;
-
-    public List<Participant> getParticipants(){
-        return getMany(Participant.class, "match_detail");
-    }
+    private List<Participant> participants;
 
     @Expose
     @Column(name = "platform_id")
@@ -76,18 +68,22 @@ public class MatchDetail extends Model {
 
     @Expose
     @Column(name = "teams")
-    public List<Team> teams;
-
-    public List<Team> getTeams(){
-        return getMany(Team.class, "match_detail");
-    }
-
-    @Expose
-    @Column(name = "timeline")
-    public Timeline timeline;
+    private List<Team> teams;
 
     public MatchDetail(){
         super();
+    }
+
+    public List<ParticipantIdentity> getParticipantIdentities(){
+        return getMany(ParticipantIdentity.class, "match_detail");
+    }
+
+    public List<Participant> getParticipants(){
+        return getMany(Participant.class, "match_detail");
+    }
+
+    public List<Team> getTeams(){
+        return getMany(Team.class, "match_detail");
     }
 
     public void cascadeSave(){
@@ -109,12 +105,8 @@ public class MatchDetail extends Model {
             if (teams != null){
                 for (Team team : teams){
                     team.matchDetail = this;
-                    team.cascadeSave();
+                    team.save();
                 }
-            }
-            if (timeline != null){
-                timeline.matchDetail = this;
-                timeline.cascadeSave();
             }
             ActiveAndroid.setTransactionSuccessful();
         } finally {
