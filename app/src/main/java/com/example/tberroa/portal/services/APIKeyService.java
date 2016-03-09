@@ -9,7 +9,7 @@ import com.example.tberroa.portal.data.APIKeyUsage;
 
 public class APIKeyService extends Service {
 
-    private APIKeyUsage keyUsage = new APIKeyUsage();
+    private final APIKeyUsage keyUsage = new APIKeyUsage();
     private boolean kill = false;
 
     @Override

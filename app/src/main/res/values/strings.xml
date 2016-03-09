@@ -66,6 +66,7 @@
     <!-- activity content -->
     <string name="no_friends">You have no friends saved. Click the + button to add some.</string>
     <string name="add_friend">Add Friend</string>
+    <string name="plot_title">Plot Title</string>
 
     <!-- stats and plots -->
     <string name = "you">You</string>

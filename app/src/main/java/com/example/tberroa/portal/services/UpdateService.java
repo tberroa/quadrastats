@@ -25,15 +25,13 @@ import java.util.TimerTask;
 
 public class UpdateService extends Service {
 
-    /*
-    2 states:
+    /*  2 states:
         0, service is ready to run.
-        1, service is taking a break. (state is switched to 0 at end of break)
-    */
+        1, service is taking a break. (state is switched to 0 at end of break) */
 
-    private UpdateJobFlags updateJobFlags = new UpdateJobFlags();
+    private final UpdateJobFlags updateJobFlags = new UpdateJobFlags();
     private boolean kill = false;
-    Timer timer;
+    private Timer timer;
 
     @Override
     public void onCreate() {

@@ -7,18 +7,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
-import com.androidplot.ui.AnchorPosition;
-import com.androidplot.ui.LayoutManager;
-import com.androidplot.ui.Size;
-import com.androidplot.ui.XLayoutStyle;
-import com.androidplot.ui.YLayoutStyle;
-
-import com.androidplot.xy.CatmullRomInterpolator;
-import com.androidplot.xy.LineAndPointFormatter;
-import com.androidplot.xy.PointLabelFormatter;
-import com.androidplot.xy.SimpleXYSeries;
-import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.example.tberroa.portal.R;
@@ -29,7 +19,6 @@ import com.example.tberroa.portal.data.UpdateJobFlags;
 import com.example.tberroa.portal.helpers.StatUtil;
 import com.example.tberroa.portal.models.match.ParticipantStats;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,15 +91,11 @@ public class DynamicQueueActivity extends BaseActivity {
                     }
                 }
 
-
-                // ========================================= PLOT STUFF =========================================
-                // initialize our XYPlot reference:
-                XYPlot plot = (XYPlot) findViewById(R.id.plot);
-
-                // create a couple arrays of y-values to plot:
+                // create data array for summoner
                 Number[] sNumbers =
                         {sWardsPlaced[0], sWardsPlaced[1], sWardsPlaced[2], sWardsPlaced[3], sWardsPlaced[4]};
 
+                // create data array for friends
                 Map<String, Number[]> fNumbers = new HashMap<>();
                 for (String name : friendNames){
                     fNumbers.put(name, new Number[loadedMatches]);
@@ -119,60 +104,23 @@ public class DynamicQueueActivity extends BaseActivity {
                     }
                 }
 
-                // turn the above arrays into XYSeries':
-                // (Y VALUES ONLY means use the element index as the x value)
-                XYSeries series1 = new SimpleXYSeries(Arrays.asList(sNumbers),
-                        SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, getString(R.string.you));
+                // construct XYSeries
+                List<XYSeries> series = StatUtil.constructXYSeries(friendNames, sNumbers, fNumbers);
 
-                String firstFriend = friendNames.iterator().next();
-                XYSeries series2 = new SimpleXYSeries(Arrays.asList(fNumbers.get(firstFriend)),
-                        SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series2");
+                // initialize our XYPlot reference:
+                XYPlot plot = (XYPlot) findViewById(R.id.plot);
 
-                // create formatters to use for drawing a series using LineAndPointRenderer
-                // and configure them from xml:
-                LineAndPointFormatter series1Format = new LineAndPointFormatter();
-                series1Format.setPointLabelFormatter(new PointLabelFormatter());
-                series1Format.configure(getApplicationContext(),
-                        R.xml.line_point_formatter_with_labels);
+                // create plot
+                StatUtil.createPlot(this, plot,series);
 
-                LineAndPointFormatter series2Format = new LineAndPointFormatter();
-                series2Format.setPointLabelFormatter(new PointLabelFormatter());
-                series2Format.configure(getApplicationContext(),
-                        R.xml.line_point_formatter_with_labels_2);
+                // set title
+                TextView plotTitle = (TextView) findViewById(R.id.plot_title);
+                plotTitle.setText(R.string.wards_placed_per_game);
 
-                // just for fun, add some smoothing to the lines:
-                series1Format.setInterpolationParams(
-                        new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
-
-                series2Format.setInterpolationParams(
-                        new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
-
-                // add a new series' to the xy plot
-                plot.addSeries(series1, series1Format);
-                plot.addSeries(series2, series2Format);
-
-                // get rid of unneeded elements
-                plot.setBorderStyle(XYPlot.BorderStyle.NONE, null, null);
-
-                XYGraphWidget g = plot.getGraphWidget();
-                //g.position(0, XLayoutStyle.ABSOLUTE_FROM_LEFT, 0, YLayoutStyle.ABSOLUTE_FROM_TOP);
-                g.position(-0.5f, XLayoutStyle.RELATIVE_TO_RIGHT, -0.5f, YLayoutStyle.RELATIVE_TO_BOTTOM, AnchorPosition.CENTER);
-                g.setSize(Size.FILL);
-                g.setBackgroundPaint(null);
-                g.setGridBackgroundPaint(null);
-                g.setDomainOriginLinePaint(null);
-                //g.setRangeOriginLinePaint(null);
-
-                LayoutManager l = plot.getLayoutManager();
-                l.remove(plot.getTitleWidget());
-                l.remove(plot.getRangeLabelWidget());
-                l.remove(plot.getDomainLabelWidget());
-                l.remove(plot.getLegendWidget());
             } else {
-                Log.d(Params.TAG_DEBUG, "@DynamicQueueActivity: plot not shown, update job is running");
+                Log.d(Params.TAG_DEBUG, "@DynamicQueueActivity: plot not shown, no friends found");
             }
         }
-
     }
 
     @Override

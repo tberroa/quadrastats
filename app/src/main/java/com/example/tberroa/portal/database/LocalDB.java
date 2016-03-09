@@ -58,7 +58,7 @@ public class LocalDB {
 
     public List<MatchReference> getMatchReferences(long summonerId, String queue){
         MatchList matchList = getMatchList(summonerId);
-        if (matchList.totalGames > 0){
+        if (matchList != null && matchList.totalGames > 0){
             return new Select()
                     .from(MatchReference.class)
                     .where("match_list = ?", matchList.getId())

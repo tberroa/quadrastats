@@ -1,33 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ap="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/plot_title"
-        android:layout_centerHorizontal="true"
-        android:text="@string/wards_placed_per_game"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_marginBottom="5dp"/>
-
-    <com.androidplot.xy.XYPlot
-        android:id="@+id/plot"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/plot_title"
-        ap:gridPaddingLeft="20dp"
-        ap:gridPaddingRight="20dp"
-        ap:gridPaddingTop="20dp"
-        ap:gridPaddingBottom="20dp"
-        ap:graphDomainLineColor="@color/transparent"
-        ap:rangeTickLabelTextSize="0sp"
-        ap:rangeOriginTickLabelTextSize="0sp"
-        ap:domainTickLabelTextSize="0sp"
-        ap:domainOriginTickLabelTextSize="0sp" />
+    <include layout="@layout/plot" />
 </RelativeLayout>

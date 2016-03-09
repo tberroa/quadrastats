@@ -29,7 +29,7 @@ import java.util.Set;
 
 public class FriendsActivity extends BaseActivity{
 
-    FloatingActionButton addFriend;
+    private FloatingActionButton addFriend;
     private boolean inView;
 
     @Override
@@ -109,6 +109,9 @@ public class FriendsActivity extends BaseActivity{
                                 summoner = AuthUtil.validateName(FriendsActivity.this, enteredName);
                                 Message msg = new Message();
                                 if (summoner != null) {
+                                    // save friend dto
+                                    summoner.get(enteredName).save();
+
                                     // save name
                                     new Friends().addFriend(FriendsActivity.this, summoner.get(enteredName).name);
 
