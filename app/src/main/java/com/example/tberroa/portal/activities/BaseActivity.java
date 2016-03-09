@@ -63,15 +63,17 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         summonerNameView.setText(stylizedName);
 
         // get the summoner dto in order to display the summoner icon
-        SummonerDto summoner = new LocalDB().getSummoner(summonerId);
-        if (summoner != null){
-            Log.d(Params.TAG_DEBUG, "@HomeActivity: summoner dto is not null");
-            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
-            String url = new URLConstructor().summonerIcon(summoner.profileIconId);
-            Picasso.with(this)
-                    .load(url)
-                    .fit()
-                    .transform(new CircleTransform()).into(summonerIcon);
+        if (summonerId != 0){
+            SummonerDto summoner = new LocalDB().getSummonerById(summonerId);
+            if (summoner != null){
+                Log.d(Params.TAG_DEBUG, "@HomeActivity: summoner dto is not null");
+                ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
+                String url = new URLConstructor().summonerIcon(summoner.profileIconId);
+                Picasso.with(this)
+                        .load(url)
+                        .fit()
+                        .transform(new CircleTransform()).into(summonerIcon);
+            }
         }
     }
 
@@ -85,6 +87,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void run() {
                         startActivity(new Intent(BaseActivity.this, ProfileActivity.class));
+                        finish();
+                    }
+                });
+                drawer.closeDrawers();
+                break;
+            case R.id.manage_friends:
+                toggle.runWhenIdle(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(BaseActivity.this, FriendsActivity.class));
                         finish();
                     }
                 });

@@ -24,15 +24,13 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.database.RiotAPI;
-import com.example.tberroa.portal.helpers.AuthenticationUtil;
+import com.example.tberroa.portal.helpers.AuthUtil;
 import com.example.tberroa.portal.models.summoner.RunePageDto;
 import com.example.tberroa.portal.models.summoner.RunePagesDto;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.network.NetworkUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -111,23 +109,21 @@ public class RegisterActivity extends AppCompatActivity {
         enteredInfo.putString("password", enteredPassword);
         enteredInfo.putString("confirm_password", enteredConfirmPassword);
 
-        String response = AuthenticationUtil.validate(enteredInfo);
+        String response = AuthUtil.validate(enteredInfo);
         if (response.matches("")){
             if (NetworkUtil.isInternetAvailable(this)){
                 int regionSelection = region.getSelectedItemPosition();
                 if (regionSelection > 0){
                     // decode region
-                    String region = AuthenticationUtil.decodeRegion(regionSelection);
+                    String region = AuthUtil.decodeRegion(regionSelection);
                     // save region
                     summonerInfo.setRegion(this, region);
 
                     // validate summoner name in separate thread
                     new Thread(new Runnable() {
                         public void run() {
-                            List<String> summonerList = new ArrayList<>();
-                            summonerList.add(enteredSummonerName);
                             Map<String, SummonerDto> summoner;
-                            summoner = new RiotAPI(RegisterActivity.this).getSummonersByName(summonerList);
+                            summoner = AuthUtil.validateName(RegisterActivity.this, enteredSummonerName);
                             Message msg = new Message();
                             if (summoner != null){
                                 // save the stylized name
@@ -182,15 +178,20 @@ public class RegisterActivity extends AppCompatActivity {
     //method to verify summoner account ownership, called in dialog
     private boolean validOwnership(String summonerName, String keyString){
         RunePagesDto runePagesDto = new RiotAPI(this).getRunePages(summonerName);
-        Set<RunePageDto> pages = runePagesDto.pages;
-        Log.d(Params.TAG_DEBUG, "@validOwnership: keyString is " + keyString);
-        for(RunePageDto page : pages){
-            Log.d(Params.TAG_DEBUG, "@validOwnership: rune page name is " + page.name);
-            if (page.name.equals(keyString)){
-                return true;
+        if (runePagesDto != null){
+            Set<RunePageDto> pages = runePagesDto.pages;
+            Log.d(Params.TAG_DEBUG, "@validOwnership: keyString is " + keyString);
+            for(RunePageDto page : pages){
+                Log.d(Params.TAG_DEBUG, "@validOwnership: rune page name is " + page.name);
+                if (page.name.equals(keyString)){
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     // dialog for validating ownership
@@ -279,7 +280,7 @@ public class RegisterActivity extends AppCompatActivity {
             summonerName = RegisterActivity.this.summonerName.getText().toString();
             password = RegisterActivity.this.password.getText().toString();
             confirmPassword = RegisterActivity.this.confirmPassword.getText().toString();
-            region = AuthenticationUtil.decodeRegion(RegisterActivity.this.region.getSelectedItemPosition());
+            region = AuthUtil.decodeRegion(RegisterActivity.this.region.getSelectedItemPosition());
             keyValuePairs = "app_name="+summonerName+"&riot_name="+stylizedName+"&password="+password+
                             "&confirm_password="+confirmPassword+"&region="+region;
         }
@@ -299,7 +300,7 @@ public class RegisterActivity extends AppCompatActivity {
             if (postResponse.contains("success")) {
                 // sign in
                 Log.d(Params.TAG_DEBUG, "@RegisterActivity: successful register");
-                AuthenticationUtil.signIn(RegisterActivity.this, summonerName, region, inView);
+                AuthUtil.signIn(RegisterActivity.this, summonerName, stylizedName, region, inView);
             }
             else{ // display error
                 Toast.makeText(RegisterActivity.this, postResponse, Toast.LENGTH_SHORT).show();

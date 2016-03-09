@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.SummonerInfo;
-import com.example.tberroa.portal.helpers.AuthenticationUtil;
+import com.example.tberroa.portal.helpers.AuthUtil;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.network.NetworkUtil;
 
@@ -88,7 +88,7 @@ public class SignInActivity extends AppCompatActivity {
         enteredInfo.putString("summoner_name", enteredSummonerName);
         enteredInfo.putString("password", enteredPassword);
 
-        String response = AuthenticationUtil.validate(enteredInfo);
+        String response = AuthUtil.validate(enteredInfo);
         if (response.matches("")){
             if (NetworkUtil.isInternetAvailable(this)){
                 int regionSelection = region.getSelectedItemPosition();
@@ -133,7 +133,7 @@ public class SignInActivity extends AppCompatActivity {
             super.onPreExecute();
             summonerName = SignInActivity.this.summonerName.getText().toString();
             password = SignInActivity.this.password.getText().toString();
-            region = AuthenticationUtil.decodeRegion(SignInActivity.this.region.getSelectedItemPosition());
+            region = AuthUtil.decodeRegion(SignInActivity.this.region.getSelectedItemPosition());
             keyValuePairs = "app_name="+summonerName+"&password="+password+"&region="+region;
         }
 
@@ -149,10 +149,10 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Void param) {
-            if (postResponse.equals("success")) {
+            if (!postResponse.contains("Error")) {
                 // sign in
                 Log.d(Params.TAG_DEBUG, "@SignInActivity: successful sign in");
-                AuthenticationUtil.signIn(SignInActivity.this, summonerName, region, inView);
+                AuthUtil.signIn(SignInActivity.this, summonerName, postResponse, region, inView);
             }
             else{ // display error
                 Toast.makeText(SignInActivity.this, postResponse, Toast.LENGTH_SHORT).show();

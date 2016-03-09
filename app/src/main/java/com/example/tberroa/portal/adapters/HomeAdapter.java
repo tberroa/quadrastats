@@ -36,7 +36,7 @@ public class HomeAdapter extends ArrayAdapter<String> {
             // initialize view holder and layout inflater
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.home_list_row, parent, false);
+            convertView = inflater.inflate(R.layout.row_home, parent, false);
 
             // initialize views
             viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
@@ -49,7 +49,7 @@ public class HomeAdapter extends ArrayAdapter<String> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        // set label
+        // set name
         viewHolder.label.setText(labels[position]);
 
         // get screen dimensions

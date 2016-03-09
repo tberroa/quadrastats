@@ -2,7 +2,6 @@ package com.example.tberroa.portal.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -11,9 +10,6 @@ import android.widget.ListView;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.adapters.HomeAdapter;
-import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.UpdateServiceState;
-import com.example.tberroa.portal.services.UpdateService;
 
 public class HomeActivity extends BaseActivity {
 
@@ -21,13 +17,6 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        // check if update service needs to be started up
-        int state = new UpdateServiceState().get(this);
-        if (state == 0){
-            startService(new Intent(this, UpdateService.class));
-        }
-        Log.d(Params.TAG_DEBUG, "@HomeActivity: updateServiceState is " + Integer.toString(state));
 
         // initialize labels
         String dynamicQueue = getResources().getString(R.string.dynamic_queue);

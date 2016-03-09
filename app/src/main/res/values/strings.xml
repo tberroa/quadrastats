@@ -63,6 +63,14 @@
     <!-- activity titles -->
     <string name="profile">Profile</string>
 
+    <!-- activity content -->
+    <string name="no_friends">You have no friends saved. Click the + button to add some.</string>
+    <string name="add_friend">Add Friend</string>
+
+    <!-- stats and plots -->
+    <string name = "you">You</string>
+    <string name = "wards_placed_per_game">Wards Placed Per Game</string>
+
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
     <string name="internet_not_available">Internet not available</string>

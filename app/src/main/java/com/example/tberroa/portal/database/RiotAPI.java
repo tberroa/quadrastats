@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.tberroa.portal.data.APIKeyUsage;
 import com.example.tberroa.portal.data.MostRecentError;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.SummonerInfo;
@@ -24,11 +25,13 @@ import java.util.List;
 import java.util.Map;
 
 // all methods, except boolean methods, return null if http response validation fails
+// only call this in a background thread as it uses wait()
 public class RiotAPI {
 
     private final String region;
     private String url;
     private final Context context;
+    private final APIKeyUsage keyUsage = new APIKeyUsage();
 
     public RiotAPI(Context context){
         this.context = context;
@@ -53,7 +56,10 @@ public class RiotAPI {
                 names + "?api_key=" + Params.API_KEY;
         Log.d(Params.TAG_DEBUG, "@getSummonersByName: url is " + url);
 
-        // query the riot api
+        // make sure key usage is at an acceptable level before querying riot api
+        keyUsageCheck();
+
+        // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
         try{
             response =  new AttemptGet().execute().get();
@@ -61,6 +67,9 @@ public class RiotAPI {
             Log.e(Params.TAG_EXCEPTIONS,"@getSummonersByName: " + e.getMessage() );
         }
         Log.d(Params.TAG_DEBUG, "@getSummonersByName: response body is " + response[1]);
+
+        // increment key usage
+        keyUsage.increment(context);
 
         // validate response
         if (validResponse(response[0])){
@@ -79,7 +88,7 @@ public class RiotAPI {
         List<String> summonerNames = new ArrayList<>();
         summonerNames.add(summonerName);
 
-        // query riot api
+        // get the summoner dto
         Map<String, SummonerDto> summonerMap = getSummonersByName(summonerNames);
         if (summonerMap != null){
             // get summoner id
@@ -90,6 +99,9 @@ public class RiotAPI {
                     "/runes?api_key="+Params.API_KEY;
             Log.d(Params.TAG_DEBUG, "@getRunePages: url is " + url);
 
+            // make sure key usage is at an acceptable level before querying riot api
+            keyUsageCheck();
+
             // query the riot api
             String[] response = {Params.HTTP_GET_FAILED, ""};
             try{
@@ -98,6 +110,9 @@ public class RiotAPI {
                 Log.e(Params.TAG_EXCEPTIONS,"@getRunePages: " + e.getMessage() );
             }
             Log.d(Params.TAG_DEBUG, "@getRunePages: response body is " + response[1]);
+
+            // increment key usage
+            keyUsage.increment(context);
 
             // validate response
             if (validResponse(response[0])){
@@ -138,6 +153,9 @@ public class RiotAPI {
                 "&api_key=" + Params.API_KEY;
         Log.d(Params.TAG_DEBUG, "@getMatchList: url is " + url);
 
+        // make sure key usage is at an acceptable level before querying riot api
+        keyUsageCheck();
+
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
         try{
@@ -146,6 +164,9 @@ public class RiotAPI {
             Log.e(Params.TAG_EXCEPTIONS,"@getMatchList: " + e.getMessage() );
         }
         Log.d(Params.TAG_DEBUG, "@getMatchList: response body is " + response[1]);
+
+        // increment key usage
+        keyUsage.increment(context);
 
         // validate response
         if (validResponse(response[0])){
@@ -159,9 +180,11 @@ public class RiotAPI {
 
     public MatchDetail getMatchDetail(long matchId){
         // construct url
-        url = Params.RIOT_API_BASE_URL + region + Params.API_MATCH + matchId +
-                "?includeTimeline=true&api_key=" + Params.API_KEY;
+        url = Params.RIOT_API_BASE_URL + region + Params.API_MATCH + matchId + "?api_key=" + Params.API_KEY;
         Log.d(Params.TAG_DEBUG, "@getMatchDetail: url is " + url);
+
+        // make sure key usage is at an acceptable level before querying riot api
+        keyUsageCheck();
 
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
@@ -171,6 +194,9 @@ public class RiotAPI {
             Log.e(Params.TAG_EXCEPTIONS,"@getMatchDetail: " + e.getMessage() );
         }
         Log.d(Params.TAG_DEBUG, "@getMatchDetail: response body is " + response[1]);
+
+        // increment key usage
+        keyUsage.increment(context);
 
         // validate response
         if (validResponse(response[0])){
@@ -192,6 +218,17 @@ public class RiotAPI {
                 Log.d(Params.TAG_EXCEPTIONS,"@RAPI AttemptGet: " + e.getMessage());
             }
             return response;
+        }
+    }
+
+    private void keyUsageCheck(){
+        // make sure key usage is at an acceptable level before querying riot api
+        while (keyUsage.getUsage(context) > 10){
+            try{
+                wait(1000);
+            }catch (InterruptedException e){
+                Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
+            }
         }
     }
 

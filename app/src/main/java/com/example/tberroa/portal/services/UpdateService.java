@@ -1,15 +1,14 @@
 package com.example.tberroa.portal.services;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.tberroa.portal.data.Friends;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.SummonerInfo;
-import com.example.tberroa.portal.data.UpdateServiceState;
+import com.example.tberroa.portal.data.UpdateJobFlags;
 import com.example.tberroa.portal.database.RiotAPI;
 import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.matchlist.MatchList;
@@ -20,98 +19,141 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UpdateService extends Service {
 
-    // 2 states:
-    //      0, service is ready to run.
-    //      1, service recently ran, can't run because it's taking a break
+    /*
+    2 states:
+        0, service is ready to run.
+        1, service is taking a break. (state is switched to 0 at end of break)
+    */
+
+    private UpdateJobFlags updateJobFlags = new UpdateJobFlags();
+    private boolean kill = false;
+    Timer timer;
 
     @Override
     public void onCreate() {
-            new Thread(new Runnable() {
-                public void run() {
-                    // grab state
-                    UpdateServiceState updateServiceState = new UpdateServiceState();
-                    int state = updateServiceState.get(UpdateService.this);
-                    Log.d(Params.TAG_DEBUG, "@UpdateService: entering state is " + Integer.toString(state));
-                    switch(state){
-                        case 0:
-                            // initialize summoner info
-                            SummonerInfo summonerInfo = new SummonerInfo();
+        // initialize timer
+        timer = new Timer();
 
-                            // get summoner name
-                            String summonerName = summonerInfo.getBasicName(UpdateService.this);
-                            Log.d(Params.TAG_DEBUG, "@UpdateService: basic summoner name is " + summonerName);
+        // initialize timer task to be done periodically
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                // make timer task run in background via new thread
+                new Thread(new Runnable() {
+                    public void run() {
+                        updateJob();
+                    }
+                }).start();
+            }
+        };
 
-                            if (NetworkUtil.isInternetAvailable(UpdateService.this) && !summonerName.equals("")){
-                                // initialize riot api
-                                RiotAPI riotAPI = new RiotAPI(UpdateService.this);
+        // after an immediate initial run, the task will run every minute
+        timer.schedule(timerTask, 0, 1000 * 60);
+    }
 
-                                // query riot api for summoner dto
-                                List<String> summonerNames = new ArrayList<>();
-                                summonerNames.add(summonerName);
-                                Map<String, SummonerDto> summoners = riotAPI.getSummonersByName(summonerNames);
+    // runs in a background thread
+    private void updateJob() {
+        // let system know the update job is running
+        updateJobFlags.setRunning(this, true);
+        Log.d(Params.TAG_DEBUG, "@UpdateService: update job is running, flag set");
 
-                                // if a proper response was received, begin gathering data
-                                if (summoners != null){
-                                    Log.d(Params.TAG_DEBUG, "@UpdateService: summoners map not null");
+        // grab previous state
+        int previousState = updateJobFlags.getState(this);
+        Log.d(Params.TAG_DEBUG, "@UpdateService: previous state was " + Integer.toString(previousState));
 
-                                    // save summoner locally
-                                    SummonerDto summoner = summoners.get(summonerName);
-                                    summoner.save();
-                                    Log.d(Params.TAG_DEBUG, "@UpdateService: stylized name is:" + summoner.name);
+        switch (previousState) {
+            case 0:
+                SummonerInfo summonerInfo = new SummonerInfo();
+                // get summoner name
+                String summonerName = summonerInfo.getBasicName(UpdateService.this);
 
-                                    // get match list for summoner
-                                    Map<String, String> matchParameters = new HashMap<>();
-                                    matchParameters.put("seasons", Params.PRESEASON_2016 + "," + Params.SEASON_2016);
+                // get friend names
+                Set<String> friendNames = new Friends().getNames(UpdateService.this);
 
-                                    MatchList matchlist;
-                                    matchlist = riotAPI.getMatchList(summoner.id, matchParameters);
-                                    matchlist.summonerId = summoner.id;
+                if (NetworkUtil.isInternetAvailable(UpdateService.this)) {
+                    // initialize riot api
+                    RiotAPI riotAPI = new RiotAPI(UpdateService.this);
 
-                                    if (matchlist != null){
-                                        matchlist.cascadeSave();
+                    // construct list of names to get data for
+                    List<String> summonerNames = new ArrayList<>();
+                    summonerNames.add(summonerName);
+                    if (friendNames.size() > 0) {
+                        for (String friend : friendNames) {
+                            summonerNames.add(friend);
+                        }
+                    }
 
-                                        // get match detail for last 5 games
-                                        for (int i=0; i<5 && i<matchlist.totalGames; i++){
+                    // query riot api for summoner & friend dto's
+                    Map<String, SummonerDto> summoners = riotAPI.getSummonersByName(summonerNames);
+
+                    // if a proper response was received, save and begin gathering data
+                    if (summoners != null) {
+                        // save summoner id
+                        summonerInfo.setId(this, summoners.get(summonerName).id);
+
+                        // initialize match list parameters
+                        Map<String, String> matchParameters = new HashMap<>();
+                        matchParameters.put("seasons", Params.SEASON_2016);
+
+
+                        // save summoner & friend dto's locally, get match list for each
+                        for (Map.Entry<String, SummonerDto> entry : summoners.entrySet()) {
+                            if (!kill) {
+                                // save
+                                entry.getValue().save();
+
+                                // get match list parameters
+                                MatchList matchlist;
+                                matchlist = riotAPI.getMatchList(entry.getValue().id, matchParameters);
+
+                                if (matchlist != null){
+                                    matchlist.summonerId = entry.getValue().id;
+                                    matchlist.cascadeSave();
+
+                                    // get match detail for last 5 games
+                                    if (matchlist.totalGames > 0) {
+                                        for (int i = 0; i < 5 && i < matchlist.totalGames; i++) {
                                             long matchId = matchlist.getMatchReferences().get(i).matchId;
                                             MatchDetail match = riotAPI.getMatchDetail(matchId);
-                                            match.cascadeSave();
-                                            try{
-                                                Thread.sleep(1200);
-                                            } catch (InterruptedException e){
-                                                Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
+                                            if (match != null) {
+                                                match.cascadeSave();
                                             }
-
                                         }
                                     }
                                 }
                             }
-                            // set state to 1, service was just recently ran
-                            updateServiceState.set(UpdateService.this, 1);
-                            break;
-                        case 1:
-                            // set state to 0, service is done taking a break
-                            updateServiceState.set(UpdateService.this, 0);
-                            break;
+                        }
                     }
-                    Log.d(Params.TAG_DEBUG, "@UpdateService: end of thread reached");
-                    UpdateService.this.stopSelf();
                 }
-            }).start();
+                // set state to 1, service was just recently ran and needs a break
+                updateJobFlags.setState(UpdateService.this, 1);
+                break;
+            case 1:
+                // set state to 0, service is done taking a break
+                updateJobFlags.setState(UpdateService.this, 0);
+                break;
+        }
+
+        // let system know the update job is done running
+        updateJobFlags.setRunning(this, false);
+        Log.d(Params.TAG_DEBUG, "@UpdateService: update job is done running, flag set");
     }
 
     @Override
     public void onDestroy() {
-        // restart this service again in 15 minutes
-        // without user request, max time before stats refresh is 30 minutes and min time is 15 minutes
-        AlarmManager alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarm.set(
-                AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis() + (1000 * 60 * 20),
-                PendingIntent.getService(this, 0, new Intent(this, UpdateService.class), 0)
-        );
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        kill = true;
+        updateJobFlags.setState(this, 0);
+        updateJobFlags.setRunning(this, false);
     }
 
     @Override

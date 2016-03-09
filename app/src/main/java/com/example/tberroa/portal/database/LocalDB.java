@@ -9,6 +9,7 @@ import com.example.tberroa.portal.models.match.Participant;
 import com.example.tberroa.portal.models.match.ParticipantIdentity;
 import com.example.tberroa.portal.models.match.ParticipantStats;
 import com.example.tberroa.portal.models.matchlist.MatchList;
+import com.example.tberroa.portal.models.matchlist.MatchReference;
 import com.example.tberroa.portal.models.stats.PlayerStatsSummaryListDto;
 import com.example.tberroa.portal.models.stats.RankedStatsDto;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
@@ -20,7 +21,14 @@ public class LocalDB {
     public LocalDB(){
     }
 
-    public SummonerDto getSummoner(long id){
+    public SummonerDto getSummonerByName(String name){
+        return new Select()
+                .from(SummonerDto.class)
+                .where("name = ?", name)
+                .executeSingle();
+    }
+
+    public SummonerDto getSummonerById(long id){
         return new Select()
                 .from(SummonerDto.class)
                 .where("summoner_id = ?", id)
@@ -46,6 +54,20 @@ public class LocalDB {
                 .from(MatchList.class)
                 .where("summoner_id = ?", summonerId)
                 .executeSingle();
+    }
+
+    public List<MatchReference> getMatchReferences(long summonerId, String queue){
+        MatchList matchList = getMatchList(summonerId);
+        if (matchList.totalGames > 0){
+            return new Select()
+                    .from(MatchReference.class)
+                    .where("match_list = ?", matchList.getId())
+                    .where("queue = ?", queue)
+                    .execute();
+        }
+        else{
+            return null;
+        }
     }
 
     public MatchDetail getMatchDetail(long matchId){

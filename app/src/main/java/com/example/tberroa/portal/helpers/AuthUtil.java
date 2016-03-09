@@ -8,20 +8,21 @@ import android.os.Bundle;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.activities.SignInActivity;
 import com.example.tberroa.portal.activities.SplashActivity;
+import com.example.tberroa.portal.data.Friends;
 import com.example.tberroa.portal.data.SummonerInfo;
-import com.example.tberroa.portal.data.UpdateServiceState;
 import com.example.tberroa.portal.database.LocalDB;
 import com.example.tberroa.portal.database.RiotAPI;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.services.APIKeyService;
 import com.example.tberroa.portal.services.UpdateService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AuthenticationUtil {
+public class AuthUtil {
 
-    private AuthenticationUtil(){
+    private AuthUtil(){
     }
 
     public static String validate(Bundle enteredInfo){
@@ -54,14 +55,21 @@ public class AuthenticationUtil {
         return validation;
     }
 
-    public static void signIn(final Context context, String summonerName, String region, boolean inView){
+    public static void signIn(final Context context, final String summonerName, final String stylizedName,
+                              final String region, final boolean inView){
         SummonerInfo summonerInfo = new SummonerInfo();
 
-        // clear shared preferences of old data
-        summonerInfo.clear(context);
+        // start api key service
+        context.startService(new Intent(context, APIKeyService.class));
+
+        // start update service
+        context.startService(new Intent(context, UpdateService.class));
 
         // save summoner name
         summonerInfo.setBasicName(context, summonerName.toLowerCase());
+
+        // save stylized summoner name
+        summonerInfo.setStylizedName(context, stylizedName);
 
         // save region
         summonerInfo.setRegion(context, region);
@@ -69,32 +77,12 @@ public class AuthenticationUtil {
         // update summoner sign in status
         summonerInfo.setSummonerStatus(context, true);
 
-        // start update service
-        context.startService(new Intent(context, UpdateService.class));
-
-        // save summoner id and stylized summoner name
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                RiotAPI riotAPI = new RiotAPI(context);
-                SummonerInfo summonerInfo = new SummonerInfo();
-                String basicName = summonerInfo.getBasicName(context);
-                List<String> nameList = new ArrayList<>();
-                nameList.add(basicName);
-                Map<String, SummonerDto> summonerMap = riotAPI.getSummonersByName(nameList);
-                if (summonerMap != null){
-                    summonerInfo.setId(context, summonerMap.get(basicName).id);
-                    summonerInfo.setStylizedName(context, summonerMap.get(basicName).name);
-                }
-            }
-        }).start();
-
         // go to splash page if app is in view
         if (inView){
             context.startActivity(new Intent(context, SplashActivity.class));
         }
 
-        // destroy activity
+        // if coming from an activity, finish it
         if(context instanceof Activity){
             ((Activity)context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
             ((Activity)context).finish();
@@ -102,22 +90,32 @@ public class AuthenticationUtil {
     }
 
     public static void signOut(Context context){
-        SummonerInfo summonerInfo = new SummonerInfo();
+        // end api key service
+        context.stopService(new Intent(context, APIKeyService.class));
 
-        // clear shared preferences of old data
-        summonerInfo.clear(context);
+        // end update service
+        context.stopService(new Intent(context, UpdateService.class));
+
+        // clear data
+        new SummonerInfo().clear(context);
+        new Friends().clear(context);
 
         // clear database
         new LocalDB().clear(context);
 
-        // reset update service state
-        new UpdateServiceState().set(context, 0);
-
         // go to sign in page
         context.startActivity(new Intent(context, SignInActivity.class));
+
+        // if coming from an activity, finish it
         if(context instanceof Activity){
             ((Activity)context).finish();
         }
+    }
+
+    public static Map<String, SummonerDto> validateName(Context context, String summonerName){
+        List<String> name = new ArrayList<>();
+        name.add(summonerName);
+        return new RiotAPI(context).getSummonersByName(name);
     }
 
     public static String decodeRegion(int position){

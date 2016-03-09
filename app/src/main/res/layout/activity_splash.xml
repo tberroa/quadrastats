@@ -13,7 +13,7 @@
         android:layout_marginBottom="5dp"
         android:text="@string/app_name"
         android:textSize="75sp"
-        android:textColor="@color/logo1" />
+        android:textColor="@color/logo_main" />
 
     <TextView
         android:id="@+id/app_slogan"
@@ -24,7 +24,7 @@
         android:layout_marginBottom="25dp"
         android:text="@string/app_slogan"
         android:textSize="20sp"
-        android:textColor="@color/logo2" />
+        android:textColor="@color/logo_slogan" />
 
     <TextView
         android:id="@+id/fetching_data_progress_bar"

@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.helpers.AuthenticationUtil;
+import com.example.tberroa.portal.helpers.AuthUtil;
 
 public class ProfileActivity extends BaseActivity {
 
@@ -45,7 +45,7 @@ public class ProfileActivity extends BaseActivity {
 
     private final View.OnClickListener signOutButtonListener = new View.OnClickListener() {
         public void onClick(View v) {
-            AuthenticationUtil.signOut(ProfileActivity.this);
+            AuthUtil.signOut(ProfileActivity.this);
         }
     };
 

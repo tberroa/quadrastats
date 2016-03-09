@@ -72,9 +72,12 @@
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.ProfileActivity"
                   android:screenOrientation="portrait" />
+        <activity android:name=".activities.FriendsActivity"
+                  android:screenOrientation="portrait" />
         <activity android:name=".activities.DynamicQueueActivity"
                   android:screenOrientation="portrait"/>
 
+        <service android:name=".services.APIKeyService" />
         <service android:name=".services.UpdateService" />
     </application>
 </manifest>
