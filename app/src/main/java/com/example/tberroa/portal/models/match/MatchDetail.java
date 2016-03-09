@@ -8,6 +8,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
@@ -44,11 +45,11 @@ public class MatchDetail extends Model {
 
     @Expose
     @Column(name = "participant_identities")
-    private List<ParticipantIdentity> participantIdentities;
+    private List<ParticipantIdentity> participantIdentities = new ArrayList<>();
 
     @Expose
     @Column(name = "participants")
-    private List<Participant> participants;
+    private List<Participant> participants = new ArrayList<>();
 
     @Expose
     @Column(name = "platform_id")
@@ -68,7 +69,7 @@ public class MatchDetail extends Model {
 
     @Expose
     @Column(name = "teams")
-    private List<Team> teams;
+    private List<Team> teams = new ArrayList<>();
 
     public MatchDetail(){
         super();
@@ -90,19 +91,19 @@ public class MatchDetail extends Model {
         ActiveAndroid.beginTransaction();
         try{
             save();
-            if (participantIdentities != null){
+            if (!participantIdentities.isEmpty()){
                 for (ParticipantIdentity identity : participantIdentities){
                     identity.matchDetail = this;
                     identity.cascadeSave();
                 }
             }
-            if (participants != null){
+            if (!participants.isEmpty()){
                 for (Participant participant : participants){
                     participant.matchDetail = this;
                     participant.cascadeSave();
                 }
             }
-            if (teams != null){
+            if (!teams.isEmpty()){
                 for (Team team : teams){
                     team.matchDetail = this;
                     team.save();

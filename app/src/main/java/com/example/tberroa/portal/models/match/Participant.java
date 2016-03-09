@@ -9,6 +9,7 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
@@ -29,7 +30,7 @@ public class Participant extends Model {
 
     @Expose
     @Column(name = "masteries")
-    private List<Mastery> masteries;
+    private List<Mastery> masteries = new ArrayList<>();
 
     @Expose
     @Column(name = "participant_id")
@@ -37,7 +38,7 @@ public class Participant extends Model {
 
     @Expose
     @Column(name = "runes")
-    private List<Rune> runes;
+    private List<Rune> runes = new ArrayList<>();
 
     @Expose
     @Column(name = "spell_1_id")
@@ -89,13 +90,13 @@ public class Participant extends Model {
         ActiveAndroid.beginTransaction();
         try{
             save();
-            if (masteries != null){
+            if (!masteries.isEmpty()){
                 for (Mastery mastery : masteries){
                     mastery.participant = this;
                     mastery.save();
                 }
             }
-            if (runes != null){
+            if (!runes.isEmpty()){
                 for (Rune rune : runes){
                     rune.participant = this;
                     rune.save();

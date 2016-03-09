@@ -12,7 +12,6 @@ import com.google.gson.annotations.Expose;
 public class MasteryDto extends Model {
 
     // parent
-    @Expose
     @Column(name = "mastery_page")
     MasteryPageDto masteryPageDto;
 

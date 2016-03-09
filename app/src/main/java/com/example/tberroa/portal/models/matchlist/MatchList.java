@@ -8,6 +8,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
@@ -24,7 +25,7 @@ public class MatchList extends Model {
 
     @Expose
     @Column(name = "matches")
-    private List<MatchReference> matches;
+    private List<MatchReference> matches = new ArrayList<>();
 
     @Expose
     @Column(name = "start_index")
@@ -46,7 +47,7 @@ public class MatchList extends Model {
         ActiveAndroid.beginTransaction();
         try{
             save();
-            if (matches != null){
+            if (!matches.isEmpty()){
                 for (MatchReference match : matches){
                     match.matchList = this;
                     match.save();

@@ -6,6 +6,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +15,6 @@ import java.util.Set;
 public class RunePageDto extends Model {
 
     // parent
-    @Expose
     @Column(name = "rune_pages")
     RunePagesDto runePagesDto;
 
@@ -32,21 +32,21 @@ public class RunePageDto extends Model {
 
     @Expose
     @Column(name = "slots")
-    public Set<RuneSlotDto> slots;
-
-    public List<RuneSlotDto> getSlots(){
-        return getMany(RuneSlotDto.class, "rune_page");
-    }
+    public Set<RuneSlotDto> slots = new HashSet<>();
 
     public RunePageDto(){
         super();
+    }
+
+    public List<RuneSlotDto> getSlots(){
+        return getMany(RuneSlotDto.class, "rune_page");
     }
 
     public void cascadeSave(){
         ActiveAndroid.beginTransaction();
         try{
             save();
-            if (slots != null){
+            if (!slots.isEmpty()){
                 for (RuneSlotDto slot : slots){
                     slot.runePageDto = this;
                     slot.save();

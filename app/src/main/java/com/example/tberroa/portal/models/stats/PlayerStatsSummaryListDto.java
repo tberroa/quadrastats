@@ -8,6 +8,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
@@ -16,7 +17,7 @@ public class PlayerStatsSummaryListDto extends Model {
 
     @Expose
     @Column(name = "player_stat_summaries")
-    private List<PlayerStatsSummaryDto> playerStatSummaries;
+    private List<PlayerStatsSummaryDto> playerStatSummaries = new ArrayList<>();
 
     @Expose
     @Column(name = "summoner_id")
@@ -34,7 +35,7 @@ public class PlayerStatsSummaryListDto extends Model {
         ActiveAndroid.beginTransaction();
         try{
             save();
-            if (playerStatSummaries != null){
+            if (!playerStatSummaries.isEmpty()){
                 for (PlayerStatsSummaryDto playerStatsSummary : playerStatSummaries){
                     playerStatsSummary.playerStatsSummaryListDto = this;
                     playerStatsSummary.cascadeSave();

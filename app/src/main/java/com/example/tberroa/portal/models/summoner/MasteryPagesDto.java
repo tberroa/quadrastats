@@ -8,6 +8,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,11 +18,7 @@ public class MasteryPagesDto extends Model {
 
     @Expose
     @Column(name = "pages")
-    public Set<MasteryPageDto> pages;
-
-    public List<MasteryPageDto> getPages(){
-        return getMany(MasteryPageDto.class, "mastery_pages");
-    }
+    public Set<MasteryPageDto> pages = new HashSet<>();
 
     @Expose
     @Column(name = "summoner_id")
@@ -31,11 +28,15 @@ public class MasteryPagesDto extends Model {
         super();
     }
 
+    public List<MasteryPageDto> getPages(){
+        return getMany(MasteryPageDto.class, "mastery_pages");
+    }
+
     public void cascadeSave(){
         ActiveAndroid.beginTransaction();
         try{
             save();
-            if (pages != null){
+            if (!pages.isEmpty()){
                 for(MasteryPageDto page : pages){
                     page.masteryPagesDto = this;
                     page.cascadeSave();

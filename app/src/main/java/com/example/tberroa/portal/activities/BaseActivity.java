@@ -56,7 +56,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         SummonerInfo summonerInfo = new SummonerInfo();
         String stylizedName = summonerInfo.getStylizedName(this);
         long summonerId = summonerInfo.getId(this);
-        Log.d(Params.TAG_DEBUG, "@HomeActivity: stylized name is " + stylizedName);
+        Log.d(Params.TAG_DEBUG, "@BaseActivity: stylized name is " + stylizedName);
 
         // display the stylized summoner name
         TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
@@ -66,7 +66,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         if (summonerId != 0){
             SummonerDto summoner = new LocalDB().getSummonerById(summonerId);
             if (summoner != null){
-                Log.d(Params.TAG_DEBUG, "@HomeActivity: summoner dto is not null");
+                Log.d(Params.TAG_DEBUG, "@BaseActivity: summoner dto is not null");
                 ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
                 String url = new URLConstructor().summonerIcon(summoner.profileIconId);
                 Picasso.with(this)

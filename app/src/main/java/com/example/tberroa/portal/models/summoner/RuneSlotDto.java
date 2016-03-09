@@ -10,7 +10,6 @@ import com.google.gson.annotations.Expose;
 public class RuneSlotDto extends Model{
 
     // parent
-    @Expose
     @Column(name = "rune_page")
     RunePageDto runePageDto;
 

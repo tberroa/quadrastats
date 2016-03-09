@@ -8,6 +8,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
@@ -15,7 +16,6 @@ import java.util.List;
 public class MasteryPageDto extends Model {
 
     // parent
-    @Expose
     @Column(name = "mastery_pages")
     MasteryPagesDto masteryPagesDto;
 
@@ -29,11 +29,7 @@ public class MasteryPageDto extends Model {
 
     @Expose
     @Column(name = "masteries")
-    public List<MasteryDto> masteries;
-
-    public List<MasteryDto> getMasteries(){
-        return getMany(MasteryDto.class, "mastery_page");
-    }
+    public List<MasteryDto> masteries = new ArrayList<>();
 
     @Expose
     @Column(name = "name")
@@ -43,11 +39,15 @@ public class MasteryPageDto extends Model {
         super();
     }
 
+    public List<MasteryDto> getMasteries(){
+        return getMany(MasteryDto.class, "mastery_page");
+    }
+
     public void cascadeSave(){
         ActiveAndroid.beginTransaction();
         try{
             save();
-            if (masteries != null){
+            if (!masteries.isEmpty()){
                 for (MasteryDto mastery : masteries){
                     mastery.masteryPageDto = this;
                     mastery.save();
