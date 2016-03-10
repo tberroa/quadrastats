@@ -108,7 +108,7 @@ public class FriendsActivity extends BaseActivity {
                         // validate summoner name in separate thread
                         new Thread(new Runnable() {
                             public void run() {
-                                String enteredName = friendsName.getText().toString();
+                                String enteredName = friendsName.getText().toString().toLowerCase();
 
                                 // validate summoner name
                                 Map<String, SummonerDto> summoner;

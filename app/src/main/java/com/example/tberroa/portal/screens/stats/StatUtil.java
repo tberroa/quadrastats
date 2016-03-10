@@ -15,7 +15,6 @@ import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.match.ParticipantStats;
@@ -35,12 +34,12 @@ class StatUtil {
     private StatUtil() {
     }
 
-    private static boolean hasMatches(long summonerId, String queue){
+    static private boolean hasMatches(long summonerId, String queue){
         List<MatchReference> matches = new LocalDB().getMatchReferences(summonerId, queue);
         return  (matches != null && !matches.isEmpty());
     }
 
-    private static boolean hasMatches(Set<String> friendNames, String queue){
+    static private boolean hasMatches(Set<String> friendNames, String queue){
         LocalDB localDB = new LocalDB();
         for (String name : friendNames){
             long summonerId = localDB.getSummonerByName(name).id;
@@ -106,10 +105,10 @@ class StatUtil {
             Map<String, List<MatchDetail>> friendMatchDetails = new HashMap<>();
             for (String name : friendNames) {
                 friendMatchDetails.put(name, new ArrayList<MatchDetail>());
-                for (int i = 0; i < numberOfMatches; i++) {
-                    if (friendMatches.get(name).size() > 0){
-                        MatchReference reference = friendMatches.get(name).get(i);
-                        MatchDetail detail = localDB.getMatchDetail(reference.matchId);
+                for (int i = 0; i<friendMatches.get(name).size() && i<numberOfMatches; i++) {
+                    MatchReference reference = friendMatches.get(name).get(i);
+                    MatchDetail detail = localDB.getMatchDetail(reference.matchId);
+                    if (detail != null){
                         friendMatchDetails.get(name).add(detail);
                     }
                 }
@@ -118,11 +117,11 @@ class StatUtil {
             // get friend participant stats list
             for (String name : friendNames) {
                 friendParticipantStatsList.put(name, new ArrayList<ParticipantStats>());
-                for (int i = 0; i < numberOfMatches; i++) {
-                    long friendId = friendIds.get(name);
-                    if (friendMatchDetails.get(name).size() > 0){
-                        MatchDetail matchDetail = friendMatchDetails.get(name).get(i);
-                        ParticipantStats stats = localDB.getParticipantStats(friendId, matchDetail);
+                long friendId = friendIds.get(name);
+                for (int i = 0; i<friendMatchDetails.get(name).size() && i<numberOfMatches; i++) {
+                    MatchDetail matchDetail = friendMatchDetails.get(name).get(i);
+                    ParticipantStats stats = localDB.getParticipantStats(friendId, matchDetail);
+                    if (stats != null){
                         friendParticipantStatsList.get(name).add(stats);
                     }
                 }
@@ -188,7 +187,7 @@ class StatUtil {
         l.remove(plot.getLegendWidget());
     }
 
-    public static int checkConditions(Context context, long summonerId, String queue, Set<String> friendNames) {
+    static public int checkConditions(Context context, long summonerId, String queue, Set<String> friendNames) {
 
         // code 100: summoner has no matches for this queue
         if (!StatUtil.hasMatches(summonerId, queue)) {
@@ -206,7 +205,7 @@ class StatUtil {
         }
 
         // code 400: none of the summoners friends have any matches for this queue
-        if (!StatUtil.hasMatches(friendNames, Params.DYNAMIC_QUEUE)) {
+        if (!StatUtil.hasMatches(friendNames, queue)) {
             return 400;
         }
 

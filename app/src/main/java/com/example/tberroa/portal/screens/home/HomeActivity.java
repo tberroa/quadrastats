@@ -9,8 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.screens.BaseActivity;
-import com.example.tberroa.portal.screens.stats.StatActivity;
+import com.example.tberroa.portal.screens.stats.StatsActivity;
 
 public class HomeActivity extends BaseActivity {
 
@@ -33,11 +34,23 @@ public class HomeActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3) {
+                Intent intent = new Intent(HomeActivity.this, StatsActivity.class);
                 switch (position) {
                     case 0:
-                        startActivity(new Intent(HomeActivity.this, StatActivity.class));
+                        intent.putExtra("queue", Params.DYNAMIC_QUEUE);
                         break;
+                    case 1:
+                        intent.putExtra("queue", Params.SOLO_QUEUE);
+                        break;
+                    case 2:
+                        intent.putExtra("queue", Params.TEAM_5);
+                        break;
+                    case 3:
+                        intent.putExtra("queue", Params.TEAM_3);
+                        break;
+
                 }
+                startActivity(intent);
             }
         });
     }

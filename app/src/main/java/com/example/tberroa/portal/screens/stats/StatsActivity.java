@@ -15,6 +15,7 @@ import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.screens.BaseActivity;
+import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.friends.FriendsInfo;
 import com.example.tberroa.portal.data.Params;
@@ -28,16 +29,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class StatActivity extends BaseActivity {
+public class StatsActivity extends BaseActivity {
 
     private UpdateJobListener updateJobListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dynamic_queue);
-        SummonerInfo summonerInfo = new SummonerInfo();
-        long summonerId = summonerInfo.getId(this);
+        setContentView(R.layout.activity_stats);
+
+        // get queue
+        String queue = getIntent().getStringExtra("queue");
 
         // no animation if starting activity as a reload
         if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
@@ -46,7 +48,7 @@ public class StatActivity extends BaseActivity {
 
         // set toolbar
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.dynamic_queue);
+            getSupportActionBar().setTitle(ScreenUtil.stylizeQueue(this, queue));
         }
 
         // set back button
@@ -58,28 +60,36 @@ public class StatActivity extends BaseActivity {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 } else {
-                    startActivity(new Intent(StatActivity.this, HomeActivity.class));
+                    startActivity(new Intent(StatsActivity.this, HomeActivity.class));
                     finish();
                 }
             }
         });
 
         // get layouts
+        LinearLayout genMessageLayout = (LinearLayout) findViewById(R.id.layout_gen_message);
         RelativeLayout plotLayout = (RelativeLayout) findViewById(R.id.plot_layout);
         LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
         LinearLayout busyUpdatingLayout = (LinearLayout) findViewById(R.id.layout_busy_updating);
+        TextView genMessage = (TextView) findViewById(R.id.gen_message);
+        genMessageLayout.setVisibility(View.GONE);
         plotLayout.setVisibility(View.GONE);
         noFriendsLayout.setVisibility(View.GONE);
         busyUpdatingLayout.setVisibility(View.GONE);
+
+        // get summoner id
+        long summonerId = new SummonerInfo().getId(this);
 
         // get friends
         Set<String> friendNames = new FriendsInfo().getNames(this);
 
         // check conditions
-        int condition = StatUtil.checkConditions(this, summonerId, Params.DYNAMIC_QUEUE, friendNames);
+        int condition = StatUtil.checkConditions(this, summonerId, queue, friendNames);
 
         switch(condition){
             case 100: // code 100: summoner has no matches for this queue
+                genMessageLayout.setVisibility(View.VISIBLE);
+                genMessage.setText(getString(R.string.no_matches));
                 break;
 
             case 200: // code 200: update job is currently running
@@ -98,13 +108,15 @@ public class StatActivity extends BaseActivity {
                 goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(StatActivity.this, FriendsActivity.class));
+                        startActivity(new Intent(StatsActivity.this, FriendsActivity.class));
                         finish();
                     }
                 });
                 break;
 
             case 400: // code 400: none of the summoners friends have any matches for this queue
+                genMessageLayout.setVisibility(View.VISIBLE);
+                genMessage.setText(getString(R.string.no_friend_matches));
                 break;
 
             case 500: // code 500: no issues, conditions are good for showing data
@@ -114,16 +126,18 @@ public class StatActivity extends BaseActivity {
 
                 // get friend stats
                 Map<String, List<ParticipantStats>> friendStats;
-                friendStats = StatUtil.getFriendStats(friendNames, Params.DYNAMIC_QUEUE, loadedMatches);
+                friendStats = StatUtil.getFriendStats(friendNames, queue, loadedMatches);
 
                 // get summoner stats
                 List<ParticipantStats> summonerStats;
-                summonerStats = StatUtil.getStats(summonerId, Params.DYNAMIC_QUEUE, loadedMatches);
+                summonerStats = StatUtil.getStats(summonerId, queue, loadedMatches);
 
                 // get wards placed per game
                 long[] sWardsPlaced = new long[loadedMatches];
                 for (int i = 0; i < loadedMatches; i++) {
-                    sWardsPlaced[i] = summonerStats.get(i).wardsPlaced;
+                    if (summonerStats.get(i) != null){
+                        sWardsPlaced[i] = summonerStats.get(i).wardsPlaced;
+                    }
                 }
 
                 // get friend wards placed per game
@@ -132,7 +146,9 @@ public class StatActivity extends BaseActivity {
                     fWardsPlaced.put(name, new long[loadedMatches]);
                     if (friendStats.get(name).size() > 0) {
                         for (int i = 0; i < loadedMatches; i++) {
-                            fWardsPlaced.get(name)[i] = friendStats.get(name).get(i).wardsPlaced;
+                            if (friendStats.get(name).get(i) != null){
+                                fWardsPlaced.get(name)[i] = friendStats.get(name).get(i).wardsPlaced;
+                            }
                         }
                     }
                 }

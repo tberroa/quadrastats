@@ -74,7 +74,7 @@
                   android:screenOrientation="portrait" />
         <activity android:name=".screens.friends.FriendsActivity"
                   android:screenOrientation="portrait" />
-        <activity android:name=".screens.stats.StatActivity"
+        <activity android:name=".screens.stats.StatsActivity"
                   android:screenOrientation="portrait"/>
 
         <service android:name=".apimanager.APIMonitorService" />

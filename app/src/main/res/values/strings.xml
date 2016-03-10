@@ -69,9 +69,12 @@
     <string name="add_friends">Add Friends</string>
     <string name="plot_title">Plot Title</string>
     <string name="busy_updating">In process of updating your stats&#8230;</string>
+    <string name="message_placeholder">Message placeholder</string>
+    <string name="no_matches">You have not played this game mode this season.</string>
     <string name="no_friends_stats">
-        You have no friends to compare stats to! Click the button below to add some.
+        You have no friends to compare stats to! Click the button below to manage your friends.
     </string>
+    <string name="no_friend_matches">None of your friends have played this game mode this season.</string>
 
     <!-- stats and plots -->
     <string name = "you">You</string>

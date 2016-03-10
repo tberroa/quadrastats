@@ -23,7 +23,7 @@ import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
-import com.example.tberroa.portal.screens.stats.StatActivity;
+import com.example.tberroa.portal.screens.stats.StatsActivity;
 import com.squareup.picasso.Picasso;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -108,7 +108,45 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(BaseActivity.this, StatActivity.class));
+                        Intent dynamicQueue = new Intent(BaseActivity.this, StatsActivity.class);
+                        dynamicQueue.putExtra("queue", Params.DYNAMIC_QUEUE);
+                        startActivity(dynamicQueue);
+                        finish();
+                    }
+                });
+                drawer.closeDrawers();
+                break;
+            case R.id.solo_queue:
+                toggle.runWhenIdle(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent soloQueue = new Intent(BaseActivity.this, StatsActivity.class);
+                        soloQueue.putExtra("queue", Params.SOLO_QUEUE);
+                        startActivity(soloQueue);
+                        finish();
+                    }
+                });
+                drawer.closeDrawers();
+                break;
+            case R.id.team_5:
+                toggle.runWhenIdle(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent team5 = new Intent(BaseActivity.this, StatsActivity.class);
+                        team5.putExtra("queue", Params.TEAM_5);
+                        startActivity(team5);
+                        finish();
+                    }
+                });
+                drawer.closeDrawers();
+                break;
+            case R.id.team_3:
+                toggle.runWhenIdle(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent team3 = new Intent(BaseActivity.this, StatsActivity.class);
+                        team3.putExtra("queue", Params.TEAM_3);
+                        startActivity(team3);
                         finish();
                     }
                 });

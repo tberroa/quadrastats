@@ -11,6 +11,10 @@
         android:layout_height="match_parent"
         android:gravity="center" >
 
+        <include layout="@layout/element_gen_message"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" />
+
         <include layout="@layout/element_no_friends"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content" />

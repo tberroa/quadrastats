@@ -62,20 +62,25 @@ public class LocalDB {
     }
 
     public ParticipantStats getParticipantStats(long summonerId, MatchDetail matchDetail){
-        List<ParticipantIdentity> identities = matchDetail.getParticipantIdentities();
-        int i = 0;
-        long identityId;
-        do {
-            identityId = identities.get(i).getPlayer().summonerId;
-            i++;
-        } while (identityId != summonerId);
-        int participantId = identities.get(i-1).participantId;
-        Participant participant = new Select()
-                .from(Participant.class)
-                .where("participant_id = ?", participantId)
-                .where("match_detail = ?", matchDetail.getId())
-                .executeSingle();
-        return participant.getParticipantStats();
+        if (matchDetail != null){
+            List<ParticipantIdentity> identities = matchDetail.getParticipantIdentities();
+            int i = 0;
+            long identityId;
+            do {
+                identityId = identities.get(i).getPlayer().summonerId;
+                i++;
+            } while (identityId != summonerId);
+            int participantId = identities.get(i-1).participantId;
+            Participant participant = new Select()
+                    .from(Participant.class)
+                    .where("participant_id = ?", participantId)
+                    .where("match_detail = ?", matchDetail.getId())
+                    .executeSingle();
+            return participant.getParticipantStats();
+        }
+        else{
+            return null;
+        }
     }
 
     public void clear(Context context){
