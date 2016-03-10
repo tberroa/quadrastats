@@ -2,7 +2,22 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
+    android:layout_width="wrap_content" >
 
-    <include layout="@layout/plot" />
+    <include layout="@layout/element_plot" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+        <include layout="@layout/element_no_friends"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" />
+
+        <include layout="@layout/element_busy_updating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
 </RelativeLayout>
