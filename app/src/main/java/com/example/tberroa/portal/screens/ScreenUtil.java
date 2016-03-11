@@ -13,7 +13,7 @@ public class ScreenUtil {
     private ScreenUtil(){
     }
 
-    private static Point getScreenDimensions(Context context){
+    static private Point getScreenDimensions(Context context){
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point screenDimensions = new Point();
@@ -21,11 +21,11 @@ public class ScreenUtil {
         return screenDimensions;
     }
 
-    public static int getScreenWidth(Context context){
+    static public int getScreenWidth(Context context){
         return getScreenDimensions(context).x;
     }
 
-    public static int getScreenHeight(Context context){
+    static public int getScreenHeight(Context context){
         return getScreenDimensions(context).y;
     }
 

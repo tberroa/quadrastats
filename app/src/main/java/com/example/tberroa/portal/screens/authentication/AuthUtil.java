@@ -8,11 +8,11 @@ import android.os.Bundle;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.screens.friends.FriendsInfo;
 import com.example.tberroa.portal.data.SummonerInfo;
-import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.RiotAPI;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.apimanager.APIMonitorService;
 import com.example.tberroa.portal.updater.UpdateService;
+import com.example.tberroa.portal.updater.UpdateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +57,8 @@ public class AuthUtil {
                               final String region, final boolean inView){
         SummonerInfo summonerInfo = new SummonerInfo();
 
-        // start api key service
-        context.startService(new Intent(context, APIMonitorService.class));
-
-        // start update service
-        context.startService(new Intent(context, UpdateService.class));
+        // add summoner to the profile map
+        UpdateUtil.addPlayerToProfileMap(context, stylizedName);
 
         // save summoner name
         summonerInfo.setBasicName(context, summonerName.toLowerCase());
@@ -74,6 +71,12 @@ public class AuthUtil {
 
         // update summoner sign in status
         summonerInfo.setSummonerStatus(context, true);
+
+        // start api key service
+        context.startService(new Intent(context, APIMonitorService.class));
+
+        // start update service
+        context.startService(new Intent(context, UpdateService.class));
 
         // go to splash page if app is in view
         if (inView){
@@ -96,9 +99,6 @@ public class AuthUtil {
         // clear data
         new SummonerInfo().clear(context);
         new FriendsInfo().clear(context);
-
-        // clear database
-        new LocalDB().clear(context);
 
         // go to sign in page
         context.startActivity(new Intent(context, SignInActivity.class));

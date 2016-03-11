@@ -4,6 +4,9 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
+
+import com.example.tberroa.portal.data.Params;
 
 public class APIMonitorService extends Service {
 
@@ -12,6 +15,7 @@ public class APIMonitorService extends Service {
 
     @Override
     public void onCreate() {
+        Log.d(Params.TAG_DEBUG, "@APIMonitorService: service has been started");
 
         final Handler h = new Handler();
         final int delay = 10 * 1000; // 10 seconds
@@ -29,6 +33,8 @@ public class APIMonitorService extends Service {
     @Override
     public void onDestroy() {
         kill = true;
+        keyUsage.reset(this);
+        Log.d(Params.TAG_DEBUG, "@APIMonitorService: service has been killed");
     }
 
     @Override

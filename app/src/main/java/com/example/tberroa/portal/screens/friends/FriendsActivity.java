@@ -24,6 +24,7 @@ import com.example.tberroa.portal.screens.authentication.AuthUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.NetworkUtil;
+import com.example.tberroa.portal.updater.UpdateUtil;
 
 import java.util.Map;
 import java.util.Set;
@@ -115,11 +116,14 @@ public class FriendsActivity extends BaseActivity {
                                 summoner = AuthUtil.validateName(FriendsActivity.this, enteredName);
                                 Message msg = new Message();
                                 if (summoner != null) {
-                                    // save friend dto
-                                    summoner.get(enteredName).save();
+                                    // get stylized name
+                                    String name = summoner.get(enteredName).name;
 
                                     // save name
-                                    new FriendsInfo().addFriend(FriendsActivity.this, summoner.get(enteredName).name);
+                                    new FriendsInfo().addFriend(FriendsActivity.this, name);
+
+                                    // add summoner to the player update profile map
+                                    UpdateUtil.addPlayerToProfileMap(FriendsActivity.this, name);
 
                                     msg.arg1 = 2;
 

@@ -1,8 +1,5 @@
 package com.example.tberroa.portal.data;
 
-import android.content.Context;
-
-import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
 import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.match.Participant;
@@ -33,20 +30,26 @@ public class LocalDB {
                 .executeSingle();
     }
 
-    private MatchList getMatchList(long summonerId){
+    public List<SummonerDto> getAllSummoners(){
+        return new Select()
+                .from(SummonerDto.class)
+                .execute();
+    }
+
+    public MatchList getMatchList(long summonerId, String queue){
         return new Select()
                 .from(MatchList.class)
                 .where("summoner_id = ?", summonerId)
+                .where("queue = ?", queue)
                 .executeSingle();
     }
 
     public List<MatchReference> getMatchReferences(long summonerId, String queue){
-        MatchList matchList = getMatchList(summonerId);
+        MatchList matchList = getMatchList(summonerId, queue);
         if (matchList != null && matchList.totalGames > 0){
             return new Select()
                     .from(MatchReference.class)
                     .where("match_list = ?", matchList.getId())
-                    .where("queue = ?", queue)
                     .execute();
         }
         else{
@@ -81,11 +84,6 @@ public class LocalDB {
         else{
             return null;
         }
-    }
-
-    public void clear(Context context){
-        ActiveAndroid.dispose();
-        ActiveAndroid.initialize(context);
     }
 }
 

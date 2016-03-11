@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 // all methods, except boolean methods, return null if http response validation fails
-// only call this in a background thread as it uses wait()
+// only call this in a background thread as it uses sleep()
 public class RiotAPI {
 
     private final String region;
@@ -30,21 +30,20 @@ public class RiotAPI {
     private final Context context;
     private final APIUsageInfo keyUsage = new APIUsageInfo();
 
-    public RiotAPI(Context context){
+    public RiotAPI(Context context) {
         this.context = context;
         region = new SummonerInfo().getRegion(context);
         Log.d(Params.TAG_DEBUG, "@RAPI Constructor: region is " + region);
     }
 
-    public Map<String, SummonerDto> getSummonersByName(List<String> summonerNames){
+    public Map<String, SummonerDto> getSummonersByName(List<String> summonerNames) {
         // construct names field
         String names = "";
-        for (int i=0; i < summonerNames.size(); i++){
-            if (i == 0){
+        for (int i = 0; i < summonerNames.size(); i++) {
+            if (i == 0) {
                 names = summonerNames.get(i);
-            }
-            else{
-                names = names + ","+summonerNames.get(i);
+            } else {
+                names = names + "," + summonerNames.get(i);
             }
         }
 
@@ -58,10 +57,10 @@ public class RiotAPI {
 
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
-        try{
-            response =  new AttemptGet().execute().get();
-        }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
-            Log.e(Params.TAG_EXCEPTIONS,"@getSummonersByName: " + e.getMessage() );
+        try {
+            response = new AttemptGet().execute().get();
+        } catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e) {
+            Log.e(Params.TAG_EXCEPTIONS, "@getSummonersByName: " + e.getMessage());
         }
         Log.d(Params.TAG_DEBUG, "@getSummonersByName: response body is " + response[1]);
 
@@ -69,31 +68,31 @@ public class RiotAPI {
         keyUsage.increment(context);
 
         // validate response
-        if (validResponse(response[0])){
+        if (validResponse(response[0])) {
             // return summoner map
-            Type typeMap = new TypeToken<Map<String, SummonerDto>>(){}.getType();
+            Type typeMap = new TypeToken<Map<String, SummonerDto>>() {
+            }.getType();
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             return gson.fromJson(response[1], typeMap);
-        }
-        else{
+        } else {
             return null;
         }
     }
 
-    public RunePagesDto getRunePages(String summonerName){
+    public RunePagesDto getRunePages(String summonerName) {
         // construct list with summoner name
         List<String> summonerNames = new ArrayList<>();
         summonerNames.add(summonerName);
 
         // get the summoner dto
         Map<String, SummonerDto> summonerMap = getSummonersByName(summonerNames);
-        if (summonerMap != null){
+        if (summonerMap != null) {
             // get summoner id
             long id = summonerMap.get(summonerName).id;
 
             // construct url
             url = Params.RIOT_API_BASE_URL + region + Params.API_SUMMONER + id +
-                    "/runes?api_key="+Params.API_KEY;
+                    "/runes?api_key=" + Params.API_KEY;
             Log.d(Params.TAG_DEBUG, "@getRunePages: url is " + url);
 
             // make sure key usage is at an acceptable level before querying riot api
@@ -101,10 +100,10 @@ public class RiotAPI {
 
             // query the riot api
             String[] response = {Params.HTTP_GET_FAILED, ""};
-            try{
-                response =  new AttemptGet().execute().get();
-            }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
-                Log.e(Params.TAG_EXCEPTIONS,"@getRunePages: " + e.getMessage() );
+            try {
+                response = new AttemptGet().execute().get();
+            } catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e) {
+                Log.e(Params.TAG_EXCEPTIONS, "@getRunePages: " + e.getMessage());
             }
             Log.d(Params.TAG_DEBUG, "@getRunePages: response body is " + response[1]);
 
@@ -112,23 +111,22 @@ public class RiotAPI {
             keyUsage.increment(context);
 
             // validate response
-            if (validResponse(response[0])){
+            if (validResponse(response[0])) {
                 // return individual summoners rune pages
-                Type typeMap = new TypeToken<Map<String, RunePagesDto>>(){}.getType();
+                Type typeMap = new TypeToken<Map<String, RunePagesDto>>() {
+                }.getType();
                 Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
                 Map<String, RunePagesDto> runePagesDtoMap = gson.fromJson(response[1], typeMap);
                 return runePagesDtoMap.get(Long.toString(id));
-            }
-            else{
+            } else {
                 return null;
             }
-        }
-        else{
+        } else {
             return null;
         }
     }
 
-    public MatchList getMatchList(long id, Map<String, String> parameters){
+    public MatchList getMatchList(long id, Map<String, String> parameters) {
         // declare and initialize parameters
         String queue, seasons, beginTime, endTime, beginIndex, endIndex;
         queue = (parameters.get("queue") != null) ? parameters.get("queue") : "";
@@ -155,10 +153,10 @@ public class RiotAPI {
 
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
-        try{
-            response =  new AttemptGet().execute().get();
-        }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
-            Log.e(Params.TAG_EXCEPTIONS,"@getMatchList: " + e.getMessage() );
+        try {
+            response = new AttemptGet().execute().get();
+        } catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e) {
+            Log.e(Params.TAG_EXCEPTIONS, "@getMatchList: " + e.getMessage());
         }
         Log.d(Params.TAG_DEBUG, "@getMatchList: response body is " + response[1]);
 
@@ -166,16 +164,15 @@ public class RiotAPI {
         keyUsage.increment(context);
 
         // validate response
-        if (validResponse(response[0])){
+        if (validResponse(response[0])) {
             //return matches
             return ModelUtil.fromJson(response[1], MatchList.class);
-        }
-        else{
+        } else {
             return null;
         }
     }
 
-    public MatchDetail getMatchDetail(long matchId){
+    public MatchDetail getMatchDetail(long matchId) {
         // construct url
         url = Params.RIOT_API_BASE_URL + region + Params.API_MATCH + matchId + "?api_key=" + Params.API_KEY;
         Log.d(Params.TAG_DEBUG, "@getMatchDetail: url is " + url);
@@ -185,10 +182,10 @@ public class RiotAPI {
 
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
-        try{
-            response =  new AttemptGet().execute().get();
-        }catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e){
-            Log.e(Params.TAG_EXCEPTIONS,"@getMatchDetail: " + e.getMessage() );
+        try {
+            response = new AttemptGet().execute().get();
+        } catch (java.lang.InterruptedException | java.util.concurrent.ExecutionException e) {
+            Log.e(Params.TAG_EXCEPTIONS, "@getMatchDetail: " + e.getMessage());
         }
         Log.d(Params.TAG_DEBUG, "@getMatchDetail: response body is " + response[1]);
 
@@ -196,11 +193,10 @@ public class RiotAPI {
         keyUsage.increment(context);
 
         // validate response
-        if (validResponse(response[0])){
+        if (validResponse(response[0])) {
             //return matches
             return ModelUtil.fromJson(response[1], MatchDetail.class);
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -209,28 +205,39 @@ public class RiotAPI {
         @Override
         protected String[] doInBackground(Void... params) {
             String[] response = {Params.HTTP_GET_FAILED, ""};
-            try{
+            try {
                 response = new Http().get(url);
-            }catch(IOException e){
-                Log.d(Params.TAG_EXCEPTIONS,"@RAPI AttemptGet: " + e.getMessage());
+            } catch (IOException e) {
+                Log.d(Params.TAG_EXCEPTIONS, "@RAPI AttemptGet: " + e.getMessage());
             }
             return response;
         }
     }
 
-    private void keyUsageCheck(){
+    private void keyUsageCheck() {
         // make sure key usage is at an acceptable level before querying riot api
-        while (keyUsage.getUsage(context) > 10){
-            try{
-                wait(1000);
-            }catch (InterruptedException e){
-                Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
+        Thread wait = new Thread(){
+            public void run() {
+                while (keyUsage.getUsage(context) > 10) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
+                    }
+                }
             }
+        };
+
+        try {
+            wait.join();
+        } catch (InterruptedException e) {
+            Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
         }
     }
 
-    private boolean validResponse(String responseCode){
-        switch(responseCode){
+
+    private boolean validResponse(String responseCode) {
+        switch (responseCode) {
             case Params.RC_200_SUCCESS:
                 return true;
             default:

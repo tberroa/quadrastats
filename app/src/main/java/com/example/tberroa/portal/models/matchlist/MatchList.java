@@ -16,20 +16,24 @@ import java.util.List;
 public class MatchList extends Model {
 
     @Expose
-    @Column(name = "summoner_id")
-    public long summonerId;
-
-    @Expose
     @Column(name = "end_index")
     public int endIndex;
 
     @Expose
     @Column(name = "matches")
-    private List<MatchReference> matches = new ArrayList<>();
+    public List<MatchReference> matches = new ArrayList<>();
+
+    @Expose
+    @Column(name = "queue")
+    public String queue;
 
     @Expose
     @Column(name = "start_index")
     public int startIndex;
+
+    @Expose
+    @Column(name = "summoner_id")
+    public long summonerId;
 
     @Expose
     @Column(name = "total_games")
