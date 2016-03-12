@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,8 +19,6 @@ import com.example.tberroa.portal.data.DataUtil;
 import com.example.tberroa.portal.screens.profile.ProfileActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.SummonerInfo;
-import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.stats.StatsActivity;
 import com.squareup.picasso.Picasso;
@@ -43,40 +40,33 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getLayoutInflater().inflate(layoutResID, content, true);
         super.setContentView(drawer);
 
+        // initialize toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // initialize drawer
         toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        // initialize navigation view
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerLayout = navigationView.getHeaderView(0);
 
-        // get summoner info
+        // get the summoner's profile icon id and stylized name
         SummonerInfo summonerInfo = new SummonerInfo();
+        int profileIconId = summonerInfo.getIconId(this);
         String stylizedName = summonerInfo.getStylizedName(this);
-        long summonerId = summonerInfo.getId(this);
-        Log.d(Params.TAG_DEBUG, "@BaseActivity: stylized name is " + stylizedName);
 
         // display the stylized summoner name
         TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
         summonerNameView.setText(stylizedName);
 
-        // get the summoner dto in order to display the summoner icon
-        if (summonerId != 0){
-            SummonerDto summoner = new LocalDB().getSummonerById(summonerId);
-            if (summoner != null){
-                Log.d(Params.TAG_DEBUG, "@BaseActivity: summoner dto is not null");
-                ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
-                String url = DataUtil.summonerIcon(summoner.profileIconId);
-                Picasso.with(this)
-                        .load(url)
-                        .fit()
-                        .transform(new CircleTransform()).into(summonerIcon);
-            }
-        }
+        // display the profile icon
+        ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
+        String url = DataUtil.summonerIcon(profileIconId);
+        Picasso.with(this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
     }
 
     @Override

@@ -42,16 +42,18 @@ class StatUtil {
     static private boolean hasMatches(Set<String> friendNames, String queue){
         LocalDB localDB = new LocalDB();
         for (String name : friendNames){
-            long summonerId = localDB.getSummonerByName(name).id;
-            List<MatchReference> references = localDB.getMatchReferences(summonerId, queue);
-            if (references !=null && !references.isEmpty()){
-                return true;
+            SummonerDto friendDto = localDB.getSummonerByName(name);
+            if (friendDto != null){
+                List<MatchReference> references = localDB.getMatchReferences(friendDto.id, queue);
+                if (references !=null && !references.isEmpty()){
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    static public List<ParticipantStats> getStats(long summonerId, String queue, int numberOfMatches){
+    static public List<ParticipantStats> getStats(long summonerId, String queue, int maxAmount){
         LocalDB localDB = new LocalDB();
 
         // get match references
@@ -59,21 +61,25 @@ class StatUtil {
 
         // get match details
         List<MatchDetail> matchDetails = new ArrayList<>();
-        for (int i = 0; i < numberOfMatches; i++) {
+        for (int i = 0; i<maxAmount && i<matches.size(); i++) {
             matchDetails.add(localDB.getMatchDetail(matches.get(i).matchId));
         }
 
         // get participant stats for each match detail
         List<ParticipantStats> participantStatsList = new ArrayList<>();
-        for (int i = 0; i < numberOfMatches; i++) {
+        for (int i = 0; i<maxAmount && i<matchDetails.size(); i++) {
             participantStatsList.add(localDB.getParticipantStats(summonerId, matchDetails.get(i)));
         }
 
         return participantStatsList;
     }
 
-    static public Map<String, List<ParticipantStats>> getFriendStats(
-            Set<String> friendNames, String queue, int numberOfMatches) {
+    static public Map<String, List<ParticipantStats>> getFriendStats(Set<String> names, String queue, int maxMatches) {
+        // turn the set into a local list to prevent making permanent changes to friendNames
+        List<String> friendNames = new ArrayList<>();
+        for (String name : names){
+            names.add(name);
+        }
 
         // initialize map of friend stats
         Map<String, List<ParticipantStats>> friendParticipantStatsList = new HashMap<>();
@@ -88,6 +94,9 @@ class StatUtil {
                 if (friendDto != null){
                     friendIds.put(name, friendDto.id);
                 }
+                else{ // remove any friends who don't have their summoner dto saved
+                    friendNames.remove(name);
+                }
             }
 
             // get friend match references
@@ -99,13 +108,16 @@ class StatUtil {
                 if (references != null){
                     friendMatches.put(name, references);
                 }
+                else{ // remove any friends who don't have any match references for this queue
+                    friendNames.remove(name);
+                }
             }
 
             // get friend match details
             Map<String, List<MatchDetail>> friendMatchDetails = new HashMap<>();
             for (String name : friendNames) {
                 friendMatchDetails.put(name, new ArrayList<MatchDetail>());
-                for (int i = 0; i<friendMatches.get(name).size() && i<numberOfMatches; i++) {
+                for (int i = 0; i<friendMatches.get(name).size() && i<maxMatches; i++) {
                     MatchReference reference = friendMatches.get(name).get(i);
                     MatchDetail detail = localDB.getMatchDetail(reference.matchId);
                     if (detail != null){
@@ -118,7 +130,7 @@ class StatUtil {
             for (String name : friendNames) {
                 friendParticipantStatsList.put(name, new ArrayList<ParticipantStats>());
                 long friendId = friendIds.get(name);
-                for (int i = 0; i<friendMatchDetails.get(name).size() && i<numberOfMatches; i++) {
+                for (int i = 0; i<friendMatchDetails.get(name).size() && i<maxMatches; i++) {
                     MatchDetail matchDetail = friendMatchDetails.get(name).get(i);
                     ParticipantStats stats = localDB.getParticipantStats(friendId, matchDetail);
                     if (stats != null){

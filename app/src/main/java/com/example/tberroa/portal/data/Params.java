@@ -9,6 +9,8 @@ public class Params {
     static public final String RELOAD = "-80";
 
     // broadcast
+    static public final String SIGN_IN_SUCCESS = "sign_in_success";
+    static public final String SIGN_IN_FAILED = "sign_in_failed";
     static public final String UPDATE_COMPLETE = "update_complete";
 
     // authentication

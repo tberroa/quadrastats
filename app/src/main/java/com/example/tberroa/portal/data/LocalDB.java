@@ -1,5 +1,7 @@
 package com.example.tberroa.portal.data;
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
 import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.match.Participant;
@@ -23,36 +25,25 @@ public class LocalDB {
                 .executeSingle();
     }
 
-    public SummonerDto getSummonerById(long id){
-        return new Select()
-                .from(SummonerDto.class)
-                .where("summoner_id = ?", id)
-                .executeSingle();
-    }
-
-    public List<SummonerDto> getAllSummoners(){
-        return new Select()
-                .from(SummonerDto.class)
-                .execute();
-    }
-
-    public MatchList getMatchList(long summonerId, String queue){
+    public MatchList getMatchList(long summonerId){
         return new Select()
                 .from(MatchList.class)
                 .where("summoner_id = ?", summonerId)
-                .where("queue = ?", queue)
                 .executeSingle();
     }
 
     public List<MatchReference> getMatchReferences(long summonerId, String queue){
-        MatchList matchList = getMatchList(summonerId, queue);
-        if (matchList != null && matchList.totalGames > 0){
+        MatchList matchList = getMatchList(summonerId);
+        if (matchList != null){
+            Log.d(Params.TAG_DEBUG, "@LocalDB/getReferences: matchlist is not null");
             return new Select()
                     .from(MatchReference.class)
                     .where("match_list = ?", matchList.getId())
+                    .where("queue = ?", queue)
                     .execute();
         }
         else{
+            Log.d(Params.TAG_DEBUG, "@LocalDB/getReferences: matchlist is null");
             return null;
         }
     }

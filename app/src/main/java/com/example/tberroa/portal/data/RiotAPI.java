@@ -53,7 +53,9 @@ public class RiotAPI {
         Log.d(Params.TAG_DEBUG, "@getSummonersByName: url is " + url);
 
         // make sure key usage is at an acceptable level before querying riot api
-        keyUsageCheck();
+        if (keyNotAvailable()){
+            return null;
+        }
 
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
@@ -96,7 +98,9 @@ public class RiotAPI {
             Log.d(Params.TAG_DEBUG, "@getRunePages: url is " + url);
 
             // make sure key usage is at an acceptable level before querying riot api
-            keyUsageCheck();
+            if (keyNotAvailable()){
+                return null;
+            }
 
             // query the riot api
             String[] response = {Params.HTTP_GET_FAILED, ""};
@@ -149,7 +153,9 @@ public class RiotAPI {
         Log.d(Params.TAG_DEBUG, "@getMatchList: url is " + url);
 
         // make sure key usage is at an acceptable level before querying riot api
-        keyUsageCheck();
+        if (keyNotAvailable()){
+            return null;
+        }
 
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
@@ -178,7 +184,9 @@ public class RiotAPI {
         Log.d(Params.TAG_DEBUG, "@getMatchDetail: url is " + url);
 
         // make sure key usage is at an acceptable level before querying riot api
-        keyUsageCheck();
+        if (keyNotAvailable()){
+            return null;
+        }
 
         // query riot api
         String[] response = {Params.HTTP_GET_FAILED, ""};
@@ -214,27 +222,10 @@ public class RiotAPI {
         }
     }
 
-    private void keyUsageCheck() {
+    private boolean keyNotAvailable() {
         // make sure key usage is at an acceptable level before querying riot api
-        Thread wait = new Thread(){
-            public void run() {
-                while (keyUsage.getUsage(context) > 10) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
-                    }
-                }
-            }
-        };
-
-        try {
-            wait.join();
-        } catch (InterruptedException e) {
-            Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
-        }
+        return  (keyUsage.getUsage(context) > 7);
     }
-
 
     private boolean validResponse(String responseCode) {
         switch (responseCode) {

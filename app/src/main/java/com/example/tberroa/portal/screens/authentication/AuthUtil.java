@@ -72,6 +72,9 @@ public class AuthUtil {
         // update summoner sign in status
         summonerInfo.setSummonerStatus(context, true);
 
+        // start sign in intent service
+        context.startService(new Intent(context, SignInIntentService.class));
+
         // start api key service
         context.startService(new Intent(context, APIMonitorService.class));
 

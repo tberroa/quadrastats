@@ -6,11 +6,12 @@ import android.content.SharedPreferences;
 
 public class SummonerInfo extends Application {
 
+    private final String IS_SIGNED_IN = "is_signed_in";
     private final String REGION = "region";
     private final String ID = "id";
     private final String BASIC_NAME = "basic_name";
     private final String STYLIZED_NAME = "stylized_name";
-    private final String IS_SIGNED_IN = "is_logged_in";
+    private final String ICON_ID = "summoner_icon_id";
 
     private SharedPreferences getSharedPreferences(Context context){
         return context.getSharedPreferences("summoner_info", MODE_PRIVATE);
@@ -22,6 +23,10 @@ public class SummonerInfo extends Application {
 
     public long getId(Context context) {
         return getSharedPreferences(context).getLong(ID, 0);
+    }
+
+    public int getIconId(Context context) {
+        return getSharedPreferences(context).getInt(ICON_ID, 0);
     }
 
     public String getBasicName(Context context){
@@ -63,6 +68,12 @@ public class SummonerInfo extends Application {
     public void setSummonerStatus(Context context, Boolean bool) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putBoolean(IS_SIGNED_IN, bool);
+        editor.apply();
+    }
+
+    public void setIconId(Context context, int id) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putInt(ICON_ID, id);
         editor.apply();
     }
 

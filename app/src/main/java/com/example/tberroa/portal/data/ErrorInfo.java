@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class ErrorInfo extends Application {
+class ErrorInfo extends Application {
 
     private final String CODE = "code";
 
