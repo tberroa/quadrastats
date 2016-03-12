@@ -237,6 +237,13 @@ public class UpdateService extends Service {
         // create new thread to handle getting the match detail. this thread utilizes sleep
         new Thread(new Runnable() {
             public void run() {
+                // sleep for 5 seconds before beginning in case user has many friends to getMatchList for
+                try{
+                    Thread.sleep(5000);
+                }catch (InterruptedException e){
+                    Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
+                }
+
                 for (List<MatchReference> matches : newMatches) {
                     for (MatchReference match : matches){
 

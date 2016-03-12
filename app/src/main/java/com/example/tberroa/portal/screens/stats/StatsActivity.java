@@ -24,8 +24,14 @@ import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.models.match.ParticipantStats;
 import com.example.tberroa.portal.updater.UpdateJobListener;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -133,9 +139,13 @@ public class StatsActivity extends BaseActivity {
                 // get friend stats
                 Map<String, List<ParticipantStats>> friendStats;
                 friendStats = StatUtil.getFriendStats(friendNames, queue, maxMatches);
+                Type friendStatsType = new TypeToken<Map<String, List<ParticipantStats>>>(){}.getType();
+                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+                String friendStatsJson = gson.toJson(friendStats, friendStatsType);
+                Log.d(Params.TAG_DEBUG, "@StatActivity: friendStats is " + friendStatsJson);
 
                 // get wards placed per game
-                long[] sWardsPlaced = new long[maxMatches];
+                long[] sWardsPlaced = new long[summonerStats.size()];
                 for (int i = 0; i < summonerStats.size(); i++) {
                     if (summonerStats.get(i) != null) {
                         sWardsPlaced[i] = summonerStats.get(i).wardsPlaced;
@@ -145,7 +155,7 @@ public class StatsActivity extends BaseActivity {
                 // get friend wards placed per game
                 Map<String, long[]> fWardsPlaced = new HashMap<>();
                 for (Map.Entry<String, List<ParticipantStats>> friend : friendStats.entrySet()) {
-                    fWardsPlaced.put(friend.getKey(), new long[maxMatches]);
+                    fWardsPlaced.put(friend.getKey(), new long[friend.getValue().size()]);
                     for (int i = 0; i < friend.getValue().size(); i++) {
                         if (friend.getValue().get(i) != null) {
                             fWardsPlaced.get(friend.getKey())[i] = friend.getValue().get(i).wardsPlaced;
@@ -154,22 +164,30 @@ public class StatsActivity extends BaseActivity {
                 }
 
                 // create data array for summoner
-                Number[] sNumbers = new Number[maxMatches];
+                Number[] sNumbers = new Number[sWardsPlaced.length];
                 for (int i = 0; i < sWardsPlaced.length; i++) {
                     sNumbers[i] = sWardsPlaced[i];
                 }
 
                 // create data array for friends
                 Map<String, Number[]> fNumbers = new HashMap<>();
-                for (String name : friendNames) {
-                    fNumbers.put(name, new Number[maxMatches]);
-                    for (int i = 0; i < fWardsPlaced.get(name).length; i++) {
-                        fNumbers.get(name)[i] = fWardsPlaced.get(name)[i];
+                for (Map.Entry<String, long[]> friend : fWardsPlaced.entrySet()) {
+                    Number[] array = new Number[maxMatches];
+                    Arrays.fill(array, 0);
+                    fNumbers.put(friend.getKey(), array);
+                    for (int i = 0; i < friend.getValue().length; i++) {
+                        fNumbers.get(friend.getKey())[i] = friend.getValue()[i];
                     }
                 }
 
+                // create a set of friends who have stats to display
+                Set<String> friendsWithStats = new HashSet<>();
+                for (Map.Entry<String, Number[]> friend : fNumbers.entrySet()){
+                    friendsWithStats.add(friend.getKey());
+                }
+
                 // construct XYSeries
-                List<XYSeries> series = StatUtil.constructXYSeries(friendNames, sNumbers, fNumbers);
+                List<XYSeries> series = StatUtil.constructXYSeries(friendsWithStats, sNumbers, fNumbers);
 
                 // initialize our XYPlot reference:
                 XYPlot plot = (XYPlot) findViewById(R.id.plot);

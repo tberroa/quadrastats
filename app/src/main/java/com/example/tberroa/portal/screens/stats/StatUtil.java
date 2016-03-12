@@ -1,6 +1,7 @@
 package com.example.tberroa.portal.screens.stats;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.androidplot.ui.AnchorPosition;
 import com.androidplot.ui.LayoutManager;
@@ -16,12 +17,17 @@ import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
+import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.match.ParticipantStats;
 import com.example.tberroa.portal.models.matchlist.MatchReference;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.updater.UpdateJobInfo;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -75,11 +81,14 @@ class StatUtil {
     }
 
     static public Map<String, List<ParticipantStats>> getFriendStats(Set<String> names, String queue, int maxMatches) {
+        // initialize gson for logging
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
         // turn the set into a local list to prevent making permanent changes to friendNames
-        List<String> friendNames = new ArrayList<>();
-        for (String name : names){
-            names.add(name);
-        }
+        List<String> friendNames = new ArrayList<>(names);
+        Type friendNamesType = new TypeToken<List<String>>(){}.getType();
+        String friendNamesJson = gson.toJson(friendNames, friendNamesType);
+        Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendNames is " + friendNamesJson);
 
         // initialize map of friend stats
         Map<String, List<ParticipantStats>> friendParticipantStatsList = new HashMap<>();
@@ -94,47 +103,49 @@ class StatUtil {
                 if (friendDto != null){
                     friendIds.put(name, friendDto.id);
                 }
-                else{ // remove any friends who don't have their summoner dto saved
-                    friendNames.remove(name);
-                }
             }
+            Type friendIdsType = new TypeToken<Map<String, Long>>(){}.getType();
+            String friendIdsJson = gson.toJson(friendIds, friendIdsType);
+            Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendIds is " + friendIdsJson);
 
             // get friend match references
             Map<String, List<MatchReference>> friendMatches = new HashMap<>();
-            for (String name : friendNames) {
-                friendMatches.put(name, new ArrayList<MatchReference>());
-                long friendId = friendIds.get(name);
-                List<MatchReference> references = localDB.getMatchReferences(friendId, queue);
+            for (Map.Entry<String, Long> friend : friendIds.entrySet()) {
+                friendMatches.put(friend.getKey(), new ArrayList<MatchReference>());
+                List<MatchReference> references = localDB.getMatchReferences(friend.getValue(), queue);
                 if (references != null){
-                    friendMatches.put(name, references);
-                }
-                else{ // remove any friends who don't have any match references for this queue
-                    friendNames.remove(name);
+                    friendMatches.put(friend.getKey(), references);
                 }
             }
+            Type friendMatchesType = new TypeToken<Map<String, List<MatchReference>>>(){}.getType();
+            String friendMatchesJson = gson.toJson(friendMatches, friendMatchesType);
+            Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendMatches is " + friendMatchesJson);
 
             // get friend match details
             Map<String, List<MatchDetail>> friendMatchDetails = new HashMap<>();
-            for (String name : friendNames) {
-                friendMatchDetails.put(name, new ArrayList<MatchDetail>());
-                for (int i = 0; i<friendMatches.get(name).size() && i<maxMatches; i++) {
-                    MatchReference reference = friendMatches.get(name).get(i);
+            for (Map.Entry<String, List<MatchReference>> friend : friendMatches.entrySet()) {
+                friendMatchDetails.put(friend.getKey(), new ArrayList<MatchDetail>());
+                for (int i = 0; i<friend.getValue().size() && i<maxMatches; i++) {
+                    MatchReference reference = friend.getValue().get(i);
                     MatchDetail detail = localDB.getMatchDetail(reference.matchId);
                     if (detail != null){
-                        friendMatchDetails.get(name).add(detail);
+                        friendMatchDetails.get(friend.getKey()).add(detail);
                     }
                 }
             }
+            Type friendDetailsType = new TypeToken<Map<String, List<MatchDetail>>>(){}.getType();
+            String friendDetailsJson = gson.toJson(friendMatchDetails, friendDetailsType);
+            Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendMatchDetails is " + friendDetailsJson);
 
             // get friend participant stats list
-            for (String name : friendNames) {
-                friendParticipantStatsList.put(name, new ArrayList<ParticipantStats>());
-                long friendId = friendIds.get(name);
-                for (int i = 0; i<friendMatchDetails.get(name).size() && i<maxMatches; i++) {
-                    MatchDetail matchDetail = friendMatchDetails.get(name).get(i);
+            for (Map.Entry<String, List<MatchDetail>> friend : friendMatchDetails.entrySet()) {
+                friendParticipantStatsList.put(friend.getKey(), new ArrayList<ParticipantStats>());
+                long friendId = friendIds.get(friend.getKey());
+                for (int i = 0; i<friend.getValue().size() && i<maxMatches; i++) {
+                    MatchDetail matchDetail = friend.getValue().get(i);
                     ParticipantStats stats = localDB.getParticipantStats(friendId, matchDetail);
                     if (stats != null){
-                        friendParticipantStatsList.get(name).add(stats);
+                        friendParticipantStatsList.get(friend.getKey()).add(stats);
                     }
                 }
             }
@@ -142,19 +153,23 @@ class StatUtil {
         return friendParticipantStatsList;
     }
 
-    static public List<XYSeries> constructXYSeries(
-            Set<String> friendNames, Number[] sNumbers, Map<String, Number[]> fNumbers){
+    static public List<XYSeries> constructXYSeries(Set<String> fNames, Number[] sNums, Map<String, Number[]> fNums){
 
         List<XYSeries> series = new ArrayList<>();
 
         // add summoner first
-        series.add(new SimpleXYSeries(Arrays.asList(sNumbers),
-                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
+        series.add(new SimpleXYSeries(Arrays.asList(sNums), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
 
         // add friends
-        for (String name : friendNames){
-            series.add(new SimpleXYSeries(Arrays.asList(fNumbers.get(name)),
-                    SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
+        for (String name : fNames){
+            Number[] nums = fNums.get(name);
+
+            // log friend numbers
+            Type numbersType = new TypeToken<Number[]>(){}.getType();
+            String numbersJson = new Gson().toJson(nums, numbersType);
+            Log.d(Params.TAG_DEBUG, "@StatUtil/constructXYSeries: numbers for " + name + " are " + numbersJson);
+
+            series.add(new SimpleXYSeries(Arrays.asList(nums), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
         }
 
         return series;
