@@ -124,6 +124,9 @@ public class UpdateService extends Service {
 
         // look through the profile map for new players
         for (Map.Entry<String, PlayerUpdateProfile> profile : profilesMap.entrySet()) {
+
+            if (kill) return;
+
             if (profile.getValue().newPlayer) {
                 // add the name of any new players to the list of names to query for
                 summonerNames.add(profile.getKey());
@@ -134,15 +137,23 @@ public class UpdateService extends Service {
         }
         Log.d(Params.TAG_DEBUG, "@UpdateService: number of new players is " + Integer.toString(summonerNames.size()));
 
-        // if new players were found, save the profile map and query the riot api for their summoner dto and save it
+        if (kill) return;
+
+        // if new players were found, get and save their summoner dto then save the profile map
         if (!summonerNames.isEmpty()) {
-            new UpdateJobInfo().setProfiles(this, profilesMap);
+
+            if (kill) return;
+
             Map<String, SummonerDto> summoners = riotAPI.getSummonersByName(summonerNames);
             if (summoners != null) {
                 for (Map.Entry<String, SummonerDto> summoner : summoners.entrySet()) {
+
+                    if (kill) return;
+
                     summoner.getValue().save();
                 }
             }
+            new UpdateJobInfo().setProfiles(this, profilesMap);
         }
     }
 
@@ -158,6 +169,9 @@ public class UpdateService extends Service {
         List<SummonerDto> summoners = new ArrayList<>();
         LocalDB localDB = new LocalDB();
         for (Map.Entry<String, PlayerUpdateProfile> entry : profilesMap.entrySet()){
+
+            if (kill) return null;
+
             summoners.add(localDB.getSummonerByName(entry.getKey()));
         }
         Log.d(Params.TAG_DEBUG, "@UpdateService: size of summoners is " + Integer.toString(summoners.size()));
@@ -168,13 +182,21 @@ public class UpdateService extends Service {
 
         // for each summoner, look for new matches
         for (SummonerDto summoner : summoners) {
+
+if (kill) return null;
+
             // query riot api for the new match list
             MatchList newMatchList = riotAPI.getMatchList(summoner.id, parameters);
+
+            if (kill) return null;
 
             // load up the old match list
             MatchList oldMatchList = localDB.getMatchList(summoner.id);
 
             if ((oldMatchList == null) || (oldMatchList.totalGames < newMatchList.totalGames)) {
+
+                if (kill) return null;
+
                 // get the amount of new games
                 int amountOfNewGames;
                 if (oldMatchList == null){
@@ -184,44 +206,34 @@ public class UpdateService extends Service {
                     amountOfNewGames = newMatchList.totalGames - oldMatchList.totalGames;
                 }
 
+                if (kill) return null;
+
                 // get the list of new matches
                 List<MatchReference> newMatches = newMatchList.matches.subList(0, amountOfNewGames);
+
+                if (kill) return null;
 
                 // parse the matches and separate by queue type
                 List<List<MatchReference>> newMatchesByQueue = divideMatches(newMatches);
 
                 // trim each list to only hold the 10 most recent matches
                 for (int i=0; i<newMatchesByQueue.size(); i++) {
+                    if (kill) return null;
+
                     List<MatchReference> trimmedList = onlyMostRecent(newMatchesByQueue.get(i), 10);
                     newMatchesByQueue.set(i, trimmedList);
                 }
 
-                // log how many matches per queue were found for this summoner
-                for (int i=0; i<newMatchesByQueue.size(); i++){
-                    String name = summoner.name;
-                    String amount = Integer.toString(newMatchesByQueue.get(i).size());
-                    String queue = "";
-                    switch (i){
-                        case 0:
-                            queue = Params.DYNAMIC_QUEUE;
-                            break;
-                        case 1:
-                            queue = Params.SOLO_QUEUE;
-                            break;
-                        case 2:
-                            queue = Params.TEAM_5;
-                            break;
-                        case 3:
-                            queue = Params.TEAM_3;
-                            break;
-                    }
-                    Log.d(Params.TAG_DEBUG, "@UpdateService: " + name + " has " + amount + " new matches for " + queue);
-                }
+                if (kill) return null;
 
                 // include the new match references in the returned value
                 for (int i = 0; i < newMatchesByQueue.size(); i++) {
+                    if (kill) return null;
+
                     returnedMatchesByQueue.get(i).addAll(newMatchesByQueue.get(i));
                 }
+
+                if (kill) return null;
 
                 // update the saved match list
                 oldMatchList = newMatchList;
@@ -239,7 +251,7 @@ public class UpdateService extends Service {
             public void run() {
                 // sleep for 5 seconds before beginning in case user has many friends to getMatchList for
                 try{
-                    Thread.sleep(5000);
+                    Thread.sleep(10000);
                 }catch (InterruptedException e){
                     Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
                 }

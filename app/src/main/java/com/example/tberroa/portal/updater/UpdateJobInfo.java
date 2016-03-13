@@ -59,4 +59,10 @@ public class UpdateJobInfo extends Application{
         editor.putString(PLAYER_PROFILES, profilesMapJson);
         editor.apply();
     }
+
+    public void clear(Context context){
+        setProfiles(context, new HashMap<String, PlayerUpdateProfile>());
+        setState(context, 0);
+        setRunning(context, false);
+    }
 }

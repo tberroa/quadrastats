@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,10 +16,11 @@ import android.widget.TextView;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.LocalDB;
+import com.example.tberroa.portal.models.summoner.FriendsList;
 import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
-import com.example.tberroa.portal.screens.friends.FriendsInfo;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.screens.home.HomeActivity;
@@ -29,6 +31,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -44,6 +47,7 @@ public class StatsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+        SummonerInfo summonerInfo = new SummonerInfo();
 
         // get queue
         String queue = getIntent().getStringExtra("queue");
@@ -78,21 +82,23 @@ public class StatsActivity extends BaseActivity {
         RelativeLayout plotLayout = (RelativeLayout) findViewById(R.id.plot_layout);
         LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
         LinearLayout busyUpdatingLayout = (LinearLayout) findViewById(R.id.layout_busy_updating);
+        LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend);
         TextView genMessage = (TextView) findViewById(R.id.gen_message);
+        legendLayout.setVisibility(View.GONE);
         genMessageLayout.setVisibility(View.GONE);
         plotLayout.setVisibility(View.GONE);
         noFriendsLayout.setVisibility(View.GONE);
         busyUpdatingLayout.setVisibility(View.GONE);
 
         // get summoner id
-        long summonerId = new SummonerInfo().getId(this);
+        long summonerId = summonerInfo.getId(this);
         Log.d(Params.TAG_DEBUG, "@StatActivity: summoner id is " + Long.toString(summonerId));
 
         // get friends
-        Set<String> friendNames = new FriendsInfo().getNames(this);
+        FriendsList friendsList = new LocalDB().getFriendsDto();
 
         // check conditions
-        int condition = StatUtil.checkConditions(this, summonerId, queue, friendNames);
+        int condition = StatUtil.checkConditions(this, summonerId, queue, friendsList);
 
         switch (condition) {
             case 100: // code 100: summoner has no matches for this queue
@@ -130,6 +136,7 @@ public class StatsActivity extends BaseActivity {
             case 500: // code 500: no issues, conditions are good for showing data
                 plotLayout.setVisibility(View.VISIBLE);
 
+
                 int maxMatches = 10; // this can be changed by user input in future
 
                 // get summoner stats
@@ -138,8 +145,9 @@ public class StatsActivity extends BaseActivity {
 
                 // get friend stats
                 Map<String, List<ParticipantStats>> friendStats;
-                friendStats = StatUtil.getFriendStats(friendNames, queue, maxMatches);
-                Type friendStatsType = new TypeToken<Map<String, List<ParticipantStats>>>(){}.getType();
+                friendStats = StatUtil.getFriendStats(friendsList, queue, maxMatches);
+                Type friendStatsType = new TypeToken<Map<String, List<ParticipantStats>>>() {
+                }.getType();
                 Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
                 String friendStatsJson = gson.toJson(friendStats, friendStatsType);
                 Log.d(Params.TAG_DEBUG, "@StatActivity: friendStats is " + friendStatsJson);
@@ -182,17 +190,59 @@ public class StatsActivity extends BaseActivity {
 
                 // create a set of friends who have stats to display
                 Set<String> friendsWithStats = new HashSet<>();
-                for (Map.Entry<String, Number[]> friend : fNumbers.entrySet()){
+                for (Map.Entry<String, Number[]> friend : fNumbers.entrySet()) {
                     friendsWithStats.add(friend.getKey());
+                }
+
+                // get legend views
+                List<TextView> nameViews = getLegendNames();
+                List<ImageView> colorViews = getLegendColors();
+
+                // construct legend
+                legendLayout.setVisibility(View.VISIBLE);
+                nameViews.get(0).setText(summonerInfo.getStylizedName(this));
+                nameViews.get(0).setVisibility(View.VISIBLE);
+                colorViews.get(0).setImageResource(R.color.series_blue);
+                colorViews.get(0).setVisibility(View.VISIBLE);
+
+                int i = 1;
+                for (String name : friendsWithStats) {
+                    nameViews.get(i).setText(name);
+                    nameViews.get(i).setVisibility(View.VISIBLE);
+
+                    switch (i){
+                        case 1:
+                            colorViews.get(i).setImageResource(R.color.series_green);
+                            break;
+                        case 2:
+                            colorViews.get(i).setImageResource(R.color.series_orange);
+                            break;
+                        case 3:
+                            colorViews.get(i).setImageResource(R.color.series_pink);
+                            break;
+                        case 4:
+                            colorViews.get(i).setImageResource(R.color.series_red);
+                            break;
+                        case 5:
+                            colorViews.get(i).setImageResource(R.color.series_yellow);
+                            break;
+                        case 6:
+                            colorViews.get(i).setImageResource(R.color.series_blue);
+                            break;
+                        case 7:
+                            colorViews.get(i).setImageResource(R.color.series_green);
+                            break;
+                    }
+                    colorViews.get(i).setVisibility(View.VISIBLE);
+
+                    i++;
                 }
 
                 // construct XYSeries
                 List<XYSeries> series = StatUtil.constructXYSeries(friendsWithStats, sNumbers, fNumbers);
 
-                // initialize our XYPlot reference:
-                XYPlot plot = (XYPlot) findViewById(R.id.plot);
-
                 // create plot
+                XYPlot plot = (XYPlot) findViewById(R.id.plot);
                 StatUtil.createPlot(this, plot, series);
 
                 // set title
@@ -200,6 +250,73 @@ public class StatsActivity extends BaseActivity {
                 plotTitle.setText(R.string.wards_placed_per_game);
                 break;
         }
+    }
+
+    private List<TextView> getLegendNames() {
+        // initialize list
+        List<TextView> nameViews = new ArrayList<>();
+
+        TextView summoner1 = (TextView) findViewById(R.id.summoner_1);
+        TextView summoner2 = (TextView) findViewById(R.id.summoner_2);
+        TextView summoner3 = (TextView) findViewById(R.id.summoner_3);
+        TextView summoner4 = (TextView) findViewById(R.id.summoner_4);
+        TextView summoner5 = (TextView) findViewById(R.id.summoner_5);
+        TextView summoner6 = (TextView) findViewById(R.id.summoner_6);
+        TextView summoner7 = (TextView) findViewById(R.id.summoner_7);
+        TextView summoner8 = (TextView) findViewById(R.id.summoner_8);
+        summoner1.setVisibility(View.GONE);
+        summoner2.setVisibility(View.GONE);
+        summoner3.setVisibility(View.GONE);
+        summoner4.setVisibility(View.GONE);
+        summoner5.setVisibility(View.GONE);
+        summoner6.setVisibility(View.GONE);
+        summoner7.setVisibility(View.GONE);
+        summoner8.setVisibility(View.GONE);
+
+        nameViews.add(summoner1);
+        nameViews.add(summoner2);
+        nameViews.add(summoner3);
+        nameViews.add(summoner4);
+        nameViews.add(summoner5);
+        nameViews.add(summoner6);
+        nameViews.add(summoner7);
+        nameViews.add(summoner8);
+
+        return nameViews;
+    }
+
+    private List<ImageView> getLegendColors() {
+
+        // initialize list
+        List<ImageView> colorViews = new ArrayList<>();
+
+        ImageView color1 = (ImageView) findViewById(R.id.color_1);
+        ImageView color2 = (ImageView) findViewById(R.id.color_2);
+        ImageView color3 = (ImageView) findViewById(R.id.color_3);
+        ImageView color4 = (ImageView) findViewById(R.id.color_4);
+        ImageView color5 = (ImageView) findViewById(R.id.color_5);
+        ImageView color6 = (ImageView) findViewById(R.id.color_6);
+        ImageView color7 = (ImageView) findViewById(R.id.color_7);
+        ImageView color8 = (ImageView) findViewById(R.id.color_8);
+        color1.setVisibility(View.GONE);
+        color2.setVisibility(View.GONE);
+        color3.setVisibility(View.GONE);
+        color4.setVisibility(View.GONE);
+        color5.setVisibility(View.GONE);
+        color6.setVisibility(View.GONE);
+        color7.setVisibility(View.GONE);
+        color8.setVisibility(View.GONE);
+
+        colorViews.add(color1);
+        colorViews.add(color2);
+        colorViews.add(color3);
+        colorViews.add(color4);
+        colorViews.add(color5);
+        colorViews.add(color6);
+        colorViews.add(color7);
+        colorViews.add(color8);
+
+        return colorViews;
     }
 
     @Override

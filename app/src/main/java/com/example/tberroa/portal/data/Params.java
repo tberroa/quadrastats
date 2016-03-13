@@ -8,6 +8,9 @@ public class Params {
     // UI parameters
     static public final String RELOAD = "-80";
 
+    // friends
+    static public final int MAX_FRIENDS = 7;
+
     // broadcast
     static public final String SIGN_IN_SUCCESS = "sign_in_success";
     static public final String SIGN_IN_FAILED = "sign_in_failed";

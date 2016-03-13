@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.screens.friends.FriendsInfo;
+import com.example.tberroa.portal.apimanager.APIUsageInfo;
 import com.example.tberroa.portal.data.SummonerInfo;
 import com.example.tberroa.portal.data.RiotAPI;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.apimanager.APIMonitorService;
+import com.example.tberroa.portal.updater.UpdateJobInfo;
 import com.example.tberroa.portal.updater.UpdateService;
 import com.example.tberroa.portal.updater.UpdateUtil;
 
@@ -75,12 +76,6 @@ public class AuthUtil {
         // start sign in intent service
         context.startService(new Intent(context, SignInIntentService.class));
 
-        // start api key service
-        context.startService(new Intent(context, APIMonitorService.class));
-
-        // start update service
-        context.startService(new Intent(context, UpdateService.class));
-
         // go to splash page if app is in view
         if (inView){
             context.startActivity(new Intent(context, SplashActivity.class));
@@ -93,15 +88,16 @@ public class AuthUtil {
     }
 
     public static void signOut(Context context){
-        // end api key service
-        context.stopService(new Intent(context, APIMonitorService.class));
-
         // end update service
         context.stopService(new Intent(context, UpdateService.class));
 
+        // end api key service
+        context.stopService(new Intent(context, APIMonitorService.class));
+
         // clear data
         new SummonerInfo().clear(context);
-        new FriendsInfo().clear(context);
+        new UpdateJobInfo().clear(context);
+        new APIUsageInfo().reset(context);
 
         // go to sign in page
         context.startActivity(new Intent(context, SignInActivity.class));

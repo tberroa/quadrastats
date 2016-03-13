@@ -9,6 +9,7 @@ import com.example.tberroa.portal.models.match.ParticipantIdentity;
 import com.example.tberroa.portal.models.match.ParticipantStats;
 import com.example.tberroa.portal.models.matchlist.MatchList;
 import com.example.tberroa.portal.models.matchlist.MatchReference;
+import com.example.tberroa.portal.models.summoner.FriendsList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 
 import java.util.List;
@@ -22,6 +23,12 @@ public class LocalDB {
         return new Select()
                 .from(SummonerDto.class)
                 .where("name = ?", name)
+                .executeSingle();
+    }
+
+    public FriendsList getFriendsDto(){
+        return new Select()
+                .from(FriendsList.class)
                 .executeSingle();
     }
 

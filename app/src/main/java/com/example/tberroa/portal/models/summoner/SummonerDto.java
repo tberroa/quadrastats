@@ -9,6 +9,10 @@ import com.google.gson.annotations.Expose;
 @Table(name = "SummonerDto")
 public class SummonerDto extends Model {
 
+    // parent
+    @Column(name = "friend")
+    public FriendsList friend;
+
     @Expose
     @Column(name = "summoner_id")
     public long id;

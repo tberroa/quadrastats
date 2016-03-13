@@ -11,4 +11,12 @@
     <color name="transparent">#00000000</color>
     <color name="transparent_white">#80000000</color>
     <color name="accent_material_dark" tools:override="true">#b86200</color>
+
+    <!-- plot series colors-->
+    <color name="series_blue">#66D9FF</color>
+    <color name="series_green">#33ffAD</color>
+    <color name="series_orange">#FFAD33</color>
+    <color name="series_pink">#FF99FF</color>
+    <color name="series_red">#FF0000</color>
+    <color name="series_yellow">#FFFF00</color>
 </resources>

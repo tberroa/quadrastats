@@ -224,7 +224,7 @@ public class RiotAPI {
 
     private boolean keyNotAvailable() {
         // make sure key usage is at an acceptable level before querying riot api
-        return  (keyUsage.getUsage(context) > 7);
+        return  (keyUsage.getUsage(context) >= 9);
     }
 
     private boolean validResponse(String responseCode) {

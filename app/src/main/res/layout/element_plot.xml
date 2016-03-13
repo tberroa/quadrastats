@@ -27,8 +27,8 @@
         ap:gridPaddingTop="20dp"
         ap:gridPaddingBottom="20dp"
         ap:graphDomainLineColor="@color/transparent"
-        ap:rangeTickLabelTextSize="0sp"
-        ap:rangeOriginTickLabelTextSize="0sp"
+        ap:rangeTickLabelTextSize="15sp"
+        ap:rangeOriginTickLabelTextSize="15sp"
         ap:domainTickLabelTextSize="0sp"
         ap:domainOriginTickLabelTextSize="0sp" />
 </RelativeLayout>

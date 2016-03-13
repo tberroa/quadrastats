@@ -18,6 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.LocalDB;
+import com.example.tberroa.portal.data.SummonerInfo;
+import com.example.tberroa.portal.models.summoner.FriendsList;
 import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.screens.authentication.AuthUtil;
@@ -26,16 +29,17 @@ import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.network.NetworkUtil;
 import com.example.tberroa.portal.updater.UpdateUtil;
 
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 
 public class FriendsActivity extends BaseActivity {
 
+    FriendsList friendsList;
     private FloatingActionButton addFriend;
     private boolean inView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
@@ -45,7 +49,7 @@ public class FriendsActivity extends BaseActivity {
         }
 
         // initialize toolbar
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.friends);
         }
 
@@ -57,8 +61,7 @@ public class FriendsActivity extends BaseActivity {
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else {
+                } else {
                     startActivity(new Intent(FriendsActivity.this, HomeActivity.class));
                     finish();
                 }
@@ -69,24 +72,15 @@ public class FriendsActivity extends BaseActivity {
         addFriend = (FloatingActionButton) findViewById(R.id.add_friend);
         addFriend.setOnClickListener(addFriendListener);
 
-        // get friends
-        Set<String> friends = new FriendsInfo().getNames(this);
+        // get friends dto
+        friendsList = new LocalDB().getFriendsDto();
 
-        if (friends.size() > 0){
-            // initialize names
-            String[] names = new String[friends.size()];
-            int i = 0;
-            for (String friendId : friends){
-                names[i] = friendId;
-                i++;
-            }
-
+        if (friendsList != null && !friendsList.getFriends().isEmpty()) {
             // set list view
             ListView listView = (ListView) findViewById(R.id.list_view);
-            FriendsAdapter friendsAdapter = new FriendsAdapter(this, names);
+            FriendsAdapter friendsAdapter = new FriendsAdapter(this, friendsList.getFriends());
             listView.setAdapter(friendsAdapter);
-        }
-        else {
+        } else {
             TextView noFriends = (TextView) findViewById(R.id.no_friends);
             noFriends.setVisibility(View.VISIBLE);
         }
@@ -105,40 +99,66 @@ public class FriendsActivity extends BaseActivity {
             builder.setCancelable(true);
             builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    if (NetworkUtil.isInternetAvailable(FriendsActivity.this)) {
-                        // validate summoner name in separate thread
-                        new Thread(new Runnable() {
-                            public void run() {
-                                String enteredName = friendsName.getText().toString().toLowerCase();
+                    // validate user input in a separate thread
+                    new Thread(new Runnable() {
+                        public void run() {
+                            Message msg = new Message();
 
-                                // validate summoner name
-                                Map<String, SummonerDto> summoner;
-                                summoner = AuthUtil.validateName(FriendsActivity.this, enteredName);
-                                Message msg = new Message();
-                                if (summoner != null) {
-                                    // get stylized name
-                                    String name = summoner.get(enteredName).name;
-
-                                    // save name
-                                    new FriendsInfo().addFriend(FriendsActivity.this, name);
-
-                                    // add summoner to the player update profile map
-                                    UpdateUtil.addPlayerToProfileMap(FriendsActivity.this, name);
-
-                                    msg.arg1 = 2;
-
-                                } else {
-                                    msg.arg1 = 1;
-
-                                }
+                            // check if the user has hit the friend limit
+                            FriendsList friendsList = new LocalDB().getFriendsDto();
+                            if (friendsList !=null && friendsList.getFriends().size()  == Params.MAX_FRIENDS) {
+                                msg.arg1 = 1;
                                 handler.sendMessage(msg);
+                                return;
                             }
-                        }).start();
 
-                    } else {
-                        String toastMsg = getString(R.string.internet_not_available);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
+                            // check if internet is not available
+                            if (!NetworkUtil.isInternetAvailable(FriendsActivity.this)) {
+                                msg.arg1 = 2;
+                                handler.sendMessage(msg);
+                                return;
+                            }
+
+                            // query riot for the summoner dto corresponding to the entered name
+                            String enteredName = friendsName.getText().toString().toLowerCase();
+                            Map<String, SummonerDto> friendDtoMap;
+                            friendDtoMap = AuthUtil.validateName(FriendsActivity.this, enteredName);
+
+                            // check if the entered name was a valid summoner name
+                            if (friendDtoMap == null) {
+                                msg.arg1 = 3;
+                                handler.sendMessage(msg);
+                                return;
+                            }
+
+                            // initialize the friend dto and get the stylized name of the friend
+                            SummonerDto friendDto = new SummonerDto();
+                            String name = "";
+                            for (Map.Entry<String, SummonerDto> friend : friendDtoMap.entrySet()) {
+                                friendDto = friend.getValue();
+                                name = friend.getValue().name;
+                            }
+
+                            // check if the user entered themselves as a friend
+                            if (name.equals(new SummonerInfo().getStylizedName(FriendsActivity.this))) {
+                                msg.arg1 = 4;
+                                handler.sendMessage(msg);
+                                return;
+                            }
+
+                            // if all checks were passed successfully, add the friend and save them locally
+                            UpdateUtil.addPlayerToProfileMap(FriendsActivity.this, name);
+                            if (friendsList == null){ // first friend
+                                friendsList = new FriendsList();
+                            }
+                            friendsList.friends = new ArrayList<>();
+                            friendsList.friends.add(friendDto);
+                            friendsList.cascadeSave();
+
+                            msg.arg1 = 5;
+                            handler.sendMessage(msg);
+                        }
+                    }).start();
                 }
             });
             builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -157,18 +177,36 @@ public class FriendsActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             int flag = msg.arg1;
-            switch (flag){
-                case 2:
-                    if (inView){
+            switch (flag) {
+                case 5: // all checks passed, reload activity
+                    if (inView) {
                         Intent intent = new Intent(FriendsActivity.this, FriendsActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
                         startActivity(intent);
                         finish();
                     }
                     break;
-                case 1:
-                    if (inView){
+                case 4: // user entered themselves as a friend
+                    if (inView) {
+                        String toastMsg = getString(R.string.cant_add_yourself_as_friend);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 3: // entered name is invalid
+                    if (inView) {
                         String toastMsg = getString(R.string.invalid_summoner_name);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 2: // internet not available
+                    if (inView) {
+                        String toastMsg = getString(R.string.internet_not_available);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 1: // friend limit reached
+                    if (inView) {
+                        String toastMsg = getString(R.string.friend_limit_reached);
                         Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
                     }
                     break;
@@ -178,13 +216,13 @@ public class FriendsActivity extends BaseActivity {
     };
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         inView = true;
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         inView = false;
     }
@@ -194,8 +232,7 @@ public class FriendsActivity extends BaseActivity {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }

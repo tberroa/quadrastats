@@ -75,6 +75,8 @@
         You have no friends to compare stats to! Click the button below to manage your friends.
     </string>
     <string name="no_friend_matches">None of your friends have played this game mode this season.</string>
+    <string name="cant_add_yourself_as_friend">Cannot add yourself as a friend.</string>
+    <string name="friend_limit_reached">Sorry, only up to 7 friends are allowed at this time.</string>
 
     <!-- stats and plots -->
     <string name = "you">You</string>
@@ -85,4 +87,7 @@
     <string name="internet_not_available">Internet not available</string>
     <string name="invalid_summoner_name">Invalid summoner name</string>
     <string name="code_not_found">Rune page code not found</string>
+
+    <!-- xml content descriptions -->
+    <string name="series_color">Series color</string>
 </resources>

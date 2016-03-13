@@ -81,6 +81,8 @@ public class SummonerInfo extends Application {
         setRegion(context, "");
         setBasicName(context, "");
         setStylizedName(context, "");
+        setId(context, 0);
+        setIconId(context, 0);
         setSummonerStatus(context, false);
     }
 }

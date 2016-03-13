@@ -15,12 +15,14 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
+import com.androidplot.xy.XYStepMode;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.match.ParticipantStats;
 import com.example.tberroa.portal.models.matchlist.MatchReference;
+import com.example.tberroa.portal.models.summoner.FriendsList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.updater.UpdateJobInfo;
 import com.google.gson.Gson;
@@ -45,12 +47,11 @@ class StatUtil {
         return  (matches != null && !matches.isEmpty());
     }
 
-    static private boolean hasMatches(Set<String> friendNames, String queue){
+    static private boolean hasMatches(FriendsList friendsList, String queue){
         LocalDB localDB = new LocalDB();
-        for (String name : friendNames){
-            SummonerDto friendDto = localDB.getSummonerByName(name);
-            if (friendDto != null){
-                List<MatchReference> references = localDB.getMatchReferences(friendDto.id, queue);
+        for (SummonerDto friend : friendsList.getFriends()){
+            if (friend != null){
+                List<MatchReference> references = localDB.getMatchReferences(friend.id, queue);
                 if (references !=null && !references.isEmpty()){
                     return true;
                 }
@@ -80,29 +81,20 @@ class StatUtil {
         return participantStatsList;
     }
 
-    static public Map<String, List<ParticipantStats>> getFriendStats(Set<String> names, String queue, int maxMatches) {
+    static public Map<String, List<ParticipantStats>> getFriendStats(FriendsList friendsList, String queue, int maxMatches) {
         // initialize gson for logging
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-
-        // turn the set into a local list to prevent making permanent changes to friendNames
-        List<String> friendNames = new ArrayList<>(names);
-        Type friendNamesType = new TypeToken<List<String>>(){}.getType();
-        String friendNamesJson = gson.toJson(friendNames, friendNamesType);
-        Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendNames is " + friendNamesJson);
 
         // initialize map of friend stats
         Map<String, List<ParticipantStats>> friendParticipantStatsList = new HashMap<>();
 
-        if (friendNames.size() > 0) {
+        if (friendsList != null && !friendsList.getFriends().isEmpty()) {
             LocalDB localDB = new LocalDB();
 
             // get friend ids
             Map<String, Long> friendIds = new HashMap<>();
-            for (String name : friendNames) {
-                SummonerDto friendDto = localDB.getSummonerByName(name);
-                if (friendDto != null){
-                    friendIds.put(name, friendDto.id);
-                }
+            for (SummonerDto friend : friendsList.getFriends()) {
+                    friendIds.put(friend.name, friend.id);
             }
             Type friendIdsType = new TypeToken<Map<String, Long>>(){}.getType();
             String friendIdsJson = gson.toJson(friendIds, friendIdsType);
@@ -184,15 +176,30 @@ class StatUtil {
             seriesFormat.setInterpolationParams(
                     new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
 
-            switch(i % 3){
+            switch(i){
                 case 0:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_green);
-                    break;
-                case 1:
                     seriesFormat.configure(context.getApplicationContext(), R.xml.line_blue);
                     break;
+                case 1:
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_green);
+                    break;
                 case 2:
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_orange);
+                    break;
+                case 3:
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_pink);
+                    break;
+                case 4:
                     seriesFormat.configure(context.getApplicationContext(), R.xml.line_red);
+                    break;
+                case 5:
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_yellow);
+                    break;
+                case 6:
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_blue);
+                    break;
+                case 7:
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_green);
                     break;
             }
             i++;
@@ -201,6 +208,8 @@ class StatUtil {
 
         // plot styling
         plot.setBorderStyle(XYPlot.BorderStyle.NONE, null, null);
+        plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
+        plot.setTicksPerRangeLabel(2);
         XYGraphWidget g = plot.getGraphWidget();
         g.position(-0.5f, XLayoutStyle.RELATIVE_TO_RIGHT, -0.5f, YLayoutStyle.RELATIVE_TO_BOTTOM, AnchorPosition.CENTER);
         g.setSize(Size.FILL);
@@ -209,12 +218,11 @@ class StatUtil {
         g.setDomainOriginLinePaint(null);
         LayoutManager l = plot.getLayoutManager();
         l.remove(plot.getTitleWidget());
-        l.remove(plot.getRangeLabelWidget());
         l.remove(plot.getDomainLabelWidget());
         l.remove(plot.getLegendWidget());
     }
 
-    static public int checkConditions(Context context, long summonerId, String queue, Set<String> friendNames) {
+    static public int checkConditions(Context context, long summonerId, String queue, FriendsList friendsList) {
 
         // code 100: summoner has no matches for this queue
         if (!StatUtil.hasMatches(summonerId, queue)) {
@@ -227,12 +235,12 @@ class StatUtil {
         }
 
         // code 300: summoner has no friends to compare matches to
-        if (friendNames.isEmpty()) {
+        if (friendsList == null || friendsList.getFriends() == null || friendsList.getFriends().size() == 0) {
             return 300;
         }
 
         // code 400: none of the summoners friends have any matches for this queue
-        if (!StatUtil.hasMatches(friendNames, queue)) {
+        if (!StatUtil.hasMatches(friendsList, queue)) {
             return 400;
         }
 
