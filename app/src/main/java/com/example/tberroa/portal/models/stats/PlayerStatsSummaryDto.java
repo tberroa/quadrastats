@@ -36,19 +36,19 @@ public class PlayerStatsSummaryDto extends Model {
     @Column(name = "wins")
     public int wins;
 
-    public PlayerStatsSummaryDto(){
+    public PlayerStatsSummaryDto() {
         super();
     }
 
-    public AggregatedStatsDto getAggregatedStatsDto(){
+    public AggregatedStatsDto getAggregatedStatsDto() {
         return new Select().from(AggregatedStatsDto.class)
                 .where("player_stats_summary = ?", getId())
                 .executeSingle();
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         save();
-        if (aggregatedStatsDto != null){
+        if (aggregatedStatsDto != null) {
             aggregatedStatsDto.playerStatsSummaryDto = this;
             aggregatedStatsDto.save();
         }

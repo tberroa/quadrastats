@@ -21,8 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// all methods, except boolean methods, return null if http response validation fails
-// only call this in a background thread as it uses sleep()
+// all public methods return null if http response validation fails
+// only call these methods in a background thread because they are expensive
+
 public class RiotAPI {
 
     private final String region;
@@ -32,7 +33,7 @@ public class RiotAPI {
 
     public RiotAPI(Context context) {
         this.context = context;
-        region = new SummonerInfo().getRegion(context);
+        region = new UserInfo().getRegion(context);
         Log.d(Params.TAG_DEBUG, "@RAPI Constructor: region is " + region);
     }
 
@@ -53,7 +54,7 @@ public class RiotAPI {
         Log.d(Params.TAG_DEBUG, "@getSummonersByName: url is " + url);
 
         // make sure key usage is at an acceptable level before querying riot api
-        if (keyNotAvailable()){
+        if (keyNotAvailable()) {
             return null;
         }
 
@@ -86,19 +87,18 @@ public class RiotAPI {
         List<String> summonerNames = new ArrayList<>();
         summonerNames.add(summonerName);
 
-        // get the summoner dto
+        // get the summoner map
         Map<String, SummonerDto> summonerMap = getSummonersByName(summonerNames);
         if (summonerMap != null) {
             // get summoner id
             long id = summonerMap.get(summonerName).id;
 
             // construct url
-            url = Params.RIOT_API_BASE_URL + region + Params.API_SUMMONER + id +
-                    "/runes?api_key=" + Params.API_KEY;
+            url = Params.RIOT_API_BASE_URL + region + Params.API_SUMMONER + id + "/runes?api_key=" + Params.API_KEY;
             Log.d(Params.TAG_DEBUG, "@getRunePages: url is " + url);
 
             // make sure key usage is at an acceptable level before querying riot api
-            if (keyNotAvailable()){
+            if (keyNotAvailable()) {
                 return null;
             }
 
@@ -116,7 +116,7 @@ public class RiotAPI {
 
             // validate response
             if (validResponse(response[0])) {
-                // return individual summoners rune pages
+                // return rune pages
                 Type typeMap = new TypeToken<Map<String, RunePagesDto>>() {
                 }.getType();
                 Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -153,7 +153,7 @@ public class RiotAPI {
         Log.d(Params.TAG_DEBUG, "@getMatchList: url is " + url);
 
         // make sure key usage is at an acceptable level before querying riot api
-        if (keyNotAvailable()){
+        if (keyNotAvailable()) {
             return null;
         }
 
@@ -184,7 +184,7 @@ public class RiotAPI {
         Log.d(Params.TAG_DEBUG, "@getMatchDetail: url is " + url);
 
         // make sure key usage is at an acceptable level before querying riot api
-        if (keyNotAvailable()){
+        if (keyNotAvailable()) {
             return null;
         }
 
@@ -224,7 +224,7 @@ public class RiotAPI {
 
     private boolean keyNotAvailable() {
         // make sure key usage is at an acceptable level before querying riot api
-        return  (keyUsage.getUsage(context) >= 9);
+        return (keyUsage.getUsage(context) >= 9);
     }
 
     private boolean validResponse(String responseCode) {

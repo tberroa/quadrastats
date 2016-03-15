@@ -24,20 +24,20 @@ public class ParticipantIdentity extends Model {
     @Column(name = "player")
     private Player player;
 
-    public ParticipantIdentity(){
+    public ParticipantIdentity() {
         super();
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return new Select()
                 .from(Player.class)
                 .where("participant_identity = ?", getId())
                 .executeSingle();
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         save();
-        if (player != null){
+        if (player != null) {
             player.participantIdentity = this;
             player.save();
         }

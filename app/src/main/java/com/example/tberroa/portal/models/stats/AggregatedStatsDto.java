@@ -156,7 +156,7 @@ public class AggregatedStatsDto extends Model {
     @Column(name = "total_unreal_kills")
     public int totalUnrealKills;
 
-    public AggregatedStatsDto(){
+    public AggregatedStatsDto() {
         super();
     }
 }

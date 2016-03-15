@@ -124,91 +124,91 @@ public class ParticipantTimeline extends Model {
     @Column(name = "xp_per_min_deltas")
     public ParticipantTimelineData xpPerMinDeltas;
 
-    public ParticipantTimeline(){
+    public ParticipantTimeline() {
         super();
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
-            if (ancientGolemAssistsPerMinCounts != null){
+        try {
+            if (ancientGolemAssistsPerMinCounts != null) {
                 ancientGolemAssistsPerMinCounts.save();
             }
-            if (ancientGolemKillsPerMinCounts != null){
+            if (ancientGolemKillsPerMinCounts != null) {
                 ancientGolemKillsPerMinCounts.save();
             }
-            if (assistedLaneDeathsPerMinDeltas != null){
+            if (assistedLaneDeathsPerMinDeltas != null) {
                 assistedLaneDeathsPerMinDeltas.save();
             }
-            if (assistedLaneKillsPerMinDeltas != null){
+            if (assistedLaneKillsPerMinDeltas != null) {
                 assistedLaneKillsPerMinDeltas.save();
             }
-            if (baronAssistsPerMinCounts != null){
+            if (baronAssistsPerMinCounts != null) {
                 baronAssistsPerMinCounts.save();
             }
-            if (baronKillsPerMinCounts != null){
+            if (baronKillsPerMinCounts != null) {
                 baronKillsPerMinCounts.save();
             }
-            if (creepsPerMinDeltas != null){
+            if (creepsPerMinDeltas != null) {
                 creepsPerMinDeltas.save();
             }
-            if (csDiffPerMinDeltas != null){
+            if (csDiffPerMinDeltas != null) {
                 csDiffPerMinDeltas.save();
             }
-            if (damageTakenDiffPerMinDeltas != null){
+            if (damageTakenDiffPerMinDeltas != null) {
                 damageTakenDiffPerMinDeltas.save();
             }
-            if (damageTakenPerMinDeltas != null){
+            if (damageTakenPerMinDeltas != null) {
                 damageTakenPerMinDeltas.save();
             }
-            if (dragonAssistsPerMinCounts != null){
+            if (dragonAssistsPerMinCounts != null) {
                 dragonAssistsPerMinCounts.save();
             }
-            if (dragonKillsPerMinCounts != null){
+            if (dragonKillsPerMinCounts != null) {
                 dragonKillsPerMinCounts.save();
             }
-            if (elderLizardAssistsPerMinCounts != null){
+            if (elderLizardAssistsPerMinCounts != null) {
                 elderLizardAssistsPerMinCounts.save();
             }
-            if (elderLizardKillsPerMinCounts != null){
+            if (elderLizardKillsPerMinCounts != null) {
                 elderLizardKillsPerMinCounts.save();
             }
-            if (goldPerMinDeltas != null){
+            if (goldPerMinDeltas != null) {
                 goldPerMinDeltas.save();
             }
-            if (inhibitorAssistsPerMinCounts != null){
+            if (inhibitorAssistsPerMinCounts != null) {
                 inhibitorAssistsPerMinCounts.save();
             }
-            if (inhibitorKillsPerMinCounts != null){
+            if (inhibitorKillsPerMinCounts != null) {
                 inhibitorKillsPerMinCounts.save();
             }
-            if (towerAssistsPerMinCounts != null){
+            if (towerAssistsPerMinCounts != null) {
                 towerAssistsPerMinCounts.save();
             }
-            if (towerKillsPerMinCounts != null){
+            if (towerKillsPerMinCounts != null) {
                 towerKillsPerMinCounts.save();
             }
-            if (towerKillsPerMinDeltas != null){
+            if (towerKillsPerMinDeltas != null) {
                 towerKillsPerMinDeltas.save();
             }
-            if (vilemawAssistsPerMinCounts != null){
+            if (vilemawAssistsPerMinCounts != null) {
                 vilemawAssistsPerMinCounts.save();
             }
-            if (vilemawKillsPerMinCounts != null){
+            if (vilemawKillsPerMinCounts != null) {
                 vilemawKillsPerMinCounts.save();
             }
-            if (wardsPerMinDeltas != null){
+            if (wardsPerMinDeltas != null) {
                 wardsPerMinDeltas.save();
             }
-            if (xpDiffPerMinDeltas != null){
+            if (xpDiffPerMinDeltas != null) {
                 xpDiffPerMinDeltas.save();
             }
-            if (xpPerMinDeltas != null){
+            if (xpPerMinDeltas != null) {
                 xpPerMinDeltas.save();
             }
             save();
             ActiveAndroid.setTransactionSuccessful();
-        }finally {
+        } finally {
             ActiveAndroid.endTransaction();
         }
     }

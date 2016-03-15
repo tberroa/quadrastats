@@ -18,23 +18,22 @@ import com.example.tberroa.portal.screens.BaseActivity;
 public class ProfileActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.profile);
         }
 
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.back_button));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else {
+                } else {
                     startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
                     finish();
                 }
@@ -56,8 +55,7 @@ public class ProfileActivity extends BaseActivity {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }

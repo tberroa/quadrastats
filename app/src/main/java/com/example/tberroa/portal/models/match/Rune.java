@@ -23,7 +23,7 @@ public class Rune extends Model {
     @Column(name = "rune_id")
     public long runeId;
 
-    public Rune(){
+    public Rune() {
         super();
     }
 }

@@ -30,7 +30,7 @@ public class UpdateService extends Service {
     private final UpdateJobInfo updateJobInfo = new UpdateJobInfo();
     private RiotAPI riotAPI;
     private boolean kill = false;
-    private Timer timer;
+    public Timer timer;
 
     @Override
     public void onCreate() {
@@ -52,29 +52,21 @@ public class UpdateService extends Service {
             }
         };
 
-        // after an immediate initial run, the task will run every minute
-        timer.schedule(timerTask, 0, 1000 * 60);
+        // after an immediate initial run, the task will run every 10 minutes
+        timer.schedule(timerTask, 0, 1000 * 60 * 5);
     }
 
     private void updateJob() {
-        // grab previous state
-        int previousState = updateJobInfo.getState(this);
-
-        int condition = checkConditions(previousState);
+        int condition = checkConditions();
 
         switch (condition) {
             case 100: // code 100, internet is not available
                 Log.d(Params.TAG_DEBUG, "@UpdateService: network not available. update job not able to run");
                 break;
-            case 200: // code 200, update job is resting
-                // set state to 0, service is done taking a break
-                updateJobInfo.setState(UpdateService.this, 0);
-                Log.d(Params.TAG_DEBUG, "@UpdateService: update job just finished resting");
-                break;
-            case 300: // code 300, update job is already running
+            case 200: // code 200, update job is already running
                 Log.d(Params.TAG_DEBUG, "@UpdateService: update job is already running");
                 break;
-            case 400: // code 400, update job is ready to run
+            case 300: // code 300, update job is good to go
                 // let the system know the update job is running
                 updateJobInfo.setRunning(this, true);
                 Log.d(Params.TAG_DEBUG, "@UpdateService: update job is running");
@@ -168,7 +160,7 @@ public class UpdateService extends Service {
         // get summoner dto's
         List<SummonerDto> summoners = new ArrayList<>();
         LocalDB localDB = new LocalDB();
-        for (Map.Entry<String, PlayerUpdateProfile> entry : profilesMap.entrySet()){
+        for (Map.Entry<String, PlayerUpdateProfile> entry : profilesMap.entrySet()) {
 
             if (kill) return null;
 
@@ -183,7 +175,7 @@ public class UpdateService extends Service {
         // for each summoner, look for new matches
         for (SummonerDto summoner : summoners) {
 
-if (kill) return null;
+            if (kill) return null;
 
             // query riot api for the new match list
             MatchList newMatchList = riotAPI.getMatchList(summoner.id, parameters);
@@ -199,10 +191,9 @@ if (kill) return null;
 
                 // get the amount of new games
                 int amountOfNewGames;
-                if (oldMatchList == null){
+                if (oldMatchList == null) {
                     amountOfNewGames = newMatchList.endIndex;
-                }
-                else{
+                } else {
                     amountOfNewGames = newMatchList.totalGames - oldMatchList.totalGames;
                 }
 
@@ -217,7 +208,7 @@ if (kill) return null;
                 List<List<MatchReference>> newMatchesByQueue = divideMatches(newMatches);
 
                 // trim each list to only hold the 10 most recent matches
-                for (int i=0; i<newMatchesByQueue.size(); i++) {
+                for (int i = 0; i < newMatchesByQueue.size(); i++) {
                     if (kill) return null;
 
                     List<MatchReference> trimmedList = onlyMostRecent(newMatchesByQueue.get(i), 10);
@@ -250,14 +241,14 @@ if (kill) return null;
         new Thread(new Runnable() {
             public void run() {
                 // sleep for 5 seconds before beginning in case user has many friends to getMatchList for
-                try{
+                try {
                     Thread.sleep(10000);
-                }catch (InterruptedException e){
+                } catch (InterruptedException e) {
                     Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
                 }
 
                 for (List<MatchReference> matches : newMatches) {
-                    for (MatchReference match : matches){
+                    for (MatchReference match : matches) {
 
                         // check if this service was killed before every request
                         if (kill) {
@@ -273,9 +264,9 @@ if (kill) return null;
                         }
 
                         // sleep for 1 second before next request
-                        try{
+                        try {
                             Thread.sleep(1000);
-                        }catch (InterruptedException e){
+                        } catch (InterruptedException e) {
                             Log.d(Params.TAG_EXCEPTIONS, e.getMessage());
                         }
 
@@ -284,32 +275,26 @@ if (kill) return null;
 
                 // let the system know the update job is done running
                 updateJobInfo.setRunning(UpdateService.this, false);
-                updateJobInfo.setState(UpdateService.this, 1);
                 sendBroadcast(new Intent().setAction(Params.UPDATE_COMPLETE));
                 Log.d(Params.TAG_DEBUG, "@UpdateService: update job is done running");
             }
         }).start();
     }
 
-    private int checkConditions(int previousState) {
+    private int checkConditions() {
 
         // code 100, internet is not available
         if (!NetworkUtil.isInternetAvailable(this)) {
             return 100;
         }
 
-        // code 200, update job is resting
-        if (previousState == 1) {
+        // code 200, update job is already running
+        if (updateJobInfo.isRunning(this)) {
             return 200;
         }
 
-        // code 300, update job is already running
-        if (updateJobInfo.isRunning(this)) {
-            return 300;
-        }
-
-        // code 400, update job is ready to run
-        return 400;
+        // code 300, update job is good to go
+        return 300;
     }
 
     private List<List<MatchReference>> divideMatches(List<MatchReference> matches) {
@@ -356,7 +341,7 @@ if (kill) return null;
             timer = null;
         }
         kill = true;
-        updateJobInfo.setState(this, 0);
+        updateJobInfo.setRunning(this, false);
     }
 
     @Override

@@ -14,20 +14,20 @@ public class FriendsList extends Model {
     @Column(name = "friends")
     public List<SummonerDto> friends;
 
-    public FriendsList(){
+    public FriendsList() {
         super();
     }
 
-    public List<SummonerDto> getFriends(){
+    public List<SummonerDto> getFriends() {
         return getMany(SummonerDto.class, "friend");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!friends.isEmpty()){
-                for (SummonerDto friend : friends){
+            if (!friends.isEmpty()) {
+                for (SummonerDto friend : friends) {
                     friend.friend = this;
                     friend.save();
                 }

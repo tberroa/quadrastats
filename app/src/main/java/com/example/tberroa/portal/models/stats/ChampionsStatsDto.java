@@ -24,20 +24,20 @@ public class ChampionsStatsDto extends Model {
     @Column(name = "aggregated_stats")
     private AggregatedStatsDto aggregatedStatsDto;
 
-    public ChampionsStatsDto(){
+    public ChampionsStatsDto() {
         super();
     }
 
-    public AggregatedStatsDto getAggregatedStatsDto(){
+    public AggregatedStatsDto getAggregatedStatsDto() {
         return new Select()
                 .from(AggregatedStatsDto.class)
                 .where("champion_stats = ?", getId())
                 .executeSingle();
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         save();
-        if (aggregatedStatsDto != null){
+        if (aggregatedStatsDto != null) {
             aggregatedStatsDto.championsStatsDto = this;
             aggregatedStatsDto.save();
         }

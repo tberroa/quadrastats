@@ -15,15 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.data.DataUtil;
+import com.example.tberroa.portal.apimanager.APIMonitorService;
+import com.example.tberroa.portal.apimanager.APIUsageInfo;
 import com.example.tberroa.portal.screens.profile.ProfileActivity;
 import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.SummonerInfo;
+import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.stats.StatsActivity;
+import com.example.tberroa.portal.updater.UpdateJobInfo;
+import com.example.tberroa.portal.updater.UpdateService;
+import com.example.tberroa.portal.updater.UpdateUtil;
 import com.squareup.picasso.Picasso;
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private SmoothActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
@@ -31,7 +35,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @SuppressLint("InflateParams")
     @Override
-    public void setContentView(final int layoutResID){
+    public void setContentView(final int layoutResID) {
         // base layout
         drawer = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
         FrameLayout content = (FrameLayout) drawer.findViewById(R.id.activity_content);
@@ -55,9 +59,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         View headerLayout = navigationView.getHeaderView(0);
 
         // get the summoner's profile icon id and stylized name
-        SummonerInfo summonerInfo = new SummonerInfo();
-        int profileIconId = summonerInfo.getIconId(this);
-        String stylizedName = summonerInfo.getStylizedName(this);
+        UserInfo userInfo = new UserInfo();
+        int profileIconId = userInfo.getIconId(this);
+        String stylizedName = userInfo.getStylizedName(this);
 
         // display the stylized summoner name
         TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
@@ -65,15 +69,25 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         // display the profile icon
         ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
-        String url = DataUtil.summonerIcon(profileIconId);
+        String url = ScreenUtil.constructIconURL(profileIconId);
         Picasso.with(this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
+
+        // boot up services in the case they were killed unexpectedly
+        if (!UpdateUtil.isMyServiceRunning(this, UpdateService.class)){
+            new UpdateJobInfo().setRunning(this, false);
+            startService(new Intent(this, UpdateService.class));
+        }
+        if (!UpdateUtil.isMyServiceRunning(this, APIMonitorService.class)){
+            new APIUsageInfo().reset(this);
+            startService(new Intent(this, APIMonitorService.class));
+        }
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.view_profile:
                 toggle.runWhenIdle(new Runnable() {
                     @Override

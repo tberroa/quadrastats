@@ -35,20 +35,20 @@ public class MasteryPageDto extends Model {
     @Column(name = "name")
     public String name;
 
-    public MasteryPageDto(){
+    public MasteryPageDto() {
         super();
     }
 
-    public List<MasteryDto> getMasteries(){
+    public List<MasteryDto> getMasteries() {
         return getMany(MasteryDto.class, "mastery_page");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!masteries.isEmpty()){
-                for (MasteryDto mastery : masteries){
+            if (!masteries.isEmpty()) {
+                for (MasteryDto mastery : masteries) {
                     mastery.masteryPageDto = this;
                     mastery.save();
                 }

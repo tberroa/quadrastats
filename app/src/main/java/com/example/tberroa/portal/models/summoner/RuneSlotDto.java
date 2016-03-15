@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "RuneSlotDto")
-public class RuneSlotDto extends Model{
+public class RuneSlotDto extends Model {
 
     // parent
     @Column(name = "rune_page")
@@ -21,7 +21,7 @@ public class RuneSlotDto extends Model{
     @Column(name = "rune_slot_id")
     public int runeSlotId;
 
-    public RuneSlotDto(){
+    public RuneSlotDto() {
         super();
     }
 }

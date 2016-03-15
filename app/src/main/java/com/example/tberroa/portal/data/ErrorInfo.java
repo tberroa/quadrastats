@@ -8,11 +8,11 @@ class ErrorInfo extends Application {
 
     private final String CODE = "code";
 
-    private SharedPreferences getSharedPreferences(Context context){
+    private SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences("most_recent_error", MODE_PRIVATE);
     }
 
-    public String getCode(Context context){
+    public String getCode(Context context) {
         return getSharedPreferences(context).getString(CODE, "");
     }
 

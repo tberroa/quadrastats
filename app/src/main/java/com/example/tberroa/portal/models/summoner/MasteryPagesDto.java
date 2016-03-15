@@ -24,26 +24,26 @@ public class MasteryPagesDto extends Model {
     @Column(name = "summoner_id")
     public long summonerId;
 
-    public MasteryPagesDto(){
+    public MasteryPagesDto() {
         super();
     }
 
-    public List<MasteryPageDto> getPages(){
+    public List<MasteryPageDto> getPages() {
         return getMany(MasteryPageDto.class, "mastery_pages");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!pages.isEmpty()){
-                for(MasteryPageDto page : pages){
+            if (!pages.isEmpty()) {
+                for (MasteryPageDto page : pages) {
                     page.masteryPagesDto = this;
                     page.cascadeSave();
                 }
             }
             ActiveAndroid.setTransactionSuccessful();
-        }finally {
+        } finally {
             ActiveAndroid.endTransaction();
         }
     }

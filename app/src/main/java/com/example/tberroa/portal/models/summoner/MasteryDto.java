@@ -23,7 +23,7 @@ public class MasteryDto extends Model {
     @Column(name = "rank")
     public int rank;
 
-    public MasteryDto(){
+    public MasteryDto() {
         super();
     }
 }

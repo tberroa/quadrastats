@@ -27,17 +27,17 @@ public class RankedStatsDto extends Model {
     @Column(name = "summoner_id")
     public long summonerId;
 
-    public RankedStatsDto(){
+    public RankedStatsDto() {
         super();
     }
 
-    public List<ChampionsStatsDto> getChampions(){
+    public List<ChampionsStatsDto> getChampions() {
         return getMany(ChampionsStatsDto.class, "ranked_stats");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
             if (!champions.isEmpty()) {
                 for (ChampionsStatsDto champion : champions) {

@@ -39,20 +39,20 @@ public class MatchList extends Model {
     @Column(name = "total_games")
     public int totalGames;
 
-    public MatchList(){
+    public MatchList() {
         super();
     }
 
-    public List<MatchReference> getMatchReferences(){
+    public List<MatchReference> getMatchReferences() {
         return getMany(MatchReference.class, "match_list");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!matches.isEmpty()){
-                for (MatchReference match : matches){
+            if (!matches.isEmpty()) {
+                for (MatchReference match : matches) {
                     match.matchList = this;
                     match.save();
                 }

@@ -1,7 +1,9 @@
 package com.example.tberroa.portal.data;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
 import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.match.Participant;
@@ -16,54 +18,53 @@ import java.util.List;
 
 public class LocalDB {
 
-    public LocalDB(){
+    public LocalDB() {
     }
 
-    public SummonerDto getSummonerByName(String name){
+    public SummonerDto getSummonerByName(String name) {
         return new Select()
                 .from(SummonerDto.class)
                 .where("name = ?", name)
                 .executeSingle();
     }
 
-    public FriendsList getFriendsDto(){
+    public FriendsList getFriendsList() {
         return new Select()
                 .from(FriendsList.class)
                 .executeSingle();
     }
 
-    public MatchList getMatchList(long summonerId){
+    public MatchList getMatchList(long summonerId) {
         return new Select()
                 .from(MatchList.class)
                 .where("summoner_id = ?", summonerId)
                 .executeSingle();
     }
 
-    public List<MatchReference> getMatchReferences(long summonerId, String queue){
+    public List<MatchReference> getMatchReferences(long summonerId, String queue) {
         MatchList matchList = getMatchList(summonerId);
-        if (matchList != null){
+        if (matchList != null) {
             Log.d(Params.TAG_DEBUG, "@LocalDB/getReferences: matchlist is not null");
             return new Select()
                     .from(MatchReference.class)
                     .where("match_list = ?", matchList.getId())
                     .where("queue = ?", queue)
                     .execute();
-        }
-        else{
+        } else {
             Log.d(Params.TAG_DEBUG, "@LocalDB/getReferences: matchlist is null");
             return null;
         }
     }
 
-    public MatchDetail getMatchDetail(long matchId){
+    public MatchDetail getMatchDetail(long matchId) {
         return new Select()
                 .from(MatchDetail.class)
                 .where("match_id = ?", matchId)
                 .executeSingle();
     }
 
-    public ParticipantStats getParticipantStats(long summonerId, MatchDetail matchDetail){
-        if (matchDetail != null){
+    public ParticipantStats getParticipantStats(long summonerId, MatchDetail matchDetail) {
+        if (matchDetail != null) {
             List<ParticipantIdentity> identities = matchDetail.getParticipantIdentities();
             int i = 0;
             long identityId;
@@ -71,17 +72,22 @@ public class LocalDB {
                 identityId = identities.get(i).getPlayer().summonerId;
                 i++;
             } while (identityId != summonerId);
-            int participantId = identities.get(i-1).participantId;
+            int participantId = identities.get(i - 1).participantId;
             Participant participant = new Select()
                     .from(Participant.class)
                     .where("participant_id = ?", participantId)
                     .where("match_detail = ?", matchDetail.getId())
                     .executeSingle();
             return participant.getParticipantStats();
-        }
-        else{
+        } else {
             return null;
         }
+    }
+
+    public void clearDatabase(Context context) {
+        ActiveAndroid.dispose();
+        context.deleteDatabase("Portal.db");
+        ActiveAndroid.initialize(context);
     }
 }
 

@@ -5,10 +5,10 @@ import com.google.gson.GsonBuilder;
 
 public class ModelUtil {
 
-    private ModelUtil(){
+    private ModelUtil() {
     }
 
-    static public <T> String toJson(T object, Class<T> clazz){
+    static public <T> String toJson(T object, Class<T> clazz) {
         final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.toJson(object, clazz);
     }

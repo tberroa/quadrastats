@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.SummonerInfo;
+import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.network.NetworkUtil;
 
@@ -40,20 +40,20 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         // check if summoner is already signed in
-        if (new SummonerInfo().isSignedIn(this)){
+        if (new UserInfo().isSignedIn(this)) {
             startActivity(new Intent(SignInActivity.this, HomeActivity.class));
             finish();
         }
 
         // initialize summoner input fields
-        summonerName = (EditText)findViewById(R.id.summoner_name);
-        password = (EditText)findViewById(R.id.password);
-        region = (Spinner)findViewById(R.id.region_spinner);
+        summonerName = (EditText) findViewById(R.id.summoner_name);
+        password = (EditText) findViewById(R.id.password);
+        region = (Spinner) findViewById(R.id.region_spinner);
 
         // declare and initialize buttons
-        signInButton = (Button)findViewById(R.id.sign_in);
+        signInButton = (Button) findViewById(R.id.sign_in);
         signInButton.setOnClickListener(signInButtonListener);
-        goToRegisterButton = (TextView)findViewById(R.id.register);
+        goToRegisterButton = (TextView) findViewById(R.id.register);
         goToRegisterButton.setOnClickListener(goToRegisterButtonListener);
 
         // set up region spinner
@@ -80,7 +80,7 @@ public class SignInActivity extends AppCompatActivity {
     };
 
     // validation process
-    private void signIn(){
+    private void signIn() {
         String enteredSummonerName = summonerName.getText().toString();
         String enteredPassword = password.getText().toString();
 
@@ -89,34 +89,29 @@ public class SignInActivity extends AppCompatActivity {
         enteredInfo.putString("password", enteredPassword);
 
         String response = AuthUtil.validate(enteredInfo);
-        if (response.matches("")){
-            if (NetworkUtil.isInternetAvailable(this)){
+        if (response.matches("")) {
+            if (NetworkUtil.isInternetAvailable(this)) {
                 int regionSelection = region.getSelectedItemPosition();
-                if (regionSelection > 0){
+                if (regionSelection > 0) {
                     goToRegisterButton.setEnabled(false);
                     new AttemptSignIn().execute();
-                }
-                else{
+                } else {
                     Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
                     signInButton.setEnabled(true);
                 }
-            }
-            else{
+            } else {
                 Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
                 signInButton.setEnabled(true);
             }
-        }
-        else{
-            if (response.contains("summoner_name")){
+        } else {
+            if (response.contains("summoner_name")) {
                 summonerName.setError(getResources().getString(R.string.summoner_name_format));
-            }
-            else{
+            } else {
                 summonerName.setError(null);
             }
-            if (response.contains("pass_word")){
+            if (response.contains("pass_word")) {
                 password.setError(getResources().getString(R.string.password_format));
-            }
-            else{
+            } else {
                 password.setError(null);
             }
             signInButton.setEnabled(true);
@@ -134,16 +129,16 @@ public class SignInActivity extends AppCompatActivity {
             summonerName = SignInActivity.this.summonerName.getText().toString();
             password = SignInActivity.this.password.getText().toString();
             region = AuthUtil.decodeRegion(SignInActivity.this.region.getSelectedItemPosition());
-            keyValuePairs = "app_name="+summonerName+"&password="+password+"&region="+region;
+            keyValuePairs = "app_name=" + summonerName + "&password=" + password + "&region=" + region;
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            try{
+            try {
                 String url = Params.SIGN_IN_URL;
                 postResponse = new Http().post(url, keyValuePairs);
-            } catch(java.io.IOException e){
-                Log.e(Params.TAG_EXCEPTIONS,"@SignInActivity: " + e.getMessage());
+            } catch (java.io.IOException e) {
+                Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());
             }
             return null;
         }
@@ -153,8 +148,7 @@ public class SignInActivity extends AppCompatActivity {
                 // sign in
                 Log.d(Params.TAG_DEBUG, "@SignInActivity: successful sign in");
                 AuthUtil.signIn(SignInActivity.this, summonerName, postResponse, region, inView);
-            }
-            else{ // display error
+            } else { // display error
                 Toast.makeText(SignInActivity.this, postResponse, Toast.LENGTH_SHORT).show();
                 goToRegisterButton.setEnabled(true);
                 signInButton.setEnabled(true);
@@ -163,13 +157,13 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         inView = true;
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         inView = false;
     }

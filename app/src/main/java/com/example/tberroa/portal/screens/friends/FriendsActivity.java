@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.SummonerInfo;
+import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.summoner.FriendsList;
 import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.data.Params;
@@ -73,7 +73,7 @@ public class FriendsActivity extends BaseActivity {
         addFriend.setOnClickListener(addFriendListener);
 
         // get friends dto
-        friendsList = new LocalDB().getFriendsDto();
+        friendsList = new LocalDB().getFriendsList();
 
         if (friendsList != null && !friendsList.getFriends().isEmpty()) {
             // set list view
@@ -105,8 +105,8 @@ public class FriendsActivity extends BaseActivity {
                             Message msg = new Message();
 
                             // check if the user has hit the friend limit
-                            FriendsList friendsList = new LocalDB().getFriendsDto();
-                            if (friendsList !=null && friendsList.getFriends().size()  == Params.MAX_FRIENDS) {
+                            FriendsList friendsList = new LocalDB().getFriendsList();
+                            if (friendsList != null && friendsList.getFriends().size() == Params.MAX_FRIENDS) {
                                 msg.arg1 = 1;
                                 handler.sendMessage(msg);
                                 return;
@@ -140,22 +140,33 @@ public class FriendsActivity extends BaseActivity {
                             }
 
                             // check if the user entered themselves as a friend
-                            if (name.equals(new SummonerInfo().getStylizedName(FriendsActivity.this))) {
+                            if (name.equals(new UserInfo().getStylizedName(FriendsActivity.this))) {
                                 msg.arg1 = 4;
                                 handler.sendMessage(msg);
                                 return;
                             }
 
+                            // check if this friend has already been entered
+                            if (friendsList != null){
+                                for (SummonerDto friend : friendsList.getFriends()){
+                                    if (friend != null && name.equals(friend.name)){
+                                        msg.arg1 = 5;
+                                        handler.sendMessage(msg);
+                                        return;
+                                    }
+                                }
+                            }
+
                             // if all checks were passed successfully, add the friend and save them locally
                             UpdateUtil.addPlayerToProfileMap(FriendsActivity.this, name);
-                            if (friendsList == null){ // first friend
+                            if (friendsList == null) { // first friend
                                 friendsList = new FriendsList();
                             }
                             friendsList.friends = new ArrayList<>();
                             friendsList.friends.add(friendDto);
                             friendsList.cascadeSave();
 
-                            msg.arg1 = 5;
+                            msg.arg1 = 6;
                             handler.sendMessage(msg);
                         }
                     }).start();
@@ -178,12 +189,18 @@ public class FriendsActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             int flag = msg.arg1;
             switch (flag) {
-                case 5: // all checks passed, reload activity
+                case 6: // all checks passed, reload activity
                     if (inView) {
                         Intent intent = new Intent(FriendsActivity.this, FriendsActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
                         startActivity(intent);
                         finish();
+                    }
+                    break;
+                case 5: // this friend already exists
+                    if (inView) {
+                        String toastMsg = getString(R.string.friend_already_exists);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case 4: // user entered themselves as a friend

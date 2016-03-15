@@ -71,40 +71,40 @@ public class MatchDetail extends Model {
     @Column(name = "teams")
     private List<Team> teams = new ArrayList<>();
 
-    public MatchDetail(){
+    public MatchDetail() {
         super();
     }
 
-    public List<ParticipantIdentity> getParticipantIdentities(){
+    public List<ParticipantIdentity> getParticipantIdentities() {
         return getMany(ParticipantIdentity.class, "match_detail");
     }
 
-    public List<Participant> getParticipants(){
+    public List<Participant> getParticipants() {
         return getMany(Participant.class, "match_detail");
     }
 
-    public List<Team> getTeams(){
+    public List<Team> getTeams() {
         return getMany(Team.class, "match_detail");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!participantIdentities.isEmpty()){
-                for (ParticipantIdentity identity : participantIdentities){
+            if (!participantIdentities.isEmpty()) {
+                for (ParticipantIdentity identity : participantIdentities) {
                     identity.matchDetail = this;
                     identity.cascadeSave();
                 }
             }
-            if (!participants.isEmpty()){
-                for (Participant participant : participants){
+            if (!participants.isEmpty()) {
+                for (Participant participant : participants) {
                     participant.matchDetail = this;
                     participant.cascadeSave();
                 }
             }
-            if (!teams.isEmpty()){
-                for (Team team : teams){
+            if (!teams.isEmpty()) {
+                for (Team team : teams) {
                     team.matchDetail = this;
                     team.save();
                 }

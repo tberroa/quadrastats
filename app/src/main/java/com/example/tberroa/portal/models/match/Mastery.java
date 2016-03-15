@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "Mastery")
-public class Mastery  extends Model {
+public class Mastery extends Model {
 
     // parent
     @Column(name = "participant")
@@ -21,7 +21,7 @@ public class Mastery  extends Model {
     @Column(name = "rank")
     public long rank;
 
-    public Mastery(){
+    public Mastery() {
         super();
     }
 }

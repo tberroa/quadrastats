@@ -34,20 +34,20 @@ public class RunePageDto extends Model {
     @Column(name = "slots")
     public Set<RuneSlotDto> slots = new HashSet<>();
 
-    public RunePageDto(){
+    public RunePageDto() {
         super();
     }
 
-    public List<RuneSlotDto> getSlots(){
+    public List<RuneSlotDto> getSlots() {
         return getMany(RuneSlotDto.class, "rune_page");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!slots.isEmpty()){
-                for (RuneSlotDto slot : slots){
+            if (!slots.isEmpty()) {
+                for (RuneSlotDto slot : slots) {
                     slot.runePageDto = this;
                     slot.save();
                 }

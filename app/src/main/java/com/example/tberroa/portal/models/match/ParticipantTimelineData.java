@@ -27,7 +27,7 @@ public class ParticipantTimelineData extends Model {
     @Column(name = "zero_to_ten")
     public double zeroToTen;
 
-    public ParticipantTimelineData(){
+    public ParticipantTimelineData() {
         super();
     }
 }

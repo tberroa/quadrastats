@@ -32,7 +32,7 @@ class HomeAdapter extends ArrayAdapter<String> {
 
         ViewHolder viewHolder;
 
-        if (convertView == null){
+        if (convertView == null) {
             // initialize view holder and layout inflater
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -44,8 +44,7 @@ class HomeAdapter extends ArrayAdapter<String> {
 
             // set tag
             convertView.setTag(viewHolder);
-        }
-        else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -57,7 +56,7 @@ class HomeAdapter extends ArrayAdapter<String> {
         int height = ScreenUtil.getScreenHeight(context) / 4;
 
         // set image
-        switch(position){
+        switch (position) {
             case 0:
                 Picasso.with(context).load(R.drawable.splash_zed).centerCrop().resize(width, height).into(viewHolder.thumbnail);
                 break;

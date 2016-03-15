@@ -267,7 +267,7 @@ public class ParticipantStats extends Model {
     @Column(name = "winner")
     public boolean winner;
 
-    public ParticipantStats(){
+    public ParticipantStats() {
         super();
     }
 }

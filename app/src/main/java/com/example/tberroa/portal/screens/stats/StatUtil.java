@@ -30,8 +30,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,17 +42,17 @@ class StatUtil {
     private StatUtil() {
     }
 
-    static private boolean hasMatches(long summonerId, String queue){
+    static private boolean hasMatches(long summonerId, String queue) {
         List<MatchReference> matches = new LocalDB().getMatchReferences(summonerId, queue);
-        return  (matches != null && !matches.isEmpty());
+        return (matches != null && !matches.isEmpty());
     }
 
-    static private boolean hasMatches(FriendsList friendsList, String queue){
+    static private boolean hasMatches(FriendsList friendsList, String queue) {
         LocalDB localDB = new LocalDB();
-        for (SummonerDto friend : friendsList.getFriends()){
-            if (friend != null){
+        for (SummonerDto friend : friendsList.getFriends()) {
+            if (friend != null) {
                 List<MatchReference> references = localDB.getMatchReferences(friend.id, queue);
-                if (references !=null && !references.isEmpty()){
+                if (references != null && !references.isEmpty()) {
                     return true;
                 }
             }
@@ -60,7 +60,7 @@ class StatUtil {
         return false;
     }
 
-    static public List<ParticipantStats> getStats(long summonerId, String queue, int maxAmount){
+    static public List<ParticipantStats> getStats(long summonerId, String queue, int maxAmount) {
         LocalDB localDB = new LocalDB();
 
         // get match references
@@ -68,13 +68,13 @@ class StatUtil {
 
         // get match details
         List<MatchDetail> matchDetails = new ArrayList<>();
-        for (int i = 0; i<maxAmount && i<matches.size(); i++) {
+        for (int i = 0; i < maxAmount && i < matches.size(); i++) {
             matchDetails.add(localDB.getMatchDetail(matches.get(i).matchId));
         }
 
         // get participant stats for each match detail
         List<ParticipantStats> participantStatsList = new ArrayList<>();
-        for (int i = 0; i<maxAmount && i<matchDetails.size(); i++) {
+        for (int i = 0; i < maxAmount && i < matchDetails.size(); i++) {
             participantStatsList.add(localDB.getParticipantStats(summonerId, matchDetails.get(i)));
         }
 
@@ -94,9 +94,10 @@ class StatUtil {
             // get friend ids
             Map<String, Long> friendIds = new HashMap<>();
             for (SummonerDto friend : friendsList.getFriends()) {
-                    friendIds.put(friend.name, friend.id);
+                friendIds.put(friend.name, friend.id);
             }
-            Type friendIdsType = new TypeToken<Map<String, Long>>(){}.getType();
+            Type friendIdsType = new TypeToken<Map<String, Long>>() {
+            }.getType();
             String friendIdsJson = gson.toJson(friendIds, friendIdsType);
             Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendIds is " + friendIdsJson);
 
@@ -105,11 +106,12 @@ class StatUtil {
             for (Map.Entry<String, Long> friend : friendIds.entrySet()) {
                 friendMatches.put(friend.getKey(), new ArrayList<MatchReference>());
                 List<MatchReference> references = localDB.getMatchReferences(friend.getValue(), queue);
-                if (references != null){
+                if (references != null) {
                     friendMatches.put(friend.getKey(), references);
                 }
             }
-            Type friendMatchesType = new TypeToken<Map<String, List<MatchReference>>>(){}.getType();
+            Type friendMatchesType = new TypeToken<Map<String, List<MatchReference>>>() {
+            }.getType();
             String friendMatchesJson = gson.toJson(friendMatches, friendMatchesType);
             Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendMatches is " + friendMatchesJson);
 
@@ -117,15 +119,16 @@ class StatUtil {
             Map<String, List<MatchDetail>> friendMatchDetails = new HashMap<>();
             for (Map.Entry<String, List<MatchReference>> friend : friendMatches.entrySet()) {
                 friendMatchDetails.put(friend.getKey(), new ArrayList<MatchDetail>());
-                for (int i = 0; i<friend.getValue().size() && i<maxMatches; i++) {
+                for (int i = 0; i < friend.getValue().size() && i < maxMatches; i++) {
                     MatchReference reference = friend.getValue().get(i);
                     MatchDetail detail = localDB.getMatchDetail(reference.matchId);
-                    if (detail != null){
+                    if (detail != null) {
                         friendMatchDetails.get(friend.getKey()).add(detail);
                     }
                 }
             }
-            Type friendDetailsType = new TypeToken<Map<String, List<MatchDetail>>>(){}.getType();
+            Type friendDetailsType = new TypeToken<Map<String, List<MatchDetail>>>() {
+            }.getType();
             String friendDetailsJson = gson.toJson(friendMatchDetails, friendDetailsType);
             Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendMatchDetails is " + friendDetailsJson);
 
@@ -133,10 +136,10 @@ class StatUtil {
             for (Map.Entry<String, List<MatchDetail>> friend : friendMatchDetails.entrySet()) {
                 friendParticipantStatsList.put(friend.getKey(), new ArrayList<ParticipantStats>());
                 long friendId = friendIds.get(friend.getKey());
-                for (int i = 0; i<friend.getValue().size() && i<maxMatches; i++) {
+                for (int i = 0; i < friend.getValue().size() && i < maxMatches; i++) {
                     MatchDetail matchDetail = friend.getValue().get(i);
                     ParticipantStats stats = localDB.getParticipantStats(friendId, matchDetail);
-                    if (stats != null){
+                    if (stats != null) {
                         friendParticipantStatsList.get(friend.getKey()).add(stats);
                     }
                 }
@@ -145,38 +148,52 @@ class StatUtil {
         return friendParticipantStatsList;
     }
 
-    static public List<XYSeries> constructXYSeries(Set<String> fNames, Number[] sNums, Map<String, Number[]> fNums){
+    static public List<SimpleXYSeries> createXYSeries(Set<String> fNames, Number[] sNums, Map<String, Number[]> fNums) {
 
-        List<XYSeries> series = new ArrayList<>();
+        List<SimpleXYSeries> series = new ArrayList<>();
 
-        // add summoner first
-        series.add(new SimpleXYSeries(Arrays.asList(sNums), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
+        Number nullNumber = null;
+
+        // add user first
+        series.add(new SimpleXYSeries(null));
+        for (int i = 0; i < sNums.length; i++){
+            if(sNums[i]==0){
+                series.get(0).addLast(i, nullNumber); // Does not display points for 0 values
+            } else {
+                series.get(0).addLast(i, sNums[i]);
+            }
+        }
+        // old code
+        // series.add(new SimpleXYSeries(Arrays.asList(sNums), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
 
         // add friends
-        for (String name : fNames){
+        int x = 1;
+        for (String name : fNames) {
+            series.add(new SimpleXYSeries(null));
             Number[] nums = fNums.get(name);
 
-            // log friend numbers
-            Type numbersType = new TypeToken<Number[]>(){}.getType();
-            String numbersJson = new Gson().toJson(nums, numbersType);
-            Log.d(Params.TAG_DEBUG, "@StatUtil/constructXYSeries: numbers for " + name + " are " + numbersJson);
-
-            series.add(new SimpleXYSeries(Arrays.asList(nums), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
+            for (int i = 0; i < nums.length; i++){
+                if(nums[i]==0){
+                    series.get(x).addLast(i, nullNumber); // Does not display points for 0 values
+                } else {
+                    series.get(x).addLast(i, nums[i]);
+                }
+            }
+            x++;
         }
-
         return series;
     }
 
-    static public void createPlot(Context context, XYPlot plot, List<XYSeries> series){
+    static public void createPlot(Context context, XYPlot plot, List<SimpleXYSeries> series) {
         // add series to plot
-        int i=0;
-        for (XYSeries seriesX : series){
+        int i = 0;
+        for (XYSeries seriesX : series) {
             LineAndPointFormatter seriesFormat = new LineAndPointFormatter();
             seriesFormat.setPointLabelFormatter(new PointLabelFormatter());
-            seriesFormat.setInterpolationParams(
-                    new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
+            //seriesFormat.setInterpolationParams(
+                   // new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
 
-            switch(i){
+            switch (i) {
                 case 0:
                     seriesFormat.configure(context.getApplicationContext(), R.xml.line_blue);
                     break;
@@ -209,6 +226,7 @@ class StatUtil {
         // plot styling
         plot.setBorderStyle(XYPlot.BorderStyle.NONE, null, null);
         plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
+        plot.setRangeValueFormat(new DecimalFormat("#"));
         plot.setTicksPerRangeLabel(2);
         XYGraphWidget g = plot.getGraphWidget();
         g.position(-0.5f, XLayoutStyle.RELATIVE_TO_RIGHT, -0.5f, YLayoutStyle.RELATIVE_TO_BOTTOM, AnchorPosition.CENTER);

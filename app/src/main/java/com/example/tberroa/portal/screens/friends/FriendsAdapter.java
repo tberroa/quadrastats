@@ -9,14 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.data.DataUtil;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.screens.CircleTransform;
+import com.example.tberroa.portal.screens.ScreenUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-class FriendsAdapter extends ArrayAdapter<SummonerDto>{
+class FriendsAdapter extends ArrayAdapter<SummonerDto> {
 
 
     private final Context context;
@@ -38,7 +38,7 @@ class FriendsAdapter extends ArrayAdapter<SummonerDto>{
 
         ViewHolder viewHolder;
 
-        if (convertView == null){
+        if (convertView == null) {
             // initialize view holder and layout inflater
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -50,13 +50,12 @@ class FriendsAdapter extends ArrayAdapter<SummonerDto>{
 
             // set tag
             convertView.setTag(viewHolder);
-        }
-        else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         // set the profile icon
-        String url = DataUtil.summonerIcon(friends.get(position).profileIconId);
+        String url = ScreenUtil.constructIconURL(friends.get(position).profileIconId);
         Picasso.with(context).load(url).fit().transform(new CircleTransform()).into(viewHolder.summonerIcon);
 
         // set name

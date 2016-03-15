@@ -22,20 +22,20 @@ public class RunePagesDto extends Model {
     @Column(name = "summoner_id")
     public long summonerId;
 
-    public RunePagesDto(){
+    public RunePagesDto() {
         super();
     }
 
-    public List<RunePageDto> getPages(){
+    public List<RunePageDto> getPages() {
         return getMany(RunePageDto.class, "rune_pages");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!pages.isEmpty()){
-                for (RunePageDto page : pages){
+            if (!pages.isEmpty()) {
+                for (RunePageDto page : pages) {
                     page.runePagesDto = this;
                     page.cascadeSave();
                 }

@@ -77,6 +77,7 @@
     <string name="no_friend_matches">None of your friends have played this game mode this season.</string>
     <string name="cant_add_yourself_as_friend">Cannot add yourself as a friend.</string>
     <string name="friend_limit_reached">Sorry, only up to 7 friends are allowed at this time.</string>
+    <string name="friend_already_exists">This friend is already on your list.</string>
 
     <!-- stats and plots -->
     <string name = "you">You</string>

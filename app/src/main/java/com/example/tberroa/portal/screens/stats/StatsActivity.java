@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.example.tberroa.portal.R;
@@ -22,7 +23,7 @@ import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.SummonerInfo;
+import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.models.match.ParticipantStats;
 import com.example.tberroa.portal.updater.UpdateJobListener;
@@ -47,7 +48,7 @@ public class StatsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-        SummonerInfo summonerInfo = new SummonerInfo();
+        UserInfo userInfo = new UserInfo();
 
         // get queue
         String queue = getIntent().getStringExtra("queue");
@@ -91,11 +92,11 @@ public class StatsActivity extends BaseActivity {
         busyUpdatingLayout.setVisibility(View.GONE);
 
         // get summoner id
-        long summonerId = summonerInfo.getId(this);
+        long summonerId = userInfo.getId(this);
         Log.d(Params.TAG_DEBUG, "@StatActivity: summoner id is " + Long.toString(summonerId));
 
         // get friends
-        FriendsList friendsList = new LocalDB().getFriendsDto();
+        FriendsList friendsList = new LocalDB().getFriendsList();
 
         // check conditions
         int condition = StatUtil.checkConditions(this, summonerId, queue, friendsList);
@@ -136,7 +137,6 @@ public class StatsActivity extends BaseActivity {
             case 500: // code 500: no issues, conditions are good for showing data
                 plotLayout.setVisibility(View.VISIBLE);
 
-
                 int maxMatches = 10; // this can be changed by user input in future
 
                 // get summoner stats
@@ -171,8 +171,11 @@ public class StatsActivity extends BaseActivity {
                     }
                 }
 
+                Number nullNumber = null;
+
                 // create data array for summoner
                 Number[] sNumbers = new Number[sWardsPlaced.length];
+                Arrays.fill(sNumbers, nullNumber);
                 for (int i = 0; i < sWardsPlaced.length; i++) {
                     sNumbers[i] = sWardsPlaced[i];
                 }
@@ -181,7 +184,7 @@ public class StatsActivity extends BaseActivity {
                 Map<String, Number[]> fNumbers = new HashMap<>();
                 for (Map.Entry<String, long[]> friend : fWardsPlaced.entrySet()) {
                     Number[] array = new Number[maxMatches];
-                    Arrays.fill(array, 0);
+                    Arrays.fill(array, nullNumber);
                     fNumbers.put(friend.getKey(), array);
                     for (int i = 0; i < friend.getValue().length; i++) {
                         fNumbers.get(friend.getKey())[i] = friend.getValue()[i];
@@ -200,7 +203,7 @@ public class StatsActivity extends BaseActivity {
 
                 // construct legend
                 legendLayout.setVisibility(View.VISIBLE);
-                nameViews.get(0).setText(summonerInfo.getStylizedName(this));
+                nameViews.get(0).setText(userInfo.getStylizedName(this));
                 nameViews.get(0).setVisibility(View.VISIBLE);
                 colorViews.get(0).setImageResource(R.color.series_blue);
                 colorViews.get(0).setVisibility(View.VISIBLE);
@@ -210,7 +213,7 @@ public class StatsActivity extends BaseActivity {
                     nameViews.get(i).setText(name);
                     nameViews.get(i).setVisibility(View.VISIBLE);
 
-                    switch (i){
+                    switch (i) {
                         case 1:
                             colorViews.get(i).setImageResource(R.color.series_green);
                             break;
@@ -239,7 +242,7 @@ public class StatsActivity extends BaseActivity {
                 }
 
                 // construct XYSeries
-                List<XYSeries> series = StatUtil.constructXYSeries(friendsWithStats, sNumbers, fNumbers);
+                List<SimpleXYSeries> series = StatUtil.createXYSeries(friendsWithStats, sNumbers, fNumbers);
 
                 // create plot
                 XYPlot plot = (XYPlot) findViewById(R.id.plot);

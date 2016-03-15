@@ -6,6 +6,6 @@ class PlayerUpdateProfile {
 
     public boolean newPlayer = true;
 
-    public PlayerUpdateProfile(){
+    public PlayerUpdateProfile() {
     }
 }

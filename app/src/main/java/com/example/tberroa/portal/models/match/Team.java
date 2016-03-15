@@ -75,7 +75,7 @@ public class Team extends Model {
     @Column(name = "winner")
     public boolean winner;
 
-    public Team(){
+    public Team() {
         super();
     }
 }

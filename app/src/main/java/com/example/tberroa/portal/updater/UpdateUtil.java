@@ -1,12 +1,13 @@
 package com.example.tberroa.portal.updater;
 
+import android.app.ActivityManager;
 import android.content.Context;
 
 import java.util.Map;
 
 public class UpdateUtil {
 
-    private UpdateUtil(){
+    private UpdateUtil() {
     }
 
     static public void addPlayerToProfileMap(Context context, String stylizedName) {
@@ -26,4 +27,15 @@ public class UpdateUtil {
         // save the updated profile map
         updateJobInfo.setProfiles(context, profileMap);
     }
+
+    static public boolean isMyServiceRunning(Context context, Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

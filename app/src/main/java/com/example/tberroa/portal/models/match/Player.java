@@ -31,7 +31,7 @@ public class Player extends Model {
     @Column(name = "summoner_name")
     public String summonerName;
 
-    public Player(){
+    public Player() {
         super();
     }
 }

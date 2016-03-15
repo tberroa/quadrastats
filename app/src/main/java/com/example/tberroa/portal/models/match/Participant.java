@@ -60,53 +60,53 @@ public class Participant extends Model {
     @Column(name = "timeline")
     private ParticipantTimeline timeline;
 
-    public List<Mastery> getMasteries(){
+    public List<Mastery> getMasteries() {
         return getMany(Mastery.class, "participant");
     }
 
-    public List<Rune> getRunes(){
+    public List<Rune> getRunes() {
         return getMany(Rune.class, "participant");
     }
 
-    public ParticipantStats getParticipantStats(){
+    public ParticipantStats getParticipantStats() {
         return new Select()
                 .from(ParticipantStats.class)
                 .where("participant = ?", getId())
                 .executeSingle();
     }
 
-    public ParticipantTimeline getParticipantTimeline(){
+    public ParticipantTimeline getParticipantTimeline() {
         return new Select()
                 .from(ParticipantTimeline.class)
                 .where("participant = ?", getId())
                 .executeSingle();
     }
 
-    public Participant(){
+    public Participant() {
         super();
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!masteries.isEmpty()){
-                for (Mastery mastery : masteries){
+            if (!masteries.isEmpty()) {
+                for (Mastery mastery : masteries) {
                     mastery.participant = this;
                     mastery.save();
                 }
             }
-            if (!runes.isEmpty()){
-                for (Rune rune : runes){
+            if (!runes.isEmpty()) {
+                for (Rune rune : runes) {
                     rune.participant = this;
                     rune.save();
                 }
             }
-            if (stats != null){
+            if (stats != null) {
                 stats.participant = this;
                 stats.save();
             }
-            if (timeline != null){
+            if (timeline != null) {
                 timeline.participant = this;
                 timeline.cascadeSave();
             }

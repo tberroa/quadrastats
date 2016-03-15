@@ -17,7 +17,7 @@ public class Http {
     private final OkHttpClient client = new OkHttpClient();
     private final MediaType mediaType = MediaType.parse(Params.POST_MEDIA_TYPE);
 
-    public Http(){
+    public Http() {
     }
 
     // used to query riot api

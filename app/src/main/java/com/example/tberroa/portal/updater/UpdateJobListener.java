@@ -13,7 +13,7 @@ import com.example.tberroa.portal.data.Params;
 
 public class UpdateJobListener extends BroadcastReceiver {
 
-    public IntentFilter getFilter(){
+    public IntentFilter getFilter() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Params.UPDATE_COMPLETE);
         return filter;

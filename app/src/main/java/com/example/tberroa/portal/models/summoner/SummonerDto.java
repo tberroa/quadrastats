@@ -33,7 +33,7 @@ public class SummonerDto extends Model {
     @Column(name = "summoner_level")
     public long summonerLevel;
 
-    public SummonerDto(){
+    public SummonerDto() {
         super();
     }
 }

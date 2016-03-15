@@ -51,7 +51,7 @@ public class MatchReference extends Model {
     @Column(name = "timestamp")
     public long timestamp;
 
-    public MatchReference(){
+    public MatchReference() {
         super();
     }
 }

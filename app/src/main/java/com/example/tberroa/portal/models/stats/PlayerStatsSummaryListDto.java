@@ -23,20 +23,20 @@ public class PlayerStatsSummaryListDto extends Model {
     @Column(name = "summoner_id")
     public long summonerId;
 
-    public PlayerStatsSummaryListDto(){
+    public PlayerStatsSummaryListDto() {
         super();
     }
 
-    public List<PlayerStatsSummaryDto> getPlayerStatSummaries(){
+    public List<PlayerStatsSummaryDto> getPlayerStatSummaries() {
         return getMany(PlayerStatsSummaryDto.class, "player_stats_summary_list");
     }
 
-    public void cascadeSave(){
+    public void cascadeSave() {
         ActiveAndroid.beginTransaction();
-        try{
+        try {
             save();
-            if (!playerStatSummaries.isEmpty()){
-                for (PlayerStatsSummaryDto playerStatsSummary : playerStatSummaries){
+            if (!playerStatSummaries.isEmpty()) {
+                for (PlayerStatsSummaryDto playerStatsSummary : playerStatSummaries) {
                     playerStatsSummary.playerStatsSummaryListDto = this;
                     playerStatsSummary.cascadeSave();
                 }

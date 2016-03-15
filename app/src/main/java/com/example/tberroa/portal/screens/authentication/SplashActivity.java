@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                if (inView){
+                if (inView) {
                     startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                 }
                 finish();
@@ -33,13 +33,13 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         inView = true;
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         inView = false;
     }
