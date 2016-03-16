@@ -2,22 +2,26 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:id="@+id/layout_gen_message"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:id="@+id/layout_rendering_plots"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gen_message"
-        android:text="@string/message_placeholder"
+        android:text="@string/busy_rendering"
         android:textSize="25sp"
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="30dp" />
 
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 </LinearLayout>

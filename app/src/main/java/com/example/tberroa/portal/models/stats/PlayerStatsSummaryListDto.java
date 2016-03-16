@@ -16,12 +16,11 @@ import java.util.List;
 public class PlayerStatsSummaryListDto extends Model {
 
     @Expose
-    @Column(name = "player_stat_summaries")
-    private List<PlayerStatsSummaryDto> playerStatSummaries = new ArrayList<>();
-
-    @Expose
     @Column(name = "summoner_id")
     public long summonerId;
+    @Expose
+    @Column(name = "player_stat_summaries")
+    private List<PlayerStatsSummaryDto> playerStatSummaries = new ArrayList<>();
 
     public PlayerStatsSummaryListDto() {
         super();

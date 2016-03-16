@@ -16,16 +16,14 @@ import java.util.List;
 public class RankedStatsDto extends Model {
 
     @Expose
-    @Column(name = "champions")
-    private List<ChampionsStatsDto> champions = new ArrayList<>();
-
-    @Expose
     @Column(name = "modify_date")
     public long modifyDate;
-
     @Expose
     @Column(name = "summoner_id")
     public long summonerId;
+    @Expose
+    @Column(name = "champions")
+    private List<ChampionsStatsDto> champions = new ArrayList<>();
 
     public RankedStatsDto() {
         super();

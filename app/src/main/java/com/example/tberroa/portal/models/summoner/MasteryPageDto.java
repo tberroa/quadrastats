@@ -15,25 +15,21 @@ import java.util.List;
 @Table(name = "MasteryPageDto")
 public class MasteryPageDto extends Model {
 
-    // parent
-    @Column(name = "mastery_pages")
-    MasteryPagesDto masteryPagesDto;
-
     @Expose
     @Column(name = "current")
     public boolean current;
-
     @Expose
     @Column(name = "mastery_page_id")
     public long id;
-
     @Expose
     @Column(name = "masteries")
     public List<MasteryDto> masteries = new ArrayList<>();
-
     @Expose
     @Column(name = "name")
     public String name;
+    // parent
+    @Column(name = "mastery_pages")
+    MasteryPagesDto masteryPagesDto;
 
     public MasteryPageDto() {
         super();

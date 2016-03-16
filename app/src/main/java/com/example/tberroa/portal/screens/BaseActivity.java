@@ -29,9 +29,9 @@ import com.squareup.picasso.Picasso;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    protected Toolbar toolbar;
     private SmoothActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
-    protected Toolbar toolbar;
 
     @SuppressLint("InflateParams")
     @Override
@@ -73,11 +73,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         Picasso.with(this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
 
         // boot up services in the case they were killed unexpectedly
-        if (!UpdateUtil.isMyServiceRunning(this, UpdateService.class)){
+        if (UpdateUtil.serviceNotRunning(this, UpdateService.class)) {
             new UpdateJobInfo().setRunning(this, false);
             startService(new Intent(this, UpdateService.class));
         }
-        if (!UpdateUtil.isMyServiceRunning(this, APIMonitorService.class)){
+        if (UpdateUtil.serviceNotRunning(this, APIMonitorService.class)) {
             new APIUsageInfo().reset(this);
             startService(new Intent(this, APIMonitorService.class));
         }

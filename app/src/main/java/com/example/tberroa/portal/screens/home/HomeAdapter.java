@@ -22,11 +22,6 @@ class HomeAdapter extends ArrayAdapter<String> {
         this.labels = labels;
     }
 
-    class ViewHolder {
-        ImageView thumbnail;
-        TextView label;
-    }
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -58,19 +53,28 @@ class HomeAdapter extends ArrayAdapter<String> {
         // set image
         switch (position) {
             case 0:
-                Picasso.with(context).load(R.drawable.splash_zed).centerCrop().resize(width, height).into(viewHolder.thumbnail);
+                Picasso.with(context).load(R.drawable.splash_zed).centerCrop()
+                        .resize(width, height).into(viewHolder.thumbnail);
                 break;
             case 1:
-                Picasso.with(context).load(R.drawable.splash_amumu).centerCrop().resize(width, height).into(viewHolder.thumbnail);
+                Picasso.with(context).load(R.drawable.splash_amumu).centerCrop()
+                        .resize(width, height).into(viewHolder.thumbnail);
                 break;
             case 2:
-                Picasso.with(context).load(R.drawable.splash_shyvana).centerCrop().resize(width, height).into(viewHolder.thumbnail);
+                Picasso.with(context).load(R.drawable.splash_shyvana).centerCrop()
+                        .resize(width, height).into(viewHolder.thumbnail);
                 break;
             case 3:
-                Picasso.with(context).load(R.drawable.splash_jarvan).centerCrop().resize(width, height).into(viewHolder.thumbnail);
+                Picasso.with(context).load(R.drawable.splash_jarvan).centerCrop()
+                        .resize(width, height).into(viewHolder.thumbnail);
                 break;
         }
 
         return convertView;
+    }
+
+    class ViewHolder {
+        ImageView thumbnail;
+        TextView label;
     }
 }

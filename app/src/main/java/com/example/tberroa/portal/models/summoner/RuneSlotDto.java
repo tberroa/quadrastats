@@ -9,17 +9,15 @@ import com.google.gson.annotations.Expose;
 @Table(name = "RuneSlotDto")
 public class RuneSlotDto extends Model {
 
-    // parent
-    @Column(name = "rune_page")
-    RunePageDto runePageDto;
-
     @Expose
     @Column(name = "rune_id")
     public int runeId;
-
     @Expose
     @Column(name = "rune_slot_id")
     public int runeSlotId;
+    // parent
+    @Column(name = "rune_page")
+    RunePageDto runePageDto;
 
     public RuneSlotDto() {
         super();

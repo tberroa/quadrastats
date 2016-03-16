@@ -23,10 +23,24 @@ import com.example.tberroa.portal.network.NetworkUtil;
 
 public class SignInActivity extends AppCompatActivity {
 
+    private final OnClickListener goToRegisterButtonListener = new OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
+            startActivity(intent);
+            finish();
+        }
+    };
     private EditText summonerName, password;
     private Spinner region;
     private Button signInButton;
     private TextView goToRegisterButton;
+    private final OnClickListener signInButtonListener = new OnClickListener() {
+        public void onClick(View v) {
+            signInButton.setEnabled(false);
+            signIn();
+        }
+    };
     private boolean inView;
 
     @Override
@@ -62,22 +76,6 @@ public class SignInActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         region.setAdapter(adapter);
     }
-
-    private final OnClickListener signInButtonListener = new OnClickListener() {
-        public void onClick(View v) {
-            signInButton.setEnabled(false);
-            signIn();
-        }
-    };
-
-    private final OnClickListener goToRegisterButtonListener = new OnClickListener() {
-        public void onClick(View v) {
-            Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
-            startActivity(intent);
-            finish();
-        }
-    };
 
     // validation process
     private void signIn() {
@@ -118,6 +116,18 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inView = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        inView = false;
+    }
+
     // attempts to sign in via http
     class AttemptSignIn extends AsyncTask<Void, Void, Void> {
 
@@ -154,17 +164,5 @@ public class SignInActivity extends AppCompatActivity {
                 signInButton.setEnabled(true);
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        inView = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        inView = false;
     }
 }

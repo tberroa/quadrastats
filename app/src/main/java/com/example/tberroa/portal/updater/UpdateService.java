@@ -30,7 +30,7 @@ public class UpdateService extends Service {
     private final UpdateJobInfo updateJobInfo = new UpdateJobInfo();
     private RiotAPI riotAPI;
     private boolean kill = false;
-    public Timer timer;
+    private Timer timer;
 
     @Override
     public void onCreate() {
@@ -185,7 +185,7 @@ public class UpdateService extends Service {
             // load up the old match list
             MatchList oldMatchList = localDB.getMatchList(summoner.id);
 
-            if ((oldMatchList == null) || (oldMatchList.totalGames < newMatchList.totalGames)) {
+            if (newMatchList != null && (oldMatchList == null || oldMatchList.totalGames < newMatchList.totalGames)) {
 
                 if (kill) return null;
 
@@ -226,10 +226,9 @@ public class UpdateService extends Service {
 
                 if (kill) return null;
 
-                // update the saved match list
-                oldMatchList = newMatchList;
-                oldMatchList.summonerId = summoner.id;
-                oldMatchList.cascadeSave();
+                // save the new match list
+                newMatchList.summonerId = summoner.id;
+                newMatchList.cascadeSave();
             }
         }
 

@@ -28,11 +28,6 @@ class FriendsAdapter extends ArrayAdapter<SummonerDto> {
         this.friends = friends;
     }
 
-    class ViewHolder {
-        ImageView summonerIcon;
-        TextView name;
-    }
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -62,5 +57,10 @@ class FriendsAdapter extends ArrayAdapter<SummonerDto> {
         viewHolder.name.setText(friends.get(position).name);
 
         return convertView;
+    }
+
+    class ViewHolder {
+        ImageView summonerIcon;
+        TextView name;
     }
 }

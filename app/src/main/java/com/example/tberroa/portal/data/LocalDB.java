@@ -38,6 +38,7 @@ public class LocalDB {
         return new Select()
                 .from(MatchList.class)
                 .where("summoner_id = ?", summonerId)
+                .orderBy("id DESC")
                 .executeSingle();
     }
 

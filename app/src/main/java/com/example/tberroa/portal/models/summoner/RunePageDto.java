@@ -14,25 +14,21 @@ import java.util.Set;
 @Table(name = "RunePageDto")
 public class RunePageDto extends Model {
 
-    // parent
-    @Column(name = "rune_pages")
-    RunePagesDto runePagesDto;
-
     @Expose
     @Column(name = "current")
     public boolean current;
-
     @Expose
     @Column(name = "rune_page_id")
     public long id;
-
     @Expose
     @Column(name = "name")
     public String name;
-
     @Expose
     @Column(name = "slots")
     public Set<RuneSlotDto> slots = new HashSet<>();
+    // parent
+    @Column(name = "rune_pages")
+    RunePagesDto runePagesDto;
 
     public RunePageDto() {
         super();

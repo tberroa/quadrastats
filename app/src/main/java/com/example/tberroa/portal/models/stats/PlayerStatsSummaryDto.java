@@ -15,26 +15,21 @@ public class PlayerStatsSummaryDto extends Model {
     // parent
     @Column(name = "player_stats_summary_list")
     public PlayerStatsSummaryListDto playerStatsSummaryListDto;
-
-    @Expose
-    @Column(name = "aggregated_stats")
-    private AggregatedStatsDto aggregatedStatsDto;
-
     @Expose
     @Column(name = "losses")
     public int losses;
-
     @Expose
     @Column(name = "modify_date")
     public long modifyDate;
-
     @Expose
     @Column(name = "player_stat_summary_type")
     public String playerStatSummaryType;
-
     @Expose
     @Column(name = "wins")
     public int wins;
+    @Expose
+    @Column(name = "aggregated_stats")
+    private AggregatedStatsDto aggregatedStatsDto;
 
     public PlayerStatsSummaryDto() {
         super();

@@ -27,9 +27,9 @@ import java.util.Map;
 public class RiotAPI {
 
     private final String region;
-    private String url;
     private final Context context;
     private final APIUsageInfo keyUsage = new APIUsageInfo();
+    private String url;
 
     public RiotAPI(Context context) {
         this.context = context;
@@ -209,19 +209,6 @@ public class RiotAPI {
         }
     }
 
-    private class AttemptGet extends AsyncTask<Void, Void, String[]> {
-        @Override
-        protected String[] doInBackground(Void... params) {
-            String[] response = {Params.HTTP_GET_FAILED, ""};
-            try {
-                response = new Http().get(url);
-            } catch (IOException e) {
-                Log.d(Params.TAG_EXCEPTIONS, "@RAPI AttemptGet: " + e.getMessage());
-            }
-            return response;
-        }
-    }
-
     private boolean keyNotAvailable() {
         // make sure key usage is at an acceptable level before querying riot api
         return (keyUsage.getUsage(context) >= 9);
@@ -234,6 +221,19 @@ public class RiotAPI {
             default:
                 new ErrorInfo().setCode(context, responseCode);
                 return false;
+        }
+    }
+
+    private class AttemptGet extends AsyncTask<Void, Void, String[]> {
+        @Override
+        protected String[] doInBackground(Void... params) {
+            String[] response = {Params.HTTP_GET_FAILED, ""};
+            try {
+                response = new Http().get(url);
+            } catch (IOException e) {
+                Log.d(Params.TAG_EXCEPTIONS, "@RAPI AttemptGet: " + e.getMessage());
+            }
+            return response;
         }
     }
 }

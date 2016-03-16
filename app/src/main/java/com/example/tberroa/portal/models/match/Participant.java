@@ -27,38 +27,34 @@ public class Participant extends Model {
     @Expose
     @Column(name = "highest_achieved_season_tier")
     public String highestAchievedSeasonTier;
-
-    @Expose
-    @Column(name = "masteries")
-    private List<Mastery> masteries = new ArrayList<>();
-
     @Expose
     @Column(name = "participant_id")
     public int participantId;
-
-    @Expose
-    @Column(name = "runes")
-    private List<Rune> runes = new ArrayList<>();
-
     @Expose
     @Column(name = "spell_1_id")
     public int spell1Id;
-
     @Expose
     @Column(name = "spell_2_id")
     public int spell2Id;
-
-    @Expose
-    @Column(name = "stats")
-    private ParticipantStats stats;
-
     @Expose
     @Column(name = "team_id")
     public int teamId;
-
+    @Expose
+    @Column(name = "masteries")
+    private List<Mastery> masteries = new ArrayList<>();
+    @Expose
+    @Column(name = "runes")
+    private List<Rune> runes = new ArrayList<>();
+    @Expose
+    @Column(name = "stats")
+    private ParticipantStats stats;
     @Expose
     @Column(name = "timeline")
     private ParticipantTimeline timeline;
+
+    public Participant() {
+        super();
+    }
 
     public List<Mastery> getMasteries() {
         return getMany(Mastery.class, "participant");
@@ -80,10 +76,6 @@ public class Participant extends Model {
                 .from(ParticipantTimeline.class)
                 .where("participant = ?", getId())
                 .executeSingle();
-    }
-
-    public Participant() {
-        super();
     }
 
     public void cascadeSave() {

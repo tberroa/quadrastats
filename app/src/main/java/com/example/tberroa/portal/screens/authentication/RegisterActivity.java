@@ -38,6 +38,14 @@ import java.util.Set;
 public class RegisterActivity extends AppCompatActivity {
 
     final private UserInfo userInfo = new UserInfo();
+    private final View.OnClickListener goToSignInButtonListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
+            startActivity(intent);
+            finish();
+        }
+    };
     private EditText summonerName, password, confirmPassword;
     private String stylizedName;
     private Spinner region;
@@ -46,6 +54,45 @@ public class RegisterActivity extends AppCompatActivity {
     private AlertDialog.Builder builder;
     private String enteredSummonerName;
     private boolean inView;
+    // handler used to respond to validation process which occurs in separate thread
+    @SuppressLint("HandlerLeak")
+    private final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int flag = msg.arg1;
+            switch (flag) {
+                case 4:
+                    new AttemptRegister().execute();
+                    break;
+                case 3:
+                    if (inView) {
+                        String toastMsg = getString(R.string.code_not_found);
+                        Toast.makeText(RegisterActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    goToSignInButton.setEnabled(true);
+                    registerButton.setEnabled(true);
+                    break;
+                case 2:
+                    if (inView) {
+                        builder.create().show();
+                    }
+                    break;
+                case 1:
+                    if (inView) {
+                        String toastMsg = getString(R.string.invalid_summoner_name);
+                        Toast.makeText(RegisterActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    registerButton.setEnabled(true);
+                    break;
+            }
+        }
+    };
+    private final View.OnClickListener registerButtonListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            registerButton.setEnabled(false);
+            Register();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,22 +128,6 @@ public class RegisterActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         region.setAdapter(adapter);
     }
-
-    private final View.OnClickListener registerButtonListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            registerButton.setEnabled(false);
-            Register();
-        }
-    };
-
-    private final View.OnClickListener goToSignInButtonListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
-            startActivity(intent);
-            finish();
-        }
-    };
 
     // validation process
     private void Register() {
@@ -227,39 +258,17 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    // handler used to respond to validation process which occurs in separate thread
-    @SuppressLint("HandlerLeak")
-    private final Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            int flag = msg.arg1;
-            switch (flag) {
-                case 4:
-                    new AttemptRegister().execute();
-                    break;
-                case 3:
-                    if (inView) {
-                        String toastMsg = getString(R.string.code_not_found);
-                        Toast.makeText(RegisterActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    goToSignInButton.setEnabled(true);
-                    registerButton.setEnabled(true);
-                    break;
-                case 2:
-                    if (inView) {
-                        builder.create().show();
-                    }
-                    break;
-                case 1:
-                    if (inView) {
-                        String toastMsg = getString(R.string.invalid_summoner_name);
-                        Toast.makeText(RegisterActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    registerButton.setEnabled(true);
-                    break;
-            }
-        }
-    };
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inView = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        inView = false;
+    }
 
     // attempts to register via http
     class AttemptRegister extends AsyncTask<Void, Void, Void> {
@@ -299,17 +308,5 @@ public class RegisterActivity extends AppCompatActivity {
                 registerButton.setEnabled(true);
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        inView = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        inView = false;
     }
 }

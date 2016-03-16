@@ -42,31 +42,24 @@ public class MatchDetail extends Model {
     @Expose
     @Column(name = "match_version")
     public String matchVersion;
-
-    @Expose
-    @Column(name = "participant_identities")
-    private List<ParticipantIdentity> participantIdentities = new ArrayList<>();
-
-    @Expose
-    @Column(name = "participants")
-    private List<Participant> participants = new ArrayList<>();
-
     @Expose
     @Column(name = "platform_id")
     public String platformId;
-
     @Expose
     @Column(name = "queue_type")
     public String queueType;
-
     @Expose
     @Column(name = "region")
     public String region;
-
     @Expose
     @Column(name = "season")
     public String season;
-
+    @Expose
+    @Column(name = "participant_identities")
+    private List<ParticipantIdentity> participantIdentities = new ArrayList<>();
+    @Expose
+    @Column(name = "participants")
+    private List<Participant> participants = new ArrayList<>();
     @Expose
     @Column(name = "teams")
     private List<Team> teams = new ArrayList<>();

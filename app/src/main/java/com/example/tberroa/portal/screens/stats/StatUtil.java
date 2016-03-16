@@ -8,7 +8,6 @@ import com.androidplot.ui.LayoutManager;
 import com.androidplot.ui.Size;
 import com.androidplot.ui.XLayoutStyle;
 import com.androidplot.ui.YLayoutStyle;
-import com.androidplot.xy.CatmullRomInterpolator;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
@@ -32,6 +31,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,19 +81,19 @@ class StatUtil {
         return participantStatsList;
     }
 
-    static public Map<String, List<ParticipantStats>> getFriendStats(FriendsList friendsList, String queue, int maxMatches) {
+    static public Map<String, List<ParticipantStats>> getFriendStats(FriendsList fList, String queue, int maxMatches) {
         // initialize gson for logging
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
         // initialize map of friend stats
         Map<String, List<ParticipantStats>> friendParticipantStatsList = new HashMap<>();
 
-        if (friendsList != null && !friendsList.getFriends().isEmpty()) {
+        if (fList != null && !fList.getFriends().isEmpty()) {
             LocalDB localDB = new LocalDB();
 
             // get friend ids
             Map<String, Long> friendIds = new HashMap<>();
-            for (SummonerDto friend : friendsList.getFriends()) {
+            for (SummonerDto friend : fList.getFriends()) {
                 friendIds.put(friend.name, friend.id);
             }
             Type friendIdsType = new TypeToken<Map<String, Long>>() {
@@ -148,38 +148,17 @@ class StatUtil {
         return friendParticipantStatsList;
     }
 
-    static public List<SimpleXYSeries> createXYSeries(Set<String> fNames, Number[] sNums, Map<String, Number[]> fNums) {
+    static public List<SimpleXYSeries> createXYSeries(Set<String> fNames, Number[] uNums, Map<String, Number[]> fNums) {
 
         List<SimpleXYSeries> series = new ArrayList<>();
 
-        Number nullNumber = null;
-
         // add user first
-        series.add(new SimpleXYSeries(null));
-        for (int i = 0; i < sNums.length; i++){
-            if(sNums[i]==0){
-                series.get(0).addLast(i, nullNumber); // Does not display points for 0 values
-            } else {
-                series.get(0).addLast(i, sNums[i]);
-            }
-        }
-        // old code
-        // series.add(new SimpleXYSeries(Arrays.asList(sNums), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
+        series.add(new SimpleXYSeries(Arrays.asList(uNums), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
 
         // add friends
-        int x = 1;
         for (String name : fNames) {
-            series.add(new SimpleXYSeries(null));
-            Number[] nums = fNums.get(name);
-
-            for (int i = 0; i < nums.length; i++){
-                if(nums[i]==0){
-                    series.get(x).addLast(i, nullNumber); // Does not display points for 0 values
-                } else {
-                    series.get(x).addLast(i, nums[i]);
-                }
-            }
-            x++;
+            List<Number> nums = Arrays.asList(fNums.get(name));
+            series.add(new SimpleXYSeries(nums, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
         }
         return series;
     }
@@ -190,8 +169,6 @@ class StatUtil {
         for (XYSeries seriesX : series) {
             LineAndPointFormatter seriesFormat = new LineAndPointFormatter();
             seriesFormat.setPointLabelFormatter(new PointLabelFormatter());
-            //seriesFormat.setInterpolationParams(
-                   // new CatmullRomInterpolator.Params(10, CatmullRomInterpolator.Type.Centripetal));
 
             switch (i) {
                 case 0:
@@ -207,16 +184,16 @@ class StatUtil {
                     seriesFormat.configure(context.getApplicationContext(), R.xml.line_pink);
                     break;
                 case 4:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_red);
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_purple);
                     break;
                 case 5:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_yellow);
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_red);
                     break;
                 case 6:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_blue);
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_sky);
                     break;
                 case 7:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_green);
+                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_yellow);
                     break;
             }
             i++;
@@ -229,7 +206,8 @@ class StatUtil {
         plot.setRangeValueFormat(new DecimalFormat("#"));
         plot.setTicksPerRangeLabel(2);
         XYGraphWidget g = plot.getGraphWidget();
-        g.position(-0.5f, XLayoutStyle.RELATIVE_TO_RIGHT, -0.5f, YLayoutStyle.RELATIVE_TO_BOTTOM, AnchorPosition.CENTER);
+        g.position(-0.5f, XLayoutStyle.RELATIVE_TO_RIGHT,
+                -0.5f, YLayoutStyle.RELATIVE_TO_BOTTOM, AnchorPosition.CENTER);
         g.setSize(Size.FILL);
         g.setBackgroundPaint(null);
         g.setGridBackgroundPaint(null);

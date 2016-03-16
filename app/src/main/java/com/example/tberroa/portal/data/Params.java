@@ -2,35 +2,25 @@ package com.example.tberroa.portal.data;
 
 public class Params {
 
-    private Params() {
-    }
-
     // app limits
     static public final int MAX_FRIENDS = 7;
-
     // authentication
     static public final String SIGN_IN_URL = "http://portalapp.altervista.org/signin.php";
     static public final String REGISTER_URL = "http://portalapp.altervista.org/register.php";
-
     // broadcast signals
     static public final String SIGN_IN_SUCCESS = "sign_in_success";
     static public final String SIGN_IN_FAILED = "sign_in_failed";
     static public final String UPDATE_COMPLETE = "update_complete";
-
     // intents
     static public final String RELOAD = "-80";
-
     // log tags
     static public final String TAG_EXCEPTIONS = "tag_exceptions";
     static public final String TAG_DEBUG = "tag_debug";
-
     // network
     static public final String POST_MEDIA_TYPE = "application/x-www-form-urlencoded;charset=utf-8";
-
     // response codes, RC = riot code
     static public final String HTTP_GET_FAILED = "-50";
     static public final String RC_200_SUCCESS = "200";
-
     // riot api
     static public final String API_KEY = "f5ee63d2-54d8-466d-ae42-df491f8eabc5";
     static public final String DATA_DRAGON_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/";
@@ -44,4 +34,6 @@ public class Params {
     static public final String SOLO_QUEUE = "RANKED_SOLO_5x5";
     static public final String TEAM_3 = "RANKED_TEAM_3x3";
     static public final String TEAM_5 = "RANKED_TEAM_5x5";
+    private Params() {
+    }
 }

@@ -31,7 +31,7 @@
         <item>Russia</item>
         <item>Turkey</item>
     </string-array>
-    <string name="initializing_data">Initializing your data&#8230;</string>
+    <string name="initializing_data">Grabbing your data &#8230;</string>
     <string name="cancel">Cancel</string>
 
     <!-- dialogs -->
@@ -44,8 +44,8 @@
     <string name="done">Done</string>
 
     <!-- menu items -->
-    <string name="drawer_open">Open drawer</string>
-    <string name="drawer_close">Close drawer</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
     <string name="summoner_name">Summoner Name</string>
     <string name="account">Account</string>
     <string name="view_profile">View Profile</string>
@@ -55,9 +55,9 @@
     <string name="solo_queue">Solo Queue</string>
     <string name="team_5">Ranked Team 5v5</string>
     <string name="team_3">Ranked Team 3v3</string>
-    <string name="thumbnail">Image thumbnail</string>
-    <string name="thumbnail_label">Thumbnail label</string>
-    <string name="thumbnail_summoner_icon">Image of the summoners icon</string>
+    <string name="thumbnail">Image Thumbnail</string>
+    <string name="thumbnail_label">Thumbnail Label</string>
+    <string name="thumbnail_summoner_icon">Summoner Icon Thumbnail</string>
     <string name="sign_out">Sign Out</string>
 
     <!-- activity titles -->
@@ -68,7 +68,8 @@
     <string name="add_friend">Add Friend</string>
     <string name="add_friends">Add Friends</string>
     <string name="plot_title">Plot Title</string>
-    <string name="busy_updating">In process of updating your stats&#8230;</string>
+    <string name="busy_updating">Updating your stats &#8230;</string>
+    <string name="busy_rendering">Rendering plots &#8230;</string>
     <string name="message_placeholder">Message placeholder</string>
     <string name="no_matches">You have not played this game mode this season.</string>
     <string name="no_friends_stats">
@@ -80,7 +81,6 @@
     <string name="friend_already_exists">This friend is already on your list.</string>
 
     <!-- stats and plots -->
-    <string name = "you">You</string>
     <string name = "wards_placed_per_game">Wards Placed Per Game</string>
 
     <!-- error messages -->

@@ -34,58 +34,57 @@ import java.util.Map;
 
 public class FriendsActivity extends BaseActivity {
 
-    FriendsList friendsList;
     private FloatingActionButton addFriend;
     private boolean inView;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
-
-        // no animation if starting activity as a reload
-        if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
-            overridePendingTransition(0, 0);
-        }
-
-        // initialize toolbar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.friends);
-        }
-
-        // initialize back button
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else {
-                    startActivity(new Intent(FriendsActivity.this, HomeActivity.class));
-                    finish();
-                }
+    // handler used to respond to summoner name validation which occurs in separate thread
+    @SuppressLint("HandlerLeak")
+    private final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int flag = msg.arg1;
+            switch (flag) {
+                case 6: // all checks passed, reload activity
+                    if (inView) {
+                        Intent intent = new Intent(FriendsActivity.this, FriendsActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
+                        startActivity(intent);
+                        finish();
+                    }
+                    break;
+                case 5: // this friend already exists
+                    if (inView) {
+                        String toastMsg = getString(R.string.friend_already_exists);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 4: // user entered themselves as a friend
+                    if (inView) {
+                        String toastMsg = getString(R.string.cant_add_yourself_as_friend);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 3: // entered name is invalid
+                    if (inView) {
+                        String toastMsg = getString(R.string.invalid_summoner_name);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 2: // internet not available
+                    if (inView) {
+                        String toastMsg = getString(R.string.internet_not_available);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 1: // friend limit reached
+                    if (inView) {
+                        String toastMsg = getString(R.string.friend_limit_reached);
+                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             }
-        });
-
-        // initialize add friend button
-        addFriend = (FloatingActionButton) findViewById(R.id.add_friend);
-        addFriend.setOnClickListener(addFriendListener);
-
-        // get friends dto
-        friendsList = new LocalDB().getFriendsList();
-
-        if (friendsList != null && !friendsList.getFriends().isEmpty()) {
-            // set list view
-            ListView listView = (ListView) findViewById(R.id.list_view);
-            FriendsAdapter friendsAdapter = new FriendsAdapter(this, friendsList.getFriends());
-            listView.setAdapter(friendsAdapter);
-        } else {
-            TextView noFriends = (TextView) findViewById(R.id.no_friends);
-            noFriends.setVisibility(View.VISIBLE);
+            addFriend.setEnabled(true);
         }
-    }
-
+    };
     private final View.OnClickListener addFriendListener = new View.OnClickListener() {
         public void onClick(View v) {
             addFriend.setEnabled(false);
@@ -147,9 +146,9 @@ public class FriendsActivity extends BaseActivity {
                             }
 
                             // check if this friend has already been entered
-                            if (friendsList != null){
-                                for (SummonerDto friend : friendsList.getFriends()){
-                                    if (friend != null && name.equals(friend.name)){
+                            if (friendsList != null) {
+                                for (SummonerDto friend : friendsList.getFriends()) {
+                                    if (friend != null && name.equals(friend.name)) {
                                         msg.arg1 = 5;
                                         handler.sendMessage(msg);
                                         return;
@@ -182,55 +181,53 @@ public class FriendsActivity extends BaseActivity {
         }
     };
 
-    // handler used to respond to summoner name validation which occurs in separate thread
-    @SuppressLint("HandlerLeak")
-    private final Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            int flag = msg.arg1;
-            switch (flag) {
-                case 6: // all checks passed, reload activity
-                    if (inView) {
-                        Intent intent = new Intent(FriendsActivity.this, FriendsActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
-                        startActivity(intent);
-                        finish();
-                    }
-                    break;
-                case 5: // this friend already exists
-                    if (inView) {
-                        String toastMsg = getString(R.string.friend_already_exists);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case 4: // user entered themselves as a friend
-                    if (inView) {
-                        String toastMsg = getString(R.string.cant_add_yourself_as_friend);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case 3: // entered name is invalid
-                    if (inView) {
-                        String toastMsg = getString(R.string.invalid_summoner_name);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case 2: // internet not available
-                    if (inView) {
-                        String toastMsg = getString(R.string.internet_not_available);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case 1: // friend limit reached
-                    if (inView) {
-                        String toastMsg = getString(R.string.friend_limit_reached);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
-            addFriend.setEnabled(true);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_friends);
+
+        // no animation if starting activity as a reload
+        if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
+            overridePendingTransition(0, 0);
         }
-    };
+
+        // initialize toolbar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.friends);
+        }
+
+        // initialize back button
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    startActivity(new Intent(FriendsActivity.this, HomeActivity.class));
+                    finish();
+                }
+            }
+        });
+
+        // initialize add friend button
+        addFriend = (FloatingActionButton) findViewById(R.id.add_friend);
+        addFriend.setOnClickListener(addFriendListener);
+
+        // get friends dto
+        FriendsList friendsList = new LocalDB().getFriendsList();
+
+        if (friendsList != null && !friendsList.getFriends().isEmpty()) {
+            // set list view
+            ListView listView = (ListView) findViewById(R.id.list_view);
+            FriendsAdapter friendsAdapter = new FriendsAdapter(this, friendsList.getFriends());
+            listView.setAdapter(friendsAdapter);
+        } else {
+            TextView noFriends = (TextView) findViewById(R.id.no_friends);
+            noFriends.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected void onResume() {

@@ -33,6 +33,10 @@
         <include layout="@layout/element_busy_updating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <include layout="@layout/element_busy_rendering"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" />
     </RelativeLayout>
 
 </RelativeLayout>

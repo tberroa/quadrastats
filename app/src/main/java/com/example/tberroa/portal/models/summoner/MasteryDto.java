@@ -11,17 +11,15 @@ import com.google.gson.annotations.Expose;
 @Table(name = "MasteryDto")
 public class MasteryDto extends Model {
 
-    // parent
-    @Column(name = "mastery_page")
-    MasteryPageDto masteryPageDto;
-
     @Expose
     @Column(name = "mastery_id")
     public int id;
-
     @Expose
     @Column(name = "rank")
     public int rank;
+    // parent
+    @Column(name = "mastery_page")
+    MasteryPageDto masteryPageDto;
 
     public MasteryDto() {
         super();
