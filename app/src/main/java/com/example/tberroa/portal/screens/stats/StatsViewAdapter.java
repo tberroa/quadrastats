@@ -19,19 +19,22 @@ public class StatsViewAdapter extends RecyclerView.Adapter<StatsViewAdapter.plot
     private final List<Map<String, Number[]>> plotData;
     private final int numberOfPlots;
 
-    public StatsViewAdapter(Context context, List<Map<String, Number[]>> plotData){
+    public StatsViewAdapter(Context context, List<Map<String, Number[]>> plotData) {
         this.context = context;
         this.plotData = plotData;
         numberOfPlots = plotData.size();
     }
 
-    public class plotViewHolder extends RecyclerView.ViewHolder{
+    public class plotViewHolder extends RecyclerView.ViewHolder {
         final TextView plotTitle;
         final XYPlot plot;
+
         plotViewHolder(View itemView) {
             super(itemView);
             plotTitle = (TextView) itemView.findViewById(R.id.plot_title);
+            plotTitle.setVisibility(View.INVISIBLE);
             plot = (XYPlot) itemView.findViewById(R.id.plot);
+            plot.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -48,17 +51,13 @@ public class StatsViewAdapter extends RecyclerView.Adapter<StatsViewAdapter.plot
     }
 
     @Override
-    public void onBindViewHolder(final plotViewHolder plotViewHolder, final int i) {
-        // set plot title
+    public void onBindViewHolder(plotViewHolder plotViewHolder, int i) {
+        // set views
         plotViewHolder.plotTitle.setText(R.string.wards_placed_per_game);
+        StatUtil.createPlot(context, plotViewHolder.plot, plotData.get(i));
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // create plot
-                StatUtil.createPlot(context, plotViewHolder.plot, plotData.get(i));
-            }
-        }).start();
-
+        // make views visible
+        plotViewHolder.plotTitle.setVisibility(View.VISIBLE);
+        plotViewHolder.plot.setVisibility(View.VISIBLE);
     }
 }

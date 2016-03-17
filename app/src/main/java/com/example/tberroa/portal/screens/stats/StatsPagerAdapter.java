@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.Map;
 
-public class StatsPagerAdapter extends FragmentStatePagerAdapter {
+class StatsPagerAdapter extends FragmentStatePagerAdapter {
 
     private final int numberOfTabs;
     private final Bundle goldPlotData;

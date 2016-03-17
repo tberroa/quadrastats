@@ -137,7 +137,7 @@ class StatUtil {
         return numbers;
     }
 
-    static public Map<String, SimpleXYSeries> createXYSeries(Map<String, Number[]> numbers) {
+    private static Map<String, SimpleXYSeries> createXYSeries(Map<String, Number[]> numbers) {
         Map<String, SimpleXYSeries> series = new HashMap<>();
         for (Map.Entry<String, Number[]> summoner : numbers.entrySet()) {
             List<Number> nums = Arrays.asList(summoner.getValue());

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
@@ -24,18 +23,14 @@ import java.util.Map;
 
 public class StatsFragment extends Fragment {
 
-    List<TextView> nameViews;
-    List<ImageView> colorViews;
-    LinearLayout legendLayout;
-    List<String> names;
-    List<Map<String, Number[]>> plotData;
+    private List<String> names;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_stats, group, false);
 
         names = new ArrayList<>();
-        plotData = new ArrayList<>();
+        List<Map<String, Number[]>> plotData = new ArrayList<>();
 
         if (isAdded()) {
             // grab data passed to fragment
@@ -53,21 +48,23 @@ public class StatsFragment extends Fragment {
             // create legend
             createLegend(v);
 
-            // try list view
-            ListView listView = (ListView) v.findViewById(R.id.list_view);
+            // initialize recycler view
+            RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
 
-            // populate list view
-            StatsViewAdapter2 statsViewAdapter2;
-            statsViewAdapter2 = new StatsViewAdapter2(context, plotData);
-            listView.setAdapter(statsViewAdapter2);
+            // populate recycler view
+            StatsViewAdapter statsViewAdapter;
+            statsViewAdapter = new StatsViewAdapter(context, plotData);
+            recyclerView.setAdapter(statsViewAdapter);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(linearLayoutManager);
         }
         return v;
     }
 
     private void createLegend(View v){
-        nameViews = getLegendNames(v);
-        colorViews = getLegendColors(v);
-        legendLayout = (LinearLayout) v.findViewById(R.id.legend);
+        List<TextView> nameViews = getLegendNames(v);
+        List<ImageView> colorViews = getLegendColors(v);
+        LinearLayout legendLayout = (LinearLayout) v.findViewById(R.id.legend);
         legendLayout.setVisibility(View.VISIBLE);
 
         // then friends
