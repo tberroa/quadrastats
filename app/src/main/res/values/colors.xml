@@ -13,7 +13,7 @@
     <color name="accent_material_dark" tools:override="true">#b86200</color>
 
     <!-- plot series colors-->
-    <color name="series_blue">#66D9FF</color>
+    <color name="series_blue">#1A8CFF</color>
     <color name="series_green">#33ffAD</color>
     <color name="series_orange">#FFAD33</color>
     <color name="series_pink">#FF99FF</color>

@@ -2,20 +2,24 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:paddingTop="20dp" >
+    android:layout_width="wrap_content" >
 
-    <include layout="@layout/element_legend"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/legend"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"/>
+        android:background="@color/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_marginBottom="20dp" />
 
-    <include layout="@layout/element_plot"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-        android:layout_below="@id/legend"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/stats_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tab_bar"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,10 +37,6 @@
         <include layout="@layout/element_busy_updating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <include layout="@layout/element_busy_rendering"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content" />
     </RelativeLayout>
 
 </RelativeLayout>

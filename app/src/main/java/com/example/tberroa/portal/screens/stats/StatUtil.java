@@ -1,7 +1,6 @@
 package com.example.tberroa.portal.screens.stats;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.androidplot.ui.AnchorPosition;
 import com.androidplot.ui.LayoutManager;
@@ -13,7 +12,6 @@ import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
-import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.XYStepMode;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
@@ -24,22 +22,44 @@ import com.example.tberroa.portal.models.matchlist.MatchReference;
 import com.example.tberroa.portal.models.summoner.FriendsList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
 import com.example.tberroa.portal.updater.UpdateJobInfo;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 class StatUtil {
 
     private StatUtil() {
+    }
+
+    // =============================================== UTILITY FUNCTIONS ===============================================
+    static public int checkConditions(Context context, long summonerId, String queue, FriendsList friendsList) {
+
+        // code 100: summoner has no matches for this queue
+        if (!StatUtil.hasMatches(summonerId, queue)) {
+            return 100;
+        }
+
+        // code 200: update job is currently running
+        if (new UpdateJobInfo().isRunning(context)) {
+            return 200;
+        }
+
+        // code 300: summoner has no friends to compare matches to
+        if (friendsList == null || friendsList.getFriends() == null || friendsList.getFriends().size() == 0) {
+            return 300;
+        }
+
+        // code 400: none of the summoners friends have any matches for this queue
+        if (!StatUtil.hasMatches(friendsList, queue)) {
+            return 400;
+        }
+
+        // code 500: no issues, conditions are good for showing data
+        return 500;
     }
 
     static private boolean hasMatches(long summonerId, String queue) {
@@ -60,113 +80,80 @@ class StatUtil {
         return false;
     }
 
-    static public List<ParticipantStats> getStats(long summonerId, String queue, int maxAmount) {
+    static public Map<String, List<ParticipantStats>> getStats(Map<String, Long> ids, String queue, int maxMatches) {
         LocalDB localDB = new LocalDB();
 
+        Map<String, List<ParticipantStats>> participantStats = new HashMap<>();
+
         // get match references
-        List<MatchReference> matches = localDB.getMatchReferences(summonerId, queue);
+        Map<String, List<MatchReference>> matches = new HashMap<>();
+        for (Map.Entry<String, Long> summoner : ids.entrySet()) {
+            matches.put(summoner.getKey(), new ArrayList<MatchReference>());
+            List<MatchReference> references = localDB.getMatchReferences(summoner.getValue(), queue);
+            if (references != null) {
+                matches.put(summoner.getKey(), references);
+            }
+        }
 
         // get match details
-        List<MatchDetail> matchDetails = new ArrayList<>();
-        for (int i = 0; i < maxAmount && i < matches.size(); i++) {
-            matchDetails.add(localDB.getMatchDetail(matches.get(i).matchId));
+        Map<String, List<MatchDetail>> matchDetails = new HashMap<>();
+        for (Map.Entry<String, List<MatchReference>> summoner : matches.entrySet()) {
+            matchDetails.put(summoner.getKey(), new ArrayList<MatchDetail>());
+            for (int i = 0; i < summoner.getValue().size() && i < maxMatches; i++) {
+                MatchReference reference = summoner.getValue().get(i);
+                MatchDetail detail = localDB.getMatchDetail(reference.matchId);
+                if (detail != null) {
+                    matchDetails.get(summoner.getKey()).add(detail);
+                }
+            }
         }
 
-        // get participant stats for each match detail
-        List<ParticipantStats> participantStatsList = new ArrayList<>();
-        for (int i = 0; i < maxAmount && i < matchDetails.size(); i++) {
-            participantStatsList.add(localDB.getParticipantStats(summonerId, matchDetails.get(i)));
+        // get participant stats list
+        for (Map.Entry<String, List<MatchDetail>> summoner : matchDetails.entrySet()) {
+            participantStats.put(summoner.getKey(), new ArrayList<ParticipantStats>());
+            long id = ids.get(summoner.getKey());
+            for (int i = 0; i < summoner.getValue().size() && i < maxMatches; i++) {
+                MatchDetail matchDetail = summoner.getValue().get(i);
+                ParticipantStats stats = localDB.getParticipantStats(id, matchDetail);
+                if (stats != null) {
+                    participantStats.get(summoner.getKey()).add(stats);
+                }
+            }
         }
 
-        return participantStatsList;
+        return participantStats;
     }
 
-    static public Map<String, List<ParticipantStats>> getFriendStats(FriendsList fList, String queue, int maxMatches) {
-        // initialize gson for logging
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-
-        // initialize map of friend stats
-        Map<String, List<ParticipantStats>> friendParticipantStatsList = new HashMap<>();
-
-        if (fList != null && !fList.getFriends().isEmpty()) {
-            LocalDB localDB = new LocalDB();
-
-            // get friend ids
-            Map<String, Long> friendIds = new HashMap<>();
-            for (SummonerDto friend : fList.getFriends()) {
-                friendIds.put(friend.name, friend.id);
-            }
-            Type friendIdsType = new TypeToken<Map<String, Long>>() {
-            }.getType();
-            String friendIdsJson = gson.toJson(friendIds, friendIdsType);
-            Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendIds is " + friendIdsJson);
-
-            // get friend match references
-            Map<String, List<MatchReference>> friendMatches = new HashMap<>();
-            for (Map.Entry<String, Long> friend : friendIds.entrySet()) {
-                friendMatches.put(friend.getKey(), new ArrayList<MatchReference>());
-                List<MatchReference> references = localDB.getMatchReferences(friend.getValue(), queue);
-                if (references != null) {
-                    friendMatches.put(friend.getKey(), references);
-                }
-            }
-            Type friendMatchesType = new TypeToken<Map<String, List<MatchReference>>>() {
-            }.getType();
-            String friendMatchesJson = gson.toJson(friendMatches, friendMatchesType);
-            Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendMatches is " + friendMatchesJson);
-
-            // get friend match details
-            Map<String, List<MatchDetail>> friendMatchDetails = new HashMap<>();
-            for (Map.Entry<String, List<MatchReference>> friend : friendMatches.entrySet()) {
-                friendMatchDetails.put(friend.getKey(), new ArrayList<MatchDetail>());
-                for (int i = 0; i < friend.getValue().size() && i < maxMatches; i++) {
-                    MatchReference reference = friend.getValue().get(i);
-                    MatchDetail detail = localDB.getMatchDetail(reference.matchId);
-                    if (detail != null) {
-                        friendMatchDetails.get(friend.getKey()).add(detail);
-                    }
-                }
-            }
-            Type friendDetailsType = new TypeToken<Map<String, List<MatchDetail>>>() {
-            }.getType();
-            String friendDetailsJson = gson.toJson(friendMatchDetails, friendDetailsType);
-            Log.d(Params.TAG_DEBUG, "@StatUtil/getFriendStats: friendMatchDetails is " + friendDetailsJson);
-
-            // get friend participant stats list
-            for (Map.Entry<String, List<MatchDetail>> friend : friendMatchDetails.entrySet()) {
-                friendParticipantStatsList.put(friend.getKey(), new ArrayList<ParticipantStats>());
-                long friendId = friendIds.get(friend.getKey());
-                for (int i = 0; i < friend.getValue().size() && i < maxMatches; i++) {
-                    MatchDetail matchDetail = friend.getValue().get(i);
-                    ParticipantStats stats = localDB.getParticipantStats(friendId, matchDetail);
-                    if (stats != null) {
-                        friendParticipantStatsList.get(friend.getKey()).add(stats);
-                    }
-                }
+    static public Map<String, Number[]> createNumberArray(Map<String, long[]> data) {
+        Map<String, Number[]> numbers = new HashMap<>();
+        for (Map.Entry<String, long[]> summoner : data.entrySet()) {
+            Number[] array = new Number[Params.MAX_MATCHES];
+            Arrays.fill(array, null);
+            numbers.put(summoner.getKey(), array);
+            for (int i = 0; i < summoner.getValue().length; i++) {
+                numbers.get(summoner.getKey())[i] = summoner.getValue()[i];
             }
         }
-        return friendParticipantStatsList;
+        return numbers;
     }
 
-    static public List<SimpleXYSeries> createXYSeries(Set<String> fNames, Number[] uNums, Map<String, Number[]> fNums) {
-
-        List<SimpleXYSeries> series = new ArrayList<>();
-
-        // add user first
-        series.add(new SimpleXYSeries(Arrays.asList(uNums), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
-
-        // add friends
-        for (String name : fNames) {
-            List<Number> nums = Arrays.asList(fNums.get(name));
-            series.add(new SimpleXYSeries(nums, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
+    static public Map<String, SimpleXYSeries> createXYSeries(Map<String, Number[]> numbers) {
+        Map<String, SimpleXYSeries> series = new HashMap<>();
+        for (Map.Entry<String, Number[]> summoner : numbers.entrySet()) {
+            List<Number> nums = Arrays.asList(summoner.getValue());
+            series.put(summoner.getKey(), new SimpleXYSeries(nums, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
         }
         return series;
     }
 
-    static public void createPlot(Context context, XYPlot plot, List<SimpleXYSeries> series) {
-        // add series to plot
+    static public void createPlot(Context context, XYPlot plot, Map<String, Number[]> numbers) {
+
+        // turn numbers into an xy series
+        Map<String, SimpleXYSeries> series = StatUtil.createXYSeries(numbers);
+
+        // add series to plot one at a time
         int i = 0;
-        for (XYSeries seriesX : series) {
+        for (Map.Entry<String, SimpleXYSeries> seriesX : series.entrySet()) {
             LineAndPointFormatter seriesFormat = new LineAndPointFormatter();
             seriesFormat.setPointLabelFormatter(new PointLabelFormatter());
 
@@ -197,7 +184,7 @@ class StatUtil {
                     break;
             }
             i++;
-            plot.addSeries(seriesX, seriesFormat);
+            plot.addSeries(seriesX.getValue(), seriesFormat);
         }
 
         // plot styling
@@ -218,29 +205,171 @@ class StatUtil {
         l.remove(plot.getLegendWidget());
     }
 
-    static public int checkConditions(Context context, long summonerId, String queue, FriendsList friendsList) {
-
-        // code 100: summoner has no matches for this queue
-        if (!StatUtil.hasMatches(summonerId, queue)) {
-            return 100;
+    // ================================================ STAT FUNCTIONS =================================================
+    // offense
+    static public Map<String, long[]> totalDamageToChampions(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).totalDamageDealtToChampions;
+                }
+            }
         }
-
-        // code 200: update job is currently running
-        if (new UpdateJobInfo().isRunning(context)) {
-            return 200;
-        }
-
-        // code 300: summoner has no friends to compare matches to
-        if (friendsList == null || friendsList.getFriends() == null || friendsList.getFriends().size() == 0) {
-            return 300;
-        }
-
-        // code 400: none of the summoners friends have any matches for this queue
-        if (!StatUtil.hasMatches(friendsList, queue)) {
-            return 400;
-        }
-
-        // code 500: no issues, conditions are good for showing data
-        return 500;
+        return data;
     }
+
+    static public Map<String, long[]> doubleKills(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).doubleKills;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> tripleKills(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).tripleKills;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> quadraKills(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).quadraKills;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> pentaKills(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).totalDamageDealtToChampions;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> killingSprees(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).killingSprees;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> kills(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).kills;
+                }
+            }
+        }
+        return data;
+    }
+
+    // utility
+    static public Map<String, long[]> assists(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).assists;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> damageTakenPerDeath(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    long damageTaken = summoner.getValue().get(i).totalDamageTaken;
+                    long deaths = summoner.getValue().get(i).deaths;
+                    if (deaths != 0){
+                        data.get(summoner.getKey())[i] = damageTaken / deaths;
+                    }
+                    else{
+                        data.get(summoner.getKey())[i] = damageTaken;
+                    }
+                }
+            }
+        }
+        return data;
+    }
+
+    // vision
+    static public Map<String, long[]> visionWardsBought(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).visionWardsBoughtInGame;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> wardsPlaced(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).wardsPlaced;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> wardsKilled(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new HashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).wardsKilled;
+                }
+            }
+        }
+        return data;
+    }
+
 }

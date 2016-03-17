@@ -4,6 +4,7 @@ public class Params {
 
     // app limits
     static public final int MAX_FRIENDS = 7;
+    static public final int MAX_MATCHES = 10;
     // authentication
     static public final String SIGN_IN_URL = "http://portalapp.altervista.org/signin.php";
     static public final String REGISTER_URL = "http://portalapp.altervista.org/register.php";
