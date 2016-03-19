@@ -16,11 +16,13 @@ import java.util.Map;
 public class StatsViewAdapter extends RecyclerView.Adapter<StatsViewAdapter.plotViewHolder> {
 
     private final Context context;
+    private final List<String> plotTitles;
     private final List<Map<String, Number[]>> plotData;
     private final int numberOfPlots;
 
-    public StatsViewAdapter(Context context, List<Map<String, Number[]>> plotData) {
+    public StatsViewAdapter(Context context, List<String> plotTitles, List<Map<String, Number[]>> plotData) {
         this.context = context;
+        this.plotTitles = plotTitles;
         this.plotData = plotData;
         numberOfPlots = plotData.size();
     }
@@ -53,7 +55,7 @@ public class StatsViewAdapter extends RecyclerView.Adapter<StatsViewAdapter.plot
     @Override
     public void onBindViewHolder(plotViewHolder plotViewHolder, int i) {
         // set views
-        plotViewHolder.plotTitle.setText(R.string.wards_placed_per_game);
+        plotViewHolder.plotTitle.setText(plotTitles.get(i));
         StatUtil.createPlot(context, plotViewHolder.plot, plotData.get(i));
 
         // make views visible

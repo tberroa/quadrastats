@@ -30,6 +30,7 @@ public class StatsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_stats, group, false);
 
         names = new ArrayList<>();
+        List<String> plotTitles = new ArrayList<>();
         List<Map<String, Number[]>> plotData = new ArrayList<>();
 
         if (isAdded()) {
@@ -37,8 +38,10 @@ public class StatsFragment extends Fragment {
             Bundle bundle = this.getArguments();
             if (bundle != null) {
                 names = bundle.getStringArrayList("names");
+                plotTitles = bundle.getStringArrayList("plot_titles");
                 String plotDataJson = bundle.getString("plot_data");
-                Type plotDataType = new TypeToken<List<Map<String, Number[]>>>(){}.getType();
+                Type plotDataType = new TypeToken<List<Map<String, Number[]>>>() {
+                }.getType();
                 plotData = new Gson().fromJson(plotDataJson, plotDataType);
             }
 
@@ -53,7 +56,7 @@ public class StatsFragment extends Fragment {
 
             // populate recycler view
             StatsViewAdapter statsViewAdapter;
-            statsViewAdapter = new StatsViewAdapter(context, plotData);
+            statsViewAdapter = new StatsViewAdapter(context, plotTitles, plotData);
             recyclerView.setAdapter(statsViewAdapter);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
             recyclerView.setLayoutManager(linearLayoutManager);
@@ -61,7 +64,7 @@ public class StatsFragment extends Fragment {
         return v;
     }
 
-    private void createLegend(View v){
+    private void createLegend(View v) {
         List<TextView> nameViews = getLegendNames(v);
         List<ImageView> colorViews = getLegendColors(v);
         LinearLayout legendLayout = (LinearLayout) v.findViewById(R.id.legend);

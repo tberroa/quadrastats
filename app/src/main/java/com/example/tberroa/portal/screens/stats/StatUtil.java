@@ -1,6 +1,7 @@
 package com.example.tberroa.portal.screens.stats;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.androidplot.ui.AnchorPosition;
 import com.androidplot.ui.LayoutManager;
@@ -26,7 +27,7 @@ import com.example.tberroa.portal.updater.UpdateJobInfo;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,10 +84,10 @@ class StatUtil {
     static public Map<String, List<ParticipantStats>> getStats(Map<String, Long> ids, String queue, int maxMatches) {
         LocalDB localDB = new LocalDB();
 
-        Map<String, List<ParticipantStats>> participantStats = new HashMap<>();
+        Map<String, List<ParticipantStats>> participantStats = new LinkedHashMap<>();
 
         // get match references
-        Map<String, List<MatchReference>> matches = new HashMap<>();
+        Map<String, List<MatchReference>> matches = new LinkedHashMap<>();
         for (Map.Entry<String, Long> summoner : ids.entrySet()) {
             matches.put(summoner.getKey(), new ArrayList<MatchReference>());
             List<MatchReference> references = localDB.getMatchReferences(summoner.getValue(), queue);
@@ -96,7 +97,7 @@ class StatUtil {
         }
 
         // get match details
-        Map<String, List<MatchDetail>> matchDetails = new HashMap<>();
+        Map<String, List<MatchDetail>> matchDetails = new LinkedHashMap<>();
         for (Map.Entry<String, List<MatchReference>> summoner : matches.entrySet()) {
             matchDetails.put(summoner.getKey(), new ArrayList<MatchDetail>());
             for (int i = 0; i < summoner.getValue().size() && i < maxMatches; i++) {
@@ -125,7 +126,7 @@ class StatUtil {
     }
 
     static public Map<String, Number[]> createNumberArray(Map<String, long[]> data) {
-        Map<String, Number[]> numbers = new HashMap<>();
+        Map<String, Number[]> numbers = new LinkedHashMap<>();
         for (Map.Entry<String, long[]> summoner : data.entrySet()) {
             Number[] array = new Number[Params.MAX_MATCHES];
             Arrays.fill(array, null);
@@ -138,7 +139,7 @@ class StatUtil {
     }
 
     private static Map<String, SimpleXYSeries> createXYSeries(Map<String, Number[]> numbers) {
-        Map<String, SimpleXYSeries> series = new HashMap<>();
+        Map<String, SimpleXYSeries> series = new LinkedHashMap<>();
         for (Map.Entry<String, Number[]> summoner : numbers.entrySet()) {
             List<Number> nums = Arrays.asList(summoner.getValue());
             series.put(summoner.getKey(), new SimpleXYSeries(nums, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, null));
@@ -147,6 +148,27 @@ class StatUtil {
     }
 
     static public void createPlot(Context context, XYPlot plot, Map<String, Number[]> numbers) {
+
+        // get the min and max values
+        double min = 500000, max = 0;
+        for (Map.Entry<String, Number[]> entry : numbers.entrySet()) {
+            for (Number number : entry.getValue()) {
+                if (max < number.longValue()) {
+                    max = number.longValue();
+                }
+                if (min > number.longValue()){
+                    min = number.longValue();
+                }
+            }
+        }
+        Log.d(Params.TAG_DEBUG, "@StatUtil/plot: min/max are " + Double.toString(min) + "/" + Double.toString(max));
+
+        // calculate the range step value
+        double step = Math.floor((max-min) / 5);
+        if (step < 1) {
+            step = 1;
+        }
+        Log.d(Params.TAG_DEBUG, "@StatUtil/createPlot: step is " + Double.toString(step));
 
         // turn numbers into an xy series
         Map<String, SimpleXYSeries> series = StatUtil.createXYSeries(numbers);
@@ -189,7 +211,7 @@ class StatUtil {
 
         // plot styling
         plot.setBorderStyle(XYPlot.BorderStyle.NONE, null, null);
-        plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
+        plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, step);
         plot.setRangeValueFormat(new DecimalFormat("#"));
         plot.setTicksPerRangeLabel(2);
         XYGraphWidget g = plot.getGraphWidget();
@@ -208,77 +230,12 @@ class StatUtil {
     // ================================================ STAT FUNCTIONS =================================================
     // offense
     static public Map<String, long[]> totalDamageToChampions(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
+        Map<String, long[]> data = new LinkedHashMap<>();
         for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
                     data.get(summoner.getKey())[i] = summoner.getValue().get(i).totalDamageDealtToChampions;
-                }
-            }
-        }
-        return data;
-    }
-
-    static public Map<String, long[]> doubleKills(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
-            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
-            for (int i = 0; i < summoner.getValue().size(); i++) {
-                if (summoner.getValue().get(i) != null) {
-                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).doubleKills;
-                }
-            }
-        }
-        return data;
-    }
-
-    static public Map<String, long[]> tripleKills(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
-            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
-            for (int i = 0; i < summoner.getValue().size(); i++) {
-                if (summoner.getValue().get(i) != null) {
-                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).tripleKills;
-                }
-            }
-        }
-        return data;
-    }
-
-    static public Map<String, long[]> quadraKills(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
-            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
-            for (int i = 0; i < summoner.getValue().size(); i++) {
-                if (summoner.getValue().get(i) != null) {
-                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).quadraKills;
-                }
-            }
-        }
-        return data;
-    }
-
-    static public Map<String, long[]> pentaKills(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
-            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
-            for (int i = 0; i < summoner.getValue().size(); i++) {
-                if (summoner.getValue().get(i) != null) {
-                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).totalDamageDealtToChampions;
-                }
-            }
-        }
-        return data;
-    }
-
-    static public Map<String, long[]> killingSprees(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
-            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
-            for (int i = 0; i < summoner.getValue().size(); i++) {
-                if (summoner.getValue().get(i) != null) {
-                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).killingSprees;
                 }
             }
         }
@@ -286,7 +243,7 @@ class StatUtil {
     }
 
     static public Map<String, long[]> kills(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
+        Map<String, long[]> data = new LinkedHashMap<>();
         for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
@@ -298,9 +255,35 @@ class StatUtil {
         return data;
     }
 
+    static public Map<String, long[]> killingSprees(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new LinkedHashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).killingSprees;
+                }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, long[]> largestKillingSpree(Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new LinkedHashMap<>();
+        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).largestKillingSpree;
+                }
+            }
+        }
+        return data;
+    }
+
     // utility
     static public Map<String, long[]> assists(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
+        Map<String, long[]> data = new LinkedHashMap<>();
         for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
@@ -313,17 +296,16 @@ class StatUtil {
     }
 
     static public Map<String, long[]> damageTakenPerDeath(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
+        Map<String, long[]> data = new LinkedHashMap<>();
         for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
                     long damageTaken = summoner.getValue().get(i).totalDamageTaken;
                     long deaths = summoner.getValue().get(i).deaths;
-                    if (deaths != 0){
+                    if (deaths != 0) {
                         data.get(summoner.getKey())[i] = damageTaken / deaths;
-                    }
-                    else{
+                    } else {
                         data.get(summoner.getKey())[i] = damageTaken;
                     }
                 }
@@ -334,7 +316,7 @@ class StatUtil {
 
     // vision
     static public Map<String, long[]> visionWardsBought(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
+        Map<String, long[]> data = new LinkedHashMap<>();
         for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
@@ -347,7 +329,7 @@ class StatUtil {
     }
 
     static public Map<String, long[]> wardsPlaced(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
+        Map<String, long[]> data = new LinkedHashMap<>();
         for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
@@ -360,7 +342,7 @@ class StatUtil {
     }
 
     static public Map<String, long[]> wardsKilled(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new HashMap<>();
+        Map<String, long[]> data = new LinkedHashMap<>();
         for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {

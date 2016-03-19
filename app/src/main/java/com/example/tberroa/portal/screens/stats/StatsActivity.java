@@ -33,7 +33,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -143,7 +143,7 @@ public class StatsActivity extends BaseActivity {
                     @Override
                     public void run() {
                         // create map of summoner ids
-                        Map<String, Long> ids = new HashMap<>();
+                        Map<String, Long> ids = new LinkedHashMap<>();
                         ids.put(userInfo.getStylizedName(StatsActivity.this), userSummonerId);
                         for (SummonerDto friend : friendsList.getFriends()) {
                            ids.put(friend.name, friend.id);
@@ -153,15 +153,27 @@ public class StatsActivity extends BaseActivity {
                         Map<String, List<ParticipantStats>> stats;
                         stats = StatUtil.getStats(ids, queue, Params.MAX_MATCHES);
 
+                        // create list of plot titles
+                        ArrayList<String> goldPlotTitles = new ArrayList<>();
+                        ArrayList<String> offensePlotTitles = new ArrayList<>();
+                        ArrayList<String> utilityPlotTitles = new ArrayList<>();
+                        ArrayList<String> visionPlotTitles = new ArrayList<>();
+                        offensePlotTitles.add("Total Damage To Champions");
+                        offensePlotTitles.add("Kills");
+                        offensePlotTitles.add("Killing Sprees");
+                        offensePlotTitles.add("Largest Killing Spree");
+                        utilityPlotTitles.add("Assists");
+                        utilityPlotTitles.add("Damage Taken Per Death");
+                        visionPlotTitles.add("Vision Wards Bought");
+                        visionPlotTitles.add("Wards Placed");
+                        visionPlotTitles.add("Wards Killed");
+
                         // get game stats
                         List<Map<String, long[]>> gameStatsLong = new ArrayList<>();
                         gameStatsLong.add(StatUtil.totalDamageToChampions(stats));
-                        gameStatsLong.add(StatUtil.doubleKills(stats));
-                        gameStatsLong.add(StatUtil.tripleKills(stats));
-                        gameStatsLong.add(StatUtil.quadraKills(stats));
-                        gameStatsLong.add(StatUtil.pentaKills(stats));
-                        gameStatsLong.add(StatUtil.killingSprees(stats));
                         gameStatsLong.add(StatUtil.kills(stats));
+                        gameStatsLong.add(StatUtil.killingSprees(stats));
+                        gameStatsLong.add(StatUtil.largestKillingSpree(stats));
                         gameStatsLong.add(StatUtil.assists(stats));
                         gameStatsLong.add(StatUtil.damageTakenPerDeath(stats));
                         gameStatsLong.add(StatUtil.visionWardsBought(stats));
@@ -176,9 +188,9 @@ public class StatsActivity extends BaseActivity {
 
                         // separate by type (0-6 offense, 7-8 utility, 9-11 vision)
                         List<Map<String, Number[]>> goldPlotData = new ArrayList<>();
-                        List<Map<String, Number[]>> offensePlotData = gameStatsNumber.subList(0,7);
-                        List<Map<String, Number[]>> utilityPlotData = gameStatsNumber.subList(7,9);
-                        List<Map<String, Number[]>> visionPlotData = gameStatsNumber.subList(9,12);
+                        List<Map<String, Number[]>> offensePlotData = gameStatsNumber.subList(0,4);
+                        List<Map<String, Number[]>> utilityPlotData = gameStatsNumber.subList(4,6);
+                        List<Map<String, Number[]>> visionPlotData = gameStatsNumber.subList(6,9);
 
                         // serialize the plot data
                         Gson gson = new Gson();
@@ -194,22 +206,26 @@ public class StatsActivity extends BaseActivity {
                         // create tab bundles
                         Bundle goldTabBundle = new Bundle();
                         goldTabBundle.putString("plot_data", goldPlotDataJson);
+                        goldTabBundle.putStringArrayList("plot_titles", goldPlotTitles);
                         goldTabBundle.putStringArrayList("names", names);
 
                         Bundle offenseTabBundle = new Bundle();
                         offenseTabBundle.putString("plot_data", offensePlotDataJson);
+                        offenseTabBundle.putStringArrayList("plot_titles", offensePlotTitles);
                         offenseTabBundle.putStringArrayList("names", names);
 
                         Bundle utilityTabBundle = new Bundle();
                         utilityTabBundle.putString("plot_data", utilityPlotDataJson);
+                        utilityTabBundle.putStringArrayList("plot_titles", utilityPlotTitles);
                         utilityTabBundle.putStringArrayList("names", names);
 
                         Bundle visionTabBundle = new Bundle();
                         visionTabBundle.putString("plot_data", visionPlotDataJson);
+                        visionTabBundle.putStringArrayList("plot_titles", visionPlotTitles);
                         visionTabBundle.putStringArrayList("names", names);
 
                         // add bundles to plot data
-                        plotData = new HashMap<>();
+                        plotData = new LinkedHashMap<>();
                         plotData.put("gold", goldTabBundle);
                         plotData.put("offense", offenseTabBundle);
                         plotData.put("utility", utilityTabBundle);
