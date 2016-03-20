@@ -11,7 +11,10 @@ import android.widget.ListView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.screens.BaseActivity;
-import com.example.tberroa.portal.screens.stats.StatsActivity;
+import com.example.tberroa.portal.screens.friends.FriendsActivity;
+import com.example.tberroa.portal.screens.stats.recent.RecentActivity;
+import com.example.tberroa.portal.screens.stats.season.SeasonActivity;
+import com.example.tberroa.portal.screens.stats.withfriends.WithFriendsActivity;
 
 public class HomeActivity extends BaseActivity {
 
@@ -21,11 +24,11 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
 
         // initialize labels
-        String dynamicQueue = getResources().getString(R.string.dynamic_queue);
-        String soloQueue = getResources().getString(R.string.solo_queue);
-        String team5 = getResources().getString(R.string.team_5);
-        String team3 = getResources().getString(R.string.team_3);
-        String[] labels = {dynamicQueue, soloQueue, team5, team3};
+        String manageFriends = getResources().getString(R.string.manage_friends);
+        String recentGames = getResources().getString(R.string.recent_games);
+        String seasonTotals = getResources().getString(R.string.season_totals);
+        String withFriends = getResources().getString(R.string.with_friends);
+        String[] labels = {manageFriends, recentGames, seasonTotals, withFriends};
 
         // set list view
         ListView listView = (ListView) findViewById(R.id.list_view);
@@ -34,23 +37,27 @@ public class HomeActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Intent intent = new Intent(HomeActivity.this, StatsActivity.class);
                 switch (position) {
                     case 0:
-                        intent.putExtra("queue", Params.DYNAMIC_QUEUE);
+                        Intent manageFriends = new Intent(HomeActivity.this, FriendsActivity.class);
+                        startActivity(manageFriends);
                         break;
                     case 1:
-                        intent.putExtra("queue", Params.SOLO_QUEUE);
+                        Intent recentGames = new Intent(HomeActivity.this, RecentActivity.class);
+                        recentGames.putExtra("queue", Params.DYNAMIC_QUEUE);
+                        startActivity(recentGames);
                         break;
                     case 2:
-                        intent.putExtra("queue", Params.TEAM_5);
+                        Intent seasonTotals = new Intent(HomeActivity.this, SeasonActivity.class);
+                        seasonTotals.putExtra("queue", Params.DYNAMIC_QUEUE);
+                        startActivity(seasonTotals);
                         break;
                     case 3:
-                        intent.putExtra("queue", Params.TEAM_3);
+                        Intent withFriends = new Intent(HomeActivity.this,WithFriendsActivity.class);
+                        withFriends.putExtra("queue", Params.DYNAMIC_QUEUE);
+                        startActivity(withFriends);
                         break;
-
                 }
-                startActivity(intent);
             }
         });
     }

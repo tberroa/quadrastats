@@ -81,7 +81,13 @@
             android:name=".screens.friends.FriendsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screens.stats.StatsActivity"
+            android:name=".screens.stats.recent.RecentActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.stats.season.SeasonActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.stats.withfriends.WithFriendsActivity"
             android:screenOrientation="portrait"/>
 
         <service android:name=".apimanager.APIMonitorService"/>

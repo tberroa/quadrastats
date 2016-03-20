@@ -207,11 +207,11 @@ public class UpdateService extends Service {
                 // parse the matches and separate by queue type
                 List<List<MatchReference>> newMatchesByQueue = divideMatches(newMatches);
 
-                // trim each list to only hold the 10 most recent matches
+                // trim each list to only hold the most recent matches
                 for (int i = 0; i < newMatchesByQueue.size(); i++) {
                     if (kill) return null;
 
-                    List<MatchReference> trimmedList = onlyMostRecent(newMatchesByQueue.get(i), 10);
+                    List<MatchReference> trimmedList = onlyMostRecent(newMatchesByQueue.get(i));
                     newMatchesByQueue.set(i, trimmedList);
                 }
 
@@ -301,7 +301,6 @@ public class UpdateService extends Service {
         List<List<MatchReference>> matchesByQueue = new ArrayList<>();
         matchesByQueue.add(new ArrayList<MatchReference>()); // dynamic queue
         matchesByQueue.add(new ArrayList<MatchReference>()); // solo queue
-        matchesByQueue.add(new ArrayList<MatchReference>()); // 5's
         matchesByQueue.add(new ArrayList<MatchReference>()); // 3's
 
         // begin parsing
@@ -313,9 +312,6 @@ public class UpdateService extends Service {
                 case Params.SOLO_QUEUE:
                     matchesByQueue.get(1).add(match);
                     break;
-                case Params.TEAM_5:
-                    matchesByQueue.get(2).add(match);
-                    break;
                 case Params.TEAM_3:
                     matchesByQueue.get(3).add(match);
                     break;
@@ -325,9 +321,9 @@ public class UpdateService extends Service {
         return matchesByQueue;
     }
 
-    private List<MatchReference> onlyMostRecent(List<MatchReference> matches, int max) {
-        if (matches.size() > max) {
-            return matches.subList(0, max);
+    private List<MatchReference> onlyMostRecent(List<MatchReference> matches) {
+        if (matches.size() > Params.MAX_MATCHES) {
+            return matches.subList(0, Params.MAX_MATCHES);
         } else {
             return matches;
         }

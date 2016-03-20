@@ -53,11 +53,11 @@ class HomeAdapter extends ArrayAdapter<String> {
         // set image
         switch (position) {
             case 0:
-                Picasso.with(context).load(R.drawable.splash_zed).centerCrop()
+                Picasso.with(context).load(R.drawable.splash_pool_party).centerCrop()
                         .resize(width, height).into(viewHolder.thumbnail);
                 break;
             case 1:
-                Picasso.with(context).load(R.drawable.splash_amumu).centerCrop()
+                Picasso.with(context).load(R.drawable.splash_zed).centerCrop()
                         .resize(width, height).into(viewHolder.thumbnail);
                 break;
             case 2:

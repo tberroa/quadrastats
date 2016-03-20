@@ -1,4 +1,4 @@
-package com.example.tberroa.portal.screens.stats;
+package com.example.tberroa.portal.screens.stats.recent;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +13,14 @@ import com.example.tberroa.portal.R;
 import java.util.List;
 import java.util.Map;
 
-public class StatsViewAdapter extends RecyclerView.Adapter<StatsViewAdapter.plotViewHolder> {
+public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.plotViewHolder> {
 
     private final Context context;
     private final List<String> plotTitles;
     private final List<Map<String, Number[]>> plotData;
     private final int numberOfPlots;
 
-    public StatsViewAdapter(Context context, List<String> plotTitles, List<Map<String, Number[]>> plotData) {
+    public RecentViewAdapter(Context context, List<String> plotTitles, List<Map<String, Number[]>> plotData) {
         this.context = context;
         this.plotTitles = plotTitles;
         this.plotData = plotData;
@@ -56,7 +56,7 @@ public class StatsViewAdapter extends RecyclerView.Adapter<StatsViewAdapter.plot
     public void onBindViewHolder(plotViewHolder plotViewHolder, int i) {
         // set views
         plotViewHolder.plotTitle.setText(plotTitles.get(i));
-        StatUtil.createPlot(context, plotViewHolder.plot, plotData.get(i));
+        RecentUtil.createPlot(context, plotViewHolder.plot, plotData.get(i));
 
         // make views visible
         plotViewHolder.plotTitle.setVisibility(View.VISIBLE);

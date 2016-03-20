@@ -1,4 +1,4 @@
-package com.example.tberroa.portal.screens.stats;
+package com.example.tberroa.portal.screens.stats.recent;
 
 import android.content.Context;
 import android.util.Log;
@@ -19,6 +19,7 @@ import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.models.match.MatchDetail;
 import com.example.tberroa.portal.models.match.ParticipantStats;
+import com.example.tberroa.portal.models.match.ParticipantTimeline;
 import com.example.tberroa.portal.models.matchlist.MatchReference;
 import com.example.tberroa.portal.models.summoner.FriendsList;
 import com.example.tberroa.portal.models.summoner.SummonerDto;
@@ -31,16 +32,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-class StatUtil {
+class RecentUtil {
 
-    private StatUtil() {
+    private RecentUtil() {
     }
 
     // =============================================== UTILITY FUNCTIONS ===============================================
     static public int checkConditions(Context context, long summonerId, String queue, FriendsList friendsList) {
 
         // code 100: summoner has no matches for this queue
-        if (!StatUtil.hasMatches(summonerId, queue)) {
+        if (!RecentUtil.hasMatches(summonerId, queue)) {
             return 100;
         }
 
@@ -55,7 +56,7 @@ class StatUtil {
         }
 
         // code 400: none of the summoners friends have any matches for this queue
-        if (!StatUtil.hasMatches(friendsList, queue)) {
+        if (!RecentUtil.hasMatches(friendsList, queue)) {
             return 400;
         }
 
@@ -81,7 +82,7 @@ class StatUtil {
         return false;
     }
 
-    static public Map<String, List<ParticipantStats>> getStats(Map<String, Long> ids, String queue, int maxMatches) {
+    static public Map<String, List<ParticipantStats>> getStats(Map<String, Long> ids, String queue) {
         LocalDB localDB = new LocalDB();
 
         Map<String, List<ParticipantStats>> participantStats = new LinkedHashMap<>();
@@ -100,7 +101,7 @@ class StatUtil {
         Map<String, List<MatchDetail>> matchDetails = new LinkedHashMap<>();
         for (Map.Entry<String, List<MatchReference>> summoner : matches.entrySet()) {
             matchDetails.put(summoner.getKey(), new ArrayList<MatchDetail>());
-            for (int i = 0; i < summoner.getValue().size() && i < maxMatches; i++) {
+            for (int i = 0; i < summoner.getValue().size() && i < Params.MAX_MATCHES; i++) {
                 MatchReference reference = summoner.getValue().get(i);
                 MatchDetail detail = localDB.getMatchDetail(reference.matchId);
                 if (detail != null) {
@@ -113,7 +114,7 @@ class StatUtil {
         for (Map.Entry<String, List<MatchDetail>> summoner : matchDetails.entrySet()) {
             participantStats.put(summoner.getKey(), new ArrayList<ParticipantStats>());
             long id = ids.get(summoner.getKey());
-            for (int i = 0; i < summoner.getValue().size() && i < maxMatches; i++) {
+            for (int i = 0; i < summoner.getValue().size() && i < Params.MAX_MATCHES; i++) {
                 MatchDetail matchDetail = summoner.getValue().get(i);
                 ParticipantStats stats = localDB.getParticipantStats(id, matchDetail);
                 if (stats != null) {
@@ -125,9 +126,105 @@ class StatUtil {
         return participantStats;
     }
 
-    static public Map<String, Number[]> createNumberArray(Map<String, long[]> data) {
+    static public Map<String, List<ParticipantTimeline>> getTimeline(Map<String, Long> ids, String queue) {
+        LocalDB localDB = new LocalDB();
+
+        Map<String, List<ParticipantTimeline>> participantTimeline = new LinkedHashMap<>();
+
+        // get match references
+        Map<String, List<MatchReference>> matches = new LinkedHashMap<>();
+        for (Map.Entry<String, Long> summoner : ids.entrySet()) {
+            matches.put(summoner.getKey(), new ArrayList<MatchReference>());
+            List<MatchReference> references = localDB.getMatchReferences(summoner.getValue(), queue);
+            if (references != null) {
+                matches.put(summoner.getKey(), references);
+            }
+        }
+
+        // get match details
+        Map<String, List<MatchDetail>> matchDetails = new LinkedHashMap<>();
+        for (Map.Entry<String, List<MatchReference>> summoner : matches.entrySet()) {
+            matchDetails.put(summoner.getKey(), new ArrayList<MatchDetail>());
+            for (int i = 0; i < summoner.getValue().size() && i < Params.MAX_MATCHES; i++) {
+                MatchReference reference = summoner.getValue().get(i);
+                MatchDetail detail = localDB.getMatchDetail(reference.matchId);
+                if (detail != null) {
+                    matchDetails.get(summoner.getKey()).add(detail);
+                }
+            }
+        }
+
+        // get participant timeline list
+        for (Map.Entry<String, List<MatchDetail>> summoner : matchDetails.entrySet()) {
+            participantTimeline.put(summoner.getKey(), new ArrayList<ParticipantTimeline>());
+            long id = ids.get(summoner.getKey());
+            for (int i = 0; i < summoner.getValue().size() && i < Params.MAX_MATCHES; i++) {
+                MatchDetail matchDetail = summoner.getValue().get(i);
+                ParticipantTimeline timeline = localDB.getParticipantTimeline(id, matchDetail);
+                if (timeline != null) {
+                    participantTimeline.get(summoner.getKey()).add(timeline);
+                }
+            }
+        }
+
+        return participantTimeline;
+    }
+
+    static public Map<String, long[]> getMatchDuration(Map<String, Long> ids, String queue) {
+        LocalDB localDB = new LocalDB();
+
+        Map<String, long[]> matchDurations = new LinkedHashMap<>();
+
+        // get match references
+        Map<String, List<MatchReference>> matches = new LinkedHashMap<>();
+        for (Map.Entry<String, Long> summoner : ids.entrySet()) {
+            matches.put(summoner.getKey(), new ArrayList<MatchReference>());
+            List<MatchReference> references = localDB.getMatchReferences(summoner.getValue(), queue);
+            if (references != null) {
+                matches.put(summoner.getKey(), references);
+            }
+        }
+
+        // get match details
+        Map<String, List<MatchDetail>> matchDetails = new LinkedHashMap<>();
+        for (Map.Entry<String, List<MatchReference>> summoner : matches.entrySet()) {
+            matchDetails.put(summoner.getKey(), new ArrayList<MatchDetail>());
+            for (int i = 0; i < summoner.getValue().size() && i < Params.MAX_MATCHES; i++) {
+                MatchReference reference = summoner.getValue().get(i);
+                MatchDetail detail = localDB.getMatchDetail(reference.matchId);
+                if (detail != null) {
+                    matchDetails.get(summoner.getKey()).add(detail);
+                }
+            }
+        }
+
+        // get match durations
+        for (Map.Entry<String, List<MatchDetail>> summoner : matchDetails.entrySet()) {
+            matchDurations.put(summoner.getKey(), new long[Params.MAX_MATCHES]);
+            for (int i = 0; i < summoner.getValue().size() && i < Params.MAX_MATCHES; i++) {
+                matchDurations.get(summoner.getKey())[i] = summoner.getValue().get(i).matchDuration;
+            }
+        }
+
+        return matchDurations;
+    }
+
+    static public Map<String, Number[]> createNumberArrayL(Map<String, long[]> data) {
         Map<String, Number[]> numbers = new LinkedHashMap<>();
         for (Map.Entry<String, long[]> summoner : data.entrySet()) {
+            Number[] array = new Number[Params.MAX_MATCHES];
+            Arrays.fill(array, null);
+            numbers.put(summoner.getKey(), array);
+            for (int i = 0; i < summoner.getValue().length; i++) {
+                numbers.get(summoner.getKey())[i] = summoner.getValue()[i];
+            }
+        }
+        return numbers;
+    }
+
+    static public Map<String, Number[]> createNumberArrayD(Map<String, double[]> data) {
+        Map<String, Number[]> numbers = new LinkedHashMap<>();
+        for (Map.Entry<String, double[]> summoner : data.entrySet()) {
             Number[] array = new Number[Params.MAX_MATCHES];
             Arrays.fill(array, null);
             numbers.put(summoner.getKey(), array);
@@ -153,25 +250,27 @@ class StatUtil {
         double min = 500000, max = 0;
         for (Map.Entry<String, Number[]> entry : numbers.entrySet()) {
             for (Number number : entry.getValue()) {
-                if (max < number.longValue()) {
-                    max = number.longValue();
-                }
-                if (min > number.longValue()){
-                    min = number.longValue();
+                if (number != null) {
+                    if (max < number.longValue()) {
+                        max = number.longValue();
+                    }
+                    if (min > number.longValue()) {
+                        min = number.longValue();
+                    }
                 }
             }
         }
         Log.d(Params.TAG_DEBUG, "@StatUtil/plot: min/max are " + Double.toString(min) + "/" + Double.toString(max));
 
         // calculate the range step value
-        double step = Math.floor((max-min) / 5);
+        double step = Math.floor((max - min) / 5);
         if (step < 1) {
             step = 1;
         }
         Log.d(Params.TAG_DEBUG, "@StatUtil/createPlot: step is " + Double.toString(step));
 
         // turn numbers into an xy series
-        Map<String, SimpleXYSeries> series = StatUtil.createXYSeries(numbers);
+        Map<String, SimpleXYSeries> series = RecentUtil.createXYSeries(numbers);
 
         // add series to plot one at a time
         int i = 0;
@@ -213,7 +312,7 @@ class StatUtil {
         plot.setBorderStyle(XYPlot.BorderStyle.NONE, null, null);
         plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, step);
         plot.setRangeValueFormat(new DecimalFormat("#"));
-        plot.setTicksPerRangeLabel(2);
+        plot.setTicksPerRangeLabel(1);
         XYGraphWidget g = plot.getGraphWidget();
         g.position(-0.5f, XLayoutStyle.RELATIVE_TO_RIGHT,
                 -0.5f, YLayoutStyle.RELATIVE_TO_BOTTOM, AnchorPosition.CENTER);
@@ -228,15 +327,70 @@ class StatUtil {
     }
 
     // ================================================ STAT FUNCTIONS =================================================
-    // offense
-    static public Map<String, long[]> totalDamageToChampions(Map<String, List<ParticipantStats>> stats) {
-        Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
-            data.put(summoner.getKey(), new long[summoner.getValue().size()]);
+    // income
+    static public Map<String, double[]> goldPerMin(Map<String, long[]> mD, Map<String, List<ParticipantStats>> stats) {
+        Map<String, double[]> data = new LinkedHashMap<>();
+
+        // get names
+        ArrayList<String> names = new ArrayList<>(stats.keySet());
+
+        // loop for each player
+        for (int i=0; i<names.size(); i++) {
+            data.put(names.get(i), new double[stats.get(names.get(i)).size()]);
+
+            // loop for each game
+            for (int j = 0; j < stats.get(names.get(i)).size(); j++) {
+                double matchDuration = (double) mD.get(names.get(i))[j] / 60;
+                long goldEarned = stats.get(names.get(i)).get(j).goldEarned;
+                data.get(names.get(i))[j] = (double) goldEarned / matchDuration;
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, double[]> csAtTen(Map<String, List<ParticipantTimeline>> timeline) {
+        Map<String, double[]> data = new LinkedHashMap<>();
+        for (Map.Entry<String, List<ParticipantTimeline>> summoner : timeline.entrySet()) {
+            data.put(summoner.getKey(), new double[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
-                if (summoner.getValue().get(i) != null) {
-                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).totalDamageDealtToChampions;
+                if (summoner.getValue().get(i) != null && summoner.getValue().get(i).creepsPerMinDeltas != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).creepsPerMinDeltas.zeroToTen * 10;
                 }
+            }
+        }
+        return data;
+    }
+
+    static public Map<String, double[]> csDiffAtTen(Map<String, List<ParticipantTimeline>> timeline) {
+        Map<String, double[]> data = new LinkedHashMap<>();
+        for (Map.Entry<String, List<ParticipantTimeline>> summoner : timeline.entrySet()) {
+            data.put(summoner.getKey(), new double[summoner.getValue().size()]);
+            for (int i = 0; i < summoner.getValue().size(); i++) {
+                if (summoner.getValue().get(i) != null && summoner.getValue().get(i).csDiffPerMinDeltas != null) {
+                    data.get(summoner.getKey())[i] = summoner.getValue().get(i).csDiffPerMinDeltas.zeroToTen * 10;
+                }
+            }
+        }
+        return data;
+    }
+
+    // offense
+    static public Map<String, long[]> dmgPerMin(Map<String, long[]> mD, Map<String, List<ParticipantStats>> stats) {
+        Map<String, long[]> data = new LinkedHashMap<>();
+
+        // get names
+        ArrayList<String> names = new ArrayList<>(stats.keySet());
+
+        // loop for each player
+        for (int i=0; i<names.size(); i++) {
+            data.put(names.get(i), new long[stats.get(names.get(i)).size()]);
+
+            // loop for each game
+            for (int j = 0; j < stats.get(names.get(i)).size(); j++) {
+                double matchDuration = (double) mD.get(names.get(i))[j] / 60;
+                long damageDealt = stats.get(names.get(i)).get(j).totalDamageDealtToChampions;
+                double result = (double) damageDealt / matchDuration;
+                data.get(names.get(i))[j] = (long) Math.floor(result);
             }
         }
         return data;

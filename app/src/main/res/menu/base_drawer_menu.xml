@@ -10,28 +10,24 @@
                 <item
                     android:id="@+id/manage_friends"
                     android:icon="@drawable/ic_inner_circle"
-                    android:title="@string/friends" />
+                    android:title="@string/manage_friends" />
             </menu>
         </item>
     </group>
     <item android:title="@string/stats" >
         <menu>
             <item
-                android:id="@+id/dynamic_queue"
-                android:icon="@drawable/ic_group"
-                android:title="@string/dynamic_queue" />
+                android:id="@+id/recent_games"
+                android:icon="@drawable/ic_recent_games"
+                android:title="@string/recent_games" />
             <item
-                android:id="@+id/solo_queue"
-                android:icon="@drawable/ic_solo"
-                android:title="@string/solo_queue" />
+                android:id="@+id/season_totals"
+                android:icon="@drawable/ic_season_totals"
+                android:title="@string/season_totals" />
             <item
-                android:id="@+id/team_5"
-                android:icon="@drawable/ic_team_5"
-                android:title="@string/team_5" />
-            <item
-                android:id="@+id/team_3"
-                android:icon="@drawable/ic_team_3"
-                android:title="@string/team_3" />
+                android:id="@+id/with_friends"
+                android:icon="@drawable/ic_with_friends"
+                android:title="@string/with_friends" />
         </menu>
     </item>
 </menu>

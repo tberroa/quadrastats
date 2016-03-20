@@ -21,7 +21,9 @@ import com.example.tberroa.portal.screens.profile.ProfileActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
-import com.example.tberroa.portal.screens.stats.StatsActivity;
+import com.example.tberroa.portal.screens.stats.recent.RecentActivity;
+import com.example.tberroa.portal.screens.stats.season.SeasonActivity;
+import com.example.tberroa.portal.screens.stats.withfriends.WithFriendsActivity;
 import com.example.tberroa.portal.updater.UpdateJobInfo;
 import com.example.tberroa.portal.updater.UpdateService;
 import com.example.tberroa.portal.updater.UpdateUtil;
@@ -108,49 +110,37 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 });
                 drawer.closeDrawers();
                 break;
-            case R.id.dynamic_queue:
+            case R.id.recent_games:
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        Intent dynamicQueue = new Intent(BaseActivity.this, StatsActivity.class);
-                        dynamicQueue.putExtra("queue", Params.DYNAMIC_QUEUE);
-                        startActivity(dynamicQueue);
+                        Intent recentGames = new Intent(BaseActivity.this, RecentActivity.class);
+                        recentGames.putExtra("queue", Params.DYNAMIC_QUEUE);
+                        startActivity(recentGames);
                         finish();
                     }
                 });
                 drawer.closeDrawers();
                 break;
-            case R.id.solo_queue:
+            case R.id.season_totals:
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        Intent soloQueue = new Intent(BaseActivity.this, StatsActivity.class);
-                        soloQueue.putExtra("queue", Params.SOLO_QUEUE);
-                        startActivity(soloQueue);
+                        Intent seasonTotals = new Intent(BaseActivity.this, SeasonActivity.class);
+                        seasonTotals.putExtra("queue", Params.DYNAMIC_QUEUE);
+                        startActivity(seasonTotals);
                         finish();
                     }
                 });
                 drawer.closeDrawers();
                 break;
-            case R.id.team_5:
+            case R.id.with_friends:
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        Intent team5 = new Intent(BaseActivity.this, StatsActivity.class);
-                        team5.putExtra("queue", Params.TEAM_5);
-                        startActivity(team5);
-                        finish();
-                    }
-                });
-                drawer.closeDrawers();
-                break;
-            case R.id.team_3:
-                toggle.runWhenIdle(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent team3 = new Intent(BaseActivity.this, StatsActivity.class);
-                        team3.putExtra("queue", Params.TEAM_3);
-                        startActivity(team3);
+                        Intent withFriends = new Intent(BaseActivity.this, WithFriendsActivity.class);
+                        withFriends.putExtra("queue", Params.DYNAMIC_QUEUE);
+                        startActivity(withFriends);
                         finish();
                     }
                 });

@@ -1,4 +1,4 @@
-package com.example.tberroa.portal.screens.stats;
+package com.example.tberroa.portal.screens.stats.recent;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,18 +7,18 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.Map;
 
-class StatsPagerAdapter extends FragmentStatePagerAdapter {
+class RecentPagerAdapter extends FragmentStatePagerAdapter {
 
     private final int numberOfTabs;
-    private final Bundle goldPlotData;
+    private final Bundle incomePlotData;
     private final Bundle offensePlotData;
     private final Bundle utilityPlotData;
     private final Bundle visionPlotData;
 
-    public StatsPagerAdapter(FragmentManager fM, int numberOfTabs, Map<String, Bundle> plotData) {
+    public RecentPagerAdapter(FragmentManager fM, int numberOfTabs, Map<String, Bundle> plotData) {
         super(fM);
         this.numberOfTabs = numberOfTabs;
-        goldPlotData = plotData.get("gold");
+        incomePlotData = plotData.get("income");
         offensePlotData = plotData.get("offense");
         utilityPlotData = plotData.get("utility");
         visionPlotData = plotData.get("vision");
@@ -26,22 +26,22 @@ class StatsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        StatsFragment statsFragment = new StatsFragment();
+        RecentFragment recentFragment = new RecentFragment();
         switch (position) {
             case 0:
-                statsFragment.setArguments(goldPlotData);
+                recentFragment.setArguments(incomePlotData);
                 break;
             case 1:
-                statsFragment.setArguments(offensePlotData);
+                recentFragment.setArguments(offensePlotData);
                 break;
             case 2:
-                statsFragment.setArguments(utilityPlotData);
+                recentFragment.setArguments(utilityPlotData);
                 break;
             case 3:
-                statsFragment.setArguments(visionPlotData);
+                recentFragment.setArguments(visionPlotData);
                 break;
         }
-        return statsFragment;
+        return recentFragment;
     }
 
     @Override

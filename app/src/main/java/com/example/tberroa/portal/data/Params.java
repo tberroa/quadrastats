@@ -34,7 +34,6 @@ public class Params {
     static public final String DYNAMIC_QUEUE = "TEAM_BUILDER_DRAFT_RANKED_5x5";
     static public final String SOLO_QUEUE = "RANKED_SOLO_5x5";
     static public final String TEAM_3 = "RANKED_TEAM_3x3";
-    static public final String TEAM_5 = "RANKED_TEAM_5x5";
     private Params() {
     }
 }

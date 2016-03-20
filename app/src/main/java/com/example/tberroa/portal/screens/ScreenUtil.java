@@ -35,8 +35,6 @@ public class ScreenUtil {
                 return context.getString(R.string.dynamic_queue);
             case Params.SOLO_QUEUE:
                 return context.getString(R.string.solo_queue);
-            case Params.TEAM_5:
-                return context.getString(R.string.team_5);
             case Params.TEAM_3:
                 return context.getString(R.string.team_3);
         }

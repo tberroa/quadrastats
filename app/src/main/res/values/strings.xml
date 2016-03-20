@@ -5,6 +5,7 @@
 
     <!-- user authentication -->
     <!-- field hints -->
+    <string name="summoner_name">Summoner Name</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <!-- input validation -->
@@ -43,52 +44,54 @@
     </string>
     <string name="done">Done</string>
 
-    <!-- menu items -->
-    <string name="drawer_open">Open Drawer</string>
-    <string name="drawer_close">Close Drawer</string>
-    <string name="summoner_name">Summoner Name</string>
+    <!-- navigation -->
     <string name="account">Account</string>
     <string name="view_profile">View Profile</string>
-    <string name="friends">Friends</string>
+    <string name="manage_friends">Manage Friends</string>
     <string name="stats">Stats</string>
+    <string name="recent_games">Recent Games</string>
+    <string name="season_totals">Season Totals</string>
+    <string name="with_friends">Games With Friends</string>
+    <string name="select_queue">Select Queue</string>
     <string name="dynamic_queue">Dynamic Queue</string>
     <string name="solo_queue">Solo Queue</string>
-    <string name="team_5">Ranked Team 5v5</string>
     <string name="team_3">Ranked Team 3v3</string>
-    <string name="thumbnail">Image Thumbnail</string>
-    <string name="thumbnail_label">Thumbnail Label</string>
-    <string name="thumbnail_summoner_icon">Summoner Icon Thumbnail</string>
     <string name="sign_out">Sign Out</string>
+
+    <!-- event messages -->
+    <string name="message_placeholder">Message placeholder</string>
+    <string name="nothing_here">Sorry there is nothing to see here</string>
+    <string name="no_matches">You have not played this game mode this season.</string>
+        <string name="no_friends_stats">
+        You have no friends to compare stats to! Click the button below to add friends.
+    </string>
+    <string name="no_friends">You have no friends saved! Click the + button to add some.</string>
+    <string name="no_friend_matches">None of your friends have played this game mode this season.</string>
+    <string name="busy_updating">Updating your stats &#8230;</string>
+    <string name="busy_calculating">Crunching the numbers &#8230;</string>
 
     <!-- activity titles -->
     <string name="profile">Profile</string>
+    <string name="friends">Friends</string>
 
-    <!-- activity content -->
-    <string name="no_friends">You have no friends saved! Click the + button to add some.</string>
+    <!-- element labels and titles -->
     <string name="add_friend">Add Friend</string>
     <string name="add_friends">Add Friends</string>
-    <string name="plot_title">Plot Title</string>
-    <string name="busy_updating">Updating your stats &#8230;</string>
-    <string name="busy_rendering">Rendering plots &#8230;</string>
-    <string name="message_placeholder">Message placeholder</string>
-    <string name="no_matches">You have not played this game mode this season.</string>
-    <string name="no_friends_stats">
-        You have no friends to compare stats to! Click the button below to manage your friends.
-    </string>
-    <string name="no_friend_matches">None of your friends have played this game mode this season.</string>
-    <string name="cant_add_yourself_as_friend">Cannot add yourself as a friend.</string>
-    <string name="friend_limit_reached">Sorry, only up to 7 friends are allowed at this time.</string>
-    <string name="friend_already_exists">This friend is already on your list.</string>
-
-    <!-- stats and plots -->
-    <string name = "wards_placed_per_game">Wards Placed Per Game</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
     <string name="internet_not_available">Internet not available</string>
     <string name="invalid_summoner_name">Invalid summoner name</string>
     <string name="code_not_found">Rune page code not found</string>
+    <string name="cant_add_yourself_as_friend">Cannot add yourself as a friend.</string>
+    <string name="friend_limit_reached">Sorry, only up to 7 friends are allowed at this time.</string>
+    <string name="friend_already_exists">This friend is already on your list.</string>
 
-    <!-- xml content descriptions -->
+    <!-- content descriptions -->
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="thumbnail">Image Thumbnail</string>
+    <string name="thumbnail_label">Thumbnail Label</string>
+    <string name="thumbnail_summoner_icon">Summoner Icon Thumbnail</string>
     <string name="series_color">Series color</string>
 </resources>
