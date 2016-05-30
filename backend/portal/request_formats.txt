@@ -26,3 +26,17 @@ Getting summoners:
     "name" : "frosiiph"
 }
 ]
+
+Adding a friend:
+{
+   "region" : "na",
+   "summoner_name" : "frosiph",
+   "friend_name" : "acruz",
+   "friend_profile_icon" : "87"
+}
+
+
+
+
+
+
