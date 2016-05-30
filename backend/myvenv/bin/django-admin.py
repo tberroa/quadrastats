@@ -1,4 +1,4 @@
-#!/home/tberroa/Projects/Portal/Backend/myvenv/bin/python3
+#!/home/tberroa/Projects/portal/backend/myvenv/bin/python3
 from django.core import management
 
 if __name__ == "__main__":
