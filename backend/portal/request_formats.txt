@@ -1,0 +1,28 @@
+Registering a new user:
+{
+    "user" : {
+        "password" : "123456"
+    },
+    "region" : "na",
+    "name" : "frosiph",
+    "profile_icon" : "78"
+}
+
+Creating a new summoner:
+{
+    "region" : "na",
+    "name" : "frosiph",
+    "profile_icon" : "117"
+} 
+
+Getting summoners:
+[
+{
+    "region" : "na",
+    "name" : "frosiph"
+},
+{
+    "region" : "na",
+    "name" : "frosiiph"
+}
+]

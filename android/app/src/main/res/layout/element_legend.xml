@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout android:id="@+id/legend_layout"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="6"
+            android:orientation="horizontal"
+            android:rowCount="4" >
+
+    <TextView
+        android:id="@+id/summoner_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/summoner_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/color_1"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/series_color"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:src="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/summoner_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/summoner_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/color_2"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/series_color"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:src="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/summoner_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/summoner_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/color_3"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/series_color"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:src="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/summoner_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/summoner_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/color_4"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/series_color"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:src="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/summoner_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/summoner_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/color_5"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/series_color"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:src="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/summoner_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/summoner_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/color_6"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/series_color"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:src="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/summoner_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/summoner_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/color_7"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/series_color"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:src="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/summoner_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/summoner_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/color_8"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/series_color"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:src="#FFFFFF"/>
+</GridLayout>

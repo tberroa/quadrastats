@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary" tools:ignore="UnusedResources">#FF212121</color>
+    <color name="colorPrimaryDark" tools:ignore="UnusedResources">#FF000000</color>
+    <color name="colorAccent">#FFb86200</color>
+    <color name="colorBackground" tools:ignore="UnusedResources">#FF303030</color>
+    <color name="logo_main">#FFC5E8EB</color>
+    <color name="logo_slogan">#FFF69729</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black" tools:ignore="UnusedResources">#FF000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_white">#80000000</color>
+    <color name="accent_material_dark" tools:override="true">#b86200</color>
+
+    <!-- plot series colors-->
+    <color name="series_blue">#1A8CFF</color>
+    <color name="series_green">#33ffAD</color>
+    <color name="series_orange">#FFAD33</color>
+    <color name="series_pink">#FF99FF</color>
+    <color name="series_purple">#8000ff</color>
+    <color name="series_red">#FF0000</color>
+    <color name="series_sky">#ccffff</color>
+    <color name="series_yellow">#FFFF00</color>
+</resources>

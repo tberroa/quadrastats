@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.example.tberroa.portal"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:name="com.activeandroid.app.Application"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Portal.db"/>
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1"/>
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.example.tberroa.portal.models.summoner.FriendsList,
+            com.example.tberroa.portal.models.summoner.SummonerDto,
+            com.example.tberroa.portal.models.summoner.RunePagesDto,
+            com.example.tberroa.portal.models.summoner.RunePageDto,
+            com.example.tberroa.portal.models.summoner.RuneSlotDto,
+            com.example.tberroa.portal.models.summoner.MasteryPagesDto,
+            com.example.tberroa.portal.models.summoner.MasteryPageDto,
+            com.example.tberroa.portal.models.summoner.MasteryDto,
+            com.example.tberroa.portal.models.stats.RankedStatsDto,
+            com.example.tberroa.portal.models.stats.PlayerStatsSummaryListDto,
+            com.example.tberroa.portal.models.stats.PlayerStatsSummaryDto,
+            com.example.tberroa.portal.models.stats.ChampionsStatsDto,
+            com.example.tberroa.portal.models.stats.AggregatedStatsDto,
+            com.example.tberroa.portal.models.matchlist.MatchReference,
+            com.example.tberroa.portal.models.matchlist.MatchList,
+            com.example.tberroa.portal.models.match.Timeline,
+            com.example.tberroa.portal.models.match.Team,
+            com.example.tberroa.portal.models.match.Rune,
+            com.example.tberroa.portal.models.match.Position,
+            com.example.tberroa.portal.models.match.Player,
+            com.example.tberroa.portal.models.match.ParticipantTimelineData,
+            com.example.tberroa.portal.models.match.ParticipantTimeline,
+            com.example.tberroa.portal.models.match.ParticipantStats,
+            com.example.tberroa.portal.models.match.ParticipantIdentity,
+            com.example.tberroa.portal.models.match.ParticipantFrame,
+            com.example.tberroa.portal.models.match.Participant,
+            com.example.tberroa.portal.models.match.MatchDetail,
+            com.example.tberroa.portal.models.match.Mastery,
+            com.example.tberroa.portal.models.match.Frame,
+            com.example.tberroa.portal.models.match.Event,
+            com.example.tberroa.portal.models.match.BannedChampion"/>
+
+        <activity
+            android:name=".screens.authentication.SignInActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".screens.authentication.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.authentication.SplashActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.BaseActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.home.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.profile.ProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.friends.FriendsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.stats.recent.RecentActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.stats.season.SeasonActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screens.stats.withfriends.WithFriendsActivity"
+            android:screenOrientation="portrait"/>
+
+        <service android:name=".apimanager.APIMonitorService"/>
+        <service android:name=".updater.UpdateService"/>
+        <service
+            android:name=".screens.authentication.SignInIntentService"
+            android:exported="false">
+        </service>
+    </application>
+
+</manifest>
