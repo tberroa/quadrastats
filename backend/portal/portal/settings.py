@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'summoners.apps.SummonersConfig',
     'stats.apps.StatsConfig',
+    'update.apps.UpdateConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

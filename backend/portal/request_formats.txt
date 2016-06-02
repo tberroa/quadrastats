@@ -1,3 +1,4 @@
+SUMMONER
 Registering a new user:
 {
     "user" : {
@@ -6,6 +7,13 @@ Registering a new user:
     "region" : "na",
     "name" : "frosiph",
     "profile_icon" : "78"
+}
+
+Logging in:
+{
+    "region" : "na",
+    "name" : "frosiph",
+    "password" : "123456"
 }
 
 Creating a new summoner:
@@ -34,6 +42,18 @@ Adding a friend:
    "friend_name" : "acruz",
    "friend_profile_icon" : "87"
 }
+
+
+STATS
+
+UPDATE
+Run a command:
+{
+  "command" : "run"
+}
+
+
+
 
 
 
