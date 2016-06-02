@@ -5,52 +5,65 @@ Registering a new user:
         "password" : "123456"
     },
     "region" : "na",
-    "name" : "frosiph",
-    "profile_icon" : "78"
+    "name" : "Frosiph",
+    "profile_icon" : 78
 }
 
 Logging in:
 {
     "region" : "na",
-    "name" : "frosiph",
+    "name" : "Frosiph",
     "password" : "123456"
 }
 
 Creating a new summoner:
 {
     "region" : "na",
-    "name" : "frosiph",
-    "profile_icon" : "117"
+    "name" : "Frosiph",
+    "profile_icon" : 117
 } 
 
 Getting summoners:
 [
 {
     "region" : "na",
-    "name" : "frosiph"
+    "name" : "Frosiph"
 },
 {
     "region" : "na",
-    "name" : "frosiiph"
+    "name" : "Frosiiph"
 }
 ]
 
 Adding a friend:
 {
    "region" : "na",
-   "summoner_name" : "frosiph",
-   "friend_name" : "acruz",
-   "friend_profile_icon" : "87"
+   "summoner_name" : "Frosiph",
+   "friend_name" : "Acruz",
+   "friend_profile_icon" : 87
 }
 
 
 STATS
+Get match stats:
+{
+    "summoners" : ["Frosiph", "Acruz"],
+    "champion" : 1,
+    "lane" : "MIDDLE",
+    "role" : null
+}
+
 
 UPDATE
 Run a command:
 {
-  "command" : "run"
+  "command" : "all"
 }
+
+commands:
+all 
+
+
 
 
 

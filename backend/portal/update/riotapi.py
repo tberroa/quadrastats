@@ -1,4 +1,7 @@
-import json, requests
+import json
+import requests
+
+from time import sleep
 
 from .keys import riot_api_key
 
@@ -15,10 +18,12 @@ def match_list(summoner):
         + "&api_key=" + riot_api_key
 
     # make get request
+    sleep(1.2)
+    print(url)
     r = requests.get(url)
 
     # return response
-    return json.loads(r.text)["matches"]
+    return (r.status_code, json.loads(r.text))
 
 def match_detail(match, region):
     # construct url
@@ -27,10 +32,12 @@ def match_detail(match, region):
         + "?api_key=" + riot_api_key
 
     # make get request
+    sleep(1.2)
+    print(url)
     r = requests.get(url)
 
     # return response
-    return json.loads(r.text)
+    return (r.status_code, json.loads(r.text))
 
 
 

@@ -1,15 +1,15 @@
-from django.shortcuts import render
-from django.core import serializers
 from django.contrib.auth import hashers
+from django.core import serializers
+from django.shortcuts import render
 
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from summoners.models import User
-from summoners.models import Summoner
-from summoners.serializers import UserSerializer
-from summoners.serializers import SummonerSerializer
-from summoners.utils import create_summoner
+from .models import Summoner
+from .models import User
+from .serializers import SummonerSerializer
+from .serializers import UserSerializer
+from .utils import create_summoner
 
 class RegisterUser(APIView):
     def post(self, request, format=None):

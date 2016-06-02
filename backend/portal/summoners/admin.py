@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from summoners.models import User
-from summoners.models import Summoner
+from .models import Summoner
+from .models import User
 
 admin.site.register(User)
 admin.site.register(Summoner)

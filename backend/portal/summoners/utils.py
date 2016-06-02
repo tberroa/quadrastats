@@ -1,4 +1,4 @@
-from summoners.models import Summoner
+from .models import Summoner
 
 def create_summoner(region, name, profile_icon):
     try:

@@ -1,4 +1,5 @@
 from django.db import models
+
 from summoners.models import Summoner
 
 class SeasonStats(models.Model):
@@ -28,8 +29,12 @@ class ChampionStats(models.Model):
 class Match(models.Model):
     class Meta:
         verbose_name_plural = 'Matches'
-    creation = models.BigIntegerField()
-    duration = models.BigIntegerField()
+    riot_id = models.BigIntegerField()
+    creation = models.BigIntegerField(null = True, blank = True)
+    duration = models.BigIntegerField(null = True, blank = True)
+
+    def __str__(self):
+        return str(self.riot_id)
 
 class MatchStats(models.Model):
     class Meta:
@@ -37,13 +42,14 @@ class MatchStats(models.Model):
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     champion = models.IntegerField()
+    lane = models.CharField(max_length = 128)
     role = models.CharField(max_length = 128)
-    kills = models.IntegerField()
-    deaths = models.IntegerField()
-    assists = models.IntegerField()
+    kills = models.BigIntegerField(null = True, blank = True)
+    deaths = models.BigIntegerField(null = True, blank = True)
+    assists = models.BigIntegerField(null = True, blank = True)
 
     def __str__(self):
-        return self.name + ',' + self.role
+        return self.summoner.name + "," + str(self.match.riot_id)
 
   
 
