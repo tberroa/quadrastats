@@ -13,4 +13,3 @@ parts
 media/uploads
 tmp
 .DS_Store
-myvenv/
