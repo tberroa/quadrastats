@@ -1,12 +1,11 @@
-from stats.models import ChampionStats
-from stats.models import Match
-from stats.models import MatchStats
-from stats.models import SeasonStats
-
 from summoners.models import Summoner
 
 from threading import Thread
 
+from .models import ChampionStats
+from .models import Match
+from .models import MatchStats
+from .models import SeasonStats
 from .riotapi import match_detail
 from .riotapi import match_list
 
