@@ -25,3 +25,7 @@ urlpatterns = [
     url(r'^stats/', include('stats.urls')),
     url(r'^admin/', admin.site.urls),
 ]
+
+
+
+
