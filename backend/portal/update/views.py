@@ -79,14 +79,68 @@ def update(summoner):
 
             # create a new match stats object
             match_stats = MatchStats.objects.create( \
+                # identity info			
                 summoner = summoner, \
                 match = match_o, \
                 champion = info["championId"], \
                 lane = info["timeline"]["lane"], \
                 role = info["timeline"]["role"], \
-                kills = info["stats"]["kills"], \
+
+                # stats
+                assists = info["stats"]["assists"], \
+                champ_level = info["stats"]["champLevel"], \
                 deaths = info["stats"]["deaths"], \
-                assists = info["stats"]["assists"]) \
+                double_kills = info["stats"]["doubleKills"], \
+                first_blood_assist = info["stats"]["firstBloodAssist"], \
+                first_blood_kill = info["stats"]["firstBloodKill"], \
+                first_inhibitor_assist = info["stats"]["firstInhibitorAssist"], \
+                first_inhibitor_kill = info["stats"]["firstInhibitorKill"], \
+                first_tower_assist = info["stats"]["firstTowerAssist"], \
+                first_tower_kill = info["stats"]["firstTowerKill"], \
+                gold_earned = info["stats"]["goldEarned"], \
+                gold_spent = info["stats"]["goldSpent"], \
+                inhibitor_kills = info["stats"]["inhibitorKills"], \
+                item0 = info["stats"]["item0"], \
+                item1 = info["stats"]["item1"], \
+                item2 = info["stats"]["item2"], \
+                item3 = info["stats"]["item3"], \
+                item4 = info["stats"]["item4"], \
+                item5 = info["stats"]["item5"], \
+                item6 = info["stats"]["item6"], \
+                killing_sprees = info["stats"]["killingSprees"], \
+                kills = info["stats"]["kills"], \
+                largest_critical_strike = info["stats"]["largestCriticalStrike"], \
+                largest_killing_spree = info["stats"]["largestKillingSpree"], \
+                largest_multi_kill = info["stats"]["largestMultiKill"], \
+                magic_damage_dealt = info["stats"]["magicDamageDealt"], \
+                magic_damage_dealt_to_champions = info["stats"]["magicDamageDealtToChampions"], \
+                magic_damage_taken = info["stats"]["magicDamageTaken"], \
+                minions_killed = info["stats"]["minionsKilled"], \
+                neutral_minions_killed = info["stats"]["neutralMinionsKilled"], \
+                neutral_minions_killed_enemy_jungle = info["stats"]["neutralMinionsKilledEnemyJungle"], \
+                neutral_minions_killed_team_jungle = info["stats"]["neutralMinionsKilledTeamJungle"], \
+                penta_kills = info["stats"]["pentaKills"], \
+                physical_damage_dealt = info["stats"]["physicalDamageDealt"], \
+                physical_damage_dealt_to_champions = info["stats"]["physicalDamageDealtToChampions"], \
+                physical_damage_taken = info["stats"]["physicalDamageTaken"], \
+                quadra_kills = info["stats"]["quadraKills"], \
+                sight_wards_bought_in_game = info["stats"]["sightWardsBoughtInGame"], \
+                total_damage_dealt = info["stats"]["totalDamageDealt"], \
+                total_damage_dealt_to_champions = info["stats"]["totalDamageDealtToChampions"], \
+                total_damage_taken = info["stats"]["totalDamageTaken"], \
+                total_heal = info["stats"]["totalHeal"], \
+                total_time_crowd_control_dealt = info["stats"]["totalTimeCrowdControlDealt"], \
+                total_units_healed = info["stats"]["totalUnitsHealed"], \
+                tower_kills = info["stats"]["towerKills"], \
+                triple_kills = info["stats"]["tripleKills"], \
+                true_damage_dealt = info["stats"]["trueDamageDealt"], \
+                true_damage_dealt_to_champions = info["stats"]["trueDamageDealtToChampions"], \
+                true_damage_taken = info["stats"]["trueDamageTaken"], \
+                unreal_kills = info["stats"]["unrealKills"], \
+                vision_wards_bought_in_game = info["stats"]["visionWardsBoughtInGame"], \
+                wards_killed = info["stats"]["wardsKilled"], \
+                wards_placed = info["stats"]["wardsPlaced"], \
+                winner = info["stats"]["winner"])
 
         # match fully processed, increment total_games
         total_games += 1
