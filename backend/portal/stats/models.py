@@ -40,14 +40,14 @@ class MatchStats(models.Model):
     class Meta:
         verbose_name_plural = 'Match Stats'
 	
-	# identity info
+    # identity info
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     champion = models.IntegerField()
     lane = models.CharField(max_length = 128)
     role = models.CharField(max_length = 128)
-	
-	# stats
+
+    # stats
     assists = models.BigIntegerField(null = True, blank = True)
     champ_level = models.BigIntegerField(null = True, blank = True)
     deaths = models.BigIntegerField(null = True, blank = True)
