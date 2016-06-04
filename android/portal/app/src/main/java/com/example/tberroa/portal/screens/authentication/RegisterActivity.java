@@ -24,10 +24,7 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
-import com.example.tberroa.portal.data.RiotAPI;
-import com.example.tberroa.portal.models.summoner.RunePageDto;
-import com.example.tberroa.portal.models.summoner.RunePagesDto;
-import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.network.NetworkUtil;
 
@@ -153,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                     // validate summoner name in separate thread
                     new Thread(new Runnable() {
                         public void run() {
-                            Map<String, SummonerDto> summoner;
+                            Map<String, Summoner> summoner;
                             summoner = AuthUtil.validateName(RegisterActivity.this, enteredSummonerName);
                             Message msg = new Message();
                             if (summoner != null) {

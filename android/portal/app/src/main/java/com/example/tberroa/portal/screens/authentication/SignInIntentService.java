@@ -6,9 +6,8 @@ import android.content.Intent;
 import com.example.tberroa.portal.apimanager.APIMonitorService;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.RiotAPI;
 import com.example.tberroa.portal.data.UserInfo;
-import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.updater.UpdateService;
 
 import java.util.ArrayList;
@@ -35,11 +34,11 @@ public class SignInIntentService extends IntentService {
         // query riot api for summoner dto
         List<String> name = new ArrayList<>();
         name.add(summonerName);
-        Map<String, SummonerDto> summoners = new RiotAPI(this).getSummonersByName(name);
+        Map<String, Summoner> summoners = new RiotAPI(this).getSummonersByName(name);
 
         if (summoners != null) {
             // save the summoner's id and profile icon id
-            SummonerDto summoner = summoners.get(summonerName);
+            Summoner summoner = summoners.get(summonerName);
             userInfo.setId(this, summoner.id);
             userInfo.setIconId(this, summoner.profileIconId);
 

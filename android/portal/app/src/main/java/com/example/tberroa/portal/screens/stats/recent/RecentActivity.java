@@ -24,15 +24,14 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.models.match.ParticipantTimeline;
-import com.example.tberroa.portal.models.summoner.FriendsList;
-import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.home.HomeActivity;
-import com.example.tberroa.portal.models.match.ParticipantStats;
+import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.stats.SelectQueueDialog;
 import com.example.tberroa.portal.updater.UpdateJobListener;
 import com.google.gson.Gson;
@@ -163,7 +162,7 @@ public class RecentActivity extends BaseActivity {
                         // create map of summoner ids
                         Map<String, Long> ids = new LinkedHashMap<>();
                         ids.put(userInfo.getStylizedName(RecentActivity.this), userSummonerId);
-                        for (SummonerDto friend : friendsList.getFriends()) {
+                        for (Summoner friend : friendsList.getFriends()) {
                            ids.put(friend.name, friend.id);
                         }
 
@@ -176,7 +175,7 @@ public class RecentActivity extends BaseActivity {
                         timeline = RecentUtil.getTimeline(ids, queue);
 
                         // get participant stats
-                        Map<String, List<ParticipantStats>> stats;
+                        Map<String, List<MatchStats>> stats;
                         stats = RecentUtil.getStats(ids, queue);
 
                         // create list of plot titles

@@ -8,8 +8,7 @@ import android.os.Bundle;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.apimanager.APIUsageInfo;
 import com.example.tberroa.portal.data.UserInfo;
-import com.example.tberroa.portal.data.RiotAPI;
-import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.apimanager.APIMonitorService;
 import com.example.tberroa.portal.updater.UpdateJobInfo;
 import com.example.tberroa.portal.updater.UpdateService;
@@ -104,7 +103,7 @@ public class AuthUtil {
         ((Activity) context).finish();
     }
 
-    public static Map<String, SummonerDto> validateName(Context context, String summonerName) {
+    public static Map<String, Summoner> validateName(Context context, String summonerName) {
         List<String> name = new ArrayList<>();
         name.add(summonerName);
         return new RiotAPI(context).getSummonersByName(name);

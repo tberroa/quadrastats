@@ -20,12 +20,11 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.UserInfo;
-import com.example.tberroa.portal.models.summoner.FriendsList;
 import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.screens.authentication.AuthUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
-import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.network.NetworkUtil;
 import com.example.tberroa.portal.updater.UpdateUtil;
 
@@ -120,7 +119,7 @@ public class FriendsActivity extends BaseActivity {
 
                             // query riot for the summoner dto corresponding to the entered name
                             String enteredName = friendsName.getText().toString().toLowerCase();
-                            Map<String, SummonerDto> friendDtoMap;
+                            Map<String, Summoner> friendDtoMap;
                             friendDtoMap = AuthUtil.validateName(FriendsActivity.this, enteredName);
 
                             // check if the entered name was a valid summoner name
@@ -131,9 +130,9 @@ public class FriendsActivity extends BaseActivity {
                             }
 
                             // initialize the friend dto and get the stylized name of the friend
-                            SummonerDto friendDto = new SummonerDto();
+                            Summoner friendDto = new Summoner();
                             String name = "";
-                            for (Map.Entry<String, SummonerDto> friend : friendDtoMap.entrySet()) {
+                            for (Map.Entry<String, Summoner> friend : friendDtoMap.entrySet()) {
                                 friendDto = friend.getValue();
                                 name = friend.getValue().name;
                             }
@@ -147,7 +146,7 @@ public class FriendsActivity extends BaseActivity {
 
                             // check if this friend has already been entered
                             if (friendsList != null) {
-                                for (SummonerDto friend : friendsList.getFriends()) {
+                                for (Summoner friend : friendsList.getFriends()) {
                                     if (friend != null && name.equals(friend.name)) {
                                         msg.arg1 = 5;
                                         handler.sendMessage(msg);

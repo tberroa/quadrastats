@@ -150,6 +150,15 @@ public class SignInActivity extends AppCompatActivity {
             } catch (java.io.IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());
             }
+
+            // testing the backend here
+            try {
+                String url = Params.URL_SUMMONERS_GET;
+                String body = "[{\"region\" : \"na\",\"name\" : \"Frosiph\"},{\"region\" : \"na\",\"name\" : \"Frosiiph\"}]";
+                new Http().postJson(url, body);
+            } catch (java.io.IOException e) {
+                Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity/backend test: " + e.getMessage());
+            }
             return null;
         }
 

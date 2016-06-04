@@ -18,11 +18,10 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.models.match.MatchDetail;
-import com.example.tberroa.portal.models.match.ParticipantStats;
+import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.models.match.ParticipantTimeline;
 import com.example.tberroa.portal.models.matchlist.MatchReference;
-import com.example.tberroa.portal.models.summoner.FriendsList;
-import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.updater.UpdateJobInfo;
 
 import java.text.DecimalFormat;
@@ -71,7 +70,7 @@ class RecentUtil {
 
     static private boolean hasMatches(FriendsList friendsList, String queue) {
         LocalDB localDB = new LocalDB();
-        for (SummonerDto friend : friendsList.getFriends()) {
+        for (Summoner friend : friendsList.getFriends()) {
             if (friend != null) {
                 List<MatchReference> references = localDB.getMatchReferences(friend.id, queue);
                 if (references != null && !references.isEmpty()) {
@@ -82,10 +81,10 @@ class RecentUtil {
         return false;
     }
 
-    static public Map<String, List<ParticipantStats>> getStats(Map<String, Long> ids, String queue) {
+    static public Map<String, List<MatchStats>> getStats(Map<String, Long> ids, String queue) {
         LocalDB localDB = new LocalDB();
 
-        Map<String, List<ParticipantStats>> participantStats = new LinkedHashMap<>();
+        Map<String, List<MatchStats>> participantStats = new LinkedHashMap<>();
 
         // get match references
         Map<String, List<MatchReference>> matches = new LinkedHashMap<>();
@@ -112,11 +111,11 @@ class RecentUtil {
 
         // get participant stats list
         for (Map.Entry<String, List<MatchDetail>> summoner : matchDetails.entrySet()) {
-            participantStats.put(summoner.getKey(), new ArrayList<ParticipantStats>());
+            participantStats.put(summoner.getKey(), new ArrayList<MatchStats>());
             long id = ids.get(summoner.getKey());
             for (int i = 0; i < summoner.getValue().size() && i < Params.MAX_MATCHES; i++) {
                 MatchDetail matchDetail = summoner.getValue().get(i);
-                ParticipantStats stats = localDB.getParticipantStats(id, matchDetail);
+                MatchStats stats = localDB.getParticipantStats(id, matchDetail);
                 if (stats != null) {
                     participantStats.get(summoner.getKey()).add(stats);
                 }
@@ -328,7 +327,7 @@ class RecentUtil {
 
     // ================================================ STAT FUNCTIONS =================================================
     // income
-    static public Map<String, double[]> goldPerMin(Map<String, long[]> mD, Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, double[]> goldPerMin(Map<String, long[]> mD, Map<String, List<MatchStats>> stats) {
         Map<String, double[]> data = new LinkedHashMap<>();
 
         // get names
@@ -375,7 +374,7 @@ class RecentUtil {
     }
 
     // offense
-    static public Map<String, long[]> dmgPerMin(Map<String, long[]> mD, Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> dmgPerMin(Map<String, long[]> mD, Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
 
         // get names
@@ -396,9 +395,9 @@ class RecentUtil {
         return data;
     }
 
-    static public Map<String, long[]> kills(Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> kills(Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+        for (Map.Entry<String, List<MatchStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
@@ -409,9 +408,9 @@ class RecentUtil {
         return data;
     }
 
-    static public Map<String, long[]> killingSprees(Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> killingSprees(Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+        for (Map.Entry<String, List<MatchStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
@@ -422,9 +421,9 @@ class RecentUtil {
         return data;
     }
 
-    static public Map<String, long[]> largestKillingSpree(Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> largestKillingSpree(Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+        for (Map.Entry<String, List<MatchStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
@@ -436,9 +435,9 @@ class RecentUtil {
     }
 
     // utility
-    static public Map<String, long[]> assists(Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> assists(Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+        for (Map.Entry<String, List<MatchStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
@@ -449,9 +448,9 @@ class RecentUtil {
         return data;
     }
 
-    static public Map<String, long[]> damageTakenPerDeath(Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> damageTakenPerDeath(Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+        for (Map.Entry<String, List<MatchStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
@@ -469,9 +468,9 @@ class RecentUtil {
     }
 
     // vision
-    static public Map<String, long[]> visionWardsBought(Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> visionWardsBought(Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+        for (Map.Entry<String, List<MatchStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
@@ -482,9 +481,9 @@ class RecentUtil {
         return data;
     }
 
-    static public Map<String, long[]> wardsPlaced(Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> wardsPlaced(Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+        for (Map.Entry<String, List<MatchStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {
@@ -495,9 +494,9 @@ class RecentUtil {
         return data;
     }
 
-    static public Map<String, long[]> wardsKilled(Map<String, List<ParticipantStats>> stats) {
+    static public Map<String, long[]> wardsKilled(Map<String, List<MatchStats>> stats) {
         Map<String, long[]> data = new LinkedHashMap<>();
-        for (Map.Entry<String, List<ParticipantStats>> summoner : stats.entrySet()) {
+        for (Map.Entry<String, List<MatchStats>> summoner : stats.entrySet()) {
             data.put(summoner.getKey(), new long[summoner.getValue().size()]);
             for (int i = 0; i < summoner.getValue().size(); i++) {
                 if (summoner.getValue().get(i) != null) {

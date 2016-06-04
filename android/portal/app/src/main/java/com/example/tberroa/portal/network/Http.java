@@ -16,18 +16,9 @@ public class Http {
 
     private final OkHttpClient client = new OkHttpClient();
     private final MediaType mediaType = MediaType.parse(Params.POST_MEDIA_TYPE);
+    private final MediaType mediaType2 = MediaType.parse(Params.POST_MEDIA_TYPE2);
 
     public Http() {
-    }
-
-    // used to query riot api
-    public String[] get(String url) throws IOException {
-        Request request = new Request.Builder().url(url).build();
-        Response rawResponse = client.newCall(request).execute();
-        String code = Integer.toString(rawResponse.code());
-        String body = rawResponse.body().string().trim();
-        Log.d(Params.TAG_DEBUG, "@HttpGet: response body is " + body);
-        return new String[]{code, body};
     }
 
     // used to query altervista servers for signin/register authentication
@@ -37,6 +28,16 @@ public class Http {
         Response rawResponse = client.newCall(request).execute();
         String response = rawResponse.body().string().trim();
         Log.d(Params.TAG_DEBUG, "@HttpPost: response body is " + response);
+        return response;
+    }
+
+    // used for django backend
+    public String postJson(String url, String jsonString) throws IOException {
+        RequestBody body = RequestBody.create(mediaType2, jsonString);
+        Request request = new Request.Builder().url(url).post(body).build();
+        Response rawResponse = client.newCall(request).execute();
+        String response = rawResponse.body().string().trim();
+        Log.d(Params.TAG_DEBUG, "@HttpPostJson: response body is " + response);
         return response;
     }
 }

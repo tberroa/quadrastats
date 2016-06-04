@@ -9,20 +9,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.models.summoner.SummonerDto;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.CircleTransform;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-class FriendsAdapter extends ArrayAdapter<SummonerDto> {
+class FriendsAdapter extends ArrayAdapter<Summoner> {
 
 
     private final Context context;
-    private final List<SummonerDto> friends;
+    private final List<Summoner> friends;
 
-    public FriendsAdapter(Context context, List<SummonerDto> friends) {
+    public FriendsAdapter(Context context, List<Summoner> friends) {
         super(context, -1, friends);
         this.context = context;
         this.friends = friends;

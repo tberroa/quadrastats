@@ -1,6 +1,4 @@
-package com.example.tberroa.portal.models.match;
-
-// This object contains participant statistics information
+package com.example.tberroa.portal.models.stats;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -9,12 +7,34 @@ import com.google.gson.annotations.Expose;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @Table(name = "ParticipantStats")
-public class ParticipantStats extends Model {
+public class MatchStats extends Model {
 
-    // parent
-    @Column(name = "participant")
-    public Participant participant;
+    // identity info
+    @Expose
+    @Column(name = "summoner_region")
+    public long summonerRegion;
 
+    @Expose
+    @Column(name = "summoner_riot_id")
+    public long summonerRiotId;
+
+    @Expose
+    @Column(name = "match_riot_id")
+    public long matchRiotId;
+
+    @Expose
+    @Column(name = "champion")
+    public long champion;
+
+    @Expose
+    @Column(name = "lane")
+    public long lane;
+
+    @Expose
+    @Column(name = "role")
+    public long role;
+
+    // stats
     @Expose
     @Column(name = "assists")
     public long assists;
@@ -22,10 +42,6 @@ public class ParticipantStats extends Model {
     @Expose
     @Column(name = "champ_level")
     public long champLevel;
-
-    @Expose
-    @Column(name = "combat_player_score")
-    public long combatPlayerScore;
 
     @Expose
     @Column(name = "deaths")
@@ -148,26 +164,6 @@ public class ParticipantStats extends Model {
     public long neutralMinionsKilledTeamJungle;
 
     @Expose
-    @Column(name = "node_capture")
-    public long nodeCapture;
-
-    @Expose
-    @Column(name = "node_capture_assist")
-    public long nodeCaptureAssist;
-
-    @Expose
-    @Column(name = "node_neutralize")
-    public long nodeNeutralize;
-
-    @Expose
-    @Column(name = "node_neutralize_assist")
-    public long nodeNeutralizeAssist;
-
-    @Expose
-    @Column(name = "objective_player_score")
-    public long objectivePlayerScore;
-
-    @Expose
     @Column(name = "penta_kills")
     public long pentaKills;
 
@@ -192,10 +188,6 @@ public class ParticipantStats extends Model {
     public long sightWardsBoughtInGame;
 
     @Expose
-    @Column(name = "team_objective")
-    public long teamObjective;
-
-    @Expose
     @Column(name = "total_damage_dealt")
     public long totalDamageDealt;
 
@@ -210,14 +202,6 @@ public class ParticipantStats extends Model {
     @Expose
     @Column(name = "total_heal")
     public long totalHeal;
-
-    @Expose
-    @Column(name = "total_player_score")
-    public long totalPlayerScore;
-
-    @Expose
-    @Column(name = "total_score_rank")
-    public long totalScoreRank;
 
     @Expose
     @Column(name = "total_time_crowd_control_dealt")
@@ -267,7 +251,7 @@ public class ParticipantStats extends Model {
     @Column(name = "winner")
     public boolean winner;
 
-    public ParticipantStats() {
+    public MatchStats() {
         super();
     }
 }

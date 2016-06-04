@@ -2,6 +2,13 @@ package com.example.tberroa.portal.data;
 
 public class Params {
 
+    // backend urls
+    static public final String URL_SUMMONERS_REGISTER = "http://52.90.34.48/summoners/register.json";
+    static public final String URL_SUMMONERS_SIGN_IN = "http://52.90.34.48/summoners/login.json";
+    static public final String URL_SUMMONERS_GET = "http://52.90.34.48/summoners/get.json";
+    static public final String URL_SUMMONERS_ADD_FRIEND = "http://52.90.34.48/summoners/add-friend.json";
+
+
     // app limits
     static public final int MAX_FRIENDS = 7;
     static public final int MAX_MATCHES = 10;
@@ -19,6 +26,7 @@ public class Params {
     static public final String TAG_DEBUG = "tag_debug";
     // network
     static public final String POST_MEDIA_TYPE = "application/x-www-form-urlencoded;charset=utf-8";
+    static public final String POST_MEDIA_TYPE2 = "application/json; charset=utf-8";
     // response codes, RC = riot code
     static public final String HTTP_GET_FAILED = "-50";
     static public final String RC_200_SUCCESS = "200";
