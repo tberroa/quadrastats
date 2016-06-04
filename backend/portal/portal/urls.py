@@ -26,11 +26,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 
-# start up periodic updates
-from threading import Event
-from update.startup import UpdateThread
-flag = Event()
-thread = UpdateThread(flag)
-thread.start()
-
 

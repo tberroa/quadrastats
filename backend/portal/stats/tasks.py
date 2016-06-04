@@ -1,6 +1,8 @@
-from summoners.models import Summoner
+from __future__ import absolute_import
 
-from threading import Thread
+from celery import shared_task
+
+from summoners.models import Summoner
 
 from .models import ChampionStats
 from .models import Match
@@ -9,17 +11,7 @@ from .models import SeasonStats
 from .riotapi import match_detail
 from .riotapi import match_list
 
-class UpdateThread(Thread):
-    def __init__(self, event):
-        Thread.__init__(self)
-        self.stopped = event
-
-    def run(self):
-        while not self.stopped.wait(5):
-            print("beginning update")
-            update_all()
-            print("update complete")
-
+@shared_task
 def update_all():
     # get all summoner objects
     summoners = Summoner.objects.all().order_by("modified")
