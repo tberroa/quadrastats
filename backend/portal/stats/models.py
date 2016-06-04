@@ -5,6 +5,7 @@ from summoners.models import Summoner
 class SeasonStats(models.Model):
     class Meta:
         verbose_name_plural = 'Season Stats'
+
     season = models.CharField(max_length = 128)
     kills = models.IntegerField()
     deaths = models.IntegerField()
@@ -17,6 +18,7 @@ class SeasonStats(models.Model):
 class ChampionStats(models.Model):
     class Meta:
         verbose_name_plural = 'Champion Stats'
+
     season = models.CharField(max_length = 128)
     kills = models.IntegerField()
     deaths = models.IntegerField()
@@ -29,6 +31,8 @@ class ChampionStats(models.Model):
 class Match(models.Model):
     class Meta:
         verbose_name_plural = 'Matches'
+
+    region = models.CharField(max_length = 128)
     riot_id = models.BigIntegerField()
     creation = models.BigIntegerField(null = True, blank = True)
     duration = models.BigIntegerField(null = True, blank = True)

@@ -23,6 +23,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^summoners/', include('summoners.urls')),
     url(r'^stats/', include('stats.urls')),
-    url(r'^update/', include('update.urls')),
     url(r'^admin/', admin.site.urls),
 ]

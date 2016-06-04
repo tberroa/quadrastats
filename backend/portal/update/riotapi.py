@@ -3,7 +3,7 @@ import requests
 
 from time import sleep
 
-from .keys import riot_api_key
+from .key import riot_api_key
 
 def match_list(summoner):
     # construct url

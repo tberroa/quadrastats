@@ -18,7 +18,6 @@ class Summoner(models.Model):
     riot_id = models.BigIntegerField(default = 0)
     profile_icon = models.IntegerField(default = 0)
     friends = models.CharField(max_length = 255, null = True, blank = True)
-    total_games = models.IntegerField(default = 0)
     modified = models.DateTimeField(null = True, blank = True)
 
     def save(self, *args, **kwargs):

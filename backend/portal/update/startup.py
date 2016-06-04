@@ -1,10 +1,3 @@
-from django.shortcuts import render
-
-from multiprocessing.dummy import Pool as ThreadPool
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-
 from stats.models import ChampionStats
 from stats.models import Match
 from stats.models import MatchStats
@@ -12,37 +5,48 @@ from stats.models import SeasonStats
 
 from summoners.models import Summoner
 
+from threading import Thread
+
 from .riotapi import match_detail
 from .riotapi import match_list
 
-def update(summoner):
+class UpdateThread(Thread):
+    def __init__(self, event):
+        Thread.__init__(self)
+        self.stopped = event
+
+    def run(self):
+        while not self.stopped.wait(5):
+            print("beginning update")
+            update_all()
+            print("update complete")
+
+def update_all():
+    # get all summoner objects
+    summoners = Summoner.objects.all().order_by("modified")
+
+    # update each summoner one at a time
+    for summoner in summoners:
+        update_one(summoner)
+
+def update_one(summoner):
     # get the summoners match list
     val = match_list(summoner)
     if val[0] != 200:
-        # error occured, return http response
+        # error occurrred, return http response
         return (False, val)
     else:
         matches = val[1]["matches"]
-        total_games = val[1]["totalGames"]
 
-    # only interested in new games since last update
-    new_games = total_games - summoner.total_games
-    if new_games == 0:
-        # no new games since last update
-        return (True, None)
-    else:
-        # slice out the new games, 10 max
-        matches = matches[:new_games][:10]
-
-    # none of the new games have been processed yet
-    total_games = total_games - len(matches)
+    # slice out the 10 most recent games
+    matches = matches[:10]
 
     for match in matches:
         # get match object, create new if required
         try:
-            match_o = Match.objects.get(riot_id = match["matchId"])
+            match_o = Match.objects.get(region = summoner.region, riot_id = match["matchId"])
         except Match.DoesNotExist:
-            match_o = Match.objects.create(riot_id = match["matchId"])
+            match_o = Match.objects.create(region = summoner.region, riot_id = match["matchId"])
 
         # record stats if required
         try:
@@ -51,9 +55,7 @@ def update(summoner):
             # get match detail
             val = match_detail(match, summoner.region)
             if val[0] != 200:
-                # update before returning http response
-                summoner.total_games = total_games
-                summoner.save()
+                # error occurred, return http response
                 return (False, val)
             else:
                 detail = val[1]
@@ -142,32 +144,9 @@ def update(summoner):
                 wards_placed = info["stats"]["wardsPlaced"], \
                 winner = info["stats"]["winner"])
 
-        # match fully processed, increment total_games
-        total_games += 1
-
-    # update before successful return
-    summoner.total_games = total_games
-    summoner.save()
+    # successful return
     return (True, None)
 
-class Command(APIView):
-    def post(self, request, format=None):
-        # extract command
-        command = request.data["command"]
 
-        if command == 'all':
-            # get all summoner objects
-            summoners = Summoner.objects.all().order_by("modified")
-
-            # update each summoner one at a time
-            for summoner in summoners:
-                val = update(summoner)
-                
-                # check if update failed
-                if not val[0]:
-                    # return http response
-                    return Response(val[1])
-
-            return Response("success")
             
 
