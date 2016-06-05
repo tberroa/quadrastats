@@ -1,0 +1,8 @@
+The backend is a Python Django project which requires the following
+packages to be installed using pip within a virtual environment.
+
+django
+djangorestframework
+requests
+celery
+gunicorn - production only

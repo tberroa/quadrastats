@@ -1,0 +1,171 @@
+[2016-06-05 22:39:21 +0000] [8226] [DEBUG] Current configuration:
+  on_reload: <function OnReload.on_reload at 0x7f06883bb7b8>
+  pre_request: <function PreRequest.pre_request at 0x7f06883c0510>
+  post_request: <function PostRequest.post_request at 0x7f06883c0620>
+  reload: False
+  daemon: False
+  django_settings: None
+  accesslog: None
+  capture_output: False
+  on_exit: <function OnExit.on_exit at 0x7f06883c0ae8>
+  workers: 3
+  bind: ['127.0.0.1:8000']
+  certfile: None
+  do_handshake_on_connect: False
+  pre_fork: <function Prefork.pre_fork at 0x7f06883bbae8>
+  ciphers: TLSv1
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f06883c01e0>
+  worker_class: sync
+  user: 1000
+  umask: 0
+  pythonpath: None
+  errorlog: /home/ubuntu/portal/backend/logs/gunicorn/06-05-16.log
+  syslog_addr: udp://localhost:514
+  syslog: False
+  enable_stdio_inheritance: False
+  statsd_prefix: 
+  default_proc_name: portal.wsgi:application
+  group: 1000
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  logger_class: gunicorn.glogging.Logger
+  proxy_protocol: False
+  limit_request_fields: 100
+  raw_env: []
+  tmp_upload_dir: None
+  proxy_allow_ips: ['127.0.0.1']
+  keepalive: 2
+  backlog: 2048
+  statsd_host: None
+  spew: False
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f06883bbe18>
+  ca_certs: None
+  suppress_ragged_eofs: True
+  when_ready: <function WhenReady.when_ready at 0x7f06883bb950>
+  threads: 1
+  keyfile: None
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  ssl_version: 3
+  cert_reqs: 0
+  syslog_facility: user
+  pre_exec: <function PreExec.pre_exec at 0x7f06883c0378>
+  sendfile: None
+  forwarded_allow_ips: ['127.0.0.1']
+  on_starting: <function OnStarting.on_starting at 0x7f06883bb620>
+  post_fork: <function Postfork.post_fork at 0x7f06883bbc80>
+  preload_app: False
+  worker_connections: 1000
+  max_requests: 0
+  worker_exit: <function WorkerExit.worker_exit at 0x7f06883c07b8>
+  graceful_timeout: 30
+  chdir: /home/ubuntu/portal/backend/portal
+  limit_request_line: 4094
+  paste: None
+  limit_request_field_size: 8190
+  proc_name: None
+  logconfig: None
+  check_config: False
+  loglevel: debug
+  config: None
+  max_requests_jitter: 0
+  timeout: 30
+  syslog_prefix: None
+  pidfile: None
+  worker_tmp_dir: None
+  worker_int: <function WorkerInt.worker_int at 0x7f06883c0048>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f06883c0950>
+[2016-06-05 22:39:21 +0000] [8226] [INFO] Starting gunicorn 19.6.0
+[2016-06-05 22:39:21 +0000] [8226] [DEBUG] Arbiter booted
+[2016-06-05 22:39:21 +0000] [8226] [INFO] Listening at: http://127.0.0.1:8000 (8226)
+[2016-06-05 22:39:21 +0000] [8226] [INFO] Using worker: sync
+[2016-06-05 22:39:21 +0000] [8229] [INFO] Booting worker with pid: 8229
+[2016-06-05 22:39:21 +0000] [8231] [INFO] Booting worker with pid: 8231
+[2016-06-05 22:39:21 +0000] [8232] [INFO] Booting worker with pid: 8232
+[2016-06-05 22:39:21 +0000] [8226] [DEBUG] 3 workers
+[2016-06-05 22:39:28 +0000] [8226] [INFO] Handling signal: term
+[2016-06-05 22:39:28 +0000] [8232] [INFO] Worker exiting (pid: 8232)
+[2016-06-05 22:39:28 +0000] [8229] [INFO] Worker exiting (pid: 8229)
+[2016-06-05 22:39:28 +0000] [8231] [INFO] Worker exiting (pid: 8231)
+[2016-06-05 22:39:28 +0000] [8226] [INFO] Shutting down: Master
+[2016-06-05 22:39:31 +0000] [8242] [DEBUG] Current configuration:
+  daemon: False
+  worker_tmp_dir: None
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f1df623b1e0>
+  logger_class: gunicorn.glogging.Logger
+  enable_stdio_inheritance: False
+  threads: 1
+  post_fork: <function Postfork.post_fork at 0x7f1df6236c80>
+  pre_exec: <function PreExec.pre_exec at 0x7f1df623b378>
+  on_exit: <function OnExit.on_exit at 0x7f1df623bae8>
+  spew: False
+  check_config: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-SSL': 'on', 'X-FORWARDED-PROTO': 'https'}
+  pythonpath: None
+  pre_request: <function PreRequest.pre_request at 0x7f1df623b510>
+  paste: None
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  errorlog: /home/ubuntu/portal/backend/logs/gunicorn/06-05-16.log
+  workers: 3
+  sendfile: None
+  default_proc_name: portal.wsgi:application
+  chdir: /home/ubuntu/portal/backend/portal
+  ciphers: TLSv1
+  accesslog: None
+  loglevel: debug
+  raw_env: []
+  capture_output: False
+  statsd_host: None
+  keyfile: None
+  certfile: None
+  worker_exit: <function WorkerExit.worker_exit at 0x7f1df623b7b8>
+  limit_request_fields: 100
+  max_requests: 0
+  syslog: False
+  timeout: 30
+  proc_name: None
+  on_reload: <function OnReload.on_reload at 0x7f1df62367b8>
+  preload_app: False
+  worker_connections: 1000
+  graceful_timeout: 30
+  pidfile: None
+  logconfig: None
+  ca_certs: None
+  pre_fork: <function Prefork.pre_fork at 0x7f1df6236ae8>
+  suppress_ragged_eofs: True
+  max_requests_jitter: 0
+  forwarded_allow_ips: ['127.0.0.1']
+  statsd_prefix: 
+  umask: 0
+  do_handshake_on_connect: False
+  user: 1000
+  worker_int: <function WorkerInt.worker_int at 0x7f1df623b048>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f1df623b950>
+  syslog_facility: user
+  limit_request_line: 4094
+  keepalive: 2
+  config: None
+  group: 1000
+  syslog_addr: udp://localhost:514
+  backlog: 2048
+  when_ready: <function WhenReady.when_ready at 0x7f1df6236950>
+  cert_reqs: 0
+  reload: False
+  worker_class: sync
+  on_starting: <function OnStarting.on_starting at 0x7f1df6236620>
+  limit_request_field_size: 8190
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f1df6236e18>
+  syslog_prefix: None
+  post_request: <function PostRequest.post_request at 0x7f1df623b620>
+  bind: ['127.0.0.1:8000']
+  django_settings: None
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  ssl_version: 3
+[2016-06-05 22:39:31 +0000] [8242] [INFO] Starting gunicorn 19.6.0
+[2016-06-05 22:39:31 +0000] [8242] [DEBUG] Arbiter booted
+[2016-06-05 22:39:31 +0000] [8242] [INFO] Listening at: http://127.0.0.1:8000 (8242)
+[2016-06-05 22:39:31 +0000] [8242] [INFO] Using worker: sync
+[2016-06-05 22:39:31 +0000] [8245] [INFO] Booting worker with pid: 8245
+[2016-06-05 22:39:31 +0000] [8246] [INFO] Booting worker with pid: 8246
+[2016-06-05 22:39:31 +0000] [8242] [DEBUG] 3 workers
+[2016-06-05 22:39:31 +0000] [8248] [INFO] Booting worker with pid: 8248
