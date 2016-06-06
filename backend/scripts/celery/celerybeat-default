@@ -1,5 +1,3 @@
-# Move and rename this file to /etc/default/celerybeat
-
 # Absolute or relative path to the 'celery' command:
 #CELERY_BIN="/usr/local/bin/celery"
 CELERY_BIN="/home/ubuntu/portal/backend/myvenv/bin/celery"
