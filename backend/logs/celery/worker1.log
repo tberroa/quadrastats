@@ -70,3 +70,983 @@ You must only enable the serializers that you will actually use.
 [2016-06-06 02:28:15,593: INFO/MainProcess] mingle: searching for neighbors
 [2016-06-06 02:28:16,600: INFO/MainProcess] mingle: all alone
 [2016-06-06 02:28:16,608: WARNING/MainProcess] worker1@ip-172-31-53-15 ready.
+[2016-06-06 02:41:07,839: DEBUG/MainProcess] | Worker: Preparing bootsteps.
+[2016-06-06 02:41:07,842: DEBUG/MainProcess] | Worker: Building graph...
+[2016-06-06 02:41:07,842: DEBUG/MainProcess] | Worker: New boot order: {StateDB, Beat, Timer, Hub, Queues (intra), Pool, Autoreloader, Autoscaler, Consumer}
+[2016-06-06 02:41:07,845: DEBUG/MainProcess] | Consumer: Preparing bootsteps.
+[2016-06-06 02:41:07,845: DEBUG/MainProcess] | Consumer: Building graph...
+[2016-06-06 02:41:07,850: DEBUG/MainProcess] | Consumer: New boot order: {Connection, Events, Mingle, Gossip, Heart, Agent, Tasks, Control, event loop}
+[2016-06-06 02:41:07,850: WARNING/MainProcess] /home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-06-06 02:41:07,852: DEBUG/MainProcess] | Worker: Starting Hub
+[2016-06-06 02:41:07,852: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:07,853: DEBUG/MainProcess] | Worker: Starting Pool
+[2016-06-06 02:41:07,871: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:07,872: DEBUG/MainProcess] | Worker: Starting Consumer
+[2016-06-06 02:41:07,872: DEBUG/MainProcess] | Consumer: Starting Connection
+[2016-06-06 02:41:07,885: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'platform': 'Erlang/OTP', 'version': '3.2.4', 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'product': 'RabbitMQ', 'capabilities': {'consumer_priorities': True, 'exchange_exchange_bindings': True, 'connection.blocked': True, 'basic.nack': True, 'authentication_failure_close': True, 'publisher_confirms': True, 'consumer_cancel_notify': True}, 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 02:41:07,886: DEBUG/MainProcess] Open OK!
+[2016-06-06 02:41:07,887: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-06-06 02:41:07,887: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:07,887: DEBUG/MainProcess] | Consumer: Starting Events
+[2016-06-06 02:41:07,894: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'platform': 'Erlang/OTP', 'version': '3.2.4', 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'product': 'RabbitMQ', 'capabilities': {'consumer_priorities': True, 'exchange_exchange_bindings': True, 'connection.blocked': True, 'basic.nack': True, 'authentication_failure_close': True, 'publisher_confirms': True, 'consumer_cancel_notify': True}, 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 02:41:07,894: DEBUG/MainProcess] Open OK!
+[2016-06-06 02:41:07,895: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 02:41:07,896: DEBUG/MainProcess] Channel open
+[2016-06-06 02:41:07,896: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:07,896: DEBUG/MainProcess] | Consumer: Starting Mingle
+[2016-06-06 02:41:07,896: INFO/MainProcess] mingle: searching for neighbors
+[2016-06-06 02:41:07,897: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 02:41:07,897: DEBUG/MainProcess] Channel open
+[2016-06-06 02:41:08,903: INFO/MainProcess] mingle: all alone
+[2016-06-06 02:41:08,904: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:08,904: DEBUG/MainProcess] | Consumer: Starting Gossip
+[2016-06-06 02:41:08,904: DEBUG/MainProcess] using channel_id: 2
+[2016-06-06 02:41:08,904: DEBUG/MainProcess] Channel open
+[2016-06-06 02:41:08,907: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:08,907: DEBUG/MainProcess] | Consumer: Starting Heart
+[2016-06-06 02:41:08,907: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:08,908: DEBUG/MainProcess] | Consumer: Starting Tasks
+[2016-06-06 02:41:08,910: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:08,911: DEBUG/MainProcess] | Consumer: Starting Control
+[2016-06-06 02:41:08,911: DEBUG/MainProcess] using channel_id: 3
+[2016-06-06 02:41:08,911: DEBUG/MainProcess] Channel open
+[2016-06-06 02:41:08,913: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 02:41:08,913: DEBUG/MainProcess] | Consumer: Starting event loop
+[2016-06-06 02:41:08,914: WARNING/MainProcess] worker1@ip-172-31-53-15 ready.
+[2016-06-06 02:41:08,914: DEBUG/MainProcess] | Worker: Hub.register Pool...
+[2016-06-06 02:41:08,914: DEBUG/MainProcess] basic.qos: prefetch_count->4
+[2016-06-06 02:47:06,224: ERROR/MainProcess] Received unregistered task of type 'stats.tasks.update_all'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you are using relative imports?
+Please see http://bit.ly/gLye1c for more information.
+
+The full contents of the message body was:
+{'timelimit': (None, None), 'task': 'stats.tasks.update_all', 'utc': True, 'id': '92f8c2dd-dca4-4d41-ad10-7055034c6100', 'taskset': None, 'eta': None, 'chord': None, 'callbacks': None, 'args': [], 'errbacks': None, 'retries': 0, 'expires': None, 'kwargs': {}} (265b)
+Traceback (most recent call last):
+  File "/home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/worker/consumer.py", line 456, in on_task_received
+    strategies[name](message, body,
+KeyError: 'stats.tasks.update_all'
+[2016-06-06 02:51:47,833: ERROR/MainProcess] Received unregistered task of type 'stats.tasks.update_all'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you are using relative imports?
+Please see http://bit.ly/gLye1c for more information.
+
+The full contents of the message body was:
+{'timelimit': (None, None), 'task': 'stats.tasks.update_all', 'utc': True, 'id': '41205fe9-1643-4fc2-8ffb-4a488deccaf6', 'taskset': None, 'eta': None, 'chord': None, 'callbacks': None, 'args': [], 'kwargs': {}, 'retries': 0, 'expires': None, 'errbacks': None} (265b)
+Traceback (most recent call last):
+  File "/home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/worker/consumer.py", line 456, in on_task_received
+    strategies[name](message, body,
+KeyError: 'stats.tasks.update_all'
+[2016-06-06 02:59:32,133: DEBUG/MainProcess] | Worker: Closing Hub...
+[2016-06-06 02:59:32,133: DEBUG/MainProcess] | Worker: Closing Pool...
+[2016-06-06 02:59:32,133: DEBUG/MainProcess] | Worker: Closing Consumer...
+[2016-06-06 02:59:32,133: DEBUG/MainProcess] | Worker: Stopping Consumer...
+[2016-06-06 02:59:32,133: DEBUG/MainProcess] | Consumer: Closing Connection...
+[2016-06-06 02:59:32,133: DEBUG/MainProcess] | Consumer: Closing Events...
+[2016-06-06 02:59:32,133: DEBUG/MainProcess] | Consumer: Closing Mingle...
+[2016-06-06 02:59:32,133: DEBUG/MainProcess] | Consumer: Closing Gossip...
+[2016-06-06 02:59:32,134: DEBUG/MainProcess] | Consumer: Closing Heart...
+[2016-06-06 02:59:32,134: DEBUG/MainProcess] | Consumer: Closing Tasks...
+[2016-06-06 02:59:32,134: DEBUG/MainProcess] | Consumer: Closing Control...
+[2016-06-06 02:59:32,134: DEBUG/MainProcess] | Consumer: Closing event loop...
+[2016-06-06 02:59:32,134: DEBUG/MainProcess] | Consumer: Stopping event loop...
+[2016-06-06 02:59:32,134: DEBUG/MainProcess] | Consumer: Stopping Control...
+[2016-06-06 02:59:32,135: DEBUG/MainProcess] Closed channel #3
+[2016-06-06 02:59:32,135: DEBUG/MainProcess] | Consumer: Stopping Tasks...
+[2016-06-06 02:59:32,135: DEBUG/MainProcess] Canceling task consumer...
+[2016-06-06 02:59:32,136: DEBUG/MainProcess] | Consumer: Stopping Heart...
+[2016-06-06 02:59:32,137: DEBUG/MainProcess] | Consumer: Stopping Gossip...
+[2016-06-06 02:59:32,138: DEBUG/MainProcess] Closed channel #2
+[2016-06-06 02:59:32,138: DEBUG/MainProcess] | Consumer: Stopping Mingle...
+[2016-06-06 02:59:32,138: DEBUG/MainProcess] | Consumer: Stopping Events...
+[2016-06-06 02:59:32,138: DEBUG/MainProcess] | Consumer: Stopping Connection...
+[2016-06-06 02:59:32,138: DEBUG/MainProcess] | Worker: Stopping Pool...
+[2016-06-06 02:59:33,141: DEBUG/MainProcess] | Worker: Stopping Hub...
+[2016-06-06 02:59:33,141: DEBUG/MainProcess] | Consumer: Shutdown Control...
+[2016-06-06 02:59:33,141: DEBUG/MainProcess] | Consumer: Shutdown Tasks...
+[2016-06-06 02:59:33,142: DEBUG/MainProcess] Canceling task consumer...
+[2016-06-06 02:59:33,142: DEBUG/MainProcess] Closing consumer channel...
+[2016-06-06 02:59:33,142: DEBUG/MainProcess] | Consumer: Shutdown Heart...
+[2016-06-06 02:59:33,142: DEBUG/MainProcess] | Consumer: Shutdown Gossip...
+[2016-06-06 02:59:33,142: DEBUG/MainProcess] | Consumer: Shutdown Events...
+[2016-06-06 02:59:33,143: DEBUG/MainProcess] Closed channel #1
+[2016-06-06 02:59:33,143: DEBUG/MainProcess] | Consumer: Shutdown Connection...
+[2016-06-06 02:59:33,144: DEBUG/MainProcess] Closed channel #1
+[2016-06-06 02:59:33,145: DEBUG/MainProcess] removing tasks from inqueue until task handler finished
+[2016-06-06 03:00:07,410: DEBUG/MainProcess] | Worker: Preparing bootsteps.
+[2016-06-06 03:00:07,412: DEBUG/MainProcess] | Worker: Building graph...
+[2016-06-06 03:00:07,413: DEBUG/MainProcess] | Worker: New boot order: {Beat, StateDB, Timer, Hub, Queues (intra), Pool, Autoscaler, Autoreloader, Consumer}
+[2016-06-06 03:00:07,416: DEBUG/MainProcess] | Consumer: Preparing bootsteps.
+[2016-06-06 03:00:07,416: DEBUG/MainProcess] | Consumer: Building graph...
+[2016-06-06 03:00:07,421: DEBUG/MainProcess] | Consumer: New boot order: {Connection, Agent, Events, Mingle, Gossip, Heart, Tasks, Control, event loop}
+[2016-06-06 03:00:07,421: WARNING/MainProcess] /home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-06-06 03:00:07,423: DEBUG/MainProcess] | Worker: Starting Hub
+[2016-06-06 03:00:07,423: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:07,423: DEBUG/MainProcess] | Worker: Starting Pool
+[2016-06-06 03:00:07,439: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:07,440: DEBUG/MainProcess] | Worker: Starting Consumer
+[2016-06-06 03:00:07,440: DEBUG/MainProcess] | Consumer: Starting Connection
+[2016-06-06 03:00:07,453: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'version': '3.2.4', 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'product': 'RabbitMQ', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'platform': 'Erlang/OTP', 'capabilities': {'authentication_failure_close': True, 'consumer_priorities': True, 'publisher_confirms': True, 'connection.blocked': True, 'consumer_cancel_notify': True, 'exchange_exchange_bindings': True, 'basic.nack': True}}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 03:00:07,455: DEBUG/MainProcess] Open OK!
+[2016-06-06 03:00:07,455: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-06-06 03:00:07,455: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:07,455: DEBUG/MainProcess] | Consumer: Starting Events
+[2016-06-06 03:00:07,462: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'version': '3.2.4', 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'product': 'RabbitMQ', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'platform': 'Erlang/OTP', 'capabilities': {'authentication_failure_close': True, 'consumer_priorities': True, 'publisher_confirms': True, 'connection.blocked': True, 'consumer_cancel_notify': True, 'exchange_exchange_bindings': True, 'basic.nack': True}}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 03:00:07,463: DEBUG/MainProcess] Open OK!
+[2016-06-06 03:00:07,463: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 03:00:07,464: DEBUG/MainProcess] Channel open
+[2016-06-06 03:00:07,465: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:07,465: DEBUG/MainProcess] | Consumer: Starting Mingle
+[2016-06-06 03:00:07,465: INFO/MainProcess] mingle: searching for neighbors
+[2016-06-06 03:00:07,465: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 03:00:07,466: DEBUG/MainProcess] Channel open
+[2016-06-06 03:00:08,472: INFO/MainProcess] mingle: all alone
+[2016-06-06 03:00:08,472: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:08,472: DEBUG/MainProcess] | Consumer: Starting Gossip
+[2016-06-06 03:00:08,472: DEBUG/MainProcess] using channel_id: 2
+[2016-06-06 03:00:08,473: DEBUG/MainProcess] Channel open
+[2016-06-06 03:00:08,475: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:08,475: DEBUG/MainProcess] | Consumer: Starting Heart
+[2016-06-06 03:00:08,476: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:08,476: DEBUG/MainProcess] | Consumer: Starting Tasks
+[2016-06-06 03:00:08,479: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:08,479: DEBUG/MainProcess] | Consumer: Starting Control
+[2016-06-06 03:00:08,479: DEBUG/MainProcess] using channel_id: 3
+[2016-06-06 03:00:08,480: DEBUG/MainProcess] Channel open
+[2016-06-06 03:00:08,481: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:00:08,481: DEBUG/MainProcess] | Consumer: Starting event loop
+[2016-06-06 03:00:08,482: WARNING/MainProcess] worker1@ip-172-31-53-15 ready.
+[2016-06-06 03:00:08,482: DEBUG/MainProcess] | Worker: Hub.register Pool...
+[2016-06-06 03:00:08,482: DEBUG/MainProcess] basic.qos: prefetch_count->4
+[2016-06-06 03:01:37,480: DEBUG/MainProcess] pidbox received method hello(from_node='celery@ip-172-31-53-15', revoked={}) [reply_to:{'routing_key': '4654457e-48b0-3d7e-9721-9094cb3b9627', 'exchange': 'reply.celery.pidbox'} ticket:353cdffa-757b-4bd6-a7dc-e118026c97a0]
+[2016-06-06 03:01:37,481: INFO/MainProcess] sync with celery@ip-172-31-53-15
+[2016-06-06 03:01:38,495: DEBUG/MainProcess] celery@ip-172-31-53-15 joined the party
+[2016-06-06 03:02:17,058: DEBUG/MainProcess] celery@ip-172-31-53-15 left
+[2016-06-06 03:02:25,026: DEBUG/MainProcess] | Worker: Closing Hub...
+[2016-06-06 03:02:25,026: DEBUG/MainProcess] | Worker: Closing Pool...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Worker: Closing Consumer...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Worker: Stopping Consumer...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Consumer: Closing Connection...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Consumer: Closing Events...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Consumer: Closing Mingle...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Consumer: Closing Gossip...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Consumer: Closing Heart...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Consumer: Closing Tasks...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Consumer: Closing Control...
+[2016-06-06 03:02:25,027: DEBUG/MainProcess] | Consumer: Closing event loop...
+[2016-06-06 03:02:25,028: DEBUG/MainProcess] | Consumer: Stopping event loop...
+[2016-06-06 03:02:25,028: DEBUG/MainProcess] | Consumer: Stopping Control...
+[2016-06-06 03:02:25,029: DEBUG/MainProcess] Closed channel #3
+[2016-06-06 03:02:25,029: DEBUG/MainProcess] | Consumer: Stopping Tasks...
+[2016-06-06 03:02:25,029: DEBUG/MainProcess] Canceling task consumer...
+[2016-06-06 03:02:25,030: DEBUG/MainProcess] | Consumer: Stopping Heart...
+[2016-06-06 03:02:25,030: DEBUG/MainProcess] | Consumer: Stopping Gossip...
+[2016-06-06 03:02:25,032: DEBUG/MainProcess] Closed channel #2
+[2016-06-06 03:02:25,032: DEBUG/MainProcess] | Consumer: Stopping Mingle...
+[2016-06-06 03:02:25,032: DEBUG/MainProcess] | Consumer: Stopping Events...
+[2016-06-06 03:02:25,032: DEBUG/MainProcess] | Consumer: Stopping Connection...
+[2016-06-06 03:02:25,032: DEBUG/MainProcess] | Worker: Stopping Pool...
+[2016-06-06 03:02:26,035: DEBUG/MainProcess] | Worker: Stopping Hub...
+[2016-06-06 03:02:26,035: DEBUG/MainProcess] | Consumer: Shutdown Control...
+[2016-06-06 03:02:26,035: DEBUG/MainProcess] | Consumer: Shutdown Tasks...
+[2016-06-06 03:02:26,036: DEBUG/MainProcess] Canceling task consumer...
+[2016-06-06 03:02:26,036: DEBUG/MainProcess] Closing consumer channel...
+[2016-06-06 03:02:26,036: DEBUG/MainProcess] | Consumer: Shutdown Heart...
+[2016-06-06 03:02:26,036: DEBUG/MainProcess] | Consumer: Shutdown Gossip...
+[2016-06-06 03:02:26,036: DEBUG/MainProcess] | Consumer: Shutdown Events...
+[2016-06-06 03:02:26,037: DEBUG/MainProcess] Closed channel #1
+[2016-06-06 03:02:26,037: DEBUG/MainProcess] | Consumer: Shutdown Connection...
+[2016-06-06 03:02:26,037: DEBUG/MainProcess] Closed channel #1
+[2016-06-06 03:02:26,038: DEBUG/MainProcess] removing tasks from inqueue until task handler finished
+[2016-06-06 03:37:49,773: DEBUG/MainProcess] | Worker: Preparing bootsteps.
+[2016-06-06 03:37:49,775: DEBUG/MainProcess] | Worker: Building graph...
+[2016-06-06 03:37:49,776: DEBUG/MainProcess] | Worker: New boot order: {Beat, StateDB, Timer, Hub, Queues (intra), Pool, Autoreloader, Autoscaler, Consumer}
+[2016-06-06 03:37:49,779: DEBUG/MainProcess] | Consumer: Preparing bootsteps.
+[2016-06-06 03:37:49,779: DEBUG/MainProcess] | Consumer: Building graph...
+[2016-06-06 03:37:49,783: DEBUG/MainProcess] | Consumer: New boot order: {Connection, Agent, Events, Mingle, Gossip, Tasks, Control, Heart, event loop}
+[2016-06-06 03:37:49,784: WARNING/MainProcess] /home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-06-06 03:37:49,786: DEBUG/MainProcess] | Worker: Starting Hub
+[2016-06-06 03:37:49,786: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:49,786: DEBUG/MainProcess] | Worker: Starting Pool
+[2016-06-06 03:37:49,802: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:49,803: DEBUG/MainProcess] | Worker: Starting Consumer
+[2016-06-06 03:37:49,803: DEBUG/MainProcess] | Consumer: Starting Connection
+[2016-06-06 03:37:49,816: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'capabilities': {'basic.nack': True, 'consumer_priorities': True, 'authentication_failure_close': True, 'exchange_exchange_bindings': True, 'consumer_cancel_notify': True, 'publisher_confirms': True, 'connection.blocked': True}, 'product': 'RabbitMQ', 'platform': 'Erlang/OTP', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'version': '3.2.4'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 03:37:49,817: DEBUG/MainProcess] Open OK!
+[2016-06-06 03:37:49,817: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-06-06 03:37:49,817: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:49,817: DEBUG/MainProcess] | Consumer: Starting Events
+[2016-06-06 03:37:49,824: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'capabilities': {'basic.nack': True, 'consumer_priorities': True, 'authentication_failure_close': True, 'exchange_exchange_bindings': True, 'consumer_cancel_notify': True, 'publisher_confirms': True, 'connection.blocked': True}, 'product': 'RabbitMQ', 'platform': 'Erlang/OTP', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'version': '3.2.4'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 03:37:49,825: DEBUG/MainProcess] Open OK!
+[2016-06-06 03:37:49,825: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 03:37:49,826: DEBUG/MainProcess] Channel open
+[2016-06-06 03:37:49,826: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:49,827: DEBUG/MainProcess] | Consumer: Starting Mingle
+[2016-06-06 03:37:49,827: INFO/MainProcess] mingle: searching for neighbors
+[2016-06-06 03:37:49,827: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 03:37:49,828: DEBUG/MainProcess] Channel open
+[2016-06-06 03:37:50,834: INFO/MainProcess] mingle: all alone
+[2016-06-06 03:37:50,834: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:50,834: DEBUG/MainProcess] | Consumer: Starting Gossip
+[2016-06-06 03:37:50,834: DEBUG/MainProcess] using channel_id: 2
+[2016-06-06 03:37:50,835: DEBUG/MainProcess] Channel open
+[2016-06-06 03:37:50,837: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:50,837: DEBUG/MainProcess] | Consumer: Starting Tasks
+[2016-06-06 03:37:50,840: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:50,840: DEBUG/MainProcess] | Consumer: Starting Control
+[2016-06-06 03:37:50,840: DEBUG/MainProcess] using channel_id: 3
+[2016-06-06 03:37:50,841: DEBUG/MainProcess] Channel open
+[2016-06-06 03:37:50,843: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:50,843: DEBUG/MainProcess] | Consumer: Starting Heart
+[2016-06-06 03:37:50,844: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 03:37:50,844: DEBUG/MainProcess] | Consumer: Starting event loop
+[2016-06-06 03:37:50,845: WARNING/MainProcess] worker1@ip-172-31-53-15 ready.
+[2016-06-06 03:37:50,845: DEBUG/MainProcess] | Worker: Hub.register Pool...
+[2016-06-06 03:37:50,845: DEBUG/MainProcess] basic.qos: prefetch_count->4
+[2016-06-06 03:43:55,962: ERROR/MainProcess] Received unregistered task of type 'portal.stats.tasks'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you are using relative imports?
+Please see http://bit.ly/gLye1c for more information.
+
+The full contents of the message body was:
+{'timelimit': (None, None), 'id': '29be4a8b-36ee-4a2e-a948-be9a7de3f3c3', 'retries': 0, 'kwargs': {}, 'errbacks': None, 'callbacks': None, 'chord': None, 'task': 'portal.stats.tasks', 'utc': True, 'eta': None, 'expires': None, 'args': [], 'taskset': None} (261b)
+Traceback (most recent call last):
+  File "/home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/worker/consumer.py", line 456, in on_task_received
+    strategies[name](message, body,
+KeyError: 'portal.stats.tasks'
+[2016-06-06 03:44:54,656: DEBUG/MainProcess] pidbox received method hello(from_node='celery@ip-172-31-53-15', revoked={}) [reply_to:{'exchange': 'reply.celery.pidbox', 'routing_key': '11052b90-820d-38c5-aef4-e37e346d5a89'} ticket:fd0bc4e9-1541-4711-b6d3-b19c97f1645f]
+[2016-06-06 03:44:54,656: INFO/MainProcess] sync with celery@ip-172-31-53-15
+[2016-06-06 03:44:55,668: DEBUG/MainProcess] celery@ip-172-31-53-15 joined the party
+[2016-06-06 03:45:00,111: DEBUG/MainProcess] celery@ip-172-31-53-15 left
+[2016-06-06 03:45:10,743: DEBUG/MainProcess] | Worker: Closing Hub...
+[2016-06-06 03:45:10,743: DEBUG/MainProcess] | Worker: Closing Pool...
+[2016-06-06 03:45:10,743: DEBUG/MainProcess] | Worker: Closing Consumer...
+[2016-06-06 03:45:10,743: DEBUG/MainProcess] | Worker: Stopping Consumer...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Closing Connection...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Closing Events...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Closing Mingle...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Closing Gossip...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Closing Tasks...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Closing Control...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Closing Heart...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Closing event loop...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Stopping event loop...
+[2016-06-06 03:45:10,744: DEBUG/MainProcess] | Consumer: Stopping Heart...
+[2016-06-06 03:45:10,745: DEBUG/MainProcess] | Consumer: Stopping Control...
+[2016-06-06 03:45:10,747: DEBUG/MainProcess] Closed channel #3
+[2016-06-06 03:45:10,747: DEBUG/MainProcess] | Consumer: Stopping Tasks...
+[2016-06-06 03:45:10,747: DEBUG/MainProcess] Canceling task consumer...
+[2016-06-06 03:45:10,747: DEBUG/MainProcess] | Consumer: Stopping Gossip...
+[2016-06-06 03:45:10,748: DEBUG/MainProcess] Closed channel #2
+[2016-06-06 03:45:10,749: DEBUG/MainProcess] | Consumer: Stopping Mingle...
+[2016-06-06 03:45:10,749: DEBUG/MainProcess] | Consumer: Stopping Events...
+[2016-06-06 03:45:10,749: DEBUG/MainProcess] | Consumer: Stopping Connection...
+[2016-06-06 03:45:10,749: DEBUG/MainProcess] | Worker: Stopping Pool...
+[2016-06-06 03:45:11,752: DEBUG/MainProcess] | Worker: Stopping Hub...
+[2016-06-06 03:45:11,752: DEBUG/MainProcess] | Consumer: Shutdown Heart...
+[2016-06-06 03:45:11,752: DEBUG/MainProcess] | Consumer: Shutdown Control...
+[2016-06-06 03:45:11,752: DEBUG/MainProcess] | Consumer: Shutdown Tasks...
+[2016-06-06 03:45:11,752: DEBUG/MainProcess] Canceling task consumer...
+[2016-06-06 03:45:11,752: DEBUG/MainProcess] Closing consumer channel...
+[2016-06-06 03:45:11,752: DEBUG/MainProcess] | Consumer: Shutdown Gossip...
+[2016-06-06 03:45:11,752: DEBUG/MainProcess] | Consumer: Shutdown Events...
+[2016-06-06 03:45:11,753: DEBUG/MainProcess] Closed channel #1
+[2016-06-06 03:45:11,754: DEBUG/MainProcess] | Consumer: Shutdown Connection...
+[2016-06-06 03:45:11,754: DEBUG/MainProcess] Closed channel #1
+[2016-06-06 03:45:11,755: DEBUG/MainProcess] removing tasks from inqueue until task handler finished
+[2016-06-06 04:31:55,556: DEBUG/MainProcess] | Worker: Preparing bootsteps.
+[2016-06-06 04:31:55,559: DEBUG/MainProcess] | Worker: Building graph...
+[2016-06-06 04:31:55,559: DEBUG/MainProcess] | Worker: New boot order: {Timer, Hub, Queues (intra), Pool, Autoreloader, Autoscaler, Beat, StateDB, Consumer}
+[2016-06-06 04:31:55,562: DEBUG/MainProcess] | Consumer: Preparing bootsteps.
+[2016-06-06 04:31:55,562: DEBUG/MainProcess] | Consumer: Building graph...
+[2016-06-06 04:31:55,566: DEBUG/MainProcess] | Consumer: New boot order: {Connection, Events, Mingle, Tasks, Control, Gossip, Heart, Agent, event loop}
+[2016-06-06 04:31:55,566: WARNING/MainProcess] /home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-06-06 04:31:55,568: DEBUG/MainProcess] | Worker: Starting Hub
+[2016-06-06 04:31:55,568: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:55,569: DEBUG/MainProcess] | Worker: Starting Pool
+[2016-06-06 04:31:55,586: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:55,586: DEBUG/MainProcess] | Worker: Starting Consumer
+[2016-06-06 04:31:55,586: DEBUG/MainProcess] | Consumer: Starting Connection
+[2016-06-06 04:31:55,599: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'product': 'RabbitMQ', 'version': '3.2.4', 'capabilities': {'consumer_priorities': True, 'authentication_failure_close': True, 'publisher_confirms': True, 'exchange_exchange_bindings': True, 'consumer_cancel_notify': True, 'basic.nack': True, 'connection.blocked': True}, 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'platform': 'Erlang/OTP'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 04:31:55,600: DEBUG/MainProcess] Open OK!
+[2016-06-06 04:31:55,600: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-06-06 04:31:55,600: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:55,600: DEBUG/MainProcess] | Consumer: Starting Events
+[2016-06-06 04:31:55,607: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'product': 'RabbitMQ', 'version': '3.2.4', 'capabilities': {'consumer_priorities': True, 'authentication_failure_close': True, 'publisher_confirms': True, 'exchange_exchange_bindings': True, 'consumer_cancel_notify': True, 'basic.nack': True, 'connection.blocked': True}, 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'platform': 'Erlang/OTP'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 04:31:55,608: DEBUG/MainProcess] Open OK!
+[2016-06-06 04:31:55,608: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 04:31:55,609: DEBUG/MainProcess] Channel open
+[2016-06-06 04:31:55,610: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:55,610: DEBUG/MainProcess] | Consumer: Starting Mingle
+[2016-06-06 04:31:55,610: INFO/MainProcess] mingle: searching for neighbors
+[2016-06-06 04:31:55,610: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 04:31:55,611: DEBUG/MainProcess] Channel open
+[2016-06-06 04:31:56,617: INFO/MainProcess] mingle: all alone
+[2016-06-06 04:31:56,617: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:56,617: DEBUG/MainProcess] | Consumer: Starting Tasks
+[2016-06-06 04:31:56,620: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:56,620: DEBUG/MainProcess] | Consumer: Starting Control
+[2016-06-06 04:31:56,620: DEBUG/MainProcess] using channel_id: 2
+[2016-06-06 04:31:56,620: DEBUG/MainProcess] Channel open
+[2016-06-06 04:31:56,622: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:56,622: DEBUG/MainProcess] | Consumer: Starting Gossip
+[2016-06-06 04:31:56,622: DEBUG/MainProcess] using channel_id: 3
+[2016-06-06 04:31:56,623: DEBUG/MainProcess] Channel open
+[2016-06-06 04:31:56,625: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:56,625: DEBUG/MainProcess] | Consumer: Starting Heart
+[2016-06-06 04:31:56,626: DEBUG/MainProcess] ^-- substep ok
+[2016-06-06 04:31:56,626: DEBUG/MainProcess] | Consumer: Starting event loop
+[2016-06-06 04:31:56,627: WARNING/MainProcess] worker1@ip-172-31-53-15 ready.
+[2016-06-06 04:31:56,627: DEBUG/MainProcess] | Worker: Hub.register Pool...
+[2016-06-06 04:31:56,627: DEBUG/MainProcess] basic.qos: prefetch_count->4
+[2016-06-06 04:31:56,628: INFO/MainProcess] Received task: stats.tasks.update_all[4a9225fa-b5ae-4f52-8a95-c6f739b954b9]
+[2016-06-06 04:31:56,628: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', '4a9225fa-b5ae-4f52-8a95-c6f739b954b9', [], {}, {'taskset': None, 'args': [], 'errbacks': None, 'chord': None, 'reply_to': '3b78f5a6-e84a-3f05-bb40-71d9c6a75ef1', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': True, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': '4a9225fa-b5ae-4f52-8a95-c6f739b954b9', 'group': None, 'retries': 0, 'id': '4a9225fa-b5ae-4f52-8a95-c6f739b954b9', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 04:31:56,634: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[4a9225fa-b5ae-4f52-8a95-c6f739b954b9] pid:15765
+[2016-06-06 04:31:57,835: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:31:57,840: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:31:58,215: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:31:58,629: INFO/MainProcess] Received task: stats.tasks.update_all[e1ad8235-6f7f-410f-b1af-f7e6e2111c4d]
+[2016-06-06 04:31:59,442: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:31:59,443: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:31:59,832: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:01,058: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:01,060: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:01,433: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:02,660: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:02,662: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:02,831: INFO/MainProcess] Received task: stats.tasks.update_all[3dd46541-2991-4b3b-8907-798eebf59636]
+[2016-06-06 04:32:03,042: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 856
+[2016-06-06 04:32:04,267: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:04,269: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:04,659: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:05,886: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:05,888: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:06,259: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 04:32:07,462: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:07,463: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:07,890: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:07,915: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', 'e1ad8235-6f7f-410f-b1af-f7e6e2111c4d', [], {}, {'taskset': None, 'args': [], 'errbacks': None, 'chord': None, 'reply_to': '3b78f5a6-e84a-3f05-bb40-71d9c6a75ef1', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': True, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': 'e1ad8235-6f7f-410f-b1af-f7e6e2111c4d', 'group': None, 'retries': 0, 'id': 'e1ad8235-6f7f-410f-b1af-f7e6e2111c4d', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 04:32:07,915: INFO/MainProcess] Task stats.tasks.update_all[4a9225fa-b5ae-4f52-8a95-c6f739b954b9] succeeded in 11.286134371002845s: None
+[2016-06-06 04:32:07,916: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[e1ad8235-6f7f-410f-b1af-f7e6e2111c4d] pid:15765
+[2016-06-06 04:32:09,119: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:09,120: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:09,494: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 04:32:10,698: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:10,699: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:11,092: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 384
+[2016-06-06 04:32:12,316: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:12,318: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:12,694: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:13,920: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:13,921: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:14,266: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 04:32:15,471: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:15,473: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:15,824: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:17,050: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:17,051: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:17,431: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:18,658: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:18,660: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:19,033: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:19,058: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', '3dd46541-2991-4b3b-8907-798eebf59636', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': '3dd46541-2991-4b3b-8907-798eebf59636', 'group': None, 'retries': 0, 'id': '3dd46541-2991-4b3b-8907-798eebf59636', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 04:32:19,058: INFO/MainProcess] Task stats.tasks.update_all[e1ad8235-6f7f-410f-b1af-f7e6e2111c4d] succeeded in 11.14257589400222s: None
+[2016-06-06 04:32:19,059: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[3dd46541-2991-4b3b-8907-798eebf59636] pid:15765
+[2016-06-06 04:32:20,261: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:20,263: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:20,666: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 1270
+[2016-06-06 04:32:21,891: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:21,893: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:22,252: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 384
+[2016-06-06 04:32:23,478: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:23,479: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:23,848: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 2929
+[2016-06-06 04:32:25,074: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:25,075: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:25,465: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:26,692: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:26,694: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:27,070: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:28,296: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:28,298: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:28,684: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:29,912: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:32:29,913: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:32:30,267: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:32:30,292: INFO/MainProcess] Task stats.tasks.update_all[3dd46541-2991-4b3b-8907-798eebf59636] succeeded in 11.233612511001411s: None
+[2016-06-06 04:37:02,927: INFO/MainProcess] Received task: stats.tasks.update_all[5a420c02-9318-408d-adbd-587b7d683187]
+[2016-06-06 04:37:02,927: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', '5a420c02-9318-408d-adbd-587b7d683187', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': '5a420c02-9318-408d-adbd-587b7d683187', 'group': None, 'retries': 0, 'id': '5a420c02-9318-408d-adbd-587b7d683187', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 04:37:02,930: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[5a420c02-9318-408d-adbd-587b7d683187] pid:15765
+[2016-06-06 04:37:04,131: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:04,132: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:04,599: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:37:05,825: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:05,827: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:06,208: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 384
+[2016-06-06 04:37:07,432: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:07,434: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:07,838: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:37:09,063: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:09,064: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:09,430: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 04:37:10,635: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:10,636: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:11,020: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:37:12,246: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:12,247: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:12,640: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:37:13,856: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207479324?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:13,858: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:14,197: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207479324?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 04:37:15,400: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:15,402: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:15,784: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:37:16,990: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207673979?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:16,992: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:17,367: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207673979?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:37:18,597: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:18,599: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:18,937: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:37:20,164: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:20,166: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:20,560: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 3950
+[2016-06-06 04:37:21,788: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207531202?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:21,790: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:22,134: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207531202?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 3930
+[2016-06-06 04:37:23,367: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207479324?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:37:23,369: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:37:23,765: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207479324?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:37:23,805: INFO/MainProcess] Task stats.tasks.update_all[5a420c02-9318-408d-adbd-587b7d683187] succeeded in 20.877160721996916s: None
+[2016-06-06 04:42:03,022: INFO/MainProcess] Received task: stats.tasks.update_all[b0ed7e92-d02a-4048-ade1-0f8bb555e717]
+[2016-06-06 04:42:03,022: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', 'b0ed7e92-d02a-4048-ade1-0f8bb555e717', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': 'b0ed7e92-d02a-4048-ade1-0f8bb555e717', 'group': None, 'retries': 0, 'id': 'b0ed7e92-d02a-4048-ade1-0f8bb555e717', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 04:42:03,025: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[b0ed7e92-d02a-4048-ade1-0f8bb555e717] pid:15765
+[2016-06-06 04:42:04,226: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:04,227: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:04,648: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:05,855: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2157464540?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:05,856: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:06,229: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2157464540?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 4012
+[2016-06-06 04:42:07,457: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2152369940?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:07,458: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:07,828: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2152369940?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:09,057: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2143409638?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:09,058: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:09,425: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2143409638?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:10,654: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2143287667?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:10,656: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:11,026: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2143287667?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:12,256: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2143273109?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:12,258: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:12,630: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2143273109?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:13,858: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2143237741?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:13,859: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:14,235: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2143237741?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 3438
+[2016-06-06 04:42:15,464: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2143231264?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:15,465: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:15,810: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2143231264?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:17,040: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2141499758?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:17,042: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:17,472: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2141499758?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:18,701: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2138070607?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:18,703: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:19,105: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2138070607?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:20,336: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2138016222?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:20,338: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:21,423: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2138016222?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:22,652: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:22,653: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:23,028: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:24,234: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2146353177?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:24,236: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:24,569: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2146353177?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:25,800: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2146351870?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:25,801: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:26,152: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2146351870?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:27,381: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2146350962?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:27,383: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:27,803: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2146350962?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:29,033: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2144964437?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:29,035: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:29,427: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2144964437?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:30,656: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2144889108?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:30,658: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:31,052: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2144889108?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:32,280: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2144871247?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:32,281: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:32,646: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2144871247?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:33,874: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2144829841?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:33,875: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:34,229: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2144829841?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:35,461: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2143697961?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:35,462: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:35,814: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2143697961?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 04:42:37,017: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:37,019: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:37,416: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:38,623: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2204475769?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:38,624: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:39,012: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2204475769?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:40,241: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201619129?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:40,242: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:40,616: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201619129?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:41,844: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201632565?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:41,845: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:42,176: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201632565?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 None
+[2016-06-06 04:42:43,379: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:43,381: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:43,757: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 856
+[2016-06-06 04:42:44,963: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2151725201?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:44,965: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:45,347: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2151725201?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:46,578: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2099982248?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:46,579: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:46,958: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2099982248?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:48,188: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2099906294?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:48,189: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:48,568: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2099906294?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:49,797: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2097971385?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:49,798: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:50,188: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2097971385?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:51,416: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2097600652?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:51,418: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:51,783: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2097600652?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 3871
+[2016-06-06 04:42:53,011: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2097499212?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:53,013: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:53,397: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2097499212?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:54,626: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2094501770?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:54,628: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:55,012: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2094501770?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:56,242: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2094192410?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:56,244: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:56,617: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2094192410?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:57,845: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2094180908?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:57,847: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:58,192: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2094180908?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:42:59,420: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2090640383?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:42:59,422: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:42:59,797: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2090640383?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:01,025: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:01,027: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:01,413: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:02,619: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207673979?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:02,621: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:03,000: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207673979?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:04,231: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:04,232: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:04,625: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:05,853: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2206811356?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:05,854: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:06,222: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2206811356?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:07,449: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2204475769?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:07,451: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:07,818: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2204475769?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:09,048: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2203253436?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:09,050: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:09,419: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2203253436?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 4926
+[2016-06-06 04:43:10,649: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2202597635?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:10,651: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:11,001: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2202597635?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:12,228: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2202531390?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:12,230: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:12,619: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2202531390?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:13,848: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2202448195?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:13,849: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:14,233: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2202448195?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:15,463: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201935135?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:15,465: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:15,803: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201935135?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:17,030: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201864680?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:17,032: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:17,432: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201864680?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:18,658: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:18,659: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:19,053: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:20,261: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207673979?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:20,262: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:20,659: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207673979?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:21,889: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:21,890: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:22,238: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 4415
+[2016-06-06 04:43:23,467: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:23,469: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:23,824: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:25,052: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207531202?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:25,053: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:25,403: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207531202?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:26,632: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207479324?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:26,634: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:26,999: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207479324?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:28,228: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207486830?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:28,229: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:28,601: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207486830?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:29,829: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207483047?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:29,831: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:30,175: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207483047?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:31,404: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207462912?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:31,405: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:31,777: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207462912?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 4380
+[2016-06-06 04:43:33,005: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207469908?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:33,006: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:33,385: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207469908?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:34,613: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207405799?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:34,615: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:34,962: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207405799?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:36,189: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:36,191: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:36,573: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:37,779: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207673979?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:37,781: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:38,165: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207673979?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:39,392: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:39,394: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:39,790: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:41,018: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:41,019: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:41,399: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:42,629: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207531202?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:42,631: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:42,996: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207531202?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:44,224: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207479324?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:44,225: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:44,574: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207479324?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:45,802: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2204475769?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:45,803: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:46,188: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2204475769?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:47,418: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2202597635?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:47,419: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:47,781: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2202597635?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:49,009: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201935135?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:49,010: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:49,368: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201935135?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:50,596: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201864680?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:50,597: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:50,945: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201864680?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:52,173: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201619129?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:43:52,175: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:43:52,546: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201619129?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:43:52,572: INFO/MainProcess] Task stats.tasks.update_all[b0ed7e92-d02a-4048-ade1-0f8bb555e717] succeeded in 109.54982808799832s: None
+[2016-06-06 04:47:03,076: INFO/MainProcess] Received task: stats.tasks.update_all[384086a4-a471-48b2-aa10-238aa5390dc0]
+[2016-06-06 04:47:03,076: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', '384086a4-a471-48b2-aa10-238aa5390dc0', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': '384086a4-a471-48b2-aa10-238aa5390dc0', 'group': None, 'retries': 0, 'id': '384086a4-a471-48b2-aa10-238aa5390dc0', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 04:47:03,079: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[384086a4-a471-48b2-aa10-238aa5390dc0] pid:15765
+[2016-06-06 04:47:04,280: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:04,281: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:04,666: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:05,892: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:05,893: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:06,272: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:07,493: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2143697961?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:07,494: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:07,876: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2143697961?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:09,104: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2143691927?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:09,105: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:09,485: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2143691927?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:10,713: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2141581303?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:10,714: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:11,076: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2141581303?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:12,302: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:12,304: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:12,687: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:13,898: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201632565?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:13,900: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:14,356: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201632565?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:15,584: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2201548981?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:15,585: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:15,952: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2201548981?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:17,181: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2200806702?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:17,182: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:17,580: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2200806702?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:18,810: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2193681760?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:18,811: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:19,170: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2193681760?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 3999
+[2016-06-06 04:47:20,400: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2189769739?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:20,402: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:20,764: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2189769739?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:21,993: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2189737222?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:21,994: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:22,346: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2189737222?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:23,578: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2189089153?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:23,579: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:23,952: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2189089153?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:25,182: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2188462389?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:25,183: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:25,545: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2188462389?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:26,770: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:26,771: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:27,145: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:28,373: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:28,374: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:28,761: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:29,988: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:29,990: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:30,388: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:31,616: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:47:31,617: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:47:32,010: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:47:32,036: INFO/MainProcess] Task stats.tasks.update_all[384086a4-a471-48b2-aa10-238aa5390dc0] succeeded in 28.959199971999624s: None
+[2016-06-06 04:52:03,158: INFO/MainProcess] Received task: stats.tasks.update_all[b5824c88-c6a8-4419-8845-62bf0c2a6aaa]
+[2016-06-06 04:52:03,158: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', 'b5824c88-c6a8-4419-8845-62bf0c2a6aaa', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': 'b5824c88-c6a8-4419-8845-62bf0c2a6aaa', 'group': None, 'retries': 0, 'id': 'b5824c88-c6a8-4419-8845-62bf0c2a6aaa', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 04:52:03,161: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[b5824c88-c6a8-4419-8845-62bf0c2a6aaa] pid:15765
+[2016-06-06 04:52:04,362: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:04,363: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:04,760: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:05,987: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:05,988: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:06,380: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:07,605: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:07,607: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:07,997: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:09,205: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:09,207: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:09,618: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:10,850: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2206811356?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:10,851: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:11,203: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2206811356?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:12,445: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:12,446: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:12,931: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:14,141: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:14,142: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:14,486: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207568809?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:15,716: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:15,718: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:16,115: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:17,357: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:17,359: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:17,704: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 None
+[2016-06-06 04:52:18,908: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:18,909: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:19,289: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 384
+[2016-06-06 04:52:20,514: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:20,516: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:20,871: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:22,095: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2189089153?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:22,097: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:22,459: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2189089153?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:23,689: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2188462389?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:52:23,690: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:52:24,075: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2188462389?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:52:24,102: INFO/MainProcess] Task stats.tasks.update_all[b5824c88-c6a8-4419-8845-62bf0c2a6aaa] succeeded in 20.943043982995732s: None
+[2016-06-06 04:57:03,232: INFO/MainProcess] Received task: stats.tasks.update_all[a277daed-5c47-475d-a255-3effd78e26fe]
+[2016-06-06 04:57:03,232: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', 'a277daed-5c47-475d-a255-3effd78e26fe', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': 'a277daed-5c47-475d-a255-3effd78e26fe', 'group': None, 'retries': 0, 'id': 'a277daed-5c47-475d-a255-3effd78e26fe', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 04:57:03,235: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[a277daed-5c47-475d-a255-3effd78e26fe] pid:15765
+[2016-06-06 04:57:04,436: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:04,437: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:04,840: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 1270
+[2016-06-06 04:57:06,066: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:06,068: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:06,444: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 856
+[2016-06-06 04:57:07,670: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:07,671: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:08,059: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:57:09,270: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:09,272: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:09,635: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207532542?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:57:10,866: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/match/2207531202?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:10,868: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:11,250: DEBUG/Worker-1] "GET /api/lol/na/v2.2/match/2207531202?api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:57:12,490: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:12,492: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:12,875: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:57:14,100: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:14,101: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:14,500: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:57:15,727: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:15,728: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:16,129: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:57:17,356: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 04:57:17,357: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 04:57:17,773: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 04:57:17,799: INFO/MainProcess] Task stats.tasks.update_all[a277daed-5c47-475d-a255-3effd78e26fe] succeeded in 14.566089097002987s: None
+[2016-06-06 05:02:03,274: INFO/MainProcess] Received task: stats.tasks.update_all[72a1afaa-a40b-4633-be3f-d86a133df74b]
+[2016-06-06 05:02:03,275: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', '72a1afaa-a40b-4633-be3f-d86a133df74b', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': '72a1afaa-a40b-4633-be3f-d86a133df74b', 'group': None, 'retries': 0, 'id': '72a1afaa-a40b-4633-be3f-d86a133df74b', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 05:02:03,277: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[72a1afaa-a40b-4633-be3f-d86a133df74b] pid:15765
+[2016-06-06 05:02:04,478: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:02:04,480: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:02:04,877: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:02:06,104: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:02:06,106: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:02:06,509: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 856
+[2016-06-06 05:02:07,735: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:02:07,736: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:02:09,081: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:02:10,306: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:02:10,307: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:02:10,719: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 2361
+[2016-06-06 05:02:11,946: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:02:11,948: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:02:12,332: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:02:13,560: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:02:13,562: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:02:13,945: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:02:15,172: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:02:15,173: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:02:15,554: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:02:15,581: INFO/MainProcess] Task stats.tasks.update_all[72a1afaa-a40b-4633-be3f-d86a133df74b] succeeded in 12.305908850001288s: None
+[2016-06-06 05:07:03,369: INFO/MainProcess] Received task: stats.tasks.update_all[d4725cd5-0be5-4148-92f3-399837e48b99]
+[2016-06-06 05:07:03,369: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', 'd4725cd5-0be5-4148-92f3-399837e48b99', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': 'd4725cd5-0be5-4148-92f3-399837e48b99', 'group': None, 'retries': 0, 'id': 'd4725cd5-0be5-4148-92f3-399837e48b99', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 05:07:03,372: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[d4725cd5-0be5-4148-92f3-399837e48b99] pid:15765
+[2016-06-06 05:07:04,573: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:07:04,575: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:07:04,982: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:07:06,209: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:07:06,210: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:07:06,580: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 05:07:07,783: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:07:07,784: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:07:09,304: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:07:10,530: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:07:10,531: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:07:11,678: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 2361
+[2016-06-06 05:07:12,904: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:07:12,905: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:07:13,312: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:07:14,540: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:07:14,541: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:07:14,976: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:07:16,202: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:07:16,203: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:07:18,546: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 503 None
+[2016-06-06 05:07:18,548: INFO/MainProcess] Task stats.tasks.update_all[d4725cd5-0be5-4148-92f3-399837e48b99] succeeded in 15.178248926000379s: None
+[2016-06-06 05:12:03,463: INFO/MainProcess] Received task: stats.tasks.update_all[95db83b3-eabb-4d70-af15-d820d3b21257]
+[2016-06-06 05:12:03,464: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f97b71fdbf8> (args:('stats.tasks.update_all', '95db83b3-eabb-4d70-af15-d820d3b21257', [], {}, {'args': [], 'taskset': None, 'errbacks': None, 'chord': None, 'reply_to': '2345b63a-4e20-31c2-a238-bf617930e548', 'task': 'stats.tasks.update_all', 'expires': None, 'timelimit': (None, None), 'is_eager': False, 'eta': None, 'headers': {}, 'delivery_info': {'exchange': 'celery', 'redelivered': False, 'priority': 0, 'routing_key': 'celery'}, 'correlation_id': '95db83b3-eabb-4d70-af15-d820d3b21257', 'group': None, 'retries': 0, 'id': '95db83b3-eabb-4d70-af15-d820d3b21257', 'utc': True, 'hostname': 'worker1@ip-172-31-53-15', 'callbacks': None, 'kwargs': {}}) kwargs:{})
+[2016-06-06 05:12:03,467: DEBUG/MainProcess] Task accepted: stats.tasks.update_all[95db83b3-eabb-4d70-af15-d820d3b21257] pid:15765
+[2016-06-06 05:12:04,668: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:12:04,670: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:12:05,056: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26136415?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 None
+[2016-06-06 05:12:06,260: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:12:06,261: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:12:06,609: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/21203379?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:12:07,835: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:12:07,837: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:12:08,328: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/31229008?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:12:09,554: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:12:09,555: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:12:09,929: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/37422451?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 05:12:11,134: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:12:11,135: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:12:11,493: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/40323106?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 429 60
+[2016-06-06 05:12:12,697: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:12:12,698: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:12:13,083: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26155824?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:12:14,309: WARNING/Worker-1] https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5
+[2016-06-06 05:12:14,310: INFO/Worker-1] Starting new HTTPS connection (1): na.api.pvp.net
+[2016-06-06 05:12:14,719: DEBUG/Worker-1] "GET /api/lol/na/v2.2/matchlist/by-summoner/26125925?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5&seasons=SEASON2016&api_key=f5ee63d2-54d8-466d-ae42-df491f8eabc5 HTTP/1.1" 200 None
+[2016-06-06 05:12:14,745: INFO/MainProcess] Task stats.tasks.update_all[95db83b3-eabb-4d70-af15-d820d3b21257] succeeded in 11.28061509100371s: None
+[2016-06-06 05:16:04,365: DEBUG/MainProcess] | Worker: Closing Hub...
+[2016-06-06 05:16:04,365: DEBUG/MainProcess] | Worker: Closing Pool...
+[2016-06-06 05:16:04,365: DEBUG/MainProcess] | Worker: Closing Consumer...
+[2016-06-06 05:16:04,365: DEBUG/MainProcess] | Worker: Stopping Consumer...
+[2016-06-06 05:16:04,365: DEBUG/MainProcess] | Consumer: Closing Connection...
+[2016-06-06 05:16:04,365: DEBUG/MainProcess] | Consumer: Closing Events...
+[2016-06-06 05:16:04,365: DEBUG/MainProcess] | Consumer: Closing Mingle...
+[2016-06-06 05:16:04,366: DEBUG/MainProcess] | Consumer: Closing Tasks...
+[2016-06-06 05:16:04,366: DEBUG/MainProcess] | Consumer: Closing Control...
+[2016-06-06 05:16:04,366: DEBUG/MainProcess] | Consumer: Closing Gossip...
+[2016-06-06 05:16:04,366: DEBUG/MainProcess] | Consumer: Closing Heart...
+[2016-06-06 05:16:04,366: DEBUG/MainProcess] | Consumer: Closing event loop...
+[2016-06-06 05:16:04,366: DEBUG/MainProcess] | Consumer: Stopping event loop...
+[2016-06-06 05:16:04,366: DEBUG/MainProcess] | Consumer: Stopping Heart...
+[2016-06-06 05:16:04,367: DEBUG/MainProcess] | Consumer: Stopping Gossip...
+[2016-06-06 05:16:04,369: DEBUG/MainProcess] Closed channel #3
+[2016-06-06 05:16:04,369: DEBUG/MainProcess] | Consumer: Stopping Control...
+[2016-06-06 05:16:04,370: DEBUG/MainProcess] Closed channel #2
+[2016-06-06 05:16:04,370: DEBUG/MainProcess] | Consumer: Stopping Tasks...
+[2016-06-06 05:16:04,371: DEBUG/MainProcess] Canceling task consumer...
+[2016-06-06 05:16:04,371: DEBUG/MainProcess] | Consumer: Stopping Mingle...
+[2016-06-06 05:16:04,371: DEBUG/MainProcess] | Consumer: Stopping Events...
+[2016-06-06 05:16:04,371: DEBUG/MainProcess] | Consumer: Stopping Connection...
+[2016-06-06 05:16:04,371: DEBUG/MainProcess] | Worker: Stopping Pool...
+[2016-06-06 05:16:05,374: DEBUG/MainProcess] | Worker: Stopping Hub...
+[2016-06-06 05:16:05,375: DEBUG/MainProcess] | Consumer: Shutdown Heart...
+[2016-06-06 05:16:05,375: DEBUG/MainProcess] | Consumer: Shutdown Gossip...
+[2016-06-06 05:16:05,375: DEBUG/MainProcess] | Consumer: Shutdown Control...
+[2016-06-06 05:16:05,375: DEBUG/MainProcess] | Consumer: Shutdown Tasks...
+[2016-06-06 05:16:05,375: DEBUG/MainProcess] Canceling task consumer...
+[2016-06-06 05:16:05,375: DEBUG/MainProcess] Closing consumer channel...
+[2016-06-06 05:16:05,375: DEBUG/MainProcess] | Consumer: Shutdown Events...
+[2016-06-06 05:16:05,376: DEBUG/MainProcess] Closed channel #1
+[2016-06-06 05:16:05,376: DEBUG/MainProcess] | Consumer: Shutdown Connection...
+[2016-06-06 05:16:05,377: DEBUG/MainProcess] Closed channel #1
+[2016-06-06 05:16:05,377: DEBUG/MainProcess] removing tasks from inqueue until task handler finished

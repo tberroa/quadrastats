@@ -1,0 +1,46 @@
+[2016-06-06 04:32:02,806: DEBUG/MainProcess] Setting default socket timeout to 30
+[2016-06-06 04:32:02,806: INFO/MainProcess] beat: Starting...
+[2016-06-06 04:32:02,815: DEBUG/MainProcess] Current schedule:
+<Entry: celery.backend_cleanup celery.backend_cleanup() <crontab: 0 4 * * * (m/h/d/dM/MY)>
+<Entry: update-all-summoners stats.tasks.update_all() <freq: 5.00 minutes>
+[2016-06-06 04:32:02,815: DEBUG/MainProcess] beat: Ticking with max interval->5.00 minutes
+[2016-06-06 04:32:02,825: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'product': 'RabbitMQ', 'capabilities': {'consumer_priorities': True, 'consumer_cancel_notify': True, 'authentication_failure_close': True, 'connection.blocked': True, 'exchange_exchange_bindings': True, 'basic.nack': True, 'publisher_confirms': True}, 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'version': '3.2.4', 'platform': 'Erlang/OTP', 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 04:32:02,825: DEBUG/MainProcess] Open OK!
+[2016-06-06 04:32:02,826: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 04:32:02,827: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 04:32:02,828: DEBUG/MainProcess] Channel open
+[2016-06-06 04:32:02,831: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 04:32:02,834: DEBUG/MainProcess] stats.tasks.update_all sent. id->3dd46541-2991-4b3b-8907-798eebf59636
+[2016-06-06 04:32:02,834: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 04:37:02,925: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 04:37:02,925: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 04:37:02,926: DEBUG/MainProcess] stats.tasks.update_all sent. id->5a420c02-9318-408d-adbd-587b7d683187
+[2016-06-06 04:37:02,926: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 04:42:03,016: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 04:42:03,020: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 04:42:03,021: DEBUG/MainProcess] stats.tasks.update_all sent. id->b0ed7e92-d02a-4048-ade1-0f8bb555e717
+[2016-06-06 04:42:03,021: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 04:47:03,071: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 04:47:03,074: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 04:47:03,075: DEBUG/MainProcess] stats.tasks.update_all sent. id->384086a4-a471-48b2-aa10-238aa5390dc0
+[2016-06-06 04:47:03,075: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 04:52:03,153: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 04:52:03,156: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 04:52:03,157: DEBUG/MainProcess] stats.tasks.update_all sent. id->b5824c88-c6a8-4419-8845-62bf0c2a6aaa
+[2016-06-06 04:52:03,157: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 04:57:03,227: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 04:57:03,230: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 04:57:03,231: DEBUG/MainProcess] stats.tasks.update_all sent. id->a277daed-5c47-475d-a255-3effd78e26fe
+[2016-06-06 04:57:03,231: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 05:02:03,269: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:02:03,273: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 05:02:03,273: DEBUG/MainProcess] stats.tasks.update_all sent. id->72a1afaa-a40b-4633-be3f-d86a133df74b
+[2016-06-06 05:02:03,274: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 05:07:03,364: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:07:03,367: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 05:07:03,368: DEBUG/MainProcess] stats.tasks.update_all sent. id->d4725cd5-0be5-4148-92f3-399837e48b99
+[2016-06-06 05:07:03,368: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 05:12:03,458: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:12:03,462: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 05:12:03,465: DEBUG/MainProcess] stats.tasks.update_all sent. id->95db83b3-eabb-4d70-af15-d820d3b21257
+[2016-06-06 05:12:03,467: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
