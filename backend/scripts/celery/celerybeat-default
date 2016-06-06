@@ -17,6 +17,8 @@ CELERYBEAT_CHDIR="/home/ubuntu/portal/backend/portal/"
 # %N will be replaced with the first part of the nodename.
 CELERYBEAT_LOG_FILE="/home/ubuntu/portal/backend/logs/celery/%N.log"
 
+CELERYBEAT_LOG_LEVEL="DEBUG"
+
 # If enabled pid and log directories will be created if missing,
 # and owned by the userid/group configured.
 CELERY_CREATE_DIRS=1
