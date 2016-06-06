@@ -30,8 +30,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'summoners.apps.SummonersConfig',
-    'stats.apps.StatsConfig',
+    'summoners',
+    'stats',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -112,17 +112,6 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.CryptPasswordHasher',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
-    ),
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': '5/sec',
-        'user': '5/sec'
-    }
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -152,6 +141,28 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+
+# Django rest framework config
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5000/sec',
+        'user': '5000/sec'
+    }
+}
+
+# Celery config
+from datetime import timedelta
+
+CELERYBEAT_SCHEDULE = {
+    'update-all-summoners': {
+        'task': 'stats.tasks.update_all',
+        'schedule': timedelta(minutes=10)
+    },
+}
 
 
 

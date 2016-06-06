@@ -18,8 +18,7 @@ def match_list(summoner):
         + "&api_key=" + riot_api_key
 
     # make get request
-    sleep(1.2)
-    print(url)
+    sleep(1.5)
     r = requests.get(url)
 
     # return response
@@ -32,8 +31,7 @@ def match_detail(match, region):
         + "?api_key=" + riot_api_key
 
     # make get request
-    sleep(1.2)
-    print(url)
+    sleep(1.5)
     r = requests.get(url)
 
     # return response
