@@ -169,3 +169,8 @@
 [2016-06-05 22:39:31 +0000] [8246] [INFO] Booting worker with pid: 8246
 [2016-06-05 22:39:31 +0000] [8242] [DEBUG] 3 workers
 [2016-06-05 22:39:31 +0000] [8248] [INFO] Booting worker with pid: 8248
+[2016-06-05 22:51:31 +0000] [8242] [INFO] Handling signal: term
+[2016-06-05 22:51:31 +0000] [8248] [INFO] Worker exiting (pid: 8248)
+[2016-06-05 22:51:31 +0000] [8245] [INFO] Worker exiting (pid: 8245)
+[2016-06-05 22:51:31 +0000] [8246] [INFO] Worker exiting (pid: 8246)
+[2016-06-05 22:51:31 +0000] [8242] [INFO] Shutting down: Master

@@ -1,0 +1,24 @@
+# Move and rename this file to /etc/default/celerybeat
+
+# Absolute or relative path to the 'celery' command:
+#CELERY_BIN="/usr/local/bin/celery"
+CELERY_BIN="/home/ubuntu/portal/backend/myvenv/bin/celery"
+
+# App instance to use
+# comment out this line if you don't use an app
+CELERY_APP="portal"
+# or fully qualified:
+#CELERY_APP="proj.tasks:app"
+
+# Where to chdir at start.
+CELERYBEAT_CHDIR="/home/ubuntu/portal/backend/portal/"
+
+# Extra arguments to celerybeat
+#CELERYBEAT_OPTS="--schedule=/var/run/celery/celerybeat-schedule"
+
+# %N will be replaced with the first part of the nodename.
+CELERYBEAT_LOG_FILE="/home/ubuntu/portal/backend/logs/celery/%N.log"
+
+# If enabled pid and log directories will be created if missing,
+# and owned by the userid/group configured.
+CELERY_CREATE_DIRS=1

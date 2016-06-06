@@ -1,0 +1,72 @@
+[2016-06-06 01:11:47,892: WARNING/MainProcess] /home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-06-06 01:11:47,925: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-06-06 01:11:47,933: INFO/MainProcess] mingle: searching for neighbors
+[2016-06-06 01:11:48,940: INFO/MainProcess] mingle: all alone
+[2016-06-06 01:11:48,949: WARNING/MainProcess] worker1@ip-172-31-53-15 ready.
+[2016-06-06 01:20:08,379: WARNING/MainProcess] /home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-06-06 01:20:08,411: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-06-06 01:20:08,419: INFO/MainProcess] mingle: searching for neighbors
+[2016-06-06 01:20:09,426: INFO/MainProcess] mingle: all alone
+[2016-06-06 01:20:09,435: WARNING/MainProcess] worker1@ip-172-31-53-15 ready.
+[2016-06-06 02:28:15,554: WARNING/MainProcess] /home/ubuntu/portal/backend/myvenv/lib/python3.4/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-06-06 02:28:15,585: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-06-06 02:28:15,593: INFO/MainProcess] mingle: searching for neighbors
+[2016-06-06 02:28:16,600: INFO/MainProcess] mingle: all alone
+[2016-06-06 02:28:16,608: WARNING/MainProcess] worker1@ip-172-31-53-15 ready.

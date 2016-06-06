@@ -1,0 +1,90 @@
+[2016-06-06 01:15:06 +0000] [11406] [DEBUG] Current configuration:
+  statsd_host: None
+  proc_name: None
+  threads: 1
+  syslog: False
+  reload: False
+  cert_reqs: 0
+  pre_request: <function PreRequest.pre_request at 0x7f414a798510>
+  backlog: 2048
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f414a793e18>
+  logger_class: gunicorn.glogging.Logger
+  limit_request_line: 4094
+  do_handshake_on_connect: False
+  on_reload: <function OnReload.on_reload at 0x7f414a7937b8>
+  worker_int: <function WorkerInt.worker_int at 0x7f414a798048>
+  sendfile: None
+  ciphers: TLSv1
+  worker_class: sync
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-SSL': 'on', 'X-FORWARDED-PROTO': 'https'}
+  proxy_protocol: False
+  pre_exec: <function PreExec.pre_exec at 0x7f414a798378>
+  keepalive: 2
+  django_settings: None
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /home/ubuntu/portal/backend/logs/gunicorn/06-06-16.log
+  capture_output: False
+  syslog_facility: user
+  chdir: /home/ubuntu/portal/backend/portal
+  group: 1000
+  umask: 0
+  keyfile: None
+  certfile: None
+  syslog_addr: udp://localhost:514
+  config: None
+  daemon: False
+  enable_stdio_inheritance: False
+  pre_fork: <function Prefork.pre_fork at 0x7f414a793ae8>
+  workers: 3
+  worker_connections: 1000
+  max_requests: 0
+  timeout: 30
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f414a7981e0>
+  on_exit: <function OnExit.on_exit at 0x7f414a798ae8>
+  syslog_prefix: None
+  preload_app: False
+  raw_env: []
+  worker_tmp_dir: None
+  forwarded_allow_ips: ['127.0.0.1']
+  pythonpath: None
+  proxy_allow_ips: ['127.0.0.1']
+  when_ready: <function WhenReady.when_ready at 0x7f414a793950>
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  spew: False
+  post_fork: <function Postfork.post_fork at 0x7f414a793c80>
+  limit_request_fields: 100
+  graceful_timeout: 30
+  logconfig: None
+  paste: None
+  check_config: False
+  bind: ['127.0.0.1:8000']
+  worker_exit: <function WorkerExit.worker_exit at 0x7f414a7987b8>
+  accesslog: None
+  loglevel: debug
+  ca_certs: None
+  limit_request_field_size: 8190
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f414a798950>
+  max_requests_jitter: 0
+  on_starting: <function OnStarting.on_starting at 0x7f414a793620>
+  statsd_prefix: 
+  pidfile: None
+  user: 1000
+  post_request: <function PostRequest.post_request at 0x7f414a798620>
+  default_proc_name: portal.wsgi:application
+  tmp_upload_dir: None
+[2016-06-06 01:15:06 +0000] [11406] [INFO] Starting gunicorn 19.6.0
+[2016-06-06 01:15:06 +0000] [11406] [DEBUG] Arbiter booted
+[2016-06-06 01:15:06 +0000] [11406] [INFO] Listening at: http://127.0.0.1:8000 (11406)
+[2016-06-06 01:15:06 +0000] [11406] [INFO] Using worker: sync
+[2016-06-06 01:15:06 +0000] [11409] [INFO] Booting worker with pid: 11409
+[2016-06-06 01:15:06 +0000] [11411] [INFO] Booting worker with pid: 11411
+[2016-06-06 01:15:06 +0000] [11413] [INFO] Booting worker with pid: 11413
+[2016-06-06 01:15:06 +0000] [11406] [DEBUG] 3 workers
+[2016-06-06 02:29:04 +0000] [11413] [DEBUG] GET /
+[2016-06-06 02:29:05 +0000] [11411] [DEBUG] GET /favicon.ico
+[2016-06-06 02:29:05 +0000] [11413] [DEBUG] GET /favicon.ico
+[2016-06-06 02:29:09 +0000] [11409] [DEBUG] GET /admin
+[2016-06-06 02:29:09 +0000] [11413] [DEBUG] GET /admin/
+[2016-06-06 02:29:09 +0000] [11409] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 02:29:09 +0000] [11411] [DEBUG] GET /static/admin/css/dashboard.css
