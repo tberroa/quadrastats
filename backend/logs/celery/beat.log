@@ -44,3 +44,1999 @@
 [2016-06-06 05:12:03,462: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
 [2016-06-06 05:12:03,465: DEBUG/MainProcess] stats.tasks.update_all sent. id->95db83b3-eabb-4d70-af15-d820d3b21257
 [2016-06-06 05:12:03,467: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 05:38:44,107: DEBUG/MainProcess] Setting default socket timeout to 30
+[2016-06-06 05:38:44,107: INFO/MainProcess] beat: Starting...
+[2016-06-06 05:38:44,119: DEBUG/MainProcess] Current schedule:
+<Entry: celery.backend_cleanup celery.backend_cleanup() <crontab: 0 4 * * * (m/h/d/dM/MY)>
+<Entry: update-all-summoners stats.tasks.update_all() <freq: 5.00 minutes>
+<Entry: http-limit-test stats.tasks.http_limit_test() <freq: 3.00 seconds>
+[2016-06-06 05:38:44,119: DEBUG/MainProcess] beat: Ticking with max interval->5.00 minutes
+[2016-06-06 05:38:44,129: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'product': 'RabbitMQ', 'capabilities': {'basic.nack': True, 'authentication_failure_close': True, 'consumer_cancel_notify': True, 'publisher_confirms': True, 'connection.blocked': True, 'exchange_exchange_bindings': True, 'consumer_priorities': True}, 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'version': '3.2.4', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'platform': 'Erlang/OTP'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 05:38:44,130: DEBUG/MainProcess] Open OK!
+[2016-06-06 05:38:44,131: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 05:38:44,132: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 05:38:44,132: DEBUG/MainProcess] Channel open
+[2016-06-06 05:38:44,134: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:38:44,137: DEBUG/MainProcess] stats.tasks.update_all sent. id->9582b541-8e7f-4efe-826e-087193c4a9f9
+[2016-06-06 05:38:44,137: DEBUG/MainProcess] beat: Waking up in 2.96 seconds.
+[2016-06-06 05:38:47,112: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:38:47,113: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f2e3a65b-2897-46f4-9400-b0140abfb0f2
+[2016-06-06 05:38:47,113: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:38:50,112: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:38:50,114: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->06a1e859-8dc7-4282-8f20-3cae7c458baf
+[2016-06-06 05:38:50,114: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:38:53,112: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:38:53,114: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4e8aef3c-1ca9-44b9-8cbd-ee8033c37425
+[2016-06-06 05:38:53,114: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:38:56,113: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:38:56,114: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->2a7efccf-d82a-4a93-88e5-8c9279c828c3
+[2016-06-06 05:38:56,114: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:38:59,113: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:38:59,114: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b5dad5c4-2721-4a89-9a8e-17fd6a3be27b
+[2016-06-06 05:38:59,115: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:02,114: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:02,115: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->70650817-2c72-47c5-b2fb-c7f919dbe8df
+[2016-06-06 05:39:02,115: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:05,114: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:05,115: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e6c042bd-268a-455b-9417-8dfab570da0d
+[2016-06-06 05:39:05,115: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:08,114: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:08,116: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->aab96499-5355-4170-a014-96e655c33f89
+[2016-06-06 05:39:08,116: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:11,115: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:11,116: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b8e3d64b-2275-4ce7-b693-a05084b42c89
+[2016-06-06 05:39:11,116: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:14,115: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:14,116: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a44039b0-50bd-4571-b102-d73ddcb4bdd0
+[2016-06-06 05:39:14,116: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:17,115: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:17,117: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->deb2a233-6b9d-41e8-a87b-e35a00bc6644
+[2016-06-06 05:39:17,117: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:20,116: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:20,117: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->86d2168e-013a-46d0-b3d0-a034d3fa8587
+[2016-06-06 05:39:20,117: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:23,116: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:23,117: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b8d88653-9b7f-4f9f-b725-ca22227d7993
+[2016-06-06 05:39:23,117: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:26,116: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:26,118: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a0cb0e5c-855c-44d5-bfff-fca51eab85c9
+[2016-06-06 05:39:26,118: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:29,117: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:29,118: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6538a993-b32a-4a85-9664-f7471f137df2
+[2016-06-06 05:39:29,118: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:32,117: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:32,118: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a386ef12-1cb0-414f-b147-a625ff33fceb
+[2016-06-06 05:39:32,119: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:35,117: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:35,119: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5d258d58-6536-4e79-a4de-1c42bf1e9015
+[2016-06-06 05:39:35,119: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:38,121: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:38,122: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4c9cae46-ec96-4e54-996b-aece88c94861
+[2016-06-06 05:39:38,122: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:41,121: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:41,122: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->229b7d1a-8550-4d21-9825-ae99a31824da
+[2016-06-06 05:39:41,123: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:44,121: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:44,123: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->8d3150c5-0b26-422c-8eb4-4e2808daadf1
+[2016-06-06 05:39:44,123: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:47,122: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:47,123: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->204c137b-135e-49e7-9f8c-0e08a69d9c2f
+[2016-06-06 05:39:47,123: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:50,122: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:50,123: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->34d6ea69-27dc-4973-902a-6c3186702905
+[2016-06-06 05:39:50,124: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:53,122: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:53,124: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->dc6abffa-6aa9-4665-afd9-609c33f2c558
+[2016-06-06 05:39:53,124: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:56,123: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:56,124: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->692ca3af-1ed2-49be-abe9-a30c2355e6a4
+[2016-06-06 05:39:56,124: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:39:59,123: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:39:59,125: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->04fb966c-8e80-44f0-8426-7c03762a0ee9
+[2016-06-06 05:39:59,125: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:02,124: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:02,125: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->9cb5aabb-ee02-4096-b2ad-2c521ab77d89
+[2016-06-06 05:40:02,125: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:05,124: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:05,125: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->1b30fe56-4530-4227-873c-3e8322797366
+[2016-06-06 05:40:05,126: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:08,125: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:08,126: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a7f71737-fb95-49f2-9dc2-f4d7504a9dfa
+[2016-06-06 05:40:08,126: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:11,125: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:11,126: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->702b90fb-3e90-4168-a57d-078f8718d030
+[2016-06-06 05:40:11,126: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:14,125: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:14,127: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5b0d0a34-6ecf-4562-88f5-67551b92cd34
+[2016-06-06 05:40:14,127: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:17,126: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:17,127: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->eedea00b-734c-486c-9ef3-4277ccb67f7b
+[2016-06-06 05:40:17,127: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:20,126: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:20,131: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->bf309325-fe46-4cca-97be-d213b81d2cfc
+[2016-06-06 05:40:20,131: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:23,127: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:23,131: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->918e8277-00fe-49ce-a9ae-48ae52ee3b92
+[2016-06-06 05:40:23,132: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:26,127: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:26,131: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->da8dc4a1-9f0c-4e7b-b39a-66476549d2b5
+[2016-06-06 05:40:26,132: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:29,127: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:29,132: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4fdcc3b6-1af0-4a07-96f7-2d9216a1e954
+[2016-06-06 05:40:29,132: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:32,128: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:32,132: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->134584c5-07b3-456f-b11d-c8c46b0b5c2b
+[2016-06-06 05:40:32,133: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:35,128: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:35,133: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->7721d029-d9d3-4fa4-8889-7fff0eecc8d7
+[2016-06-06 05:40:35,134: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:38,129: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:38,132: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d5525ccf-4ed5-4f0d-a170-7c90e41b94aa
+[2016-06-06 05:40:38,133: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:41,129: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:41,133: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->08300ef8-092a-4280-85b0-3189a2f746ef
+[2016-06-06 05:40:41,134: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:44,129: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:44,133: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->675f9373-b2b3-4a54-ad83-e3da22bec79c
+[2016-06-06 05:40:44,134: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:47,129: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:47,130: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->56b0463b-0f54-4767-86ef-2296aa04758a
+[2016-06-06 05:40:47,130: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:50,130: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:50,135: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->9d1ed13c-e150-4338-9af5-c266215d2846
+[2016-06-06 05:40:50,135: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:53,130: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:53,131: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c1f3fdb7-7452-4f2e-9372-810a9709ecb3
+[2016-06-06 05:40:53,131: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:56,131: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:56,135: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ea392033-466f-4361-83b0-8a921a37c5e0
+[2016-06-06 05:40:56,136: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:40:59,131: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:40:59,132: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->bc3ecb30-6727-4d8c-b228-f0c7b2f00c8a
+[2016-06-06 05:40:59,132: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:02,131: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:02,136: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->dfd1ef3c-67a7-4cc1-b825-5ed5fc5d75ad
+[2016-06-06 05:41:02,137: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:05,132: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:05,133: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->2a51c262-7165-4a47-a3b3-ffa9b052c1f7
+[2016-06-06 05:41:05,133: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:08,132: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:08,137: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c1cc9cd1-74eb-4bf3-bc8c-95ba40339765
+[2016-06-06 05:41:08,138: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:11,133: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:11,134: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6070d9d5-29f4-4bec-a414-3007462a74f9
+[2016-06-06 05:41:11,134: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:14,133: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:14,138: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c80bf260-b5ff-44a2-b982-84da2ca49e05
+[2016-06-06 05:41:14,138: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:17,134: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:17,138: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c8eff9b5-63e9-4344-8dd2-5fdaae5d8a05
+[2016-06-06 05:41:17,139: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:20,134: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:20,139: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4ce6d42d-4951-41ea-9950-be03e95dc64f
+[2016-06-06 05:41:20,140: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:23,134: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:23,135: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a26ca56a-90cf-4f5d-9ffd-2194aab03d59
+[2016-06-06 05:41:23,135: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:26,135: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:26,139: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b6902b6c-caa8-41c0-a864-3fbdf6fabc8b
+[2016-06-06 05:41:26,140: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:29,135: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:29,136: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->8c658fc1-a6fd-443a-b6f6-c30cd072f2d0
+[2016-06-06 05:41:29,136: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:32,136: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:32,140: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f583b9f3-a2f4-4cd3-b83b-c9a67cb2e212
+[2016-06-06 05:41:32,141: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:35,136: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:35,137: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->1dcca920-cc8e-4bdc-b4f6-a8eb1b530a9c
+[2016-06-06 05:41:35,137: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:38,136: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:38,141: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f0011800-f836-4753-b02c-1fccbbe49cb8
+[2016-06-06 05:41:38,142: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:41,137: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:41,138: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->7e5247f4-dcfb-48c4-90d7-076a987cad89
+[2016-06-06 05:41:41,138: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:44,137: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:44,142: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:41:44,144: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->91ed889b-e8f5-4c09-a02e-c6d4fdc094e7
+[2016-06-06 05:41:44,148: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:47,142: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:47,143: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->610d1c35-14ed-4566-89a3-b8e40cec64b1
+[2016-06-06 05:41:47,143: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:50,142: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:50,147: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->35d53294-c79d-4a85-83a4-a045f77aef4d
+[2016-06-06 05:41:50,147: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:53,143: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:53,143: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c78e5016-3b05-4c43-9599-5e15e29e09e4
+[2016-06-06 05:41:53,144: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:56,143: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:56,148: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->506ea7cd-e2fe-4ea6-9a14-b4e3bcf5438b
+[2016-06-06 05:41:56,148: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:41:59,143: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:41:59,144: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->758e873a-8150-4174-b877-03aa06fa6a7e
+[2016-06-06 05:41:59,144: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:02,144: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:02,148: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->aae31780-a254-441c-bac4-4b369131daa9
+[2016-06-06 05:42:02,149: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:05,144: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:05,145: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e2ecd88b-77b3-4726-9988-b3f0baf6bfd1
+[2016-06-06 05:42:05,145: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:08,145: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:08,149: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->8ebbf0c5-71df-4a58-a407-b7f4eccf1bc1
+[2016-06-06 05:42:08,150: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:11,145: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:11,146: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->704bdd8d-c533-468b-acb1-e8faafd23b9d
+[2016-06-06 05:42:11,146: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:14,146: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:14,150: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ebd4c27b-2b5f-4b34-9c32-1dc89e4f2689
+[2016-06-06 05:42:14,151: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:17,146: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:17,147: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->886f74c7-7059-41df-8a1a-d4e991cfb052
+[2016-06-06 05:42:17,147: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:20,146: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:20,151: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->26a8ed60-11ce-4940-849f-730e368876b9
+[2016-06-06 05:42:20,152: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:23,147: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:23,148: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ca2915d5-a83a-4933-a4cd-83bd1558374e
+[2016-06-06 05:42:23,148: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:26,147: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:26,152: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d4a3ebef-fc92-4a61-b6df-19d84c2d9e64
+[2016-06-06 05:42:26,152: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:29,148: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:29,149: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5457d463-1d7f-47d2-9bee-04a4ede1a296
+[2016-06-06 05:42:29,149: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:32,148: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:32,153: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->8a6a59ba-dc3a-439c-8104-95058ebcc45a
+[2016-06-06 05:42:32,153: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:35,148: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:35,149: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f8638ee2-e37e-4804-b18e-84d16d27c284
+[2016-06-06 05:42:35,149: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:38,149: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:38,153: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0f03a6da-1884-498e-8fa7-987642003bb5
+[2016-06-06 05:42:38,154: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:41,149: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:41,150: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->408dfac0-bf48-42ec-8f5e-a1c0f0be2737
+[2016-06-06 05:42:41,150: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:44,150: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:44,154: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d14d455f-1162-4ee2-8b65-73d899e0518a
+[2016-06-06 05:42:44,154: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:47,150: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:47,151: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a249837f-f72f-415f-b95f-c5770e1e0ca3
+[2016-06-06 05:42:47,151: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:50,150: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:50,155: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->57ef351d-9919-4c03-a47c-7da01bb6fe84
+[2016-06-06 05:42:50,156: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:53,151: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:53,155: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c6f4f4c9-48bb-4e8e-bd9e-c82551bf16cb
+[2016-06-06 05:42:53,156: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:56,151: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:56,155: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->61e3bae9-96b2-4630-83e2-d88c7f1e47b8
+[2016-06-06 05:42:56,155: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:42:59,151: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:42:59,156: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e8b326d4-72d9-4a8c-b38f-310b45bde0db
+[2016-06-06 05:42:59,157: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:02,152: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:02,153: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->337622cc-da7b-4565-849e-01c036fdbb51
+[2016-06-06 05:43:02,153: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:05,152: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:05,157: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->9cc21594-3086-4e98-95bf-714418c5e0f5
+[2016-06-06 05:43:05,157: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:08,153: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:08,154: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->badaab1e-2e5e-4c88-a5bc-b9709ccc587d
+[2016-06-06 05:43:08,154: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:11,153: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:11,158: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b2705db3-9c7b-43fe-bdab-f98ed843742e
+[2016-06-06 05:43:11,159: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:14,154: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:14,154: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a02e3215-6fc3-4133-b134-45f14c1b4138
+[2016-06-06 05:43:14,155: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:17,154: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:17,159: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->2f721fa5-4a26-49ea-a2ae-c7cd9474bf99
+[2016-06-06 05:43:17,159: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:20,154: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:20,155: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f135ece8-9467-4a2d-b3dd-4e81137862a5
+[2016-06-06 05:43:20,156: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:23,155: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:23,159: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b1c7e385-d755-484b-b9de-458cc370ade8
+[2016-06-06 05:43:23,160: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:26,155: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:26,156: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ff25aea5-96eb-4510-a6e3-6e8c0da6794b
+[2016-06-06 05:43:26,156: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:29,156: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:29,160: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d595096f-dabd-4235-890d-55eab64735af
+[2016-06-06 05:43:29,161: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:32,156: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:32,161: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c1b0193f-00ef-4fba-a5c0-59eac7b6e0db
+[2016-06-06 05:43:32,161: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:35,156: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:35,157: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6eae6349-2585-4f35-a60a-db41054acceb
+[2016-06-06 05:43:35,157: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:38,157: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:38,161: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b1a391f8-f79f-4f2e-a960-a59d17d12da4
+[2016-06-06 05:43:38,162: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:41,157: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:41,158: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5a210a87-d45b-4608-907d-b9326a20b984
+[2016-06-06 05:43:41,158: DEBUG/MainProcess] beat: Waking up in 2.96 seconds.
+[2016-06-06 05:43:44,131: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 05:43:44,135: DEBUG/MainProcess] stats.tasks.update_all sent. id->2df67a29-de80-4828-ad92-c2f8db486311
+[2016-06-06 05:43:44,137: DEBUG/MainProcess] beat: Waking up now.
+[2016-06-06 05:43:44,158: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:44,159: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->763c43a2-f60e-422f-aa4e-54cf77769788
+[2016-06-06 05:43:44,160: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:47,158: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:47,160: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b6ac5ea7-03da-4d59-9042-1489b3a6ef23
+[2016-06-06 05:43:47,161: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:50,158: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:50,160: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->55f21c56-ca46-4218-b850-e9c2f4d2fc5f
+[2016-06-06 05:43:50,161: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:53,158: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:53,161: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d2dc87c7-a824-4cec-ae24-c782b3d4f3f3
+[2016-06-06 05:43:53,163: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:56,159: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:56,160: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->cd59a2b6-6379-4554-873f-9a91d74480cf
+[2016-06-06 05:43:56,160: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:43:59,159: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:43:59,164: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->fa4b17a3-7167-41b4-acba-81c5f19dec4e
+[2016-06-06 05:43:59,164: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:02,160: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:02,160: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a285c474-98cd-45ad-9463-ae0eaba4679b
+[2016-06-06 05:44:02,161: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:05,160: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:05,165: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->26ad8c10-6b88-4994-8b94-b73c252f69d2
+[2016-06-06 05:44:05,166: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:08,160: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:08,161: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->8ad8f099-89dc-4641-b91d-2961356efc1a
+[2016-06-06 05:44:08,161: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:11,161: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:11,165: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->91ca6d87-5b08-41ac-a6ad-5c57183929b8
+[2016-06-06 05:44:11,166: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:14,161: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:14,162: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ac21c4fd-b7f2-42ca-a16f-64cd799f7dd8
+[2016-06-06 05:44:14,162: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:17,162: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:17,166: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4d1f0aaa-aa7e-470c-8a8c-33f7ca707770
+[2016-06-06 05:44:17,167: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:20,162: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:20,163: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e7df7795-52c0-4447-99a1-ee1a061618dd
+[2016-06-06 05:44:20,163: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:23,162: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:23,167: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ff993c3f-6499-44f4-8efb-ab5bc6384638
+[2016-06-06 05:44:23,168: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:26,163: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:26,164: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b1c06d71-b7d0-4525-b613-cac524a50df7
+[2016-06-06 05:44:26,164: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:29,163: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:29,168: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0cb82f4a-88ee-4fd6-8d04-ac786f60158c
+[2016-06-06 05:44:29,168: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:32,164: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:32,167: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5b66a03f-97ea-4136-b484-06cefcc6b562
+[2016-06-06 05:44:32,167: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:35,164: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:35,169: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->504a810b-d258-4c70-a1b7-b4e46f34a84a
+[2016-06-06 05:44:35,169: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:38,164: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:38,169: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6096a3c6-e146-4301-b865-ee352cb03040
+[2016-06-06 05:44:38,169: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:41,165: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:41,169: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c5640f15-8520-4338-a38e-8e90d2913a72
+[2016-06-06 05:44:41,170: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:44,163: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:44:44,167: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:44,170: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->eda11d51-efff-4599-ada8-5b89e0037c94
+[2016-06-06 05:44:44,172: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:47,167: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:47,171: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->9e135893-d569-4249-a5fb-2615481c6d4b
+[2016-06-06 05:44:47,172: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:50,167: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:50,172: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f9c7c252-54a4-4d9d-813a-49da859cc58f
+[2016-06-06 05:44:50,173: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:53,167: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:53,171: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->34b4defb-3f46-473e-ba31-5de1b2bf22e9
+[2016-06-06 05:44:53,172: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:56,168: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:56,172: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->7f45a1e7-a851-415b-928f-352309e56d17
+[2016-06-06 05:44:56,172: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:44:59,168: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:44:59,173: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->979939f2-62d4-4e4f-b006-a8eb08b63b87
+[2016-06-06 05:44:59,174: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:02,169: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:02,169: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ed54bb58-78e5-4548-9f1b-52b3fb9ce90c
+[2016-06-06 05:45:02,170: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:05,169: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:05,174: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->1490a2d4-2408-443f-ad80-080c48722760
+[2016-06-06 05:45:05,175: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:08,169: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:08,172: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->02282e23-6de0-4f40-8e63-ca0cdf4771e9
+[2016-06-06 05:45:08,172: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:11,170: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:11,174: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->28187de9-db62-4f4b-ac9d-0b6de85b5f33
+[2016-06-06 05:45:11,174: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:14,170: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:14,174: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e7f2634c-c645-4ebf-a195-948f4d3d1efb
+[2016-06-06 05:45:14,174: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:17,170: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:17,175: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->62e3215c-37a9-4e16-8287-ccf8afe5ef4b
+[2016-06-06 05:45:17,176: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:20,171: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:20,175: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->3086c3d1-b03e-43a8-9b7b-c8366d29cafa
+[2016-06-06 05:45:20,176: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:23,171: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:23,176: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6b7a7a7b-b7b4-42e9-9ab3-fe7dc9662255
+[2016-06-06 05:45:23,176: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:26,171: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:26,176: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f3a06a59-15b1-4e5f-a118-bf92cc54bfa7
+[2016-06-06 05:45:26,177: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:29,172: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:29,173: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6059efab-add7-400a-a408-69085fbec30e
+[2016-06-06 05:45:29,173: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:32,172: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:32,177: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->9391530e-097b-444d-b6f6-fa97f3cde142
+[2016-06-06 05:45:32,177: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:35,173: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:35,173: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->fec07931-e737-4b04-b16d-753c29947033
+[2016-06-06 05:45:35,174: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:38,174: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:38,178: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->66f229bf-d585-44d9-b0f8-28910514f016
+[2016-06-06 05:45:38,178: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:41,174: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:41,179: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d3b340f3-5dd6-4f93-a9a3-5d52a918bcbf
+[2016-06-06 05:45:41,180: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:44,175: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:44,179: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->957227b4-9bb9-4e25-ae7d-6b6b858f75b2
+[2016-06-06 05:45:44,181: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:47,175: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:47,179: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f4be068c-5774-4076-8e1d-f99ce03678f6
+[2016-06-06 05:45:47,181: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:50,175: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:50,176: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->182719b9-a5c1-4827-b9e4-c42a2b558ed2
+[2016-06-06 05:45:50,176: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:45:53,176: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:45:53,180: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0c7b6fe8-8c67-4804-9219-af02dbd0630f
+[2016-06-06 05:45:53,181: DEBUG/MainProcess] beat: Waking up in 2.99 seconds.
+[2016-06-06 05:46:25,523: DEBUG/MainProcess] Setting default socket timeout to 30
+[2016-06-06 05:46:25,524: INFO/MainProcess] beat: Starting...
+[2016-06-06 05:46:25,533: DEBUG/MainProcess] Current schedule:
+<Entry: celery.backend_cleanup celery.backend_cleanup() <crontab: 0 4 * * * (m/h/d/dM/MY)>
+<Entry: http-limit-test stats.tasks.http_limit_test() <freq: 10.00 seconds>
+<Entry: update-all-summoners stats.tasks.update_all() <freq: 5.00 minutes>
+[2016-06-06 05:46:25,533: DEBUG/MainProcess] beat: Ticking with max interval->5.00 minutes
+[2016-06-06 05:46:25,541: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'product': 'RabbitMQ', 'capabilities': {'publisher_confirms': True, 'exchange_exchange_bindings': True, 'connection.blocked': True, 'basic.nack': True, 'consumer_cancel_notify': True, 'consumer_priorities': True, 'authentication_failure_close': True}, 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'version': '3.2.4', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'platform': 'Erlang/OTP'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 05:46:25,542: DEBUG/MainProcess] Open OK!
+[2016-06-06 05:46:25,543: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:46:25,544: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 05:46:25,545: DEBUG/MainProcess] Channel open
+[2016-06-06 05:46:25,550: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:46:25,553: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->cf547add-5275-4ad9-90a8-e410cfbe4c9a
+[2016-06-06 05:46:25,553: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:46:35,552: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:46:35,553: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->16370d0c-a00d-4ed3-ab85-1acb29dc71ae
+[2016-06-06 05:46:35,553: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:46:45,553: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:46:45,554: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->cf89e0a8-fe7e-492e-879e-73e59b278c96
+[2016-06-06 05:46:45,554: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:46:55,553: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:46:55,554: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0abfbfd4-40b2-4442-9e7e-62489e50a601
+[2016-06-06 05:46:55,554: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:47:05,554: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:47:05,555: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->aad2664c-607c-4708-9f69-faf4f9490efc
+[2016-06-06 05:47:05,555: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:47:15,554: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:47:15,556: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4e9db63d-6ab9-4a7a-8ae2-ccdd85fc3fbe
+[2016-06-06 05:47:15,556: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:47:25,555: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:47:25,556: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->24f6b0be-b943-4a65-9b33-c107d266101c
+[2016-06-06 05:47:25,556: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:47:35,555: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:47:35,556: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4a85dea2-7b14-4409-b153-a22ee7851912
+[2016-06-06 05:47:35,556: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:47:45,555: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:47:45,557: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6c791192-7354-4fa7-bc45-9e9ad6b23664
+[2016-06-06 05:47:45,557: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:47:55,556: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:47:55,559: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0a7f2c3c-842b-4758-82e1-bb72e270b721
+[2016-06-06 05:47:55,559: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:48:05,556: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:48:05,558: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->336e0018-09cc-4fd6-94ab-2cf86d43ceaa
+[2016-06-06 05:48:05,558: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:48:15,561: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:48:15,562: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->000cae00-01c2-4ce5-a1b6-10aae3945a2b
+[2016-06-06 05:48:15,562: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:48:25,563: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:48:25,564: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c9497bde-a107-42b6-ad88-f22f5c082075
+[2016-06-06 05:48:25,564: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:48:35,564: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:48:35,565: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->308eb3ae-c986-4093-93bd-669b3c8d4844
+[2016-06-06 05:48:35,565: DEBUG/MainProcess] beat: Waking up in 8.56 seconds.
+[2016-06-06 05:48:44,131: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 05:48:44,133: DEBUG/MainProcess] stats.tasks.update_all sent. id->7b49e74f-3d7c-4ccc-9e76-703cf5c5dffc
+[2016-06-06 05:48:44,133: DEBUG/MainProcess] beat: Waking up in 1.42 seconds.
+[2016-06-06 05:48:45,565: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:48:45,566: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b4de57e8-225b-4085-ad74-d131bf5a5ba3
+[2016-06-06 05:48:45,566: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:48:55,567: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:48:55,568: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->867c0b40-aadc-4eb3-80d2-067828e7198c
+[2016-06-06 05:48:55,568: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:49:05,567: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:49:05,568: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->74167eab-dc91-42b6-ade7-ae9bd2b336ea
+[2016-06-06 05:49:05,568: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:49:15,569: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:49:15,570: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ed918b02-8d70-4b48-914a-d5a9e918f04c
+[2016-06-06 05:49:15,570: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:49:25,568: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:49:25,572: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:49:25,573: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->61a90ceb-6c47-4332-beb2-fb5db3d964d1
+[2016-06-06 05:49:25,573: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:49:35,572: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:49:35,573: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->971cc2cf-27c3-4806-b8eb-ce98eb199103
+[2016-06-06 05:49:35,573: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:50:20,181: DEBUG/MainProcess] Setting default socket timeout to 30
+[2016-06-06 05:50:20,181: INFO/MainProcess] beat: Starting...
+[2016-06-06 05:50:20,189: DEBUG/MainProcess] Current schedule:
+<Entry: update-all-summoners stats.tasks.update_all() <freq: 5.00 minutes>
+<Entry: celery.backend_cleanup celery.backend_cleanup() <crontab: 0 4 * * * (m/h/d/dM/MY)>
+<Entry: http-limit-test stats.tasks.http_limit_test() <freq: 10.00 seconds>
+[2016-06-06 05:50:20,189: DEBUG/MainProcess] beat: Ticking with max interval->5.00 minutes
+[2016-06-06 05:50:20,198: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'platform': 'Erlang/OTP', 'product': 'RabbitMQ', 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'version': '3.2.4', 'capabilities': {'consumer_cancel_notify': True, 'consumer_priorities': True, 'exchange_exchange_bindings': True, 'authentication_failure_close': True, 'publisher_confirms': True, 'basic.nack': True, 'connection.blocked': True}}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 05:50:20,199: DEBUG/MainProcess] Open OK!
+[2016-06-06 05:50:20,199: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:50:20,201: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 05:50:20,201: DEBUG/MainProcess] Channel open
+[2016-06-06 05:50:20,203: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:50:20,207: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->76a47908-6634-4c74-8f1f-758dff9933c4
+[2016-06-06 05:50:20,207: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:50:30,208: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:50:30,209: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e4d37dcd-b354-4295-b4a3-cde33b6a324f
+[2016-06-06 05:50:30,209: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:50:40,210: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:50:40,211: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->43c5a80e-c327-485e-863d-b8bd493f9889
+[2016-06-06 05:50:40,211: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:50:50,211: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:50:50,213: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e46f0db5-b0c1-4d59-813b-2ed0edd5ce14
+[2016-06-06 05:50:50,213: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:51:00,213: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:51:00,214: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d58cc32f-6abe-4600-9adc-bdc5b8aab231
+[2016-06-06 05:51:00,214: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:51:10,215: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:51:10,216: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5b6eae5f-8746-4ed8-a3cd-905ed1425704
+[2016-06-06 05:51:10,216: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:51:20,215: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:51:20,221: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->24a583e2-c99c-4796-90fe-40d18f1ca0c8
+[2016-06-06 05:51:20,221: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:51:30,222: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:51:30,223: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->bfbe85b7-3c02-4b06-8af6-a6b0c8edb18c
+[2016-06-06 05:51:30,223: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:51:40,223: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:51:40,224: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c0c10d87-d8b4-478f-8daf-d776d4517a09
+[2016-06-06 05:51:40,224: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:51:50,225: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:51:50,226: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6ed1ee9d-90b0-430d-a770-0b5865262b4c
+[2016-06-06 05:51:50,226: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:52:00,225: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:52:00,226: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->90cd8787-4fde-4749-8a36-0ca4d9638d38
+[2016-06-06 05:52:00,227: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:52:10,227: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:52:10,228: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f3916005-61e0-4f80-8e57-6af3603cebea
+[2016-06-06 05:52:10,228: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:52:20,229: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:52:20,229: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4e264aee-e990-49dc-ae76-effa80a6cb80
+[2016-06-06 05:52:20,230: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:52:30,229: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:52:30,230: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b90847ae-3f36-45ab-a5f5-af4c97617a3c
+[2016-06-06 05:52:30,230: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:52:40,231: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:52:40,232: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->bb3c1073-2851-433b-9eb1-da7c262846a6
+[2016-06-06 05:52:40,232: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:52:50,232: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:52:50,233: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->9c539b3d-3217-4862-9f48-af766a9a6eba
+[2016-06-06 05:52:50,233: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:53:34,169: DEBUG/MainProcess] Setting default socket timeout to 30
+[2016-06-06 05:53:34,170: INFO/MainProcess] beat: Starting...
+[2016-06-06 05:53:34,178: DEBUG/MainProcess] Current schedule:
+<Entry: update-all-summoners stats.tasks.update_all() <freq: 5.00 minutes>
+<Entry: celery.backend_cleanup celery.backend_cleanup() <crontab: 0 4 * * * (m/h/d/dM/MY)>
+<Entry: http-limit-test stats.tasks.http_limit_test() <freq: 10.00 seconds>
+[2016-06-06 05:53:34,178: DEBUG/MainProcess] beat: Ticking with max interval->5.00 minutes
+[2016-06-06 05:53:34,186: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'capabilities': {'consumer_priorities': True, 'basic.nack': True, 'consumer_cancel_notify': True, 'connection.blocked': True, 'exchange_exchange_bindings': True, 'publisher_confirms': True, 'authentication_failure_close': True}, 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'product': 'RabbitMQ', 'version': '3.2.4', 'platform': 'Erlang/OTP'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 05:53:34,187: DEBUG/MainProcess] Open OK!
+[2016-06-06 05:53:34,188: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:53:34,189: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 05:53:34,190: DEBUG/MainProcess] Channel open
+[2016-06-06 05:53:34,191: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:53:34,193: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->129fb2c0-f157-4eca-b238-1c7c8ac39848
+[2016-06-06 05:53:34,194: DEBUG/MainProcess] beat: Waking up in 9.93 seconds.
+[2016-06-06 05:53:44,137: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 05:53:44,138: DEBUG/MainProcess] stats.tasks.update_all sent. id->dcd12d58-fdf0-4fda-85b5-be869ecfeeb5
+[2016-06-06 05:53:44,139: DEBUG/MainProcess] beat: Waking up now.
+[2016-06-06 05:53:44,193: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:53:44,194: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5d09e8f7-a522-448a-9266-c5f448cf90c6
+[2016-06-06 05:53:44,194: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:53:54,194: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:53:54,195: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->fef71fcd-b53d-4a72-84ac-196dbc88b25c
+[2016-06-06 05:53:54,195: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:54:04,196: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:54:04,197: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->91095203-0f20-4520-9d19-6ddad80d73bd
+[2016-06-06 05:54:04,197: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:54:14,198: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:54:14,198: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->de050b76-6e89-4cf6-a31f-0b2cbe6df4ff
+[2016-06-06 05:54:14,199: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:54:24,199: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:54:24,200: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->374c19a7-8dd7-4261-8fb0-22e294aefc8a
+[2016-06-06 05:54:24,200: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:54:34,201: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:54:34,201: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->317f3d88-8df7-4309-a3f5-7a6780afbb71
+[2016-06-06 05:54:34,201: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:54:44,202: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:54:44,203: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6900b12b-f1b7-4774-bb87-152924e24e8b
+[2016-06-06 05:54:44,203: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:54:54,204: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:54:54,205: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->63995e0a-0ec0-4935-b6af-8f20799a0c2c
+[2016-06-06 05:54:54,206: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:55:04,206: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:55:04,207: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5bc7c357-dd9e-4693-91e4-39d9c24300bf
+[2016-06-06 05:55:04,207: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:55:14,208: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:55:14,208: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d4bbb7f8-770d-42ed-ac6f-8bfdd3bfa02f
+[2016-06-06 05:55:14,208: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:55:24,209: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:55:24,210: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->b9ad4943-8b57-4e6f-a60a-2d40a5ae37bc
+[2016-06-06 05:55:24,210: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:55:34,210: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:55:34,211: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->78c2e3b3-39ed-4b6a-8453-9badd3b236a7
+[2016-06-06 05:55:34,211: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:55:44,212: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:55:44,213: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->1ed5c3b1-2f1c-4703-b5d9-91fef9c371ca
+[2016-06-06 05:55:44,213: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:55:54,214: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:55:54,215: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d198274a-5639-40fb-b651-c39af7caa44e
+[2016-06-06 05:55:54,215: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:56:04,214: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:56:04,216: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4cc85714-bde2-43d9-8260-5eb3f3b94ad4
+[2016-06-06 05:56:04,216: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:56:14,215: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:56:14,216: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ec43ab5c-f9ca-4a2f-b1d0-ad1563e7e9d8
+[2016-06-06 05:56:14,216: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:56:24,217: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:56:24,218: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->46835710-955b-4296-a792-c0e4ec20b61d
+[2016-06-06 05:56:24,218: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:56:34,216: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:56:34,220: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:56:34,221: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->7840d114-761f-4c78-bcca-1a6e6443aaaf
+[2016-06-06 05:56:34,221: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:56:44,221: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:56:44,222: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f35c2091-e110-43bd-bec7-118b03b1c928
+[2016-06-06 05:56:44,222: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:56:54,223: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:56:54,224: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->da5a909b-6df5-4ec8-9bdf-20b3ab3e1566
+[2016-06-06 05:56:54,225: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:57:04,225: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:57:04,226: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->7ca0ce2b-87e0-4270-924e-38ace2ca1d85
+[2016-06-06 05:57:04,226: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:57:14,227: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:57:14,227: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->92c72195-c9e6-4c13-9543-1590b7e4e48a
+[2016-06-06 05:57:14,228: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:57:24,228: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:57:24,229: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0de7750e-cde3-49c8-8cdf-7e112f88daa5
+[2016-06-06 05:57:24,229: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:57:34,228: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:57:34,229: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->619325ca-0c9f-4d77-830f-7c422a10f0a1
+[2016-06-06 05:57:34,229: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:57:44,230: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:57:44,231: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->75000363-aadb-4423-9861-689707a5dd86
+[2016-06-06 05:57:44,231: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:57:54,231: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:57:54,232: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->50eb0497-1c96-43b7-bad7-974428d85263
+[2016-06-06 05:57:54,232: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:58:04,232: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:58:04,233: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->d56eaba5-f803-4111-a170-b9b9f67bdf12
+[2016-06-06 05:58:04,233: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:58:14,234: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:58:14,235: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->81d600cc-ba54-48c5-bb2a-1263a5ed1adc
+[2016-06-06 05:58:14,235: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:58:24,235: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:58:24,236: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->02048b83-03df-4967-8abf-8216870b76e1
+[2016-06-06 05:58:24,237: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:58:34,237: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:58:34,238: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->8bf98fb3-164e-45a2-8e01-32aff547aa0f
+[2016-06-06 05:58:34,238: DEBUG/MainProcess] beat: Waking up in 9.89 seconds.
+[2016-06-06 05:58:44,139: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 05:58:44,140: DEBUG/MainProcess] stats.tasks.update_all sent. id->6b8c56ce-e05b-467c-a903-019aedb10a5d
+[2016-06-06 05:58:44,140: DEBUG/MainProcess] beat: Waking up now.
+[2016-06-06 05:58:44,238: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:58:44,239: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6c2b3268-db5f-4cba-b23c-089ec4490d1a
+[2016-06-06 05:58:44,239: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:58:54,238: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:58:54,239: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->98059a29-f17c-4338-989d-82e2874898d9
+[2016-06-06 05:58:54,239: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:59:04,240: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:59:04,241: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->31e95b61-b9bd-4603-868b-cf8a411b703b
+[2016-06-06 05:59:04,241: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:59:14,241: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:59:14,242: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->00ff90be-78a7-42fe-b226-55f08ebcd859
+[2016-06-06 05:59:14,242: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:59:24,243: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:59:24,243: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->76e84378-69f4-40a6-bc32-7eeea87c71be
+[2016-06-06 05:59:24,244: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:59:34,244: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 05:59:34,247: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:59:34,248: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e6cb119c-6304-476a-912d-9e0711cfc0c7
+[2016-06-06 05:59:34,248: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:59:44,248: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:59:44,249: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->02d2296c-dd13-4607-9710-e502210d7755
+[2016-06-06 05:59:44,249: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 05:59:54,250: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 05:59:54,251: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->5d864042-53e0-44c4-b74f-d87ffc74d46b
+[2016-06-06 05:59:54,251: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:00:04,250: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:00:04,251: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f331182e-7ea5-46a7-af40-9f1ac2de4d26
+[2016-06-06 06:00:04,252: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:00:14,252: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:00:14,253: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->44ef77c1-538d-4472-ac7c-9fc95b7fcf7e
+[2016-06-06 06:00:14,254: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:00:24,252: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:00:24,254: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0fcae7e1-b031-47e7-9062-8a55d995ba56
+[2016-06-06 06:00:24,254: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:00:34,254: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:00:34,255: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->8271d552-c720-407b-b9f4-63e06510fb60
+[2016-06-06 06:00:34,255: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:00:44,256: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:00:44,257: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4eaf4b9a-0e39-4492-b0c4-27b1cb6a5572
+[2016-06-06 06:00:44,257: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:00:54,257: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:00:54,258: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6876e691-201a-4d52-8870-bcd00b950dc0
+[2016-06-06 06:00:54,258: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:01:04,258: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:01:04,259: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->97819631-da21-43ca-89d6-691a2b2e33c4
+[2016-06-06 06:01:04,259: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:01:14,259: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:01:14,260: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->1f0dd932-5e6d-4a08-82ce-185dc1adaae4
+[2016-06-06 06:01:14,260: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:01:24,259: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:01:24,263: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->06a34a2a-6430-46a8-ace7-c128b7bf2a27
+[2016-06-06 06:01:24,263: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:01:34,263: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:01:34,264: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->acb6dc05-75b6-44a1-9f07-b02173dd332a
+[2016-06-06 06:01:34,264: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:01:44,265: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:01:44,265: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->3bf76ec1-beeb-43e3-a3a7-3aaa4aefda22
+[2016-06-06 06:01:44,266: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:01:54,266: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:01:54,270: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e34b5a76-1dab-4916-96a1-26635e3fbcf8
+[2016-06-06 06:01:54,273: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:02:04,274: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:02:04,274: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->409778d7-3149-4709-bad4-e01f5ae275bf
+[2016-06-06 06:02:04,275: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:02:14,275: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:02:14,276: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->1d5f20b2-7b55-4ff1-a7f3-e6a26c587a12
+[2016-06-06 06:02:14,276: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:02:24,277: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:02:24,277: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->48969e40-8e22-4f49-8a05-b7d2405fea6d
+[2016-06-06 06:02:24,278: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:02:34,278: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:02:34,283: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:02:34,287: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->86293081-aa01-4634-8d83-89f03fb13a52
+[2016-06-06 06:02:34,288: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:02:44,288: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:02:44,293: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->eefe9525-624f-4069-bb80-22afd0868814
+[2016-06-06 06:02:44,293: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:02:54,294: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:02:54,295: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0db99ea8-de30-45b4-894e-e3fc6704f11b
+[2016-06-06 06:02:54,295: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:03:04,295: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:03:04,296: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->95505085-f17e-4096-92a9-ca83ef51436b
+[2016-06-06 06:03:04,296: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:03:14,297: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:03:14,298: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->3a9ff6bd-92c7-4588-b72b-ebbeb4a315dc
+[2016-06-06 06:03:14,298: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:03:24,297: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:03:24,298: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->ced95256-a217-4fb2-b870-7b16da229a26
+[2016-06-06 06:03:24,298: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:03:34,299: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:03:34,300: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->c7aaa348-1172-4f5c-bd97-41d892b5b4ce
+[2016-06-06 06:03:34,300: DEBUG/MainProcess] beat: Waking up in 9.83 seconds.
+[2016-06-06 06:03:44,140: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 06:03:44,141: DEBUG/MainProcess] stats.tasks.update_all sent. id->2243c25a-efed-4b38-803c-96890eecb2ec
+[2016-06-06 06:03:44,141: DEBUG/MainProcess] beat: Waking up now.
+[2016-06-06 06:03:44,299: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:03:44,301: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->f34f5d2a-8f68-4832-9021-c0df28449390
+[2016-06-06 06:03:44,302: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:03:54,303: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:03:54,304: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0b5f75af-5dbd-4873-8e19-0fb77300127a
+[2016-06-06 06:03:54,304: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:04:04,305: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:04:04,305: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0a9c5467-b2d7-490e-9322-f6be55ff0e3d
+[2016-06-06 06:04:04,306: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:04:14,306: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:04:14,307: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->fb4ae658-4e0c-46d9-8284-e57a51de72d2
+[2016-06-06 06:04:14,307: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:04:24,308: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:04:24,308: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a176ab51-b6e5-47be-8129-5b00a3cafba0
+[2016-06-06 06:04:24,309: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:04:34,309: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:04:34,310: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->17409bef-8204-44d5-8e1a-09bf75b01a3f
+[2016-06-06 06:04:34,310: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:04:44,310: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:04:44,311: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a4186d21-4638-4ab7-84d2-4268d1e59ed9
+[2016-06-06 06:04:44,311: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:04:54,312: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:04:54,313: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e0b9ed12-20eb-43ca-bdbe-a55bd2e6e6a5
+[2016-06-06 06:04:54,313: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:05:04,313: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:05:04,314: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->60f79a00-211e-4d23-b434-68ef623a8bfd
+[2016-06-06 06:05:04,314: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:05:14,315: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:05:14,316: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->988f28f6-47d8-4c7c-a907-99bbe8d15c94
+[2016-06-06 06:05:14,316: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:05:24,316: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:05:24,317: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->3f290bf0-9192-4a21-b622-504477d31b0f
+[2016-06-06 06:05:24,317: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:05:34,318: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:05:34,322: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:05:34,323: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a883ba70-f7e9-453f-82e4-b12da9109c78
+[2016-06-06 06:05:34,323: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:05:44,323: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:05:44,324: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a531835a-2703-4960-85c2-3bcfe0c12976
+[2016-06-06 06:05:44,324: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:05:54,325: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:05:54,326: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->9c20a312-f17a-480b-8552-1e02d77e4114
+[2016-06-06 06:05:54,326: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:06:04,326: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:06:04,330: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->6237085e-92f3-425f-87af-2c2041eac9d1
+[2016-06-06 06:06:04,332: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:06:14,333: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:06:14,334: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4eed14a0-bca8-4955-b2a2-f9b7f171c89a
+[2016-06-06 06:06:14,334: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:06:24,334: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:06:24,335: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->01fb23e2-c9e0-448e-974d-89d566cecf77
+[2016-06-06 06:06:24,335: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:06:34,336: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:06:34,337: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->74d7899e-d2e1-4edd-87ed-48b3d38c2e9d
+[2016-06-06 06:06:34,337: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:06:44,338: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:06:44,338: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->77a35f59-4bad-46e1-b1e3-ff030c8ee538
+[2016-06-06 06:06:44,339: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:06:54,339: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:06:54,340: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->29b34748-8584-4d0b-bf18-f65500f0cd63
+[2016-06-06 06:06:54,340: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:07:04,341: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:07:04,345: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->17319f9a-8ba2-44f9-80e3-eb9fbc2e93df
+[2016-06-06 06:07:04,346: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:07:14,346: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:07:14,347: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4de6a01d-f2bb-44da-907e-98789b5db1f5
+[2016-06-06 06:07:14,347: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:07:24,348: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:07:24,349: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->e133b889-cd16-46b7-9009-f27638924481
+[2016-06-06 06:07:24,349: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:07:34,349: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:07:34,350: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->338448da-9b9f-4be4-86f6-9d6acaacda6a
+[2016-06-06 06:07:34,350: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:07:44,351: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:07:44,351: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0350c273-08d7-4448-9bb4-32ec26c6780a
+[2016-06-06 06:07:44,352: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:07:54,351: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:07:54,356: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->1d545e32-276c-4014-94d0-e3f1989ca437
+[2016-06-06 06:07:54,356: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:08:04,357: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:08:04,358: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->41bb7851-6356-405b-a67d-87c0564cac97
+[2016-06-06 06:08:04,358: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:08:14,358: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:08:14,359: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->a8f0c7df-79fb-4234-94cf-c86f103b4cf3
+[2016-06-06 06:08:14,359: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:08:24,360: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:08:24,361: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->282485c6-6c84-4cc6-af20-f368be297f8f
+[2016-06-06 06:08:24,361: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:08:34,361: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:08:34,364: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:08:34,365: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->23782fdd-7432-49eb-8010-293706de5272
+[2016-06-06 06:08:34,365: DEBUG/MainProcess] beat: Waking up in 9.77 seconds.
+[2016-06-06 06:08:44,141: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 06:08:44,141: DEBUG/MainProcess] stats.tasks.update_all sent. id->3aac9b42-8f71-40b5-acf6-0097667618ca
+[2016-06-06 06:08:44,142: DEBUG/MainProcess] beat: Waking up now.
+[2016-06-06 06:08:44,365: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:08:44,367: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->7243a4aa-139d-42fe-8f99-6ec9de2731f8
+[2016-06-06 06:08:44,369: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:08:54,369: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:08:54,370: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->0e2c9b67-8917-4418-a5e7-c8a75cac0a81
+[2016-06-06 06:08:54,370: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:09:04,371: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:09:04,372: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->4049fa86-f327-42f0-a051-8da736e9a713
+[2016-06-06 06:09:04,372: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:09:14,372: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:09:14,373: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->cd10c24b-b811-49fb-ad9f-1bbe0c4de395
+[2016-06-06 06:09:14,373: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:09:24,374: INFO/MainProcess] Scheduler: Sending due task http-limit-test (stats.tasks.http_limit_test)
+[2016-06-06 06:09:24,374: DEBUG/MainProcess] stats.tasks.http_limit_test sent. id->8ccf24b2-e78a-47e3-9d6b-66370d8556ce
+[2016-06-06 06:09:24,375: DEBUG/MainProcess] beat: Waking up in 9.99 seconds.
+[2016-06-06 06:09:45,761: DEBUG/MainProcess] Setting default socket timeout to 30
+[2016-06-06 06:09:45,761: INFO/MainProcess] beat: Starting...
+[2016-06-06 06:09:45,769: DEBUG/MainProcess] Current schedule:
+<Entry: update-all-summoners stats.tasks.update_all() <freq: 10.00 minutes>
+<Entry: celery.backend_cleanup celery.backend_cleanup() <crontab: 0 4 * * * (m/h/d/dM/MY)>
+[2016-06-06 06:09:45,769: DEBUG/MainProcess] beat: Ticking with max interval->5.00 minutes
+[2016-06-06 06:09:45,778: DEBUG/MainProcess] Start from server, version: 0.9, properties: {'platform': 'Erlang/OTP', 'information': 'Licensed under the MPL.  See http://www.rabbitmq.com/', 'capabilities': {'connection.blocked': True, 'basic.nack': True, 'authentication_failure_close': True, 'publisher_confirms': True, 'exchange_exchange_bindings': True, 'consumer_cancel_notify': True, 'consumer_priorities': True}, 'copyright': 'Copyright (C) 2007-2013 GoPivotal, Inc.', 'version': '3.2.4', 'product': 'RabbitMQ'}, mechanisms: ['PLAIN', 'AMQPLAIN'], locales: ['en_US']
+[2016-06-06 06:09:45,779: DEBUG/MainProcess] Open OK!
+[2016-06-06 06:09:45,779: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:14:45,848: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:14:45,851: DEBUG/MainProcess] beat: Waking up in 3.97 minutes.
+[2016-06-06 06:18:44,231: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:18:44,234: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 06:18:44,235: DEBUG/MainProcess] using channel_id: 1
+[2016-06-06 06:18:44,236: DEBUG/MainProcess] Channel open
+[2016-06-06 06:18:44,238: DEBUG/MainProcess] stats.tasks.update_all sent. id->441a0def-e4c3-4778-8da0-f4931a86d376
+[2016-06-06 06:18:44,238: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:23:44,328: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:23:44,331: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:28:44,325: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:28:44,328: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 06:28:44,329: DEBUG/MainProcess] stats.tasks.update_all sent. id->e6dbdaca-12f6-420d-9e9c-591d948c41f7
+[2016-06-06 06:28:44,329: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:33:44,419: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:33:44,423: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:38:44,419: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:38:44,422: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 06:38:44,422: DEBUG/MainProcess] stats.tasks.update_all sent. id->89bcf9ce-703b-4274-a7e8-9f67e28a0784
+[2016-06-06 06:38:44,423: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:43:44,474: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:43:44,477: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:48:44,512: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:48:44,515: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 06:48:44,516: DEBUG/MainProcess] stats.tasks.update_all sent. id->7632a7ee-95c8-4f8e-839e-1c3f25b64f97
+[2016-06-06 06:48:44,516: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:53:44,601: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:53:44,604: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 06:58:44,592: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 06:58:44,595: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 06:58:44,595: DEBUG/MainProcess] stats.tasks.update_all sent. id->9f04fee3-5a42-496c-b911-d05397d8cb73
+[2016-06-06 06:58:44,595: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:03:44,686: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:03:44,689: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:08:44,685: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:08:44,688: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 07:08:44,689: DEBUG/MainProcess] stats.tasks.update_all sent. id->a41f69fd-7724-41aa-bf8a-75c97cd1c438
+[2016-06-06 07:08:44,689: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:13:44,779: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:13:44,782: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:18:44,779: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:18:44,783: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 07:18:44,784: DEBUG/MainProcess] stats.tasks.update_all sent. id->5035996c-dba3-4f54-9129-5907b911f047
+[2016-06-06 07:18:44,784: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:23:44,777: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:23:44,780: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:28:44,870: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:28:44,873: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 07:28:44,874: DEBUG/MainProcess] stats.tasks.update_all sent. id->c1209b0f-fd6d-454f-af6c-a9c8003cd961
+[2016-06-06 07:28:44,875: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:33:44,965: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:33:44,968: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:38:44,964: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:38:44,967: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 07:38:44,969: DEBUG/MainProcess] stats.tasks.update_all sent. id->b8da164d-0485-47e2-85a3-0ad02141cf8c
+[2016-06-06 07:38:44,969: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:43:45,060: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:43:45,064: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:48:45,058: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:48:45,061: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 07:48:45,062: DEBUG/MainProcess] stats.tasks.update_all sent. id->afd5916e-073f-4ba4-a99a-1b33f6e8ddb1
+[2016-06-06 07:48:45,062: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:53:45,119: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:53:45,123: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 07:58:45,062: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 07:58:45,065: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 07:58:45,066: DEBUG/MainProcess] stats.tasks.update_all sent. id->2e773f63-cb04-4c12-b1e8-a01ac5250eb0
+[2016-06-06 07:58:45,066: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:03:45,061: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:03:45,065: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:08:45,061: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:08:45,065: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 08:08:45,066: DEBUG/MainProcess] stats.tasks.update_all sent. id->fe45669e-a575-46f8-ad9e-fdc01d1b17d2
+[2016-06-06 08:08:45,066: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:13:45,100: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:13:45,104: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:18:45,061: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:18:45,066: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 08:18:45,066: DEBUG/MainProcess] stats.tasks.update_all sent. id->a9aefa14-8c5b-48f9-afb1-4d3781afae85
+[2016-06-06 08:18:45,066: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:23:45,115: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:23:45,118: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:28:45,143: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:28:45,146: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 08:28:45,147: DEBUG/MainProcess] stats.tasks.update_all sent. id->76eccfb1-e93f-414b-b502-994025616c1c
+[2016-06-06 08:28:45,147: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:33:45,237: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:33:45,241: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:38:45,200: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:38:45,203: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 08:38:45,204: DEBUG/MainProcess] stats.tasks.update_all sent. id->3d2fd553-b5b0-4137-acfc-1c403033aa91
+[2016-06-06 08:38:45,204: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:43:45,295: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:43:45,298: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:48:45,294: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:48:45,297: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 08:48:45,298: DEBUG/MainProcess] stats.tasks.update_all sent. id->383dbc10-566b-4890-b8f1-caade2a1ff63
+[2016-06-06 08:48:45,298: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:53:45,318: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:53:45,321: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 08:58:45,357: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 08:58:45,361: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 08:58:45,361: DEBUG/MainProcess] stats.tasks.update_all sent. id->e384a5dc-19a1-44fe-9f60-0de3d942a446
+[2016-06-06 08:58:45,361: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:03:45,452: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:03:45,455: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:08:45,404: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:08:45,407: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 09:08:45,407: DEBUG/MainProcess] stats.tasks.update_all sent. id->b9d1455a-a5b6-4e47-8489-c4c300bec0dc
+[2016-06-06 09:08:45,408: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:13:45,466: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:13:45,470: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:18:45,497: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:18:45,500: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 09:18:45,501: DEBUG/MainProcess] stats.tasks.update_all sent. id->8793cf51-6bd2-4043-ba6f-b5bb0965ac8f
+[2016-06-06 09:18:45,501: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:23:45,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:23:45,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:28:45,574: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:28:45,578: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 09:28:45,578: DEBUG/MainProcess] stats.tasks.update_all sent. id->cd56cc96-78f6-414d-a65d-30afcf7eb4ab
+[2016-06-06 09:28:45,579: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:33:45,669: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:33:45,673: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:38:45,668: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:38:45,671: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 09:38:45,672: DEBUG/MainProcess] stats.tasks.update_all sent. id->ca323701-0733-4284-bf3e-a600b6cad461
+[2016-06-06 09:38:45,672: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:43:45,763: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:43:45,766: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:48:45,762: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:48:45,765: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 09:48:45,766: DEBUG/MainProcess] stats.tasks.update_all sent. id->c6b71e75-6158-4298-93d2-a966258db4b6
+[2016-06-06 09:48:45,766: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:53:45,856: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:53:45,859: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 09:58:45,777: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 09:58:45,780: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 09:58:45,781: DEBUG/MainProcess] stats.tasks.update_all sent. id->63b666bb-6ca8-4dc3-81db-2a7551d8c10c
+[2016-06-06 09:58:45,781: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:03:45,871: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:03:45,875: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:08:45,871: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:08:45,874: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 10:08:45,875: DEBUG/MainProcess] stats.tasks.update_all sent. id->e58cae68-9417-41d6-8a83-30562bc92f8c
+[2016-06-06 10:08:45,875: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:13:45,892: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:13:45,895: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:18:45,964: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:18:45,968: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 10:18:45,968: DEBUG/MainProcess] stats.tasks.update_all sent. id->4d3429a9-afaa-4845-8e64-6f0bc8ab1550
+[2016-06-06 10:18:45,969: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:23:46,059: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:23:46,062: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:28:46,004: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:28:46,007: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 10:28:46,008: DEBUG/MainProcess] stats.tasks.update_all sent. id->962979c5-51de-4642-a24a-4ca1f0505d3e
+[2016-06-06 10:28:46,008: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:33:46,098: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:33:46,101: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:38:46,098: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:38:46,101: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 10:38:46,102: DEBUG/MainProcess] stats.tasks.update_all sent. id->68f36aaf-719b-4f2d-8171-efbbc79fe959
+[2016-06-06 10:38:46,102: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:43:46,192: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:43:46,196: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:48:46,192: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:48:46,194: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 10:48:46,195: DEBUG/MainProcess] stats.tasks.update_all sent. id->89f44ea0-1c66-443f-8bf8-c27c21c90f94
+[2016-06-06 10:48:46,195: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:53:46,286: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:53:46,289: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 10:58:46,285: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 10:58:46,288: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 10:58:46,289: DEBUG/MainProcess] stats.tasks.update_all sent. id->23042e92-2870-415f-be20-297e4140d697
+[2016-06-06 10:58:46,289: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:03:46,379: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:03:46,383: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:08:46,338: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:08:46,341: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 11:08:46,342: DEBUG/MainProcess] stats.tasks.update_all sent. id->8dd32939-c1f3-4bc1-9b25-d488a3723304
+[2016-06-06 11:08:46,342: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:13:46,333: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:13:46,337: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:18:46,427: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:18:46,430: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 11:18:46,431: DEBUG/MainProcess] stats.tasks.update_all sent. id->85c9ca8f-2987-4567-96ea-5a96b4bdd1a9
+[2016-06-06 11:18:46,431: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:23:46,521: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:23:46,524: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:28:46,451: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:28:46,454: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 11:28:46,455: DEBUG/MainProcess] stats.tasks.update_all sent. id->1a4f6484-5b99-44a3-a944-38852ac65384
+[2016-06-06 11:28:46,455: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:33:46,546: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:33:46,549: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:38:46,502: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:38:46,505: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 11:38:46,505: DEBUG/MainProcess] stats.tasks.update_all sent. id->6c08481b-ce96-4643-83e6-81666355a948
+[2016-06-06 11:38:46,506: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:43:46,563: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:43:46,566: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:48:46,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:48:46,555: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 11:48:46,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->c26c414c-1f8e-441c-8ba0-86e232c3a539
+[2016-06-06 11:48:46,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:53:46,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:53:46,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 11:58:46,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 11:58:46,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 11:58:46,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->25925b1d-750e-4645-af0e-468b3058692e
+[2016-06-06 11:58:46,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:03:46,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:03:46,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:08:46,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:08:46,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 12:08:46,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->8aa8c575-22d2-4ad7-b6b9-928fbb8a1dbc
+[2016-06-06 12:08:46,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:13:46,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:13:46,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:18:46,647: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:18:46,650: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 12:18:46,650: DEBUG/MainProcess] stats.tasks.update_all sent. id->da0a3de9-22d2-4ed5-97ff-a45de81a9ffa
+[2016-06-06 12:18:46,651: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:23:46,683: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:23:46,686: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:28:46,740: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:28:46,744: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 12:28:46,744: DEBUG/MainProcess] stats.tasks.update_all sent. id->68b6d6a8-7578-4f1b-a580-2df8864eb7c9
+[2016-06-06 12:28:46,745: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:33:46,755: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:33:46,759: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:38:46,834: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:38:46,838: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 12:38:46,838: DEBUG/MainProcess] stats.tasks.update_all sent. id->46474521-f4ef-420c-b2b8-dd502cb58538
+[2016-06-06 12:38:46,839: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:43:46,921: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:43:46,924: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:48:46,862: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:48:46,865: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 12:48:46,866: DEBUG/MainProcess] stats.tasks.update_all sent. id->4b94ee13-3186-418a-aca8-cdd77485879d
+[2016-06-06 12:48:46,866: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:53:46,957: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:53:46,960: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 12:58:46,956: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 12:58:46,959: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 12:58:46,960: DEBUG/MainProcess] stats.tasks.update_all sent. id->61008d39-0278-437d-8047-c74e52897086
+[2016-06-06 12:58:46,960: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:03:46,978: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:03:46,982: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:08:47,050: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:08:47,053: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 13:08:47,054: DEBUG/MainProcess] stats.tasks.update_all sent. id->666a5ab1-bde0-4ff3-bb74-63fd461c119b
+[2016-06-06 13:08:47,054: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:13:47,144: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:13:47,148: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:18:47,128: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:18:47,131: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 13:18:47,132: DEBUG/MainProcess] stats.tasks.update_all sent. id->bb544c7a-59fc-4916-8a7e-d9cb925ef808
+[2016-06-06 13:18:47,132: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:23:47,222: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:23:47,225: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:28:47,221: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:28:47,225: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 13:28:47,225: DEBUG/MainProcess] stats.tasks.update_all sent. id->ad4753f2-be69-4e33-a963-78bda946e123
+[2016-06-06 13:28:47,226: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:33:47,316: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:33:47,319: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:38:47,315: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:38:47,318: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 13:38:47,319: DEBUG/MainProcess] stats.tasks.update_all sent. id->99ec7c50-b485-4266-8011-8057ab2c3a49
+[2016-06-06 13:38:47,319: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:43:47,313: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:43:47,317: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:48:47,348: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:48:47,351: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 13:48:47,352: DEBUG/MainProcess] stats.tasks.update_all sent. id->d6940524-c8f5-4d5b-a6e5-1f46de797b7c
+[2016-06-06 13:48:47,352: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:53:47,443: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:53:47,446: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 13:58:47,442: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 13:58:47,445: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 13:58:47,446: DEBUG/MainProcess] stats.tasks.update_all sent. id->fd715d73-4e7b-4a42-b280-ebe383a79ee1
+[2016-06-06 13:58:47,446: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:03:47,464: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:03:47,468: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:08:47,464: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:08:47,468: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 14:08:47,468: DEBUG/MainProcess] stats.tasks.update_all sent. id->f96186b8-0c5a-4b6c-8a28-0986499a0d53
+[2016-06-06 14:08:47,469: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:13:47,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:13:47,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:18:47,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:18:47,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 14:18:47,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->93ed2de5-9125-4d6b-ae4a-8e48cd176260
+[2016-06-06 14:18:47,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:23:47,561: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:23:47,564: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:28:47,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:28:47,557: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 14:28:47,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->a1fcb44d-b13a-4539-bc27-c86338580266
+[2016-06-06 14:28:47,558: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:33:47,613: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:33:47,616: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:38:47,561: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:38:47,564: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 14:38:47,565: DEBUG/MainProcess] stats.tasks.update_all sent. id->4b6fbd87-2024-43e5-b361-af99e0b3ae0b
+[2016-06-06 14:38:47,565: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:43:47,561: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:43:47,564: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:48:47,654: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:48:47,657: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 14:48:47,658: DEBUG/MainProcess] stats.tasks.update_all sent. id->656ef26e-de0b-4296-b95e-7bbe3dfbea9e
+[2016-06-06 14:48:47,658: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:53:47,717: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:53:47,721: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 14:58:47,748: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 14:58:47,751: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 14:58:47,751: DEBUG/MainProcess] stats.tasks.update_all sent. id->5a4df2e9-4da2-4a13-9626-53a250e082ce
+[2016-06-06 14:58:47,752: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:03:47,842: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:03:47,845: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:08:47,783: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:08:47,786: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 15:08:47,787: DEBUG/MainProcess] stats.tasks.update_all sent. id->0eadbbc2-b490-43a9-99ba-330a5127f9b0
+[2016-06-06 15:08:47,787: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:13:47,841: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:13:47,844: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:18:47,877: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:18:47,880: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 15:18:47,880: DEBUG/MainProcess] stats.tasks.update_all sent. id->6ee31e35-900e-416e-a042-4e9997a30990
+[2016-06-06 15:18:47,881: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:23:47,917: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:23:47,921: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:28:47,970: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:28:47,973: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 15:28:47,974: DEBUG/MainProcess] stats.tasks.update_all sent. id->e2612c68-0e5e-40e5-9df8-187aac77c1b0
+[2016-06-06 15:28:47,974: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:33:48,065: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:33:48,068: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:38:47,994: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:38:47,998: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 15:38:47,998: DEBUG/MainProcess] stats.tasks.update_all sent. id->38da2692-8255-4cc9-aee9-09d7c9b5c410
+[2016-06-06 15:38:47,998: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:43:48,089: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:43:48,092: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:48:48,088: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:48:48,091: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 15:48:48,092: DEBUG/MainProcess] stats.tasks.update_all sent. id->41849ed0-395e-4354-9efb-441383dfc52c
+[2016-06-06 15:48:48,092: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:53:48,182: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:53:48,185: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 15:58:48,182: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 15:58:48,185: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 15:58:48,186: DEBUG/MainProcess] stats.tasks.update_all sent. id->149fc6de-7265-4ccf-8511-e292a4be7e19
+[2016-06-06 15:58:48,186: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:03:48,277: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:03:48,280: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:08:48,221: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:08:48,226: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 16:08:48,226: DEBUG/MainProcess] stats.tasks.update_all sent. id->0c293671-80d9-4446-bc85-7f9023555f2b
+[2016-06-06 16:08:48,227: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:13:48,317: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:13:48,320: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:18:48,316: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:18:48,320: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 16:18:48,320: DEBUG/MainProcess] stats.tasks.update_all sent. id->805f5b1d-473f-4cc5-94e7-01003fc6aaf8
+[2016-06-06 16:18:48,321: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:23:48,324: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:23:48,327: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:28:48,410: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:28:48,414: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 16:28:48,414: DEBUG/MainProcess] stats.tasks.update_all sent. id->1258541c-25fa-444f-a5c0-0554633ccd12
+[2016-06-06 16:28:48,415: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:33:48,505: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:33:48,508: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:38:48,434: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:38:48,437: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 16:38:48,438: DEBUG/MainProcess] stats.tasks.update_all sent. id->558df41e-3648-438f-ac99-237c81d7e354
+[2016-06-06 16:38:48,438: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:43:48,528: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:43:48,532: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:48:48,527: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:48:48,531: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 16:48:48,531: DEBUG/MainProcess] stats.tasks.update_all sent. id->8b6401e9-935b-4d87-99df-292696af5685
+[2016-06-06 16:48:48,532: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:53:48,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:53:48,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 16:58:48,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 16:58:48,555: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 16:58:48,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->bfdfc094-9705-4b5e-8565-9a8b242526ce
+[2016-06-06 16:58:48,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:03:48,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:03:48,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:08:48,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:08:48,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 17:08:48,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->4810eab6-0b43-486d-9105-3df9f51928e8
+[2016-06-06 17:08:48,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:13:48,647: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:13:48,651: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:18:48,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:18:48,558: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 17:18:48,559: DEBUG/MainProcess] stats.tasks.update_all sent. id->5b2bfbb7-cc77-49bb-99f8-4a0692ced35a
+[2016-06-06 17:18:48,559: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:23:48,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:23:48,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:28:48,630: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:28:48,634: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 17:28:48,634: DEBUG/MainProcess] stats.tasks.update_all sent. id->1ad9aec9-faaf-4ecf-abd6-67331eef6a5a
+[2016-06-06 17:28:48,634: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:33:48,725: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:33:48,728: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:38:48,724: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:38:48,727: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 17:38:48,728: DEBUG/MainProcess] stats.tasks.update_all sent. id->924ee116-f384-4f15-90b1-3cc60c95485e
+[2016-06-06 17:38:48,728: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:43:48,818: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:43:48,822: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:48:48,818: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:48:48,821: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 17:48:48,822: DEBUG/MainProcess] stats.tasks.update_all sent. id->c9111e47-3d42-4e73-892c-30550d0c3529
+[2016-06-06 17:48:48,822: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:53:48,897: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:53:48,900: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 17:58:48,813: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 17:58:48,821: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 17:58:48,826: DEBUG/MainProcess] stats.tasks.update_all sent. id->a648e157-8eed-45ab-825e-8884e00a188b
+[2016-06-06 17:58:48,826: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:03:48,916: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:03:48,919: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:08:48,912: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:08:48,915: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 18:08:48,916: DEBUG/MainProcess] stats.tasks.update_all sent. id->08f7b4e7-b894-4167-a7f4-659b4677a7a0
+[2016-06-06 18:08:48,916: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:13:48,917: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:13:48,920: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:18:49,005: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:18:49,008: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 18:18:49,009: DEBUG/MainProcess] stats.tasks.update_all sent. id->fc4960fa-4de2-4943-8114-e3ca1c6bb30a
+[2016-06-06 18:18:49,009: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:23:49,048: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:23:49,051: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:28:49,029: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:28:49,032: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 18:28:49,032: DEBUG/MainProcess] stats.tasks.update_all sent. id->2aace904-0d93-4db0-a4cd-9765f4ed38ae
+[2016-06-06 18:28:49,033: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:33:49,123: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:33:49,126: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:38:49,122: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:38:49,126: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 18:38:49,126: DEBUG/MainProcess] stats.tasks.update_all sent. id->1e365061-824f-48fa-a3dc-8d30aac819a7
+[2016-06-06 18:38:49,127: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:43:49,217: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:43:49,220: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:48:49,216: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:48:49,220: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 18:48:49,220: DEBUG/MainProcess] stats.tasks.update_all sent. id->1f301bd0-3d60-490f-9d85-a92ae8ebadd0
+[2016-06-06 18:48:49,220: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:53:49,300: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:53:49,304: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 18:58:49,304: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 18:58:49,308: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 18:58:49,309: DEBUG/MainProcess] stats.tasks.update_all sent. id->91b42f05-48bc-4ca4-927d-3d3c29a79322
+[2016-06-06 18:58:49,309: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:03:49,400: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:03:49,403: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:08:49,399: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:08:49,402: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 19:08:49,403: DEBUG/MainProcess] stats.tasks.update_all sent. id->5def1178-e9a4-4074-ba6f-1ea1beeb8021
+[2016-06-06 19:08:49,403: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:13:49,493: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:13:49,497: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:18:49,493: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:18:49,496: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 19:18:49,496: DEBUG/MainProcess] stats.tasks.update_all sent. id->58e03f01-2ff9-4df7-b8ed-daf57f63be90
+[2016-06-06 19:18:49,497: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:23:49,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:23:49,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:28:49,520: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:28:49,523: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 19:28:49,524: DEBUG/MainProcess] stats.tasks.update_all sent. id->9d1df6e2-e7fd-418c-baea-c1d0a2a99e9f
+[2016-06-06 19:28:49,524: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:33:49,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:33:49,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:38:49,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:38:49,555: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 19:38:49,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->0a33baa8-db5c-4305-bb46-7e3b1c604706
+[2016-06-06 19:38:49,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:43:49,557: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:43:49,561: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:48:49,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:48:49,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 19:48:49,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->33c62874-0934-4fc2-8b39-2b9c0af5afaa
+[2016-06-06 19:48:49,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:53:49,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:53:49,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 19:58:49,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 19:58:49,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 19:58:49,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->01722501-ce1f-4bad-a3a3-31e0c6011410
+[2016-06-06 19:58:49,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:03:49,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:03:49,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:08:49,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:08:49,557: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 20:08:49,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->4c799fed-bcef-4b4c-acb7-d2138d5d4fe2
+[2016-06-06 20:08:49,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:13:49,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:13:49,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:18:49,614: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:18:49,617: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 20:18:49,617: DEBUG/MainProcess] stats.tasks.update_all sent. id->427efd9f-9121-4413-bb30-15e3055aa5d0
+[2016-06-06 20:18:49,618: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:23:49,708: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:23:49,711: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:28:49,676: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:28:49,679: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 20:28:49,680: DEBUG/MainProcess] stats.tasks.update_all sent. id->9507ac27-3da3-4d50-9693-8ac8449717fc
+[2016-06-06 20:28:49,680: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:33:49,768: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:33:49,772: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:38:49,770: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:38:49,773: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 20:38:49,774: DEBUG/MainProcess] stats.tasks.update_all sent. id->5a73486c-563a-4ad7-85df-b5fbbd4be383
+[2016-06-06 20:38:49,774: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:43:49,865: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:43:49,868: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:48:49,864: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:48:49,867: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 20:48:49,868: DEBUG/MainProcess] stats.tasks.update_all sent. id->9706e509-9849-4858-aebf-c84a63e29532
+[2016-06-06 20:48:49,868: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:53:49,925: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:53:49,929: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 20:58:49,958: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 20:58:49,961: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 20:58:49,961: DEBUG/MainProcess] stats.tasks.update_all sent. id->9eaf6ef0-92dc-4a9a-8487-8f1c27404c3c
+[2016-06-06 20:58:49,962: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:03:50,052: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:03:50,055: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:08:50,051: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:08:50,055: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 21:08:50,055: DEBUG/MainProcess] stats.tasks.update_all sent. id->38b26a56-ec48-4feb-91ec-edba4107ec22
+[2016-06-06 21:08:50,055: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:13:50,061: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:13:50,064: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:18:50,104: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:18:50,107: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 21:18:50,107: DEBUG/MainProcess] stats.tasks.update_all sent. id->7a3077c7-bb85-48f2-8c33-2ce0e2434d62
+[2016-06-06 21:18:50,108: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:23:50,198: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:23:50,201: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:28:50,197: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:28:50,201: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 21:28:50,201: DEBUG/MainProcess] stats.tasks.update_all sent. id->53986210-6201-460e-9dba-d2de3d7f4cd3
+[2016-06-06 21:28:50,201: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:33:50,292: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:33:50,295: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:38:50,291: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:38:50,294: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 21:38:50,295: DEBUG/MainProcess] stats.tasks.update_all sent. id->daf1a675-6f92-496c-b645-9d1f3c695700
+[2016-06-06 21:38:50,295: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:43:50,385: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:43:50,389: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:48:50,292: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:48:50,295: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 21:48:50,296: DEBUG/MainProcess] stats.tasks.update_all sent. id->e58d9599-1915-46cd-b30c-73bba595cda0
+[2016-06-06 21:48:50,296: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:53:50,386: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:53:50,389: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 21:58:50,306: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 21:58:50,309: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 21:58:50,310: DEBUG/MainProcess] stats.tasks.update_all sent. id->a27c0246-3b3e-4564-94e1-9d378fa3da63
+[2016-06-06 21:58:50,310: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:03:50,391: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:03:50,394: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:08:50,400: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:08:50,403: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 22:08:50,404: DEBUG/MainProcess] stats.tasks.update_all sent. id->dc57fe86-f66e-44cc-9150-2ad8d5847d0d
+[2016-06-06 22:08:50,404: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:13:50,494: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:13:50,498: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:18:50,493: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:18:50,496: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 22:18:50,497: DEBUG/MainProcess] stats.tasks.update_all sent. id->8b97706f-3d9b-4983-be4f-998e3334c0d7
+[2016-06-06 22:18:50,497: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:23:50,505: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:23:50,508: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:28:50,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:28:50,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 22:28:50,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->dae58004-87a3-4c91-bf01-e0718271c71d
+[2016-06-06 22:28:50,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:33:50,605: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:33:50,608: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:38:50,577: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:38:50,580: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 22:38:50,580: DEBUG/MainProcess] stats.tasks.update_all sent. id->5dc2dda7-d11e-421e-8ab2-c4d761fc1378
+[2016-06-06 22:38:50,580: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:43:50,668: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:43:50,672: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:48:50,669: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:48:50,672: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 22:48:50,672: DEBUG/MainProcess] stats.tasks.update_all sent. id->2b6a5264-939b-4fa8-9f0d-a9e9f2af6904
+[2016-06-06 22:48:50,673: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:53:50,763: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:53:50,766: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 22:58:50,762: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 22:58:50,765: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 22:58:50,766: DEBUG/MainProcess] stats.tasks.update_all sent. id->a0e81fbe-73f4-42c5-8d88-f3550a99d3ea
+[2016-06-06 22:58:50,766: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:03:50,833: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:03:50,837: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:08:50,856: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:08:50,859: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 23:08:50,860: DEBUG/MainProcess] stats.tasks.update_all sent. id->2e09ea2b-c6d8-4867-8761-e5d68629f90d
+[2016-06-06 23:08:50,860: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:13:50,916: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:13:50,920: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:18:50,939: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:18:50,943: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 23:18:50,943: DEBUG/MainProcess] stats.tasks.update_all sent. id->ca9deb4d-65a7-43cd-ac79-aee4de5f6c74
+[2016-06-06 23:18:50,943: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:23:51,034: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:23:51,037: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:28:50,948: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:28:50,951: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 23:28:50,952: DEBUG/MainProcess] stats.tasks.update_all sent. id->3aac56f2-7a5e-4b3f-9856-718187f8fd5d
+[2016-06-06 23:28:50,952: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:33:51,042: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:33:51,045: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:38:50,966: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:38:50,969: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 23:38:50,970: DEBUG/MainProcess] stats.tasks.update_all sent. id->b4af043b-3268-480e-a37f-3a645d1f3b1c
+[2016-06-06 23:38:50,970: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:43:51,031: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:43:51,034: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:48:51,060: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:48:51,063: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 23:48:51,064: DEBUG/MainProcess] stats.tasks.update_all sent. id->969903ac-83c5-4ba6-bdb1-3e4c7672ccac
+[2016-06-06 23:48:51,064: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:53:51,154: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:53:51,157: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-06 23:58:51,091: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-06 23:58:51,094: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-06 23:58:51,094: DEBUG/MainProcess] stats.tasks.update_all sent. id->cf88a302-599e-44bb-aafb-6b82c7f3cf5d
+[2016-06-06 23:58:51,095: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:03:51,185: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:03:51,188: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:08:51,184: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:08:51,188: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 00:08:51,188: DEBUG/MainProcess] stats.tasks.update_all sent. id->0e3181b5-1a48-4442-89ee-1bf8037fc2af
+[2016-06-07 00:08:51,189: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:13:51,189: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:13:51,194: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:18:51,278: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:18:51,281: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 00:18:51,282: DEBUG/MainProcess] stats.tasks.update_all sent. id->84605106-1319-486d-b42b-7b5b95417977
+[2016-06-07 00:18:51,282: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:23:51,373: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:23:51,376: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:28:51,372: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:28:51,375: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 00:28:51,376: DEBUG/MainProcess] stats.tasks.update_all sent. id->8ee396a0-3cfe-491c-ad6f-2a176f12aee8
+[2016-06-07 00:28:51,376: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:33:51,464: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:33:51,468: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:38:51,465: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:38:51,468: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 00:38:51,469: DEBUG/MainProcess] stats.tasks.update_all sent. id->e3bc5250-2647-4368-affa-a1911c3ae3cd
+[2016-06-07 00:38:51,469: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:43:51,496: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:43:51,499: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:48:51,555: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:48:51,559: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 00:48:51,560: DEBUG/MainProcess] stats.tasks.update_all sent. id->e300ca63-e4eb-42c7-b155-c178e5054ea6
+[2016-06-07 00:48:51,560: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:53:51,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:53:51,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 00:58:51,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 00:58:51,559: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 00:58:51,564: DEBUG/MainProcess] stats.tasks.update_all sent. id->ae9f8666-b91f-4be2-a6a9-b76bfb554d41
+[2016-06-07 00:58:51,565: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:03:51,636: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:03:51,639: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:08:51,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:08:51,559: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 01:08:51,564: DEBUG/MainProcess] stats.tasks.update_all sent. id->91b5a6e8-a8a6-4615-b385-0f9a35960dcb
+[2016-06-07 01:08:51,565: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:13:51,641: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:13:51,644: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:18:51,650: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:18:51,654: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 01:18:51,654: DEBUG/MainProcess] stats.tasks.update_all sent. id->da0092ca-93ad-4a7f-8150-4ab69429844a
+[2016-06-07 01:18:51,655: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:23:51,745: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:23:51,748: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:28:51,744: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:28:51,749: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 01:28:51,750: DEBUG/MainProcess] stats.tasks.update_all sent. id->c3bdff5a-9a17-4b41-ae8b-f06982d9eea5
+[2016-06-07 01:28:51,750: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:33:51,791: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:33:51,794: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:38:51,840: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:38:51,843: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 01:38:51,843: DEBUG/MainProcess] stats.tasks.update_all sent. id->6b99df19-b559-41be-a442-0350f68a11ae
+[2016-06-07 01:38:51,844: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:43:51,934: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:43:51,938: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:48:51,870: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:48:51,874: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 01:48:51,875: DEBUG/MainProcess] stats.tasks.update_all sent. id->bec4d3cd-2803-4e8b-b9e9-ddafed708f6f
+[2016-06-07 01:48:51,875: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:53:51,965: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:53:51,968: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 01:58:51,964: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 01:58:51,968: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 01:58:51,968: DEBUG/MainProcess] stats.tasks.update_all sent. id->e0b57205-452a-497a-87f9-f5beff168ea3
+[2016-06-07 01:58:51,968: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:03:52,059: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:03:52,062: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:08:52,058: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:08:52,061: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 02:08:52,062: DEBUG/MainProcess] stats.tasks.update_all sent. id->44286920-0c79-4d9e-b4e8-3dc4b5b0d1b3
+[2016-06-07 02:08:52,062: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:13:52,152: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:13:52,156: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:18:52,083: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:18:52,086: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 02:18:52,087: DEBUG/MainProcess] stats.tasks.update_all sent. id->3c04c90c-85e2-46bb-bfc2-24e3b8cf3932
+[2016-06-07 02:18:52,087: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:23:52,177: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:23:52,181: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:28:52,177: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:28:52,180: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 02:28:52,181: DEBUG/MainProcess] stats.tasks.update_all sent. id->0ed2e77b-8a2f-45e7-b3dd-ecdf3b3ee784
+[2016-06-07 02:28:52,181: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:33:52,271: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:33:52,274: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:38:52,271: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:38:52,274: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 02:38:52,274: DEBUG/MainProcess] stats.tasks.update_all sent. id->20808c11-7f7f-4dc4-a93c-0d3bb1f3a2c6
+[2016-06-07 02:38:52,275: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:43:52,365: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:43:52,369: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:48:52,364: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:48:52,367: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 02:48:52,368: DEBUG/MainProcess] stats.tasks.update_all sent. id->ddf4813d-29e5-49d5-8101-24741686318d
+[2016-06-07 02:48:52,368: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:53:52,458: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:53:52,461: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 02:58:52,458: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 02:58:52,461: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 02:58:52,462: DEBUG/MainProcess] stats.tasks.update_all sent. id->e44a3288-3a4e-4931-ae3d-d7bc580abc6d
+[2016-06-07 02:58:52,462: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:03:52,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:03:52,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:08:52,465: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:08:52,468: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 03:08:52,469: DEBUG/MainProcess] stats.tasks.update_all sent. id->8e0512f7-9f1f-4e2b-8a95-5e920f435f7b
+[2016-06-07 03:08:52,469: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:13:52,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:13:52,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:18:52,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:18:52,555: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 03:18:52,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->a21b4d5b-b109-4647-b866-bd2441496f91
+[2016-06-07 03:18:52,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:23:52,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:23:52,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:28:52,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:28:52,555: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 03:28:52,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->c118fcca-dafb-49d2-865c-8e6b304d11c3
+[2016-06-07 03:28:52,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:33:52,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:33:52,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:38:52,619: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:38:52,622: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 03:38:52,623: DEBUG/MainProcess] stats.tasks.update_all sent. id->d3e3dddd-ef06-4603-9275-f6bb0111f867
+[2016-06-07 03:38:52,623: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:43:52,714: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:43:52,717: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:48:52,713: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:48:52,716: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 03:48:52,717: DEBUG/MainProcess] stats.tasks.update_all sent. id->eab405b2-f4b4-46b7-b3e6-6925d57d1be3
+[2016-06-07 03:48:52,717: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:53:52,763: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:53:52,766: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 03:58:52,807: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 03:58:52,810: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 03:58:52,810: DEBUG/MainProcess] stats.tasks.update_all sent. id->d3605f48-4fcf-4cc3-a44f-a10f07d9d1ec
+[2016-06-07 03:58:52,811: DEBUG/MainProcess] beat: Waking up in 1.12 minutes.
+[2016-06-07 04:00:00,057: INFO/MainProcess] Scheduler: Sending due task celery.backend_cleanup (celery.backend_cleanup)
+[2016-06-07 04:00:00,058: DEBUG/MainProcess] celery.backend_cleanup sent. id->f1ee71d1-4481-4737-a596-8b02805f2f25
+[2016-06-07 04:00:00,059: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:05:00,061: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:05:00,064: DEBUG/MainProcess] beat: Waking up in 3.88 minutes.
+[2016-06-07 04:08:52,836: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:08:52,839: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 04:08:52,839: DEBUG/MainProcess] stats.tasks.update_all sent. id->fde31941-067d-4cde-9114-bda494db425d
+[2016-06-07 04:08:52,840: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:13:52,930: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:13:52,933: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:18:52,895: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:18:52,898: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 04:18:52,899: DEBUG/MainProcess] stats.tasks.update_all sent. id->4db223f3-c653-4a62-a075-8c0414b69073
+[2016-06-07 04:18:52,899: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:23:52,905: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:23:52,908: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:28:52,989: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:28:52,992: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 04:28:52,992: DEBUG/MainProcess] stats.tasks.update_all sent. id->ba8fedd8-7f3f-4e92-be15-5c6c7572b089
+[2016-06-07 04:28:52,993: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:33:53,083: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:33:53,086: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:38:53,012: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:38:53,015: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 04:38:53,016: DEBUG/MainProcess] stats.tasks.update_all sent. id->7c2af59e-2dbb-4c62-85f6-8792961e7ce1
+[2016-06-07 04:38:53,016: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:43:53,107: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:43:53,110: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:48:53,106: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:48:53,109: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 04:48:53,110: DEBUG/MainProcess] stats.tasks.update_all sent. id->4fb656f4-4489-403e-bf3f-534998fb6098
+[2016-06-07 04:48:53,110: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:53:53,200: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:53:53,203: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 04:58:53,200: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 04:58:53,203: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 04:58:53,203: DEBUG/MainProcess] stats.tasks.update_all sent. id->7631a0ea-8428-4bdc-8c68-499f3c4a4914
+[2016-06-07 04:58:53,204: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:03:53,294: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:03:53,297: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:08:53,293: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:08:53,297: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 05:08:53,297: DEBUG/MainProcess] stats.tasks.update_all sent. id->3847d556-dbbd-4165-bf63-d392f9ec5220
+[2016-06-07 05:08:53,298: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:13:53,315: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:13:53,318: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:18:53,302: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:18:53,307: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 05:18:53,308: DEBUG/MainProcess] stats.tasks.update_all sent. id->491ad55e-32c2-40d5-837f-5219ccf3f95d
+[2016-06-07 05:18:53,308: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:23:53,396: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:23:53,401: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:28:53,333: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:28:53,336: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 05:28:53,337: DEBUG/MainProcess] stats.tasks.update_all sent. id->d2182d46-1527-4109-b505-023068587ef0
+[2016-06-07 05:28:53,337: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:33:53,428: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:33:53,431: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:38:53,427: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:38:53,430: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 05:38:53,431: DEBUG/MainProcess] stats.tasks.update_all sent. id->cea9ecde-84bd-44b7-8357-22608910cbc0
+[2016-06-07 05:38:53,431: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:43:53,424: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:43:53,427: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:48:53,476: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:48:53,479: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 05:48:53,480: DEBUG/MainProcess] stats.tasks.update_all sent. id->cda3810c-f4d6-4772-90be-a02a1e5f7fe0
+[2016-06-07 05:48:53,480: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:53:53,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:53:53,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 05:58:53,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 05:58:53,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 05:58:53,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->d254aee7-252a-4b13-9114-75ac0e45c361
+[2016-06-07 05:58:53,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:03:53,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:03:53,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:08:53,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:08:53,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 06:08:53,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->adefdb6a-c451-4579-8c92-5c4ce10f4717
+[2016-06-07 06:08:53,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:13:53,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:13:53,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:18:53,622: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:18:53,625: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 06:18:53,626: DEBUG/MainProcess] stats.tasks.update_all sent. id->d694f358-1ff1-41b6-bd77-9e804f08ee94
+[2016-06-07 06:18:53,626: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:23:53,717: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:23:53,720: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:28:53,716: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:28:53,719: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 06:28:53,720: DEBUG/MainProcess] stats.tasks.update_all sent. id->7793419f-2238-4762-ac46-552f2f07d078
+[2016-06-07 06:28:53,720: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:33:53,799: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:33:53,802: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:38:53,809: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:38:53,812: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 06:38:53,813: DEBUG/MainProcess] stats.tasks.update_all sent. id->c36aee89-f165-4125-98f3-7dcb4455383f
+[2016-06-07 06:38:53,813: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:43:53,904: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:43:53,907: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:48:53,903: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:48:53,907: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 06:48:53,908: DEBUG/MainProcess] stats.tasks.update_all sent. id->dfb5b158-5bd0-43dd-bbb6-f253bb04244d
+[2016-06-07 06:48:53,908: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:53:53,980: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:53:53,983: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 06:58:53,998: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 06:58:54,001: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 06:58:54,002: DEBUG/MainProcess] stats.tasks.update_all sent. id->a7fe50e6-de9b-40c0-8718-2d9999c37191
+[2016-06-07 06:58:54,002: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:03:54,092: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:03:54,095: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:08:54,087: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:08:54,090: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 07:08:54,091: DEBUG/MainProcess] stats.tasks.update_all sent. id->5a48a7cc-4f24-433b-a53b-1b9eb1141f92
+[2016-06-07 07:08:54,091: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:13:54,181: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:13:54,185: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:18:54,181: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:18:54,184: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 07:18:54,184: DEBUG/MainProcess] stats.tasks.update_all sent. id->ab163815-79e4-4faf-908b-e2c15720655f
+[2016-06-07 07:18:54,185: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:23:54,187: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:23:54,190: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:28:54,274: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:28:54,279: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 07:28:54,280: DEBUG/MainProcess] stats.tasks.update_all sent. id->5ad7c70f-5a7f-4ba7-90b1-d55fbbef2c8d
+[2016-06-07 07:28:54,280: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:33:54,371: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:33:54,374: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:38:54,370: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:38:54,373: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 07:38:54,374: DEBUG/MainProcess] stats.tasks.update_all sent. id->0de550b8-dbd8-497e-8150-300b152536d0
+[2016-06-07 07:38:54,374: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:43:54,464: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:43:54,467: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:48:54,464: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:48:54,467: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 07:48:54,468: DEBUG/MainProcess] stats.tasks.update_all sent. id->24560978-aa06-4c04-9d5f-811506156f9a
+[2016-06-07 07:48:54,468: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:53:54,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:53:54,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 07:58:54,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 07:58:54,555: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 07:58:54,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->70260e06-1f5d-4fb0-8cca-430c628d58a0
+[2016-06-07 07:58:54,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:03:54,585: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:03:54,588: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:08:54,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:08:54,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 08:08:54,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->6e23f437-f70f-41de-82fd-36489ae79690
+[2016-06-07 08:08:54,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:13:54,592: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:13:54,595: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:18:54,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:18:54,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 08:18:54,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->19e8cb9e-022b-4f14-85ba-b66d18ff837b
+[2016-06-07 08:18:54,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:23:54,632: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:23:54,636: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:28:54,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:28:54,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 08:28:54,557: DEBUG/MainProcess] stats.tasks.update_all sent. id->a4a60eb2-e7cf-412c-99db-e7c5d7375c8f
+[2016-06-07 08:28:54,557: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:33:54,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:33:54,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:38:54,646: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:38:54,649: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 08:38:54,650: DEBUG/MainProcess] stats.tasks.update_all sent. id->b6aad250-4379-4367-a6d5-6540a53411b6
+[2016-06-07 08:38:54,650: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:43:54,740: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:43:54,744: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:48:54,740: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:48:54,743: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 08:48:54,744: DEBUG/MainProcess] stats.tasks.update_all sent. id->804f5909-1e15-456f-a5b1-c72b6b76b098
+[2016-06-07 08:48:54,744: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:53:54,834: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:53:54,837: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 08:58:54,770: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 08:58:54,774: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 08:58:54,775: DEBUG/MainProcess] stats.tasks.update_all sent. id->37356b49-58c7-4a7d-9598-fb750a8148cf
+[2016-06-07 08:58:54,775: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:03:54,866: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:03:54,869: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:08:54,865: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:08:54,868: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 09:08:54,869: DEBUG/MainProcess] stats.tasks.update_all sent. id->f5a105b3-f20f-475d-b50f-cb0b30c64dfe
+[2016-06-07 09:08:54,869: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:13:54,959: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:13:54,962: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:18:54,940: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:18:54,943: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 09:18:54,944: DEBUG/MainProcess] stats.tasks.update_all sent. id->8dcc0474-e143-4f34-b49a-2b6067ded03e
+[2016-06-07 09:18:54,944: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:23:55,034: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:23:55,037: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:28:55,033: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:28:55,037: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 09:28:55,038: DEBUG/MainProcess] stats.tasks.update_all sent. id->378567c9-7283-4492-97c7-27f501472248
+[2016-06-07 09:28:55,038: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:33:55,061: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:33:55,064: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:38:55,061: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:38:55,064: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 09:38:55,065: DEBUG/MainProcess] stats.tasks.update_all sent. id->c2b11702-8191-449e-aa91-acdea4b18ddb
+[2016-06-07 09:38:55,065: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:43:55,062: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:43:55,064: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:48:55,154: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:48:55,157: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 09:48:55,158: DEBUG/MainProcess] stats.tasks.update_all sent. id->2ef6478e-278c-4a4c-8141-2ba90f700a87
+[2016-06-07 09:48:55,158: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:53:55,248: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:53:55,251: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 09:58:55,248: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 09:58:55,251: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 09:58:55,252: DEBUG/MainProcess] stats.tasks.update_all sent. id->40245bd6-cd3c-4a41-a33a-fd7c90422698
+[2016-06-07 09:58:55,252: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:03:55,342: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:03:55,346: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:08:55,342: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:08:55,345: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 10:08:55,345: DEBUG/MainProcess] stats.tasks.update_all sent. id->5362b77b-a987-4d32-aebf-6ab3c16ac77d
+[2016-06-07 10:08:55,346: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:13:55,436: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:13:55,450: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:18:55,435: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:18:55,438: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 10:18:55,439: DEBUG/MainProcess] stats.tasks.update_all sent. id->685b017c-014c-4d1c-9eca-ada34e982ba3
+[2016-06-07 10:18:55,439: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:23:55,529: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:23:55,533: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:28:55,465: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:28:55,468: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 10:28:55,468: DEBUG/MainProcess] stats.tasks.update_all sent. id->79525b33-0d59-4ab1-8fd2-986de45d486d
+[2016-06-07 10:28:55,469: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:33:55,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:33:55,555: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:38:55,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:38:55,555: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 10:38:55,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->7d88cff8-0c62-47da-9d74-bec8ebf1d801
+[2016-06-07 10:38:55,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:43:55,608: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:43:55,611: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:48:55,552: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:48:55,556: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 10:48:55,556: DEBUG/MainProcess] stats.tasks.update_all sent. id->cfb28ccd-4d07-46df-8133-32458efeebad
+[2016-06-07 10:48:55,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:53:55,553: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:53:55,556: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 10:58:55,577: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 10:58:55,580: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 10:58:55,580: DEBUG/MainProcess] stats.tasks.update_all sent. id->fe8c1c67-2dd3-492a-879a-e4bb8a2e3e3c
+[2016-06-07 10:58:55,580: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:03:55,671: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:03:55,674: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:08:55,670: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:08:55,673: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 11:08:55,674: DEBUG/MainProcess] stats.tasks.update_all sent. id->e87675ba-9dff-4e8d-ab92-e87ff2b75ba2
+[2016-06-07 11:08:55,674: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:13:55,722: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:13:55,725: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:18:55,764: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:18:55,767: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 11:18:55,768: DEBUG/MainProcess] stats.tasks.update_all sent. id->c54a65c1-5546-4a2c-9976-715b8dc25c75
+[2016-06-07 11:18:55,768: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:23:55,858: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:23:55,861: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:28:55,782: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:28:55,788: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 11:28:55,789: DEBUG/MainProcess] stats.tasks.update_all sent. id->cd6a8d6d-919b-4ad9-bcfa-ac1821e5cfd3
+[2016-06-07 11:28:55,789: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:33:55,794: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:33:55,798: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:38:55,879: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:38:55,882: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 11:38:55,882: DEBUG/MainProcess] stats.tasks.update_all sent. id->540166aa-14ea-452d-a576-797dcc077a10
+[2016-06-07 11:38:55,883: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:43:55,887: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:43:55,890: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:48:55,972: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:48:55,975: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 11:48:55,976: DEBUG/MainProcess] stats.tasks.update_all sent. id->5ddd7fec-1992-48ba-b056-8ede5d32c8cb
+[2016-06-07 11:48:55,976: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:53:56,067: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:53:56,070: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 11:58:55,993: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 11:58:55,996: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 11:58:55,997: DEBUG/MainProcess] stats.tasks.update_all sent. id->716aef11-703b-4d59-9b06-74cd9d238185
+[2016-06-07 11:58:55,997: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 12:03:56,011: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 12:03:56,014: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.
+[2016-06-07 12:08:56,081: DEBUG/MainProcess] beat: Synchronizing schedule...
+[2016-06-07 12:08:56,085: INFO/MainProcess] Scheduler: Sending due task update-all-summoners (stats.tasks.update_all)
+[2016-06-07 12:08:56,085: DEBUG/MainProcess] stats.tasks.update_all sent. id->e78c1607-4643-48fb-95e9-84fa4d72a671
+[2016-06-07 12:08:56,086: DEBUG/MainProcess] beat: Waking up in 5.00 minutes.

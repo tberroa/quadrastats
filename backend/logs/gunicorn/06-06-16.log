@@ -88,3 +88,1958 @@
 [2016-06-06 02:29:09 +0000] [11413] [DEBUG] GET /admin/
 [2016-06-06 02:29:09 +0000] [11409] [DEBUG] GET /static/admin/css/base.css
 [2016-06-06 02:29:09 +0000] [11411] [DEBUG] GET /static/admin/css/dashboard.css
+[2016-06-06 02:50:18 +0000] [11406] [INFO] Handling signal: term
+[2016-06-06 02:50:18 +0000] [11409] [INFO] Worker exiting (pid: 11409)
+[2016-06-06 02:50:18 +0000] [11411] [INFO] Worker exiting (pid: 11411)
+[2016-06-06 02:50:18 +0000] [11413] [INFO] Worker exiting (pid: 11413)
+[2016-06-06 02:50:18 +0000] [11406] [INFO] Shutting down: Master
+[2016-06-06 02:50:34 +0000] [13610] [DEBUG] Current configuration:
+  pythonpath: None
+  on_starting: <function OnStarting.on_starting at 0x7f6f6df60620>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f6f6df60e18>
+  config: None
+  worker_class: sync
+  threads: 1
+  daemon: False
+  post_request: <function PostRequest.post_request at 0x7f6f6df65620>
+  secure_scheme_headers: {'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-SSL': 'on'}
+  ca_certs: None
+  raw_env: []
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  statsd_prefix: 
+  check_config: False
+  sendfile: None
+  worker_int: <function WorkerInt.worker_int at 0x7f6f6df65048>
+  limit_request_field_size: 8190
+  reload: False
+  loglevel: debug
+  backlog: 2048
+  suppress_ragged_eofs: True
+  spew: False
+  enable_stdio_inheritance: False
+  worker_connections: 1000
+  group: 1000
+  syslog: False
+  syslog_prefix: None
+  worker_tmp_dir: None
+  timeout: 30
+  accesslog: None
+  syslog_facility: user
+  bind: ['127.0.0.1:8000']
+  graceful_timeout: 30
+  user: 1000
+  umask: 0
+  proxy_allow_ips: ['127.0.0.1']
+  on_reload: <function OnReload.on_reload at 0x7f6f6df607b8>
+  pre_fork: <function Prefork.pre_fork at 0x7f6f6df60ae8>
+  pre_exec: <function PreExec.pre_exec at 0x7f6f6df65378>
+  on_exit: <function OnExit.on_exit at 0x7f6f6df65ae8>
+  proc_name: None
+  post_fork: <function Postfork.post_fork at 0x7f6f6df60c80>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f6f6df651e0>
+  limit_request_line: 4094
+  do_handshake_on_connect: False
+  max_requests_jitter: 0
+  pre_request: <function PreRequest.pre_request at 0x7f6f6df65510>
+  logconfig: None
+  statsd_host: None
+  limit_request_fields: 100
+  worker_exit: <function WorkerExit.worker_exit at 0x7f6f6df657b8>
+  default_proc_name: portal.wsgi:application
+  keyfile: None
+  ciphers: TLSv1
+  errorlog: /home/ubuntu/portal/backend/logs/gunicorn/06-06-16.log
+  logger_class: gunicorn.glogging.Logger
+  django_settings: None
+  preload_app: False
+  pidfile: None
+  paste: None
+  proxy_protocol: False
+  ssl_version: 3
+  max_requests: 0
+  chdir: /home/ubuntu/portal/backend/portal
+  forwarded_allow_ips: ['127.0.0.1']
+  when_ready: <function WhenReady.when_ready at 0x7f6f6df60950>
+  workers: 3
+  certfile: None
+  keepalive: 2
+  tmp_upload_dir: None
+  cert_reqs: 0
+  capture_output: False
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f6f6df65950>
+  syslog_addr: udp://localhost:514
+[2016-06-06 02:50:34 +0000] [13610] [INFO] Starting gunicorn 19.6.0
+[2016-06-06 02:50:34 +0000] [13610] [DEBUG] Arbiter booted
+[2016-06-06 02:50:34 +0000] [13610] [INFO] Listening at: http://127.0.0.1:8000 (13610)
+[2016-06-06 02:50:34 +0000] [13610] [INFO] Using worker: sync
+[2016-06-06 02:50:34 +0000] [13613] [INFO] Booting worker with pid: 13613
+[2016-06-06 02:50:34 +0000] [13615] [INFO] Booting worker with pid: 13615
+[2016-06-06 02:50:34 +0000] [13617] [INFO] Booting worker with pid: 13617
+[2016-06-06 02:50:34 +0000] [13610] [DEBUG] 3 workers
+[2016-06-06 02:50:36 +0000] [13615] [DEBUG] GET /admin/
+[2016-06-06 02:50:36 +0000] [13617] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 02:50:36 +0000] [13615] [DEBUG] GET /static/admin/css/dashboard.css
+[2016-06-06 02:59:15 +0000] [13610] [INFO] Handling signal: term
+[2016-06-06 02:59:15 +0000] [13617] [INFO] Worker exiting (pid: 13617)
+[2016-06-06 02:59:15 +0000] [13613] [INFO] Worker exiting (pid: 13613)
+[2016-06-06 02:59:15 +0000] [13615] [INFO] Worker exiting (pid: 13615)
+[2016-06-06 02:59:15 +0000] [13610] [INFO] Shutting down: Master
+[2016-06-06 02:59:53 +0000] [13815] [DEBUG] Current configuration:
+  limit_request_field_size: 8190
+  max_requests_jitter: 0
+  backlog: 2048
+  daemon: False
+  pidfile: None
+  paste: None
+  pre_fork: <function Prefork.pre_fork at 0x7fd19512dae8>
+  errorlog: /home/ubuntu/portal/backend/logs/gunicorn/06-06-16.log
+  django_settings: None
+  proxy_allow_ips: ['127.0.0.1']
+  reload: False
+  worker_connections: 1000
+  config: None
+  proxy_protocol: False
+  limit_request_fields: 100
+  logconfig: None
+  enable_stdio_inheritance: False
+  worker_int: <function WorkerInt.worker_int at 0x7fd195132048>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fd1951327b8>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fd195132950>
+  default_proc_name: portal.wsgi:application
+  check_config: False
+  forwarded_allow_ips: ['127.0.0.1']
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  umask: 0
+  logger_class: gunicorn.glogging.Logger
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fd19512de18>
+  pre_exec: <function PreExec.pre_exec at 0x7fd195132378>
+  graceful_timeout: 30
+  bind: ['127.0.0.1:8000']
+  syslog: False
+  statsd_prefix: 
+  secure_scheme_headers: {'X-FORWARDED-SSL': 'on', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-PROTOCOL': 'ssl'}
+  certfile: None
+  spew: False
+  limit_request_line: 4094
+  timeout: 30
+  loglevel: debug
+  syslog_prefix: None
+  raw_env: []
+  proc_name: None
+  threads: 1
+  group: 1000
+  when_ready: <function WhenReady.when_ready at 0x7fd19512d950>
+  keepalive: 2
+  ssl_version: 3
+  accesslog: None
+  worker_tmp_dir: None
+  pythonpath: None
+  keyfile: None
+  cert_reqs: 0
+  ca_certs: None
+  do_handshake_on_connect: False
+  post_fork: <function Postfork.post_fork at 0x7fd19512dc80>
+  capture_output: False
+  workers: 3
+  worker_class: sync
+  max_requests: 0
+  syslog_addr: udp://localhost:514
+  preload_app: False
+  chdir: /home/ubuntu/portal/backend/portal
+  user: 1000
+  tmp_upload_dir: None
+  on_starting: <function OnStarting.on_starting at 0x7fd19512d620>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fd1951321e0>
+  pre_request: <function PreRequest.pre_request at 0x7fd195132510>
+  post_request: <function PostRequest.post_request at 0x7fd195132620>
+  on_exit: <function OnExit.on_exit at 0x7fd195132ae8>
+  statsd_host: None
+  on_reload: <function OnReload.on_reload at 0x7fd19512d7b8>
+  syslog_facility: user
+  suppress_ragged_eofs: True
+  ciphers: TLSv1
+  sendfile: None
+[2016-06-06 02:59:53 +0000] [13815] [INFO] Starting gunicorn 19.6.0
+[2016-06-06 02:59:53 +0000] [13815] [DEBUG] Arbiter booted
+[2016-06-06 02:59:53 +0000] [13815] [INFO] Listening at: http://127.0.0.1:8000 (13815)
+[2016-06-06 02:59:53 +0000] [13815] [INFO] Using worker: sync
+[2016-06-06 02:59:53 +0000] [13818] [INFO] Booting worker with pid: 13818
+[2016-06-06 02:59:53 +0000] [13820] [INFO] Booting worker with pid: 13820
+[2016-06-06 02:59:53 +0000] [13821] [INFO] Booting worker with pid: 13821
+[2016-06-06 02:59:53 +0000] [13815] [DEBUG] 3 workers
+[2016-06-06 02:59:57 +0000] [13820] [DEBUG] GET /admin/
+[2016-06-06 02:59:57 +0000] [13821] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 02:59:57 +0000] [13820] [DEBUG] GET /static/admin/css/dashboard.css
+[2016-06-06 03:09:03 +0000] [13815] [INFO] Handling signal: term
+[2016-06-06 03:09:03 +0000] [13818] [INFO] Worker exiting (pid: 13818)
+[2016-06-06 03:09:03 +0000] [13820] [INFO] Worker exiting (pid: 13820)
+[2016-06-06 03:09:03 +0000] [13821] [INFO] Worker exiting (pid: 13821)
+[2016-06-06 03:09:03 +0000] [13815] [INFO] Shutting down: Master
+[2016-06-06 04:25:24 +0000] [15542] [DEBUG] Current configuration:
+  workers: 3
+  accesslog: None
+  max_requests: 0
+  do_handshake_on_connect: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  max_requests_jitter: 0
+  graceful_timeout: 30
+  backlog: 2048
+  syslog_prefix: None
+  on_reload: <function OnReload.on_reload at 0x7f13486837b8>
+  pre_fork: <function Prefork.pre_fork at 0x7f1348683ae8>
+  worker_tmp_dir: None
+  forwarded_allow_ips: ['127.0.0.1']
+  proxy_allow_ips: ['127.0.0.1']
+  worker_int: <function WorkerInt.worker_int at 0x7f1348688048>
+  django_settings: None
+  errorlog: /home/ubuntu/portal/backend/logs/gunicorn/06-06-16.log
+  ciphers: TLSv1
+  worker_class: sync
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f13486881e0>
+  daemon: False
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f1348683e18>
+  on_exit: <function OnExit.on_exit at 0x7f1348688ae8>
+  umask: 0
+  logger_class: gunicorn.glogging.Logger
+  keyfile: None
+  syslog_addr: udp://localhost:514
+  statsd_prefix: 
+  limit_request_field_size: 8190
+  raw_env: []
+  on_starting: <function OnStarting.on_starting at 0x7f1348683620>
+  when_ready: <function WhenReady.when_ready at 0x7f1348683950>
+  post_request: <function PostRequest.post_request at 0x7f1348688620>
+  suppress_ragged_eofs: True
+  chdir: /home/ubuntu/portal/backend/portal
+  proxy_protocol: False
+  check_config: False
+  limit_request_line: 4094
+  capture_output: False
+  ca_certs: None
+  bind: ['127.0.0.1:8000']
+  spew: False
+  proc_name: None
+  loglevel: debug
+  sendfile: None
+  reload: False
+  timeout: 30
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f1348688950>
+  statsd_host: None
+  pre_request: <function PreRequest.pre_request at 0x7f1348688510>
+  certfile: None
+  enable_stdio_inheritance: False
+  limit_request_fields: 100
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  default_proc_name: portal.wsgi:application
+  cert_reqs: 0
+  paste: None
+  syslog_facility: user
+  post_fork: <function Postfork.post_fork at 0x7f1348683c80>
+  config: None
+  user: 1000
+  group: 1000
+  pythonpath: None
+  logconfig: None
+  pidfile: None
+  pre_exec: <function PreExec.pre_exec at 0x7f1348688378>
+  preload_app: False
+  syslog: False
+  worker_exit: <function WorkerExit.worker_exit at 0x7f13486887b8>
+  threads: 1
+  worker_connections: 1000
+  ssl_version: 3
+  keepalive: 2
+  tmp_upload_dir: None
+[2016-06-06 04:25:24 +0000] [15542] [INFO] Starting gunicorn 19.6.0
+[2016-06-06 04:25:24 +0000] [15542] [DEBUG] Arbiter booted
+[2016-06-06 04:25:24 +0000] [15542] [INFO] Listening at: http://127.0.0.1:8000 (15542)
+[2016-06-06 04:25:24 +0000] [15542] [INFO] Using worker: sync
+[2016-06-06 04:25:24 +0000] [15545] [INFO] Booting worker with pid: 15545
+[2016-06-06 04:25:24 +0000] [15547] [INFO] Booting worker with pid: 15547
+[2016-06-06 04:25:24 +0000] [15548] [INFO] Booting worker with pid: 15548
+[2016-06-06 04:25:24 +0000] [15542] [DEBUG] 3 workers
+[2016-06-06 04:25:27 +0000] [15545] [DEBUG] GET /admin/
+[2016-06-06 04:25:27 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:25:27 +0000] [15545] [DEBUG] GET /static/admin/css/dashboard.css
+[2016-06-06 04:25:29 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:25:29 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:25:29 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:25:29 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:25:29 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:25:29 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:25:29 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:25:29 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:25:29 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:25:29 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:25:29 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:25:29 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:25:29 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:25:30 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:25:30 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:25:30 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:25:30 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:25:30 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:25:30 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:25:30 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:25:33 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:25:33 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:25:33 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:25:33 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:25:33 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:25:33 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:25:33 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:25:33 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:25:33 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:25:33 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:25:33 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:25:33 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:25:33 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:25:33 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:25:34 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:25:34 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:25:34 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:25:34 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:25:34 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:25:34 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:27:22 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/209/change/
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 04:27:23 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:27:23 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:27:23 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:27:23 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:27:23 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:27:23 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:27:23 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:27:23 +0000] [15545] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 04:27:23 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:27:23 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:27:23 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:27:23 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:27:23 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:27:23 +0000] [15545] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 04:27:23 +0000] [15548] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 04:27:43 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:27:45 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/214/change/
+[2016-06-06 04:27:45 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:27:45 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:27:45 +0000] [15547] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 04:27:45 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:27:45 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:27:45 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:27:45 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:27:45 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:27:45 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:27:45 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:27:45 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:27:45 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:27:45 +0000] [15545] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 04:27:45 +0000] [15547] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 04:27:45 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:27:45 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:27:46 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:27:46 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:27:46 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:27:46 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:27:46 +0000] [15548] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 04:27:46 +0000] [15545] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 04:27:48 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:27:53 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/213/change/
+[2016-06-06 04:27:53 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:27:53 +0000] [15548] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 04:27:53 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:27:53 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:27:53 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:27:53 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:27:53 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:27:53 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:27:53 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:27:53 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:27:53 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:27:53 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:27:53 +0000] [15548] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 04:27:53 +0000] [15545] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 04:27:53 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:27:53 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:27:53 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:27:53 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:27:53 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:27:53 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:27:54 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:27:54 +0000] [15547] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 04:27:54 +0000] [15545] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 04:28:02 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:28:03 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/212/change/
+[2016-06-06 04:28:03 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:28:03 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:28:03 +0000] [15547] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 04:28:03 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:28:03 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:28:03 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:28:03 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:28:03 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:28:03 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:28:03 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:28:03 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:28:03 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:28:03 +0000] [15545] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 04:28:03 +0000] [15548] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 04:28:03 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:28:03 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:28:04 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:28:04 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:28:04 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:28:04 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:28:04 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:28:04 +0000] [15547] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 04:28:04 +0000] [15548] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 04:28:09 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:32:09 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:32:09 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:32:09 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:32:09 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:32:09 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:32:09 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:32:09 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:32:09 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:32:09 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:32:09 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:32:09 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:32:09 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:32:09 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:32:09 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:32:09 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:32:09 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:32:09 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:32:09 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:32:09 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:32:09 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:33:21 +0000] [15545] [DEBUG] POST /admin/stats/matchstats/
+[2016-06-06 04:33:21 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:33:23 +0000] [15547] [DEBUG] POST /admin/stats/matchstats/
+[2016-06-06 04:33:23 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:33:23 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:33:23 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:33:23 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:33:23 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:33:23 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:33:23 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:33:23 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:33:23 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:33:23 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:33:23 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:33:23 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:33:23 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:33:23 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:33:23 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:33:23 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:33:23 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:33:26 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:33:26 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:33:26 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:33:26 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:33:26 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:33:26 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:33:26 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:33:26 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:33:26 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:33:26 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:33:26 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:33:26 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:33:26 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:33:26 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:33:26 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:33:26 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:33:26 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:33:26 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:33:26 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:33:26 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:36:10 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:36:10 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:36:10 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:36:10 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:36:10 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:36:10 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:36:10 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:36:10 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:36:10 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:36:10 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:36:10 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:36:10 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:36:10 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:36:12 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:36:12 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:36:12 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:36:12 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:36:12 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:36:12 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:36:12 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:36:12 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:36:12 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:36:12 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:36:12 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:36:12 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:36:12 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:36:12 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:36:12 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:36:12 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:36:12 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:36:12 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:36:12 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:36:12 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:37:54 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:37:54 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:37:54 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:37:54 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:37:54 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:37:54 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:37:54 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:37:54 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:37:54 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:37:54 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:37:54 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:37:54 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:37:55 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:37:55 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:37:55 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:37:55 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:37:55 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:37:55 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:37:55 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:37:55 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:37:56 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:37:56 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:37:56 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:37:56 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:37:56 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:37:56 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:37:56 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:37:56 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:37:56 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:37:56 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:37:56 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:37:56 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:37:56 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:37:57 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:37:57 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:37:57 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:37:57 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:37:57 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:37:57 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:37:57 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:37:58 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:37:58 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:37:58 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:37:58 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:37:58 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:37:58 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:37:58 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:37:58 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:37:58 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:37:58 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:37:58 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:37:58 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:37:58 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:37:58 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:37:58 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:37:58 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:37:58 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:37:58 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:37:58 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:37:58 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:38:06 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:38:06 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:38:06 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:38:06 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:38:06 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:38:06 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:38:06 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:38:06 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:38:06 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:38:06 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:38:06 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:38:06 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:38:06 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:38:06 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:38:06 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:38:06 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:38:06 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:38:06 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:38:06 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:38:06 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:38:08 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:38:08 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:38:08 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:38:08 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:38:08 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:38:08 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:38:08 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:38:09 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:38:09 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:38:09 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:38:09 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:38:09 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:38:09 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:38:09 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:38:09 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:38:09 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:38:09 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:38:09 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:38:09 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:38:09 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:38:16 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:38:17 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:38:17 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:38:17 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:38:17 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:38:17 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:38:17 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:38:17 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:38:17 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:38:17 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:38:17 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:38:17 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:38:17 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:38:17 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:38:17 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:38:17 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:38:17 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:38:17 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:38:17 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:38:17 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:38:24 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:38:24 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:38:24 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:38:24 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:38:24 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:38:24 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:38:24 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:38:24 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:38:24 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:38:24 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:38:24 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:38:24 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:38:24 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:38:24 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:38:25 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:38:25 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:38:25 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:38:25 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:38:25 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:38:25 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:39:44 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:39:45 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:39:45 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:39:45 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:39:45 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:39:45 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:39:45 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:39:45 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:39:45 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:39:45 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:39:45 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:39:45 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:39:45 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:39:45 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:39:45 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:39:45 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:39:45 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:39:45 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:39:45 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:39:45 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:40:52 +0000] [15548] [DEBUG] POST /admin/stats/matchstats/
+[2016-06-06 04:40:52 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:40:55 +0000] [15547] [DEBUG] POST /admin/stats/matchstats/
+[2016-06-06 04:40:55 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:40:55 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:40:55 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:40:55 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:40:55 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:40:55 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:40:55 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:40:55 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:40:55 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:40:56 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:40:56 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:40:56 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:40:56 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:40:56 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:40:56 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:40:56 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:40:56 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:40:56 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:42:25 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:42:25 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:42:25 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:42:25 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:42:25 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:42:25 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:42:25 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:42:25 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:42:25 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:42:25 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:42:25 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:42:25 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:42:25 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:42:25 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:42:26 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:42:26 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:42:26 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:42:26 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:42:26 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:42:28 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:42:28 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:42:28 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:42:28 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:42:28 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:42:28 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:42:28 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:42:28 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:42:28 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:42:28 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:42:28 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:42:28 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:42:29 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:42:29 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:42:29 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:42:29 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:42:29 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:42:29 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:42:29 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:42:29 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:42:31 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:42:31 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:42:31 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:42:31 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:42:31 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:42:31 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:42:31 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:42:31 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:42:31 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:42:31 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:42:31 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:42:31 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:42:31 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:42:32 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:42:32 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:42:32 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:42:32 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:42:32 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:42:32 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:42:32 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:44:42 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:44:42 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:44:42 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:44:43 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:44:43 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:44:43 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:44:43 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:44:43 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:44:43 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:44:43 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:44:43 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:44:43 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:44:43 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:44:43 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:44:43 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:44:43 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:44:43 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:44:43 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:44:43 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:44:43 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:44:54 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:44:54 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:44:54 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:44:54 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:44:54 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:44:54 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:44:54 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:44:54 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:44:54 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:44:54 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:44:54 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:44:54 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:44:54 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:44:54 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:44:54 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:44:54 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:44:54 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:44:54 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:44:54 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:44:54 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:44:55 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:44:56 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:44:56 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:44:56 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:44:56 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:44:56 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:44:56 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:44:56 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:44:56 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:44:56 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:44:56 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:44:56 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:44:56 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:44:56 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:44:56 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:44:56 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:44:56 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:44:56 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:44:56 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:45:09 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:45:09 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:45:09 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:45:09 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:45:09 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:45:09 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:45:09 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:45:09 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:45:09 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:45:09 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:45:09 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:45:09 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:45:09 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:45:09 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:45:09 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:45:09 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:45:09 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:45:09 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:45:09 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:45:09 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:45:10 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:45:10 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:45:10 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:45:10 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:45:10 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:45:10 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:45:10 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:45:11 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:45:11 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:45:11 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:45:11 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:45:11 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:45:11 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:45:11 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:45:11 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:45:11 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:45:11 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:45:11 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:45:11 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:45:11 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:46:14 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:46:14 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:46:14 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:46:14 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:46:14 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:46:14 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:46:14 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:46:14 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:46:14 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:46:14 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:46:14 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:46:14 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:46:14 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:46:14 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:46:15 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:46:15 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:46:15 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:46:15 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:46:15 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:46:15 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:46:43 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:46:43 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:46:43 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:46:43 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:46:43 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:46:43 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:46:43 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:46:43 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:46:43 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:46:43 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:46:43 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:46:43 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:46:43 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:46:43 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:46:43 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:46:43 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:46:43 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:46:43 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:46:43 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:46:43 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:47:27 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:47:27 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:47:27 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:47:27 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:47:27 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:47:27 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:47:27 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:47:27 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:47:27 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:47:27 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:47:27 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:47:27 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:47:27 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:47:27 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:47:27 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:47:27 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:47:27 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:47:27 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:47:30 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:47:30 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:47:30 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:47:30 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:47:30 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:47:30 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:47:30 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:47:30 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:47:30 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:47:30 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:47:30 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:47:30 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:47:30 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:47:30 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:47:30 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:47:30 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:47:30 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:47:30 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:47:31 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:47:31 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:47:50 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:47:50 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:47:50 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:47:50 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:47:50 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:47:50 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:47:50 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:47:50 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:47:50 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:47:50 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:47:50 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:47:50 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:47:50 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:47:51 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:47:51 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:47:51 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:47:51 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:47:51 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:47:51 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:48:37 +0000] [15545] [DEBUG] POST /admin/stats/matchstats/
+[2016-06-06 04:48:37 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:48:38 +0000] [15547] [DEBUG] POST /admin/stats/matchstats/
+[2016-06-06 04:48:38 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:48:39 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:48:39 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:48:39 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:48:39 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:48:39 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:48:39 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:48:39 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:48:39 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:48:39 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:48:39 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:48:39 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:48:39 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:48:39 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:48:39 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:48:39 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:48:39 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:48:39 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:48:39 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:48:39 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:49:30 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:49:31 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:49:31 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:49:31 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:49:31 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:49:31 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:49:31 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:49:31 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:49:31 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:49:31 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:49:31 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:49:31 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:49:31 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:49:31 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:49:31 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:49:31 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:49:31 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:49:31 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:49:31 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:49:31 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:51:28 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:51:28 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:51:28 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:51:28 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:51:28 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:51:28 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:51:28 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:51:28 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:51:28 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:51:28 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:51:28 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:51:28 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:51:28 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:51:28 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:51:28 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:51:29 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:51:29 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:51:29 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:51:29 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:51:29 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:52:35 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:52:35 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:52:35 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:52:35 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:52:35 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:52:35 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:52:35 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:52:35 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:52:35 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:52:35 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:52:35 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:52:35 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:52:35 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:52:35 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:52:35 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:52:35 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:52:35 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:52:35 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:52:35 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:52:35 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:52:38 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:52:39 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:52:39 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:52:39 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:52:39 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:52:39 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:52:39 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:52:39 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:52:39 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:52:39 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:52:39 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:52:39 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:52:39 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:52:39 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:52:39 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:52:39 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:52:39 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:52:39 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:52:39 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:52:39 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:52:41 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:52:41 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:52:41 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:52:41 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:52:41 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:52:41 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:52:41 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:52:41 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:52:41 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:52:41 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:52:41 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:52:41 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:52:41 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:52:41 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:52:41 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:52:41 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:52:41 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:52:41 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:52:41 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:52:41 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:53:08 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:53:08 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:53:08 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:53:08 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:53:08 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:53:08 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:53:08 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:53:08 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:53:08 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:53:08 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:53:09 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:53:09 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:53:09 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:53:09 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:53:09 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:53:09 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:53:09 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:53:09 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:53:09 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:53:12 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:53:12 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:53:12 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:53:12 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:53:12 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:53:12 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:53:12 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:53:12 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:53:12 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:53:12 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:53:12 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:53:12 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:53:12 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:53:12 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:53:12 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:53:12 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:53:12 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:53:12 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:53:12 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:53:12 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:54:19 +0000] [15547] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:54:19 +0000] [15545] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:54:19 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:54:19 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:54:19 +0000] [15545] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:54:19 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:54:19 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:54:19 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:54:19 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:54:19 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:54:19 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:54:19 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:54:19 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:54:19 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:54:19 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:54:19 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:54:20 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:54:20 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:54:20 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:54:20 +0000] [15548] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:56:18 +0000] [15548] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:56:18 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:56:18 +0000] [15545] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:56:18 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:56:18 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:56:18 +0000] [15548] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:56:18 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:56:18 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:56:18 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:56:18 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:56:18 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:56:18 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:56:18 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:56:18 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:56:18 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:56:18 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:56:18 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:56:18 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:56:18 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:56:18 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:57:40 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:57:40 +0000] [15548] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:57:40 +0000] [15547] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:57:40 +0000] [15547] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:57:40 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:57:40 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:57:40 +0000] [15547] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:57:40 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:57:40 +0000] [15545] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:57:40 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:57:40 +0000] [15545] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:57:40 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:57:40 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:57:40 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:57:40 +0000] [15545] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:57:40 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:57:41 +0000] [15547] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:57:41 +0000] [15545] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:57:41 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:57:41 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:57:42 +0000] [15545] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 04:57:42 +0000] [15547] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 04:57:42 +0000] [15548] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 04:57:42 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:57:42 +0000] [15547] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:57:42 +0000] [15545] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 04:57:42 +0000] [15548] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:57:42 +0000] [15547] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:57:42 +0000] [15548] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:57:42 +0000] [15548] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:57:43 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 04:57:43 +0000] [15547] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:57:43 +0000] [15548] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 04:57:43 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 04:57:43 +0000] [15547] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 04:57:43 +0000] [15548] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 04:57:43 +0000] [15545] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 04:57:43 +0000] [15547] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 04:57:43 +0000] [15548] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 04:57:43 +0000] [15545] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 05:16:42 +0000] [15542] [INFO] Handling signal: term
+[2016-06-06 05:16:42 +0000] [15545] [INFO] Worker exiting (pid: 15545)
+[2016-06-06 05:16:42 +0000] [15547] [INFO] Worker exiting (pid: 15547)
+[2016-06-06 05:16:42 +0000] [15548] [INFO] Worker exiting (pid: 15548)
+[2016-06-06 05:16:42 +0000] [15542] [INFO] Shutting down: Master
+[2016-06-06 05:54:31 +0000] [2665] [DEBUG] Current configuration:
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f63ae0581e0>
+  loglevel: debug
+  limit_request_line: 4094
+  chdir: /home/ubuntu/portal/backend/portal
+  certfile: None
+  do_handshake_on_connect: False
+  proc_name: None
+  bind: ['127.0.0.1:8000']
+  syslog: False
+  statsd_prefix: 
+  daemon: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  graceful_timeout: 30
+  capture_output: False
+  paste: None
+  worker_connections: 1000
+  spew: False
+  accesslog: None
+  raw_env: []
+  statsd_host: None
+  max_requests_jitter: 0
+  when_ready: <function WhenReady.when_ready at 0x7f63ae053950>
+  logger_class: gunicorn.glogging.Logger
+  syslog_facility: user
+  suppress_ragged_eofs: True
+  proxy_protocol: False
+  ciphers: TLSv1
+  syslog_prefix: None
+  pre_fork: <function Prefork.pre_fork at 0x7f63ae053ae8>
+  post_request: <function PostRequest.post_request at 0x7f63ae058620>
+  on_exit: <function OnExit.on_exit at 0x7f63ae058ae8>
+  config: None
+  django_settings: None
+  preload_app: False
+  user: 1000
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f63ae053e18>
+  backlog: 2048
+  reload: False
+  on_starting: <function OnStarting.on_starting at 0x7f63ae053620>
+  ssl_version: 3
+  timeout: 30
+  errorlog: /home/ubuntu/portal/backend/logs/gunicorn/06-06-16.log
+  worker_class: sync
+  cert_reqs: 0
+  limit_request_field_size: 8190
+  post_fork: <function Postfork.post_fork at 0x7f63ae053c80>
+  worker_int: <function WorkerInt.worker_int at 0x7f63ae058048>
+  default_proc_name: portal.wsgi:application
+  threads: 1
+  max_requests: 0
+  pre_request: <function PreRequest.pre_request at 0x7f63ae058510>
+  syslog_addr: udp://localhost:514
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  pythonpath: None
+  on_reload: <function OnReload.on_reload at 0x7f63ae0537b8>
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_exit: <function WorkerExit.worker_exit at 0x7f63ae0587b8>
+  keepalive: 2
+  sendfile: None
+  worker_tmp_dir: None
+  umask: 0
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  check_config: False
+  enable_stdio_inheritance: False
+  workers: 3
+  tmp_upload_dir: None
+  limit_request_fields: 100
+  logconfig: None
+  pre_exec: <function PreExec.pre_exec at 0x7f63ae058378>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f63ae058950>
+  pidfile: None
+  group: 1000
+  ca_certs: None
+[2016-06-06 05:54:31 +0000] [2665] [INFO] Starting gunicorn 19.6.0
+[2016-06-06 05:54:31 +0000] [2665] [DEBUG] Arbiter booted
+[2016-06-06 05:54:31 +0000] [2665] [INFO] Listening at: http://127.0.0.1:8000 (2665)
+[2016-06-06 05:54:31 +0000] [2665] [INFO] Using worker: sync
+[2016-06-06 05:54:31 +0000] [2668] [INFO] Booting worker with pid: 2668
+[2016-06-06 05:54:31 +0000] [2670] [INFO] Booting worker with pid: 2670
+[2016-06-06 05:54:32 +0000] [2672] [INFO] Booting worker with pid: 2672
+[2016-06-06 05:54:32 +0000] [2665] [DEBUG] 3 workers
+[2016-06-06 05:54:40 +0000] [2670] [DEBUG] GET /stats/match
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /stats/match/
+[2016-06-06 05:54:40 +0000] [2670] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:40 +0000] [2668] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 05:54:40 +0000] [2670] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 05:54:40 +0000] [2670] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:40 +0000] [2672] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:40 +0000] [2670] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:40 +0000] [2670] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:42 +0000] [2672] [DEBUG] GET /stats/match/
+[2016-06-06 05:54:42 +0000] [2670] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:42 +0000] [2668] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 05:54:42 +0000] [2670] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 05:54:42 +0000] [2668] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 05:54:42 +0000] [2672] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 05:54:42 +0000] [2668] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 05:54:42 +0000] [2670] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:42 +0000] [2672] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:42 +0000] [2668] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:42 +0000] [2670] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:42 +0000] [2672] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:42 +0000] [2668] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:42 +0000] [2670] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:42 +0000] [2672] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:42 +0000] [2668] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:43 +0000] [2670] [DEBUG] GET /stats/match/
+[2016-06-06 05:54:43 +0000] [2668] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 05:54:43 +0000] [2672] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 05:54:43 +0000] [2672] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 05:54:43 +0000] [2668] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 05:54:43 +0000] [2670] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 05:54:43 +0000] [2672] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:43 +0000] [2668] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:43 +0000] [2670] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:43 +0000] [2672] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:43 +0000] [2668] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:43 +0000] [2670] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:43 +0000] [2672] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:43 +0000] [2668] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:43 +0000] [2670] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:43 +0000] [2672] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:44 +0000] [2668] [DEBUG] GET /stats/match/
+[2016-06-06 05:54:45 +0000] [2672] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:45 +0000] [2670] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 05:54:45 +0000] [2672] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 05:54:45 +0000] [2670] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 05:54:45 +0000] [2668] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 05:54:45 +0000] [2672] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 05:54:45 +0000] [2670] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:45 +0000] [2668] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:45 +0000] [2672] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:45 +0000] [2670] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:45 +0000] [2668] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:45 +0000] [2672] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:45 +0000] [2670] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:45 +0000] [2668] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:45 +0000] [2672] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:46 +0000] [2670] [DEBUG] GET /stats/match/
+[2016-06-06 05:54:46 +0000] [2672] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 05:54:46 +0000] [2668] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 05:54:46 +0000] [2668] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 05:54:46 +0000] [2672] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 05:54:46 +0000] [2670] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:46 +0000] [2668] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 05:54:46 +0000] [2672] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:46 +0000] [2670] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:46 +0000] [2668] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:46 +0000] [2672] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:46 +0000] [2670] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:46 +0000] [2668] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:46 +0000] [2672] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:46 +0000] [2670] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:46 +0000] [2668] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:47 +0000] [2672] [DEBUG] GET /stats/match/
+[2016-06-06 05:54:47 +0000] [2668] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:47 +0000] [2670] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:47 +0000] [2668] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:47 +0000] [2670] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:47 +0000] [2672] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:47 +0000] [2668] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 05:54:47 +0000] [2670] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 05:54:47 +0000] [2672] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 05:54:47 +0000] [2668] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 05:54:47 +0000] [2670] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 05:54:47 +0000] [2672] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:47 +0000] [2668] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:47 +0000] [2670] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:47 +0000] [2672] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:47 +0000] [2668] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:48 +0000] [2670] [DEBUG] GET /stats/match/
+[2016-06-06 05:54:48 +0000] [2668] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 05:54:48 +0000] [2672] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 05:54:48 +0000] [2672] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 05:54:48 +0000] [2670] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 05:54:48 +0000] [2668] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 05:54:48 +0000] [2672] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:48 +0000] [2670] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:48 +0000] [2668] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:48 +0000] [2672] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:48 +0000] [2670] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:48 +0000] [2668] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:48 +0000] [2672] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:48 +0000] [2670] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:48 +0000] [2668] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:49 +0000] [2672] [DEBUG] GET /stats/match/
+[2016-06-06 05:54:49 +0000] [2668] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 05:54:49 +0000] [2670] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 05:54:49 +0000] [2668] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 05:54:49 +0000] [2670] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 05:54:49 +0000] [2672] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 05:54:49 +0000] [2668] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 05:54:49 +0000] [2670] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 05:54:49 +0000] [2672] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:49 +0000] [2668] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:49 +0000] [2670] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:54:49 +0000] [2672] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 05:54:49 +0000] [2668] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 05:54:49 +0000] [2670] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 05:59:59 +0000] [2665] [INFO] Handling signal: term
+[2016-06-06 05:59:59 +0000] [2672] [INFO] Worker exiting (pid: 2672)
+[2016-06-06 05:59:59 +0000] [2668] [INFO] Worker exiting (pid: 2668)
+[2016-06-06 05:59:59 +0000] [2670] [INFO] Worker exiting (pid: 2670)
+[2016-06-06 05:59:59 +0000] [2665] [INFO] Shutting down: Master
+[2016-06-06 06:08:44 +0000] [3251] [DEBUG] Current configuration:
+  errorlog: /home/ubuntu/portal/backend/logs/gunicorn/06-06-16.log
+  limit_request_fields: 100
+  pre_request: <function PreRequest.pre_request at 0x7f98ddacf510>
+  threads: 1
+  max_requests_jitter: 0
+  proxy_allow_ips: ['127.0.0.1']
+  loglevel: debug
+  enable_stdio_inheritance: False
+  limit_request_line: 4094
+  chdir: /home/ubuntu/portal/backend/portal
+  config: None
+  worker_int: <function WorkerInt.worker_int at 0x7f98ddacf048>
+  post_request: <function PostRequest.post_request at 0x7f98ddacf620>
+  on_exit: <function OnExit.on_exit at 0x7f98ddacfae8>
+  django_settings: None
+  statsd_host: None
+  ssl_version: 3
+  ca_certs: None
+  suppress_ragged_eofs: True
+  pre_fork: <function Prefork.pre_fork at 0x7f98ddacaae8>
+  post_fork: <function Postfork.post_fork at 0x7f98ddacac80>
+  pre_exec: <function PreExec.pre_exec at 0x7f98ddacf378>
+  sendfile: None
+  check_config: False
+  limit_request_field_size: 8190
+  syslog_addr: udp://localhost:514
+  certfile: None
+  reload: False
+  daemon: False
+  umask: 0
+  statsd_prefix: 
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-SSL': 'on', 'X-FORWARDED-PROTO': 'https'}
+  do_handshake_on_connect: False
+  group: 1000
+  pythonpath: None
+  paste: None
+  bind: ['127.0.0.1:8000']
+  worker_class: sync
+  graceful_timeout: 30
+  preload_app: False
+  raw_env: []
+  tmp_upload_dir: None
+  proxy_protocol: False
+  max_requests: 0
+  on_starting: <function OnStarting.on_starting at 0x7f98ddaca620>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f98ddacf950>
+  backlog: 2048
+  accesslog: None
+  syslog_prefix: None
+  worker_connections: 1000
+  timeout: 30
+  keepalive: 2
+  when_ready: <function WhenReady.when_ready at 0x7f98ddaca950>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f98ddacae18>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f98ddacf1e0>
+  keyfile: None
+  cert_reqs: 0
+  default_proc_name: portal.wsgi:application
+  logger_class: gunicorn.glogging.Logger
+  pidfile: None
+  workers: 3
+  worker_exit: <function WorkerExit.worker_exit at 0x7f98ddacf7b8>
+  worker_tmp_dir: None
+  ciphers: TLSv1
+  user: 1000
+  on_reload: <function OnReload.on_reload at 0x7f98ddaca7b8>
+  proc_name: None
+  forwarded_allow_ips: ['127.0.0.1']
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  capture_output: False
+  logconfig: None
+  spew: False
+  syslog: False
+  syslog_facility: user
+[2016-06-06 06:08:44 +0000] [3251] [INFO] Starting gunicorn 19.6.0
+[2016-06-06 06:08:44 +0000] [3251] [DEBUG] Arbiter booted
+[2016-06-06 06:08:44 +0000] [3251] [INFO] Listening at: http://127.0.0.1:8000 (3251)
+[2016-06-06 06:08:44 +0000] [3251] [INFO] Using worker: sync
+[2016-06-06 06:08:44 +0000] [3254] [INFO] Booting worker with pid: 3254
+[2016-06-06 06:08:44 +0000] [3256] [INFO] Booting worker with pid: 3256
+[2016-06-06 06:08:44 +0000] [3258] [INFO] Booting worker with pid: 3258
+[2016-06-06 06:08:44 +0000] [3251] [DEBUG] 3 workers
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /stats/match/
+[2016-06-06 06:12:05 +0000] [3256] [DEBUG] GET /static/rest_framework/css/bootstrap.min.css
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/css/bootstrap-tweaks.css
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/js/jquery-1.11.3.min.js
+[2016-06-06 06:12:05 +0000] [3254] [DEBUG] GET /static/rest_framework/js/ajax-form.js
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/css/default.css
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/css/prettify.css
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 06:12:05 +0000] [3256] [DEBUG] GET /static/rest_framework/js/csrf.js
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/js/bootstrap.min.js
+[2016-06-06 06:12:05 +0000] [3258] [DEBUG] GET /static/rest_framework/js/prettify-min.js
+[2016-06-06 06:12:05 +0000] [3256] [DEBUG] GET /static/rest_framework/js/default.js
+[2016-06-06 13:32:10 +0000] [3256] [DEBUG] GET /admin/
+[2016-06-06 13:32:10 +0000] [3258] [DEBUG] GET /admin/login/
+[2016-06-06 13:32:11 +0000] [3256] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 13:32:11 +0000] [3254] [DEBUG] GET /static/admin/css/login.css
+[2016-06-06 13:32:16 +0000] [3256] [DEBUG] POST /admin/login/
+[2016-06-06 13:32:16 +0000] [3254] [DEBUG] GET /admin/
+[2016-06-06 13:32:16 +0000] [3256] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 13:32:16 +0000] [3258] [DEBUG] GET /static/admin/css/dashboard.css
+[2016-06-06 13:32:19 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 13:32:20 +0000] [3256] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 13:32:20 +0000] [3254] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 13:32:20 +0000] [3254] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 13:32:20 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 13:32:20 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 13:32:20 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 13:32:20 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 13:32:20 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 13:32:20 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 13:32:20 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 13:32:20 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 18:58:57 +0000] [3258] [DEBUG] GET /muieblackcat
+[2016-06-06 18:59:39 +0000] [3256] [DEBUG] GET /myadmin/scripts/setup.php
+[2016-06-06 18:59:39 +0000] [3256] [DEBUG] Ignoring EPIPE
+[2016-06-06 19:26:23 +0000] [3258] [DEBUG] GET /admin/
+[2016-06-06 19:26:23 +0000] [3256] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:26:23 +0000] [3254] [DEBUG] GET /static/admin/css/dashboard.css
+[2016-06-06 19:26:23 +0000] [3256] [DEBUG] GET /favicon.ico
+[2016-06-06 19:26:28 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:26:28 +0000] [3256] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:26:28 +0000] [3258] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 19:26:28 +0000] [3256] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:26:28 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:26:28 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:26:28 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:26:28 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:26:28 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:26:28 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:26:28 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:26:28 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:26:28 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:26:29 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:26:29 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:26:29 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:26:29 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:26:29 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:26:29 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:26:29 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:26:32 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/303/change/
+[2016-06-06 19:26:32 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:26:32 +0000] [3256] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 19:26:32 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:26:32 +0000] [3254] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:26:32 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:26:32 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:26:32 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:26:32 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:26:32 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:26:32 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:26:32 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:26:32 +0000] [3258] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:26:32 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:26:32 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:26:32 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:26:33 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:26:33 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:26:33 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:26:33 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:26:33 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:26:33 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:26:33 +0000] [3254] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:26:33 +0000] [3256] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:27:03 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:27:06 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/304/change/
+[2016-06-06 19:27:07 +0000] [3258] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 19:27:07 +0000] [3258] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:27:07 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:27:07 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:27:07 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:27:07 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:27:07 +0000] [3254] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:27:07 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:27:07 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:27:07 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:27:07 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:27:07 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:27:07 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:27:07 +0000] [3256] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:27:07 +0000] [3258] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:27:15 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:27:17 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/303/change/
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:27:17 +0000] [3256] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 19:27:17 +0000] [3256] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:27:17 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:27:17 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:27:17 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:27:17 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:27:17 +0000] [3258] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:27:17 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:27:17 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:27:17 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:27:17 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:27:17 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:27:17 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:27:17 +0000] [3256] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:27:17 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:28:09 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:28:11 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/304/change/
+[2016-06-06 19:28:11 +0000] [3256] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:28:11 +0000] [3258] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:28:11 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:28:11 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:28:11 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:28:12 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:28:12 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:28:12 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:28:12 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:28:12 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:28:12 +0000] [3256] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 19:28:12 +0000] [3258] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:28:12 +0000] [3254] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:28:12 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:28:12 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:28:12 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:28:12 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:28:12 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:28:12 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:28:12 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:28:12 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:28:12 +0000] [3258] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:28:12 +0000] [3256] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:28:28 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:28:30 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/305/change/
+[2016-06-06 19:28:30 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 19:28:30 +0000] [3254] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:28:30 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:28:30 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:28:30 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:28:30 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:28:30 +0000] [3256] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:28:30 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:28:30 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:28:30 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:28:30 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:28:30 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:28:30 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:28:30 +0000] [3254] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 19:28:30 +0000] [3258] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 19:29:10 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:48:19 +0000] [3258] [DEBUG] GET /admin/
+[2016-06-06 19:48:19 +0000] [3256] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:48:19 +0000] [3254] [DEBUG] GET /static/admin/css/dashboard.css
+[2016-06-06 19:48:19 +0000] [3254] [DEBUG] GET /favicon.ico
+[2016-06-06 19:48:21 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:48:22 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:48:22 +0000] [3258] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 19:48:22 +0000] [3258] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:48:22 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:48:22 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:48:22 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:48:22 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:48:22 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:48:22 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:48:22 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:48:22 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:48:22 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:48:22 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:48:22 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:48:22 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:48:22 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:48:22 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:48:22 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:48:22 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:48:24 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:48:24 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:48:24 +0000] [3256] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 19:48:24 +0000] [3254] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:48:24 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:48:24 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:48:24 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:48:24 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:48:24 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:48:24 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:48:24 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:48:24 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:48:24 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:48:24 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:48:25 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:48:25 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:48:25 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:48:25 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:48:25 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:48:25 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:55:02 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:55:02 +0000] [3258] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:55:02 +0000] [3254] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 19:55:02 +0000] [3258] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:55:02 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:55:02 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:55:02 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:55:02 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:55:02 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:55:02 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:55:02 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:55:02 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:55:02 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:55:02 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:55:02 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:55:02 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:55:02 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:55:02 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:55:02 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:55:02 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:55:04 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 19:55:04 +0000] [3258] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 19:55:04 +0000] [3256] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 19:55:04 +0000] [3256] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 19:55:04 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:55:04 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:55:04 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:55:04 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:55:04 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:55:04 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:55:04 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:55:04 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 19:55:04 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 19:55:04 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 19:55:04 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 19:55:04 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 19:55:04 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 19:55:04 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 19:55:05 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 19:55:05 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:00:23 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 20:00:23 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 20:00:23 +0000] [3258] [DEBUG] GET /static/admin/css/changelists.css
+[2016-06-06 20:00:23 +0000] [3258] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 20:00:23 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:00:23 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:00:23 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:00:23 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:00:23 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:00:23 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:00:23 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:00:23 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:00:23 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:00:23 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:00:23 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:00:24 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:00:24 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:00:24 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:00:24 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:00:24 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:00:26 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/306/change/
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 20:00:26 +0000] [3254] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:00:26 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:00:26 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:00:26 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:00:26 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:00:26 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 20:00:26 +0000] [3256] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:00:26 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:00:26 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:00:26 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:00:26 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:00:26 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:00:26 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:00:26 +0000] [3258] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:00:26 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:00:54 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 20:05:48 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/303/change/
+[2016-06-06 20:05:48 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 20:05:48 +0000] [3256] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 20:05:48 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:05:48 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:05:48 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:05:48 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:05:48 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:05:48 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:05:48 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:05:48 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:05:48 +0000] [3254] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 20:05:48 +0000] [3258] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:05:48 +0000] [3256] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:05:48 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:05:48 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:05:48 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:05:49 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:05:49 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:05:49 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:05:49 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:05:49 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:05:49 +0000] [3256] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:05:49 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:05:52 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 20:05:54 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/304/change/
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 20:05:54 +0000] [3254] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 20:05:54 +0000] [3254] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:05:54 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:05:54 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:05:54 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:05:54 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:05:54 +0000] [3258] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:05:54 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:05:54 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:05:54 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:05:54 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:05:54 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:05:54 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:05:54 +0000] [3254] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:05:54 +0000] [3256] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:05:57 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 20:05:59 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/305/change/
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 20:06:00 +0000] [3256] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 20:06:00 +0000] [3256] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:06:00 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:06:00 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:06:00 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:06:00 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:06:00 +0000] [3254] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:06:00 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:06:00 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:06:00 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:06:00 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:06:00 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:06:00 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:06:00 +0000] [3256] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:06:00 +0000] [3258] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:06:02 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 20:06:04 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/306/change/
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 20:06:05 +0000] [3256] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 20:06:05 +0000] [3256] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:06:05 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:06:05 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:06:05 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:06:05 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:06:05 +0000] [3258] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:06:05 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:06:05 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:06:05 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:06:05 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:06:05 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:06:05 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:06:05 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:06:05 +0000] [3256] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:06:09 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 20:06:14 +0000] [3256] [DEBUG] GET /admin/stats/matchstats/299/change/
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 20:06:14 +0000] [3254] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 20:06:14 +0000] [3254] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:06:14 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:06:14 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:06:14 +0000] [3256] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:06:14 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:06:14 +0000] [3256] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:06:14 +0000] [3254] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:06:14 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:06:14 +0000] [3254] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:06:14 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:06:14 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:06:14 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:06:14 +0000] [3254] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:06:14 +0000] [3258] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:06:17 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 20:06:19 +0000] [3258] [DEBUG] GET /admin/stats/matchstats/300/change/
+[2016-06-06 20:06:19 +0000] [3254] [DEBUG] GET /static/admin/css/base.css
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/css/forms.css
+[2016-06-06 20:06:19 +0000] [3254] [DEBUG] GET /admin/jsi18n/
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:06:19 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:06:19 +0000] [3258] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:06:19 +0000] [3258] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:06:19 +0000] [3254] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:06:19 +0000] [3258] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:06:19 +0000] [3254] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/js/core.js
+[2016-06-06 20:06:19 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/jquery/jquery.min.js
+[2016-06-06 20:06:19 +0000] [3254] [DEBUG] GET /static/admin/js/jquery.init.js
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/js/admin/RelatedObjectLookups.js
+[2016-06-06 20:06:19 +0000] [3258] [DEBUG] GET /static/admin/js/actions.min.js
+[2016-06-06 20:06:19 +0000] [3254] [DEBUG] GET /static/admin/js/urlify.js
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/js/prepopulate.min.js
+[2016-06-06 20:06:19 +0000] [3258] [DEBUG] GET /static/admin/js/vendor/xregexp/xregexp.min.js
+[2016-06-06 20:06:19 +0000] [3254] [DEBUG] GET /static/admin/img/icon-changelink.svg
+[2016-06-06 20:06:19 +0000] [3256] [DEBUG] GET /static/admin/img/icon-addlink.svg
+[2016-06-06 20:06:22 +0000] [3254] [DEBUG] GET /admin/stats/matchstats/
+[2016-06-06 22:17:39 +0000] [3254] [DEBUG] GET /
+[2016-06-06 23:33:48 +0000] [3256] [DEBUG] GET /
+[2016-06-07 09:12:39 +0000] [3256] [DEBUG] GET /cgi-bin/test-cgi
+[2016-06-07 09:21:02 +0000] [3256] [DEBUG] GET /cgi-bin/test-cgi
+[2016-06-07 09:23:42 +0000] [3258] [DEBUG] GET /cgi-bin/test-cgi
