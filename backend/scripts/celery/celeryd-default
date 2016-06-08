@@ -24,7 +24,7 @@ CELERYD_CHDIR="/home/ubuntu/portal/backend/portal/"
 # %N will be replaced with the first part of the nodename.
 CELERYD_LOG_FILE="/home/ubuntu/portal/backend/logs/celery/%N.log"
 
-CELERYD_LOG_LEVEL="DEBUG"
+CELERYD_LOG_LEVEL="INFO"
 
 # Workers should run as an unprivileged user.
 #   You need to create this user manually (or you can choose

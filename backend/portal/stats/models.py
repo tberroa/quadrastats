@@ -33,12 +33,12 @@ class Match(models.Model):
         verbose_name_plural = 'Matches'
 
     region = models.CharField(max_length = 128)
-    riot_id = models.BigIntegerField()
+    match_id = models.BigIntegerField(default = 0)
     creation = models.BigIntegerField(null = True, blank = True)
     duration = models.BigIntegerField(null = True, blank = True)
 
     def __str__(self):
-        return str(self.riot_id)
+        return str(self.match_id)
 
 class MatchStats(models.Model):
     class Meta:
@@ -47,11 +47,11 @@ class MatchStats(models.Model):
     # identity info
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
-    champion = models.IntegerField()
+    champion = models.IntegerField(default = 0)
     lane = models.CharField(max_length = 128)
     role = models.CharField(max_length = 128)
 
-    # stats
+    # raw stats
     assists = models.BigIntegerField(null = True, blank = True)
     champ_level = models.BigIntegerField(null = True, blank = True)
     deaths = models.BigIntegerField(null = True, blank = True)
@@ -106,9 +106,18 @@ class MatchStats(models.Model):
     wards_killed = models.BigIntegerField(null = True, blank = True)
     wards_placed = models.BigIntegerField(null = True, blank = True)
     winner = models.NullBooleanField()
+
+    # calculated stats
+    cs_at_ten = models.FloatField(null = True, blank = True)
+    cs_diff_at_ten = models.FloatField(null = True, blank = True)
+    cs_per_min = models.FloatField(null = True, blank = True)
+    dmg_per_min = models.FloatField(null = True, blank = True)
+    gold_per_min = models.FloatField(null = True, blank = True)
+    kda = models.FloatField(null = True, blank = True)
+    kill_participation = models.FloatField(null = True, blank = True)
 	
     def __str__(self):
-        return self.summoner.name + "," + str(self.match.riot_id)
+        return self.summoner.region + "," + self.summoner.name + "," + str(self.match.match_id)
 
   
 
