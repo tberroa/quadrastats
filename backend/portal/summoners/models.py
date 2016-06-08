@@ -14,6 +14,7 @@ class User(models.Model):
 class Summoner(models.Model):
     user = models.OneToOneField(User, null = True, blank = True, on_delete=models.CASCADE)
     region = models.CharField(max_length = 128)
+    key = models.CharField(max_length = 128)
     name = models.CharField(max_length = 128)
     summoner_id = models.BigIntegerField(default = 0)
     profile_icon = models.IntegerField(default = 0)

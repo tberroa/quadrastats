@@ -1,60 +1,69 @@
-SUMMONER
-Registering a new user:
+==================== SUMMONERS ====================
+
+---------------------------------------------------
+
+Registering a New User
+Request:
 {
     "user" : {
         "password" : "123456"
     },
     "region" : "na",
-    "name" : "Frosiph",
-    "summoner_id" : 0,
-    "profile_icon" : 78
+    "key" : "frosiph"
 }
+Response:
 
-Logging in:
+---------------------------------------------------
+
+Logging In
+Request:
 {
     "region" : "na",
-    "name" : "Frosiph",
+    "key" : "frosiph",
     "password" : "123456"
 }
+Response:
 
-Creating a new summoner:
-{
-    "region" : "na",
-    "name" : "Frosiph",
-    "summoner_id" : 0,
-    "profile_icon" : 117
-} 
+---------------------------------------------------
 
-Getting summoners:
+Getting Summoners
+Request:
 [
 {
     "region" : "na",
-    "name" : "Frosiph"
+    "key" : "frosiph"
 },
 {
     "region" : "na",
-    "name" : "Frosiiph"
+    "key" : "acruz"
 }
 ]
+Response:
 
-Adding a friend:
+---------------------------------------------------
+
+Adding a Friend
+Request:
 {
    "region" : "na",
-   "summoner_name" : "Frosiph",
-   "friend_name" : "Acruz",
-   "friend_summoner_id" : 0,
-   "friend_profile_icon" : 87
+   "summoner_key" : "frosiph",
+   "friend_key" : "acruz"
 }
+Response:
 
+====================== STATS ======================
 
-STATS
-Get match stats:
+---------------------------------------------------
+
+Get Match Stats
+Request:
 {
-    "summoners" : ["Frosiph", "Acruz"],
+    "keys" : ["frosiph", "acruz"],
     "champion" : 1,
     "lane" : "MIDDLE",
     "role" : null
 } 
+Response:
 
 
 

@@ -7,75 +7,86 @@ from rest_framework.views import APIView
 
 from .models import Summoner
 from .models import User
+from .riotapi import get_summoner
 from .serializers import SummonerSerializer
 from .serializers import UserSerializer
-from .utils import create_summoner
 
 class RegisterUser(APIView):
-    def post(self, request, format=None):
+    def post(self, request, format = None):
         # extract data
         data = request.data
-        password = hashers.make_password(data["user"]["password"])
-        region = data["region"]
-        name = data["name"]
-        profile_icon = data["profile_icon"]
+        user = data.get("user")
+        region = data.get("region")
+        key = data.get("key")
+
+        # validate
+        if None in (user, region, key):
+            return Response("error")
+
+        key = format_key(key)
+
+        # hash password
+        password = user.get("password")
+        if password is None:
+            return Response("error")
+        password = hashers.make_password(password)
 
         # check if the summoner object exists
         try:
-            summoner = Summoner.objects.get(region=region, name=name)
+            summoner = Summoner.objects.get(region = region, key = key)
             # check if the user object exists
             if summoner.user is None:
                 # no user attached to this summoner object, create one
-                summoner.user = User.objects.create(password=password)
-                summoner.profile_icon = profile_icon
+                summoner.user = User.objects.create(password = password)
                 summoner.save()
-                serializer = SummonerSerializer(summoner)
                 # return the summoner object
-                return Response(serializer.data)
+                return Response(SummonerSerializer(summoner).data)
             else:
                 # this summoner already has a registered user, return message
                 return Response("this user is already registered")
+        # summoner object needs to be created
         except Summoner.DoesNotExist:
-            # this summoner does not exist yet, needs to be created
             pass
 
-        # create summoner object with attached user and serialize it in one step
-        serializer = SummonerSerializer(data=data)
+        # get more information on the summoner via riot
+        summoner = get_summoner(region, key)
+
+        # update the data before passing to serializer
+        data.get("user").update({"password" : password})
+        data.update({"name" : summoner.get("name"), \
+                     "summoner_id" : summoner.get("id"), \
+                     "profile_icon" : summoner.get("profileIconId")})
+
+        # create summoner object with attached user and serialize it
+        serializer = SummonerSerializer(data = data)
         if serializer.is_valid():
             serializer.save()
             # return the summoner object
             return Response(serializer.data)
         # validation error occured during serialization, return error
-        return Response(serializer.errors)
+        return Response("error")
 
 class LoginUser(APIView):
     def post(self, request, format=None):
         # extract data
         data = request.data
-        region = data["region"]
-        name = data["name"]
-        password = data["password"]
+        region = data.get("region")
+        key = data.get("key")
+        password = data.get("password")
+
+        # validate
+        if None in (region, key, password):
+            return Response("error")
+
+        key = format_key(key)
 
         try:
-            summoner = Summoner.objects.get(region=region, name=name)
+            summoner = Summoner.objects.get(region = region, key = key)
             if hashers.check_password(password, summoner.user.password):
                 return Response(SummonerSerializer(summoner).data)
-            return Response('incorrect combination')
+            return Response("incorrect combination")
         except Summoner.DoesNotExist:
-            return Response('incorrect combination')
-
-class CreateSummoner(APIView):
-    def post(self, request, format=None):
-        # extract data
-        region = request.data["region"]
-        name = request.data["name"]
-        profile_icon = request.data["profile_icon"]
-
-        # create summoner object
-        summoner = create_summoner(region, name, profile_icon)
-
-        # return summoner object
-        return Response(SummonerSerializer(summoner).data)
+            return Response("incorrect combination")
 
 class GetSummoners(APIView):
     def post(self, request, format=None):
@@ -85,7 +96,9 @@ class GetSummoners(APIView):
 
         # get all requested summoner objects
         for entry in data:
-            summoners.append(Summoner.objects.get(region=entry["region"], name=entry["name"]))
+            region = entry.get("region")
+            key = format_key(entry.get("key"))
+            summoners.append(Summoner.objects.get(region = region, key = key))
         
         # return the summoner objects
         return Response(SummonerSerializer(summoners, many=True).data)
@@ -94,25 +107,63 @@ class AddFriend(APIView):
     def post(Self, request, format=None):
         # extract data
         data = request.data
-        region = data["region"]
-        summoner_name = data["summoner_name"]
-        friend_name = data["friend_name"]
-        friend_profile_icon = data["friend_profile_icon"]
+        region = data.get("region")
+        summoner_key = data.get("summoner_key")
+        friend_key = data.get("friend_key")
+
+        # validate
+        if None in (region, summoner_key, friend_key):
+            return Response("error")
+
+        summoner_key = format_key(summoner_key)
+        friend_key = format_key(friend_key)
 
         # get the users summoner object
-        summoner = Summoner.objects.get(region=region, name=summoner_name) 
-        # ensure a summoner object exists for the friend
-        create_summoner(region, friend_name, friend_profile_icon)
+        summoner = Summoner.objects.get(region = region, key = summoner_key) 
 
-        # add the friends name to the users friend list
-        if summoner.friends is None:
-            summoner.friends = friend_name + ","
+        # ensure a summoner object exists for the friend
+        ensure_summoner_exists(region, friend_key)
+
+        # add the friends key to the users friend list
+        if summoner.friends is not None:
+            summoner.friends += friend_key + ","
         else:
-            summoner.friends += friend_name + ","
+            summoner.friends = friend_key + ","
         summoner.save()
 
         # return the users updated summoner object
         return Response(SummonerSerializer(summoner).data)
+
+# used to ensure a summoner exists in the database
+def ensure_summoner_exists(region, key):
+    try:
+        return Summoner.objects.get(region = region, key = key)
+    except Summoner.DoesNotExist:
+        pass
+
+    # get the summoners information via riot
+    summoner = get_summoner(region, key)
+
+    # use gathered info to create summoner in database
+    summoner = Summoner.objects.create(region = region, \
+                                       key = key, \
+                                       name = summoner.get("name"), \
+                                       profile_icon = summoner.get("profile_icon"))
+
+    # returns a summoner model object
+    return summoner
+
+def format_key(key):
+    # remove white spaces and make all lowercase
+    return(key.replace(" ", "").lower())
+    
+
+
+
+
+
+
+
 
 
 

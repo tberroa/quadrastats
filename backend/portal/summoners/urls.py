@@ -7,7 +7,6 @@ from . import views
 urlpatterns = [
   url(r'^register/$', views.RegisterUser.as_view()),
   url(r'^login/$', views.LoginUser.as_view()),
-  url(r'^create/$', views.CreateSummoner.as_view()),
   url(r'^get/$', views.GetSummoners.as_view()),
   url(r'^add-friend', views.AddFriend.as_view()),
 ]
