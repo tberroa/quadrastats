@@ -6,6 +6,7 @@ Registering a new user:
     },
     "region" : "na",
     "name" : "Frosiph",
+    "summoner_id" : 0,
     "profile_icon" : 78
 }
 
@@ -20,6 +21,7 @@ Creating a new summoner:
 {
     "region" : "na",
     "name" : "Frosiph",
+    "summoner_id" : 0,
     "profile_icon" : 117
 } 
 
@@ -40,6 +42,7 @@ Adding a friend:
    "region" : "na",
    "summoner_name" : "Frosiph",
    "friend_name" : "Acruz",
+   "friend_summoner_id" : 0,
    "friend_profile_icon" : 87
 }
 
@@ -51,17 +54,7 @@ Get match stats:
     "champion" : 1,
     "lane" : "MIDDLE",
     "role" : null
-}
-
-
-UPDATE
-Run a command:
-{
-  "command" : "all"
-}
-
-commands:
-all 
+} 
 
 
 
