@@ -209,12 +209,3 @@ class RemoveFriend(APIView):
 
 
 
-
-
-
-
-
-
-
-
-
