@@ -9,8 +9,8 @@ from portal.errors import invalid_request_format
 from portal.errors import invalid_riot_response
 from portal.errors import summoner_already_registered
 from portal.errors import summoner_does_not_exist
-from portal.riotapi import format_key
-from portal.riotapi import get_summoner
+from portal.riot_api import format_key
+from portal.riot_api import get_summoner
 from rest_framework.response import Response
 from rest_framework.views import APIView
 

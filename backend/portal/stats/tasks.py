@@ -1,8 +1,8 @@
 from __future__ import absolute_import
 
 from celery import shared_task 
-from portal.riotapi import get_match_detail
-from porta.riotapi import get_match_list
+from portal.riot_api import get_match_detail
+from portal.riot_api import get_match_list
 from summoners.models import Summoner
 
 from .models import ChampionStats

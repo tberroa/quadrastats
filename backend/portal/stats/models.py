@@ -1,19 +1,6 @@
 from django.db import models
 from summoners.models import Summoner
 
-class SeasonStats(models.Model):
-    class Meta:
-        verbose_name_plural = 'Season Stats'
-
-    season = models.CharField(max_length = 128)
-    kills = models.IntegerField()
-    deaths = models.IntegerField()
-    assists = models.IntegerField()
-    doublekills = models.IntegerField()
-    triplekills = models.IntegerField()
-    quadrakills = models.IntegerField()
-    pentakills = models.IntegerField()
-
 class ChampionStats(models.Model):
     class Meta:
         verbose_name_plural = 'Champion Stats'
@@ -117,6 +104,19 @@ class MatchStats(models.Model):
 	
     def __str__(self):
         return self.summoner.region + "," + self.summoner.name + "," + str(self.match.match_id)
+
+class SeasonStats(models.Model):
+    class Meta:
+        verbose_name_plural = 'Season Stats'
+
+    season = models.CharField(max_length = 128)
+    kills = models.IntegerField()
+    deaths = models.IntegerField()
+    assists = models.IntegerField()
+    doublekills = models.IntegerField()
+    triplekills = models.IntegerField()
+    quadrakills = models.IntegerField()
+    pentakills = models.IntegerField()
 
   
 
