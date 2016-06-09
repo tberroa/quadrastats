@@ -2,6 +2,94 @@
 
 ---------------------------------------------------
 
+Adding a Friend
+Request:
+{
+   "region" : "na",
+   "summoner_key" : "acruz",
+   "friend_key" : "frosiph"
+}
+Response:
+{
+    "id": 4,
+    "user": {
+        "id": 4,
+        "created": "2016-06-09T00:07:42.928026"
+    },
+    "region": "na",
+    "key": "acruz",
+    "name": "Acruz",
+    "summoner_id": 40323106,
+    "profile_icon": 1021,
+    "friends": "frosiph,",
+    "modified": "2016-06-09T01:24:20.238527"
+}
+
+---------------------------------------------------
+
+Getting Summoners
+Request:
+{ 
+    "region" : "na",
+    "keys" : ["frosiph", "acruz"]
+}
+Response:
+[
+    {
+        "id": 5,
+        "user": null,
+        "region": "na",
+        "key": "frosiph",
+        "name": "Frosiph",
+        "summoner_id": 26155824,
+        "profile_icon": 539,
+        "friends": null,
+        "modified": "2016-06-09T01:24:20.201180"
+    },
+    {
+        "id": 4,
+        "user": {
+            "id": 4,
+            "created": "2016-06-09T00:07:42.928026"
+        },
+        "region": "na",
+        "key": "acruz",
+        "name": "Acruz",
+        "summoner_id": 40323106,
+        "profile_icon": 1021,
+        "friends": "frosiph,",
+        "modified": "2016-06-09T01:24:20.238527"
+    }
+]
+
+---------------------------------------------------
+
+Logging In
+Request:
+{
+    "region" : "na",
+    "key" : "AcRuZ",
+    "password" : "123456"
+}
+Response:
+
+{
+    "id": 4,
+    "user": {
+        "id": 4,
+        "created": "2016-06-09T00:07:42.928026"
+    },
+    "region": "na",
+    "key": "acruz",
+    "name": "Acruz",
+    "summoner_id": 40323106,
+    "profile_icon": 1021,
+    "friends": null,
+    "modified": "2016-06-09T00:07:42.953708"
+}
+
+---------------------------------------------------
+
 Registering a New User
 Request:
 {
@@ -26,44 +114,6 @@ Response:
     "friends": null,
     "modified": "2016-06-09T00:07:42.953708"
 }
-
----------------------------------------------------
-
-Logging In
-Request:
-{
-    "region" : "na",
-    "key" : "frosiph",
-    "password" : "123456"
-}
-Response:
-
----------------------------------------------------
-
-Getting Summoners
-Request:
-[
-{
-    "region" : "na",
-    "key" : "frosiph"
-},
-{
-    "region" : "na",
-    "key" : "acruz"
-}
-]
-Response:
-
----------------------------------------------------
-
-Adding a Friend
-Request:
-{
-   "region" : "na",
-   "summoner_key" : "frosiph",
-   "friend_key" : "acruz"
-}
-Response:
 
 ====================== STATS ======================
 
