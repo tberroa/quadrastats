@@ -17,7 +17,7 @@ class Summoner(models.Model):
     name = models.CharField(max_length = 128)
     summoner_id = models.BigIntegerField(default = 0)
     profile_icon = models.IntegerField(default = 0)
-    friends = models.CharField(max_length = 255, null = True, blank = True)
+    friends = models.CharField(max_length = 255, default = "", blank = True)
     modified = models.DateTimeField(null = True, blank = True)
 
     def save(self, *args, **kwargs):

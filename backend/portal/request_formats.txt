@@ -6,7 +6,7 @@ Adding a Friend
 Request:
 {
    "region" : "na",
-   "summoner_key" : "acruz",
+   "user_key" : "acruz",
    "friend_key" : "frosiph"
 }
 Response:
@@ -114,6 +114,33 @@ Response:
     "friends": null,
     "modified": "2016-06-09T00:07:42.953708"
 }
+
+---------------------------------------------------
+
+Removing a Friend
+Request:
+{
+   "region" : "na",
+   "user_key" : "acruz",
+   "friend_key" : "frosiph"
+}
+Response:
+{
+    "id": 4,
+    "user": {
+        "id": 4,
+        "created": "2016-06-09T00:07:42.928026"
+    },
+    "region": "na",
+    "key": "acruz",
+    "name": "Acruz",
+    "summoner_id": 40323106,
+    "profile_icon": 1021,
+    "friends": "",
+    "modified": "2016-06-09T13:29:16.905609"
+}
+
+---------------------------------------------------
 
 ====================== STATS ======================
 

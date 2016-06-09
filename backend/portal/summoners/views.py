@@ -2,12 +2,14 @@ from django.contrib.auth import hashers
 from django.core import serializers
 from django.shortcuts import render
 from portal.errors import friend_already_listed
+from portal.errors import friend_equals_user
 from portal.errors import internal_processing_error
 from portal.errors import invalid_credentials
 from portal.errors import invalid_request_format
 from portal.errors import invalid_riot_response
 from portal.errors import summoner_already_registered
 from portal.errors import summoner_does_not_exist
+from portal.riotapi import format_key
 from portal.riotapi import get_summoner
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -22,25 +24,29 @@ class AddFriend(APIView):
         # extract data
         data = request.data
         region = data.get("region")
-        summoner_key = data.get("summoner_key")
+        user_key = data.get("user_key")
         friend_key = data.get("friend_key")
 
         # validate
-        if None in (region, summoner_key, friend_key):
+        if None in (region, user_key, friend_key):
             return Response(invalid_request_format)
 
-        summoner_key = format_key(summoner_key)
+        user_key = format_key(user_key)
         friend_key = format_key(friend_key)
+
+        # make sure friend is not the user
+        if user_key == friend_key:
+            return Response(friend_equals_user)
 
         # get the users summoner object
         try:
-            summoner = Summoner.objects.get(region = region, key = summoner_key)
+            user = Summoner.objects.get(region = region, key = user_key)
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
 
         # check if friend is already listed
-        if summoner.friends is not None:
-            friends = summoner.friends.split(",")
+        if user.friends is not None:
+            friends = user.friends.split(",")
             for friend in friends:
                 if friend == friend_key:
                     return Response(friend_already_listed)
@@ -61,14 +67,11 @@ class AddFriend(APIView):
                                     profile_icon = friend.get("profileIconId"))
 
         # add the friends key to the users friend list
-        if summoner.friends is not None:
-            summoner.friends += friend_key + ","
-        else:
-            summoner.friends = friend_key + ","
-        summoner.save()
+        user.friends += friend_key + ","
+        user.save()
 
         # return the users updated summoner object
-        return Response(SummonerSerializer(summoner).data)
+        return Response(SummonerSerializer(user).data)
 
 class GetSummoners(APIView):
     def post(self, request, format=None):
@@ -88,6 +91,9 @@ class GetSummoners(APIView):
                 summoners.append(Summoner.objects.get(region = region, key = format_key(key)))
             except Summoner.DoesNotExist:
                 return Response(summoner_does_not_exist)
+
+        # remove duplicates
+        summoners = set(summoners)
 
         # return the summoner objects
         return Response(SummonerSerializer(summoners, many=True).data)
@@ -168,9 +174,37 @@ class RegisterUser(APIView):
             return Response(serializer.data)
         return Response(internal_processing_error)
 
-# remove white spaces and make all lowercase
-def format_key(key):
-    return(key.replace(" ", "").lower())
+class RemoveFriend(APIView):
+    def post(Self, request, format=None):
+        # extract data
+        data = request.data
+        region = data.get("region")
+        user_key = data.get("user_key")
+        friend_key = data.get("friend_key")
+
+        # validate
+        if None in (region, user_key, friend_key):
+            return Response(invalid_request_format)
+
+        user_key = format_key(user_key)
+        friend_key = format_key(friend_key)
+
+        # make sure friend is not the user
+        if user_key == friend_key:
+            return Response(friend_equals_user)
+
+        # get the users summoner object
+        try:
+            user = Summoner.objects.get(region = region, key = user_key)
+        except Summoner.DoesNotExist:
+            return Response(summoner_does_not_exist)
+
+        # remove the friends key from the users friend list
+        user.friends = user.friends.replace(friend_key + ",", "")
+        user.save()
+
+        # return the users updated summoner object
+        return Response(SummonerSerializer(user).data)
     
 
 
