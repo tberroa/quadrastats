@@ -22,4 +22,4 @@ class SummonerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop("user")
         user = User.objects.create(**user_data)
-        return Summoner.objects.create(user=user, **validated_data)
+        return Summoner.objects.create(user = user, **validated_data)

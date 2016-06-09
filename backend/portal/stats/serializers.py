@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from summoners.serializers import SummonerSerializer
 
 from .models import Match

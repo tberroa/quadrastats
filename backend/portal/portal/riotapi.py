@@ -5,7 +5,7 @@ from time import sleep
 
 from .key import riot_api_key
 
-def match_list(region, summoner_id):
+def get_match_list(region, summoner_id):
     # construct url
     queue = "TEAM_BUILDER_DRAFT_RANKED_5x5"
     season = "SEASON2016"
@@ -22,7 +22,7 @@ def match_list(region, summoner_id):
     # return response
     return (r.status_code, json.loads(r.text))
 
-def match_detail(region, match_id):
+def get_match_detail(region, match_id):
     # construct url
     url = "https://" + region + ".api.pvp.net/api/lol/" + region \
         + "/v2.2/match/" + str(match_id) \
@@ -34,6 +34,22 @@ def match_detail(region, match_id):
 
     # return response
     return (r.status_code, json.loads(r.text))
+
+def get_summoner(region, key):
+    # ensure key has proper format
+    key = key.replace(" ", "").lower()
+
+    # construct url
+    url = "https://" + region + ".api.pvp.net/api/lol/" + region \
+        + "/v1.4/summoner/by-name/" + key \
+        + "?api_key=" + riot_api_key
+
+    # make get request
+    sleep(1.1)
+    r = requests.get(url)
+
+    # return response
+    return (r.status_code, json.loads(r.text).get(key))
 
 
 

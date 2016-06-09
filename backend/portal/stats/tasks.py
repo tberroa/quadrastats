@@ -1,15 +1,14 @@
 from __future__ import absolute_import
 
 from celery import shared_task 
-
+from portal.riotapi import get_match_detail
+from porta.riotapi import get_match_list
 from summoners.models import Summoner
 
 from .models import ChampionStats
 from .models import Match
 from .models import MatchStats
 from .models import SeasonStats
-from .riotapi import match_detail
-from .riotapi import match_list
 
 # The riot api can potentially return None for any field.
 # Due to this, many None checks are in place.
@@ -25,7 +24,7 @@ def update_all():
 
 def update_one(summoner):
     # get the summoners match list
-    val = match_list(summoner.region, summoner.summoner_id)
+    val = get_match_list(summoner.region, summoner.summoner_id)
     if val[0] != 200:
         # error occurrred, return http response
         return (False, val)
@@ -57,7 +56,7 @@ def update_one(summoner):
             MatchStats.objects.get(summoner = summoner, match = match_o)
         except MatchStats.DoesNotExist:
             # get match detail
-            val = match_detail(summoner.region, match_id)
+            val = get_match_detail(summoner.region, match_id)
             if val[0] != 200:
                 # error occurred, return http response
                 return (False, val)

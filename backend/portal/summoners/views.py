@@ -1,13 +1,16 @@
 from django.contrib.auth import hashers
 from django.core import serializers
 from django.shortcuts import render
-
+from portal.errors import internal_processing_error
+from portal.errors import invalid_request_format
+from portal.errors import invalid_riot_response
+from portal.errors import summoner_already_registered
+from portal.riotapi import get_summoner
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Summoner
 from .models import User
-from .riotapi import get_summoner
 from .serializers import SummonerSerializer
 from .serializers import UserSerializer
 
@@ -21,14 +24,14 @@ class RegisterUser(APIView):
 
         # validate
         if None in (user, region, key):
-            return Response("error")
+            return Response(invalid_request_format)
 
         key = format_key(key)
 
         # hash password
         password = user.get("password")
         if password is None:
-            return Response("error")
+            return Response(invalid_request_format)
         password = hashers.make_password(password)
 
         # check if the summoner object exists
@@ -36,24 +39,25 @@ class RegisterUser(APIView):
             summoner = Summoner.objects.get(region = region, key = key)
             # check if the user object exists
             if summoner.user is None:
-                # no user attached to this summoner object, create one
                 summoner.user = User.objects.create(password = password)
                 summoner.save()
-                # return the summoner object
                 return Response(SummonerSerializer(summoner).data)
             else:
-                # this summoner already has a registered user, return message
-                return Response("this user is already registered")
-        # summoner object needs to be created
+                return Response(summoner_already_registered)
         except Summoner.DoesNotExist:
             pass
 
         # get more information on the summoner via riot
-        summoner = get_summoner(region, key)
+        val = get_summoner(region, key)
+        if val[0] != 200:
+            return Response(invalid_riot_response)
+        else:
+            summoner = val[1]
 
         # update the data before passing to serializer
         data.get("user").update({"password" : password})
-        data.update({"name" : summoner.get("name"), \
+        data.update({"key" : key, \
+                     "name" : summoner.get("name"), \
                      "summoner_id" : summoner.get("id"), \
                      "profile_icon" : summoner.get("profileIconId")})
 
@@ -61,10 +65,8 @@ class RegisterUser(APIView):
         serializer = SummonerSerializer(data = data)
         if serializer.is_valid():
             serializer.save()
-            # return the summoner object
             return Response(serializer.data)
-        # validation error occured during serialization, return error
-        return Response("error")
+        return Response(internal_processing_error)
 
 class LoginUser(APIView):
     def post(self, request, format=None):
@@ -142,7 +144,7 @@ def ensure_summoner_exists(region, key):
         pass
 
     # get the summoners information via riot
-    summoner = get_summoner(region, key)
+    summoner = get_summoner(region, key)[1]
 
     # use gathered info to create summoner in database
     summoner = Summoner.objects.create(region = region, \

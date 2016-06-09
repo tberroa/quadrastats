@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.db import models
 
 class User(models.Model):
@@ -12,7 +11,7 @@ class User(models.Model):
         super(User, self).save(*args, **kwargs)
 
 class Summoner(models.Model):
-    user = models.OneToOneField(User, null = True, blank = True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null = True, blank = True, on_delete = models.CASCADE)
     region = models.CharField(max_length = 128)
     key = models.CharField(max_length = 128)
     name = models.CharField(max_length = 128)

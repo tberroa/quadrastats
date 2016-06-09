@@ -1,5 +1,4 @@
 from django.db import models
-
 from summoners.models import Summoner
 
 class SeasonStats(models.Model):
@@ -45,8 +44,8 @@ class MatchStats(models.Model):
         verbose_name_plural = 'Match Stats'
 	
     # identity info
-    summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
-    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    summoner = models.ForeignKey(Summoner, on_delete = models.CASCADE)
+    match = models.ForeignKey(Match, on_delete = models.CASCADE)
     champion = models.IntegerField(default = 0)
     lane = models.CharField(max_length = 128)
     role = models.CharField(max_length = 128)

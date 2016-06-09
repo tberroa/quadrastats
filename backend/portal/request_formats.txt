@@ -9,9 +9,23 @@ Request:
         "password" : "123456"
     },
     "region" : "na",
-    "key" : "frosiph"
+    "key" : "aCruZ"
 }
 Response:
+{
+    "id": 4,
+    "user": {
+        "id": 4,
+        "created": "2016-06-09T00:07:42.928026"
+    },
+    "region": "na",
+    "key": "acruz",
+    "name": "Acruz",
+    "summoner_id": 40323106,
+    "profile_icon": 1021,
+    "friends": null,
+    "modified": "2016-06-09T00:07:42.953708"
+}
 
 ---------------------------------------------------
 
