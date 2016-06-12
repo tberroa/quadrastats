@@ -29,7 +29,7 @@ public class SignInIntentService extends IntentService {
         UserInfo userInfo = new UserInfo();
 
         // get the basic non stylized name
-        String summonerName = userInfo.getBasicName(this);
+        String summonerName = userInfo.getKey(this);
 
         // query riot api for summoner dto
         List<String> name = new ArrayList<>();
@@ -40,7 +40,7 @@ public class SignInIntentService extends IntentService {
             // save the summoner's id and profile icon id
             Summoner summoner = summoners.get(summonerName);
             userInfo.setId(this, summoner.id);
-            userInfo.setIconId(this, summoner.profileIconId);
+            userInfo.setIcon(this, summoner.profileIconId);
 
             // start api key service
             startService(new Intent(this, APIMonitorService.class));

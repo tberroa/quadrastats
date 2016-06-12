@@ -6,12 +6,12 @@ import android.content.SharedPreferences;
 
 public class UserInfo extends Application {
 
-    private final String IS_SIGNED_IN = "is_signed_in";
     private final String REGION = "region";
+    private final String KEY = "key";
+    private final String NAME = "name";
     private final String ID = "id";
-    private final String BASIC_NAME = "basic_name";
-    private final String STYLIZED_NAME = "stylized_name";
-    private final String ICON_ID = "user_icon_id";
+    private final String ICON = "icon";
+    private final String IS_SIGNED_IN = "is_signed_in";
 
     private SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences("user_info", MODE_PRIVATE);
@@ -21,20 +21,20 @@ public class UserInfo extends Application {
         return getSharedPreferences(context).getString(REGION, "");
     }
 
+    public String getKey(Context context) {
+        return getSharedPreferences(context).getString(KEY, "");
+    }
+
+    public String getName(Context context) {
+        return getSharedPreferences(context).getString(NAME, "");
+    }
+
     public long getId(Context context) {
         return getSharedPreferences(context).getLong(ID, 0);
     }
 
-    public int getIconId(Context context) {
-        return getSharedPreferences(context).getInt(ICON_ID, 0);
-    }
-
-    public String getBasicName(Context context) {
-        return getSharedPreferences(context).getString(BASIC_NAME, "");
-    }
-
-    public String getStylizedName(Context context) {
-        return getSharedPreferences(context).getString(STYLIZED_NAME, "");
+    public int getIcon(Context context) {
+        return getSharedPreferences(context).getInt(ICON, 0);
     }
 
     public Boolean isSignedIn(Context context) {
@@ -47,31 +47,31 @@ public class UserInfo extends Application {
         editor.apply();
     }
 
+    public void setKey(Context context, String key) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(KEY, key);
+        editor.apply();
+    }
+
+    public void setName(Context context, String name) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(NAME, name);
+        editor.apply();
+    }
+
     public void setId(Context context, long id) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putLong(ID, id);
         editor.apply();
     }
 
-    public void setIconId(Context context, int id) {
+    public void setIcon(Context context, int icon) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putInt(ICON_ID, id);
+        editor.putInt(ICON, icon);
         editor.apply();
     }
 
-    public void setBasicName(Context context, String name) {
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(BASIC_NAME, name);
-        editor.apply();
-    }
-
-    public void setStylizedName(Context context, String name) {
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(STYLIZED_NAME, name);
-        editor.apply();
-    }
-
-    public void setStatus(Context context, Boolean bool) {
+    public void setSignInStatus(Context context, Boolean bool) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putBoolean(IS_SIGNED_IN, bool);
         editor.apply();
@@ -79,10 +79,10 @@ public class UserInfo extends Application {
 
     public void clear(Context context) {
         setRegion(context, "");
-        setBasicName(context, "");
-        setStylizedName(context, "");
+        setKey(context, "");
+        setName(context, "");
         setId(context, 0);
-        setIconId(context, 0);
-        setStatus(context, false);
+        setIcon(context, 0);
+        setSignInStatus(context, false);
     }
 }

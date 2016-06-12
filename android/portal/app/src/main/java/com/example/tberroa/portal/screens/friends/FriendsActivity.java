@@ -138,7 +138,7 @@ public class FriendsActivity extends BaseActivity {
                             }
 
                             // check if the user entered themselves as a friend
-                            if (name.equals(new UserInfo().getStylizedName(FriendsActivity.this))) {
+                            if (name.equals(new UserInfo().getName(FriendsActivity.this))) {
                                 msg.arg1 = 4;
                                 handler.sendMessage(msg);
                                 return;

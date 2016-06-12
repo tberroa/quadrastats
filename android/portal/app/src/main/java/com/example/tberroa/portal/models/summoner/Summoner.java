@@ -10,12 +10,20 @@ import com.google.gson.annotations.Expose;
 public class Summoner extends Model {
 
     @Expose
+    @Column(name = "region")
+    public String region;
+
+    @Expose
+    @Column(name = "key")
+    public String key;
+
+    @Expose
     @Column(name = "name")
     public String name;
 
     @Expose
-    @Column(name = "riot_id")
-    public long riotId;
+    @Column(name = "summoner_id")
+    public long summonerId;
 
     @Expose
     @Column(name = "profile_icon")

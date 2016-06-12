@@ -18,7 +18,6 @@ public class LocalDB {
                 .executeSingle();
     }
 
-
     public void clearDatabase(Context context) {
         ActiveAndroid.dispose();
         context.deleteDatabase("Portal.db");

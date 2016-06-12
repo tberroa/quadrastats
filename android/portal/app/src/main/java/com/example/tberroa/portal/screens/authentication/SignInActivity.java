@@ -60,9 +60,9 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         // initialize summoner input fields
-        summonerName = (EditText) findViewById(R.id.summoner_name);
+        summonerName = (EditText) findViewById(R.id.key);
         password = (EditText) findViewById(R.id.password);
-        region = (Spinner) findViewById(R.id.region_spinner);
+        region = (Spinner) findViewById(R.id.region_select);
 
         // declare and initialize buttons
         signInButton = (Button) findViewById(R.id.sign_in);

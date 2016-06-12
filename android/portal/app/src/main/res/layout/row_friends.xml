@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/summoner_name"
+        android:id="@+id/key"
         android:layout_toEndOf="@id/summoner_icon"
         android:layout_marginStart="5dp"
         android:layout_centerVertical="true"

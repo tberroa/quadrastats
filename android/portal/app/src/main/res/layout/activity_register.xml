@@ -38,7 +38,7 @@
             android:textColor="@color/logo_slogan" />
 
         <EditText
-            android:id="@+id/summoner_name"
+            android:id="@+id/key"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/app_slogan"
@@ -53,7 +53,7 @@
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/summoner_name"
+            android:layout_below="@id/key"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"
@@ -74,7 +74,7 @@
             android:imeOptions="actionDone" />
 
         <Spinner
-            android:id="@+id/region_spinner"
+            android:id="@+id/region_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/confirm_password"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/password"
             android:layout_alignEnd="@id/password"
-            android:layout_below="@id/region_spinner"
+            android:layout_below="@id/region_select"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="35dp"
             android:text="@string/register_button" />
