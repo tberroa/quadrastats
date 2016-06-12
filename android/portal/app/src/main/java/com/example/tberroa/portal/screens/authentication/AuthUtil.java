@@ -17,13 +17,17 @@ public class AuthUtil {
     public static void signIn(final Context context, final Summoner summoner, final boolean inView) {
         UserInfo userInfo = new UserInfo();
 
+        // clear local database
+        new LocalDB().clearDatabase(context);
+
+        // clear old user info
+        userInfo.clear(context);
+
         // save user info
-        userInfo.setRegion(context, summoner.region);
-        userInfo.setKey(context, summoner.key);
-        userInfo.setName(context, summoner.name);
-        userInfo.setId(context, summoner.summonerId);
-        userInfo.setIcon(context, summoner.profileIcon);
         userInfo.setSignInStatus(context, true);
+
+        // save the user's summoner object locally
+        summoner.save();
 
         // start sign in intent service
         context.startService(new Intent(context, SignInIntentService.class));

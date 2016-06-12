@@ -1,7 +1,7 @@
 package com.example.tberroa.portal.screens.authentication;
 
 // Intermediate activity which occurs right after signing in. It's purpose
-// is to allow for the update service to get a head start.
+// is to allow for some initialization processing to occur.
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // go to activity_profile activity after 3 seconds have passed
+        // go to home activity after 3 seconds have passed
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
