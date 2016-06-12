@@ -30,12 +30,18 @@ import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    final private UserInfo userInfo = new UserInfo();
     private EditText keyField, passwordField, confirmPasswordField;
     private String region, key, password, codeString;
     private Spinner regionSelect;
     private Button registerButton;
     private boolean inView;
+
+    private final View.OnClickListener registerButtonListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            registerButton.setEnabled(false);
+            register();
+        }
+    };
 
     private final View.OnClickListener goToSignInButtonListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -43,13 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
             startActivity(intent);
             finish();
-        }
-    };
-
-    private final View.OnClickListener registerButtonListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            registerButton.setEnabled(false);
-            Register();
         }
     };
 
@@ -64,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // check if user is already signed in
-        if (userInfo.isSignedIn(this)) {
+        if (new UserInfo().isSignedIn(this)) {
             startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
             finish();
         }
@@ -88,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         regionSelect.setAdapter(adapter);
     }
 
-    private void Register() {
+    private void register() {
         key = keyField.getText().toString();
         password = passwordField.getText().toString();
         final String confirmPassword = confirmPasswordField.getText().toString();
@@ -96,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
         // make sure passwords match
         if (confirmPassword.equals(password)) {
             confirmPasswordField.setError(null);
-        } else {
+        } else { // display error
             confirmPasswordField.setError(getResources().getString(R.string.password_mismatch));
             registerButton.setEnabled(true);
             return;
@@ -106,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
         final int regionSelection = regionSelect.getSelectedItemPosition();
         if (regionSelection > 0) {
             region = AuthUtil.decodeRegion(regionSelection);
-        } else {
+        } else { // display error
             Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
             registerButton.setEnabled(true);
             return;
