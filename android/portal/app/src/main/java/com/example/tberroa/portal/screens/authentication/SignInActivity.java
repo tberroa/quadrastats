@@ -135,7 +135,7 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Void param) {
-            if (!postResponse.contains("Error")) {
+            if (!postResponse.contains("error")) {
                 // get the summoner object
                 Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
 
