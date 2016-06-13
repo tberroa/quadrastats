@@ -15,18 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.apimanager.APIMonitorService;
-import com.example.tberroa.portal.apimanager.APIUsageInfo;
 import com.example.tberroa.portal.screens.profile.ProfileActivity;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.stats.recent.RecentActivity;
 import com.example.tberroa.portal.screens.stats.season.SeasonActivity;
 import com.example.tberroa.portal.screens.stats.withfriends.WithFriendsActivity;
-import com.example.tberroa.portal.updater.UpdateJobInfo;
-import com.example.tberroa.portal.updater.UpdateService;
-import com.example.tberroa.portal.updater.UpdateUtil;
 import com.squareup.picasso.Picasso;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -60,29 +54,19 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         View headerLayout = navigationView.getHeaderView(0);
 
-        // get the summoner's profile icon id and stylized name
+        // get the user's profile icon and name
         UserInfo userInfo = new UserInfo();
-        int profileIconId = userInfo.getIconId(this);
-        String stylizedName = userInfo.getStylizedName(this);
+        int profileIcon = userInfo.getIcon(this);
+        String name = userInfo.getName(this);
 
-        // display the stylized summoner name
-        TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.summoner_name);
-        summonerNameView.setText(stylizedName);
+        // display the user's name
+        TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.key);
+        summonerNameView.setText(name);
 
         // display the profile icon
         ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
-        String url = ScreenUtil.constructIconURL(profileIconId);
+        String url = ScreenUtil.constructIconURL(profileIcon);
         Picasso.with(this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
-
-        // boot up services in the case they were killed unexpectedly
-        if (UpdateUtil.serviceNotRunning(this, UpdateService.class)) {
-            new UpdateJobInfo().setRunning(this, false);
-            startService(new Intent(this, UpdateService.class));
-        }
-        if (UpdateUtil.serviceNotRunning(this, APIMonitorService.class)) {
-            new APIUsageInfo().reset(this);
-            startService(new Intent(this, APIMonitorService.class));
-        }
     }
 
     @Override
@@ -114,9 +98,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        Intent recentGames = new Intent(BaseActivity.this, RecentActivity.class);
-                        recentGames.putExtra("queue", Params.DYNAMIC_QUEUE);
-                        startActivity(recentGames);
+                        startActivity(new Intent(BaseActivity.this, RecentActivity.class));
                         finish();
                     }
                 });
@@ -126,9 +108,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        Intent seasonTotals = new Intent(BaseActivity.this, SeasonActivity.class);
-                        seasonTotals.putExtra("queue", Params.DYNAMIC_QUEUE);
-                        startActivity(seasonTotals);
+                        startActivity(new Intent(BaseActivity.this, SeasonActivity.class));
                         finish();
                     }
                 });
@@ -138,9 +118,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        Intent withFriends = new Intent(BaseActivity.this, WithFriendsActivity.class);
-                        withFriends.putExtra("queue", Params.DYNAMIC_QUEUE);
-                        startActivity(withFriends);
+                        startActivity(new Intent(BaseActivity.this, WithFriendsActivity.class));
                         finish();
                     }
                 });

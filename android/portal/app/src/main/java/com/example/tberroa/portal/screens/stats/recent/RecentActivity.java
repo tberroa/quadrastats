@@ -161,7 +161,7 @@ public class RecentActivity extends BaseActivity {
                     public void run() {
                         // create map of summoner ids
                         Map<String, Long> ids = new LinkedHashMap<>();
-                        ids.put(userInfo.getStylizedName(RecentActivity.this), userSummonerId);
+                        ids.put(userInfo.getName(RecentActivity.this), userSummonerId);
                         for (Summoner friend : friendsList.getFriends()) {
                            ids.put(friend.name, friend.id);
                         }

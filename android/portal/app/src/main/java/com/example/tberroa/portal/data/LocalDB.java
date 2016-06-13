@@ -18,6 +18,12 @@ public class LocalDB {
                 .executeSingle();
     }
 
+    public Summoner getSummonerById(long id) {
+        return new Select()
+                .from(Summoner.class)
+                .where("summoner_id = ?", id)
+                .executeSingle();
+    }
 
     public void clearDatabase(Context context) {
         ActiveAndroid.dispose();

@@ -41,7 +41,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
 
             // initialize views
             viewHolder.summonerIcon = (ImageView) convertView.findViewById(R.id.summoner_icon);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.summoner_name);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.key);
 
             // set tag
             convertView.setTag(viewHolder);

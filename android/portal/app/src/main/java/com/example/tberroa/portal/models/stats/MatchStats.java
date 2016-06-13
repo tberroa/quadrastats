@@ -11,16 +11,20 @@ public class MatchStats extends Model {
 
     // identity info
     @Expose
-    @Column(name = "summoner_region")
-    public long summonerRegion;
+    @Column(name = "region")
+    public long region;
 
     @Expose
-    @Column(name = "summoner_riot_id")
-    public long summonerRiotId;
+    @Column(name = "summoner_id")
+    public long summonerId;
 
     @Expose
-    @Column(name = "match_riot_id")
-    public long matchRiotId;
+    @Column(name = "match_id")
+    public long matchId;
+
+    @Expose
+    @Column(name = "match_duration")
+    public long matchDuration;
 
     @Expose
     @Column(name = "champion")
@@ -34,7 +38,7 @@ public class MatchStats extends Model {
     @Column(name = "role")
     public long role;
 
-    // stats
+    // raw stats
     @Expose
     @Column(name = "assists")
     public long assists;
@@ -250,6 +254,36 @@ public class MatchStats extends Model {
     @Expose
     @Column(name = "winner")
     public boolean winner;
+
+    // calculated stats
+
+    @Expose
+    @Column(name = "cs_at_ten")
+    public boolean csAtTen;
+
+    @Expose
+    @Column(name = "cs_diff_at_ten")
+    public boolean csDiffAtTen;
+
+    @Expose
+    @Column(name = "cs_per_min")
+    public boolean csPerMin;
+
+    @Expose
+    @Column(name = "dmg_per_min")
+    public boolean dmgPerMin;
+
+    @Expose
+    @Column(name = "gold_per_min")
+    public boolean goldPerMin;
+
+    @Expose
+    @Column(name = "kda")
+    public boolean kda;
+
+    @Expose
+    @Column(name = "kill_participation")
+    public boolean kill_participation;
 
     public MatchStats() {
         super();

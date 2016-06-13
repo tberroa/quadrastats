@@ -15,13 +15,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.models.ModelUtil;
+import com.example.tberroa.portal.models.requests.ReqSignIn;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.network.Http;
-import com.example.tberroa.portal.network.NetworkUtil;
 
 public class SignInActivity extends AppCompatActivity {
+
+    private EditText keyField, passwordField;
+    private String region, key, password;
+    private Spinner regionSelect;
+    private Button signInButton;
+    private boolean inView;
+
+    private final OnClickListener signInButtonListener = new OnClickListener() {
+        public void onClick(View v) {
+            signInButton.setEnabled(false);
+            signIn();
+        }
+    };
 
     private final OnClickListener goToRegisterButtonListener = new OnClickListener() {
         public void onClick(View v) {
@@ -31,17 +46,6 @@ public class SignInActivity extends AppCompatActivity {
             finish();
         }
     };
-    private EditText summonerName, password;
-    private Spinner region;
-    private Button signInButton;
-    private TextView goToRegisterButton;
-    private final OnClickListener signInButtonListener = new OnClickListener() {
-        public void onClick(View v) {
-            signInButton.setEnabled(false);
-            signIn();
-        }
-    };
-    private boolean inView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,67 +57,45 @@ public class SignInActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         }
 
-        // check if summoner is already signed in
+        // check if user is already signed in
         if (new UserInfo().isSignedIn(this)) {
             startActivity(new Intent(SignInActivity.this, HomeActivity.class));
             finish();
         }
 
-        // initialize summoner input fields
-        summonerName = (EditText) findViewById(R.id.summoner_name);
-        password = (EditText) findViewById(R.id.password);
-        region = (Spinner) findViewById(R.id.region_spinner);
+        // initialize input fields
+        keyField = (EditText) findViewById(R.id.key);
+        passwordField = (EditText) findViewById(R.id.password);
+        regionSelect = (Spinner) findViewById(R.id.region_select);
 
-        // declare and initialize buttons
+        // initialize buttons
         signInButton = (Button) findViewById(R.id.sign_in);
         signInButton.setOnClickListener(signInButtonListener);
-        goToRegisterButton = (TextView) findViewById(R.id.register);
+        TextView goToRegisterButton = (TextView) findViewById(R.id.register);
         goToRegisterButton.setOnClickListener(goToRegisterButtonListener);
 
-        // set up region spinner
+        // initialize region select spinner
         ArrayAdapter<CharSequence> adapter;
         adapter = ArrayAdapter.createFromResource(this, R.array.select_region, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        region.setAdapter(adapter);
+        regionSelect.setAdapter(adapter);
     }
 
-    // validation process
     private void signIn() {
-        String enteredSummonerName = summonerName.getText().toString();
-        String enteredPassword = password.getText().toString();
+        key = keyField.getText().toString();
+        password = passwordField.getText().toString();
 
-        Bundle enteredInfo = new Bundle();
-        enteredInfo.putString("summoner_name", enteredSummonerName);
-        enteredInfo.putString("password", enteredPassword);
-
-        String response = AuthUtil.validate(enteredInfo);
-        if (response.matches("")) {
-            if (NetworkUtil.isInternetAvailable(this)) {
-                int regionSelection = region.getSelectedItemPosition();
-                if (regionSelection > 0) {
-                    goToRegisterButton.setEnabled(false);
-                    new AttemptSignIn().execute();
-                } else {
-                    Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
-                    signInButton.setEnabled(true);
-                }
-            } else {
-                Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
-                signInButton.setEnabled(true);
-            }
-        } else {
-            if (response.contains("summoner_name")) {
-                summonerName.setError(getResources().getString(R.string.summoner_name_format));
-            } else {
-                summonerName.setError(null);
-            }
-            if (response.contains("pass_word")) {
-                password.setError(getResources().getString(R.string.password_format));
-            } else {
-                password.setError(null);
-            }
+        // make sure a region is selected
+        final int regionSelection = regionSelect.getSelectedItemPosition();
+        if (regionSelection > 0) {
+            region = AuthUtil.decodeRegion(regionSelection);
+        } else { // display error
+            Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
             signInButton.setEnabled(true);
+            return;
         }
+
+        new AttemptSignIn().execute();
     }
 
     @Override
@@ -128,48 +110,39 @@ public class SignInActivity extends AppCompatActivity {
         inView = false;
     }
 
-    // attempts to sign in via http
+    // makes sign in request to backend via http
     class AttemptSignIn extends AsyncTask<Void, Void, Void> {
 
-        private String summonerName, password, region, keyValuePairs, postResponse;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            summonerName = SignInActivity.this.summonerName.getText().toString();
-            password = SignInActivity.this.password.getText().toString();
-            region = AuthUtil.decodeRegion(SignInActivity.this.region.getSelectedItemPosition());
-            keyValuePairs = "app_name=" + summonerName + "&password=" + password + "&region=" + region;
-        }
+        private String postResponse;
 
         @Override
         protected Void doInBackground(Void... params) {
+            // create the request object
+            ReqSignIn request = new ReqSignIn();
+            request.region = region;
+            request.key = key;
+            request.password = password;
+
+            // make the request
             try {
-                String url = Params.SIGN_IN_URL;
-                postResponse = new Http().post(url, keyValuePairs);
+                String url = Params.BURL_SIGN_IN;
+                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqSignIn.class));
             } catch (java.io.IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());
             }
 
-            // testing the backend here
-            try {
-                String url = Params.URL_SUMMONERS_GET;
-                String body = "[{\"region\" : \"na\",\"name\" : \"Frosiph\"},{\"region\" : \"na\",\"name\" : \"Frosiiph\"}]";
-                new Http().postJson(url, body);
-            } catch (java.io.IOException e) {
-                Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity/backend test: " + e.getMessage());
-            }
             return null;
         }
 
         protected void onPostExecute(Void param) {
-            if (!postResponse.contains("Error")) {
+            if (!postResponse.contains("error")) {
+                // get the summoner object
+                Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
+
                 // sign in
-                Log.d(Params.TAG_DEBUG, "@SignInActivity: successful sign in");
-                AuthUtil.signIn(SignInActivity.this, summonerName, postResponse, region, inView);
+                AuthUtil.signIn(SignInActivity.this, summoner, inView);
             } else { // display error
                 Toast.makeText(SignInActivity.this, postResponse, Toast.LENGTH_SHORT).show();
-                goToRegisterButton.setEnabled(true);
                 signInButton.setEnabled(true);
             }
         }

@@ -5,7 +5,6 @@ import android.graphics.Point;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
 
 public class ScreenUtil {
@@ -27,18 +26,6 @@ public class ScreenUtil {
 
     static public int getScreenHeight(Context context) {
         return getScreenDimensions(context).y;
-    }
-
-    static public String stylizeQueue(Context context, String queue) {
-        switch (queue) {
-            case Params.DYNAMIC_QUEUE:
-                return context.getString(R.string.dynamic_queue);
-            case Params.SOLO_QUEUE:
-                return context.getString(R.string.solo_queue);
-            case Params.TEAM_3:
-                return context.getString(R.string.team_3);
-        }
-        return null;
     }
 
     static public String constructIconURL(int iconId) {
