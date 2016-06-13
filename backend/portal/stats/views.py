@@ -29,7 +29,7 @@ class GetMatchStats(APIView):
                 summoner = Summoner.objects.get(key = format_key(key))
             except Summoner.DoesNotExist:
                 return Response(summoner_does_not_exist)
-            query = MatchStats.objects.filter(summoner = summoner)
+            query = MatchStats.objects.filter(summoner_id = summoner.summoner_id)
             if champion is not None and champion != 0:
                 query = query.filter(champion = champion)
             if lane is not None:
