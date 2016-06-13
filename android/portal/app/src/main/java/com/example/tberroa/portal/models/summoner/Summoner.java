@@ -23,11 +23,11 @@ public class Summoner extends Model {
 
     @Expose
     @Column(name = "summoner_id")
-    public long summonerId;
+    public long summoner_id;
 
     @Expose
     @Column(name = "profile_icon")
-    public int profileIcon;
+    public int profile_icon;
 
     @Expose
     @Column(name = "friends")

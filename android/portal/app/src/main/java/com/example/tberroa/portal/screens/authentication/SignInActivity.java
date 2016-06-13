@@ -64,7 +64,7 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         // initialize input fields
-        keyField = (EditText) findViewById(R.id.key);
+        keyField = (EditText) findViewById(R.id.name);
         passwordField = (EditText) findViewById(R.id.password);
         regionSelect = (Spinner) findViewById(R.id.region_select);
 
@@ -134,8 +134,9 @@ public class SignInActivity extends AppCompatActivity {
             return null;
         }
 
+        @Override
         protected void onPostExecute(Void param) {
-            if (!postResponse.contains("error")) {
+            if (postResponse.contains("summoner_id")) {
                 // get the summoner object
                 Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
 

@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.stats.recent.RecentActivity;
@@ -39,23 +38,16 @@ public class HomeActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 switch (position) {
                     case 0:
-                        Intent manageFriends = new Intent(HomeActivity.this, FriendsActivity.class);
-                        startActivity(manageFriends);
+                        startActivity(new Intent(HomeActivity.this, FriendsActivity.class));
                         break;
                     case 1:
-                        Intent recentGames = new Intent(HomeActivity.this, RecentActivity.class);
-                        recentGames.putExtra("queue", Params.DYNAMIC_QUEUE);
-                        startActivity(recentGames);
+                        startActivity(new Intent(HomeActivity.this, RecentActivity.class));
                         break;
                     case 2:
-                        Intent seasonTotals = new Intent(HomeActivity.this, SeasonActivity.class);
-                        seasonTotals.putExtra("queue", Params.DYNAMIC_QUEUE);
-                        startActivity(seasonTotals);
+                        startActivity(new Intent(HomeActivity.this, SeasonActivity.class));
                         break;
                     case 3:
-                        Intent withFriends = new Intent(HomeActivity.this,WithFriendsActivity.class);
-                        withFriends.putExtra("queue", Params.DYNAMIC_QUEUE);
-                        startActivity(withFriends);
+                        startActivity(new Intent(HomeActivity.this,WithFriendsActivity.class));
                         break;
                 }
             }

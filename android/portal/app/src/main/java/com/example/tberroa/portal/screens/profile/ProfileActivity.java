@@ -1,7 +1,5 @@
 package com.example.tberroa.portal.screens.profile;
 
-// the signed in summoners profile
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;

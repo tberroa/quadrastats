@@ -1,17 +1,17 @@
 package com.example.tberroa.portal.screens.friends;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,160 +20,41 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.models.ModelUtil;
+import com.example.tberroa.portal.models.requests.ReqFriend;
+import com.example.tberroa.portal.models.summoner.Summoner;
+import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.screens.authentication.AuthUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
-import com.example.tberroa.portal.models.summoner.Summoner;
-import com.example.tberroa.portal.network.NetworkUtil;
-import com.example.tberroa.portal.updater.UpdateUtil;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class FriendsActivity extends BaseActivity {
 
-    private FloatingActionButton addFriend;
-    private boolean inView;
-    // handler used to respond to summoner name validation which occurs in separate thread
-    @SuppressLint("HandlerLeak")
-    private final Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            int flag = msg.arg1;
-            switch (flag) {
-                case 6: // all checks passed, reload activity
-                    if (inView) {
-                        Intent intent = new Intent(FriendsActivity.this, FriendsActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
-                        startActivity(intent);
-                        finish();
-                    }
-                    break;
-                case 5: // this friend already exists
-                    if (inView) {
-                        String toastMsg = getString(R.string.friend_already_exists);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case 4: // user entered themselves as a friend
-                    if (inView) {
-                        String toastMsg = getString(R.string.cant_add_yourself_as_friend);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case 3: // entered name is invalid
-                    if (inView) {
-                        String toastMsg = getString(R.string.invalid_summoner_name);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case 2: // internet not available
-                    if (inView) {
-                        String toastMsg = getString(R.string.internet_not_available);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case 1: // friend limit reached
-                    if (inView) {
-                        String toastMsg = getString(R.string.friend_limit_reached);
-                        Toast.makeText(FriendsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
-            addFriend.setEnabled(true);
-        }
-    };
+    private FriendsAdapter friendsAdapter;
+    private List<Summoner> friends;
+    private boolean add;
+
     private final View.OnClickListener addFriendListener = new View.OnClickListener() {
         public void onClick(View v) {
-            addFriend.setEnabled(false);
-
-            final EditText friendsName = new EditText(FriendsActivity.this);
-            friendsName.setSingleLine();
+            // construct and display a dialog containing a single text field where the user enters
+            // the name of the summoner they want to add to their friends list
+            final EditText friendKeyField = new EditText(FriendsActivity.this);
+            friendKeyField.setSingleLine();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(FriendsActivity.this);
             builder.setTitle(R.string.add_friend);
-            builder.setView(friendsName);
+            builder.setView(friendKeyField);
             builder.setCancelable(true);
             builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    // validate user input in a separate thread
-                    new Thread(new Runnable() {
-                        public void run() {
-                            Message msg = new Message();
-
-                            // check if the user has hit the friend limit
-                            FriendsList friendsList = new LocalDB().getFriendsList();
-                            if (friendsList != null && friendsList.getFriends().size() == Params.MAX_FRIENDS) {
-                                msg.arg1 = 1;
-                                handler.sendMessage(msg);
-                                return;
-                            }
-
-                            // check if internet is not available
-                            if (!NetworkUtil.isInternetAvailable(FriendsActivity.this)) {
-                                msg.arg1 = 2;
-                                handler.sendMessage(msg);
-                                return;
-                            }
-
-                            // query riot for the summoner dto corresponding to the entered name
-                            String enteredName = friendsName.getText().toString().toLowerCase();
-                            Map<String, Summoner> friendDtoMap;
-                            friendDtoMap = AuthUtil.validateName(FriendsActivity.this, enteredName);
-
-                            // check if the entered name was a valid summoner name
-                            if (friendDtoMap == null) {
-                                msg.arg1 = 3;
-                                handler.sendMessage(msg);
-                                return;
-                            }
-
-                            // initialize the friend dto and get the stylized name of the friend
-                            Summoner friendDto = new Summoner();
-                            String name = "";
-                            for (Map.Entry<String, Summoner> friend : friendDtoMap.entrySet()) {
-                                friendDto = friend.getValue();
-                                name = friend.getValue().name;
-                            }
-
-                            // check if the user entered themselves as a friend
-                            if (name.equals(new UserInfo().getName(FriendsActivity.this))) {
-                                msg.arg1 = 4;
-                                handler.sendMessage(msg);
-                                return;
-                            }
-
-                            // check if this friend has already been entered
-                            if (friendsList != null) {
-                                for (Summoner friend : friendsList.getFriends()) {
-                                    if (friend != null && name.equals(friend.name)) {
-                                        msg.arg1 = 5;
-                                        handler.sendMessage(msg);
-                                        return;
-                                    }
-                                }
-                            }
-
-                            // if all checks were passed successfully, add the friend and save them locally
-                            UpdateUtil.addPlayerToProfileMap(FriendsActivity.this, name);
-                            if (friendsList == null) { // first friend
-                                friendsList = new FriendsList();
-                            }
-                            friendsList.friends = new ArrayList<>();
-                            friendsList.friends.add(friendDto);
-                            friendsList.cascadeSave();
-
-                            msg.arg1 = 6;
-                            handler.sendMessage(msg);
-                        }
-                    }).start();
-                }
-            });
-            builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    addFriend.setEnabled(true);
+                    String friendKey = friendKeyField.getText().toString();
+                    add = true;
+                    new AttemptFriendOp().execute(friendKey);
                 }
             });
             builder.show();
@@ -192,7 +73,7 @@ public class FriendsActivity extends BaseActivity {
 
         // initialize toolbar
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.friends);
+            getSupportActionBar().setTitle(R.string.manage_friends);
         }
 
         // initialize back button
@@ -211,33 +92,50 @@ public class FriendsActivity extends BaseActivity {
         });
 
         // initialize add friend button
-        addFriend = (FloatingActionButton) findViewById(R.id.add_friend);
+        final FloatingActionButton addFriend = (FloatingActionButton) findViewById(R.id.add_friend);
         addFriend.setOnClickListener(addFriendListener);
 
-        // get friends dto
-        FriendsList friendsList = new LocalDB().getFriendsList();
+        // get user's friends
+        LocalDB localDB = new LocalDB();
+        Summoner user = localDB.getSummonerById(new UserInfo().getId(this));
 
-        if (friendsList != null && !friendsList.getFriends().isEmpty()) {
-            // set list view
-            ListView listView = (ListView) findViewById(R.id.list_view);
-            FriendsAdapter friendsAdapter = new FriendsAdapter(this, friendsList.getFriends());
-            listView.setAdapter(friendsAdapter);
-        } else {
-            TextView noFriends = (TextView) findViewById(R.id.no_friends);
-            noFriends.setVisibility(View.VISIBLE);
+        List<String> keys = new ArrayList<>(Arrays.asList(user.friends.split(",")));
+        friends = localDB.getSummonersByKeys(keys);
+
+        // initialize list view
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        friendsAdapter = new FriendsAdapter(this, friends);
+        listView.setAdapter(friendsAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
+                // construct and display a dialog asking the user if they want to remove the friend
+                final AlertDialog.Builder builder = new AlertDialog.Builder(FriendsActivity.this);
+                builder.setTitle(R.string.remove_friend);
+                builder.setMessage(R.string.remove_friend_message);
+                builder.setCancelable(true);
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        add = false;
+                        new AttemptFriendOp().execute(friends.get(position).key);
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        if (user.friends.equals("")) {
+            { // user has no friends
+                TextView noFriends = (TextView) findViewById(R.id.no_friends);
+                noFriends.setVisibility(View.VISIBLE);
+            }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        inView = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        inView = false;
     }
 
     @Override
@@ -248,6 +146,92 @@ public class FriendsActivity extends BaseActivity {
         } else {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
+        }
+    }
+
+    // makes add/remove friend request to backend via http
+    class AttemptFriendOp extends AsyncTask<String, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(String... params) {
+            // create the request object
+            Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(FriendsActivity.this));
+            ReqFriend request = new ReqFriend();
+            request.region = user.region;
+            request.user_key = user.key;
+            request.friend_key = params[0];
+
+            // make the request
+            String postResponse = "";
+            try {
+                String url;
+                if (add) {
+                    url = Params.BURL_ADD_FRIEND;
+                } else {
+                    url = Params.BURL_REMOVE_FRIEND;
+                }
+                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqFriend.class));
+            } catch (java.io.IOException e) {
+                Log.e(Params.TAG_EXCEPTIONS, "@FriendsActivity: " + e.getMessage());
+            }
+            String[] values = new String[2];
+            values[0] = params[0];
+            values[1] = postResponse;
+            return values;
+        }
+
+        @Override
+        protected void onPostExecute(String[] values) {
+            String friendKey = values[0];
+            String postResponse = values[1];
+
+            if (postResponse.contains("summoner_id")) {
+                if (add) {
+                    // save the new friend summoner object
+                    Summoner friend = ModelUtil.fromJson(postResponse, Summoner.class);
+                    friend.save();
+
+                    // add the new friend to the users local summoner object friend list
+                    Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(FriendsActivity.this));
+                    user.friends += friend.key + ",";
+                    user.save();
+
+                    // update list view
+                    friends.add(friend);
+                    friendsAdapter.notifyDataSetChanged();
+
+                    // make sure the no friends message is gone
+                    TextView noFriends = (TextView) findViewById(R.id.no_friends);
+                    noFriends.setVisibility(View.GONE);
+
+                } else { // remove friend operation
+                    // get the users updates friend list from the returned object
+                    Summoner updatedUser = ModelUtil.fromJson(postResponse, Summoner.class);
+                    Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(FriendsActivity.this));
+                    user.friends = updatedUser.friends;
+                    // profile icon might have updated too
+                    user.profile_icon = updatedUser.profile_icon;
+                    user.save();
+
+                    // update list view
+                    for (Iterator<Summoner> iterator = friends.listIterator(); iterator.hasNext(); ) {
+                        String key = iterator.next().key;
+                        if (key.equals(friendKey)) {
+                            iterator.remove();
+                        }
+                    }
+                    friendsAdapter.notifyDataSetChanged();
+
+                    // check if friends list is empty
+                    if (friends.isEmpty()){
+                        TextView noFriends = (TextView) findViewById(R.id.no_friends);
+                        noFriends.setVisibility(View.VISIBLE);
+                    }
+                }
+
+            } else { // display error
+                Toast.makeText(FriendsActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

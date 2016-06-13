@@ -11,12 +11,8 @@ public class Params {
     static public final String BURL_MATCH_STATS = "http://52.90.34.48/stats/match.json";
 
     // user limits
-    static public final int MAX_FRIENDS = 7;
+    static public final int MAX_FRIENDS = 8;
     static public final int MAX_MATCHES = 10;
-
-    // broadcast signals
-    static public final String SIGN_IN_SUCCESS = "sign_in_success";
-    static public final String SIGN_IN_FAILED = "sign_in_failed";
 
     // intents
     static public final String RELOAD = "-80";
@@ -28,12 +24,10 @@ public class Params {
     // network
     static public final String POST_MEDIA_TYPE = "application/json; charset=utf-8";
 
-    // response codes
-    static public final String HTTP_GET_FAILED = "-50";
-
     // riot static api
-    static public final String DATA_DRAGON_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/";
-    static public final String PROFILE_ICON_URL = "6.4.1/img/profileicon/";
+    static public final String RURL_DATA_DRAGON = "http://ddragon.leagueoflegends.com/cdn/";
+    static public final String RURL_PROFILE_ICON = "6.4.1/img/profileicon/";
+
     private Params() {
     }
 }

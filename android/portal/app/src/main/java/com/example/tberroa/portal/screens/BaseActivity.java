@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.LocalDB;
+import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.profile.ProfileActivity;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
@@ -55,16 +57,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         View headerLayout = navigationView.getHeaderView(0);
 
         // get the user's profile icon and name
-        UserInfo userInfo = new UserInfo();
-        int profileIcon = userInfo.getIcon(this);
-        String name = userInfo.getName(this);
+        Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(this));
+        int profileIcon = user.profile_icon;
+        String name = user.name;
 
         // display the user's name
-        TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.key);
+        TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.name);
         summonerNameView.setText(name);
 
         // display the profile icon
-        ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.summoner_icon);
+        ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.profile_icon);
         String url = ScreenUtil.constructIconURL(profileIcon);
         Picasso.with(this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
     }

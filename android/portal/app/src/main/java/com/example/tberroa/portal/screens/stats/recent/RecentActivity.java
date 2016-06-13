@@ -1,16 +1,15 @@
 package com.example.tberroa.portal.screens.stats.recent;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,46 +19,37 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.models.match.ParticipantTimeline;
+import com.example.tberroa.portal.models.ModelUtil;
+import com.example.tberroa.portal.models.requests.ReqMatchStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
+import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.screens.BaseActivity;
-import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.models.stats.MatchStats;
-import com.example.tberroa.portal.screens.stats.SelectQueueDialog;
-import com.example.tberroa.portal.updater.UpdateJobListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
 public class RecentActivity extends BaseActivity {
 
-    private UpdateJobListener updateJobListener;
-    private TabLayout tabLayout;
-    private GridLayout legendLayout;
-    private LinearLayout busyCalculating;
-    private Map<String, Bundle> plotData;
-    private ArrayList<String> names;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-        final UserInfo userInfo = new UserInfo();
-
-        // get queue
-        final String queue = getIntent().getStringExtra("queue");
 
         // no animation if starting activity as a reload
         if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
@@ -68,7 +58,7 @@ public class RecentActivity extends BaseActivity {
 
         // set toolbar
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(ScreenUtil.stylizeQueue(this, queue));
+            getSupportActionBar().setTitle(R.string.recent_games);
         }
 
         // set back button
@@ -86,240 +76,47 @@ public class RecentActivity extends BaseActivity {
             }
         });
 
-        // set tab layout
-        tabLayout = (TabLayout) findViewById(R.id.tab_bar);
-        tabLayout.addTab(tabLayout.newTab().setText("Income"));
-        tabLayout.addTab(tabLayout.newTab().setText("Offense"));
-        tabLayout.addTab(tabLayout.newTab().setText("Utility"));
-        tabLayout.addTab(tabLayout.newTab().setText("Vision"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.setVisibility(View.GONE);
-
-        // get legend layout
-        legendLayout = (GridLayout) findViewById(R.id.legend);
-        legendLayout.setVisibility(View.GONE);
-
         // get message layouts and views
-        TextView genMessage = (TextView) findViewById(R.id.gen_message);
-        LinearLayout genMessageLayout = (LinearLayout) findViewById(R.id.layout_gen_message);
-        genMessageLayout.setVisibility(View.GONE);
         LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
         noFriendsLayout.setVisibility(View.GONE);
-        LinearLayout busyUpdatingLayout = (LinearLayout) findViewById(R.id.layout_busy_updating);
-        busyUpdatingLayout.setVisibility(View.GONE);
-        busyCalculating = (LinearLayout) findViewById(R.id.layout_busy_calculating);
-        busyCalculating.setVisibility(View.GONE);
 
-        // get users summoner id
-        final long userSummonerId = userInfo.getId(this);
+        // get user
+        LocalDB localDB = new LocalDB();
+        Summoner user = localDB.getSummonerById(new UserInfo().getId(this));
 
-        // get friends
-        final FriendsList friendsList = new LocalDB().getFriendsList();
+        // initialize string of keys
+        String keys = user.key + ",";
 
-        // check conditions
-        int condition = RecentUtil.checkConditions(this, userSummonerId, queue, friendsList);
-
-        switch (condition) {
-            case 100: // code 100: summoner has no matches for this queue
-                genMessageLayout.setVisibility(View.VISIBLE);
-                genMessage.setText(getString(R.string.no_matches));
-                break;
-
-            case 200: // code 200: update job is currently running
-                busyUpdatingLayout.setVisibility(View.VISIBLE);
-
-                // initialize broadcast receiver to handle completion of update job
-                updateJobListener = new UpdateJobListener();
-                registerReceiver(updateJobListener, updateJobListener.getFilter());
-                break;
-
-            case 300: // code 300: summoner has no friends to compare matches to
-                noFriendsLayout.setVisibility(View.VISIBLE);
-
-                // initialize button to allow user navigate to friends activity
-                Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
-                goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(RecentActivity.this, FriendsActivity.class));
-                        finish();
-                    }
-                });
-                break;
-
-            case 400: // code 400: none of the summoners friends have any matches for this queue
-                genMessageLayout.setVisibility(View.VISIBLE);
-                genMessage.setText(getString(R.string.no_friend_matches));
-                break;
-
-            case 500: // code 500: no issues, conditions are good for showing data
-                busyCalculating.setVisibility(View.VISIBLE);
-
-                // process data on separate thread
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // create map of summoner ids
-                        Map<String, Long> ids = new LinkedHashMap<>();
-                        ids.put(userInfo.getName(RecentActivity.this), userSummonerId);
-                        for (Summoner friend : friendsList.getFriends()) {
-                           ids.put(friend.name, friend.id);
-                        }
-
-                        // get match durations
-                        Map<String, long[]> matchDurations;
-                        matchDurations = RecentUtil.getMatchDuration(ids, queue);
-
-                        // get participant timeline
-                        Map<String, List<ParticipantTimeline>> timeline;
-                        timeline = RecentUtil.getTimeline(ids, queue);
-
-                        // get participant stats
-                        Map<String, List<MatchStats>> stats;
-                        stats = RecentUtil.getStats(ids, queue);
-
-                        // create list of plot titles
-                        ArrayList<String> incomePlotTitles = new ArrayList<>();
-                        ArrayList<String> offensePlotTitles = new ArrayList<>();
-                        ArrayList<String> utilityPlotTitles = new ArrayList<>();
-                        ArrayList<String> visionPlotTitles = new ArrayList<>();
-                        incomePlotTitles.add("Gold Per Minute");
-                        incomePlotTitles.add("CS At 10");
-                        incomePlotTitles.add("CS Differential At 10");
-                        offensePlotTitles.add("Damage Per Minute");
-                        offensePlotTitles.add("Kills");
-                        offensePlotTitles.add("Killing Sprees");
-                        offensePlotTitles.add("Largest Killing Spree");
-                        utilityPlotTitles.add("Assists");
-                        utilityPlotTitles.add("Damage Taken Per Death");
-                        visionPlotTitles.add("Vision Wards Bought");
-                        visionPlotTitles.add("Wards Placed");
-                        visionPlotTitles.add("Wards Killed");
-
-                        // get timeline stats
-                        List<Map<String, double[]>> gameTimelineStats = new ArrayList<>();
-                        gameTimelineStats.add(RecentUtil.goldPerMin(matchDurations, stats));
-                        gameTimelineStats.add(RecentUtil.csAtTen(timeline));
-                        gameTimelineStats.add(RecentUtil.csDiffAtTen(timeline));
-
-                        // get game stats
-                        List<Map<String, long[]>> gameStatsLong = new ArrayList<>();
-                        gameStatsLong.add(RecentUtil.dmgPerMin(matchDurations, stats));
-                        gameStatsLong.add(RecentUtil.kills(stats));
-                        gameStatsLong.add(RecentUtil.killingSprees(stats));
-                        gameStatsLong.add(RecentUtil.largestKillingSpree(stats));
-                        gameStatsLong.add(RecentUtil.assists(stats));
-                        gameStatsLong.add(RecentUtil.damageTakenPerDeath(stats));
-                        gameStatsLong.add(RecentUtil.visionWardsBought(stats));
-                        gameStatsLong.add(RecentUtil.wardsPlaced(stats));
-                        gameStatsLong.add(RecentUtil.wardsKilled(stats));
-
-                        // create number arrays
-                        List<Map<String, Number[]>> gameTimelineNumber = new ArrayList<>();
-                        for (int i=0; i<gameTimelineStats.size(); i++){
-                            gameTimelineNumber.add(RecentUtil.createNumberArrayD(gameTimelineStats.get(i)));
-                        }
-                        List<Map<String, Number[]>> gameStatsNumber = new ArrayList<>();
-                        for (int i=0; i<gameStatsLong.size(); i++){
-                            gameStatsNumber.add(RecentUtil.createNumberArrayL(gameStatsLong.get(i)));
-                        }
-
-                        // separate by type (0-6 offense, 7-8 utility, 9-11 vision)
-                        List<Map<String, Number[]>> offensePlotData = gameStatsNumber.subList(0,4);
-                        List<Map<String, Number[]>> utilityPlotData = gameStatsNumber.subList(4,6);
-                        List<Map<String, Number[]>> visionPlotData = gameStatsNumber.subList(6,9);
-
-                        // serialize the plot data
-                        Gson gson = new Gson();
-                        Type plotDataType = new TypeToken<List<Map<String, Number[]>>>(){}.getType();
-                        String incomePlotDataJson = gson.toJson(gameTimelineNumber, plotDataType);
-                        String offensePlotDataJson = gson.toJson(offensePlotData, plotDataType);
-                        String utilityPlotDataJson = gson.toJson(utilityPlotData, plotDataType);
-                        String visionPlotDataJson = gson.toJson(visionPlotData, plotDataType);
-
-                        // create list of names
-                        names = new ArrayList<>(gameStatsNumber.get(0).keySet());
-
-                        // create tab bundles
-                        Bundle incomeTabBundle = new Bundle();
-                        incomeTabBundle.putString("plot_data", incomePlotDataJson);
-                        incomeTabBundle.putStringArrayList("plot_titles", incomePlotTitles);
-
-                        Bundle offenseTabBundle = new Bundle();
-                        offenseTabBundle.putString("plot_data", offensePlotDataJson);
-                        offenseTabBundle.putStringArrayList("plot_titles", offensePlotTitles);
-
-                        Bundle utilityTabBundle = new Bundle();
-                        utilityTabBundle.putString("plot_data", utilityPlotDataJson);
-                        utilityTabBundle.putStringArrayList("plot_titles", utilityPlotTitles);
-
-                        Bundle visionTabBundle = new Bundle();
-                        visionTabBundle.putString("plot_data", visionPlotDataJson);
-                        visionTabBundle.putStringArrayList("plot_titles", visionPlotTitles);
-
-                        // add bundles to plot data
-                        plotData = new LinkedHashMap<>();
-                        plotData.put("income", incomeTabBundle);
-                        plotData.put("offense", offenseTabBundle);
-                        plotData.put("utility", utilityTabBundle);
-                        plotData.put("vision", visionTabBundle);
-
-                        Message msg = new Message();
-                        msg.arg1 = 75;
-                        handler.sendMessage(msg);
-                    }
-                }).start();
-                break;
+        // get user's friends
+        if (!user.friends.equals("")) {
+            keys += user.friends;
+        } else { // user has no friends
+            noFriendsLayout.setVisibility(View.VISIBLE);
+            Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
+            goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(RecentActivity.this, FriendsActivity.class));
+                    finish();
+                }
+            });
+            return;
         }
+
+        // get the match stats for user and friends
+        new RequestMatchStats().execute(keys);
     }
 
-    // handler used to populate views once background thread is done processing
-    @SuppressLint("HandlerLeak")
-    private final Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.arg1 == 75) {
-                busyCalculating.setVisibility(View.GONE);
-                tabLayout.setVisibility(View.VISIBLE);
-
-                // populate the activity
-                createLegend();
-                int numberOfTabs = tabLayout.getTabCount();
-                FragmentManager fM = getSupportFragmentManager();
-                RecentPagerAdapter recentPagerAdapter = new RecentPagerAdapter(fM, numberOfTabs, plotData);
-                final ViewPager viewPager = (ViewPager) findViewById(R.id.stats_view_pager);
-                viewPager.setAdapter(recentPagerAdapter);
-                viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-                tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                    @Override
-                    public void onTabSelected(TabLayout.Tab tab) {
-                        viewPager.setCurrentItem(tab.getPosition());
-                    }
-
-                    @Override
-                    public void onTabUnselected(TabLayout.Tab tab) {
-                    }
-
-                    @Override
-                    public void onTabReselected(TabLayout.Tab tab) {
-                    }
-                });
-            }
-        }
-    };
-
-    private void createLegend() {
+    private void createLegend(LinkedHashSet<String> names) {
         List<TextView> nameViews = getLegendNames();
         List<ImageView> colorViews = getLegendColors();
-        legendLayout.setVisibility(View.VISIBLE);
 
-        // then friends
         int i = 0;
         for (String name : names) {
             nameViews.get(i).setText(name);
             nameViews.get(i).setVisibility(View.VISIBLE);
 
-            switch (i) {
+            switch (i % 8) {
                 case 0:
                     colorViews.get(i).setImageResource(R.color.series_blue);
                     break;
@@ -348,6 +145,9 @@ public class RecentActivity extends BaseActivity {
             colorViews.get(i).setVisibility(View.VISIBLE);
             i++;
         }
+
+        GridLayout legendLayout = (GridLayout) findViewById(R.id.legend);
+        legendLayout.setVisibility(View.VISIBLE);
     }
 
     private List<TextView> getLegendNames() {
@@ -418,6 +218,18 @@ public class RecentActivity extends BaseActivity {
         return colorViews;
     }
 
+    void updatePlotMap(Map<String, List<Number>> map, String name, Number stat) {
+        List<Number> data = map.get(name);
+        if (data == null) {
+            data = new ArrayList<>();
+            data.add(stat);
+            map.put(name, data);
+        } else {
+            data.add(stat);
+            map.put(name, data);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -428,25 +240,7 @@ public class RecentActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.select_queue:
-
-                SelectQueueDialog selectQueueDialog = new SelectQueueDialog(this);
-                selectQueueDialog.setCancelable(true);
-                selectQueueDialog.show();
-
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (updateJobListener != null) {
-            unregisterReceiver(updateJobListener);
-        }
+        return true;
     }
 
     @Override
@@ -457,6 +251,195 @@ public class RecentActivity extends BaseActivity {
         } else {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
+        }
+    }
+
+    class RequestMatchStats extends AsyncTask<String, Void, Void> {
+
+        private String postResponse;
+
+        @Override
+        protected Void doInBackground(String... params) {
+            // create the request object
+            List<String> keys = new ArrayList<>(Arrays.asList(params[0].split(",")));
+            ReqMatchStats request = new ReqMatchStats();
+            request.keys = keys;
+
+            // debugging
+            Log.e(Params.TAG_EXCEPTIONS, "@RecentActivity: request is " + ModelUtil.toJson(request, ReqMatchStats.class));
+
+            // make the request
+            try {
+                String url = Params.BURL_MATCH_STATS;
+                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqMatchStats.class));
+            } catch (java.io.IOException e) {
+                Log.e(Params.TAG_EXCEPTIONS, "@RecentActivity: " + e.getMessage());
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void param) {
+            if (postResponse.contains("champ_level")) {
+                // After receiving the raw data, this is where the data is organized to be presented using
+                // the Android Plot library. Data will be organized by summoner and by plot. One map object
+                // corresponds to one plot.
+
+                // declare set of summoner names (used for the legend)
+                LinkedHashSet<String> names = new LinkedHashSet<>();
+
+                // get the match stats objects
+                Type type =  new TypeToken<List<MatchStats>>() {}.getType();
+                List<MatchStats> matchStatsList = ModelUtil.fromJsonList(postResponse, type);
+
+                // declare the map for each plot
+                Map<String, List<Number>> csAtTen = new HashMap<>();
+                Map<String, List<Number>> csDiffAtTen = new HashMap<>();
+                Map<String, List<Number>> csPerMin = new HashMap<>();
+                Map<String, List<Number>> goldPerMin = new HashMap<>();
+
+                Map<String, List<Number>> dmgPerMin = new HashMap<>();
+                Map<String, List<Number>> kills = new HashMap<>();
+
+                Map<String, List<Number>> kda = new HashMap<>();
+                Map<String, List<Number>> killParticipation = new HashMap<>();
+                Map<String, List<Number>> ccDealt = new HashMap<>();
+
+                Map<String, List<Number>> visionWardsBought = new HashMap<>();
+                Map<String, List<Number>> wardsPlaced = new HashMap<>();
+                Map<String, List<Number>> wardsKilled = new HashMap<>();
+
+                // populate the map for each stat
+                for (MatchStats matchStats : matchStatsList) {
+                    String summoner = matchStats.summoner_name;
+                    names.add(summoner);
+
+                    updatePlotMap(csAtTen, summoner, matchStats.cs_at_ten);
+                    updatePlotMap(csDiffAtTen, summoner, matchStats.cs_diff_at_ten);
+                    updatePlotMap(csPerMin, summoner, matchStats.cs_per_min);
+                    updatePlotMap(goldPerMin, summoner, matchStats.gold_per_min);
+
+                    updatePlotMap(dmgPerMin, summoner, matchStats.dmg_per_min);
+                    updatePlotMap(kills, summoner, matchStats.kills);
+
+                    updatePlotMap(kda, summoner, matchStats.kda);
+                    updatePlotMap(killParticipation, summoner, matchStats.kill_participation);
+                    updatePlotMap(ccDealt, summoner, matchStats.total_time_crowd_control_dealt);
+
+                    updatePlotMap(visionWardsBought, summoner, matchStats.vision_wards_bought_in_game);
+                    updatePlotMap(wardsPlaced, summoner, matchStats.wards_placed);
+                    updatePlotMap(wardsKilled, summoner, matchStats.wards_killed);
+                }
+
+                // combine the different maps by tab
+                List<Map<String, List<Number>>> incomePlots = new ArrayList<>();
+                incomePlots.add(csAtTen);
+                incomePlots.add(csDiffAtTen);
+                incomePlots.add(csPerMin);
+                incomePlots.add(goldPerMin);
+
+                List<Map<String, List<Number>>> offensePlots = new ArrayList<>();
+                offensePlots.add(dmgPerMin);
+                offensePlots.add(kills);
+
+                List<Map<String, List<Number>>> utilityPlots = new ArrayList<>();
+                utilityPlots.add(kda);
+                utilityPlots.add(killParticipation);
+                utilityPlots.add(ccDealt);
+
+                List<Map<String, List<Number>>> visionPlots = new ArrayList<>();
+                visionPlots.add(visionWardsBought);
+                visionPlots.add(wardsPlaced);
+                visionPlots.add(wardsKilled);
+
+                // create list of plot titles
+                ArrayList<String> incomePlotTitles = new ArrayList<>();
+                ArrayList<String> offensePlotTitles = new ArrayList<>();
+                ArrayList<String> utilityPlotTitles = new ArrayList<>();
+                ArrayList<String> visionPlotTitles = new ArrayList<>();
+
+                incomePlotTitles.add("CS At 10");
+                incomePlotTitles.add("CS Differential At 10");
+                incomePlotTitles.add("CS Per Minute");
+                incomePlotTitles.add("Gold Per Minute");
+
+                offensePlotTitles.add("Kills");
+                offensePlotTitles.add("Damage Per Minute");
+
+                utilityPlotTitles.add("KDA");
+                utilityPlotTitles.add("Kill Participation");
+                utilityPlotTitles.add("Duration of CC Dealt");
+
+                visionPlotTitles.add("Vision Wards Bought");
+                visionPlotTitles.add("Wards Placed");
+                visionPlotTitles.add("Wards Killed");
+
+                // serialize the plot data
+                Gson gson = new Gson();
+                Type plotType = new TypeToken<List<Map<String, List<Number>>>>() {}.getType();
+                String incomePlotsJson = gson.toJson(incomePlots, plotType);
+                String offensePlotsJson = gson.toJson(offensePlots, plotType);
+                String utilityPlotsJson = gson.toJson(utilityPlots, plotType);
+                String visionPlotsJson = gson.toJson(visionPlots, plotType);
+
+                // create tab bundles
+                Bundle incomeTabBundle = new Bundle();
+                incomeTabBundle.putString("plot_data", incomePlotsJson);
+                incomeTabBundle.putStringArrayList("plot_titles", incomePlotTitles);
+
+                Bundle offenseTabBundle = new Bundle();
+                offenseTabBundle.putString("plot_data", offensePlotsJson);
+                offenseTabBundle.putStringArrayList("plot_titles", offensePlotTitles);
+
+                Bundle utilityTabBundle = new Bundle();
+                utilityTabBundle.putString("plot_data", utilityPlotsJson);
+                utilityTabBundle.putStringArrayList("plot_titles", utilityPlotTitles);
+
+                Bundle visionTabBundle = new Bundle();
+                visionTabBundle.putString("plot_data", visionPlotsJson);
+                visionTabBundle.putStringArrayList("plot_titles", visionPlotTitles);
+
+                // add bundles to plot data
+                Map<String, Bundle> plotData = new HashMap<>();
+                plotData.put("income", incomeTabBundle);
+                plotData.put("offense", offenseTabBundle);
+                plotData.put("utility", utilityTabBundle);
+                plotData.put("vision", visionTabBundle);
+
+                // populate the activity
+                createLegend(names);
+
+                TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
+                tabLayout.addTab(tabLayout.newTab().setText("Income"));
+                tabLayout.addTab(tabLayout.newTab().setText("Offense"));
+                tabLayout.addTab(tabLayout.newTab().setText("Utility"));
+                tabLayout.addTab(tabLayout.newTab().setText("Vision"));
+                tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+                int numberOfTabs = tabLayout.getTabCount();
+                FragmentManager fragManager = getSupportFragmentManager();
+                RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fragManager, numberOfTabs, plotData);
+                final ViewPager viewPager = (ViewPager) findViewById(R.id.stats_view_pager);
+                viewPager.setAdapter(pagerAdapter);
+                viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+                tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        viewPager.setCurrentItem(tab.getPosition());
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                    }
+                });
+            } else { // display error
+                Toast.makeText(RecentActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

@@ -38,7 +38,7 @@
             android:textColor="@color/logo_slogan" />
 
         <EditText
-            android:id="@+id/key"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/app_slogan"
@@ -53,7 +53,7 @@
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/key"
+            android:layout_below="@id/name"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"

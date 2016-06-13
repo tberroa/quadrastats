@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqRegister;
+import com.example.tberroa.portal.models.requests.User;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.data.Params;
@@ -69,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // initialize input fields
-        keyField = (EditText) findViewById(R.id.key);
+        keyField = (EditText) findViewById(R.id.name);
         passwordField = (EditText) findViewById(R.id.password);
         confirmPasswordField = (EditText) findViewById(R.id.confirm_password);
         regionSelect = (Spinner) findViewById(R.id.region_select);
@@ -166,6 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             // create the request object
             ReqRegister request = new ReqRegister();
+            request.user = new User();
             request.user.password = password;
             request.region = region;
             request.key = key;
@@ -182,8 +184,9 @@ public class RegisterActivity extends AppCompatActivity {
             return null;
         }
 
+        @Override
         protected void onPostExecute(Void param) {
-            if (!postResponse.contains("error")) {
+            if (postResponse.contains("summoner_id")) {
                 // get the summoner object
                 Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
 

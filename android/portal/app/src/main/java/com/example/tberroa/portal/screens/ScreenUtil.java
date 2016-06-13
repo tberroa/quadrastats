@@ -29,6 +29,6 @@ public class ScreenUtil {
     }
 
     static public String constructIconURL(int iconId) {
-        return Params.DATA_DRAGON_BASE_URL + Params.PROFILE_ICON_URL + iconId + ".png";
+        return Params.RURL_DATA_DRAGON + Params.RURL_PROFILE_ICON + iconId + ".png";
     }
 }

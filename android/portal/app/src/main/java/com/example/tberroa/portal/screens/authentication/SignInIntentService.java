@@ -9,10 +9,11 @@ import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqGetSummoners;
-import com.example.tberroa.portal.models.requests.ReqSignIn;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.network.Http;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,10 +29,10 @@ public class SignInIntentService extends IntentService {
         // get the user's summoner object
         Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(this));
 
-        // get summoner objects for the friends
+        // get and save locally the summoner objects for the friends
         if (user.friends != null) {
             // turn the comma separated string into a java list
-            List<String> keys = new ArrayList<String>(Arrays.asList(user.friends.split(",")));
+            List<String> keys = new ArrayList<>(Arrays.asList(user.friends.split(",")));
 
             // create the request object
             ReqGetSummoners request = new ReqGetSummoners();
@@ -41,13 +42,21 @@ public class SignInIntentService extends IntentService {
             // make the request
             String postResponse = null;
             try {
-                String url = Params.BURL_SIGN_IN;
+                String url = Params.BURL_GET_SUMMONERS;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
             } catch (java.io.IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());
             }
 
-        }
+            // save
+            if (postResponse != null && postResponse.contains("summoner_id")){
+                Type type =  new TypeToken<List<Summoner>>() {}.getType();
+                List<Summoner> friends = ModelUtil.fromJsonList(postResponse, type);
 
+                for (Summoner friend : friends){
+                    friend.save();
+                }
+            }
+        }
     }
 }

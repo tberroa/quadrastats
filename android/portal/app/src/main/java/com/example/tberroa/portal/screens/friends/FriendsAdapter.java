@@ -18,7 +18,6 @@ import java.util.List;
 
 class FriendsAdapter extends ArrayAdapter<Summoner> {
 
-
     private final Context context;
     private final List<Summoner> friends;
 
@@ -40,8 +39,8 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
             convertView = inflater.inflate(R.layout.row_friends, parent, false);
 
             // initialize views
-            viewHolder.summonerIcon = (ImageView) convertView.findViewById(R.id.summoner_icon);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.key);
+            viewHolder.profileIcon = (ImageView) convertView.findViewById(R.id.profile_icon);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
 
             // set tag
             convertView.setTag(viewHolder);
@@ -50,8 +49,8 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         }
 
         // set the profile icon
-        String url = ScreenUtil.constructIconURL(friends.get(position).profileIconId);
-        Picasso.with(context).load(url).fit().transform(new CircleTransform()).into(viewHolder.summonerIcon);
+        String url = ScreenUtil.constructIconURL(friends.get(position).profile_icon);
+        Picasso.with(context).load(url).fit().transform(new CircleTransform()).into(viewHolder.profileIcon);
 
         // set name
         viewHolder.name.setText(friends.get(position).name);
@@ -60,7 +59,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
     }
 
     class ViewHolder {
-        ImageView summonerIcon;
+        ImageView profileIcon;
         TextView name;
     }
 }

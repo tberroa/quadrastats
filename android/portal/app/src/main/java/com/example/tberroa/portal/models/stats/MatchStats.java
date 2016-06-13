@@ -6,25 +6,29 @@ import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
-@Table(name = "ParticipantStats")
+@Table(name = "MatchStats")
 public class MatchStats extends Model {
 
     // identity info
     @Expose
     @Column(name = "region")
-    public long region;
+    public String region;
+
+    @Expose
+    @Column(name = "summoner_name")
+    public String summoner_name;
 
     @Expose
     @Column(name = "summoner_id")
-    public long summonerId;
+    public long summoner_id;
 
     @Expose
     @Column(name = "match_id")
-    public long matchId;
+    public long match_id;
 
     @Expose
     @Column(name = "match_duration")
-    public long matchDuration;
+    public long match_duration;
 
     @Expose
     @Column(name = "champion")
@@ -32,11 +36,11 @@ public class MatchStats extends Model {
 
     @Expose
     @Column(name = "lane")
-    public long lane;
+    public String lane;
 
     @Expose
     @Column(name = "role")
-    public long role;
+    public String role;
 
     // raw stats
     @Expose
@@ -45,7 +49,7 @@ public class MatchStats extends Model {
 
     @Expose
     @Column(name = "champ_level")
-    public long champLevel;
+    public long champ_level;
 
     @Expose
     @Column(name = "deaths")
@@ -53,43 +57,43 @@ public class MatchStats extends Model {
 
     @Expose
     @Column(name = "double_kills")
-    public long doubleKills;
+    public long double_kills;
 
     @Expose
     @Column(name = "first_blood_assist")
-    public boolean firstBloodAssist;
+    public boolean first_blood_assist;
 
     @Expose
     @Column(name = "first_blood_kill")
-    public boolean firstBloodKill;
+    public boolean first_blood_kill;
 
     @Expose
     @Column(name = "first_inhibitor_assist")
-    public boolean firstInhibitorAssist;
+    public boolean first_inhibitor_assist;
 
     @Expose
     @Column(name = "first_inhibitor_kill")
-    public boolean firstInhibitorKill;
+    public boolean first_inhibitor_kill;
 
     @Expose
     @Column(name = "first_tower_assist")
-    public boolean firstTowerAssist;
+    public boolean first_tower_assist;
 
     @Expose
     @Column(name = "first_tower_kill")
-    public boolean firstTowerKill;
+    public boolean first_tower_kill;
 
     @Expose
     @Column(name = "gold_earned")
-    public long goldEarned;
+    public long gold_earned;
 
     @Expose
     @Column(name = "gold_spent")
-    public long goldSpent;
+    public long gold_spent;
 
     @Expose
     @Column(name = "inhibitor_kills")
-    public long inhibitorKills;
+    public long inhibitor_kills;
 
     @Expose
     @Column(name = "item0")
@@ -121,7 +125,7 @@ public class MatchStats extends Model {
 
     @Expose
     @Column(name = "killing_sprees")
-    public long killingSprees;
+    public long killing_sprees;
 
     @Expose
     @Column(name = "kills")
@@ -129,161 +133,160 @@ public class MatchStats extends Model {
 
     @Expose
     @Column(name = "largest_critical_strike")
-    public long largestCriticalStrike;
+    public long largest_critical_strike;
 
     @Expose
     @Column(name = "largest_killing_spree")
-    public long largestKillingSpree;
+    public long largest_killing_spree;
 
     @Expose
     @Column(name = "largest_multi_kill")
-    public long largestMultiKill;
+    public long largest_multi_kill;
 
     @Expose
     @Column(name = "magic_damage_dealt")
-    public long magicDamageDealt;
+    public long magic_damage_dealt;
 
     @Expose
     @Column(name = "magic_damage_dealt_to_champions")
-    public long magicDamageDealtToChampions;
+    public long magic_damage_dealt_to_champions;
 
     @Expose
     @Column(name = "magic_damage_taken")
-    public long magicDamageTaken;
+    public long magic_damage_taken;
 
     @Expose
     @Column(name = "minions_killed")
-    public long minionsKilled;
+    public long minions_killed;
 
     @Expose
     @Column(name = "neutral_minions_killed")
-    public long neutralMinionsKilled;
+    public long neutral_minions_killed;
 
     @Expose
     @Column(name = "neutral_minions_killed_enemy_jungle")
-    public long neutralMinionsKilledEnemyJungle;
+    public long neutral_minions_killed_enemy_jungle;
 
     @Expose
     @Column(name = "neutral_minions_killed_team_jungle")
-    public long neutralMinionsKilledTeamJungle;
+    public long neutral_minions_killed_team_jungle;
 
     @Expose
     @Column(name = "penta_kills")
-    public long pentaKills;
+    public long penta_kills;
 
     @Expose
     @Column(name = "physical_damage_dealt")
-    public long physicalDamageDealt;
+    public long physical_damage_dealt;
 
     @Expose
     @Column(name = "physical_damage_dealt_to_champions")
-    public long physicalDamageDealtToChampions;
+    public long physical_damage_dealt_to_champions;
 
     @Expose
     @Column(name = "physical_damage_taken")
-    public long physicalDamageTaken;
+    public long physical_damage_taken;
 
     @Expose
     @Column(name = "quadra_kills")
-    public long quadraKills;
+    public long quadra_kills;
 
     @Expose
     @Column(name = "sight_wards_bought_in_game")
-    public long sightWardsBoughtInGame;
+    public long sight_wards_bought_in_game;
 
     @Expose
     @Column(name = "total_damage_dealt")
-    public long totalDamageDealt;
+    public long total_damage_dealt;
 
     @Expose
     @Column(name = "total_damage_dealt_to_champions")
-    public long totalDamageDealtToChampions;
+    public long total_damage_dealt_to_champions;
 
     @Expose
     @Column(name = "total_damage_taken")
-    public long totalDamageTaken;
+    public long total_damage_taken;
 
     @Expose
     @Column(name = "total_heal")
-    public long totalHeal;
+    public long total_heal;
 
     @Expose
     @Column(name = "total_time_crowd_control_dealt")
-    public long totalTimeCrowdControlDealt;
+    public long total_time_crowd_control_dealt;
 
     @Expose
     @Column(name = "total_units_healed")
-    public long totalUnitsHealed;
+    public long total_units_healed;
 
     @Expose
     @Column(name = "tower_kills")
-    public long towerKills;
+    public long tower_kills;
 
     @Expose
     @Column(name = "triple_kills")
-    public long tripleKills;
+    public long triple_kills;
 
     @Expose
     @Column(name = "true_damage_dealt")
-    public long trueDamageDealt;
+    public long true_damage_dealt;
 
     @Expose
     @Column(name = "true_damage_dealt_to_champions")
-    public long trueDamageDealtToChampions;
+    public long true_damage_dealt_to_champions;
 
     @Expose
     @Column(name = "true_damage_taken")
-    public long trueDamageTaken;
+    public long true_damage_taken;
 
     @Expose
     @Column(name = "unreal_kills")
-    public long unrealKills;
+    public long unreal_kills;
 
     @Expose
     @Column(name = "vision_wards_bought_in_game")
-    public long visionWardsBoughtInGame;
+    public long vision_wards_bought_in_game;
 
     @Expose
     @Column(name = "wards_killed")
-    public long wardsKilled;
+    public long wards_killed;
 
     @Expose
     @Column(name = "wards_placed")
-    public long wardsPlaced;
+    public long wards_placed;
 
     @Expose
     @Column(name = "winner")
     public boolean winner;
 
     // calculated stats
-
     @Expose
     @Column(name = "cs_at_ten")
-    public boolean csAtTen;
+    public float cs_at_ten;
 
     @Expose
     @Column(name = "cs_diff_at_ten")
-    public boolean csDiffAtTen;
+    public float cs_diff_at_ten;
 
     @Expose
     @Column(name = "cs_per_min")
-    public boolean csPerMin;
+    public float cs_per_min;
 
     @Expose
     @Column(name = "dmg_per_min")
-    public boolean dmgPerMin;
+    public float dmg_per_min;
 
     @Expose
     @Column(name = "gold_per_min")
-    public boolean goldPerMin;
+    public float gold_per_min;
 
     @Expose
     @Column(name = "kda")
-    public boolean kda;
+    public float kda;
 
     @Expose
     @Column(name = "kill_participation")
-    public boolean kill_participation;
+    public float kill_participation;
 
     public MatchStats() {
         super();

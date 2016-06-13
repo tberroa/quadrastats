@@ -20,37 +20,8 @@
             android:value="1"/>
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.example.tberroa.portal.models.summoner.FriendsList,
-            com.example.tberroa.portal.models.summoner.SummonerDto,
-            com.example.tberroa.portal.models.summoner.RunePagesDto,
-            com.example.tberroa.portal.models.summoner.RunePageDto,
-            com.example.tberroa.portal.models.summoner.RuneSlotDto,
-            com.example.tberroa.portal.models.summoner.MasteryPagesDto,
-            com.example.tberroa.portal.models.summoner.MasteryPageDto,
-            com.example.tberroa.portal.models.summoner.MasteryDto,
-            com.example.tberroa.portal.models.stats.RankedStatsDto,
-            com.example.tberroa.portal.models.stats.PlayerStatsSummaryListDto,
-            com.example.tberroa.portal.models.stats.PlayerStatsSummaryDto,
-            com.example.tberroa.portal.models.stats.ChampionsStatsDto,
-            com.example.tberroa.portal.models.stats.AggregatedStatsDto,
-            com.example.tberroa.portal.models.matchlist.MatchReference,
-            com.example.tberroa.portal.models.matchlist.MatchList,
-            com.example.tberroa.portal.models.match.Timeline,
-            com.example.tberroa.portal.models.match.Team,
-            com.example.tberroa.portal.models.match.Rune,
-            com.example.tberroa.portal.models.match.Position,
-            com.example.tberroa.portal.models.match.Player,
-            com.example.tberroa.portal.models.match.ParticipantTimelineData,
-            com.example.tberroa.portal.models.match.ParticipantTimeline,
-            com.example.tberroa.portal.models.match.ParticipantStats,
-            com.example.tberroa.portal.models.match.ParticipantIdentity,
-            com.example.tberroa.portal.models.match.ParticipantFrame,
-            com.example.tberroa.portal.models.match.Participant,
-            com.example.tberroa.portal.models.match.MatchDetail,
-            com.example.tberroa.portal.models.match.Mastery,
-            com.example.tberroa.portal.models.match.Frame,
-            com.example.tberroa.portal.models.match.Event,
-            com.example.tberroa.portal.models.match.BannedChampion"/>
+            android:value="com.example.tberroa.portal.models.summoner.Summoner,
+            com.example.tberroa.portal.models.stats.MatchStats"/>
 
         <activity
             android:name=".screens.authentication.SignInActivity"
@@ -90,8 +61,6 @@
             android:name=".screens.stats.withfriends.WithFriendsActivity"
             android:screenOrientation="portrait"/>
 
-        <service android:name=".apimanager.APIMonitorService"/>
-        <service android:name=".updater.UpdateService"/>
         <service
             android:name=".screens.authentication.SignInIntentService"
             android:exported="false">

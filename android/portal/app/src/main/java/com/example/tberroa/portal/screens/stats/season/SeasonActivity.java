@@ -10,7 +10,6 @@ import android.view.View;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.screens.BaseActivity;
-import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 
 public class SeasonActivity extends BaseActivity {
@@ -20,16 +19,13 @@ public class SeasonActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_season);
 
-        // get queue
-        final String queue = getIntent().getStringExtra("queue");
-
         // no animation if starting activity as a reload
         if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
             overridePendingTransition(0, 0);
         }
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(ScreenUtil.stylizeQueue(this, queue));
+            getSupportActionBar().setTitle(R.string.season_totals);
         }
 
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));

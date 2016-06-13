@@ -43,6 +43,7 @@
         about 5 seconds before pressing Done to allow for the Riot servers to update.
     </string>
     <string name="done">Done</string>
+    <string name="yes">Yes</string>
 
     <!-- navigation -->
     <string name="account">Account</string>
@@ -77,6 +78,10 @@
     <!-- element labels and titles -->
     <string name="add_friend">Add Friend</string>
     <string name="add_friends">Add Friends</string>
+    <string name="remove_friend">Remove Friend</string>
+    <string name="remove_friend_message">
+        Are you sure you want to remove this person from your friends list?
+    </string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
@@ -92,6 +97,6 @@
     <string name="drawer_close">Close Drawer</string>
     <string name="thumbnail">Image Thumbnail</string>
     <string name="thumbnail_label">Thumbnail Label</string>
-    <string name="thumbnail_summoner_icon">Summoner Icon Thumbnail</string>
+    <string name="thumbnail_summoner_icon">Profile Icon</string>
     <string name="series_color">Series color</string>
 </resources>
