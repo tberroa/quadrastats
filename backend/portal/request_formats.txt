@@ -7,22 +7,19 @@ Request:
 {
    "region" : "na",
    "user_key" : "acruz",
-   "friend_key" : "frosiph"
+   "friend_key" : "luciaron"
 }
 Response:
 {
-    "id": 4,
-    "user": {
-        "id": 4,
-        "created": "2016-06-09T00:07:42.928026"
-    },
+    "id": 14,
+    "user": null,
     "region": "na",
-    "key": "acruz",
-    "name": "Acruz",
-    "summoner_id": 40323106,
-    "profile_icon": 1021,
-    "friends": "frosiph,",
-    "modified": "2016-06-09T01:24:20.238527"
+    "key": "luciaron",
+    "name": "Luciaron",
+    "summoner_id": 21203379,
+    "profile_icon": 7,
+    "friends": "",
+    "modified": "2016-06-13T18:47:37.808690"
 }
 
 ---------------------------------------------------

@@ -6,7 +6,6 @@ from portal.riot_api import get_match_list
 from summoners.models import Summoner
 
 from .models import ChampionStats
-from .models import Match
 from .models import MatchStats
 from .models import SeasonStats
 
@@ -45,15 +44,9 @@ def update_one(summoner):
         if match_id is None:
             return (False, None)
 
-        # get match object, create new if required
-        try:
-            match_o = Match.objects.get(region = summoner.region, match_id = match_id)
-        except Match.DoesNotExist:
-            match_o = Match.objects.create(region = summoner.region, match_id = match_id)
-
         # record stats if required
         try:
-            MatchStats.objects.get(summoner = summoner, match = match_o)
+            MatchStats.objects.get(summoner_id = summoner.summoner_id, match_id = match_id)
         except MatchStats.DoesNotExist:
             # get match detail
             val = get_match_detail(summoner.region, match_id)
@@ -66,11 +59,6 @@ def update_one(summoner):
             # defensive check
             if detail is None:
                 return (False, None)
-
-            # update the match object
-            match_o.creation = detail.get("matchCreation")
-            match_o.duration = detail.get("matchDuration")
-            match_o.save()
 
             # get the participant identities
             identities = detail.get("participantIdentities")
@@ -196,9 +184,12 @@ def update_one(summoner):
             # everything looks good, time to create a new match stats object
             # important to remember: non critical stats can be None
             match_stats = MatchStats.objects.create( \
-                # identity info			
-                summoner = summoner, \
-                match = match_o, \
+                # identity info	
+                region = summoner.region, \
+                summoner_name = summoner.name, \
+                summoner_id = summoner.summoner_id, \
+                match_id = match_id, \
+                match_duration = match_duration, \
                 champion = champion, \
                 lane = lane, \
                 role = role, \

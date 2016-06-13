@@ -1,5 +1,4 @@
 from django.db import models
-from summoners.models import Summoner
 
 class ChampionStats(models.Model):
     class Meta:
@@ -14,25 +13,16 @@ class ChampionStats(models.Model):
     quadrakills = models.IntegerField()
     pentakills = models.IntegerField()
 
-class Match(models.Model):
-    class Meta:
-        verbose_name_plural = 'Matches'
-
-    region = models.CharField(max_length = 128)
-    match_id = models.BigIntegerField(default = 0)
-    creation = models.BigIntegerField(null = True, blank = True)
-    duration = models.BigIntegerField(null = True, blank = True)
-
-    def __str__(self):
-        return str(self.match_id)
-
 class MatchStats(models.Model):
     class Meta:
         verbose_name_plural = 'Match Stats'
 	
     # identity info
-    summoner = models.ForeignKey(Summoner, on_delete = models.CASCADE)
-    match = models.ForeignKey(Match, on_delete = models.CASCADE)
+    region = models.CharField(max_length = 128)
+    summoner_name = models.CharField(max_length = 128)
+    summoner_id = models.BigIntegerField(default = 0)
+    match_id = models.BigIntegerField(default = 0)
+    match_duration = models.BigIntegerField()
     champion = models.IntegerField(default = 0)
     lane = models.CharField(max_length = 128)
     role = models.CharField(max_length = 128)
@@ -103,7 +93,7 @@ class MatchStats(models.Model):
     kill_participation = models.FloatField(null = True, blank = True)
 	
     def __str__(self):
-        return self.summoner.region + "," + self.summoner.name + "," + str(self.match.match_id)
+        return self.region + "," + self.summoner_name + "," + str(self.match_id)
 
 class SeasonStats(models.Model):
     class Meta:

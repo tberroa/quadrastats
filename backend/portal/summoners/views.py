@@ -53,25 +53,25 @@ class AddFriend(APIView):
 
         # ensure a summoner object exists for the friend
         try:
-            Summoner.objects.get(region = region, key = friend_key)
+            friend_o = Summoner.objects.get(region = region, key = friend_key)
         except Summoner.DoesNotExist:
             val = get_summoner(region, friend_key)
             if val[0] != 200:
                 return Response(invalid_riot_response)
             else:
                 friend = val[1]
-            Summoner.objects.create(region = region, \
-                                    key = friend_key, \
-                                    name = friend.get("name"), \
-                                    summoner_id = friend.get("id"), \
-                                    profile_icon = friend.get("profileIconId"))
+                friend_o = Summoner.objects.create(region = region, \
+                                                   key = friend_key, \
+                                                   name = friend.get("name"), \
+                                                   summoner_id = friend.get("id"), \
+                                                   profile_icon = friend.get("profileIconId"))
 
         # add the friends key to the users friend list
         user.friends += friend_key + ","
         user.save()
 
-        # return the users updated summoner object
-        return Response(SummonerSerializer(user).data)
+        # return the friends summoner object
+        return Response(SummonerSerializer(friend_o).data)
 
 class GetSummoners(APIView):
     def post(self, request, format=None):
