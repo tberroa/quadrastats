@@ -213,6 +213,9 @@ public class FriendsActivity extends BaseActivity {
                     user.profile_icon = updatedUser.profile_icon;
                     user.save();
 
+                    // remove from local database
+                    new LocalDB().getSummonerByKey(friendKey).delete();
+
                     // update list view
                     for (Iterator<Summoner> iterator = friends.listIterator(); iterator.hasNext(); ) {
                         String key = iterator.next().key;

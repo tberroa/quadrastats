@@ -28,14 +28,18 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
 
     private final Context context;
     private final List<String> plotTitles;
-    private final List<Map<String, SimpleXYSeries>> plotData;
+    private final Map<String, List<SimpleXYSeries>> plotData;
     private final int numberOfPlots;
 
-    public RecentViewAdapter(Context context, List<String> plotTitles, List<Map<String, SimpleXYSeries>> plotData) {
+    public RecentViewAdapter(Context context, List<String> plotTitles, Map<String, List<SimpleXYSeries>> plotData) {
         this.context = context;
         this.plotTitles = plotTitles;
         this.plotData = plotData;
-        numberOfPlots = plotData.size();
+        if (!plotData.isEmpty()){
+            numberOfPlots = plotData.entrySet().iterator().next().getValue().size();
+        } else{
+            numberOfPlots = 0;
+        }
     }
 
     public class plotViewHolder extends RecyclerView.ViewHolder {
@@ -67,27 +71,30 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
     public void onBindViewHolder(plotViewHolder plotViewHolder, int i) {
         // set views
         plotViewHolder.plotTitle.setText(plotTitles.get(i));
-        createPlot(context, plotViewHolder.plot, plotData.get(i));
+        createPlot(context, plotViewHolder.plot, plotData, i);
 
         // make views visible
         plotViewHolder.plotTitle.setVisibility(View.VISIBLE);
         plotViewHolder.plot.setVisibility(View.VISIBLE);
     }
 
-    static public void createPlot(Context context, XYPlot plot, Map<String, SimpleXYSeries> plotData) {
+    static public void createPlot(Context context, XYPlot plot, Map<String, List<SimpleXYSeries>> plotData, int pos) {
         // initialize the min and max values of the data
         double min = 500000, max = 0;
 
         // iterate over each entry in the plot data map
         int i = 0;
-        for (Map.Entry<String, SimpleXYSeries> entry : plotData.entrySet()) {
+        for (Map.Entry<String, List<SimpleXYSeries>> entry : plotData.entrySet()) {
+            // get the correct series
+            SimpleXYSeries series = entry.getValue().get(pos);
+
             // update the min and max values as iteration occurs
-            for (int j = 0; j < entry.getValue().size(); j++) {
-                if (max < entry.getValue().getY(j).doubleValue()) {
-                    max = entry.getValue().getY(j).doubleValue();
+            for (int j = 0; j < series.size(); j++) {
+                if (max < series.getY(j).doubleValue()) {
+                    max = series.getY(j).doubleValue();
                 }
-                if (min > entry.getValue().getY(j).doubleValue()) {
-                    min = entry.getValue().getY(j).doubleValue();
+                if (min > series.getY(j).doubleValue()) {
+                    min = series.getY(j).doubleValue();
                 }
             }
 
@@ -120,7 +127,7 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
                     seriesFormat.configure(context.getApplicationContext(), R.xml.line_yellow);
                     break;
             }
-            plot.addSeries(entry.getValue(), seriesFormat);
+            plot.addSeries(series, seriesFormat);
             i++;
         }
 

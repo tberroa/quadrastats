@@ -70,6 +70,7 @@
     <string name="no_friend_matches">None of your friends have played this game mode this season.</string>
     <string name="busy_updating">Updating your stats &#8230;</string>
     <string name="busy_calculating">Crunching the numbers &#8230;</string>
+    <string name="no_stats">No stats were found. Swipe down to retrieve the newest stats.</string>
 
     <!-- activity titles -->
     <string name="profile">Profile</string>

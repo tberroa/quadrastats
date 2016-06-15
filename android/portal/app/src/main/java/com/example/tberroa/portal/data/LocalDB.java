@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
+import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
 
 import java.util.ArrayList;
@@ -21,12 +22,22 @@ public class LocalDB {
                 .executeSingle();
     }
 
+    public Summoner getSummonerByKey(String key) {
+        return new Select()
+                .from(Summoner.class)
+                .where("key = ?", key)
+                .executeSingle();
+    }
+
     public List<Summoner> getSummonersByKeys(List<String> keys){
         List<Summoner> summoners = new ArrayList<>();
         ActiveAndroid.beginTransaction();
         try{
             for (String key : keys){
-                Summoner summoner = new Select().from(Summoner.class).where("key = ?", key).executeSingle();
+                Summoner summoner = new Select()
+                        .from(Summoner.class)
+                        .where("key = ?", key)
+                        .executeSingle();
                 if (summoner != null){
                     summoners.add(summoner);
                 }
@@ -36,6 +47,27 @@ public class LocalDB {
             ActiveAndroid.endTransaction();
         }
         return summoners;
+    }
+
+    public List<MatchStats> getMatchStats(List<Long> ids){
+        List<MatchStats> matchStatsList = new ArrayList<>();
+        ActiveAndroid.beginTransaction();
+        try{
+            for (Long id : ids){
+                List<MatchStats> stats = new Select()
+                        .from(MatchStats.class)
+                        .where("summoner_id = ?", id)
+                        .orderBy("match_creation DESC")
+                        .execute();
+                if (stats != null){
+                    matchStatsList.addAll(stats);
+                }
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }finally {
+            ActiveAndroid.endTransaction();
+        }
+        return matchStatsList;
     }
 
     public void clearDatabase(Context context) {

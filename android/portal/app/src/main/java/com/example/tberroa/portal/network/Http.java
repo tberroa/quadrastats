@@ -21,6 +21,7 @@ public class Http {
     }
 
     public String post(String url, String jsonString) throws IOException {
+        Log.d(Params.TAG_DEBUG, "@HttpPostJson: post body is " + jsonString);
         RequestBody body = RequestBody.create(mediaType, jsonString);
         Request request = new Request.Builder().url(url).post(body).build();
         Response rawResponse = client.newCall(request).execute();

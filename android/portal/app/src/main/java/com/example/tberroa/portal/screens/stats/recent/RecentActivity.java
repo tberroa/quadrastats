@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activeandroid.ActiveAndroid;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.models.ModelUtil;
@@ -33,7 +35,6 @@ import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.models.stats.MatchStats;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -44,7 +45,15 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
-public class RecentActivity extends BaseActivity {
+public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+
+    final private Map<String, List<List<Number>>> aggregateData = new HashMap<>();
+    final private ArrayList<String> plotTitles = new ArrayList<>();
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private LinearLayout genMessageLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private String keys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,16 +85,73 @@ public class RecentActivity extends BaseActivity {
             }
         });
 
+        // initialize swipe refresh layout
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         // get message layouts and views
+        TextView genMessage = (TextView) findViewById(R.id.gen_message);
+        genMessageLayout = (LinearLayout) findViewById(R.id.layout_gen_message);
+        genMessageLayout.setVisibility(View.GONE);
         LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
         noFriendsLayout.setVisibility(View.GONE);
+
+        // initialize the tab layout
+        tabLayout = (TabLayout) findViewById(R.id.tab_bar);
+        tabLayout.addTab(tabLayout.newTab().setText("Income"));
+        tabLayout.addTab(tabLayout.newTab().setText("Offense"));
+        tabLayout.addTab(tabLayout.newTab().setText("Utility"));
+        tabLayout.addTab(tabLayout.newTab().setText("Vision"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setVisibility(View.GONE);
+
+        // create list of plot titles
+        plotTitles.add("CS At 10");
+        plotTitles.add("CS Differential At 10");
+        plotTitles.add("CS Per Minute");
+        plotTitles.add("Gold Per Minute");
+        plotTitles.add("Damage Per Minute");
+        plotTitles.add("Kills");
+        plotTitles.add("KDA");
+        plotTitles.add("Kill Participation");
+        plotTitles.add("Duration of CC Dealt");
+        plotTitles.add("Vision Wards Bought");
+        plotTitles.add("Wards Placed");
+        plotTitles.add("Wards Killed");
+
+        // set up view pager and fragments
+        int numOfTabs = tabLayout.getTabCount();
+        FragmentManager fM = getSupportFragmentManager();
+        RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fM, numOfTabs, plotTitles, aggregateData);
+        viewPager = (ViewPager) findViewById(R.id.stats_view_pager);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout){
+            @Override
+            public void onPageScrollStateChanged( int state ) {
+                swipeRefreshLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
+            }
+        });
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
 
         // get user
         LocalDB localDB = new LocalDB();
         Summoner user = localDB.getSummonerById(new UserInfo().getId(this));
 
         // initialize string of keys
-        String keys = user.key + ",";
+        keys = user.key + ",";
 
         // get user's friends
         if (!user.friends.equals("")) {
@@ -103,7 +169,52 @@ public class RecentActivity extends BaseActivity {
             return;
         }
 
-        // get the match stats for user and friends
+        // load match stats from local database
+        List<String> keysList = new ArrayList<>(Arrays.asList(keys.split(",")));
+        List<Summoner> summoners = new LocalDB().getSummonersByKeys(keysList);
+        List<Long> ids = new ArrayList<>();
+        for (Summoner summoner : summoners){
+            ids.add(summoner.summoner_id);
+        }
+        List<MatchStats> matchStatsList = new LocalDB().getMatchStats(ids);
+
+        // populate the activity
+        if (!matchStatsList.isEmpty()){
+            populateActivity(matchStatsList);
+        } else{
+            // show message
+            genMessage.setText(R.string.no_stats);
+            genMessageLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.recent_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.setRefreshing(true);
         new RequestMatchStats().execute(keys);
     }
 
@@ -218,40 +329,85 @@ public class RecentActivity extends BaseActivity {
         return colorViews;
     }
 
-    void updatePlotMap(Map<String, List<Number>> map, String name, Number stat) {
-        List<Number> data = map.get(name);
-        if (data == null) {
-            data = new ArrayList<>();
-            data.add(stat);
-            map.put(name, data);
-        } else {
-            data.add(stat);
-            map.put(name, data);
+    private void populateActivity (List<MatchStats> matchStatsList) {
+        // Before the data can be presented using the Android Plot library, it needs to be organized.
+        // All the data will be put into one map object. The map key is the summoner name and the value
+        // is a list of of lists where each list is a list of data points corresponding to one stat plot.
+        // Example: Key: Frosiph | Value: list[0] = csAtTen, list[1] = csDiffAtTen, etc.
+
+        genMessageLayout.setVisibility(View.GONE);
+        tabLayout.setVisibility(View.VISIBLE);
+
+        // total number of plots, used for initialization later
+        int totalPlots = 12;
+
+        // declare set of summoner names (used for the legend)
+        LinkedHashSet<String> names = new LinkedHashSet<>();
+
+        // clear the map which holds the data for each summoner
+        aggregateData.clear();
+
+        // populate the map
+        for (MatchStats matchStats : matchStatsList) {
+            String summoner = matchStats.summoner_name;
+            names.add(summoner);
+
+            List<List<Number>> summonerData = aggregateData.get(summoner);
+            if (summonerData == null) {
+                summonerData = new ArrayList<>();
+                for (int i = 0; i < totalPlots; i++){
+                    summonerData.add(new ArrayList<Number>());
+                }
+            }
+
+            if (matchStats.cs_at_ten != null) {
+                summonerData.get(0).add(matchStats.cs_at_ten);
+            }
+            if (matchStats.cs_diff_at_ten != null) {
+                summonerData.get(1).add(matchStats.cs_diff_at_ten);
+            }
+            if (matchStats.cs_per_min != null) {
+                summonerData.get(2).add(matchStats.cs_per_min);
+            }
+            if (matchStats.gold_per_min != null) {
+                summonerData.get(3).add(matchStats.gold_per_min);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(4).add(matchStats.dmg_per_min);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(5).add(matchStats.kills);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(6).add(matchStats.kda);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(7).add(matchStats.kill_participation);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(8).add(matchStats.total_time_crowd_control_dealt);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(9).add(matchStats.vision_wards_bought_in_game);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(10).add(matchStats.wards_placed);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(11).add(matchStats.wards_killed);
+            }
+
+            aggregateData.put(summoner, summonerData);
         }
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.recent_menu, menu);
-        return true;
-    }
+        // update adapter
+        int numOfTabs = tabLayout.getTabCount();
+        FragmentManager fM = getSupportFragmentManager();
+        RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fM, numOfTabs, plotTitles, aggregateData);
+        viewPager.setAdapter(pagerAdapter);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
-        }
+        // create the legend
+        createLegend(names);
     }
 
     class RequestMatchStats extends AsyncTask<String, Void, Void> {
@@ -264,9 +420,6 @@ public class RecentActivity extends BaseActivity {
             List<String> keys = new ArrayList<>(Arrays.asList(params[0].split(",")));
             ReqMatchStats request = new ReqMatchStats();
             request.keys = keys;
-
-            // debugging
-            Log.e(Params.TAG_EXCEPTIONS, "@RecentActivity: request is " + ModelUtil.toJson(request, ReqMatchStats.class));
 
             // make the request
             try {
@@ -282,164 +435,27 @@ public class RecentActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Void param) {
             if (postResponse.contains("champ_level")) {
-                // After receiving the raw data, this is where the data is organized to be presented using
-                // the Android Plot library. Data will be organized by summoner and by plot. One map object
-                // corresponds to one plot.
-
-                // declare set of summoner names (used for the legend)
-                LinkedHashSet<String> names = new LinkedHashSet<>();
-
                 // get the match stats objects
                 Type type =  new TypeToken<List<MatchStats>>() {}.getType();
                 List<MatchStats> matchStatsList = ModelUtil.fromJsonList(postResponse, type);
 
-                // declare the map for each plot
-                Map<String, List<Number>> csAtTen = new HashMap<>();
-                Map<String, List<Number>> csDiffAtTen = new HashMap<>();
-                Map<String, List<Number>> csPerMin = new HashMap<>();
-                Map<String, List<Number>> goldPerMin = new HashMap<>();
-
-                Map<String, List<Number>> dmgPerMin = new HashMap<>();
-                Map<String, List<Number>> kills = new HashMap<>();
-
-                Map<String, List<Number>> kda = new HashMap<>();
-                Map<String, List<Number>> killParticipation = new HashMap<>();
-                Map<String, List<Number>> ccDealt = new HashMap<>();
-
-                Map<String, List<Number>> visionWardsBought = new HashMap<>();
-                Map<String, List<Number>> wardsPlaced = new HashMap<>();
-                Map<String, List<Number>> wardsKilled = new HashMap<>();
-
-                // populate the map for each stat
-                for (MatchStats matchStats : matchStatsList) {
-                    String summoner = matchStats.summoner_name;
-                    names.add(summoner);
-
-                    updatePlotMap(csAtTen, summoner, matchStats.cs_at_ten);
-                    updatePlotMap(csDiffAtTen, summoner, matchStats.cs_diff_at_ten);
-                    updatePlotMap(csPerMin, summoner, matchStats.cs_per_min);
-                    updatePlotMap(goldPerMin, summoner, matchStats.gold_per_min);
-
-                    updatePlotMap(dmgPerMin, summoner, matchStats.dmg_per_min);
-                    updatePlotMap(kills, summoner, matchStats.kills);
-
-                    updatePlotMap(kda, summoner, matchStats.kda);
-                    updatePlotMap(killParticipation, summoner, matchStats.kill_participation);
-                    updatePlotMap(ccDealt, summoner, matchStats.total_time_crowd_control_dealt);
-
-                    updatePlotMap(visionWardsBought, summoner, matchStats.vision_wards_bought_in_game);
-                    updatePlotMap(wardsPlaced, summoner, matchStats.wards_placed);
-                    updatePlotMap(wardsKilled, summoner, matchStats.wards_killed);
+                // save the match stats
+                ActiveAndroid.beginTransaction();
+                try{
+                    for (MatchStats matchStats : matchStatsList){
+                        matchStats.save();
+                    }
+                    ActiveAndroid.setTransactionSuccessful();
+                }finally {
+                    ActiveAndroid.endTransaction();
                 }
 
-                // combine the different maps by tab
-                List<Map<String, List<Number>>> incomePlots = new ArrayList<>();
-                incomePlots.add(csAtTen);
-                incomePlots.add(csDiffAtTen);
-                incomePlots.add(csPerMin);
-                incomePlots.add(goldPerMin);
-
-                List<Map<String, List<Number>>> offensePlots = new ArrayList<>();
-                offensePlots.add(dmgPerMin);
-                offensePlots.add(kills);
-
-                List<Map<String, List<Number>>> utilityPlots = new ArrayList<>();
-                utilityPlots.add(kda);
-                utilityPlots.add(killParticipation);
-                utilityPlots.add(ccDealt);
-
-                List<Map<String, List<Number>>> visionPlots = new ArrayList<>();
-                visionPlots.add(visionWardsBought);
-                visionPlots.add(wardsPlaced);
-                visionPlots.add(wardsKilled);
-
-                // create list of plot titles
-                ArrayList<String> incomePlotTitles = new ArrayList<>();
-                ArrayList<String> offensePlotTitles = new ArrayList<>();
-                ArrayList<String> utilityPlotTitles = new ArrayList<>();
-                ArrayList<String> visionPlotTitles = new ArrayList<>();
-
-                incomePlotTitles.add("CS At 10");
-                incomePlotTitles.add("CS Differential At 10");
-                incomePlotTitles.add("CS Per Minute");
-                incomePlotTitles.add("Gold Per Minute");
-
-                offensePlotTitles.add("Kills");
-                offensePlotTitles.add("Damage Per Minute");
-
-                utilityPlotTitles.add("KDA");
-                utilityPlotTitles.add("Kill Participation");
-                utilityPlotTitles.add("Duration of CC Dealt");
-
-                visionPlotTitles.add("Vision Wards Bought");
-                visionPlotTitles.add("Wards Placed");
-                visionPlotTitles.add("Wards Killed");
-
-                // serialize the plot data
-                Gson gson = new Gson();
-                Type plotType = new TypeToken<List<Map<String, List<Number>>>>() {}.getType();
-                String incomePlotsJson = gson.toJson(incomePlots, plotType);
-                String offensePlotsJson = gson.toJson(offensePlots, plotType);
-                String utilityPlotsJson = gson.toJson(utilityPlots, plotType);
-                String visionPlotsJson = gson.toJson(visionPlots, plotType);
-
-                // create tab bundles
-                Bundle incomeTabBundle = new Bundle();
-                incomeTabBundle.putString("plot_data", incomePlotsJson);
-                incomeTabBundle.putStringArrayList("plot_titles", incomePlotTitles);
-
-                Bundle offenseTabBundle = new Bundle();
-                offenseTabBundle.putString("plot_data", offensePlotsJson);
-                offenseTabBundle.putStringArrayList("plot_titles", offensePlotTitles);
-
-                Bundle utilityTabBundle = new Bundle();
-                utilityTabBundle.putString("plot_data", utilityPlotsJson);
-                utilityTabBundle.putStringArrayList("plot_titles", utilityPlotTitles);
-
-                Bundle visionTabBundle = new Bundle();
-                visionTabBundle.putString("plot_data", visionPlotsJson);
-                visionTabBundle.putStringArrayList("plot_titles", visionPlotTitles);
-
-                // add bundles to plot data
-                Map<String, Bundle> plotData = new HashMap<>();
-                plotData.put("income", incomeTabBundle);
-                plotData.put("offense", offenseTabBundle);
-                plotData.put("utility", utilityTabBundle);
-                plotData.put("vision", visionTabBundle);
-
                 // populate the activity
-                createLegend(names);
-
-                TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
-                tabLayout.addTab(tabLayout.newTab().setText("Income"));
-                tabLayout.addTab(tabLayout.newTab().setText("Offense"));
-                tabLayout.addTab(tabLayout.newTab().setText("Utility"));
-                tabLayout.addTab(tabLayout.newTab().setText("Vision"));
-                tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-                int numberOfTabs = tabLayout.getTabCount();
-                FragmentManager fragManager = getSupportFragmentManager();
-                RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fragManager, numberOfTabs, plotData);
-                final ViewPager viewPager = (ViewPager) findViewById(R.id.stats_view_pager);
-                viewPager.setAdapter(pagerAdapter);
-                viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-                tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                    @Override
-                    public void onTabSelected(TabLayout.Tab tab) {
-                        viewPager.setCurrentItem(tab.getPosition());
-                    }
-
-                    @Override
-                    public void onTabUnselected(TabLayout.Tab tab) {
-                    }
-
-                    @Override
-                    public void onTabReselected(TabLayout.Tab tab) {
-                    }
-                });
+                populateActivity(matchStatsList);
             } else { // display error
                 Toast.makeText(RecentActivity.this, postResponse, Toast.LENGTH_SHORT).show();
             }
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 }
