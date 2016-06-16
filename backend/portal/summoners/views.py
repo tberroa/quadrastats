@@ -115,11 +115,16 @@ class LoginUser(APIView):
 
         key = format_key(key)
 
+        # make sure summoner object exists
         try:
             summoner = Summoner.objects.get(region = region, key = key)
-            if hashers.check_password(password, summoner.user.password):
-                return Response(SummonerSerializer(summoner).data)
-            return Response(invalid_credentials)
+            # make sure user object exists
+            if summoner.user is not None:
+                if hashers.check_password(password, summoner.user.password):
+                    return Response(SummonerSerializer(summoner).data)
+                return Response(invalid_credentials)
+            else:
+                return Response(invalid_credentials)
         except Summoner.DoesNotExist:
             return Response(invalid_credentials)
 
