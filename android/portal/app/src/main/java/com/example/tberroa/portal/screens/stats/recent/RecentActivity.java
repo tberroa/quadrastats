@@ -23,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -363,14 +364,18 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 // format the checkboxes in a layout
                 final LinearLayout linearLayout = new LinearLayout(RecentActivity.this);
                 linearLayout.setOrientation(LinearLayout.VERTICAL);
+                int padding = ScreenUtil.dpToPx(RecentActivity.this, 5);
+                linearLayout.setPadding(0, padding, 0, padding);
                 for (CheckBox checkBox : checkBoxes) {
                     linearLayout.addView(checkBox);
                 }
+                final ScrollView scrollView = new ScrollView(RecentActivity.this);
+                scrollView.addView(linearLayout);
 
                 // construct dialog
                 ContextThemeWrapper theme = new ContextThemeWrapper(RecentActivity.this, R.style.DialogStyle);
                 AlertDialog.Builder builder = new AlertDialog.Builder(theme);
-                builder.setView(linearLayout);
+                builder.setView(scrollView);
                 builder.setTitle(R.string.select_summoners_to_plot);
                 builder.setCancelable(true);
                 builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
