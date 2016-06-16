@@ -88,6 +88,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
         // initialize swipe refresh layout
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setDistanceToTriggerSync(500);
         swipeRefreshLayout.setOnRefreshListener(this);
 
         // get message layouts and views, set to gone
@@ -432,12 +433,13 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         });
     }
 
-    class RequestMatchStats extends AsyncTask<String, Void, Void> {
+    class RequestMatchStats extends AsyncTask<String, Void, Boolean[]> {
 
-        private String postResponse;
+        List<MatchStats> matchStatsList;
+        String postResponse = "";
 
         @Override
-        protected Void doInBackground(String... params) {
+        protected Boolean[] doInBackground(String... params) {
             // create the request object
             List<String> keys = new ArrayList<>(Arrays.asList(params[0].split(",")));
             ReqMatchStats request = new ReqMatchStats();
@@ -451,18 +453,18 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 Log.e(Params.TAG_EXCEPTIONS, "@RecentActivity: " + e.getMessage());
             }
 
-            return null;
-        }
+            // initialize return array
+            Boolean result[] = new Boolean[]{false, false};
 
-        @Override
-        protected void onPostExecute(Void param) {
+            // process the response
             if (postResponse.contains("champ_level")) {
+                // successful http request
+                result[0] = true;
+
                 // get the match stats objects
                 Type type = new TypeToken<List<MatchStats>>() {
                 }.getType();
-                List<MatchStats> matchStatsList = ModelUtil.fromJsonList(postResponse, type);
-
-                boolean foundNew = false;
+                matchStatsList = ModelUtil.fromJsonList(postResponse, type);
 
                 // save the match stats
                 ActiveAndroid.beginTransaction();
@@ -470,7 +472,8 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                     LocalDB localDB = new LocalDB();
                     for (MatchStats matchStats : matchStatsList) {
                         if (localDB.getMatchStats(matchStats.summoner_id, matchStats.match_id) == null) {
-                            foundNew = true;
+                            // received new data
+                            result[1] = true;
                             matchStats.save();
                         }
                     }
@@ -478,9 +481,16 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 } finally {
                     ActiveAndroid.endTransaction();
                 }
+            }
 
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean[] result) {
+            if (result[0]) { // successful http request
                 // populate the activity
-                if (inView && foundNew) {
+                if (inView && result[1]) { // and received new data
                     populateActivity(matchStatsList);
                 }
             } else { // display error
