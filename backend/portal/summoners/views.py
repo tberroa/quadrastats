@@ -3,6 +3,7 @@ from django.core import serializers
 from django.shortcuts import render
 from portal.errors import friend_already_listed
 from portal.errors import friend_equals_user
+from portal.errors import friend_limit_reached
 from portal.errors import internal_processing_error
 from portal.errors import invalid_credentials
 from portal.errors import invalid_request_format
@@ -44,9 +45,11 @@ class AddFriend(APIView):
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
 
-        # check if friend is already listed
+        # check if user is at friend limit or if friend is already listed 
         if user.friends is not None:
             friends = user.friends.split(",")
+            if len(friends) > 20:
+                return Response(friend_limit_reached)
             for friend in friends:
                 if friend == friend_key:
                     return Response(friend_already_listed)

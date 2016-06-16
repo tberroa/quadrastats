@@ -22,6 +22,7 @@ class MatchStats(models.Model):
     summoner_name = models.CharField(max_length = 128)
     summoner_id = models.BigIntegerField(default = 0)
     match_id = models.BigIntegerField(default = 0)
+    match_creation = models.BigIntegerField()
     match_duration = models.BigIntegerField()
     champion = models.IntegerField(default = 0)
     lane = models.CharField(max_length = 128)

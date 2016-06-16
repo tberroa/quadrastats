@@ -60,6 +60,13 @@ def update_one(summoner):
             if detail is None:
                 return (False, None)
 
+            # get creation time
+            match_creation = detail.get("matchCreation")
+
+            # defensive check
+            if match_creation is None:
+                return (False, None)
+
             # get the participant identities
             identities = detail.get("participantIdentities")
 
@@ -179,8 +186,14 @@ def update_one(summoner):
                 kda = float('%.3f'%((kills + assists) / deaths))
             else:
                 kda = float('%.3f'%(kills + assists))
-            kill_participation = float('%.3f'%((kills + assists) / total_team_kills))
+            kill_participation = float('%.3f'%(((kills + assists) / total_team_kills) * 100))
 
+            # junglers and supports don't cs, set cs stats to None to prevent outliers
+            if lane == "JUNGLE" or role == "DUO_SUPPORT":
+                cs_at_ten = None
+                cs_diff_at_ten = None
+                cs_per_min = None
+                
             # everything looks good, time to create a new match stats object
             # important to remember: non critical stats can be None
             match_stats = MatchStats.objects.create( \
@@ -189,6 +202,7 @@ def update_one(summoner):
                 summoner_name = summoner.name, \
                 summoner_id = summoner.summoner_id, \
                 match_id = match_id, \
+                match_creation = match_creation, \
                 match_duration = match_duration, \
                 champion = champion, \
                 lane = lane, \
