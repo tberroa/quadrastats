@@ -74,7 +74,7 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
         plotViewHolder.plot.setVisibility(View.VISIBLE);
     }
 
-    public void createPlot(final XYPlot plot, final Map<String, List<SimpleXYSeries>> plotData, final int pos) {
+    private void createPlot(final XYPlot plot, final Map<String, List<SimpleXYSeries>> plotData, final int pos) {
         // initialize the min and max values of the data
         double min = 500000, max = 0;
 

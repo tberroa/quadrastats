@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/nav_header_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="Overdraw"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/nav_header_height"
     android:background="@drawable/textured_black"
+    android:gravity="bottom"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="5dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="vertical"
-    android:id="@+id/nav_header_layout"
-    android:gravity="bottom" >
+    tools:ignore="Overdraw">
 
     <ImageView
+        android:id="@+id/profile_icon"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:id="@+id/profile_icon"
-        android:contentDescription="@string/thumbnail_summoner_icon" />
+        android:contentDescription="@string/thumbnail_summoner_icon"/>
 
     <TextView
         android:id="@+id/name"
@@ -27,5 +27,5 @@
         android:layout_height="wrap_content"
         android:text="@string/summoner_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
 </LinearLayout>

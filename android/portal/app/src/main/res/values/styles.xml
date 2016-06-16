@@ -11,5 +11,7 @@
         name="AppTheme.PopupOverlay"
         parent="ThemeOverlay.AppCompat.Light" />
     <style
-        name="DialogStyle" parent="android:style/Theme.Holo.Dialog"/>
+        name="DialogStyle" parent="android:style/Theme.Holo.Dialog">
+        <item name="android:layout_gravity">center</item>
+    </style>
 </resources>

@@ -15,7 +15,7 @@ import okhttp3.Response;
 public class Http {
 
     private final OkHttpClient client = new OkHttpClient();
-    private final MediaType mediaType = MediaType.parse(Params.POST_MEDIA_TYPE);
+    private final MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
 
     public Http() {
     }

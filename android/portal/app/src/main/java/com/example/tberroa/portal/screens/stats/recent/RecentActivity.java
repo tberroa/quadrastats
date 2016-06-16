@@ -187,40 +187,10 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        /*
         switch (item.getItemId()){
-            case R.menu.recent_menu:
-                // layout
-                GridView gridView = new GridView(this);
-                gridView.setAdapter();
-
-
-                // construct dialog
-                ContextThemeWrapper theme = new ContextThemeWrapper(RecentActivity.this, R.style.DialogStyle);
-                AlertDialog.Builder builder = new AlertDialog.Builder(theme);
-                builder.setView(scrollView);
-                builder.setTitle(R.string.select_summoners_to_plot);
-                builder.setCancelable(true);
-                builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        for (CheckBox checkBox : checkBoxes) {
-                            if (!checkBox.isChecked()) {
-                                selectedNames.remove(checkBox.getText().toString());
-                                selectedData.remove(checkBox.getText().toString());
-                            }
-                        }
-                        createLegend(selectedNames);
-                        updateAdapter(plotTitles, selectedData);
-                        dialog.dismiss();
-                    }
-                });
-
-                // display dialog
-                builder.create().show();
-                break;
+            case R.id.filter:
+                new FilterDialog(this).show();
         }
-        */
         return true;
     }
 
@@ -505,7 +475,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         });
     }
 
-    class RequestMatchStats extends AsyncTask<String, Void, Boolean[]> {
+    private class RequestMatchStats extends AsyncTask<String, Void, Boolean[]> {
 
         List<MatchStats> matchStatsList;
         String postResponse = "";
@@ -519,7 +489,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
             // make the request
             try {
-                String url = Params.BURL_MATCH_STATS;
+                String url = "http://52.90.34.48/stats/match.json";
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqMatchStats.class));
             } catch (java.io.IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@RecentActivity: " + e.getMessage());

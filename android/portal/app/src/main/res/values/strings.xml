@@ -53,7 +53,6 @@
     <string name="recent_games">Recent Games</string>
     <string name="season_totals">Season Totals</string>
     <string name="with_friends">Games With Friends</string>
-    <string name="select_queue">Select Queue</string>
     <string name="dynamic_queue">Dynamic Queue</string>
     <string name="solo_queue">Solo Queue</string>
     <string name="team_3">Ranked Team 3v3</string>
@@ -84,6 +83,7 @@
         Are you sure you want to remove this person from your friends list?
     </string>
     <string name="select_summoners_to_plot">Select Summoners to Plot</string>
+    <string name="filter_by_champion">Filter By Champion</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
