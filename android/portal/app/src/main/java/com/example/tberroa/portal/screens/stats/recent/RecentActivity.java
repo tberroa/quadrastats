@@ -54,12 +54,13 @@ import java.util.Set;
 
 public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
+    private boolean emptySwipeFlag;
     private boolean inView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stats);
+        setContentView(R.layout.activity_recent);
 
         // no animation if starting activity as a reload
         if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
@@ -86,10 +87,14 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             }
         });
 
-        // initialize swipe refresh layout
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        // initialize swipe refresh layouts
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setDistanceToTriggerSync(500);
         swipeRefreshLayout.setOnRefreshListener(this);
+        final SwipeRefreshLayout emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
+        emptySwipe.setOnRefreshListener(this);
+        emptySwipe.setEnabled(false);
+        emptySwipeFlag = false;
 
         // get message layouts and views, set to gone
         TextView genMessage = (TextView) findViewById(R.id.gen_message);
@@ -147,10 +152,15 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         // populate the activity
         if (!matchStatsList.isEmpty()) {
             populateActivity(matchStatsList);
-        } else {
+        } else { // no data to display
             // show message
             genMessage.setText(R.string.no_stats);
             genMessageLayout.setVisibility(View.VISIBLE);
+
+            // switch swipe refresh layouts
+            swipeRefreshLayout.setEnabled(false);
+            emptySwipe.setEnabled(true);
+            emptySwipeFlag = true;
         }
     }
 
@@ -176,6 +186,39 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+        /*
+        switch (item.getItemId()){
+            case R.menu.recent_menu:
+                // layout
+                GridView gridView = new GridView(this);
+                gridView.setAdapter();
+
+
+                // construct dialog
+                ContextThemeWrapper theme = new ContextThemeWrapper(RecentActivity.this, R.style.DialogStyle);
+                AlertDialog.Builder builder = new AlertDialog.Builder(theme);
+                builder.setView(scrollView);
+                builder.setTitle(R.string.select_summoners_to_plot);
+                builder.setCancelable(true);
+                builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        for (CheckBox checkBox : checkBoxes) {
+                            if (!checkBox.isChecked()) {
+                                selectedNames.remove(checkBox.getText().toString());
+                                selectedData.remove(checkBox.getText().toString());
+                            }
+                        }
+                        createLegend(selectedNames);
+                        updateAdapter(plotTitles, selectedData);
+                        dialog.dismiss();
+                    }
+                });
+
+                // display dialog
+                builder.create().show();
+                break;
+        }
+        */
         return true;
     }
 
@@ -192,8 +235,14 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @Override
     public void onRefresh() {
-        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setRefreshing(true);
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        SwipeRefreshLayout emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
+
+        if (!emptySwipeFlag) {
+            swipeRefreshLayout.setRefreshing(true);
+        } else {
+            emptySwipe.setRefreshing(true);
+        }
 
         // get user
         Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(this));
@@ -206,8 +255,13 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             keys += user.friends;
             new RequestMatchStats().execute(keys);
         } else { // user has no friends
+            // clear and disable swipe refresh layouts
             swipeRefreshLayout.setRefreshing(false);
             swipeRefreshLayout.setEnabled(false);
+            emptySwipe.setRefreshing(false);
+            emptySwipe.setEnabled(false);
+
+            // display message
             LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
             noFriendsLayout.setVisibility(View.VISIBLE);
             Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
@@ -228,7 +282,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         legendLayout.removeAllViews();
 
         int i = 0;
-        for (String name : names){
+        for (String name : names) {
             TextView textView = new TextView(this);
             textView.setText(name);
             textView.setTextSize(12);
@@ -413,7 +467,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout) {
             @Override
             public void onPageScrollStateChanged(int state) {
-                SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+                SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
                 swipeRefreshLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
             }
         });
@@ -488,7 +542,24 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
         @Override
         protected void onPostExecute(Boolean[] result) {
+            // clear swipe refresh layouts
+            SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+            swipeRefreshLayout.setRefreshing(false);
+            SwipeRefreshLayout emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
+            emptySwipe.setRefreshing(false);
+
             if (result[0]) { // successful http request
+                if (emptySwipeFlag) {
+                    // switch back swipe refresh layouts
+                    emptySwipe.setEnabled(false);
+                    swipeRefreshLayout.setEnabled(true);
+                    emptySwipeFlag = false;
+
+                    // disable scroll view
+                    ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
+                    scrollView.setVisibility(View.GONE);
+                }
+
                 // populate the activity
                 if (inView && result[1]) { // and received new data
                     populateActivity(matchStatsList);
@@ -496,9 +567,6 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             } else { // display error
                 Toast.makeText(RecentActivity.this, postResponse, Toast.LENGTH_SHORT).show();
             }
-
-            SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-            swipeRefreshLayout.setRefreshing(false);
         }
     }
 }
