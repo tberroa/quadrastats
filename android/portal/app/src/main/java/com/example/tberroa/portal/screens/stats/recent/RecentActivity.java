@@ -91,6 +91,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setDistanceToTriggerSync(500);
         swipeRefreshLayout.setOnRefreshListener(this);
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
         final SwipeRefreshLayout emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
         emptySwipe.setOnRefreshListener(this);
         emptySwipe.setEnabled(false);
@@ -151,6 +152,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
         // populate the activity
         if (!matchStatsList.isEmpty()) {
+            scrollView.setVisibility(View.GONE);
             populateActivity(matchStatsList);
         } else { // no data to display
             // show message
@@ -435,15 +437,31 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 builder.setCancelable(true);
                 builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        // make sure at least one was selected
+                        boolean minimumSatisfied = false;
                         for (CheckBox checkBox : checkBoxes) {
-                            if (!checkBox.isChecked()) {
-                                selectedNames.remove(checkBox.getText().toString());
-                                selectedData.remove(checkBox.getText().toString());
+                            if (checkBox.isChecked()) {
+                                minimumSatisfied = true;
+                                break;
                             }
                         }
-                        createLegend(selectedNames);
-                        updateAdapter(plotTitles, selectedData);
-                        dialog.dismiss();
+
+                        if (minimumSatisfied) {
+                            // go through and remove those that were not checked
+                            for (CheckBox checkBox : checkBoxes) {
+                                if (!checkBox.isChecked()) {
+                                    selectedNames.remove(checkBox.getText().toString());
+                                    selectedData.remove(checkBox.getText().toString());
+                                }
+                            }
+
+                            // update the views
+                            createLegend(selectedNames);
+                            updateAdapter(plotTitles, selectedData);
+                            dialog.dismiss();
+                        } else {
+                            Toast.makeText(RecentActivity.this, R.string.must_select_one, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
