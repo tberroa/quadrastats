@@ -10,7 +10,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,10 +28,10 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
         this.numberOfTabs = numOfTabs;
 
         // split the data by tab
-        Map<String, List<List<Number>>> incomeData = new HashMap<>();
-        Map<String, List<List<Number>>> offenseData = new HashMap<>();
-        Map<String, List<List<Number>>> utilityData = new HashMap<>();
-        Map<String, List<List<Number>>> visionData = new HashMap<>();
+        Map<String, List<List<Number>>> incomeData = new LinkedHashMap<>();
+        Map<String, List<List<Number>>> offenseData = new LinkedHashMap<>();
+        Map<String, List<List<Number>>> utilityData = new LinkedHashMap<>();
+        Map<String, List<List<Number>>> visionData = new LinkedHashMap<>();
 
         if (!data.isEmpty()) {
             for (Map.Entry<String, List<List<Number>>> entry : data.entrySet()) {

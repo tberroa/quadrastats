@@ -83,6 +83,7 @@
     <string name="remove_friend_message">
         Are you sure you want to remove this person from your friends list?
     </string>
+    <string name="select_summoners_to_plot">Select Summoners to Plot</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>

@@ -6,6 +6,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
+import com.google.gson.internal.bind.MapTypeAdapterFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class LocalDB {
         return summoners;
     }
 
-    public List<MatchStats> getMatchStats(List<Long> ids){
+    public List<MatchStats> getMatchStatsList(List<Long> ids){
         List<MatchStats> matchStatsList = new ArrayList<>();
         ActiveAndroid.beginTransaction();
         try{
@@ -68,6 +69,14 @@ public class LocalDB {
             ActiveAndroid.endTransaction();
         }
         return matchStatsList;
+    }
+
+    public MatchStats getMatchStats(long summoner_id, long match_id){
+        return new Select()
+                .from(MatchStats.class)
+                .where("summoner_id = ?", summoner_id)
+                .where("match_id = ?", match_id)
+                .executeSingle();
     }
 
     public void clearDatabase(Context context) {

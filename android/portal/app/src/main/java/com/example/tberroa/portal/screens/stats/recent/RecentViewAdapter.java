@@ -1,6 +1,5 @@
 package com.example.tberroa.portal.screens.stats.recent;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,7 @@ import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYStepMode;
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.screens.ScreenUtil;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -26,18 +26,16 @@ import java.util.Map;
 
 public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.plotViewHolder> {
 
-    private final Context context;
     private final List<String> plotTitles;
     private final Map<String, List<SimpleXYSeries>> plotData;
     private final int numberOfPlots;
 
-    public RecentViewAdapter(Context context, List<String> plotTitles, Map<String, List<SimpleXYSeries>> plotData) {
-        this.context = context;
+    public RecentViewAdapter(List<String> plotTitles, Map<String, List<SimpleXYSeries>> plotData) {
         this.plotTitles = plotTitles;
         this.plotData = plotData;
-        if (!plotData.isEmpty()){
+        if (!plotData.isEmpty()) {
             numberOfPlots = plotData.entrySet().iterator().next().getValue().size();
-        } else{
+        } else {
             numberOfPlots = 0;
         }
     }
@@ -61,24 +59,22 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
     }
 
     @Override
-    public plotViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        Context context = viewGroup.getContext();
-        View inspection = LayoutInflater.from(context).inflate(R.layout.element_plot, viewGroup, false);
-        return new plotViewHolder(inspection);
+    public plotViewHolder onCreateViewHolder(ViewGroup vG, int i) {
+        return new plotViewHolder(LayoutInflater.from(vG.getContext()).inflate(R.layout.element_plot, vG, false));
     }
 
     @Override
     public void onBindViewHolder(plotViewHolder plotViewHolder, int i) {
         // set views
         plotViewHolder.plotTitle.setText(plotTitles.get(i));
-        createPlot(context, plotViewHolder.plot, plotData, i);
+        createPlot(plotViewHolder.plot, plotData, i);
 
         // make views visible
         plotViewHolder.plotTitle.setVisibility(View.VISIBLE);
         plotViewHolder.plot.setVisibility(View.VISIBLE);
     }
 
-    static public void createPlot(Context context, XYPlot plot, Map<String, List<SimpleXYSeries>> plotData, int pos) {
+    public void createPlot(final XYPlot plot, final Map<String, List<SimpleXYSeries>> plotData, final int pos) {
         // initialize the min and max values of the data
         double min = 500000, max = 0;
 
@@ -98,36 +94,14 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
                 }
             }
 
-            // add each series to the plot
+            // format the series
             LineAndPointFormatter seriesFormat = new LineAndPointFormatter();
             seriesFormat.setPointLabelFormatter(new PointLabelFormatter());
-            switch (i % 8) {
-                case 0:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_blue);
-                    break;
-                case 1:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_green);
-                    break;
-                case 2:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_orange);
-                    break;
-                case 3:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_pink);
-                    break;
-                case 4:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_purple);
-                    break;
-                case 5:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_red);
-                    break;
-                case 6:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_sky);
-                    break;
-                case 7:
-                    seriesFormat.configure(context.getApplicationContext(), R.xml.line_yellow);
-                    break;
-            }
+            seriesFormat.configure(plot.getContext(), ScreenUtil.intToSeriesColor(i));
+
+            // add series to plot
             plot.addSeries(series, seriesFormat);
+
             i++;
         }
 
