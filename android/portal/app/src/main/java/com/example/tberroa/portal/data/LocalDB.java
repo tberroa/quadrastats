@@ -6,7 +6,6 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
-import com.google.gson.internal.bind.MapTypeAdapterFactory;
 
 import java.util.ArrayList;
 import java.util.List;
