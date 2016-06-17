@@ -4,7 +4,7 @@
     <item
         android:id="@+id/filter"
         android:icon="@drawable/ic_select_queue"
-        android:title="@string/filter_by_champion"
+        android:title="@string/select_filter"
         app:showAsAction="ifRoom"/>
 </menu>
 

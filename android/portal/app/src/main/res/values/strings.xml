@@ -44,6 +44,7 @@
     </string>
     <string name="done">Done</string>
     <string name="yes">Yes</string>
+    <string name="go">Go</string>
 
     <!-- navigation -->
     <string name="account">Account</string>
@@ -83,7 +84,7 @@
         Are you sure you want to remove this person from your friends list?
     </string>
     <string name="select_summoners_to_plot">Select Summoners to Plot</string>
-    <string name="filter_by_champion">Filter By Champion</string>
+    <string name="select_filter">Select Filter</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
@@ -94,6 +95,8 @@
     <string name="friend_limit_reached">Sorry, only up to 7 friends are allowed at this time.</string>
     <string name="friend_already_exists">This friend is already on your list.</string>
     <string name="must_select_one">Must select at least one</string>
+    <string name="no_data">No data</string>
+    <string name="select_only_one">Can only select one champion</string>
 
     <!-- content descriptions -->
     <string name="drawer_open">Open Drawer</string>

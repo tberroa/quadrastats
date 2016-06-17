@@ -11,6 +11,7 @@ import com.androidplot.ui.LayoutManager;
 import com.androidplot.ui.Size;
 import com.androidplot.ui.XLayoutStyle;
 import com.androidplot.ui.YLayoutStyle;
+import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
@@ -33,16 +34,13 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
     public RecentViewAdapter(List<String> plotTitles, Map<String, List<SimpleXYSeries>> plotData) {
         this.plotTitles = plotTitles;
         this.plotData = plotData;
-        if (!plotData.isEmpty()) {
-            numberOfPlots = plotData.entrySet().iterator().next().getValue().size();
-        } else {
-            numberOfPlots = 0;
-        }
+        numberOfPlots = plotTitles.size();
     }
 
     public class plotViewHolder extends RecyclerView.ViewHolder {
         final TextView plotTitle;
         final XYPlot plot;
+        final TextView noData;
 
         plotViewHolder(View itemView) {
             super(itemView);
@@ -50,6 +48,8 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
             plotTitle.setVisibility(View.INVISIBLE);
             plot = (XYPlot) itemView.findViewById(R.id.plot);
             plot.setVisibility(View.INVISIBLE);
+            noData = (TextView) itemView.findViewById(R.id.no_data);
+            noData.setVisibility(View.GONE);
         }
     }
 
@@ -65,18 +65,22 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
 
     @Override
     public void onBindViewHolder(plotViewHolder plotViewHolder, int i) {
-        // set views
-        plotViewHolder.plotTitle.setText(plotTitles.get(i));
-        createPlot(plotViewHolder.plot, plotData, i);
-
         // make views visible
         plotViewHolder.plotTitle.setVisibility(View.VISIBLE);
         plotViewHolder.plot.setVisibility(View.VISIBLE);
+
+        // set views
+        plotViewHolder.plotTitle.setText(plotTitles.get(i));
+        createPlot(plotViewHolder.plot, plotViewHolder.noData, plotData, i);
     }
 
-    private void createPlot(final XYPlot plot, final Map<String, List<SimpleXYSeries>> plotData, final int pos) {
+    private void createPlot(final XYPlot plot, final TextView noData,
+                            final Map<String, List<SimpleXYSeries>> plotData, final int pos) {
         // initialize the min and max values of the data
         double min = 500000, max = 0;
+
+        // used to count how many data points there are
+        int count = 0;
 
         // iterate over each entry in the plot data map
         int i = 0;
@@ -86,6 +90,7 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
 
             // update the min and max values as iteration occurs
             for (int j = 0; j < series.size(); j++) {
+                count++;
                 if (max < series.getY(j).doubleValue()) {
                     max = series.getY(j).doubleValue();
                 }
@@ -106,7 +111,13 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
         }
 
         // calculate the range step value
-        double step = Math.floor((max - min) / 5);
+        double step;
+        if (count > 1){
+            step = Math.floor((max - min) / 5);
+        } else{
+            step = Math.floor(max/2);
+        }
+
         if (step < 1) {
             step = 1;
         }
@@ -127,5 +138,18 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.pl
         l.remove(plot.getTitleWidget());
         l.remove(plot.getDomainLabelWidget());
         l.remove(plot.getLegendWidget());
+
+        if (count == 1){
+            plot.setDomainBoundaries(-1, 1, BoundaryMode.FIXED);
+            if (max > 0){
+                plot.setRangeBoundaries(0, Math.floor(2*max), BoundaryMode.FIXED);
+            } else{
+                plot.setRangeBoundaries(-2,2, BoundaryMode.FIXED);
+            }
+        }
+        if (count == 0){
+            plot.setVisibility(View.GONE);
+            noData.setVisibility(View.VISIBLE);
+        }
     }
 }

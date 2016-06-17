@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/top"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/pos_top"/>
+
+        <ImageView
+            android:id="@+id/jungle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/top"
+            android:src="@drawable/pos_jungle"/>
+
+        <ImageView
+            android:id="@+id/mid"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/jungle"
+            android:src="@drawable/pos_mid"/>
+
+        <ImageView
+            android:id="@+id/bot"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/mid"
+            android:src="@drawable/pos_bot"/>
+
+        <ImageView
+            android:id="@+id/support"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_toEndOf="@id/bot"
+            android:src="@drawable/pos_support"/>
+
+        <CheckBox
+            android:id="@+id/top_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/top"
+            android:layout_alignEnd="@id/top"
+            android:layout_alignStart="@id/top"
+            android:layout_alignTop="@id/top"
+            android:scaleX="0.7"
+            android:scaleY="0.7"/>
+
+        <CheckBox
+            android:id="@+id/jungle_checkbox"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@id/jungle"
+            android:layout_alignEnd="@id/jungle"
+            android:layout_alignStart="@id/jungle"
+            android:layout_alignTop="@id/jungle"
+            android:scaleX="0.7"
+            android:scaleY="0.7"/>
+
+        <CheckBox
+            android:id="@+id/mid_checkbox"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@id/mid"
+            android:layout_alignEnd="@id/mid"
+            android:layout_alignStart="@id/mid"
+            android:layout_alignTop="@id/mid"
+            android:scaleX="0.7"
+            android:scaleY="0.7"/>
+
+        <CheckBox
+            android:id="@+id/bot_checkbox"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@id/bot"
+            android:layout_alignEnd="@id/bot"
+            android:layout_alignStart="@id/bot"
+            android:layout_alignTop="@id/bot"
+            android:scaleX="0.7"
+            android:scaleY="0.7"/>
+
+        <CheckBox
+            android:id="@+id/support_checkbox"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@id/support"
+            android:layout_alignEnd="@id/support"
+            android:layout_alignStart="@id/support"
+            android:layout_alignTop="@id/support"
+            android:scaleX="0.7"
+            android:scaleY="0.7"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fadeScrollbars="true"
+        android:scrollbars="vertical"/>
+
+    <Button
+        android:id="@+id/go_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/go"
+        android:textSize="20sp"/>
+</LinearLayout>

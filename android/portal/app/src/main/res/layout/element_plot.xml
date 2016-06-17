@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
         android:textColor="@color/white"
         android:textSize="20sp"/>
 
@@ -21,6 +20,7 @@
         android:layout_height="400dp"
         android:layout_below="@id/plot_title"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
         ap:domainOriginTickLabelTextSize="0sp"
         ap:domainTickLabelTextSize="0sp"
         ap:graphDomainLineColor="@color/transparent"
@@ -31,4 +31,14 @@
         ap:gridPaddingTop="20dp"
         ap:rangeOriginTickLabelTextSize="15sp"
         ap:rangeTickLabelTextSize="15sp"/>
+
+    <TextView
+        android:id="@+id/no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/plot_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="@string/no_data"
+        android:textSize="30sp"/>
 </RelativeLayout>
