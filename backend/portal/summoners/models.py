@@ -12,12 +12,12 @@ class User(models.Model):
 
 class Summoner(models.Model):
     user = models.OneToOneField(User, null = True, blank = True, on_delete = models.CASCADE)
-    region = models.CharField(max_length = 128)
-    key = models.CharField(max_length = 128)
-    name = models.CharField(max_length = 128)
+    region = models.CharField(max_length = 4)
+    key = models.CharField(max_length = 32)
+    name = models.CharField(max_length = 32)
     summoner_id = models.BigIntegerField(default = 0)
     profile_icon = models.IntegerField(default = 0)
-    friends = models.CharField(max_length = 255, default = "", blank = True)
+    friends = models.CharField(max_length = 1024, default = "", blank = True)
     modified = models.DateTimeField(null = True, blank = True)
 
     def __str__(self):

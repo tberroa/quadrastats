@@ -70,7 +70,10 @@ class AddFriend(APIView):
                                                    profile_icon = friend.get("profileIconId"))
 
         # add the friends key to the users friend list
-        user.friends += friend_key + ","
+        if user.friends != "":
+            user.friends += "," + friend_key
+        else:
+            user.friends = friend_key
         user.save()
 
         # return the friends summoner object
@@ -208,7 +211,14 @@ class RemoveFriend(APIView):
             return Response(summoner_does_not_exist)
 
         # remove the friends key from the users friend list
-        user.friends = user.friends.replace(friend_key + ",", "")
+        user.friends = user.friends.replace(friend_key, "")
+
+        # ensure proper formatting
+        user.friends = user.friends.replace(",,", ",")
+        if user.friends != "" and user.friends[0] == ",":
+            user.friends = user.friends[1:]
+        if user.friends != "" and user.friends[len(user.friends)-1] == ",":
+            user.friends = user.friends[:len(user.friends)-1]
         user.save()
 
         # return the users updated summoner object

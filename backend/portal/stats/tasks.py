@@ -5,9 +5,9 @@ from portal.riot_api import get_match_detail
 from portal.riot_api import get_match_list
 from summoners.models import Summoner
 
-from .models import ChampionStats
 from .models import MatchStats
 from .models import SeasonStats
+from .models import SeasonStatsChampion
 
 # The riot api can potentially return None for any field.
 # Due to this, many None checks are in place.
@@ -199,8 +199,9 @@ def update_one(summoner):
             match_stats = MatchStats.objects.create( \
                 # identity info	
                 region = summoner.region, \
+                summoner_key = summoner.key, \
                 summoner_name = summoner.name, \
-                summoner_id = summoner.summoner_id, \
+                summoner_id = summoner.id, \
                 match_id = match_id, \
                 match_creation = match_creation, \
                 match_duration = match_duration, \

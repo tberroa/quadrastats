@@ -1,32 +1,20 @@
 from django.db import models
 
-class ChampionStats(models.Model):
-    class Meta:
-        verbose_name_plural = 'Champion Stats'
-
-    season = models.CharField(max_length = 128)
-    kills = models.IntegerField()
-    deaths = models.IntegerField()
-    assists = models.IntegerField()
-    doublekills = models.IntegerField()
-    triplekills = models.IntegerField()
-    quadrakills = models.IntegerField()
-    pentakills = models.IntegerField()
-
 class MatchStats(models.Model):
     class Meta:
         verbose_name_plural = 'Match Stats'
 	
     # identity info
-    region = models.CharField(max_length = 128)
-    summoner_name = models.CharField(max_length = 128)
+    region = models.CharField(max_length = 4)
+    summoner_key = models.CharField(max_length = 32)
+    summoner_name = models.CharField(max_length = 32)
     summoner_id = models.BigIntegerField(default = 0)
     match_id = models.BigIntegerField(default = 0)
     match_creation = models.BigIntegerField()
     match_duration = models.BigIntegerField()
     champion = models.IntegerField(default = 0)
-    lane = models.CharField(max_length = 128)
-    role = models.CharField(max_length = 128)
+    lane = models.CharField(max_length = 8)
+    role = models.CharField(max_length = 16)
 
     # raw stats
     assists = models.BigIntegerField(null = True, blank = True)
@@ -99,6 +87,19 @@ class MatchStats(models.Model):
 class SeasonStats(models.Model):
     class Meta:
         verbose_name_plural = 'Season Stats'
+
+    season = models.CharField(max_length = 128)
+    kills = models.IntegerField()
+    deaths = models.IntegerField()
+    assists = models.IntegerField()
+    doublekills = models.IntegerField()
+    triplekills = models.IntegerField()
+    quadrakills = models.IntegerField()
+    pentakills = models.IntegerField()
+
+class SeasonStatsChampion(models.Model):
+    class Meta:
+        verbose_name_plural = 'Season Stats Champion'
 
     season = models.CharField(max_length = 128)
     kills = models.IntegerField()
