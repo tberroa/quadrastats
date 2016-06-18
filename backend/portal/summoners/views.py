@@ -48,7 +48,7 @@ class AddFriend(APIView):
         # check if user is at friend limit or if friend is already listed 
         if user.friends is not None:
             friends = user.friends.split(",")
-            if len(friends) > 20:
+            if len(friends) >= 20:
                 return Response(friend_limit_reached)
             for friend in friends:
                 if friend == friend_key:

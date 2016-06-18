@@ -201,7 +201,7 @@ def update_one(summoner):
                 region = summoner.region, \
                 summoner_key = summoner.key, \
                 summoner_name = summoner.name, \
-                summoner_id = summoner.id, \
+                summoner_id = summoner.summoner_id, \
                 match_id = match_id, \
                 match_creation = match_creation, \
                 match_duration = match_duration, \
