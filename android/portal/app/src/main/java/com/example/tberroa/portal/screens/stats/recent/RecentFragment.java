@@ -43,7 +43,7 @@ public class RecentFragment extends Fragment {
         return v;
     }
 
-    private static Map<String, List<SimpleXYSeries>> convertToXYSeries(Map<String, List<List<Number>>> oldMap) {
+    private Map<String, List<SimpleXYSeries>> convertToXYSeries(Map<String, List<List<Number>>> oldMap) {
         // initialize the new map
         Map<String, List<SimpleXYSeries>> newMap = new LinkedHashMap<>();
 

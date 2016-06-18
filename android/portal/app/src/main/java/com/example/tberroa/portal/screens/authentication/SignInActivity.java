@@ -111,7 +111,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     // makes sign in request to backend via http
-    class AttemptSignIn extends AsyncTask<Void, Void, Void> {
+    private class AttemptSignIn extends AsyncTask<Void, Void, Void> {
 
         private String postResponse;
 
@@ -125,7 +125,7 @@ public class SignInActivity extends AppCompatActivity {
 
             // make the request
             try {
-                String url = Params.BURL_SIGN_IN;
+                String url = "http://52.90.34.48/summoners/login.json";
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqSignIn.class));
             } catch (java.io.IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());

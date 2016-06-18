@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     // makes registration request to backend via http
-    class AttemptRegister extends AsyncTask<Void, Void, Void> {
+    private class AttemptRegister extends AsyncTask<Void, Void, Void> {
 
         private String postResponse;
 
@@ -175,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             // make the request
             try {
-                String url = Params.BURL_REGISTER;
+                String url = "http://52.90.34.48/summoners/register.json";
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqRegister.class));
             } catch (java.io.IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@RegisterActivity: " + e.getMessage());

@@ -42,7 +42,7 @@ public class SignInIntentService extends IntentService {
             // make the request
             String postResponse = null;
             try {
-                String url = Params.BURL_GET_SUMMONERS;
+                String url = "http://52.90.34.48/summoners/get.json";
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
             } catch (java.io.IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());

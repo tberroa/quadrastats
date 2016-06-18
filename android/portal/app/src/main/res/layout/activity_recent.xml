@@ -5,9 +5,9 @@
     android:layout_height="wrap_content">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/stats_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="0px"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:fadeScrollbars="true"
                 android:scrollbars="vertical"/>
@@ -50,21 +50,32 @@
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <!-- messages before populating activity -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/empty_swipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/element_no_friends"
+        <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/element_gen_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <include
+                    layout="@layout/element_no_friends"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+                <include
+                    layout="@layout/element_gen_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>
-

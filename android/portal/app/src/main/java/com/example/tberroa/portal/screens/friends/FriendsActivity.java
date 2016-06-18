@@ -150,7 +150,7 @@ public class FriendsActivity extends BaseActivity {
     }
 
     // makes add/remove friend request to backend via http
-    class AttemptFriendOp extends AsyncTask<String, Void, String[]> {
+    private class AttemptFriendOp extends AsyncTask<String, Void, String[]> {
 
         @Override
         protected String[] doInBackground(String... params) {
@@ -166,9 +166,9 @@ public class FriendsActivity extends BaseActivity {
             try {
                 String url;
                 if (add) {
-                    url = Params.BURL_ADD_FRIEND;
+                    url = "http://52.90.34.48/summoners/add-friend.json";
                 } else {
-                    url = Params.BURL_REMOVE_FRIEND;
+                    url = "http://52.90.34.48/summoners/remove-friend.json";
                 }
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqFriend.class));
             } catch (java.io.IOException e) {

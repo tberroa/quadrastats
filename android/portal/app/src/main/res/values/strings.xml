@@ -44,6 +44,7 @@
     </string>
     <string name="done">Done</string>
     <string name="yes">Yes</string>
+    <string name="go">Go</string>
 
     <!-- navigation -->
     <string name="account">Account</string>
@@ -53,7 +54,6 @@
     <string name="recent_games">Recent Games</string>
     <string name="season_totals">Season Totals</string>
     <string name="with_friends">Games With Friends</string>
-    <string name="select_queue">Select Queue</string>
     <string name="dynamic_queue">Dynamic Queue</string>
     <string name="solo_queue">Solo Queue</string>
     <string name="team_3">Ranked Team 3v3</string>
@@ -84,6 +84,7 @@
         Are you sure you want to remove this person from your friends list?
     </string>
     <string name="select_summoners_to_plot">Select Summoners to Plot</string>
+    <string name="select_filter">Select Filter</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
@@ -93,6 +94,9 @@
     <string name="cant_add_yourself_as_friend">Cannot add yourself as a friend.</string>
     <string name="friend_limit_reached">Sorry, only up to 7 friends are allowed at this time.</string>
     <string name="friend_already_exists">This friend is already on your list.</string>
+    <string name="must_select_one">Must select at least one</string>
+    <string name="no_data">No data</string>
+    <string name="select_only_one">Can only select one champion</string>
 
     <!-- content descriptions -->
     <string name="drawer_open">Open Drawer</string>

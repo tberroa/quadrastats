@@ -34,7 +34,7 @@ class HomeAdapter extends ArrayAdapter<String> {
             convertView = inflater.inflate(R.layout.row_home, parent, false);
 
             // initialize views
-            viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
+            viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.image);
             viewHolder.label = (TextView) convertView.findViewById(R.id.label);
 
             // set tag
