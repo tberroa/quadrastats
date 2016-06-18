@@ -137,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
         builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                new AttemptRegister().execute();
+                new RequestRegister().execute();
                 dialog.dismiss();
             }
         });
@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     // makes registration request to backend via http
-    private class AttemptRegister extends AsyncTask<Void, Void, Void> {
+    private class RequestRegister extends AsyncTask<Void, Void, Void> {
 
         private String postResponse;
 

@@ -95,7 +95,7 @@ public class SignInActivity extends AppCompatActivity {
             return;
         }
 
-        new AttemptSignIn().execute();
+        new RequestSignIn().execute();
     }
 
     @Override
@@ -111,7 +111,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     // makes sign in request to backend via http
-    private class AttemptSignIn extends AsyncTask<Void, Void, Void> {
+    private class RequestSignIn extends AsyncTask<Void, Void, Void> {
 
         private String postResponse;
 

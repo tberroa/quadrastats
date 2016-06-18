@@ -16,21 +16,21 @@ public class LocalDB {
     public LocalDB() {
     }
 
-    public Summoner getSummonerById(long id) {
+    public Summoner getSummoner(long id) {
         return new Select()
                 .from(Summoner.class)
                 .where("summoner_id = ?", id)
                 .executeSingle();
     }
 
-    public Summoner getSummonerByKey(String key) {
+    public Summoner getSummoner(String key) {
         return new Select()
                 .from(Summoner.class)
                 .where("key = ?", key)
                 .executeSingle();
     }
 
-    public List<Summoner> getSummonersByKeys(List<String> keys){
+    public List<Summoner> getSummoners(List<String> keys){
         List<Summoner> summoners = new ArrayList<>();
         ActiveAndroid.beginTransaction();
         try{
@@ -50,19 +50,19 @@ public class LocalDB {
         return summoners;
     }
 
-    public MatchStats getMatchStats(long summoner_id, long match_id){
+    public MatchStats getMatchStats(String key, long match_id){
         return new Select()
                 .from(MatchStats.class)
-                .where("summoner_id = ?", summoner_id)
+                .where("summoner_key = ?", key)
                 .where("match_id = ?", match_id)
                 .executeSingle();
     }
 
-    public List<MatchStats> getMatchStatsList(List<Long> ids, long champion, String lane, String role){
+    public List<MatchStats> getMatchStatsList(List<String> keys, long champion, String lane, String role){
         List<MatchStats> matchStatsList = new ArrayList<>();
         ActiveAndroid.beginTransaction();
         try{
-            for (Long id : ids){
+            for (String key : keys){
                 From query = new Select().from(MatchStats.class).orderBy("match_creation DESC");
                 if (champion > 0){
                     query.where("champion = ?", champion);
@@ -73,7 +73,7 @@ public class LocalDB {
                 if (role != null){
                     query.where("role = ?", role);
                 }
-                List<MatchStats> stats = query.where("summoner_id = ?", id).execute();
+                List<MatchStats> stats = query.where("summoner_key = ?", key).execute();
                 if (stats != null){
                     matchStatsList.addAll(stats);
                 }

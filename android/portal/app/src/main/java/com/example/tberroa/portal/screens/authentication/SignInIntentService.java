@@ -27,7 +27,7 @@ public class SignInIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         // get the user's summoner object
-        Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(this));
+        Summoner user = new LocalDB().getSummoner(new UserInfo().getId(this));
 
         // get and save locally the summoner objects for the friends
         if (user.friends != null) {

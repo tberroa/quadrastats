@@ -3,6 +3,7 @@ package com.example.tberroa.portal.screens;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -51,24 +52,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        // initialize navigation view
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        View headerLayout = navigationView.getHeaderView(0);
-
         // get the user's profile icon and name
-        Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(this));
-        int profileIcon = user.profile_icon;
-        String name = user.name;
-
-        // display the user's name
-        TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.name);
-        summonerNameView.setText(name);
-
-        // display the profile icon
-        ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.profile_icon);
-        String url = ScreenUtil.constructIconURL(profileIcon);
-        Picasso.with(this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
+        new ViewInitialization().execute();
     }
 
     @Override
@@ -162,6 +147,34 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         public void runWhenIdle(Runnable runnable) {
             this.runnable = runnable;
+        }
+    }
+
+    private class ViewInitialization extends AsyncTask<Void, Void, Summoner> {
+
+        @Override
+        protected Summoner doInBackground(Void... params) {
+            return new LocalDB().getSummoner(new UserInfo().getId(BaseActivity.this));
+        }
+
+        @Override
+        protected void onPostExecute(Summoner user) {
+            int profileIcon = user.profile_icon;
+            String name = user.name;
+
+            // initialize navigation view
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(BaseActivity.this);
+            View headerLayout = navigationView.getHeaderView(0);
+
+            // display the user's name
+            TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.name);
+            summonerNameView.setText(name);
+
+            // display the profile icon
+            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.profile_icon);
+            String url = ScreenUtil.constructIconURL(profileIcon);
+            Picasso.with(BaseActivity.this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
         }
     }
 }

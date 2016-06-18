@@ -96,23 +96,6 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             }
         });
 
-        // initialize swipe refresh layouts
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        swipeRefreshLayout.setDistanceToTriggerSync(500);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
-        final SwipeRefreshLayout emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
-        emptySwipe.setOnRefreshListener(this);
-        emptySwipe.setEnabled(false);
-        emptySwipeFlag = false;
-
-        // get message layouts and views, set to gone
-        TextView genMessage = (TextView) findViewById(R.id.gen_message);
-        LinearLayout genMessageLayout = (LinearLayout) findViewById(R.id.layout_gen_message);
-        genMessageLayout.setVisibility(View.GONE);
-        LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
-        noFriendsLayout.setVisibility(View.GONE);
-
         // initialize the tab layout, set to gone
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
         tabLayout.addTab(tabLayout.newTab().setText("Income"));
@@ -126,53 +109,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         GridLayout legendLayout = (GridLayout) findViewById(R.id.legend);
         legendLayout.setVisibility(View.GONE);
 
-        // get user
-        LocalDB localDB = new LocalDB();
-        Summoner user = localDB.getSummonerById(new UserInfo().getId(this));
-
-        // initialize string of keys
-        String keys = user.key + ",";
-
-        // get user's friends
-        if (!user.friends.equals("")) {
-            keys += user.friends;
-        } else { // user has no friends
-            swipeRefreshLayout.setEnabled(false);
-            noFriendsLayout.setVisibility(View.VISIBLE);
-            Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
-            goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(RecentActivity.this, FriendsActivity.class));
-                    finish();
-                }
-            });
-            return;
-        }
-
-        // load match stats from local database
-        List<String> keysList = new ArrayList<>(Arrays.asList(keys.split(",")));
-        List<Summoner> summoners = new LocalDB().getSummonersByKeys(keysList);
-        List<Long> ids = new ArrayList<>();
-        for (Summoner summoner : summoners) {
-            ids.add(summoner.summoner_id);
-        }
-        List<MatchStats> matchStatsList = new LocalDB().getMatchStatsList(ids, 0, null, null);
-
-        // populate the activity
-        if (!matchStatsList.isEmpty()) {
-            scrollView.setVisibility(View.GONE);
-            populateActivity(matchStatsList);
-        } else { // no data to display
-            // show message
-            genMessage.setText(R.string.no_stats);
-            genMessageLayout.setVisibility(View.VISIBLE);
-
-            // switch swipe refresh layouts
-            swipeRefreshLayout.setEnabled(false);
-            emptySwipe.setEnabled(true);
-            emptySwipeFlag = true;
-        }
+        new ViewInitialization().execute();
     }
 
     @Override
@@ -225,41 +162,13 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             emptySwipe.setRefreshing(true);
         }
 
-        // get user
-        Summoner user = new LocalDB().getSummonerById(new UserInfo().getId(this));
+        SwipeRefreshLayout[] layouts = new SwipeRefreshLayout[2];
+        layouts[0] = swipeRefreshLayout;
+        layouts[1] = emptySwipe;
 
-        // initialize string of keys
-        String keys = user.key + ",";
+        new OnRefresh().execute(layouts);
 
-        // get user's friends
-        if (!user.friends.equals("")) {
-            keys += user.friends;
 
-            // create the request object
-            ReqMatchStats request = new ReqMatchStats();
-            request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
-
-            // execute request
-            new RequestMatchStats().execute(request);
-        } else { // user has no friends
-            // clear and disable swipe refresh layouts
-            swipeRefreshLayout.setRefreshing(false);
-            swipeRefreshLayout.setEnabled(false);
-            emptySwipe.setRefreshing(false);
-            emptySwipe.setEnabled(false);
-
-            // display message
-            LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
-            noFriendsLayout.setVisibility(View.VISIBLE);
-            Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
-            goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(RecentActivity.this, FriendsActivity.class));
-                    finish();
-                }
-            });
-        }
     }
 
     private void createLegend(final Set<String> names) {
@@ -491,6 +400,16 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         });
     }
 
+    private class ChampionIcon {
+        public String name;
+        public boolean isSelected;
+
+        ChampionIcon(String name) {
+            this.name = name;
+            this.isSelected = false;
+        }
+    }
+
     private class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ChampionViewHolder> {
 
         public final List<ChampionIcon> champions;
@@ -641,10 +560,25 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             });
 
             // initialize the go button
-            Button goButton = (Button) findViewById(R.id.go_button);
+            final Button goButton = (Button) findViewById(R.id.go_button);
             goButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // get champion key
+                    int champion = 0;
+                    boolean foundSelected = false;
+                    for (ChampionIcon icon : adapter.champions) {
+                        if (icon.isSelected) {
+                            if (!foundSelected) {
+                                champion = StatsUtil.getChampionKey(icon.name);
+                                foundSelected = true;
+                            } else {
+                                Toast.makeText(RecentActivity.this, R.string.select_only_one, Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                    }
+
                     // get position
                     String lane;
                     String role;
@@ -668,59 +602,104 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                         role = null;
                     }
 
-                    // get champion key
-                    int champion = 0;
-                    boolean foundSelected = false;
-                    for (ChampionIcon icon : adapter.champions){
-                        if (icon.isSelected){
-                            if (!foundSelected){
-                                champion = StatsUtil.getChampionKey(icon.name);
-                                foundSelected = true;
-                            } else {
-                                Toast.makeText(RecentActivity.this, R.string.select_only_one, Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }
-                    }
+                    GoButtonPackage goButtonPackage = new GoButtonPackage();
+                    goButtonPackage.dialog = FilterDialog.this;
+                    goButtonPackage.champion = champion;
+                    goButtonPackage.lane = lane;
+                    goButtonPackage.role = role;
 
-                    // get user
-                    LocalDB localDB = new LocalDB();
-                    Summoner user = localDB.getSummonerById(new UserInfo().getId(RecentActivity.this));
-
-                    // initialize string of keys
-                    String keys = user.key + ",";
-
-                    // get user's friends
-                    keys += user.friends;
-
-                    // get match stats from local database
-                    List<String> keysList = new ArrayList<>(Arrays.asList(keys.split(",")));
-                    List<Summoner> summoners = new LocalDB().getSummonersByKeys(keysList);
-                    List<Long> ids = new ArrayList<>();
-                    for (Summoner summoner : summoners) {
-                        ids.add(summoner.summoner_id);
-                    }
-                    List<MatchStats> matchStatsList = localDB.getMatchStatsList(ids, champion, lane, role);
-
-                    // display
-                    if (matchStatsList.size() > 0) {
-                        populateActivity(matchStatsList);
-                        dismiss();
-                    } else {
-                        Toast.makeText(RecentActivity.this, R.string.no_data, Toast.LENGTH_SHORT).show();
-                    }
+                    new FilterDialogGoButton().execute(goButtonPackage);
                 }
             });
         }
     }
 
-    private class ChampionIcon {
-        public String name;
-        public boolean isSelected;
+    private class FilterDialogGoButton extends AsyncTask<GoButtonPackage, Void, List<MatchStats>>{
 
-        ChampionIcon(String name) {
-            this.name = name;
-            this.isSelected = false;
+        FilterDialog dialog;
+
+        @Override
+        protected List<MatchStats> doInBackground(GoButtonPackage... params){
+            LocalDB localDB = new LocalDB();
+
+            // extract view objects
+            dialog = params[0].dialog;
+
+            // get user
+            Summoner user = localDB.getSummoner(new UserInfo().getId(RecentActivity.this));
+
+            // construct list of keys
+            List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));
+
+            return localDB.getMatchStatsList(keys, params[0].champion, params[0].lane, params[0].role);
+        }
+
+        @Override
+        protected void onPostExecute(List<MatchStats> matchStatsList){
+            // display
+            if (matchStatsList.size() > 0) {
+                populateActivity(matchStatsList);
+                dialog.dismiss();
+            } else {
+                Toast.makeText(RecentActivity.this, R.string.no_data, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class GoButtonPackage {
+        public FilterDialog dialog;
+        public int champion;
+        public String lane;
+        public String role;
+    }
+
+    private class OnRefresh extends AsyncTask<SwipeRefreshLayout, Void, Summoner>{
+
+        SwipeRefreshLayout swipeRefreshLayout;
+        SwipeRefreshLayout emptySwipe;
+
+        @Override
+        protected Summoner doInBackground(SwipeRefreshLayout... params){
+            swipeRefreshLayout = params[0];
+            emptySwipe = params[1];
+
+            return new LocalDB().getSummoner(new UserInfo().getId(RecentActivity.this));
+        }
+
+        @Override
+        protected void onPostExecute(Summoner user){
+            // initialize string of keys
+            String keys = user.key + ",";
+
+            // get user's friends
+            if (!user.friends.equals("")) {
+                keys += user.friends;
+
+                // create the request object
+                ReqMatchStats request = new ReqMatchStats();
+                request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
+
+                // execute request
+                new RequestMatchStats().execute(request);
+            } else { // user has no friends
+                // clear and disable swipe refresh layouts
+                swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setEnabled(false);
+                emptySwipe.setRefreshing(false);
+                emptySwipe.setEnabled(false);
+
+                // display message
+                LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
+                noFriendsLayout.setVisibility(View.VISIBLE);
+                Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
+                goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(RecentActivity.this, FriendsActivity.class));
+                        finish();
+                    }
+                });
+            }
         }
     }
 
@@ -757,7 +736,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 try {
                     LocalDB localDB = new LocalDB();
                     for (MatchStats matchStats : matchStatsList) {
-                        if (localDB.getMatchStats(matchStats.summoner_id, matchStats.match_id) == null) {
+                        if (localDB.getMatchStats(matchStats.summoner_key, matchStats.match_id) == null) {
                             // received new data
                             result[1] = true;
                             matchStats.save();
@@ -798,6 +777,87 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 }
             } else { // display error
                 Toast.makeText(RecentActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class ViewInitialization extends AsyncTask<Void, Void, List<String>> {
+
+        private SwipeRefreshLayout swipeRefreshLayout;
+        private SwipeRefreshLayout emptySwipe;
+        private TextView genMessage;
+        private LinearLayout genMessageLayout;
+        private LinearLayout noFriendsLayout;
+        private ScrollView scrollView;
+
+        @Override
+        protected void onPreExecute(){
+            // initialize swipe refresh layouts
+            swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+            swipeRefreshLayout.setDistanceToTriggerSync(500);
+            swipeRefreshLayout.setOnRefreshListener(RecentActivity.this);
+            scrollView = (ScrollView) findViewById(R.id.scroll_view);
+            emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
+            emptySwipe.setOnRefreshListener(RecentActivity.this);
+            emptySwipe.setEnabled(false);
+            emptySwipeFlag = false;
+
+            // initialize message layouts and views, default to gone
+            genMessage = (TextView) findViewById(R.id.gen_message);
+            genMessageLayout = (LinearLayout) findViewById(R.id.layout_gen_message);
+            genMessageLayout.setVisibility(View.GONE);
+            noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
+            noFriendsLayout.setVisibility(View.GONE);
+        }
+
+        List<MatchStats> matchStatsList;
+
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            LocalDB localDB = new LocalDB();
+
+            // construct key list for user and friends
+            Summoner user = localDB.getSummoner(new UserInfo().getId(RecentActivity.this));
+            List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));
+
+            // if user has friends, get match stats
+            if (keys.size() > 1) {
+                matchStatsList = localDB.getMatchStatsList(keys, 0, null, null);
+            }
+
+            return keys;
+        }
+
+        @Override
+        protected void onPostExecute(List<String> keys) {
+            // redirect user if they have no friends
+            if (keys.size() == 1) {
+                swipeRefreshLayout.setEnabled(false);
+                noFriendsLayout.setVisibility(View.VISIBLE);
+                Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
+                goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(RecentActivity.this, FriendsActivity.class));
+                        finish();
+                    }
+                });
+                return;
+            }
+
+            // take action based on whether there is data to show or not
+            if (!matchStatsList.isEmpty()) {
+                scrollView.setVisibility(View.GONE);
+                populateActivity(matchStatsList);
+            } else { // no data to display
+                // show message
+                genMessage.setText(R.string.no_stats);
+                genMessageLayout.setVisibility(View.VISIBLE);
+
+                // switch swipe refresh layouts
+                swipeRefreshLayout.setEnabled(false);
+                emptySwipe.setEnabled(true);
+                emptySwipeFlag = true;
             }
         }
     }

@@ -5,7 +5,6 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
-////@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection"})
 @SuppressWarnings({"unused"})
 @Table(name = "MatchStats")
 public class MatchStats extends Model {
@@ -14,6 +13,10 @@ public class MatchStats extends Model {
     @Expose
     @Column(name = "region")
     public String region;
+
+    @Expose
+    @Column(name = "summoner_key")
+    public String summoner_key;
 
     @Expose
     @Column(name = "summoner_name")
