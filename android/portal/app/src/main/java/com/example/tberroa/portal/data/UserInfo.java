@@ -6,26 +6,11 @@ import android.content.SharedPreferences;
 
 public class UserInfo extends Application {
 
-    private final String REGION = "region";
-    private final String KEY = "key";
-    private final String NAME = "name";
     private final String ID = "id";
     private final String IS_SIGNED_IN = "is_signed_in";
 
     private SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences("user_info", MODE_PRIVATE);
-    }
-
-    public String getRegion(Context context) {
-        return getSharedPreferences(context).getString(REGION, "");
-    }
-
-    public String getKey(Context context) {
-        return getSharedPreferences(context).getString(KEY, "");
-    }
-
-    public String getName(Context context) {
-        return getSharedPreferences(context).getString(NAME, "");
     }
 
     public long getId(Context context) {
@@ -34,24 +19,6 @@ public class UserInfo extends Application {
 
     public Boolean isSignedIn(Context context) {
         return getSharedPreferences(context).getBoolean(IS_SIGNED_IN, false);
-    }
-
-    public void setRegion(Context context, String region) {
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(REGION, region);
-        editor.apply();
-    }
-
-    public void setKey(Context context, String key) {
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(KEY, key);
-        editor.apply();
-    }
-
-    public void setName(Context context, String name) {
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(NAME, name);
-        editor.apply();
     }
 
     public void setId(Context context, long id) {
@@ -67,9 +34,6 @@ public class UserInfo extends Application {
     }
 
     public void clear(Context context) {
-        setRegion(context, "");
-        setKey(context, "");
-        setName(context, "");
         setId(context, 0);
         setSignInStatus(context, false);
     }

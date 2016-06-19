@@ -106,7 +106,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         tabLayout.setVisibility(View.GONE);
 
         // initialize legend to gone
-        GridLayout legendLayout = (GridLayout) findViewById(R.id.legend);
+        LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
         legendLayout.setVisibility(View.GONE);
 
         new ViewInitialization().execute();
@@ -171,12 +171,29 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     }
 
-    private void createLegend(final Set<String> names) {
-        GridLayout legendLayout = (GridLayout) findViewById(R.id.legend);
+    private void createLegend(final Set<String> names, int champion, String position) {
+        // set position
+        ImageView positionIcon = (ImageView) findViewById(R.id.pos_icon);
+        if (position != null){
+            Picasso.with(this).load(ScreenUtil.getPositionIcon(position)).into(positionIcon);
+            positionIcon.setVisibility(View.VISIBLE);
+        } else{
+            positionIcon.setVisibility(View.GONE);
+        }
 
-        // clear old views
-        legendLayout.removeAllViews();
+        // set champion icon
+        ImageView championIcon = (ImageView) findViewById(R.id.champ_icon);
+        if (champion > 0){
+            String name = StatsUtil.getChampionName(champion);
+            Picasso.with(this).load(ScreenUtil.getChampionIcon(name)).into(championIcon);
+            championIcon.setVisibility(View.VISIBLE);
+        } else {
+            championIcon.setVisibility(View.GONE);
+        }
 
+        // set names
+        GridLayout legendNames = (GridLayout) findViewById(R.id.legend_names);
+        legendNames.removeAllViews();
         int i = 0;
         for (String name : names) {
             TextView textView = new TextView(this);
@@ -184,27 +201,27 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             textView.setTextSize(12);
             textView.setTextColor(ContextCompat.getColor(this, R.color.white));
             textView.setPadding(ScreenUtil.dpToPx(this, 5), 0, ScreenUtil.dpToPx(this, 5), 0);
-            legendLayout.addView(textView);
+            legendNames.addView(textView);
 
             ImageView imageView = new ImageView(this);
             imageView.setMinimumWidth(ScreenUtil.dpToPx(this, 10));
             imageView.setMinimumHeight(ScreenUtil.dpToPx(this, 10));
             imageView.setPadding(0, ScreenUtil.dpToPx(this, 5), 0, 0);
             imageView.setImageResource(ScreenUtil.intToColor(i));
-            legendLayout.addView(imageView);
+            legendNames.addView(imageView);
 
             i++;
         }
     }
 
-    private void populateActivity(List<MatchStats> matchStatsList) {
+    private void populateActivity(List<MatchStats> matchStatsList, final int champion, final String position) {
         // Before the data can be presented using the Android Plot library, it needs to be organized.
         // All the data will be put into one map object. The map key is the summoner name and the value
         // is a list of of lists where each list is a list of data points corresponding to one stat plot.
         // Example: Key: Frosiph | Value: list[0] = csAtTen, list[1] = csDiffAtTen, etc.
 
-        LinearLayout genMessageLayout = (LinearLayout) findViewById(R.id.layout_gen_message);
-        genMessageLayout.setVisibility(View.GONE);
+        TextView noStatsView = (TextView) findViewById(R.id.no_stats);
+        noStatsView.setVisibility(View.GONE);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
         tabLayout.setVisibility(View.VISIBLE);
 
@@ -290,10 +307,10 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         updateAdapter(plotTitles, aggregateData);
 
         // create the legend
-        createLegend(names);
+        createLegend(names, champion, position);
 
         // display the legend
-        GridLayout legendLayout = (GridLayout) findViewById(R.id.legend);
+        LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
         legendLayout.setVisibility(View.VISIBLE);
         legendLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -351,7 +368,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                             }
 
                             // update the views
-                            createLegend(selectedNames);
+                            createLegend(selectedNames, champion, position);
                             updateAdapter(plotTitles, selectedData);
                             dialog.dismiss();
                         } else {
@@ -401,7 +418,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
     }
 
     private class ChampionIcon {
-        public String name;
+        public final String name;
         public boolean isSelected;
 
         ChampionIcon(String name) {
@@ -433,7 +450,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         @Override
         public void onBindViewHolder(final ChampionViewHolder clientViewHolder, int i) {
             final ChampionIcon icon = champions.get(i);
-            Picasso.with(RecentActivity.this).load(ScreenUtil.getDrawable(icon.name)).into(clientViewHolder.image);
+            Picasso.with(RecentActivity.this).load(ScreenUtil.getChampionIcon(icon.name)).into(clientViewHolder.image);
 
             clientViewHolder.checkBox.setOnCheckedChangeListener(null);
             clientViewHolder.checkBox.setChecked(icon.isSelected);
@@ -617,13 +634,28 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
     private class FilterDialogGoButton extends AsyncTask<GoButtonPackage, Void, List<MatchStats>>{
 
         FilterDialog dialog;
+        int champion;
+        String position;
 
         @Override
         protected List<MatchStats> doInBackground(GoButtonPackage... params){
             LocalDB localDB = new LocalDB();
 
-            // extract view objects
+            // extract objects
             dialog = params[0].dialog;
+            champion = params[0].champion;
+            String lane = params[0].lane;
+            String role = params[0].role;
+
+            if (params[0].lane != null){
+                if (lane.equals("TOP") || lane.equals("JUNGLE") || lane.equals("MIDDLE")){
+                    position = lane;
+                } else {
+                    position = role;
+                }
+            } else{
+                position = null;
+            }
 
             // get user
             Summoner user = localDB.getSummoner(new UserInfo().getId(RecentActivity.this));
@@ -631,14 +663,14 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             // construct list of keys
             List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));
 
-            return localDB.getMatchStatsList(keys, params[0].champion, params[0].lane, params[0].role);
+            return localDB.getMatchStatsList(keys, champion, lane, role);
         }
 
         @Override
         protected void onPostExecute(List<MatchStats> matchStatsList){
             // display
             if (matchStatsList.size() > 0) {
-                populateActivity(matchStatsList);
+                populateActivity(matchStatsList, champion, position);
                 dialog.dismiss();
             } else {
                 Toast.makeText(RecentActivity.this, R.string.no_data, Toast.LENGTH_SHORT).show();
@@ -689,7 +721,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 emptySwipe.setEnabled(false);
 
                 // display message
-                LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
+                LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.no_friends_layout);
                 noFriendsLayout.setVisibility(View.VISIBLE);
                 Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
                 goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
@@ -773,7 +805,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
                 // populate the activity
                 if (inView && result[1]) { // and received new data
-                    populateActivity(matchStatsList);
+                    populateActivity(matchStatsList, 0, null);
                 }
             } else { // display error
                 Toast.makeText(RecentActivity.this, postResponse, Toast.LENGTH_SHORT).show();
@@ -785,8 +817,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
         private SwipeRefreshLayout swipeRefreshLayout;
         private SwipeRefreshLayout emptySwipe;
-        private TextView genMessage;
-        private LinearLayout genMessageLayout;
+        private TextView noStatsView;
         private LinearLayout noFriendsLayout;
         private ScrollView scrollView;
 
@@ -803,10 +834,9 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             emptySwipeFlag = false;
 
             // initialize message layouts and views, default to gone
-            genMessage = (TextView) findViewById(R.id.gen_message);
-            genMessageLayout = (LinearLayout) findViewById(R.id.layout_gen_message);
-            genMessageLayout.setVisibility(View.GONE);
-            noFriendsLayout = (LinearLayout) findViewById(R.id.layout_no_friends);
+            noStatsView = (TextView) findViewById(R.id.no_stats);
+            noStatsView.setVisibility(View.GONE);
+            noFriendsLayout = (LinearLayout) findViewById(R.id.no_friends_layout);
             noFriendsLayout.setVisibility(View.GONE);
         }
 
@@ -848,11 +878,10 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             // take action based on whether there is data to show or not
             if (!matchStatsList.isEmpty()) {
                 scrollView.setVisibility(View.GONE);
-                populateActivity(matchStatsList);
+                populateActivity(matchStatsList, 0, null);
             } else { // no data to display
                 // show message
-                genMessage.setText(R.string.no_stats);
-                genMessageLayout.setVisibility(View.VISIBLE);
+                noStatsView.setVisibility(View.VISIBLE);
 
                 // switch swipe refresh layouts
                 swipeRefreshLayout.setEnabled(false);

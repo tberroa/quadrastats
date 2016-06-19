@@ -18,6 +18,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="20dp"
+            android:contentDescription="@string/image"
             android:src="@drawable/pos_top"/>
 
         <ImageView
@@ -26,6 +27,7 @@
             android:layout_height="35dp"
             android:layout_marginEnd="20dp"
             android:layout_toEndOf="@id/top"
+            android:contentDescription="@string/image"
             android:src="@drawable/pos_jungle"/>
 
         <ImageView
@@ -34,6 +36,7 @@
             android:layout_height="35dp"
             android:layout_marginEnd="20dp"
             android:layout_toEndOf="@id/jungle"
+            android:contentDescription="@string/image"
             android:src="@drawable/pos_mid"/>
 
         <ImageView
@@ -42,6 +45,7 @@
             android:layout_height="35dp"
             android:layout_marginEnd="20dp"
             android:layout_toEndOf="@id/mid"
+            android:contentDescription="@string/image"
             android:src="@drawable/pos_bot"/>
 
         <ImageView
@@ -49,6 +53,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_toEndOf="@id/bot"
+            android:contentDescription="@string/image"
             android:src="@drawable/pos_support"/>
 
         <CheckBox

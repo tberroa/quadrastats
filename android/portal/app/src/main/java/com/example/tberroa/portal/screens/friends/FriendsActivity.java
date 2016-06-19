@@ -206,6 +206,14 @@ public class FriendsActivity extends BaseActivity {
 
     private class ViewInitialization extends AsyncTask<Void, Void, List<Summoner>> {
 
+        TextView noFriends;
+
+        @Override
+        protected void onPreExecute(){
+            noFriends = (TextView) findViewById(R.id.no_friends);
+            noFriends.setVisibility(View.GONE);
+        }
+
         @Override
         protected List<Summoner> doInBackground(Void... params) {
             LocalDB localDB = new LocalDB();
@@ -251,7 +259,6 @@ public class FriendsActivity extends BaseActivity {
 
             if (friends.isEmpty()) {
                 // user has no friends
-                TextView noFriends = (TextView) findViewById(R.id.no_friends);
                 noFriends.setVisibility(View.VISIBLE);
             }
         }

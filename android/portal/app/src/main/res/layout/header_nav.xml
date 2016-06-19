@@ -19,7 +19,7 @@
         android:id="@+id/profile_icon"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:contentDescription="@string/thumbnail_summoner_icon"/>
+        android:contentDescription="@string/profile_icon"/>
 
     <TextView
         android:id="@+id/name"

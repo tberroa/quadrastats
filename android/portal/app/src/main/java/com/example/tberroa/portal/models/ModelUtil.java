@@ -16,11 +16,6 @@ public class ModelUtil {
         return gson.toJson(object, clazz);
     }
 
-    static public <T> String toJsonList(List<T> objectList, Type type) {
-        final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        return gson.toJson(objectList, type);
-    }
-
     static public <T> T fromJson(String jsonString, Class<T> clazz) {
         final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.fromJson(jsonString, clazz);

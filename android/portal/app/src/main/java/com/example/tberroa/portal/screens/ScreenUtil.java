@@ -13,7 +13,7 @@ public class ScreenUtil {
     }
 
     static public String constructIconURL(int iconId) {
-        return "http://ddragon.leagueoflegends.com/cdn/6.4.1/img/profileicon/" + iconId + ".png";
+        return "http://ddragon.leagueoflegends.com/cdn/6.12.1/img/profileicon/" + iconId + ".png";
     }
 
     static public int dpToPx(Context context, int dp){
@@ -21,7 +21,7 @@ public class ScreenUtil {
         return (int) (dp * scale + 0.5f);
     }
 
-    static public int getDrawable(String name){
+    static public int getChampionIcon(String name){
         switch (name){
             case "aatrox":
                 return R.drawable.aatrox;
@@ -287,6 +287,23 @@ public class ScreenUtil {
                 return R.drawable.zyra;
             default:
                 return R.drawable.aatrox;
+        }
+    }
+
+    static public int getPositionIcon(String position){
+        switch (position){
+            case "TOP":
+                return R.drawable.pos_top;
+            case "JUNGLE":
+                return R.drawable.pos_jungle;
+            case "MIDDLE":
+                return R.drawable.pos_mid;
+            case "DUO_CARRY":
+                return R.drawable.pos_bot;
+            case "DUO_SUPPORT":
+                return R.drawable.pos_support;
+            default:
+                return R.drawable.pos_top;
         }
     }
 

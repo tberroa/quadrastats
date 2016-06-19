@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:contentDescription="@string/thumbnail"
+            android:contentDescription="@string/image"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
@@ -29,7 +29,6 @@
             android:gravity="start"
             android:paddingEnd="5dp"
             android:paddingStart="5dp"
-            android:text="@string/thumbnail_label"
             android:textColor="@color/white"
             android:textSize="25sp"/>
     </RelativeLayout>

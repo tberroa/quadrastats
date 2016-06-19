@@ -9,8 +9,6 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <!-- input validation -->
-    <string name="summoner_name_format">3 to 16 alphanumeric characters</string>
-    <string name="password_format">Between 6 and 20 characters</string>
     <string name="password_mismatch">Password mismatch</string>
     <!-- submit buttons -->
     <string name="sign_in_button">Sign In</string>
@@ -54,27 +52,16 @@
     <string name="recent_games">Recent Games</string>
     <string name="season_totals">Season Totals</string>
     <string name="with_friends">Games With Friends</string>
-    <string name="dynamic_queue">Dynamic Queue</string>
-    <string name="solo_queue">Solo Queue</string>
-    <string name="team_3">Ranked Team 3v3</string>
     <string name="sign_out">Sign Out</string>
 
     <!-- event messages -->
-    <string name="message_placeholder">Message placeholder</string>
-    <string name="nothing_here">Sorry there is nothing to see here</string>
-    <string name="no_matches">You have not played this game mode this season.</string>
-        <string name="no_friends_stats">
-        You have no friends to compare stats to! Click the button below to add friends.
-    </string>
-    <string name="no_friends">You have no friends saved! Click the + button to add some.</string>
-    <string name="no_friend_matches">None of your friends have played this game mode this season.</string>
-    <string name="busy_updating">Updating your stats &#8230;</string>
-    <string name="busy_calculating">Crunching the numbers &#8230;</string>
+    <string name="nothing_here">Sorry, there is nothing to see here.</string>
+    <string name="no_friends_stats">You have no friends to compare stats with!</string>
+    <string name="no_friends">Click the + button to add friends.</string>
     <string name="no_stats">No stats were found. Swipe down to retrieve the newest stats.</string>
 
     <!-- activity titles -->
     <string name="profile">Profile</string>
-    <string name="friends">Friends</string>
 
     <!-- element labels and titles -->
     <string name="add_friend">Add Friend</string>
@@ -101,8 +88,6 @@
     <!-- content descriptions -->
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
-    <string name="thumbnail">Image Thumbnail</string>
-    <string name="thumbnail_label">Thumbnail Label</string>
-    <string name="thumbnail_summoner_icon">Profile Icon</string>
-    <string name="series_color">Series color</string>
+    <string name="image">Image</string>
+    <string name="profile_icon">Profile Icon</string>
 </resources>

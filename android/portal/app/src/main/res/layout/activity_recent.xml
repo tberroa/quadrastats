@@ -39,7 +39,7 @@
                 app:mrl_rippleOverlay="true">
 
                 <include
-                    android:id="@+id/legend"
+                    android:id="@+id/legend_layout"
                     layout="@layout/element_legend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,16 +65,50 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
-                <include
-                    layout="@layout/element_no_friends"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/no_friends_layout"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical">
 
-                <include
-                    layout="@layout/element_gen_message"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="15dp"
+                        android:drawableTop="@drawable/sticker_lee"
+                        android:gravity="center"
+                        android:text="@string/no_friends_stats"
+                        android:textColor="@color/white"
+                        android:textSize="25sp"/>
+
+                    <Button
+                        android:id="@+id/go_to_friends_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/add_friends"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/no_stats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:drawableTop="@drawable/sticker_lulu"
+                    android:gravity="center"
+                    android:text="@string/no_stats"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"/>
             </RelativeLayout>
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
