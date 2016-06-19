@@ -55,6 +55,7 @@
     <string name="sign_out">Sign Out</string>
 
     <!-- event messages -->
+    <string name="loading">Loading&#8230;</string>
     <string name="nothing_here">Sorry, there is nothing to see here.</string>
     <string name="no_friends_stats">You have no friends to compare stats with!</string>
     <string name="no_friends">Click the + button to add friends.</string>

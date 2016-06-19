@@ -36,4 +36,12 @@ public class Summoner extends Model {
     public Summoner() {
         super();
     }
+
+    public void addFriend(String friendKey){
+        if (friends.equals("")){
+            friends = friendKey;
+        } else {
+            friends += "," + friendKey;
+        }
+    }
 }

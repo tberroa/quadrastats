@@ -39,28 +39,6 @@ public class FriendsActivity extends BaseActivity {
     private List<Summoner> friends;
     private boolean add;
 
-    private final View.OnClickListener addFriendListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            // construct and display a dialog containing a single text field where the user enters
-            // the name of the summoner they want to add to their friends list
-            final EditText friendKeyField = new EditText(FriendsActivity.this);
-            friendKeyField.setSingleLine();
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(FriendsActivity.this);
-            builder.setTitle(R.string.add_friend);
-            builder.setView(friendKeyField);
-            builder.setCancelable(true);
-            builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    String friendKey = friendKeyField.getText().toString();
-                    add = true;
-                    new RequestFriendOp().execute(friendKey);
-                }
-            });
-            builder.show();
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +71,27 @@ public class FriendsActivity extends BaseActivity {
 
         // initialize add friend button
         final FloatingActionButton addFriend = (FloatingActionButton) findViewById(R.id.add_friend);
-        addFriend.setOnClickListener(addFriendListener);
+        addFriend.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // construct and display a dialog containing a single text field where the user enters
+                // the name of the summoner they want to add to their friends list
+                final EditText friendKeyField = new EditText(FriendsActivity.this);
+                friendKeyField.setSingleLine();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(FriendsActivity.this);
+                builder.setTitle(R.string.add_friend);
+                builder.setView(friendKeyField);
+                builder.setCancelable(true);
+                builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String friendKey = friendKeyField.getText().toString();
+                        add = true;
+                        new RequestFriendOp().execute(friendKey);
+                    }
+                });
+                builder.show();
+            }
+        });
 
         new ViewInitialization().execute();
     }
@@ -147,7 +145,7 @@ public class FriendsActivity extends BaseActivity {
                 friend.save();
 
                 // add the new friend to the users local summoner object friend list
-                user.friends += friend.key + ",";
+                user.addFriend(friend.key);
                 user.save();
             } else if (postResponse.contains("summoner_id") && !add){
                 // get the users updated friend list from the returned object

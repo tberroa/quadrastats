@@ -818,6 +818,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         private SwipeRefreshLayout swipeRefreshLayout;
         private SwipeRefreshLayout emptySwipe;
         private TextView noStatsView;
+        private TextView loading;
         private LinearLayout noFriendsLayout;
         private ScrollView scrollView;
 
@@ -833,7 +834,9 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             emptySwipe.setEnabled(false);
             emptySwipeFlag = false;
 
-            // initialize message layouts and views, default to gone
+            // initialize message layouts and views
+            loading = (TextView) findViewById(R.id.loading);
+            loading.setVisibility(View.VISIBLE);
             noStatsView = (TextView) findViewById(R.id.no_stats);
             noStatsView.setVisibility(View.GONE);
             noFriendsLayout = (LinearLayout) findViewById(R.id.no_friends_layout);
@@ -860,6 +863,8 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
         @Override
         protected void onPostExecute(List<String> keys) {
+            loading.setVisibility(View.GONE);
+
             // redirect user if they have no friends
             if (keys.size() == 1) {
                 swipeRefreshLayout.setEnabled(false);
