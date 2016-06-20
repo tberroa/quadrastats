@@ -38,29 +38,29 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
                 List<List<Number>> summonerData = entry.getValue();
                 incomeData.put(entry.getKey(), summonerData.subList(0, 4));
                 offenseData.put(entry.getKey(), summonerData.subList(4, 6));
-                utilityData.put(entry.getKey(), summonerData.subList(6, 9));
-                visionData.put(entry.getKey(), summonerData.subList(9, 12));
+                utilityData.put(entry.getKey(), summonerData.subList(6, 8));
+                visionData.put(entry.getKey(), summonerData.subList(8, 11));
             }
         }
 
         // serialize the data
         Gson gson = new Gson();
-        Type plotType = new TypeToken<Map<String, List<List<Number>>>>() {
+        Type chartDataType = new TypeToken<Map<String, List<List<Number>>>>() {
         }.getType();
-        String incomeDataJson = gson.toJson(incomeData, plotType);
-        String offenseDataJson = gson.toJson(offenseData, plotType);
-        String utilityDataJson = gson.toJson(utilityData, plotType);
-        String visionDataJson = gson.toJson(visionData, plotType);
+        String incomeDataJson = gson.toJson(incomeData, chartDataType);
+        String offenseDataJson = gson.toJson(offenseData, chartDataType);
+        String utilityDataJson = gson.toJson(utilityData, chartDataType);
+        String visionDataJson = gson.toJson(visionData, chartDataType);
 
         // create bundles
-        incomeBundle.putStringArrayList("plot_titles", new ArrayList<>(titles.subList(0, 4)));
-        incomeBundle.putString("plot_data", incomeDataJson);
-        offenseBundle.putStringArrayList("plot_titles", new ArrayList<>(titles.subList(4, 6)));
-        offenseBundle.putString("plot_data", offenseDataJson);
-        utilityBundle.putStringArrayList("plot_titles", new ArrayList<>(titles.subList(6, 9)));
-        utilityBundle.putString("plot_data", utilityDataJson);
-        visionBundle.putStringArrayList("plot_titles", new ArrayList<>(titles.subList(9, 12)));
-        visionBundle.putString("plot_data", visionDataJson);
+        incomeBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(0, 4)));
+        incomeBundle.putString("chart_data", incomeDataJson);
+        offenseBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(4, 6)));
+        offenseBundle.putString("chart_data", offenseDataJson);
+        utilityBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(6, 8)));
+        utilityBundle.putString("chart_data", utilityDataJson);
+        visionBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(8, 11)));
+        visionBundle.putString("chart_data", visionDataJson);
     }
 
     @Override

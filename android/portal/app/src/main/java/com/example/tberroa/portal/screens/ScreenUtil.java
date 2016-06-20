@@ -290,6 +290,19 @@ public class ScreenUtil {
         }
     }
 
+    static public int[] getChartColors(){
+        int[] colors = new int[8];
+        colors[0] = R.color.series_blue;
+        colors[1] = R.color.series_green;
+        colors[2] = R.color.series_orange;
+        colors[3] = R.color.series_pink;
+        colors[4] = R.color.series_purple;
+        colors[5] = R.color.series_red;
+        colors[6] = R.color.series_sky;
+        colors[7] = R.color.series_yellow;
+        return colors;
+    }
+
     static public int getPositionIcon(String position){
         switch (position){
             case "TOP":
@@ -335,29 +348,6 @@ public class ScreenUtil {
                 return R.color.series_yellow;
             default:
                 return R.color.series_blue;
-        }
-    }
-
-    static public int intToSeriesColor(int i){
-        switch (i % 8) {
-            case 0:
-                return R.xml.line_blue;
-            case 1:
-                return R.xml.line_green;
-            case 2:
-                return R.xml.line_orange;
-            case 3:
-                return R.xml.line_pink;
-            case 4:
-                return R.xml.line_purple;
-            case 5:
-                return R.xml.line_red;
-            case 6:
-                return R.xml.line_sky;
-            case 7:
-                return R.xml.line_yellow;
-            default:
-                return R.xml.line_blue;
         }
     }
 

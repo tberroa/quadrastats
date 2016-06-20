@@ -43,6 +43,7 @@
     <string name="done">Done</string>
     <string name="yes">Yes</string>
     <string name="go">Go</string>
+    <string name="average">Average</string>
 
     <!-- navigation -->
     <string name="account">Account</string>
@@ -71,8 +72,19 @@
     <string name="remove_friend_message">
         Are you sure you want to remove this person from your friends list?
     </string>
-    <string name="select_summoners_to_plot">Select Summoners to Plot</string>
-    <string name="select_filter">Select Filter</string>
+    <string name="summoners_to_chart">Select Summoners to Chart</string>
+    <string name="filter_data">Filter Data</string>
+    <string name="cs_at_ten">CS At 10</string>
+    <string name="cs_diff_at_ten">CS Differential At 10</string>
+    <string name="cs_per_min">CS Per Minute</string>
+    <string name="gold_per_min">Gold Per Minute</string>
+    <string name="dmg_per_min">Damage Per Minute</string>
+    <string name="kills">Kills</string>
+    <string name="kda">KDA</string>
+    <string name="kill_participation">Kill Participation</string>
+    <string name="vision_wards_bought">Vision Wards Bought"</string>
+    <string name="wards_placed">Wards Placed</string>
+    <string name="wards_killed">Wards Killed</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>

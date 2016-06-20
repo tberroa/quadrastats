@@ -172,7 +172,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
     }
 
     private void createLegend(final Set<String> names, int champion, String position) {
-        // set position
+        // set position icon
         ImageView positionIcon = (ImageView) findViewById(R.id.pos_icon);
         if (position != null){
             Picasso.with(this).load(ScreenUtil.getPositionIcon(position)).into(positionIcon);
@@ -215,20 +215,31 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
     }
 
     private void populateActivity(List<MatchStats> matchStatsList, final int champion, final String position) {
-        // Before the data can be presented using the Android Plot library, it needs to be organized.
-        // All the data will be put into one map object. The map key is the summoner name and the value
-        // is a list of of lists where each list is a list of data points corresponding to one stat plot.
-        // Example: Key: Frosiph | Value: list[0] = csAtTen, list[1] = csDiffAtTen, etc.
+        // Before the data can be presented, it needs to be organized. All the data will be put into one map object.
+        // The map key is the summoner name and the value is a list of of lists where each list is a list of data
+        // points corresponding to one stat chart.
+        // Example: Key: Frosiph | Value: list[0] = List<csAtTen>, list[1] = List<csDiffAtTen>, etc.
 
         TextView noStatsView = (TextView) findViewById(R.id.no_stats);
         noStatsView.setVisibility(View.GONE);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
         tabLayout.setVisibility(View.VISIBLE);
 
-        // total number of plots, used for initialization
-        int totalPlots = 12;
+        // create list of chart titles
+        final ArrayList<String> titles = new ArrayList<>();
+        titles.add(getResources().getString(R.string.cs_at_ten));
+        titles.add(getResources().getString(R.string.cs_diff_at_ten));
+        titles.add(getResources().getString(R.string.cs_per_min));
+        titles.add(getResources().getString(R.string.gold_per_min));
+        titles.add(getResources().getString(R.string.dmg_per_min));
+        titles.add(getResources().getString(R.string.kills));
+        titles.add(getResources().getString(R.string.kda));
+        titles.add(getResources().getString(R.string.kill_participation));
+        titles.add(getResources().getString(R.string.vision_wards_bought));
+        titles.add(getResources().getString(R.string.wards_placed));
+        titles.add(getResources().getString(R.string.wards_killed));
 
-        // clear set of summoner names (used for the legend)
+        // clear set of summoner names
         final Set<String> names = new LinkedHashSet<>();
 
         // clear the map which holds the data for each summoner
@@ -243,7 +254,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             List<List<Number>> summonerData = aggregateData.get(summoner);
             if (summonerData == null) {
                 summonerData = new ArrayList<>();
-                for (int i = 0; i < totalPlots; i++) {
+                for (int i = 0; i < titles.size(); i++) {
                     summonerData.add(new ArrayList<Number>());
                 }
             }
@@ -273,38 +284,20 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 summonerData.get(7).add(matchStats.kill_participation);
             }
             if (matchStats.dmg_per_min != null) {
-                summonerData.get(8).add(matchStats.total_time_crowd_control_dealt);
+                summonerData.get(8).add(matchStats.vision_wards_bought_in_game);
             }
             if (matchStats.dmg_per_min != null) {
-                summonerData.get(9).add(matchStats.vision_wards_bought_in_game);
+                summonerData.get(9).add(matchStats.wards_placed);
             }
             if (matchStats.dmg_per_min != null) {
-                summonerData.get(10).add(matchStats.wards_placed);
-            }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(11).add(matchStats.wards_killed);
+                summonerData.get(10).add(matchStats.wards_killed);
             }
 
             aggregateData.put(summoner, summonerData);
         }
 
-        // create list of plot titles
-        final ArrayList<String> plotTitles = new ArrayList<>();
-        plotTitles.add("CS At 10");
-        plotTitles.add("CS Differential At 10");
-        plotTitles.add("CS Per Minute");
-        plotTitles.add("Gold Per Minute");
-        plotTitles.add("Damage Per Minute");
-        plotTitles.add("Kills");
-        plotTitles.add("KDA");
-        plotTitles.add("Kill Participation");
-        plotTitles.add("Duration of CC Dealt");
-        plotTitles.add("Vision Wards Bought");
-        plotTitles.add("Wards Placed");
-        plotTitles.add("Wards Killed");
-
         // update adapter
-        updateAdapter(plotTitles, aggregateData);
+        updateAdapter(titles, aggregateData);
 
         // create the legend
         createLegend(names, champion, position);
@@ -345,7 +338,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 ContextThemeWrapper theme = new ContextThemeWrapper(RecentActivity.this, R.style.DialogStyle);
                 AlertDialog.Builder builder = new AlertDialog.Builder(theme);
                 builder.setView(scrollView);
-                builder.setTitle(R.string.select_summoners_to_plot);
+                builder.setTitle(R.string.summoners_to_chart);
                 builder.setCancelable(true);
                 builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -369,7 +362,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
                             // update the views
                             createLegend(selectedNames, champion, position);
-                            updateAdapter(plotTitles, selectedData);
+                            updateAdapter(titles, selectedData);
                             dialog.dismiss();
                         } else {
                             Toast.makeText(RecentActivity.this, R.string.must_select_one, Toast.LENGTH_SHORT).show();
@@ -383,11 +376,11 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         });
     }
 
-    private void updateAdapter(ArrayList<String> plotTitles, Map<String, List<List<Number>>> aggregateData) {
+    private void updateAdapter(ArrayList<String> titles, Map<String, List<List<Number>>> aggregateData) {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
         int numOfTabs = tabLayout.getTabCount();
         FragmentManager fM = getSupportFragmentManager();
-        RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fM, numOfTabs, plotTitles, aggregateData);
+        RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fM, numOfTabs, titles, aggregateData);
         final ViewPager viewPager = (ViewPager) findViewById(R.id.stats_view_pager);
         viewPager.setAdapter(pagerAdapter);
         TabLayout.Tab tab = tabLayout.getTabAt(0);
@@ -495,7 +488,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.dialog_filter);
-            setTitle(R.string.select_filter);
+            setTitle(R.string.filter_data);
             setCancelable(true);
 
             // initialize list of champion icons

@@ -64,52 +64,52 @@
             android:layout_alignEnd="@id/top"
             android:layout_alignStart="@id/top"
             android:layout_alignTop="@id/top"
-            android:scaleX="0.7"
-            android:scaleY="0.7"/>
+            android:scaleX="1.5"
+            android:scaleY="1.5"/>
 
         <CheckBox
             android:id="@+id/jungle_checkbox"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@id/jungle"
             android:layout_alignEnd="@id/jungle"
             android:layout_alignStart="@id/jungle"
             android:layout_alignTop="@id/jungle"
-            android:scaleX="0.7"
-            android:scaleY="0.7"/>
+            android:scaleX="1.5"
+            android:scaleY="1.5"/>
 
         <CheckBox
             android:id="@+id/mid_checkbox"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@id/mid"
             android:layout_alignEnd="@id/mid"
             android:layout_alignStart="@id/mid"
             android:layout_alignTop="@id/mid"
-            android:scaleX="0.7"
-            android:scaleY="0.7"/>
+            android:scaleX="1.5"
+            android:scaleY="1.5"/>
 
         <CheckBox
             android:id="@+id/bot_checkbox"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@id/bot"
             android:layout_alignEnd="@id/bot"
             android:layout_alignStart="@id/bot"
             android:layout_alignTop="@id/bot"
-            android:scaleX="0.7"
-            android:scaleY="0.7"/>
+            android:scaleX="1.5"
+            android:scaleY="1.5"/>
 
         <CheckBox
             android:id="@+id/support_checkbox"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@id/support"
             android:layout_alignEnd="@id/support"
             android:layout_alignStart="@id/support"
             android:layout_alignTop="@id/support"
-            android:scaleX="0.7"
-            android:scaleY="0.7"/>
+            android:scaleX="1.5"
+            android:scaleY="1.5"/>
 
     </RelativeLayout>
 
