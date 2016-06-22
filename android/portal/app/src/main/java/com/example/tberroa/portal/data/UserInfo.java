@@ -6,11 +6,16 @@ import android.content.SharedPreferences;
 
 public class UserInfo extends Application {
 
+    private final String NAME = "name";
     private final String ID = "id";
     private final String IS_SIGNED_IN = "is_signed_in";
 
     private SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences("user_info", MODE_PRIVATE);
+    }
+
+    public String getName(Context context) {
+        return getSharedPreferences(context).getString(NAME, "");
     }
 
     public long getId(Context context) {
@@ -19,6 +24,12 @@ public class UserInfo extends Application {
 
     public Boolean isSignedIn(Context context) {
         return getSharedPreferences(context).getBoolean(IS_SIGNED_IN, false);
+    }
+
+    public void setName(Context context, String name) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(NAME, name);
+        editor.apply();
     }
 
     public void setId(Context context, long id) {
@@ -34,6 +45,7 @@ public class UserInfo extends Application {
     }
 
     public void clear(Context context) {
+        setName(context, "");
         setId(context, 0);
         setSignInStatus(context, false);
     }

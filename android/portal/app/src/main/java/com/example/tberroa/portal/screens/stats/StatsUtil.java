@@ -546,7 +546,7 @@ public class StatsUtil {
         }
     }
 
-    public static List<String> getChampionNames() {
+    static public List<String> getChampionNames() {
         List<String> champions = new ArrayList<>(150);
         champions.add("aatrox");
         champions.add("ahri");

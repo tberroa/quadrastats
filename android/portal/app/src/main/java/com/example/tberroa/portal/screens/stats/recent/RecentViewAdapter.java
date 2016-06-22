@@ -2,7 +2,6 @@ package com.example.tberroa.portal.screens.stats.recent;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -152,7 +151,7 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.ch
             // use the arrays to create a data set
             BarDataSet barDataSet = new BarDataSet(data, null);
             barDataSet.setColors(ScreenUtil.getChartColors(), context);
-            barDataSet.setValueTextColor(Color.WHITE);
+            barDataSet.setDrawValues(false);
             barChart.setData(new BarData(labels, barDataSet));
 
             // chart formatting

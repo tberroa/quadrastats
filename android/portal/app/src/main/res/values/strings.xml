@@ -85,6 +85,7 @@
     <string name="vision_wards_bought">Vision Wards Bought"</string>
     <string name="wards_placed">Wards Placed</string>
     <string name="wards_killed">Wards Killed</string>
+    <string name="dmg_to_champs">Damage to Champions</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>

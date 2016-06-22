@@ -24,6 +24,7 @@ public class AuthUtil {
         userInfo.clear(context);
 
         // save user info
+        userInfo.setName(context, summoner.name);
         userInfo.setId(context, summoner.summoner_id);
         userInfo.setSignInStatus(context, true);
 

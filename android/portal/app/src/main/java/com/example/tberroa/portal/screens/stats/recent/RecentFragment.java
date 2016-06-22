@@ -27,7 +27,7 @@ public class RecentFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_stats, group, false);
+        View v = inflater.inflate(R.layout.fragment_recent, group, false);
 
         if (isAdded()) {
             // grab data passed to fragment
