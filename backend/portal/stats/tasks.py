@@ -109,12 +109,21 @@ def update_one(summoner):
 
             # get the summoners information for this game
             info = participants[participant_id-1]
+            spell1 = info.get("spell1Id")
+            spell2 = info.get("spell2Id")
             stats = info.get("stats")
             timeline = info.get("timeline")
 
             # defensive check
-            if None in (stats, timeline):
+            if None in (spell1, spell2, stats, timeline):
                 return (False, None)
+
+            # search for keystone mastery
+            keystone = None
+            masteries = info.get("masteries")
+            for mastery in masteries:
+                if is_keystone(mastery.get("masteryId")):
+                    keystone = mastery.get("masteryId")
 
             # champion, lane, and role cannot be null
             champion = info.get("championId")
@@ -208,6 +217,9 @@ def update_one(summoner):
                 champion = champion, \
                 lane = lane, \
                 role = role, \
+                spell1 = spell1, \
+                spell2 = spell2, \
+                keystone = keystone, \
 
                 # raw stats
                 assists = assists, \
@@ -277,6 +289,25 @@ def update_one(summoner):
     # successful return
     return (True, None)
 
+def is_keystone(mastery_id):
+    if mastery_id == 6161:
+        return True
+    if mastery_id == 6162:
+        return True
+    if mastery_id == 6164:
+        return True
+    if mastery_id == 6361:
+        return True
+    if mastery_id == 6362:
+        return True
+    if mastery_id == 6363:
+        return True
+    if mastery_id == 6261:
+        return True
+    if mastery_id == 6262:
+        return True
+    if mastery_id == 6263:
+        return True
+    return false
 
-            
-
+        

@@ -5,16 +5,19 @@ class MatchStats(models.Model):
         verbose_name_plural = 'Match Stats'
 	
     # identity info
-    region = models.CharField(max_length = 4)
-    summoner_key = models.CharField(max_length = 32)
-    summoner_name = models.CharField(max_length = 32)
+    region = models.CharField(max_length = 4, default = "")
+    summoner_key = models.CharField(max_length = 32, default = "")
+    summoner_name = models.CharField(max_length = 32, default = "")
     summoner_id = models.BigIntegerField(default = 0)
     match_id = models.BigIntegerField(default = 0)
-    match_creation = models.BigIntegerField()
-    match_duration = models.BigIntegerField()
+    match_creation = models.BigIntegerField(default = 0)
+    match_duration = models.BigIntegerField(default = 0)
     champion = models.IntegerField(default = 0)
-    lane = models.CharField(max_length = 8)
-    role = models.CharField(max_length = 16)
+    lane = models.CharField(max_length = 8, default = "")
+    role = models.CharField(max_length = 16, default = "")
+    spell1 = models.IntegerField(default = 0)
+    spell2 = models.IntegerField(default = 0)
+    keystone = models.BigIntegerField(null = True, blank = True)
 
     # raw stats
     assists = models.BigIntegerField(null = True, blank = True)
