@@ -12,6 +12,27 @@ from .models import SeasonStatsChampion
 # The riot api can potentially return None for any field.
 # Due to this, many None checks are in place.
 
+def is_keystone(mastery_id):
+    if mastery_id == 6161:
+        return True
+    if mastery_id == 6162:
+        return True
+    if mastery_id == 6164:
+        return True
+    if mastery_id == 6361:
+        return True
+    if mastery_id == 6362:
+        return True
+    if mastery_id == 6363:
+        return True
+    if mastery_id == 6261:
+        return True
+    if mastery_id == 6262:
+        return True
+    if mastery_id == 6263:
+        return True
+    return False
+
 @shared_task
 def update_all():
     # get all summoner objects
@@ -289,25 +310,5 @@ def update_one(summoner):
     # successful return
     return (True, None)
 
-def is_keystone(mastery_id):
-    if mastery_id == 6161:
-        return True
-    if mastery_id == 6162:
-        return True
-    if mastery_id == 6164:
-        return True
-    if mastery_id == 6361:
-        return True
-    if mastery_id == 6362:
-        return True
-    if mastery_id == 6363:
-        return True
-    if mastery_id == 6261:
-        return True
-    if mastery_id == 6262:
-        return True
-    if mastery_id == 6263:
-        return True
-    return false
 
         
