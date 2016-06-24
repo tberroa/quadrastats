@@ -21,8 +21,6 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -70,6 +68,17 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.recent_games);
+        toolbar.inflateMenu(R.menu.recent_menu);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.filter:
+                        new FilterDialog().show();
+                }
+                return true;
+            }
+        });
 
         // initialize the tab layout
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -94,22 +103,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         ViewInitialization viewInitialization = new ViewInitialization();
         viewInitialization.delegateRecent = this;
         viewInitialization.execute(1);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.recent_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.filter:
-                new FilterDialog().show();
-        }
-        return true;
     }
 
     @Override

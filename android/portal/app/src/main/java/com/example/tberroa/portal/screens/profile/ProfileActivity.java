@@ -17,12 +17,6 @@ import com.example.tberroa.portal.screens.BaseActivity;
 
 public class ProfileActivity extends BaseActivity {
 
-    private final OnClickListener signOutButtonListener = new OnClickListener() {
-        public void onClick(View v) {
-            AuthUtil.signOut(ProfileActivity.this);
-        }
-    };
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -57,6 +51,10 @@ public class ProfileActivity extends BaseActivity {
         });
 
         Button signOutButton = (Button) findViewById(R.id.sign_out_button);
-        signOutButton.setOnClickListener(signOutButtonListener);
+        signOutButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                AuthUtil.signOut(ProfileActivity.this);
+            }
+        });
     }
 }
