@@ -86,6 +86,8 @@
     <string name="wards_placed">Wards Placed</string>
     <string name="wards_killed">Wards Killed</string>
     <string name="dmg_to_champs">Damage to Champions</string>
+    <string name="victory">Victory</string>
+    <string name="defeat">Defeat</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
@@ -102,6 +104,5 @@
     <!-- content descriptions -->
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
-    <string name="image">Image</string>
-    <string name="profile_icon">Profile Icon</string>
+    <string name="image_view_description">Image View Description</string>
 </resources>

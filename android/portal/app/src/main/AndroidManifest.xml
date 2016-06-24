@@ -51,6 +51,9 @@
             android:name=".screens.friends.FriendsActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".screens.stats.BaseStatsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".screens.stats.recent.RecentActivity"
             android:screenOrientation="portrait"/>
         <activity

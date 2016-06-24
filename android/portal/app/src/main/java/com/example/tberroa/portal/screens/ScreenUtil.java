@@ -12,17 +12,8 @@ public class ScreenUtil {
     private ScreenUtil() {
     }
 
-    static public String constructIconURL(int iconId) {
-        return "http://ddragon.leagueoflegends.com/cdn/6.12.1/img/profileicon/" + iconId + ".png";
-    }
-
-    static public int dpToPx(Context context, int dp){
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
-    }
-
-    static public int getChampionIcon(String name){
-        switch (name){
+    public static int championIcon(String name) {
+        switch (name) {
             case "aatrox":
                 return R.drawable.aatrox;
             case "ahri":
@@ -290,7 +281,7 @@ public class ScreenUtil {
         }
     }
 
-    static public int[] getChartColors(){
+    public static int[] chartColors() {
         int[] colors = new int[8];
         colors[0] = R.color.series_blue;
         colors[1] = R.color.series_green;
@@ -303,32 +294,57 @@ public class ScreenUtil {
         return colors;
     }
 
-    static public int getPositionIcon(String position){
-        switch (position){
-            case "TOP":
-                return R.drawable.pos_top;
-            case "JUNGLE":
-                return R.drawable.pos_jungle;
-            case "MIDDLE":
-                return R.drawable.pos_mid;
-            case "DUO_CARRY":
-                return R.drawable.pos_bot;
-            case "DUO_SUPPORT":
-                return R.drawable.pos_support;
-            default:
-                return R.drawable.pos_top;
+    public static String constructItemURL(long itemId) {
+        String version = dataDragonVersion();
+        if (itemId > 0) {
+            return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/item/" + itemId + ".png";
+        } else {
+            return "http://whosthatchampion.com/static/images/item/NoItem.png";
         }
     }
 
-    static public int getScreenHeight(Context context) {
-        return getScreenDimensions(context).y;
+    public static String constructMasteryURL(long masteryId) {
+        String version = dataDragonVersion();
+        return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/mastery/" + masteryId + ".png";
     }
 
-    static public int getScreenWidth(Context context) {
-        return getScreenDimensions(context).x;
+    public static String constructProfileIconURL(int iconId) {
+        String version = dataDragonVersion();
+        return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/profileicon/" + iconId + ".png";
     }
 
-    static public int intToColor(int i){
+    public static String constructSummonerSpellURL(int spellId) {
+        String version = dataDragonVersion();
+        switch (spellId) {
+            case 1:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerBoost.png";
+            case 3:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerExhaust.png";
+            case 4:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerFlash.png";
+            case 6:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerHaste.png";
+            case 7:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerHeal.png";
+            case 11:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerSmite.png";
+            case 12:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerTeleport.png";
+            case 14:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerDot.png";
+            case 21:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerBarrier.png";
+            default:
+                return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/spell/SummonerFlash.png";
+        }
+    }
+
+    public static int dpToPx(Context context, int dp) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) ((dp * scale) + 0.5f);
+    }
+
+    public static int intToColor(int i) {
         switch (i % 8) {
             case 0:
                 return R.color.series_blue;
@@ -351,7 +367,36 @@ public class ScreenUtil {
         }
     }
 
-    static private Point getScreenDimensions(Context context) {
+    public static int positionIcon(String position) {
+        switch (position) {
+            case "TOP":
+                return R.drawable.pos_top;
+            case "JUNGLE":
+                return R.drawable.pos_jungle;
+            case "MIDDLE":
+                return R.drawable.pos_mid;
+            case "DUO_CARRY":
+                return R.drawable.pos_bot;
+            case "DUO_SUPPORT":
+                return R.drawable.pos_support;
+            default:
+                return R.drawable.pos_top;
+        }
+    }
+
+    public static int screenHeight(Context context) {
+        return screenDimensions(context).y;
+    }
+
+    public static int screenWidth(Context context) {
+        return screenDimensions(context).x;
+    }
+
+    private static String dataDragonVersion() {
+        return "6.12.1";
+    }
+
+    private static Point screenDimensions(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point screenDimensions = new Point();

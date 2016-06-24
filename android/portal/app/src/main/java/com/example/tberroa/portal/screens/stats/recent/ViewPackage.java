@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 class ViewPackage {
-    List<String> titles;
+
+    Map<String, List<List<Number>>> data;
+    List<Integer> emptyDataSets;
     List<List<String>> labelsList;
     List<List<ILineDataSet>> lineDataSetsList;
-    List<Integer> emptyDataSets;
-    Map<String, List<List<Number>>> data;
+    List<String> titles;
 }

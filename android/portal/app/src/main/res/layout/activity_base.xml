@@ -9,26 +9,28 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <include
-            android:id="@+id/header_layout"
-            layout="@layout/header"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
         <FrameLayout
-            android:id="@+id/activity_content"
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/header_layout">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <!-- activity content gets imported here-->
+            <!-- content gets imported here-->
 
         </FrameLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -36,6 +38,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/header_nav"
-        app:menu="@menu/base_drawer_menu"/>
+        app:headerLayout="@layout/nav_view_header"
+        app:menu="@menu/drawer_menu"/>
 </android.support.v4.widget.DrawerLayout>

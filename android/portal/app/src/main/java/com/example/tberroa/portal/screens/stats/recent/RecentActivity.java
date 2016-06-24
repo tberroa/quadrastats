@@ -1,32 +1,36 @@
 package com.example.tberroa.portal.screens.stats.recent;
 
-import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.TabLayout.OnTabSelectedListener;
+import android.support.design.widget.TabLayout.Tab;
+import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView.Adapter;
+import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,25 +38,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.ActiveAndroid;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.models.ModelUtil;
-import com.example.tberroa.portal.models.requests.ReqMatchStats;
-import com.example.tberroa.portal.models.summoner.Summoner;
-import com.example.tberroa.portal.network.Http;
-import com.example.tberroa.portal.screens.BaseActivity;
-import com.example.tberroa.portal.screens.ScreenUtil;
-import com.example.tberroa.portal.screens.friends.FriendsActivity;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
-import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.models.stats.MatchStats;
+import com.example.tberroa.portal.models.summoner.Summoner;
+import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.stats.BaseStatsActivity;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
-import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -61,43 +56,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
-    private boolean emptySwipeFlag;
-    private boolean inView;
+    public void displayData(List<MatchStats> matchStatsList) {
+        populateActivity(matchStatsList, 0, null);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent);
 
-        // no animation if starting activity as a reload
-        if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
-            overridePendingTransition(0, 0);
-        }
+        // initialize the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.recent_games);
 
-        // set toolbar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.recent_games);
-        }
-
-        // set back button
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else {
-                    startActivity(new Intent(RecentActivity.this, HomeActivity.class));
-                    finish();
-                }
-            }
-        });
-
-        // initialize the tab layout, set to gone
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
+        // initialize the tab layout
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Income"));
         tabLayout.addTab(tabLayout.newTab().setText("Offense"));
         tabLayout.addTab(tabLayout.newTab().setText("Utility"));
@@ -105,23 +80,20 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setVisibility(View.GONE);
 
-        // initialize legend to gone
+        // initialize legend
         LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
         legendLayout.setVisibility(View.GONE);
 
-        new ViewInitialization().execute();
-    }
+        // set swipe refresh layout listeners
+        SwipeRefreshLayout dataSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.data_swipe_layout);
+        dataSwipeLayout.setOnRefreshListener(this);
+        SwipeRefreshLayout messageSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.message_swipe_layout);
+        messageSwipeLayout.setOnRefreshListener(this);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        inView = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        inView = false;
+        // initialize view
+        ViewInitialization viewInitialization = new ViewInitialization();
+        viewInitialization.delegateRecent = this;
+        viewInitialization.execute(1);
     }
 
     @Override
@@ -141,58 +113,35 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
-        }
-    }
-
-    @Override
     public void onRefresh() {
-        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        SwipeRefreshLayout emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
-
-        if (!emptySwipeFlag) {
-            swipeRefreshLayout.setRefreshing(true);
-        } else {
-            emptySwipe.setRefreshing(true);
-        }
-
-        SwipeRefreshLayout[] layouts = new SwipeRefreshLayout[2];
-        layouts[0] = swipeRefreshLayout;
-        layouts[1] = emptySwipe;
-
-        new OnRefresh().execute(layouts);
-
-
+        onResume();
+        RequestMatchStats requestMatchStats = new RequestMatchStats();
+        requestMatchStats.delegateRecent = this;
+        requestMatchStats.execute(1);
     }
 
-    private void createLegend(final Set<String> names, int champion, String position) {
+    private void createLegend(Set<String> names, long champion, String position) {
         // set position icon
-        ImageView positionIcon = (ImageView) findViewById(R.id.pos_icon);
-        if (position != null){
-            Picasso.with(this).load(ScreenUtil.getPositionIcon(position)).into(positionIcon);
+        ImageView positionIcon = (ImageView) findViewById(R.id.position_view);
+        if (position != null) {
+            Picasso.with(this).load(ScreenUtil.positionIcon(position)).into(positionIcon);
             positionIcon.setVisibility(View.VISIBLE);
-        } else{
+        } else {
             positionIcon.setVisibility(View.GONE);
         }
 
         // set champion icon
-        ImageView championIcon = (ImageView) findViewById(R.id.champ_icon);
-        if (champion > 0){
-            String name = StatsUtil.getChampionName(champion);
-            Picasso.with(this).load(ScreenUtil.getChampionIcon(name)).into(championIcon);
+        ImageView championIcon = (ImageView) findViewById(R.id.champ_icon_view);
+        if (champion > 0) {
+            String name = StatsUtil.championName(champion);
+            Picasso.with(this).load(ScreenUtil.championIcon(name)).into(championIcon);
             championIcon.setVisibility(View.VISIBLE);
         } else {
             championIcon.setVisibility(View.GONE);
         }
 
         // set names
-        GridLayout legendNames = (GridLayout) findViewById(R.id.legend_names);
+        GridLayout legendNames = (GridLayout) findViewById(R.id.names_layout);
         legendNames.removeAllViews();
         int i = 0;
         for (String name : names) {
@@ -220,9 +169,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         // points corresponding to one stat chart.
         // Example: Key: Frosiph | Value: list[0] = List<csAtTen>, list[1] = List<csDiffAtTen>, etc.
 
-        TextView noStatsView = (TextView) findViewById(R.id.no_stats);
-        noStatsView.setVisibility(View.GONE);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setVisibility(View.VISIBLE);
 
         // create list of chart titles
@@ -305,7 +252,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         // display the legend
         LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
         legendLayout.setVisibility(View.VISIBLE);
-        legendLayout.setOnClickListener(new View.OnClickListener() {
+        legendLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // copy the set of summoner names
@@ -324,19 +271,19 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                 }
 
                 // format the checkboxes in a layout
-                final LinearLayout linearLayout = new LinearLayout(RecentActivity.this);
+                LinearLayout linearLayout = new LinearLayout(RecentActivity.this);
                 linearLayout.setOrientation(LinearLayout.VERTICAL);
                 int padding = ScreenUtil.dpToPx(RecentActivity.this, 5);
                 linearLayout.setPadding(0, padding, 0, padding);
                 for (CheckBox checkBox : checkBoxes) {
                     linearLayout.addView(checkBox);
                 }
-                final ScrollView scrollView = new ScrollView(RecentActivity.this);
+                ScrollView scrollView = new ScrollView(RecentActivity.this);
                 scrollView.addView(linearLayout);
 
                 // construct dialog
                 ContextThemeWrapper theme = new ContextThemeWrapper(RecentActivity.this, R.style.DialogStyle);
-                AlertDialog.Builder builder = new AlertDialog.Builder(theme);
+                Builder builder = new Builder(theme);
                 builder.setView(scrollView);
                 builder.setTitle(R.string.summoners_to_chart);
                 builder.setCancelable(true);
@@ -377,35 +324,35 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
     }
 
     private void updateAdapter(ArrayList<String> titles, Map<String, List<List<Number>>> aggregateData) {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         int numOfTabs = tabLayout.getTabCount();
         FragmentManager fM = getSupportFragmentManager();
         RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fM, numOfTabs, titles, aggregateData);
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.stats_view_pager);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(pagerAdapter);
-        TabLayout.Tab tab = tabLayout.getTabAt(0);
+        Tab tab = tabLayout.getTabAt(0);
         if (tab != null) {
             tab.select();
         }
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout) {
+        viewPager.addOnPageChangeListener(new TabLayoutOnPageChangeListener(tabLayout) {
             @Override
             public void onPageScrollStateChanged(int state) {
-                SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-                swipeRefreshLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
+                SwipeRefreshLayout dataSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.data_swipe_layout);
+                dataSwipeLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
             }
         });
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.setOnTabSelectedListener(new OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabReselected(Tab tab) {
+            }
+
+            @Override
+            public void onTabSelected(Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+            public void onTabUnselected(Tab tab) {
             }
         });
     }
@@ -416,11 +363,11 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
         ChampionIcon(String name) {
             this.name = name;
-            this.isSelected = false;
+            isSelected = false;
         }
     }
 
-    private class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ChampionViewHolder> {
+    private class FilterAdapter extends Adapter<FilterAdapter.ChampionViewHolder> {
 
         public final List<ChampionIcon> champions;
 
@@ -434,21 +381,14 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         }
 
         @Override
-        public ChampionViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            Context c = viewGroup.getContext();
-            View v = LayoutInflater.from(c).inflate(R.layout.element_champion_icon, viewGroup, false);
-            return new ChampionViewHolder(v);
-        }
-
-        @Override
-        public void onBindViewHolder(final ChampionViewHolder clientViewHolder, int i) {
+        public void onBindViewHolder(ChampionViewHolder clientViewHolder, int i) {
             final ChampionIcon icon = champions.get(i);
-            Picasso.with(RecentActivity.this).load(ScreenUtil.getChampionIcon(icon.name)).into(clientViewHolder.image);
+            Picasso.with(RecentActivity.this).load(ScreenUtil.championIcon(icon.name)).into(clientViewHolder.champIcon);
 
-            clientViewHolder.checkBox.setOnCheckedChangeListener(null);
-            clientViewHolder.checkBox.setChecked(icon.isSelected);
+            clientViewHolder.champIconCheckbox.setOnCheckedChangeListener(null);
+            clientViewHolder.champIconCheckbox.setChecked(icon.isSelected);
 
-            clientViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            clientViewHolder.champIconCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     icon.isSelected = isChecked;
@@ -456,22 +396,29 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             });
         }
 
-        public class ChampionViewHolder extends RecyclerView.ViewHolder {
+        @Override
+        public ChampionViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            Context c = viewGroup.getContext();
+            View v = LayoutInflater.from(c).inflate(R.layout.element_champion_icon, viewGroup, false);
+            return new ChampionViewHolder(v);
+        }
 
-            final ImageView image;
-            final CheckBox checkBox;
+        public class ChampionViewHolder extends ViewHolder {
 
-            ChampionViewHolder(final View itemView) {
+            final CheckBox champIconCheckbox;
+            final ImageView champIcon;
+
+            ChampionViewHolder(View itemView) {
                 super(itemView);
-                image = (ImageView) itemView.findViewById(R.id.image);
-                checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
+                champIcon = (ImageView) itemView.findViewById(R.id.champ_icon_view);
+                champIconCheckbox = (CheckBox) itemView.findViewById(R.id.champ_icon_checkbox);
 
-                image.setOnClickListener(new View.OnClickListener() {
+                champIcon.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ChampionIcon icon = champions.get(getLayoutPosition());
                         icon.isSelected = !icon.isSelected;
-                        checkBox.setChecked(icon.isSelected);
+                        champIconCheckbox.setChecked(icon.isSelected);
                     }
                 });
             }
@@ -493,13 +440,13 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
 
             // initialize list of champion icons
             List<ChampionIcon> championIcons = new ArrayList<>(131);
-            List<String> names = StatsUtil.getChampionNames();
+            List<String> names = StatsUtil.championNames();
             for (String name : names) {
                 championIcons.add(new ChampionIcon(name));
             }
 
             // initialize recycler view
-            int span = ScreenUtil.getScreenWidth(RecentActivity.this) / ScreenUtil.dpToPx(RecentActivity.this, 75);
+            int span = ScreenUtil.screenWidth(RecentActivity.this) / ScreenUtil.dpToPx(RecentActivity.this, 75);
             RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             final FilterAdapter adapter = new FilterAdapter(championIcons);
             recyclerView.setAdapter(adapter);
@@ -513,7 +460,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             final CheckBox supportCheckbox = (CheckBox) findViewById(R.id.support_checkbox);
 
             // set listeners to make them behave like radio buttons
-            topCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            topCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
@@ -524,7 +471,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                     }
                 }
             });
-            jungleCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            jungleCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
@@ -535,7 +482,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                     }
                 }
             });
-            midCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            midCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
@@ -546,7 +493,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                     }
                 }
             });
-            botCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            botCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
@@ -557,7 +504,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                     }
                 }
             });
-            supportCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            supportCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
@@ -570,7 +517,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             });
 
             // initialize the go button
-            final Button goButton = (Button) findViewById(R.id.go_button);
+            Button goButton = (Button) findViewById(R.id.go_button);
             goButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -580,7 +527,7 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
                     for (ChampionIcon icon : adapter.champions) {
                         if (icon.isSelected) {
                             if (!foundSelected) {
-                                champion = StatsUtil.getChampionKey(icon.name);
+                                champion = StatsUtil.championKey(icon.name);
                                 foundSelected = true;
                             } else {
                                 Toast.makeText(RecentActivity.this, R.string.select_only_one, Toast.LENGTH_SHORT).show();
@@ -624,14 +571,14 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
         }
     }
 
-    private class FilterDialogGoButton extends AsyncTask<GoButtonPackage, Void, List<MatchStats>>{
+    private class FilterDialogGoButton extends AsyncTask<GoButtonPackage, Void, List<MatchStats>> {
 
-        FilterDialog dialog;
         int champion;
+        FilterDialog dialog;
         String position;
 
         @Override
-        protected List<MatchStats> doInBackground(GoButtonPackage... params){
+        protected List<MatchStats> doInBackground(GoButtonPackage... params) {
             LocalDB localDB = new LocalDB();
 
             // extract objects
@@ -640,29 +587,29 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
             String lane = params[0].lane;
             String role = params[0].role;
 
-            if (params[0].lane != null){
-                if (lane.equals("TOP") || lane.equals("JUNGLE") || lane.equals("MIDDLE")){
+            if (params[0].lane != null) {
+                if ("TOP".equals(lane) || "JUNGLE".equals(lane) || "MIDDLE".equals(lane)) {
                     position = lane;
                 } else {
                     position = role;
                 }
-            } else{
+            } else {
                 position = null;
             }
 
             // get user
-            Summoner user = localDB.getSummoner(new UserInfo().getId(RecentActivity.this));
+            Summoner user = localDB.summoner(new UserInfo().getId(RecentActivity.this));
 
             // construct list of keys
             List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));
 
-            return localDB.getMatchStatsList(keys, champion, lane, role);
+            return localDB.matchStatsList(keys, champion, lane, role);
         }
 
         @Override
-        protected void onPostExecute(List<MatchStats> matchStatsList){
+        protected void onPostExecute(List<MatchStats> matchStatsList) {
             // display
-            if (matchStatsList.size() > 0) {
+            if (!matchStatsList.isEmpty()) {
                 populateActivity(matchStatsList, champion, position);
                 dialog.dismiss();
             } else {
@@ -672,220 +619,9 @@ public class RecentActivity extends BaseActivity implements SwipeRefreshLayout.O
     }
 
     private class GoButtonPackage {
-        public FilterDialog dialog;
         public int champion;
+        public FilterDialog dialog;
         public String lane;
         public String role;
-    }
-
-    private class OnRefresh extends AsyncTask<SwipeRefreshLayout, Void, Summoner>{
-
-        SwipeRefreshLayout swipeRefreshLayout;
-        SwipeRefreshLayout emptySwipe;
-
-        @Override
-        protected Summoner doInBackground(SwipeRefreshLayout... params){
-            swipeRefreshLayout = params[0];
-            emptySwipe = params[1];
-
-            return new LocalDB().getSummoner(new UserInfo().getId(RecentActivity.this));
-        }
-
-        @Override
-        protected void onPostExecute(Summoner user){
-            // initialize string of keys
-            String keys = user.key + ",";
-
-            // get user's friends
-            if (!user.friends.equals("")) {
-                keys += user.friends;
-
-                // create the request object
-                ReqMatchStats request = new ReqMatchStats();
-                request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
-
-                // execute request
-                new RequestMatchStats().execute(request);
-            } else { // user has no friends
-                // clear and disable swipe refresh layouts
-                swipeRefreshLayout.setRefreshing(false);
-                swipeRefreshLayout.setEnabled(false);
-                emptySwipe.setRefreshing(false);
-                emptySwipe.setEnabled(false);
-
-                // display message
-                LinearLayout noFriendsLayout = (LinearLayout) findViewById(R.id.no_friends_layout);
-                noFriendsLayout.setVisibility(View.VISIBLE);
-                Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
-                goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(RecentActivity.this, FriendsActivity.class));
-                        finish();
-                    }
-                });
-            }
-        }
-    }
-
-    private class RequestMatchStats extends AsyncTask<ReqMatchStats, Void, Boolean[]> {
-
-        List<MatchStats> matchStatsList;
-        String postResponse = "";
-
-        @Override
-        protected Boolean[] doInBackground(ReqMatchStats... params) {
-            // make the request
-            try {
-                String url = "http://52.90.34.48/stats/match.json";
-                postResponse = new Http().post(url, ModelUtil.toJson(params[0], ReqMatchStats.class));
-            } catch (java.io.IOException e) {
-                Log.e(Params.TAG_EXCEPTIONS, "@RecentActivity: " + e.getMessage());
-            }
-
-            // initialize return array
-            Boolean result[] = new Boolean[]{false, false};
-
-            // process the response
-            if (postResponse.contains("champ_level")) {
-                // successful http request
-                result[0] = true;
-
-                // get the match stats objects
-                Type type = new TypeToken<List<MatchStats>>() {
-                }.getType();
-                matchStatsList = ModelUtil.fromJsonList(postResponse, type);
-
-                // save the match stats
-                ActiveAndroid.beginTransaction();
-                try {
-                    LocalDB localDB = new LocalDB();
-                    for (MatchStats matchStats : matchStatsList) {
-                        if (localDB.getMatchStats(matchStats.summoner_key, matchStats.match_id) == null) {
-                            // received new data
-                            result[1] = true;
-                            matchStats.save();
-                        }
-                    }
-                    ActiveAndroid.setTransactionSuccessful();
-                } finally {
-                    ActiveAndroid.endTransaction();
-                }
-            }
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean[] result) {
-            // clear swipe refresh layouts
-            SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-            swipeRefreshLayout.setRefreshing(false);
-            SwipeRefreshLayout emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
-            emptySwipe.setRefreshing(false);
-
-            if (result[0]) { // successful http request
-                if (emptySwipeFlag) {
-                    // switch back swipe refresh layouts
-                    emptySwipe.setEnabled(false);
-                    swipeRefreshLayout.setEnabled(true);
-                    emptySwipeFlag = false;
-
-                    // disable scroll view
-                    ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
-                    scrollView.setVisibility(View.GONE);
-                }
-
-                // populate the activity
-                if (inView && result[1]) { // and received new data
-                    populateActivity(matchStatsList, 0, null);
-                }
-            } else { // display error
-                Toast.makeText(RecentActivity.this, postResponse, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private class ViewInitialization extends AsyncTask<Void, Void, List<String>> {
-
-        private SwipeRefreshLayout swipeRefreshLayout;
-        private SwipeRefreshLayout emptySwipe;
-        private TextView noStatsView;
-        private TextView loading;
-        private LinearLayout noFriendsLayout;
-        private ScrollView scrollView;
-
-        @Override
-        protected void onPreExecute(){
-            // initialize swipe refresh layouts
-            swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-            swipeRefreshLayout.setDistanceToTriggerSync(500);
-            swipeRefreshLayout.setOnRefreshListener(RecentActivity.this);
-            scrollView = (ScrollView) findViewById(R.id.scroll_view);
-            emptySwipe = (SwipeRefreshLayout) findViewById(R.id.empty_swipe);
-            emptySwipe.setOnRefreshListener(RecentActivity.this);
-            emptySwipe.setEnabled(false);
-            emptySwipeFlag = false;
-
-            // initialize message layouts and views
-            loading = (TextView) findViewById(R.id.loading);
-            loading.setVisibility(View.VISIBLE);
-            noStatsView = (TextView) findViewById(R.id.no_stats);
-            noStatsView.setVisibility(View.GONE);
-            noFriendsLayout = (LinearLayout) findViewById(R.id.no_friends_layout);
-            noFriendsLayout.setVisibility(View.GONE);
-        }
-
-        List<MatchStats> matchStatsList;
-
-        @Override
-        protected List<String> doInBackground(Void... params) {
-            LocalDB localDB = new LocalDB();
-
-            // construct key list for user and friends
-            Summoner user = localDB.getSummoner(new UserInfo().getId(RecentActivity.this));
-            List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));
-
-            // if user has friends, get match stats
-            if (keys.size() > 1) {
-                matchStatsList = localDB.getMatchStatsList(keys, 0, null, null);
-            }
-
-            return keys;
-        }
-
-        @Override
-        protected void onPostExecute(List<String> keys) {
-            loading.setVisibility(View.GONE);
-
-            // redirect user if they have no friends
-            if (keys.size() == 1) {
-                swipeRefreshLayout.setEnabled(false);
-                noFriendsLayout.setVisibility(View.VISIBLE);
-                Button goToFriendsActivity = (Button) findViewById(R.id.go_to_friends_activity);
-                goToFriendsActivity.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(RecentActivity.this, FriendsActivity.class));
-                        finish();
-                    }
-                });
-                return;
-            }
-
-            // take action based on whether there is data to show or not
-            if (!matchStatsList.isEmpty()) {
-                scrollView.setVisibility(View.GONE);
-                populateActivity(matchStatsList, 0, null);
-            } else { // no data to display
-                // show message
-                noStatsView.setVisibility(View.VISIBLE);
-
-                // switch swipe refresh layouts
-                swipeRefreshLayout.setEnabled(false);
-                emptySwipe.setEnabled(true);
-                emptySwipeFlag = true;
-            }
-        }
     }
 }

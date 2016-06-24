@@ -4,16 +4,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
@@ -24,6 +27,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -38,7 +42,7 @@ public class WithFriendsFragment extends Fragment {
 
         if (isAdded()) {
             // grab data passed to fragment
-            Bundle bundle = this.getArguments();
+            Bundle bundle = getArguments();
             String matchStatsMapJson = bundle.getString("match_stats_map");
             Type matchStatsMapType = new TypeToken<Map<String, MatchStats>>() {
             }.getType();
@@ -48,6 +52,105 @@ public class WithFriendsFragment extends Fragment {
                 // separate the data into a list of names and a list match stats
                 List<String> names = new ArrayList<>(matchStatsMap.keySet());
                 List<MatchStats> matchStatsList = new ArrayList<>(matchStatsMap.values());
+
+                // display appropriate victory/defeat text
+                if (matchStatsList.get(0).winner) {
+                    TextView defeatView = (TextView) v.findViewById(R.id.defeat_view);
+                    defeatView.setVisibility(View.GONE);
+                } else {
+                    TextView victoryView = (TextView) v.findViewById(R.id.victory_view);
+                    victoryView.setVisibility(View.GONE);
+                }
+
+                // populate the summoner table
+                GridLayout summonerTable = (GridLayout) v.findViewById(R.id.summoner_table_layout);
+                int cWidth = ScreenUtil.dpToPx(getActivity(), 65);
+                int cHeight = ScreenUtil.dpToPx(getActivity(), 65);
+                int width = ScreenUtil.dpToPx(getActivity(), 30);
+                int height = ScreenUtil.dpToPx(getActivity(), 30);
+                int padding = ScreenUtil.dpToPx(getActivity(), 2);
+                for (MatchStats matchStats : matchStatsList) {
+                    LinearLayout summonerLayout = new LinearLayout(getActivity());
+                    summonerLayout.setOrientation(LinearLayout.HORIZONTAL);
+                    summonerLayout.setPadding(padding, padding, padding, padding);
+                    summonerLayout.setGravity(Gravity.CENTER);
+
+                    // champion icon
+                    ImageView championIconView = new ImageView(getActivity());
+                    championIconView.setPadding(padding, padding, padding, padding);
+                    int championIcon = ScreenUtil.championIcon(StatsUtil.championName(matchStats.champion));
+                    Picasso.with(getActivity()).load(championIcon).resize(cWidth, cHeight).into(championIconView);
+                    summonerLayout.addView(championIconView);
+
+                    // summoner spells
+                    LinearLayout summonerSpellLayout = new LinearLayout(getActivity());
+                    summonerSpellLayout.setOrientation(LinearLayout.VERTICAL);
+                    ImageView summonerSpell1View = new ImageView(getActivity());
+                    ImageView summonerSpell2View = new ImageView(getActivity());
+                    summonerSpell1View.setPadding(padding, padding, padding, padding);
+                    summonerSpell2View.setPadding(padding, padding, padding, padding);
+                    String spell1URL = ScreenUtil.constructSummonerSpellURL(matchStats.spell1);
+                    String spell2URL = ScreenUtil.constructSummonerSpellURL(matchStats.spell2);
+                    Picasso.with(getActivity()).load(spell1URL).resize(width, height).into(summonerSpell1View);
+                    Picasso.with(getActivity()).load(spell2URL).resize(width, height).into(summonerSpell2View);
+                    summonerSpellLayout.addView(summonerSpell1View);
+                    summonerSpellLayout.addView(summonerSpell2View);
+                    summonerLayout.addView(summonerSpellLayout);
+
+                    // keystone mastery and trinket
+                    LinearLayout keystoneTrinketLayout = new LinearLayout(getActivity());
+                    keystoneTrinketLayout.setOrientation(LinearLayout.VERTICAL);
+                    ImageView keystoneView = new ImageView(getActivity());
+                    keystoneView.setPadding(padding, padding, padding, padding);
+                    String keystoneURL = ScreenUtil.constructMasteryURL(matchStats.keystone);
+                    Picasso.with(getActivity()).load(keystoneURL).resize(width, height).into(keystoneView);
+                    keystoneTrinketLayout.addView(keystoneView);
+                    ImageView trinketView = new ImageView(getActivity());
+                    trinketView.setPadding(padding, padding, padding, padding);
+                    String trinketURL = ScreenUtil.constructItemURL(matchStats.item6);
+                    Picasso.with(getActivity()).load(trinketURL).resize(width, height).into(trinketView);
+                    keystoneTrinketLayout.addView(trinketView);
+                    summonerLayout.addView(keystoneTrinketLayout);
+
+                    // items
+                    GridLayout itemLayout = new GridLayout(getActivity());
+                    itemLayout.setColumnCount(3);
+                    itemLayout.setRowCount(2);
+                    for (int i = 0; i < 6; i++) {
+                        String itemURL;
+                        switch (i) {
+                            case 0:
+                                itemURL = ScreenUtil.constructItemURL(matchStats.item0);
+                                break;
+                            case 1:
+                                itemURL = ScreenUtil.constructItemURL(matchStats.item1);
+                                break;
+                            case 2:
+                                itemURL = ScreenUtil.constructItemURL(matchStats.item2);
+                                break;
+                            case 3:
+                                itemURL = ScreenUtil.constructItemURL(matchStats.item3);
+                                break;
+                            case 4:
+                                itemURL = ScreenUtil.constructItemURL(matchStats.item4);
+                                break;
+                            case 5:
+                                itemURL = ScreenUtil.constructItemURL(matchStats.item5);
+                                break;
+                            default:
+                                itemURL = ScreenUtil.constructItemURL(matchStats.item0);
+                                break;
+                        }
+                        ImageView itemView = new ImageView(getActivity());
+                        itemView.setPadding(padding, padding, padding, padding);
+                        Picasso.with(getActivity()).load(itemURL).resize(width, height).into(itemView);
+                        itemLayout.addView(itemView);
+                    }
+                    summonerLayout.addView(itemLayout);
+
+                    // add the summoner to the table
+                    summonerTable.addView(summonerLayout);
+                }
 
                 // create the entries
                 List<BarEntry> entriesDmg = new ArrayList<>();
@@ -66,7 +169,7 @@ public class WithFriendsFragment extends Fragment {
                 pieEntries.add(entriesKills);
 
                 // create the data sets
-                int[] colors = ScreenUtil.getChartColors();
+                int[] colors = ScreenUtil.chartColors();
                 List<BarDataSet> barDataSets = new ArrayList<>();
                 for (List<BarEntry> entries : barEntries) {
                     BarDataSet barDataSet = new BarDataSet(entries, "");
@@ -85,9 +188,9 @@ public class WithFriendsFragment extends Fragment {
 
                 // initialize the chart views
                 List<BarChart> barCharts = new ArrayList<>();
-                barCharts.add((BarChart) v.findViewById(R.id.wf_dmg_chart));
+                barCharts.add((BarChart) v.findViewById(R.id.dmg_chart));
                 List<PieChart> pieCharts = new ArrayList<>();
-                pieCharts.add((PieChart) v.findViewById(R.id.wf_kills_chart));
+                pieCharts.add((PieChart) v.findViewById(R.id.kills_chart));
 
                 // populate and format the charts
                 i = 0;
@@ -128,15 +231,15 @@ public class WithFriendsFragment extends Fragment {
         return v;
     }
 
-    private void createLegend(final List<String> names, View v) {
+    private void createLegend(List<String> names, View v) {
         // set unused elements to gone
-        ImageView positionIcon = (ImageView) v.findViewById(R.id.pos_icon);
+        ImageView positionIcon = (ImageView) v.findViewById(R.id.position_view);
         positionIcon.setVisibility(View.GONE);
-        ImageView championIcon = (ImageView) v.findViewById(R.id.champ_icon);
+        ImageView championIcon = (ImageView) v.findViewById(R.id.champ_icon_view);
         championIcon.setVisibility(View.GONE);
 
         // set names
-        GridLayout legendNames = (GridLayout) v.findViewById(R.id.legend_names);
+        GridLayout legendNames = (GridLayout) v.findViewById(R.id.names_layout);
         legendNames.removeAllViews();
         int i = 0;
         for (String name : names) {

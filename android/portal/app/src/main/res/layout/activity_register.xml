@@ -12,7 +12,7 @@
         android:focusableInTouchMode="true">
 
         <TextView
-            android:id="@+id/app_name"
+            android:id="@+id/app_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -24,10 +24,10 @@
             android:textSize="75sp"/>
 
         <TextView
-            android:id="@+id/app_slogan"
+            android:id="@+id/app_slogan_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/app_name"
+            android:layout_below="@id/app_name_view"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp"
             android:text="@string/app_slogan"
@@ -35,10 +35,10 @@
             android:textSize="20sp"/>
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/summoner_name_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/app_slogan"
+            android:layout_below="@id/app_slogan_view"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"
@@ -47,10 +47,10 @@
             android:inputType="text"/>
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/password_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/name"
+            android:layout_below="@id/summoner_name_field"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"
@@ -59,10 +59,10 @@
             android:inputType="textPassword"/>
 
         <EditText
-            android:id="@+id/confirm_password"
+            android:id="@+id/confirm_password_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/password"
+            android:layout_below="@id/password_field"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"
@@ -71,31 +71,30 @@
             android:inputType="textPassword"/>
 
         <Spinner
-            android:id="@+id/region_select"
+            android:id="@+id/region_select_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/confirm_password"
-            android:layout_alignStart="@id/confirm_password"
-            android:layout_below="@id/confirm_password"
+            android:layout_alignEnd="@id/confirm_password_field"
+            android:layout_alignStart="@id/confirm_password_field"
+            android:layout_below="@id/confirm_password_field"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"/>
 
         <Button
-            android:id="@+id/register"
+            android:id="@+id/register_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/password"
-            android:layout_alignStart="@id/password"
-            android:layout_below="@id/region_select"
+            android:layout_alignEnd="@id/password_field"
+            android:layout_alignStart="@id/password_field"
+            android:layout_below="@id/region_select_spinner"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="35dp"
             android:text="@string/register_button"/>
 
         <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/ripple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/register"
+            android:layout_below="@id/register_button"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
             app:mrl_rippleColor="@color/white"
@@ -104,10 +103,9 @@
             app:mrl_rippleRoundedCorners="10dp">
 
             <TextView
-                android:id="@+id/go_to_sign_in"
+                android:id="@+id/go_to_sign_in_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/register"
                 android:layout_centerHorizontal="true"
                 android:text="@string/go_to_sign_in"
                 android:textSize="16sp"/>

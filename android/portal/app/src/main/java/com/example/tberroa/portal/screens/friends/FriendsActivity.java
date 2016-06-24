@@ -1,6 +1,7 @@
 package com.example.tberroa.portal.screens.friends;
 
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,14 +9,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
@@ -28,6 +31,7 @@ import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -35,26 +39,29 @@ import java.util.List;
 
 public class FriendsActivity extends BaseActivity {
 
-    private FriendsAdapter friendsAdapter;
-    private List<Summoner> friends;
     private boolean add;
+    private List<Summoner> friends;
+    private FriendsAdapter friendsAdapter;
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
-        // no animation if starting activity as a reload
-        if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
-            overridePendingTransition(0, 0);
-        }
-
-        // initialize toolbar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.manage_friends);
-        }
-
-        // initialize back button
+        // initialize the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.manage_friends);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +77,7 @@ public class FriendsActivity extends BaseActivity {
         });
 
         // initialize add friend button
-        final FloatingActionButton addFriend = (FloatingActionButton) findViewById(R.id.add_friend);
+        FloatingActionButton addFriend = (FloatingActionButton) findViewById(R.id.add_friend_button);
         addFriend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // construct and display a dialog containing a single text field where the user enters
@@ -78,11 +85,11 @@ public class FriendsActivity extends BaseActivity {
                 final EditText friendKeyField = new EditText(FriendsActivity.this);
                 friendKeyField.setSingleLine();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(FriendsActivity.this);
+                Builder builder = new Builder(FriendsActivity.this);
                 builder.setTitle(R.string.add_friend);
                 builder.setView(friendKeyField);
                 builder.setCancelable(true);
-                builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.done, new OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String friendKey = friendKeyField.getText().toString();
                         add = true;
@@ -96,29 +103,18 @@ public class FriendsActivity extends BaseActivity {
         new ViewInitialization().execute();
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
-        }
-    }
-
     // makes add/remove friend request to backend via http
     private class RequestFriendOp extends AsyncTask<String, Void, String[]> {
 
-        Summoner user;
         Summoner friend;
+        Summoner user;
 
         @Override
         protected String[] doInBackground(String... params) {
             LocalDB localDB = new LocalDB();
 
             // create the request object
-            user = localDB.getSummoner(new UserInfo().getId(FriendsActivity.this));
+            user = localDB.summoner(new UserInfo().getId(FriendsActivity.this));
             ReqFriend request = new ReqFriend();
             request.region = user.region;
             request.user_key = user.key;
@@ -134,12 +130,12 @@ public class FriendsActivity extends BaseActivity {
                     url = "http://52.90.34.48/summoners/remove-friend.json";
                 }
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqFriend.class));
-            } catch (java.io.IOException e) {
+            } catch (IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@FriendsActivity: " + e.getMessage());
             }
 
             // a successful request requires further local database operations, do those here
-            if (postResponse.contains("summoner_id") && add){
+            if (postResponse.contains("summoner_id") && add) {
                 // save the new friend summoner object
                 friend = ModelUtil.fromJson(postResponse, Summoner.class);
                 friend.save();
@@ -147,7 +143,7 @@ public class FriendsActivity extends BaseActivity {
                 // add the new friend to the users local summoner object friend list
                 user.addFriend(friend.key);
                 user.save();
-            } else if (postResponse.contains("summoner_id") && !add){
+            } else if (postResponse.contains("summoner_id") && !add) {
                 // get the users updated friend list from the returned object
                 Summoner updatedUser = ModelUtil.fromJson(postResponse, Summoner.class);
                 user.friends = updatedUser.friends;
@@ -157,7 +153,7 @@ public class FriendsActivity extends BaseActivity {
                 user.save();
 
                 // delete the friend from local database
-                localDB.getSummoner(request.friend_key).delete();
+                localDB.summoner(request.friend_key).delete();
             }
 
             String[] values = new String[2];
@@ -178,7 +174,7 @@ public class FriendsActivity extends BaseActivity {
                     friendsAdapter.notifyDataSetChanged();
 
                     // make sure the no friends message is gone
-                    TextView noFriends = (TextView) findViewById(R.id.no_friends);
+                    TextView noFriends = (TextView) findViewById(R.id.no_friends_view);
                     noFriends.setVisibility(View.GONE);
                 } else { // remove friend operation
                     // update list view
@@ -192,7 +188,7 @@ public class FriendsActivity extends BaseActivity {
 
                     // check if friends list is empty
                     if (friends.isEmpty()) {
-                        TextView noFriends = (TextView) findViewById(R.id.no_friends);
+                        TextView noFriends = (TextView) findViewById(R.id.no_friends_view);
                         noFriends.setVisibility(View.VISIBLE);
                     }
                 }
@@ -207,20 +203,14 @@ public class FriendsActivity extends BaseActivity {
         TextView noFriends;
 
         @Override
-        protected void onPreExecute(){
-            noFriends = (TextView) findViewById(R.id.no_friends);
-            noFriends.setVisibility(View.GONE);
-        }
-
-        @Override
         protected List<Summoner> doInBackground(Void... params) {
             LocalDB localDB = new LocalDB();
 
             // get user's friends
-            Summoner user = localDB.getSummoner(new UserInfo().getId(FriendsActivity.this));
+            Summoner user = localDB.summoner(new UserInfo().getId(FriendsActivity.this));
             List<String> keys = new ArrayList<>(Arrays.asList(user.friends.split(",")));
 
-            return localDB.getSummoners(keys);
+            return localDB.summoners(keys);
         }
 
         @Override
@@ -231,22 +221,22 @@ public class FriendsActivity extends BaseActivity {
             ListView listView = (ListView) findViewById(R.id.list_view);
             friendsAdapter = new FriendsAdapter(FriendsActivity.this, friends);
             listView.setAdapter(friendsAdapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listView.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
                     // construct and display a dialog asking the user if they want to remove the friend
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(FriendsActivity.this);
+                    Builder builder = new Builder(FriendsActivity.this);
                     builder.setTitle(R.string.remove_friend);
                     builder.setMessage(R.string.remove_friend_message);
                     builder.setCancelable(true);
-                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(R.string.yes, new OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             add = false;
                             new RequestFriendOp().execute(friends.get(position).key);
                             dialog.dismiss();
                         }
                     });
-                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton(R.string.cancel, new OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             dialog.dismiss();
                         }
@@ -259,6 +249,12 @@ public class FriendsActivity extends BaseActivity {
                 // user has no friends
                 noFriends.setVisibility(View.VISIBLE);
             }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            noFriends = (TextView) findViewById(R.id.no_friends_view);
+            noFriends.setVisibility(View.GONE);
         }
     }
 }

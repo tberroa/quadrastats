@@ -1,14 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="3dp"/>
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <com.balysv.materialripple.MaterialRippleLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mrl_rippleOverlay="true">
 
+            <RelativeLayout
+                android:id="@+id/manage_friends_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/manage_friends_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:contentDescription="@string/image_view_description"/>
+
+                <TextView
+                    android:id="@+id/manage_friends_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/manage_friends_image"
+                    android:layout_alignEnd="@id/manage_friends_image"
+                    android:layout_alignStart="@id/manage_friends_image"
+                    android:background="@color/transparent_white"
+                    android:gravity="start"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"/>
+            </RelativeLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mrl_rippleOverlay="true">
+
+            <RelativeLayout
+                android:id="@+id/recent_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/recent_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:contentDescription="@string/image_view_description"/>
+
+                <TextView
+                    android:id="@+id/recent_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/recent_image"
+                    android:layout_alignEnd="@id/recent_image"
+                    android:layout_alignStart="@id/recent_image"
+                    android:background="@color/transparent_white"
+                    android:gravity="start"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"/>
+            </RelativeLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mrl_rippleOverlay="true">
+
+            <RelativeLayout
+                android:id="@+id/season_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/season_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:contentDescription="@string/image_view_description"/>
+
+                <TextView
+                    android:id="@+id/season_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/season_image"
+                    android:layout_alignEnd="@id/season_image"
+                    android:layout_alignStart="@id/season_image"
+                    android:background="@color/transparent_white"
+                    android:gravity="start"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"/>
+            </RelativeLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mrl_rippleOverlay="true">
+
+            <RelativeLayout
+                android:id="@+id/with_friends_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/with_friends_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:contentDescription="@string/image_view_description"/>
+
+                <TextView
+                    android:id="@+id/with_friends_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/with_friends_image"
+                    android:layout_alignEnd="@id/with_friends_image"
+                    android:layout_alignStart="@id/with_friends_image"
+                    android:background="@color/transparent_white"
+                    android:gravity="start"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"/>
+            </RelativeLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+    </LinearLayout>
+</ScrollView>

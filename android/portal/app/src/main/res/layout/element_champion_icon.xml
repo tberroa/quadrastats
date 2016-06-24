@@ -5,7 +5,6 @@
     android:layout_height="wrap_content">
 
     <com.balysv.materialripple.MaterialRippleLayout
-        android:id="@+id/ripple"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,17 +16,16 @@
         app:mrl_rippleOverlay="true">
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/champ_icon_view"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginBottom="1dp"
             android:layout_marginTop="1dp"
-            android:contentDescription="@string/image"
-            android:src="@mipmap/ic_launcher"/>
+            android:contentDescription="@string/image_view_description"/>
     </com.balysv.materialripple.MaterialRippleLayout>
 
     <CheckBox
-        android:id="@+id/checkbox"
+        android:id="@+id/champ_icon_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

@@ -1,5 +1,6 @@
 package com.example.tberroa.portal.screens.authentication;
 
+import android.R.layout;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,29 +24,19 @@ import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.network.Http;
 
+import java.io.IOException;
+
 public class SignInActivity extends AppCompatActivity {
 
-    private EditText keyField, passwordField;
-    private String region, key, password;
+    private static final String RELOAD = "-80";
+    private boolean inView;
+    private String key;
+    private EditText keyField;
+    private String password;
+    private EditText passwordField;
+    private String region;
     private Spinner regionSelect;
     private Button signInButton;
-    private boolean inView;
-
-    private final OnClickListener signInButtonListener = new OnClickListener() {
-        public void onClick(View v) {
-            signInButton.setEnabled(false);
-            signIn();
-        }
-    };
-
-    private final OnClickListener goToRegisterButtonListener = new OnClickListener() {
-        public void onClick(View v) {
-            Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Params.RELOAD);
-            startActivity(intent);
-            finish();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,49 +44,44 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         // no animation if starting activity as a reload
-        if (getIntent().getAction() != null && getIntent().getAction().equals(Params.RELOAD)) {
+        if ((getIntent().getAction() != null) && getIntent().getAction().equals(RELOAD)) {
             overridePendingTransition(0, 0);
         }
 
         // check if user is already signed in
-        if (new UserInfo().isSignedIn(this)) {
-            startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+        if (new UserInfo().getSignInStatus(this)) {
+            startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
 
         // initialize input fields
-        keyField = (EditText) findViewById(R.id.name);
-        passwordField = (EditText) findViewById(R.id.password);
-        regionSelect = (Spinner) findViewById(R.id.region_select);
+        keyField = (EditText) findViewById(R.id.summoner_name_field);
+        passwordField = (EditText) findViewById(R.id.password_field);
+        regionSelect = (Spinner) findViewById(R.id.region_select_spinner);
 
         // initialize buttons
-        signInButton = (Button) findViewById(R.id.sign_in);
-        signInButton.setOnClickListener(signInButtonListener);
-        TextView goToRegisterButton = (TextView) findViewById(R.id.register);
-        goToRegisterButton.setOnClickListener(goToRegisterButtonListener);
+        signInButton = (Button) findViewById(R.id.sign_in_button);
+        signInButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                signInButton.setEnabled(false);
+                signIn();
+            }
+        });
+        TextView goToRegisterButton = (TextView) findViewById(R.id.go_to_register_view);
+        goToRegisterButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(RELOAD);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         // initialize region select spinner
         ArrayAdapter<CharSequence> adapter;
-        adapter = ArrayAdapter.createFromResource(this, R.array.select_region, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter = ArrayAdapter.createFromResource(this, R.array.select_region, layout.simple_spinner_item);
+        adapter.setDropDownViewResource(layout.simple_spinner_dropdown_item);
         regionSelect.setAdapter(adapter);
-    }
-
-    private void signIn() {
-        key = keyField.getText().toString();
-        password = passwordField.getText().toString();
-
-        // make sure a region is selected
-        final int regionSelection = regionSelect.getSelectedItemPosition();
-        if (regionSelection > 0) {
-            region = AuthUtil.decodeRegion(regionSelection);
-        } else { // display error
-            Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
-            signInButton.setEnabled(true);
-            return;
-        }
-
-        new RequestSignIn().execute();
     }
 
     @Override
@@ -108,6 +94,23 @@ public class SignInActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         inView = false;
+    }
+
+    private void signIn() {
+        key = keyField.getText().toString();
+        password = passwordField.getText().toString();
+
+        // make sure a region is selected
+        int regionSelection = regionSelect.getSelectedItemPosition();
+        if (regionSelection > 0) {
+            region = AuthUtil.decodeRegion(regionSelection);
+        } else { // display error
+            Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
+            signInButton.setEnabled(true);
+            return;
+        }
+
+        new RequestSignIn().execute();
     }
 
     // makes sign in request to backend via http
@@ -127,7 +130,7 @@ public class SignInActivity extends AppCompatActivity {
             try {
                 String url = "http://52.90.34.48/summoners/login.json";
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqSignIn.class));
-            } catch (java.io.IOException e) {
+            } catch (IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());
             }
 

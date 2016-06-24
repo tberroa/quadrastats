@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/app_slogan"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:text="@string/app_name"
         android:textColor="@color/logo_main"
         android:textSize="75sp"/>
 
     <TextView
-        android:id="@+id/app_slogan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_marginBottom="25dp"
         android:text="@string/app_slogan"
         android:textColor="@color/logo_slogan"
         android:textSize="20sp"/>
 
     <TextView
-        android:id="@+id/fetching_data_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/app_slogan"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="@string/initializing_data"
         android:textColor="@color/white"
         android:textSize="20sp"/>
-</RelativeLayout>
+</LinearLayout>

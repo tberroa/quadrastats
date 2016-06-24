@@ -28,7 +28,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder;
 
@@ -39,8 +39,8 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
             convertView = inflater.inflate(R.layout.row_friends, parent, false);
 
             // initialize views
-            viewHolder.profileIcon = (ImageView) convertView.findViewById(R.id.profile_icon);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
+            viewHolder.profileIcon = (ImageView) convertView.findViewById(R.id.friend_profile_icon_view);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.friend_summoner_name_view);
 
             // set tag
             convertView.setTag(viewHolder);
@@ -49,7 +49,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         }
 
         // set the profile icon
-        String url = ScreenUtil.constructIconURL(friends.get(position).profile_icon);
+        String url = ScreenUtil.constructProfileIconURL(friends.get(position).profile_icon);
         Picasso.with(context).load(url).fit().transform(new CircleTransform()).into(viewHolder.profileIcon);
 
         // set name
@@ -59,7 +59,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
     }
 
     class ViewHolder {
-        ImageView profileIcon;
         TextView name;
+        ImageView profileIcon;
     }
 }

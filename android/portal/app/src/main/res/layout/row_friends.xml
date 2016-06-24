@@ -5,20 +5,19 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/profile_icon"
+        android:id="@+id/friend_profile_icon_view"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_margin="5dp"
-        android:contentDescription="@string/profile_icon"/>
+        android:contentDescription="@string/image_view_description"/>
 
     <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
+        android:id="@+id/friend_summoner_name_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
-        android:layout_toEndOf="@id/profile_icon"
-        android:text="@string/summoner_name"
+        android:layout_toEndOf="@id/friend_profile_icon_view"
         android:textColor="@color/white"
         android:textSize="30sp"/>
 </RelativeLayout>

@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/wf_tab_bar"
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
@@ -17,10 +17,13 @@
         app:tabMode="scrollable"/>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/wf_view_pager"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadeScrollbars="true"
         android:scrollbars="vertical"/>
 </LinearLayout>
+
+
+
 

@@ -8,7 +8,7 @@ public class StatsUtil {
     private StatsUtil() {
     }
 
-    public static int getChampionKey(String name) {
+    public static int championKey(String name) {
         switch (name) {
             case "aatrox":
                 return 266;
@@ -277,8 +277,8 @@ public class StatsUtil {
         }
     }
 
-    static public String getChampionName(int key) {
-        switch (key) {
+    public static String championName(long key) {
+        switch ((int) key) {
             case 266:
                 return "aatrox";
             case 103:
@@ -546,7 +546,7 @@ public class StatsUtil {
         }
     }
 
-    static public List<String> getChampionNames() {
+    public static List<String> championNames() {
         List<String> champions = new ArrayList<>(150);
         champions.add("aatrox");
         champions.add("ahri");

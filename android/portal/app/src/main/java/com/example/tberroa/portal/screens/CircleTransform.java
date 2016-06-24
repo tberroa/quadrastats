@@ -8,6 +8,12 @@ import android.graphics.Paint;
 import com.squareup.picasso.Transformation;
 
 public class CircleTransform implements Transformation {
+
+    @Override
+    public String key() {
+        return "circle";
+    }
+
     @Override
     public Bitmap transform(Bitmap source) {
         int size = Math.min(source.getWidth(), source.getHeight());
@@ -34,10 +40,5 @@ public class CircleTransform implements Transformation {
 
         squaredBitmap.recycle();
         return bitmap;
-    }
-
-    @Override
-    public String key() {
-        return "circle";
     }
 }

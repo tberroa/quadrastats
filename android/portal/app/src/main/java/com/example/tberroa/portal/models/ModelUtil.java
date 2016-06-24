@@ -11,18 +11,18 @@ public class ModelUtil {
     private ModelUtil() {
     }
 
-    static public <T> String toJson(T object, Class<T> clazz) {
-        final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        return gson.toJson(object, clazz);
-    }
-
-    static public <T> T fromJson(String jsonString, Class<T> clazz) {
-        final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    public static <T> T fromJson(String jsonString, Class<T> clazz) {
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.fromJson(jsonString, clazz);
     }
 
-    static public <T> List<T> fromJsonList(String jsonString, Type type) {
-        final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    public static <T> List<T> fromJsonList(String jsonString, Type type) {
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.fromJson(jsonString, type);
+    }
+
+    public static <T> String toJson(T object, Class<T> clazz) {
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        return gson.toJson(object, clazz);
     }
 }

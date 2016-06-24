@@ -18,8 +18,28 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/victory_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/victory"
+                android:textColor="@color/series_blue"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/defeat_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/defeat"
+                android:textColor="@color/series_red"
+                android:textSize="30sp"/>
+
             <GridLayout
-                android:id="@+id/wf_summoner_table"
+                android:id="@+id/summoner_table_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:columnCount="1"
@@ -27,7 +47,7 @@
             </GridLayout>
 
             <TextView
-                android:id="@+id/wf_dmg_title"
+                android:id="@+id/dmg_chart_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -36,14 +56,14 @@
                 android:textSize="20sp"/>
 
             <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/wf_dmg_chart"
+                android:id="@+id/dmg_chart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"/>
 
             <TextView
-                android:id="@+id/wf_kills_title"
+                android:id="@+id/kills_chart_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="-30dp"
@@ -53,7 +73,7 @@
                 android:textSize="20sp"/>
 
             <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/wf_kills_chart"
+                android:id="@+id/kills_chart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_marginEnd="30dp"
@@ -62,7 +82,6 @@
     </ScrollView>
 
     <include
-        android:id="@+id/legend_layout"
         layout="@layout/element_legend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

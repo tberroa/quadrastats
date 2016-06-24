@@ -14,7 +14,34 @@ public class AuthUtil {
     private AuthUtil() {
     }
 
-    public static void signIn(final Context context, final Summoner summoner, final boolean inView) {
+    public static String decodeRegion(int position) {
+        switch (position) {
+            case 1:
+                return "br";
+            case 2:
+                return "eune";
+            case 3:
+                return "euw";
+            case 4:
+                return "kr";
+            case 5:
+                return "lan";
+            case 6:
+                return "las";
+            case 7:
+                return "na";
+            case 8:
+                return "oce";
+            case 9:
+                return "ru";
+            case 10:
+                return "tr";
+            default:
+                return "";
+        }
+    }
+
+    public static void signIn(Context context, Summoner summoner, boolean inView) {
         UserInfo userInfo = new UserInfo();
 
         // clear local database
@@ -24,7 +51,6 @@ public class AuthUtil {
         userInfo.clear(context);
 
         // save user info
-        userInfo.setName(context, summoner.name);
         userInfo.setId(context, summoner.summoner_id);
         userInfo.setSignInStatus(context, true);
 
@@ -55,32 +81,5 @@ public class AuthUtil {
         // go to sign in page
         context.startActivity(new Intent(context, SignInActivity.class));
         ((Activity) context).finish();
-    }
-
-    public static String decodeRegion(int position) {
-        switch (position) {
-            case 1:
-                return "br";
-            case 2:
-                return "eune";
-            case 3:
-                return "euw";
-            case 4:
-                return "kr";
-            case 5:
-                return "lan";
-            case 6:
-                return "las";
-            case 7:
-                return "na";
-            case 8:
-                return "oce";
-            case 9:
-                return "ru";
-            case 10:
-                return "tr";
-            default:
-                return "";
-        }
     }
 }

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,41 +27,16 @@ import com.example.tberroa.portal.screens.stats.season.SeasonActivity;
 import com.example.tberroa.portal.screens.stats.withfriends.WithFriendsActivity;
 import com.squareup.picasso.Picasso;
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class BaseActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
-    protected Toolbar toolbar;
-    private SmoothActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
-
-    @SuppressLint("InflateParams")
-    @Override
-    public void setContentView(final int layoutResID) {
-        // base layout
-        drawer = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
-        FrameLayout content = (FrameLayout) drawer.findViewById(R.id.activity_content);
-
-        // fill content layout with the provided layout
-        getLayoutInflater().inflate(layoutResID, content, true);
-        super.setContentView(drawer);
-
-        // initialize toolbar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        // initialize drawer
-        toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        // get the user's profile icon and name
-        new ViewInitialization().execute();
-    }
+    private SmoothActionBarDrawerToggle toggle;
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        int itemId = item.getItemId();
 
-        switch (id) {
+        switch (itemId) {
             case R.id.view_profile:
                 toggle.runWhenIdle(new Runnable() {
                     @Override
@@ -115,6 +91,54 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @SuppressLint("InflateParams")
+    @Override
+    public void setContentView(View view) {
+        // base layout
+        drawer = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+        FrameLayout content = (FrameLayout) drawer.findViewById(R.id.content_layout);
+
+        // fill content layout with the provided layout
+        content.addView(view);
+        super.setContentView(drawer);
+
+        // initialize toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        // initialize drawer
+        toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        // get the user's profile icon and name
+        new ViewInitialization().execute();
+    }
+
+    @SuppressLint("InflateParams")
+    @Override
+    public void setContentView(int layoutResID) {
+        // base layout
+        drawer = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+        FrameLayout content = (FrameLayout) drawer.findViewById(R.id.content_layout);
+
+        // fill content layout with the provided layout
+        getLayoutInflater().inflate(layoutResID, content, true);
+
+        // set the view
+        super.setContentView(drawer);
+
+        // initialize toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        // initialize drawer
+        toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        // get the user's profile icon and name
+        new ViewInitialization().execute();
+    }
+
     private class SmoothActionBarDrawerToggle extends ActionBarDrawerToggle {
 
         private Runnable runnable;
@@ -125,21 +149,21 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         }
 
         @Override
-        public void onDrawerOpened(View drawerView) {
-            super.onDrawerOpened(drawerView);
-            invalidateOptionsMenu();
-        }
-
-        @Override
         public void onDrawerClosed(View view) {
             super.onDrawerClosed(view);
             invalidateOptionsMenu();
         }
 
         @Override
+        public void onDrawerOpened(View drawerView) {
+            super.onDrawerOpened(drawerView);
+            invalidateOptionsMenu();
+        }
+
+        @Override
         public void onDrawerStateChanged(int newState) {
             super.onDrawerStateChanged(newState);
-            if (runnable != null && newState == DrawerLayout.STATE_IDLE) {
+            if ((runnable != null) && (newState == DrawerLayout.STATE_IDLE)) {
                 runnable.run();
                 runnable = null;
             }
@@ -154,7 +178,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         protected Summoner doInBackground(Void... params) {
-            return new LocalDB().getSummoner(new UserInfo().getId(BaseActivity.this));
+            return new LocalDB().summoner(new UserInfo().getId(BaseActivity.this));
         }
 
         @Override
@@ -168,12 +192,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             View headerLayout = navigationView.getHeaderView(0);
 
             // display the user's name
-            TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.name);
+            TextView summonerNameView = (TextView) headerLayout.findViewById(R.id.user_summoner_name_view);
             summonerNameView.setText(name);
 
             // display the profile icon
-            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.profile_icon);
-            String url = ScreenUtil.constructIconURL(profileIcon);
+            ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.user_profile_icon_view);
+            String url = ScreenUtil.constructProfileIconURL(profileIcon);
             Picasso.with(BaseActivity.this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
         }
     }

@@ -13,7 +13,7 @@ import com.example.tberroa.portal.screens.home.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private boolean inView = false;
+    private boolean inView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

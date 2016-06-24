@@ -31,7 +31,7 @@ public class RecentFragment extends Fragment {
 
         if (isAdded()) {
             // grab data passed to fragment
-            Bundle bundle = this.getArguments();
+            Bundle bundle = getArguments();
             List<String> titles = bundle.getStringArrayList("titles");
             Type chartDataType = new TypeToken<Map<String, List<List<Number>>>>() {
             }.getType();
@@ -47,7 +47,7 @@ public class RecentFragment extends Fragment {
                     labelsList.add(new ArrayList<String>());
                     List<Entry> data = new ArrayList<>();
                     for (int j = 0; j < entry.getValue().get(i).size(); j++) {
-                        if (j > labelsList.get(i).size() - 1) {
+                        if (j > (labelsList.get(i).size() - 1)) {
                             labelsList.get(i).add("");
                         }
                         data.add(new Entry(entry.getValue().get(i).get(j).floatValue(), j));
@@ -58,7 +58,7 @@ public class RecentFragment extends Fragment {
 
             // create the data sets
             List<List<ILineDataSet>> lineDataSetsList = new ArrayList<>();
-            int[] colors = ScreenUtil.getChartColors();
+            int[] colors = ScreenUtil.chartColors();
             for (List<List<Entry>> dataList : dataListList) {
                 int x = 0;
                 List<ILineDataSet> lineDataSets = new ArrayList<>();

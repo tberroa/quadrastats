@@ -13,6 +13,7 @@ import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.network.Http;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +28,7 @@ public class SignInIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         // get the user's summoner object
-        Summoner user = new LocalDB().getSummoner(new UserInfo().getId(this));
+        Summoner user = new LocalDB().summoner(new UserInfo().getId(this));
 
         // get and save locally the summoner objects for the friends
         if (user.friends != null) {
@@ -44,16 +45,17 @@ public class SignInIntentService extends IntentService {
             try {
                 String url = "http://52.90.34.48/summoners/get.json";
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
-            } catch (java.io.IOException e) {
+            } catch (IOException e) {
                 Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());
             }
 
             // save
-            if (postResponse != null && postResponse.contains("summoner_id")){
-                Type type =  new TypeToken<List<Summoner>>() {}.getType();
+            if ((postResponse != null) && postResponse.contains("summoner_id")) {
+                Type type = new TypeToken<List<Summoner>>() {
+                }.getType();
                 List<Summoner> friends = ModelUtil.fromJsonList(postResponse, type);
 
-                for (Summoner friend : friends){
+                for (Summoner friend : friends) {
                     friend.save();
                 }
             }

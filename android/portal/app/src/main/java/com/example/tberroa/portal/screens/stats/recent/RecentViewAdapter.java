@@ -4,14 +4,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.Adapter;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.stats.recent.RecentViewAdapter.chartViewHolder;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
@@ -23,51 +26,31 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
-public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.chartViewHolder> {
+public class RecentViewAdapter extends Adapter<chartViewHolder> {
 
     private final Context context;
-    private final List<String> titles;
+    private final Map<String, List<List<Number>>> data;
+    private final List<Integer> emptyDataSets;
     private final List<List<String>> labelsList;
     private final List<List<ILineDataSet>> lineDataSetsList;
-    private final List<Integer> emptyDataSets;
-    private final Map<String, List<List<Number>>> data;
     private final int numberOfCharts;
+    private final List<String> titles;
 
     public RecentViewAdapter(Context context, ViewPackage viewPackage) {
         this.context = context;
-        this.titles = viewPackage.titles;
-        this.labelsList = viewPackage.labelsList;
-        this.lineDataSetsList = viewPackage.lineDataSetsList;
-        this.emptyDataSets = viewPackage.emptyDataSets;
-        this.data = viewPackage.data;
+        titles = viewPackage.titles;
+        labelsList = viewPackage.labelsList;
+        lineDataSetsList = viewPackage.lineDataSetsList;
+        emptyDataSets = viewPackage.emptyDataSets;
+        data = viewPackage.data;
         numberOfCharts = titles.size();
-    }
-
-    public class chartViewHolder extends RecyclerView.ViewHolder {
-        final TextView title;
-        final LineChart lineChart;
-        final TextView noData;
-
-        chartViewHolder(View itemView) {
-            super(itemView);
-            title = (TextView) itemView.findViewById(R.id.chart_title);
-            title.setVisibility(View.GONE);
-            lineChart = (LineChart) itemView.findViewById(R.id.line_chart);
-            lineChart.setVisibility(View.GONE);
-            noData = (TextView) itemView.findViewById(R.id.no_data);
-            noData.setVisibility(View.GONE);
-        }
     }
 
     @Override
     public int getItemCount() {
         return numberOfCharts;
-    }
-
-    @Override
-    public chartViewHolder onCreateViewHolder(ViewGroup vG, int i) {
-        return new chartViewHolder(LayoutInflater.from(vG.getContext()).inflate(R.layout.element_line_chart, vG, false));
     }
 
     @Override
@@ -96,7 +79,7 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.ch
 
             // display chart
             chartViewHolder.lineChart.setVisibility(View.VISIBLE);
-            chartViewHolder.lineChart.setOnLongClickListener(new View.OnLongClickListener() {
+            chartViewHolder.lineChart.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     new BarChartDialog(titles.get(i), i).show();
@@ -109,10 +92,31 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.ch
         }
     }
 
+    @Override
+    public chartViewHolder onCreateViewHolder(ViewGroup vG, int i) {
+        return new chartViewHolder(LayoutInflater.from(vG.getContext()).inflate(R.layout.element_line_chart, vG, false));
+    }
+
+    public class chartViewHolder extends ViewHolder {
+        final LineChart lineChart;
+        final TextView noData;
+        final TextView title;
+
+        chartViewHolder(View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.chart_title_view);
+            title.setVisibility(View.GONE);
+            lineChart = (LineChart) itemView.findViewById(R.id.line_chart);
+            lineChart.setVisibility(View.GONE);
+            noData = (TextView) itemView.findViewById(R.id.no_data_view);
+            noData.setVisibility(View.GONE);
+        }
+    }
+
     private class BarChartDialog extends Dialog {
 
-        final String title;
         final int i;
+        final String title;
 
         public BarChartDialog(String title, int i) {
             super(context, R.style.DialogStyle);
@@ -133,7 +137,7 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.ch
 
             // populate the arrays
             int x = 0;
-            for (Map.Entry<String, List<List<Number>>> entry : RecentViewAdapter.this.data.entrySet()) {
+            for (Entry<String, List<List<Number>>> entry : RecentViewAdapter.this.data.entrySet()) {
                 labels.add("");
 
                 // calculate average
@@ -150,7 +154,7 @@ public class RecentViewAdapter extends RecyclerView.Adapter<RecentViewAdapter.ch
 
             // use the arrays to create a data set
             BarDataSet barDataSet = new BarDataSet(data, null);
-            barDataSet.setColors(ScreenUtil.getChartColors(), context);
+            barDataSet.setColors(ScreenUtil.chartColors(), context);
             barDataSet.setDrawValues(false);
             barChart.setData(new BarData(labels, barDataSet));
 

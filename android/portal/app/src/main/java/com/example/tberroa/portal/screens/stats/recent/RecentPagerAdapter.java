@@ -13,11 +13,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 class RecentPagerAdapter extends FragmentStatePagerAdapter {
 
-    private final int numberOfTabs;
     private final Bundle incomeBundle = new Bundle();
+    private final int numberOfTabs;
     private final Bundle offenseBundle = new Bundle();
     private final Bundle utilityBundle = new Bundle();
     private final Bundle visionBundle = new Bundle();
@@ -25,7 +26,7 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
     public RecentPagerAdapter(FragmentManager fM, int numOfTabs,
                               ArrayList<String> titles, Map<String, List<List<Number>>> data) {
         super(fM);
-        this.numberOfTabs = numOfTabs;
+        numberOfTabs = numOfTabs;
 
         // split the data by tab
         Map<String, List<List<Number>>> incomeData = new LinkedHashMap<>();
@@ -34,7 +35,7 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
         Map<String, List<List<Number>>> visionData = new LinkedHashMap<>();
 
         if (!data.isEmpty()) {
-            for (Map.Entry<String, List<List<Number>>> entry : data.entrySet()) {
+            for (Entry<String, List<List<Number>>> entry : data.entrySet()) {
                 List<List<Number>> summonerData = entry.getValue();
                 incomeData.put(entry.getKey(), summonerData.subList(0, 4));
                 offenseData.put(entry.getKey(), summonerData.subList(4, 6));
@@ -64,6 +65,11 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
+    public int getCount() {
+        return numberOfTabs;
+    }
+
+    @Override
     public Fragment getItem(int position) {
         RecentFragment recentFragment = new RecentFragment();
         switch (position) {
@@ -81,10 +87,5 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
                 break;
         }
         return recentFragment;
-    }
-
-    @Override
-    public int getCount() {
-        return numberOfTabs;
     }
 }

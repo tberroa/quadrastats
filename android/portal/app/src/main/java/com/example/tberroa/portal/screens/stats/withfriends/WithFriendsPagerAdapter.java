@@ -16,14 +16,19 @@ import java.util.Map;
 
 class WithFriendsPagerAdapter extends FragmentStatePagerAdapter {
 
-    private final int numberOfTabs;
     private final Map<Long, Map<String, MatchStats>> matchStatsMapMap;
+    private final int numberOfTabs;
 
     public WithFriendsPagerAdapter(FragmentManager fM, int numOfTabs,
                                    Map<Long, Map<String, MatchStats>> matchStatsMapMap) {
         super(fM);
-        this.numberOfTabs = numOfTabs;
+        numberOfTabs = numOfTabs;
         this.matchStatsMapMap = matchStatsMapMap;
+    }
+
+    @Override
+    public int getCount() {
+        return numberOfTabs;
     }
 
     @Override
@@ -31,7 +36,8 @@ class WithFriendsPagerAdapter extends FragmentStatePagerAdapter {
         WithFriendsFragment withFriendsFragment = new WithFriendsFragment();
 
         Map<String, MatchStats> matchStatsMap = new ArrayList<>(matchStatsMapMap.values()).get(position);
-        Type matchStatsMapType = new TypeToken<Map<String, MatchStats>>(){}.getType();
+        Type matchStatsMapType = new TypeToken<Map<String, MatchStats>>() {
+        }.getType();
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String matchStatMapJson = gson.toJson(matchStatsMap, matchStatsMapType);
 
@@ -40,10 +46,5 @@ class WithFriendsPagerAdapter extends FragmentStatePagerAdapter {
 
         withFriendsFragment.setArguments(bundle);
         return withFriendsFragment;
-    }
-
-    @Override
-    public int getCount() {
-        return numberOfTabs;
     }
 }
