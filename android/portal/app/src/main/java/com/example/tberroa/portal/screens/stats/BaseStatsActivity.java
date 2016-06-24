@@ -108,6 +108,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
         public WithFriendsAsync delegateWithFriends;
         private int activityId;
         private List<MatchStats> matchStatsList;
+        private Map<Long, Map<String, MatchStats>> matchStatsMapMap;
         private String postResponse = "";
 
         @Override
@@ -144,12 +145,12 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                 // get the match stats objects
                 Type type = new TypeToken<List<MatchStats>>() {
                 }.getType();
-                matchStatsList = ModelUtil.fromJsonList(postResponse, type);
+                List<MatchStats> serverMatchStatsList = ModelUtil.fromJsonList(postResponse, type);
 
                 // save any new match stats
                 ActiveAndroid.beginTransaction();
                 try {
-                    for (MatchStats matchStats : matchStatsList) {
+                    for (MatchStats matchStats : serverMatchStatsList) {
                         if (localDB.matchStats(matchStats.summoner_key, matchStats.match_id) == null) {
                             // received new data
                             result[1] = true;
@@ -160,6 +161,22 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                 } finally {
                     ActiveAndroid.endTransaction();
                 }
+            }
+
+            // gather the appropriate data
+            List<String> keysList = new ArrayList<>(Arrays.asList(keys.split(",")));
+            switch (activityId) {
+                case 1: // recent activity
+                    matchStatsList = localDB.matchStatsList(keysList, 0, null, null);
+                    break;
+                case 3: // with friends activity
+                    List<MatchStats> matches = localDB.matchStatsList(user.key);
+                    List<Long> matchIds = new ArrayList<>();
+                    for (MatchStats match : matches) {
+                        matchIds.add(match.match_id);
+                    }
+                    matchStatsMapMap = localDB.matchesWithFriends(matchIds, keysList);
+                    break;
             }
 
             return result;
@@ -189,6 +206,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                             delegateRecent.displayData(matchStatsList);
                             break;
                         case 3: // with friends activity
+                            delegateWithFriends.displayData(matchStatsMapMap);
                             break;
                     }
                 }
@@ -284,9 +302,10 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                     break;
             }
 
-
             // there is data to display
             scrollView.setVisibility(View.GONE);
+            useDataSwipeLayout = true;
+            dataSwipeLayout.setEnabled(true);
             switch (activityId) {
                 case 1:
                     delegateRecent.displayData(matchStatsList);
