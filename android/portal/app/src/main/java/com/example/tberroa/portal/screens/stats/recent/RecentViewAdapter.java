@@ -94,7 +94,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
 
     @Override
     public chartViewHolder onCreateViewHolder(ViewGroup vG, int i) {
-        return new chartViewHolder(LayoutInflater.from(vG.getContext()).inflate(R.layout.element_line_chart, vG, false));
+        return new chartViewHolder(LayoutInflater.from(vG.getContext()).inflate(R.layout.view_recent, vG, false));
     }
 
     public class chartViewHolder extends ViewHolder {

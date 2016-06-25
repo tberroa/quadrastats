@@ -36,7 +36,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
             // initialize view holder and layout inflater
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.row_friends, parent, false);
+            convertView = inflater.inflate(R.layout.view_friends, parent, false);
 
             // initialize views
             viewHolder.profileIcon = (ImageView) convertView.findViewById(R.id.friend_profile_icon_view);

@@ -5,81 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/victory_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/victory"
-                android:textColor="@color/series_blue"
-                android:textSize="30sp"/>
-
-            <TextView
-                android:id="@+id/defeat_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/defeat"
-                android:textColor="@color/series_red"
-                android:textSize="30sp"/>
-
-            <GridLayout
-                android:id="@+id/summoner_table_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:columnCount="1"
-                android:orientation="vertical">
-            </GridLayout>
-
-            <TextView
-                android:id="@+id/dmg_chart_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@string/dmg_to_champs"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/dmg_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"/>
-
-            <TextView
-                android:id="@+id/kills_chart_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="-30dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/kills"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/kills_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"/>
-        </LinearLayout>
-    </ScrollView>
+        android:layout_weight="1"
+        android:fadeScrollbars="true"
+        android:scrollbars="vertical"/>
 
     <include
         layout="@layout/element_legend"
