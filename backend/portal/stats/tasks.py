@@ -280,7 +280,7 @@ def update_one(summoner):
                 magic_damage_dealt = stats.get("magicDamageDealt"), \
                 magic_damage_dealt_to_champions = stats.get("magicDamageDealtToChampions"), \
                 magic_damage_taken = stats.get("magicDamageTaken"), \
-                minions_killed = minions_killed, \
+                minions_killed = minions_killed + neutral_minions_killed, \
                 neutral_minions_killed = neutral_minions_killed, \
                 neutral_minions_killed_enemy_jungle = stats.get("neutralMinionsKilledEnemyJungle"), \
                 neutral_minions_killed_team_jungle = stats.get("neutralMinionsKilledTeamJungle"), \
