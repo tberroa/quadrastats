@@ -1,8 +1,8 @@
 package com.example.tberroa.portal.screens.stats.withfriends;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +40,13 @@ public class WithFriendsFragment extends Fragment {
             if (matchStatsMap != null) {
                 List<String> names = new ArrayList<>(matchStatsMap.keySet());
 
+                // if it wasn't a five man queue, include label for non friends
+                boolean notFiveMan = false;
+                if (names.size() < 5){
+                    notFiveMan = true;
+                    names.add(getResources().getString(R.string.gwf_others));
+                }
+
                 // initialize recycler view
                 RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
                 recyclerView.setHasFixedSize(true);
@@ -49,13 +56,13 @@ public class WithFriendsFragment extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
                 // display legend
-                createLegend(names, v);
+                createLegend(names, v, notFiveMan);
             }
         }
         return v;
     }
 
-    private void createLegend(List<String> names, View v) {
+    private void createLegend(List<String> names, View v, boolean notFiveMan) {
         // set unused elements to gone
         ImageView positionIcon = (ImageView) v.findViewById(R.id.position_view);
         positionIcon.setVisibility(View.GONE);
@@ -70,7 +77,7 @@ public class WithFriendsFragment extends Fragment {
             TextView textView = new TextView(getActivity());
             textView.setText(name);
             textView.setTextSize(12);
-            textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
+            textView.setTextColor(Color.WHITE);
             textView.setPadding(ScreenUtil.dpToPx(getActivity(), 5), 0, ScreenUtil.dpToPx(getActivity(), 5), 0);
             legendNames.addView(textView);
 
@@ -78,7 +85,11 @@ public class WithFriendsFragment extends Fragment {
             imageView.setMinimumWidth(ScreenUtil.dpToPx(getActivity(), 10));
             imageView.setMinimumHeight(ScreenUtil.dpToPx(getActivity(), 10));
             imageView.setPadding(0, ScreenUtil.dpToPx(getActivity(), 5), 0, 0);
-            imageView.setImageResource(ScreenUtil.intToColor(i));
+            if ((notFiveMan) && (i == (names.size()-1))){
+                imageView.setImageResource(R.color.gray);
+            }else{
+                imageView.setImageResource(ScreenUtil.intToColor(i));
+            }
             legendNames.addView(imageView);
 
             i++;

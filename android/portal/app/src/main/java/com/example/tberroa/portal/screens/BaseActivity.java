@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.models.summoner.Summoner;
-import com.example.tberroa.portal.screens.profile.ProfileActivity;
+import com.example.tberroa.portal.screens.account.AccountActivity;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.stats.recent.RecentActivity;
@@ -41,7 +41,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(BaseActivity.this, ProfileActivity.class));
+                        startActivity(new Intent(BaseActivity.this, AccountActivity.class));
                         finish();
                     }
                 });

@@ -3,21 +3,23 @@
     <string name="app_name">Portal</string>
     <string name="app_slogan">Stats That Mean Something</string>
 
-    <!-- user authentication -->
-    <!-- field hints -->
-    <string name="summoner_name">Summoner Name</string>
-    <string name="password">Password</string>
-    <string name="confirm_password">Confirm password</string>
-    <!-- input validation -->
-    <string name="password_mismatch">Password mismatch</string>
-    <!-- submit buttons -->
-    <string name="sign_in_button">Sign In</string>
-    <string name="register_button">Register</string>
-    <!-- text links -->
-    <string name="go_to_register">No account yet? Create one</string>
-    <string name="go_to_sign_in">Already have an account? Sign In</string>
-    <!-- region selection -->
-    <string-array name="select_region">
+    <!-- authentication activities -->
+    <string name="auth_summoner_name">Summoner Name</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_confirm_password">Confirm password</string>
+    <string name="auth_password_mismatch">Password mismatch</string>
+    <string name="auth_sign_in">Sign In</string>
+    <string name="auth_register">Register</string>
+    <string name="auth_go_to_register">No account yet? Create one</string>
+    <string name="auth_go_to_sign_in">Already have an account? Sign In</string>
+    <string name="auth_initializing_data">Grabbing your data &#8230;</string>
+    <string name="auth_validate_ownership">Validate Ownership</string>
+    <string name="auth_validate_ownership_instructions">
+        Almost done! Just change one of your rune pages to the number below in order
+        to prove ownership of the summoner account. After changing your rune page, wait
+        about 5 seconds before pressing Done to allow for the Riot servers to update.
+    </string>
+    <string-array name="auth_select_region">
         <item>Select Region</item>
         <item>Brazil</item>
         <item>Europe Nordic &amp; East</item>
@@ -30,64 +32,68 @@
         <item>Russia</item>
         <item>Turkey</item>
     </string-array>
-    <string name="initializing_data">Grabbing your data &#8230;</string>
-    <string name="cancel">Cancel</string>
 
-    <!-- dialogs -->
-    <string name="validate_ownership_title">Validate Ownership</string>
-    <string name="validate_ownership">
-        Almost done! Just change one of your rune pages to the number below in order
-        to prove ownership of the summoner account. After changing your rune page, wait
-        about 5 seconds before pressing Done to allow for the Riot servers to update.
-    </string>
-    <string name="done">Done</string>
-    <string name="yes">Yes</string>
-    <string name="go">Go</string>
-    <string name="average">Average</string>
+    <!-- manage account activity -->
+    <string name="ma_activity_title">Manage Account</string>
+    <string name="ma_sign_out">Sign Out</string>
 
-    <!-- navigation -->
-    <string name="account">Account</string>
-    <string name="view_profile">View Profile</string>
-    <string name="manage_friends">Manage Friends</string>
-    <string name="stats">Stats</string>
-    <string name="recent_games">Recent Games</string>
-    <string name="season_totals">Season Totals</string>
-    <string name="with_friends">Games With Friends</string>
-    <string name="sign_out">Sign Out</string>
-
-    <!-- event messages -->
-    <string name="loading">Loading&#8230;</string>
-    <string name="nothing_here">Sorry, there is nothing to see here.</string>
-    <string name="no_friends_stats">You have no friends to compare stats with!</string>
-    <string name="no_friends">Click the + button to add friends.</string>
-    <string name="no_stats">No stats were found. Swipe down to retrieve the newest stats.</string>
-
-    <!-- activity titles -->
-    <string name="profile">Profile</string>
-
-    <!-- element labels and titles -->
-    <string name="add_friend">Add Friend</string>
-    <string name="add_friends">Add Friends</string>
-    <string name="remove_friend">Remove Friend</string>
-    <string name="remove_friend_message">
+    <!-- manage friends activity -->
+    <string name="mf_activity_title">Manage Friends</string>
+    <string name="mf_no_friends">Click the + button to add friends.</string>
+    <string name="mf_add_friend">Add Friend</string>
+    <string name="mf_remove_friend">Remove Friend</string>
+    <string name="mf_remove_friend_confirm">
         Are you sure you want to remove this person from your friends list?
     </string>
-    <string name="summoners_to_chart">Select Summoners to Chart</string>
-    <string name="filter_data">Filter Data</string>
-    <string name="cs_at_ten">CS At 10</string>
-    <string name="cs_diff_at_ten">CS Differential At 10</string>
-    <string name="cs_per_min">CS Per Minute</string>
-    <string name="gold_per_min">Gold Per Minute</string>
-    <string name="dmg_per_min">Damage Per Minute</string>
-    <string name="kills">Kills</string>
-    <string name="kda">KDA</string>
-    <string name="kill_participation">Kill Participation</string>
-    <string name="vision_wards_bought">Vision Wards Bought"</string>
-    <string name="wards_placed">Wards Placed</string>
-    <string name="wards_killed">Wards Killed</string>
-    <string name="dmg_to_champs">Damage to Champions</string>
-    <string name="victory">Victory</string>
-    <string name="defeat">Defeat</string>
+
+    <!-- base stats activity -->
+    <string name="bs_loading">Loading&#8230;</string>
+    <string name="bs_no_stats">No stats were found. Swipe down to retrieve the newest stats.</string>
+    <string name="bs_no_friends">You have no friends to compare stats with!</string>
+    <string name="bs_add_friends">Add Friends</string>
+
+    <!-- recent games activity -->
+    <string name="rg_activity_title">Recent Games</string>
+    <string name="rg_summoners_to_chart">Summoners to Chart</string>
+    <string name="rg_filter_data">Filter Data</string>
+    <string name="rg_average">Average</string>
+    <!-- chart titles -->
+    <string name="rg_cs_at_ten">CS At 10</string>
+    <string name="rg_cs_diff_at_ten">CS Differential At 10</string>
+    <string name="rg_cs_per_min">CS Per Minute</string>
+    <string name="rg_gold_per_min">Gold Per Minute</string>
+    <string name="rg_dmg_per_min">Damage Per Minute</string>
+    <string name="rg_kills">Kills</string>
+    <string name="rg_kda">KDA</string>
+    <string name="rg_kill_participation">Kill Participation</string>
+    <string name="rg_vision_wards_bought">Vision Wards Bought"</string>
+    <string name="rg_wards_placed">Wards Placed</string>
+    <string name="rg_wards_killed">Wards Killed</string>
+    
+    <!-- season totals activity -->
+    <string name="st_activity_title">Season Totals</string>
+    <string name="st_nothing_here">Sorry, there is nothing to see here.</string>
+
+    <!-- games with friends activity -->
+    <string name="gwf_activity_title">Games With Friends</string>
+    <string name="gwf_others">Others</string>
+    <string name="gwf_victory">Victory</string>
+    <string name="gwf_defeat">Defeat</string>
+    <!-- chart titles -->
+    <string name="gwf_damage">Damage</string>
+    <string name="gwf_kills">Kills</string>
+    <string name="gwf_deaths">Deaths</string>
+    <string name="gwf_assists">Assists</string>
+
+    <!-- drawer navigation menu -->
+    <string name="account">Account</string>
+    <string name="stats">Stats</string>
+
+    <!-- generic button labels -->
+    <string name="button_done">Done</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_go">Go</string>
+    <string name="button_cancel">Cancel</string>
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>

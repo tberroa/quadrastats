@@ -75,7 +75,7 @@ public class WithFriendsActivity extends BaseStatsActivity implements WithFriend
 
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.with_friends);
+        toolbar.setTitle(R.string.gwf_activity_title);
 
         // set tab layout to gone while view is initialized
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);

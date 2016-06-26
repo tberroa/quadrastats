@@ -283,14 +283,14 @@ public class ScreenUtil {
 
     public static int[] chartColors() {
         int[] colors = new int[8];
-        colors[0] = R.color.series_blue;
-        colors[1] = R.color.series_green;
-        colors[2] = R.color.series_orange;
-        colors[3] = R.color.series_pink;
-        colors[4] = R.color.series_purple;
-        colors[5] = R.color.series_red;
-        colors[6] = R.color.series_sky;
-        colors[7] = R.color.series_yellow;
+        colors[0] = R.color.blue;
+        colors[1] = R.color.green;
+        colors[2] = R.color.orange;
+        colors[3] = R.color.pink;
+        colors[4] = R.color.purple;
+        colors[5] = R.color.red;
+        colors[6] = R.color.sky_blue;
+        colors[7] = R.color.yellow;
         return colors;
     }
 
@@ -347,23 +347,23 @@ public class ScreenUtil {
     public static int intToColor(int i) {
         switch (i % 8) {
             case 0:
-                return R.color.series_blue;
+                return R.color.blue;
             case 1:
-                return R.color.series_green;
+                return R.color.green;
             case 2:
-                return R.color.series_orange;
+                return R.color.orange;
             case 3:
-                return R.color.series_pink;
+                return R.color.pink;
             case 4:
-                return R.color.series_purple;
+                return R.color.purple;
             case 5:
-                return R.color.series_red;
+                return R.color.red;
             case 6:
-                return R.color.series_sky;
+                return R.color.sky_blue;
             case 7:
-                return R.color.series_yellow;
+                return R.color.yellow;
             default:
-                return R.color.series_blue;
+                return R.color.blue;
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.tberroa.portal.screens.profile;
+package com.example.tberroa.portal.screens.account;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import com.example.tberroa.portal.screens.authentication.AuthUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.screens.BaseActivity;
 
-public class ProfileActivity extends BaseActivity {
+public class AccountActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
@@ -35,7 +35,7 @@ public class ProfileActivity extends BaseActivity {
 
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.profile);
+        toolbar.setTitle(R.string.ma_activity_title);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
         toolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
@@ -44,7 +44,7 @@ public class ProfileActivity extends BaseActivity {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 } else {
-                    startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
+                    startActivity(new Intent(AccountActivity.this, HomeActivity.class));
                     finish();
                 }
             }
@@ -53,7 +53,7 @@ public class ProfileActivity extends BaseActivity {
         Button signOutButton = (Button) findViewById(R.id.sign_out_button);
         signOutButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                AuthUtil.signOut(ProfileActivity.this);
+                AuthUtil.signOut(AccountActivity.this);
             }
         });
     }

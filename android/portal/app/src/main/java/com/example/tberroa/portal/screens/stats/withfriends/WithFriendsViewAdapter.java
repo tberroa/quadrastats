@@ -52,12 +52,32 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         List<String> names = new ArrayList<>(matchStatsMap.keySet());
         List<MatchStats> matchStatsList = new ArrayList<>(matchStatsMap.values());
 
+        // if it wasn't a five man queue, include label for non friends
+        boolean notFiveMan = false;
+        if (names.size() < 5){
+            notFiveMan = true;
+            names.add(context.getResources().getString(R.string.gwf_others));
+        }
+
         // display appropriate victory/defeat text
         if (matchStatsList.get(0).winner) {
-            withFriendsViewHolder.defeatView.setVisibility(View.GONE);
+            withFriendsViewHolder.victoryView.setVisibility(View.VISIBLE);
         } else {
-            withFriendsViewHolder.victoryView.setVisibility(View.GONE);
+            withFriendsViewHolder.defeatView.setVisibility(View.VISIBLE);
         }
+
+        // team kda
+        String teamKills = String.valueOf(matchStatsList.get(0).team_kills);
+        String teamDeaths = String.valueOf(matchStatsList.get(0).team_deaths);
+        String teamAssists = String.valueOf(matchStatsList.get(0).team_assists);
+        String teamKDA = teamKills + "/" + teamDeaths + "/" + teamAssists;
+        withFriendsViewHolder.teamKDAView.setText(teamKDA);
+
+        // match duration
+        String minutes = String.valueOf((int) Math.floor((matchStatsList.get(0).match_duration) / 60));
+        String seconds = String.valueOf(matchStatsList.get(0).match_duration % 60);
+        String matchDuration = minutes + "m " + seconds + "s";
+        withFriendsViewHolder.matchDurationView.setText(matchDuration);
 
         // populate the summoner table
         GridLayout summonerTable = withFriendsViewHolder.summonerTable;
@@ -152,11 +172,26 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         // create the entries
         List<BarEntry> entriesDmg = new ArrayList<>();
         List<Entry> entriesKills = new ArrayList<>();
+        List<Entry> entriesDeaths = new ArrayList<>();
+        List<Entry> entriesAssists = new ArrayList<>();
+        long othersKills = matchStatsList.get(0).team_kills;
+        long othersDeaths = matchStatsList.get(0).team_deaths;
+        long othersAssists = matchStatsList.get(0).team_assists;
         int i = 0;
         for (MatchStats matchStats : matchStatsList) {
             entriesDmg.add(new BarEntry(matchStats.total_damage_dealt_to_champions, i));
             entriesKills.add(new Entry(matchStats.kills, i));
+            entriesDeaths.add(new Entry(matchStats.deaths, i));
+            entriesAssists.add(new Entry(matchStats.assists, i));
+            othersKills = othersKills - matchStats.kills;
+            othersDeaths = othersDeaths - matchStats.deaths;
+            othersAssists = othersAssists - matchStats.assists;
             i++;
+        }
+        if (notFiveMan){
+            entriesKills.add(new Entry(othersKills, i));
+            entriesDeaths.add(new Entry(othersDeaths, i));
+            entriesAssists.add(new Entry(othersAssists, i));
         }
 
         // organize entries by chart type
@@ -164,6 +199,8 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         barEntries.add(entriesDmg);
         List<List<Entry>> pieEntries = new ArrayList<>();
         pieEntries.add(entriesKills);
+        pieEntries.add(entriesDeaths);
+        pieEntries.add(entriesAssists);
 
         // create the data sets
         int[] colors = ScreenUtil.chartColors();
@@ -178,6 +215,9 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         List<PieDataSet> pieDataSets = new ArrayList<>();
         for (List<Entry> entries : pieEntries) {
             PieDataSet pieDataSet = new PieDataSet(entries, "");
+            if (notFiveMan){
+                colors[entries.size()-1] = R.color.gray;
+            }
             pieDataSet.setColors(colors, context);
             pieDataSet.setSelectionShift(0);
             pieDataSets.add(pieDataSet);
@@ -188,6 +228,8 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         barCharts.add(withFriendsViewHolder.dmgChart);
         List<PieChart> pieCharts = new ArrayList<>();
         pieCharts.add(withFriendsViewHolder.killsChart);
+        pieCharts.add(withFriendsViewHolder.deathsChart);
+        pieCharts.add(withFriendsViewHolder.assistsChart);
 
         // populate and format the charts
         i = 0;
@@ -214,13 +256,26 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             pieChart.getLegend().setTextColor(Color.WHITE);
             pieChart.getData().setValueTextSize(15);
             pieChart.setHoleRadius(35);
+            pieChart.setDrawSliceText(false);
             pieChart.setTransparentCircleAlpha(0);
             pieChart.getLegend().setEnabled(false);
             pieChart.setTouchEnabled(false);
             pieChart.setDescription("");
+            pieChart.setCenterTextSize(20);
+            pieChart.setCenterTextColor(Color.WHITE);
+            switch (i){
+                case 0:
+                    pieChart.setCenterText(context.getResources().getString(R.string.gwf_kills));
+                    break;
+                case 1:
+                    pieChart.setCenterText(context.getResources().getString(R.string.gwf_deaths));
+                    break;
+                case 2:
+                    pieChart.setCenterText(context.getResources().getString(R.string.gwf_assists));
+                    break;
+            }
             i++;
         }
-        
     }
 
     @Override
@@ -233,9 +288,13 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
 
         final TextView victoryView;
         final TextView defeatView;
+        final TextView teamKDAView;
+        final TextView matchDurationView;
         final GridLayout summonerTable;
         final BarChart dmgChart;
         final PieChart killsChart;
+        final PieChart deathsChart;
+        final PieChart assistsChart;
 
         withFriendsViewHolder(View itemView) {
             super(itemView);
@@ -243,10 +302,13 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             victoryView.setVisibility(View.GONE);
             defeatView = (TextView) itemView.findViewById(R.id.defeat_view);
             defeatView.setVisibility(View.GONE);
+            teamKDAView = (TextView) itemView.findViewById(R.id.team_kda_view);
+            matchDurationView = (TextView) itemView.findViewById(R.id.match_duration_view);
             summonerTable = (GridLayout) itemView.findViewById(R.id.summoner_table_layout);
             dmgChart = (BarChart) itemView.findViewById(R.id.dmg_chart);
             killsChart = (PieChart) itemView.findViewById(R.id.kills_chart);
+            deathsChart = (PieChart) itemView.findViewById(R.id.deaths_chart);
+            assistsChart = (PieChart) itemView.findViewById(R.id.assists_chart);
         }
     }
-
 }

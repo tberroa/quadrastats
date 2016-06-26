@@ -57,10 +57,10 @@ public class HomeActivity extends BaseActivity {
                 .centerCrop().resize(width, height).into(withFriendsView);
 
         // initialize labels
-        String manageFriends = getResources().getString(R.string.manage_friends);
-        String recentGames = getResources().getString(R.string.recent_games);
-        String seasonTotals = getResources().getString(R.string.season_totals);
-        String withFriends = getResources().getString(R.string.with_friends);
+        String manageFriends = getResources().getString(R.string.mf_activity_title);
+        String recentGames = getResources().getString(R.string.rg_activity_title);
+        String seasonTotals = getResources().getString(R.string.st_activity_title);
+        String withFriends = getResources().getString(R.string.gwf_activity_title);
         TextView manageFriendsText = (TextView) findViewById(R.id.manage_friends_text);
         TextView recentText = (TextView) findViewById(R.id.recent_text);
         TextView seasonText = (TextView) findViewById(R.id.season_text);

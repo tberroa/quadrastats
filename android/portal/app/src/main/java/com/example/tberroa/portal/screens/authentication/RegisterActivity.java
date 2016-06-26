@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // initialize region select spinner
         ArrayAdapter<CharSequence> adapter;
-        adapter = ArrayAdapter.createFromResource(this, R.array.select_region, layout.simple_spinner_item);
+        adapter = ArrayAdapter.createFromResource(this, R.array.auth_select_region, layout.simple_spinner_item);
         adapter.setDropDownViewResource(layout.simple_spinner_dropdown_item);
         regionSelect.setAdapter(adapter);
     }
@@ -114,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (confirmPassword.equals(password)) {
             confirmPasswordField.setError(null);
         } else { // display error
-            confirmPasswordField.setError(getResources().getString(R.string.password_mismatch));
+            confirmPasswordField.setError(getResources().getString(R.string.auth_password_mismatch));
             registerButton.setEnabled(true);
             return;
         }
@@ -138,8 +138,8 @@ public class RegisterActivity extends AppCompatActivity {
         dialogMessage.setPadding(15, 15, 15, 0);
         dialogMessage.setGravity(Gravity.CENTER);
         dialogMessage.setText(Html.fromHtml(
-                "<h2>" + getString(R.string.validate_ownership_title) + "</h2>" +
-                        "<p>" + getString(R.string.validate_ownership) + "</p>" +
+                "<h2>" + getString(R.string.auth_validate_ownership) + "</h2>" +
+                        "<p>" + getString(R.string.auth_validate_ownership_instructions) + "</p>" +
                         codeString
         ));
 
@@ -147,12 +147,12 @@ public class RegisterActivity extends AppCompatActivity {
         Builder builder = new Builder(this);
         builder.setView(dialogMessage);
         builder.setCancelable(false);
-        builder.setNegativeButton(R.string.cancel, new OnClickListener() {
+        builder.setNegativeButton(R.string.button_cancel, new OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 registerButton.setEnabled(true);
             }
         });
-        builder.setPositiveButton(R.string.done, new OnClickListener() {
+        builder.setPositiveButton(R.string.button_done, new OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 new RequestRegister().execute();
                 dialog.dismiss();

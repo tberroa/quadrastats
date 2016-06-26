@@ -61,7 +61,7 @@ public class FriendsActivity extends BaseActivity {
 
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.manage_friends);
+        toolbar.setTitle(R.string.mf_activity_title);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,10 +86,10 @@ public class FriendsActivity extends BaseActivity {
                 friendKeyField.setSingleLine();
 
                 Builder builder = new Builder(FriendsActivity.this);
-                builder.setTitle(R.string.add_friend);
+                builder.setTitle(R.string.mf_add_friend);
                 builder.setView(friendKeyField);
                 builder.setCancelable(true);
-                builder.setPositiveButton(R.string.done, new OnClickListener() {
+                builder.setPositiveButton(R.string.button_done, new OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String friendKey = friendKeyField.getText().toString();
                         add = true;
@@ -226,17 +226,17 @@ public class FriendsActivity extends BaseActivity {
                 public void onItemClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
                     // construct and display a dialog asking the user if they want to remove the friend
                     Builder builder = new Builder(FriendsActivity.this);
-                    builder.setTitle(R.string.remove_friend);
-                    builder.setMessage(R.string.remove_friend_message);
+                    builder.setTitle(R.string.mf_remove_friend);
+                    builder.setMessage(R.string.mf_remove_friend_confirm);
                     builder.setCancelable(true);
-                    builder.setPositiveButton(R.string.yes, new OnClickListener() {
+                    builder.setPositiveButton(R.string.button_yes, new OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             add = false;
                             new RequestFriendOp().execute(friends.get(position).key);
                             dialog.dismiss();
                         }
                     });
-                    builder.setNegativeButton(R.string.cancel, new OnClickListener() {
+                    builder.setNegativeButton(R.string.button_cancel, new OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             dialog.dismiss();
                         }

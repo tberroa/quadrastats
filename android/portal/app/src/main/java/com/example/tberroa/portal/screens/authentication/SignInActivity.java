@@ -79,7 +79,7 @@ public class SignInActivity extends AppCompatActivity {
 
         // initialize region select spinner
         ArrayAdapter<CharSequence> adapter;
-        adapter = ArrayAdapter.createFromResource(this, R.array.select_region, layout.simple_spinner_item);
+        adapter = ArrayAdapter.createFromResource(this, R.array.auth_select_region, layout.simple_spinner_item);
         adapter.setDropDownViewResource(layout.simple_spinner_dropdown_item);
         regionSelect.setAdapter(adapter);
     }

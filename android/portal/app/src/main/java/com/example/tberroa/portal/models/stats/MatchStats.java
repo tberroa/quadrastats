@@ -48,7 +48,7 @@ public class MatchStats extends Model {
     public int spell2;
     @Expose
     @Column(name = "keystone")
-    public long keystone;
+    public Long keystone;
 
     // raw stats
     @Expose
@@ -236,6 +236,15 @@ public class MatchStats extends Model {
     @Expose
     @Column(name = "kill_participation")
     public Float kill_participation;
+    @Expose
+    @Column(name = "team_kills")
+    public Long team_kills;
+    @Expose
+    @Column(name = "team_deaths")
+    public Long team_deaths;
+    @Expose
+    @Column(name = "team_assists")
+    public Long team_assists;
 
     @SuppressWarnings("RedundantNoArgConstructor")
     public MatchStats() {

@@ -4,6 +4,7 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,7 +12,6 @@ import android.support.design.widget.TabLayout.OnTabSelectedListener;
 import android.support.design.widget.TabLayout.Tab;
 import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.view.ContextThemeWrapper;
@@ -67,7 +67,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.recent_games);
+        toolbar.setTitle(R.string.rg_activity_title);
         toolbar.inflateMenu(R.menu.recent_menu);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -141,7 +141,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             TextView textView = new TextView(this);
             textView.setText(name);
             textView.setTextSize(12);
-            textView.setTextColor(ContextCompat.getColor(this, R.color.white));
+            textView.setTextColor(Color.WHITE);
             textView.setPadding(ScreenUtil.dpToPx(this, 5), 0, ScreenUtil.dpToPx(this, 5), 0);
             legendNames.addView(textView);
 
@@ -167,17 +167,17 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         // create list of chart titles
         final ArrayList<String> titles = new ArrayList<>();
-        titles.add(getResources().getString(R.string.cs_at_ten));
-        titles.add(getResources().getString(R.string.cs_diff_at_ten));
-        titles.add(getResources().getString(R.string.cs_per_min));
-        titles.add(getResources().getString(R.string.gold_per_min));
-        titles.add(getResources().getString(R.string.dmg_per_min));
-        titles.add(getResources().getString(R.string.kills));
-        titles.add(getResources().getString(R.string.kda));
-        titles.add(getResources().getString(R.string.kill_participation));
-        titles.add(getResources().getString(R.string.vision_wards_bought));
-        titles.add(getResources().getString(R.string.wards_placed));
-        titles.add(getResources().getString(R.string.wards_killed));
+        titles.add(getResources().getString(R.string.rg_cs_at_ten));
+        titles.add(getResources().getString(R.string.rg_cs_diff_at_ten));
+        titles.add(getResources().getString(R.string.rg_cs_per_min));
+        titles.add(getResources().getString(R.string.rg_gold_per_min));
+        titles.add(getResources().getString(R.string.rg_dmg_per_min));
+        titles.add(getResources().getString(R.string.rg_kills));
+        titles.add(getResources().getString(R.string.rg_kda));
+        titles.add(getResources().getString(R.string.rg_kill_participation));
+        titles.add(getResources().getString(R.string.rg_vision_wards_bought));
+        titles.add(getResources().getString(R.string.rg_wards_placed));
+        titles.add(getResources().getString(R.string.rg_wards_killed));
 
         // clear set of summoner names
         final Set<String> names = new LinkedHashSet<>();
@@ -278,9 +278,9 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 ContextThemeWrapper theme = new ContextThemeWrapper(RecentActivity.this, R.style.DialogStyle);
                 Builder builder = new Builder(theme);
                 builder.setView(scrollView);
-                builder.setTitle(R.string.summoners_to_chart);
+                builder.setTitle(R.string.rg_summoners_to_chart);
                 builder.setCancelable(true);
-                builder.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.button_done, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // make sure at least one was selected
                         boolean minimumSatisfied = false;
@@ -428,7 +428,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.dialog_filter);
-            setTitle(R.string.filter_data);
+            setTitle(R.string.rg_filter_data);
             setCancelable(true);
 
             // initialize list of champion icons

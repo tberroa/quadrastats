@@ -45,7 +45,7 @@
             android:name=".screens.home.HomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screens.profile.ProfileActivity"
+            android:name=".screens.account.AccountActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.friends.FriendsActivity"

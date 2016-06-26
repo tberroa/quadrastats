@@ -2,8 +2,8 @@ package com.example.tberroa.portal.screens.stats.recent;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -64,7 +64,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
             chartViewHolder.lineChart.setData(new LineData(labelsList.get(i), lineDataSetsList.get(i)));
 
             // chart formatting
-            chartViewHolder.lineChart.getAxisLeft().setTextColor(ContextCompat.getColor(context, R.color.white));
+            chartViewHolder.lineChart.getAxisLeft().setTextColor(Color.WHITE);
             chartViewHolder.lineChart.setDescription("");
             chartViewHolder.lineChart.getXAxis().setDrawLabels(false);
             chartViewHolder.lineChart.getXAxis().setDrawGridLines(false);
@@ -128,7 +128,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.element_bar_chart);
-            setTitle(context.getResources().getString(R.string.average) + " " + title);
+            setTitle(context.getResources().getString(R.string.rg_average) + " " + title);
             BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
 
             // initialize the labels and data arrays
@@ -159,7 +159,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
             barChart.setData(new BarData(labels, barDataSet));
 
             // chart formatting
-            barChart.getAxisLeft().setTextColor(ContextCompat.getColor(context, R.color.white));
+            barChart.getAxisLeft().setTextColor(Color.WHITE);
             barChart.setDescription("");
             barChart.getXAxis().setDrawLabels(false);
             barChart.getXAxis().setDrawGridLines(false);

@@ -42,7 +42,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"
-            android:hint="@string/summoner_name"
+            android:hint="@string/auth_summoner_name"
             android:imeOptions="actionNext"
             android:inputType="text"/>
 
@@ -54,7 +54,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"
-            android:hint="@string/password"
+            android:hint="@string/auth_password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"/>
 
@@ -77,7 +77,7 @@
             android:layout_below="@id/region_select_spinner"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="35dp"
-            android:text="@string/sign_in_button"/>
+            android:text="@string/auth_sign_in"/>
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
                 android:id="@+id/go_to_register_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/go_to_register"
+                android:text="@string/auth_go_to_register"
                 android:textSize="16sp"/>
         </com.balysv.materialripple.MaterialRippleLayout>
     </RelativeLayout>
