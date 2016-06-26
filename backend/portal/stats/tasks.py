@@ -218,11 +218,14 @@ def update_one(summoner):
             cs_per_min = float('%.3f'%((minions_killed + neutral_minions_killed) / minutes))
             dmg_per_min = float('%.3f'%(total_dmg_to_champs / minutes))
             gold_per_min = float('%.3f'%(gold_earned / minutes))
-            if deaths != 0:
+            if deaths > 0:
                 kda = float('%.3f'%((kills + assists) / deaths))
             else:
                 kda = float('%.3f'%(kills + assists))
-            kill_participation = float('%.3f'%(((kills + assists) / team_kills) * 100))
+            if team_kills > 0:
+                kill_participation = float('%.3f'%(((kills + assists) / team_kills) * 100))
+            else:
+                kill_participation = 0
 
             # junglers and supports don't cs, set cs stats to None to prevent outliers
             if lane == "JUNGLE" or role == "DUO_SUPPORT":
