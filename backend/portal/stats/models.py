@@ -83,6 +83,9 @@ class MatchStats(models.Model):
     gold_per_min = models.FloatField(null = True, blank = True)
     kda = models.FloatField(null = True, blank = True)
     kill_participation = models.FloatField(null = True, blank = True)
+    team_kills = models.BigIntegerField(null = True, blank = True)
+    team_deaths = models.BigIntegerField(null = True, blank = True)
+    team_assists = models.BigIntegerField(null = True, blank = True)
 	
     def __str__(self):
         return self.region + "," + self.summoner_name + "," + str(self.match_id)

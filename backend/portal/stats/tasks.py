@@ -55,8 +55,8 @@ def update_one(summoner):
     if matches is None:
         return (False, None)
 
-    # slice out the 10 most recent games
-    matches = matches[:10]
+    # slice out the 20 most recent games
+    matches = matches[:20]
 
     for match in matches:
         match_id = match.get("matchId")
@@ -167,8 +167,10 @@ def update_one(summoner):
             neutral_minions_killed = stats.get("neutralMinionsKilled")
             total_dmg_to_champs = stats.get("totalDamageDealtToChampions")
 
-            # getting total team kills is a bit more involved
-            total_team_kills = 0
+            # getting team kills, deaths, and assists is a bit more involved
+            team_kills = 0
+            team_deaths = 0
+            team_assists = 0
             if participant_id <= 5:
                 x = 0; y = 5;
             else:
@@ -179,10 +181,14 @@ def update_one(summoner):
                  if participant_stats is None:
                      return (False, None)
                  participant_kills = participant_stats.get("kills")
+                 participant_deaths = participant_stats.get("deaths")
+                 participant_assists = participant_stats.get("assists")
                  # defensive check
-                 if participant_kills is None:
+                 if None in (participant_kills, participant_deaths, participant_assists):
                      return (False, None)
-                 total_team_kills = total_team_kills + participant_kills
+                 team_kills = team_kills + participant_kills
+                 team_deaths = team_deaths + participant_deaths
+                 team_assists = team_assists + participant_assists
 
             # perform checks on the critical stats
             if None in (assists, deaths, gold_earned, kills, match_duration, minions_killed, \
@@ -216,7 +222,7 @@ def update_one(summoner):
                 kda = float('%.3f'%((kills + assists) / deaths))
             else:
                 kda = float('%.3f'%(kills + assists))
-            kill_participation = float('%.3f'%(((kills + assists) / total_team_kills) * 100))
+            kill_participation = float('%.3f'%(((kills + assists) / team_kills) * 100))
 
             # junglers and supports don't cs, set cs stats to None to prevent outliers
             if lane == "JUNGLE" or role == "DUO_SUPPORT":
@@ -305,7 +311,10 @@ def update_one(summoner):
                 dmg_per_min = dmg_per_min, \
                 gold_per_min = gold_per_min, \
                 kda = kda, \
-                kill_participation = kill_participation)
+                kill_participation = kill_participation, \
+                team_kills = team_kills, \
+                team_deaths = team_deaths, \
+                team_assists = team_assists)
 
     # successful return
     return (True, None)
