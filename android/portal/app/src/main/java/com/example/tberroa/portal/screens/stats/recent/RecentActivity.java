@@ -175,7 +175,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         titles.add(getResources().getString(R.string.rg_kills));
         titles.add(getResources().getString(R.string.rg_kda));
         titles.add(getResources().getString(R.string.rg_kill_participation));
-        titles.add(getResources().getString(R.string.rg_vision_wards_bought));
+        titles.add(getResources().getString(R.string.rg_wards_bought));
         titles.add(getResources().getString(R.string.rg_wards_placed));
         titles.add(getResources().getString(R.string.rg_wards_killed));
 

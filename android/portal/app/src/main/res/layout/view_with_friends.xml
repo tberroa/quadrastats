@@ -51,9 +51,9 @@
         android:orientation="vertical"/>
 
     <TextView
-        android:id="@+id/dmg_chart_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="-10dp"
         android:layout_marginTop="15dp"
         android:text="@string/gwf_damage"
         android:textColor="@color/white"
@@ -92,5 +92,37 @@
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="-20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/gwf_cs"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/cs_chart"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/gwf_wards"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/wards_chart"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"/>
 </LinearLayout>
 

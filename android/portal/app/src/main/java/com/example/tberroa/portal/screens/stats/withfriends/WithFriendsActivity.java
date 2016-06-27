@@ -24,6 +24,7 @@ public class WithFriendsActivity extends BaseStatsActivity implements WithFriend
     public void displayData(Map<Long, Map<String, MatchStats>> matchStatsMapMap) {
         // initialize the tab layout
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.removeAllTabs();
         List<String> tabs = new ArrayList<>();
         for (int i = 0; i < matchStatsMapMap.size(); i++) {
             tabs.add(String.valueOf(i + 1));

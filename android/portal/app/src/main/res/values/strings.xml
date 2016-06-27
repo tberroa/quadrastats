@@ -66,7 +66,7 @@
     <string name="rg_kills">Kills</string>
     <string name="rg_kda">KDA</string>
     <string name="rg_kill_participation">Kill Participation</string>
-    <string name="rg_vision_wards_bought">Vision Wards Bought"</string>
+    <string name="rg_wards_bought">Wards Bought</string>
     <string name="rg_wards_placed">Wards Placed</string>
     <string name="rg_wards_killed">Wards Killed</string>
     
@@ -84,6 +84,8 @@
     <string name="gwf_kills">Kills</string>
     <string name="gwf_deaths">Deaths</string>
     <string name="gwf_assists">Assists</string>
+    <string name="gwf_cs">CS</string>
+    <string name="gwf_wards">Wards Bought/Placed/Killed</string>
 
     <!-- drawer navigation menu -->
     <string name="account">Account</string>
