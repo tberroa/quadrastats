@@ -66,32 +66,66 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"/>
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/kills_chart"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginBottom="-20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-20dp"/>
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/deaths_chart"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginBottom="-20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-20dp"/>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/kills_chart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="0.5"/>
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/assists_chart"
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/deaths_chart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginBottom="-20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-20dp"/>
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/assists_chart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="0.5"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/gwf_kda"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/kda_chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

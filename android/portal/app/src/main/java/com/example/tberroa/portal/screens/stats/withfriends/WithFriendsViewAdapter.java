@@ -176,6 +176,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         List<Entry> entriesKills = new ArrayList<>();
         List<Entry> entriesDeaths = new ArrayList<>();
         List<Entry> entriesAssists = new ArrayList<>();
+        List<BarEntry> entriesKDA = new ArrayList<>();
         List<BarEntry> entriesCS = new ArrayList<>();
         List<BarEntry> entriesWardsBought = new ArrayList<>();
         List<BarEntry> entriesWardsPlaced = new ArrayList<>();
@@ -189,6 +190,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             entriesKills.add(new Entry(matchStats.kills, i));
             entriesDeaths.add(new Entry(matchStats.deaths, i));
             entriesAssists.add(new Entry(matchStats.assists, i));
+            entriesKDA.add(new BarEntry(matchStats.kda, i));
             entriesCS.add(new BarEntry(matchStats.minions_killed, i));
             entriesWardsBought.add(new BarEntry(matchStats.vision_wards_bought_in_game, i));
             entriesWardsPlaced.add(new BarEntry(matchStats.wards_placed, i));
@@ -207,6 +209,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         // organize entries by chart type
         List<List<BarEntry>> barEntries = new ArrayList<>();
         barEntries.add(entriesDmg);
+        barEntries.add(entriesKDA);
         barEntries.add(entriesCS);
         barEntries.add(entriesWardsBought);
         barEntries.add(entriesWardsPlaced);
@@ -240,6 +243,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         // initialize the chart views
         List<BarChart> barCharts = new ArrayList<>();
         barCharts.add(withFriendsViewHolder.dmgChart);
+        barCharts.add(withFriendsViewHolder.kdaChart);
         barCharts.add(withFriendsViewHolder.csChart);
         barCharts.add(withFriendsViewHolder.wardsChart);
         List<PieChart> pieCharts = new ArrayList<>();
@@ -272,6 +276,11 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             barChart.getLegend().setEnabled(false);
             barChart.getData().setHighlightEnabled(false);
             barChart.setTouchEnabled(false);
+            if (i == 1){ // kda chart
+                barChart.getAxisLeft().setDrawLabels(false);
+                barChart.getAxisLeft().setDrawGridLines(false);
+                barChart.getAxisLeft().setDrawAxisLine(false);
+            }
             i++;
         }
         i = 0;
@@ -286,7 +295,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             pieChart.getLegend().setEnabled(false);
             pieChart.setTouchEnabled(false);
             pieChart.setDescription("");
-            pieChart.setCenterTextSize(20);
+            pieChart.setCenterTextSize(13);
             pieChart.setCenterTextColor(Color.WHITE);
             switch (i) {
                 case 0:
@@ -320,6 +329,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         final PieChart killsChart;
         final PieChart deathsChart;
         final PieChart assistsChart;
+        final BarChart kdaChart;
         final BarChart csChart;
         final BarChart wardsChart;
 
@@ -336,6 +346,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             killsChart = (PieChart) itemView.findViewById(R.id.kills_chart);
             deathsChart = (PieChart) itemView.findViewById(R.id.deaths_chart);
             assistsChart = (PieChart) itemView.findViewById(R.id.assists_chart);
+            kdaChart = (BarChart) itemView.findViewById(R.id.kda_chart);
             csChart = (BarChart) itemView.findViewById(R.id.cs_chart);
             wardsChart = (BarChart) itemView.findViewById(R.id.wards_chart);
         }
