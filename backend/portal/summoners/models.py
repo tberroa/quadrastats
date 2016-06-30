@@ -2,8 +2,9 @@ from datetime import datetime
 from django.db import models
 
 class User(models.Model):
+    email = models.EmailField(max_length = 256)
+    password = models.CharField(max_length = 256)
     created = models.DateTimeField(null = True, blank = True)
-    password = models.CharField(max_length = 256, null = True, blank = True)
 
     def save(self, *args, **kwargs):
         if not self.id:
