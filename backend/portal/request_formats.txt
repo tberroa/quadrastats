@@ -91,6 +91,7 @@ Registering a New User
 Request:
 {
     "user" : {
+        "email" : "tberroa@outlook.com",
         "password" : "123456"
     },
     "region" : "na",

@@ -11,6 +11,9 @@ class User(models.Model):
             self.created = datetime.now()
         super(User, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.email
+
 class Summoner(models.Model):
     user = models.OneToOneField(User, null = True, blank = True, on_delete = models.CASCADE)
     region = models.CharField(max_length = 4)
@@ -21,11 +24,11 @@ class Summoner(models.Model):
     friends = models.CharField(max_length = 1024, default = "", blank = True)
     modified = models.DateTimeField(null = True, blank = True)
 
-    def __str__(self):
-        return self.region + "," + self.name
-
     def save(self, *args, **kwargs):
         self.modified = datetime.now()
         super(Summoner, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.region + "," + self.name
 
     

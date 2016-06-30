@@ -145,6 +145,11 @@ class RegisterUser(APIView):
 
         key = format_key(key)
 
+        # make sure email was entered
+        email = user.get("email")
+        if email is None:
+            return Response(invalid_request_format)
+
         # hash password
         password = user.get("password")
         if password is None:
@@ -156,7 +161,7 @@ class RegisterUser(APIView):
             summoner = Summoner.objects.get(region = region, key = key)
             # check if the user object exists
             if summoner.user is None:
-                summoner.user = User.objects.create(password = password)
+                summoner.user = User.objects.create(email = email, password = password)
                 summoner.save()
                 return Response(SummonerSerializer(summoner).data)
             else:
