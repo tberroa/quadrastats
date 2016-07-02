@@ -156,7 +156,6 @@ REST_FRAMEWORK = {
 
 # Celery config
 from datetime import timedelta
-
 CELERYBEAT_SCHEDULE = {
     'update-all-summoners': {
         'task': 'stats.tasks.update_all',
@@ -164,8 +163,13 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-
-
+# Email config
+from .keys import email_password
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_HOST_USER = 'tberroa@outlook.com'
+EMAIL_HOST_PASSWORD = email_password
+EMAIL_PORT = 587
 
 
 

@@ -1,6 +1,6 @@
 from django.contrib.auth import hashers
 from django.core import serializers
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.shortcuts import render
 from portal.errors import friend_already_listed
 from portal.errors import friend_equals_user
@@ -124,13 +124,8 @@ class ForgotPassword(APIView):
             return Response(invalid_request_format)
 
         # send email
-        send_mail(
-            'Portal: Requested Password',
-            'Here is the message.',
-            'tberroa@outlook.com',
-            [email],
-            fail_silently=False,
-        )
+        email = EmailMessage("Portal: Requested Password", 'Test Message', to=[email])
+        email.send(fail_silently=False)
 
         return Response(invalid_credentials)
 

@@ -4,7 +4,7 @@ import string
 
 from time import sleep
 
-from .api_keys import riot_api_key
+from .keys import riot_api_key
 
 def get_match_detail(region, match_id):
     # construct url
