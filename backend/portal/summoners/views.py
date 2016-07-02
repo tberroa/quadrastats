@@ -284,7 +284,7 @@ class ResetPassword(APIView):
             summoner = Summoner.objects.get(region = region, key = key)
             
             # generate a random password
-            new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(500))
+            new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
 
             # assign the generated password to the user object
             summoner.user.password = hashers.make_password(new_password)
