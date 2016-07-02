@@ -50,17 +50,6 @@ Response:
 
 ---------------------------------------------------
 
-Forgot Password
-Request:
-{
-   "region" : "na",
-   "key" : "frosiph",
-   "email" : "tberroa@outlook.com"
-}
-Response:
-
----------------------------------------------------
-
 Get Summoners
 Request:
 { 
@@ -177,6 +166,16 @@ Response:
     "friends": "luciaron",
     "modified": "2016-07-02T15:01:30.248845"
 }
+
+---------------------------------------------------
+
+Reset Password
+Request:
+{
+   "region" : "na",
+   "key" : "frosiph"
+}
+Response:
 
 ---------------------------------------------------
 

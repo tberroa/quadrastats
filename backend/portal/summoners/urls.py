@@ -6,11 +6,11 @@ from . import views
 urlpatterns = [
   url(r'^add-friend/$', views.AddFriend.as_view()),
   url(r'^change-password/$', views.ChangePassword.as_view()),
-  url(r'^forgot-password/$', views.ForgotPassword.as_view()),
   url(r'^get/$', views.GetSummoners.as_view()),
   url(r'^login/$', views.LoginUser.as_view()),
   url(r'^register/$', views.RegisterUser.as_view()),
   url(r'^remove-friend/$', views.RemoveFriend.as_view()),
+  url(r'^reset-password/$', views.ResetPassword.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

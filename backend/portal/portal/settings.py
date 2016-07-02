@@ -165,11 +165,12 @@ CELERYBEAT_SCHEDULE = {
 
 # Email config
 from .keys import email_password
+DEFAULT_FROM_EMAIL = 'tberroa@outlook.com'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_USER = 'tberroa@outlook.com'
 EMAIL_HOST_PASSWORD = email_password
-EMAIL_PORT = 25
+EMAIL_PORT = 587
 
 
 

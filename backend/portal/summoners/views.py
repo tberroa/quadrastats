@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.contrib.auth import hashers
 from django.core import serializers
 from django.core.mail import EmailMessage
@@ -110,24 +113,6 @@ class ChangePassword(APIView):
                 return Response(invalid_credentials)
         except Summoner.DoesNotExist:
             return Response(invalid_credentials)
-
-class ForgotPassword(APIView):
-    def post(self, request, format=None):
-        # extract data
-        data = request.data
-        region = data.get("region")
-        key = data.get("key")    
-        email = data.get("email")
-
-        # validate
-        if None in (region, key, email):
-            return Response(invalid_request_format)
-
-        # send email
-        email = EmailMessage("Portal: Requested Password", 'Test Message', to=[email])
-        email.send(fail_silently=False)
-
-        return Response(invalid_credentials)
 
 class GetSummoners(APIView):
     def post(self, request, format=None):
@@ -281,5 +266,35 @@ class RemoveFriend(APIView):
         return Response(SummonerSerializer(user).data)
     
 
+class ResetPassword(APIView):
+    def post(self, request, format=None):
+        # extract data
+        data = request.data
+        region = data.get("region")
+        key = data.get("key")    
 
+        # validate
+        if None in (region, key):
+            return Response(invalid_request_format)
+
+        key = format_key(key)
+
+        # get summoner object
+        try:
+            summoner = Summoner.objects.get(region = region, key = key)
+            
+            # generate a random password
+            new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(500))
+
+            # assign the generated password to the user object
+            summoner.user.password = hashers.make_password(new_password)
+            summoner.user.save()
+            summoner.save()
+
+            # send email to user
+            email = EmailMessage("Portal: Password Reset", 'New Password: ' + new_password, to=[summoner.user.email])
+            email.send(fail_silently=False)
+            return Response(SummonerSerializer(summoner).data)
+        except Summoner.DoesNotExist:
+            return Response(summoner_does_not_exist)
 
