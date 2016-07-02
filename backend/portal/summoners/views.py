@@ -101,6 +101,7 @@ class ChangePassword(APIView):
                 if hashers.check_password(old_password, summoner.user.password):
                     # change password
                     summoner.user.password = hashers.make_password(new_password)
+                    summoner.user.save()
                     summoner.save()
                     return Response(SummonerSerializer(summoner).data)
                 return Response(invalid_credentials)
