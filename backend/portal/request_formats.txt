@@ -24,6 +24,29 @@ Response:
 
 ---------------------------------------------------
 
+Changing Password
+Request:
+{
+   "region" : "na",
+   "key" : "frosiph",
+   "old_password" : "123456"
+   "new_password": "654321"
+}
+Response:
+{
+    "id": 14,
+    "user": null,
+    "region": "na",
+    "key": "luciaron",
+    "name": "Luciaron",
+    "summoner_id": 21203379,
+    "profile_icon": 7,
+    "friends": "",
+    "modified": "2016-06-13T18:47:37.808690"
+}
+
+---------------------------------------------------
+
 Getting Summoners
 Request:
 { 

@@ -79,6 +79,36 @@ class AddFriend(APIView):
         # return the friends summoner object
         return Response(SummonerSerializer(friend_o).data)
 
+class ChangePassword(APIView):
+    def post(self, request, format=None):
+        # extract data
+        data = request.data
+        region = data.get("region")
+        key = data.get("key")
+        old_password = data.get("old_password")
+        new_password = data.get("new_password")
+
+        # validate
+        if None in (region, key, old_password, new_password):
+           return Response(invalid_request_format)
+
+        # make sure summoner object exists
+        try:
+            summoner = Summoner.objects.get(region = region, key = key)
+            # make sure user object exists
+            if summoner.user is not None:
+                # make sure old password is correct password
+                if hashers.check_password(old_password, summoner.user.password):
+                    # change password
+                    summoner.user.password = hashers.make_password(new_password)
+                    summoner.save()
+                    return Response(SummonerSerializer(summoner).data)
+                return Response(invalid_credentials)
+            else:
+                return Response(invalid_credentials)
+        except Summoner.DoesNotExist:
+            return Response(invalid_credentials)
+
 class GetSummoners(APIView):
     def post(self, request, format=None):
         # extract data
@@ -123,6 +153,7 @@ class LoginUser(APIView):
             summoner = Summoner.objects.get(region = region, key = key)
             # make sure user object exists
             if summoner.user is not None:
+                # make sure passwords match
                 if hashers.check_password(password, summoner.user.password):
                     return Response(SummonerSerializer(summoner).data)
                 return Response(invalid_credentials)
