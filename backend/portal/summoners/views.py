@@ -1,5 +1,6 @@
 from django.contrib.auth import hashers
 from django.core import serializers
+from django.core.mail import send_mail
 from django.shortcuts import render
 from portal.errors import friend_already_listed
 from portal.errors import friend_equals_user
@@ -109,6 +110,29 @@ class ChangePassword(APIView):
                 return Response(invalid_credentials)
         except Summoner.DoesNotExist:
             return Response(invalid_credentials)
+
+class ForgotPassword(APIView):
+    def post(self, request, format=None):
+        # extract data
+        data = request.data
+        region = data.get("region")
+        key = data.get("key")    
+        email = data.get("email")
+
+        # validate
+        if None in (region, key, email):
+            return Response(invalid_request_format)
+
+        # send email
+        send_mail(
+            'Portal: Requested Password',
+            'Here is the message.',
+            'tberroa@outlook.com',
+            [email],
+            fail_silently=False,
+        )
+
+        return Response(invalid_credentials)
 
 class GetSummoners(APIView):
     def post(self, request, format=None):
