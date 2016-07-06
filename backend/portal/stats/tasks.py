@@ -39,8 +39,9 @@ def update_all():
 
     # update each summoner one at a time
     for summoner in summoners:
-        update_one(summoner)
+        update_one.delay(summoner)
 
+@shared_task(rate_limit = "25/m")
 def update_one(summoner):
     # get the summoners match list
     val = get_match_list(summoner.region, summoner.summoner_id)
