@@ -24,6 +24,33 @@ Response:
 
 ---------------------------------------------------
 
+Change Email
+Request:
+{
+   "region" : "na",
+   "key" : "frosiph",
+   "password" : "123456",
+   "new_email": "tom.berroa@gmail.com"
+}
+Response:
+{
+    "id": 38,
+    "user": {
+        "id": 40,
+        "email": "tom.berroa@gmail.com",
+        "created": "2016-07-02T14:59:26.002589"
+    },
+    "region": "na",
+    "key": "frosiph",
+    "name": "Frosiph",
+    "summoner_id": 26155824,
+    "profile_icon": 539,
+    "friends": "luciaron",
+    "modified": "2016-07-06T18:54:27.493591"
+}
+
+---------------------------------------------------
+
 Change Password
 Request:
 {
