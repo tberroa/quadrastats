@@ -159,7 +159,7 @@ from datetime import timedelta
 CELERYBEAT_SCHEDULE = {
     'update-all-summoners': {
         'task': 'stats.tasks.update_all',
-        'schedule': timedelta(minutes=1)
+        'schedule': timedelta(minutes=20)
     },
 }
 
