@@ -91,35 +91,38 @@ class ChangeEmail(APIView):
         data = request.data
         region = data.get("region")
         key = data.get("key")
-        old_email = data.get("old_email")
+        password = data.get("password")
         new_email = data.get("new_email")
 
         # validate
-        if None in (region, key, old_email, new_email):
+        if None in (region, key, password, new_email):
            return Response(invalid_request_format)
 
         # ensure proper key format
         key = format_key(key)
 
+        # get summoner object
         try:
-            # get summoner object
             summoner = Summoner.objects.get(region = region, key = key)
-
-            # make sure user object exists
-            if summoner.user is not None:
-                # make sure old password is correct password
-                if hashers.check_password(old_password, summoner.user.password):
-                    # change password
-                    summoner.user.password = hashers.make_password(new_password)
-                    summoner.user.save()
-                    summoner.save()
-                    return Response(SummonerSerializer(summoner).data)
-                return Response(invalid_credentials)
-            else:
-                return Response(invalid_credentials)
         except Summoner.DoesNotExist:
+            return Response(summoner_does_not_exist)
+
+        # make sure user object exists
+        if summoner.user is None:
+            return Response(summoner_not_registered)
+
+        # ensure password is correct
+        if not hashers.check_password(password, summoner.user.password):
             return Response(invalid_credentials)
 
+        # change email
+        summoner.user.email = new_email
+        summoner.user.save()
+        summoner.save()
+
+        # return the users summoner object
+        return Response(SummonerSerializer(summoner).data)
+        
 class ChangePassword(APIView):
     def post(self, request, format=None):
         # extract data
@@ -276,7 +279,8 @@ class RegisterUser(APIView):
             summoner = val[1]
 
         # update the data before passing to serializer
-        data.get("user").update({"password" : password})
+        data.get("user").update({"email" : email, \
+                                 "password" : password})
         data.update({"key" : key, \
                      "name" : summoner.get("name"), \
                      "summoner_id" : summoner.get("id"), \
@@ -335,7 +339,6 @@ class RemoveFriend(APIView):
         # return the users updated summoner object
         return Response(SummonerSerializer(user).data)
     
-
 class ResetPassword(APIView):
     def post(self, request, format=None):
         # extract data
@@ -347,24 +350,28 @@ class ResetPassword(APIView):
         if None in (region, key):
             return Response(invalid_request_format)
 
+        # ensure proper key format
         key = format_key(key)
 
         # get summoner object
         try:
             summoner = Summoner.objects.get(region = region, key = key)
-            
-            # generate a random password
-            new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
-
-            # assign the generated password to the user object
-            summoner.user.password = hashers.make_password(new_password)
-            summoner.user.save()
-            summoner.save()
-
-            # send email to user
-            email = EmailMessage("Portal: Password Reset", 'New Password: ' + new_password, to=[summoner.user.email])
-            email.send(fail_silently=False)
-            return Response(SummonerSerializer(summoner).data)
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
+
+        # generate a random password
+        new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
+
+        # assign the generated password to the user object
+        summoner.user.password = hashers.make_password(new_password)
+        summoner.user.save()
+        summoner.save()
+
+        # send email to user
+        email = EmailMessage("Portal: Password Reset", 'New Password: ' + new_password, to=[summoner.user.email])
+        email.send(fail_silently=False)
+
+        # return the users summoner object
+        return Response(SummonerSerializer(summoner).data)
+        
 
