@@ -7,7 +7,6 @@ from summoners.models import Summoner
 
 from .models import MatchStats
 from .models import SeasonStats
-from .models import SeasonStatsChampion
 
 # The riot api can potentially return None for any field.
 # Due to this, many None checks are in place.

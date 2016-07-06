@@ -7,7 +7,9 @@ from rest_framework.views import APIView
 from summoners.models import Summoner
 
 from .models import MatchStats
+from .models import SeasonStats
 from .serializers import MatchStatsSerializer
+from .serializers import SeasonStatsSerializer
 
 class GetMatchStats(APIView):
     def post(self, request, format=None):
@@ -49,11 +51,6 @@ class GetMatchStats(APIView):
         return Response(MatchStatsSerializer(stats, many=True).data)
 
 class GetSeasonStats(APIView):
-    def post(self, request, format=None):
-        data = request.data
-        return Response(data)
-
-class GetSeasonStatsChampion(APIView):
     def post(self, request, format=None):
         data = request.data
         return Response(data)
