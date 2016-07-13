@@ -1,12 +1,13 @@
 # friend already listed = 50
-# friend_equals_user = 55
-# friend_limit_reached = 60
+# friend equals user = 55
+# friend limit reached = 60
 # internal processing error = 65
 # invalid credentials = 70
 # invalid request format = 75
 # invalid response from riot servers = 80
 # summoner already registered = 85
 # summoner does not exist = 90
+# summoner not registered = 95
 
 friend_already_listed = {"error" : 50, \
                          "message" : "friend already listed"}
@@ -26,3 +27,5 @@ summoner_already_registered = {"error" : 85, \
                                "message" : "summoner already registered"}
 summoner_does_not_exist = {"error" : 90, \
                            "message" : "summoner does not exist"}
+summoner_not_registered = {"error" : 95, \
+                           "message" : "summoner not registered"}

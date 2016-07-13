@@ -2,16 +2,16 @@
 
 ---------------------------------------------------
 
-Adding a Friend
+Add Friend
 Request:
 {
    "region" : "na",
-   "user_key" : "acruz",
+   "user_key" : "frosiph",
    "friend_key" : "luciaron"
 }
 Response:
 {
-    "id": 14,
+    "id": 39,
     "user": null,
     "region": "na",
     "key": "luciaron",
@@ -19,122 +19,205 @@ Response:
     "summoner_id": 21203379,
     "profile_icon": 7,
     "friends": "",
-    "modified": "2016-06-13T18:47:37.808690"
+    "modified": "2016-07-02T14:54:04.400771"
 }
 
 ---------------------------------------------------
 
-Getting Summoners
+Change Email
+Request:
+{
+   "region" : "na",
+   "key" : "frosiph",
+   "password" : "123456",
+   "new_email": "tom.berroa@gmail.com"
+}
+Response:
+{
+    "id": 38,
+    "user": {
+        "id": 40,
+        "email": "tom.berroa@gmail.com",
+        "created": "2016-07-02T14:59:26.002589"
+    },
+    "region": "na",
+    "key": "frosiph",
+    "name": "Frosiph",
+    "summoner_id": 26155824,
+    "profile_icon": 539,
+    "friends": "luciaron",
+    "modified": "2016-07-06T18:54:27.493591"
+}
+
+---------------------------------------------------
+
+Change Password
+Request:
+{
+   "region" : "na",
+   "key" : "frosiph",
+   "old_password" : "123456",
+   "new_password": "654321"
+}
+Response:
+{
+    "id": 38,
+    "user": {
+        "id": 39,
+        "email": "tberroa@outlook.com",
+        "created": "2016-06-30T16:18:26.283332"
+    },
+    "region": "na",
+    "key": "frosiph",
+    "name": "Frosiph",
+    "summoner_id": 26155824,
+    "profile_icon": 539,
+    "friends": "",
+    "modified": "2016-07-02T14:36:23.127745"
+}
+
+---------------------------------------------------
+
+Get Summoners
 Request:
 { 
     "region" : "na",
-    "keys" : ["frosiph", "acruz"]
+    "keys" : ["frosiph", "luciaron"]
 }
 Response:
 [
     {
-        "id": 5,
-        "user": null,
+        "id": 38,
+        "user": {
+            "id": 39,
+            "email": "tberroa@outlook.com",
+            "created": "2016-06-30T16:18:26.283332"
+        },
         "region": "na",
         "key": "frosiph",
         "name": "Frosiph",
         "summoner_id": 26155824,
         "profile_icon": 539,
-        "friends": null,
-        "modified": "2016-06-09T01:24:20.201180"
+        "friends": "acruz,luciaron",
+        "modified": "2016-07-02T14:54:04.407578"
     },
     {
-        "id": 4,
-        "user": {
-            "id": 4,
-            "created": "2016-06-09T00:07:42.928026"
-        },
+        "id": 39,
+        "user": null,
         "region": "na",
-        "key": "acruz",
-        "name": "Acruz",
-        "summoner_id": 40323106,
-        "profile_icon": 1021,
-        "friends": "frosiph,",
-        "modified": "2016-06-09T01:24:20.238527"
+        "key": "luciaron",
+        "name": "Luciaron",
+        "summoner_id": 21203379,
+        "profile_icon": 7,
+        "friends": "",
+        "modified": "2016-07-02T14:54:04.400771"
     }
 ]
 
 ---------------------------------------------------
 
-Logging In
+Login User
 Request:
 {
     "region" : "na",
-    "key" : "AcRuZ",
+    "key" : "frosiph",
     "password" : "123456"
 }
 Response:
-
 {
-    "id": 4,
+    "id": 38,
     "user": {
-        "id": 4,
-        "created": "2016-06-09T00:07:42.928026"
+        "id": 39,
+        "email": "tberroa@outlook.com",
+        "created": "2016-06-30T16:18:26.283332"
     },
     "region": "na",
-    "key": "acruz",
-    "name": "Acruz",
-    "summoner_id": 40323106,
-    "profile_icon": 1021,
-    "friends": null,
-    "modified": "2016-06-09T00:07:42.953708"
+    "key": "frosiph",
+    "name": "Frosiph",
+    "summoner_id": 26155824,
+    "profile_icon": 539,
+    "friends": "",
+    "modified": "2016-07-02T14:36:23.127745"
 }
 
 ---------------------------------------------------
 
-Registering a New User
+Register User
 Request:
 {
     "user" : {
+        "email" : "tberroa@outlook.com",
         "password" : "123456"
     },
     "region" : "na",
-    "key" : "aCruZ"
+    "key" : "frosiph"
 }
 Response:
 {
-    "id": 4,
+    "id": 38,
     "user": {
-        "id": 4,
-        "created": "2016-06-09T00:07:42.928026"
+        "id": 40,
+        "email": "tberroa@outlook.com",
+        "created": "2016-07-02T14:59:26.002589"
     },
     "region": "na",
-    "key": "acruz",
-    "name": "Acruz",
-    "summoner_id": 40323106,
-    "profile_icon": 1021,
-    "friends": null,
-    "modified": "2016-06-09T00:07:42.953708"
+    "key": "frosiph",
+    "name": "Frosiph",
+    "summoner_id": 26155824,
+    "profile_icon": 539,
+    "friends": "acruz,luciaron",
+    "modified": "2016-07-02T14:59:26.012098"
 }
 
 ---------------------------------------------------
 
-Removing a Friend
+Remove Friend
 Request:
 {
    "region" : "na",
-   "user_key" : "acruz",
-   "friend_key" : "frosiph"
+   "user_key" : "frosiph",
+   "friend_key" : "acruz"
 }
 Response:
 {
-    "id": 4,
+    "id": 38,
     "user": {
-        "id": 4,
-        "created": "2016-06-09T00:07:42.928026"
+        "id": 40,
+        "email": "tberroa@outlook.com",
+        "created": "2016-07-02T14:59:26.002589"
     },
     "region": "na",
-    "key": "acruz",
-    "name": "Acruz",
-    "summoner_id": 40323106,
-    "profile_icon": 1021,
-    "friends": "",
-    "modified": "2016-06-09T13:29:16.905609"
+    "key": "frosiph",
+    "name": "Frosiph",
+    "summoner_id": 26155824,
+    "profile_icon": 539,
+    "friends": "luciaron",
+    "modified": "2016-07-02T15:01:30.248845"
+}
+
+---------------------------------------------------
+
+Reset Password
+Request:
+{
+   "region" : "na",
+   "key" : "frosiph"
+}
+Response:
+{
+    "id": 38,
+    "user": {
+        "id": 40,
+        "email": "tberroa@outlook.com",
+        "created": "2016-07-02T14:59:26.002589"
+    },
+    "region": "na",
+    "key": "frosiph",
+    "name": "Frosiph",
+    "summoner_id": 26155824,
+    "profile_icon": 539,
+    "friends": "luciaron",
+    "modified": "2016-07-02T17:16:07.194324"
 }
 
 ---------------------------------------------------

@@ -94,20 +94,14 @@ class SeasonStats(models.Model):
     class Meta:
         verbose_name_plural = 'Season Stats'
 
-    season = models.CharField(max_length = 128)
-    kills = models.IntegerField()
-    deaths = models.IntegerField()
-    assists = models.IntegerField()
-    doublekills = models.IntegerField()
-    triplekills = models.IntegerField()
-    quadrakills = models.IntegerField()
-    pentakills = models.IntegerField()
+    # identity info
+    region = models.CharField(max_length = 4, default = "")
+    summoner_key = models.CharField(max_length = 32, default = "")
+    summoner_name = models.CharField(max_length = 32, default = "")
+    summoner_id = models.BigIntegerField(default = 0)
+    champion = models.IntegerField(default = 0)
 
-class SeasonStatsChampion(models.Model):
-    class Meta:
-        verbose_name_plural = 'Season Stats Champion'
-
-    season = models.CharField(max_length = 128)
+    # raw stats
     kills = models.IntegerField()
     deaths = models.IntegerField()
     assists = models.IntegerField()
@@ -117,5 +111,4 @@ class SeasonStatsChampion(models.Model):
     pentakills = models.IntegerField()
 
   
-
 
