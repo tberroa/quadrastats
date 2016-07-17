@@ -120,8 +120,14 @@ class ChangeEmail(APIView):
         summoner.user.save()
         summoner.save()
 
-        # return the users summoner object
-        return Response(SummonerSerializer(summoner).data)
+        # serialize the summoner object
+        returnJson = SummonerSerializer(summoner).data
+
+        # include the email
+        returnJson.update({"email":new_email})
+
+        # return the users summoner object with the email included
+        return Response(returnJson)
         
 class ChangePassword(APIView):
     def post(self, request, format=None):
@@ -237,22 +243,13 @@ class RegisterUser(APIView):
     def post(self, request, format = None):
         # extract data
         data = request.data
-        user = data.get("user")
+        email = data.get("email")
+        password = data.get("password")
         region = data.get("region")
         key = data.get("key")
 
         # validate
-        if None in (user, region, key):
-            return Response(invalid_request_format)
-
-        # make sure email was entered
-        email = user.get("email")
-        if email is None:
-            return Response(invalid_request_format)
-
-        # make sure password was entered
-        password = user.get("password")
-        if password is None:
+        if None in (email, password, region, key):
             return Response(invalid_request_format)
 
         # ensure proper key format
