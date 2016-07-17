@@ -107,7 +107,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     @Override
     public void onRefresh() {
-        onResume();
         RequestMatchStats requestMatchStats = new RequestMatchStats();
         requestMatchStats.delegateRecent = this;
         requestMatchStats.execute(1);

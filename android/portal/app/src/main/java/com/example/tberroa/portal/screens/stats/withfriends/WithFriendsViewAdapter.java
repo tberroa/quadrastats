@@ -82,94 +82,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         withFriendsViewHolder.matchDurationView.setText(matchDuration);
 
         // populate the summoner table
-        GridLayout summonerTable = withFriendsViewHolder.summonerTable;
-        int cWidth = ScreenUtil.dpToPx(context, 65);
-        int cHeight = ScreenUtil.dpToPx(context, 65);
-        int width = ScreenUtil.dpToPx(context, 30);
-        int height = ScreenUtil.dpToPx(context, 30);
-        int padding = ScreenUtil.dpToPx(context, 2);
-        for (MatchStats matchStats : matchStatsList) {
-            LinearLayout summonerLayout = new LinearLayout(context);
-            summonerLayout.setOrientation(LinearLayout.HORIZONTAL);
-            summonerLayout.setPadding(padding, padding, padding, padding);
-            summonerLayout.setGravity(Gravity.CENTER);
-
-            // champion icon
-            ImageView championIconView = new ImageView(context);
-            championIconView.setPadding(padding, padding, padding, padding);
-            int championIcon = ScreenUtil.championIcon(StatsUtil.championName(matchStats.champion));
-            Picasso.with(context).load(championIcon).resize(cWidth, cHeight).into(championIconView);
-            summonerLayout.addView(championIconView);
-
-            // summoner spells
-            LinearLayout summonerSpellLayout = new LinearLayout(context);
-            summonerSpellLayout.setOrientation(LinearLayout.VERTICAL);
-            ImageView summonerSpell1View = new ImageView(context);
-            ImageView summonerSpell2View = new ImageView(context);
-            summonerSpell1View.setPadding(padding, padding, padding, padding);
-            summonerSpell2View.setPadding(padding, padding, padding, padding);
-            String spell1URL = ScreenUtil.constructSummonerSpellURL(matchStats.spell1);
-            String spell2URL = ScreenUtil.constructSummonerSpellURL(matchStats.spell2);
-            Picasso.with(context).load(spell1URL).resize(width, height).into(summonerSpell1View);
-            Picasso.with(context).load(spell2URL).resize(width, height).into(summonerSpell2View);
-            summonerSpellLayout.addView(summonerSpell1View);
-            summonerSpellLayout.addView(summonerSpell2View);
-            summonerLayout.addView(summonerSpellLayout);
-
-            // keystone mastery and trinket
-            LinearLayout keystoneTrinketLayout = new LinearLayout(context);
-            keystoneTrinketLayout.setOrientation(LinearLayout.VERTICAL);
-            ImageView keystoneView = new ImageView(context);
-            keystoneView.setPadding(padding, padding, padding, padding);
-            String keystoneURL = ScreenUtil.constructMasteryURL(matchStats.keystone);
-            Picasso.with(context).load(keystoneURL).resize(width, height).into(keystoneView);
-            keystoneTrinketLayout.addView(keystoneView);
-            ImageView trinketView = new ImageView(context);
-            trinketView.setPadding(padding, padding, padding, padding);
-            String trinketURL = ScreenUtil.constructItemURL(matchStats.item6);
-            Picasso.with(context).load(trinketURL).resize(width, height).into(trinketView);
-            keystoneTrinketLayout.addView(trinketView);
-            summonerLayout.addView(keystoneTrinketLayout);
-
-            // items
-            GridLayout itemLayout = new GridLayout(context);
-            itemLayout.setColumnCount(3);
-            itemLayout.setRowCount(2);
-            for (int i = 0; i < 6; i++) {
-                String itemURL;
-                switch (i) {
-                    case 0:
-                        itemURL = ScreenUtil.constructItemURL(matchStats.item0);
-                        break;
-                    case 1:
-                        itemURL = ScreenUtil.constructItemURL(matchStats.item1);
-                        break;
-                    case 2:
-                        itemURL = ScreenUtil.constructItemURL(matchStats.item2);
-                        break;
-                    case 3:
-                        itemURL = ScreenUtil.constructItemURL(matchStats.item3);
-                        break;
-                    case 4:
-                        itemURL = ScreenUtil.constructItemURL(matchStats.item4);
-                        break;
-                    case 5:
-                        itemURL = ScreenUtil.constructItemURL(matchStats.item5);
-                        break;
-                    default:
-                        itemURL = ScreenUtil.constructItemURL(matchStats.item0);
-                        break;
-                }
-                ImageView itemView = new ImageView(context);
-                itemView.setPadding(padding, padding, padding, padding);
-                Picasso.with(context).load(itemURL).resize(width, height).into(itemView);
-                itemLayout.addView(itemView);
-            }
-            summonerLayout.addView(itemLayout);
-
-            // add the summoner to the table
-            summonerTable.addView(summonerLayout);
-        }
+        populateSummonerTable(withFriendsViewHolder.summonerTable, matchStatsList);
 
         // create the entries
         List<BarEntry> entriesDmg = new ArrayList<>();
@@ -318,6 +231,96 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         return new withFriendsViewHolder(LayoutInflater.from(c).inflate(R.layout.view_with_friends, vG, false));
     }
 
+    private void populateSummonerTable(GridLayout summonerTable, List<MatchStats> matchStatsList){
+        int cWidth = ScreenUtil.dpToPx(context, 65);
+        int cHeight = ScreenUtil.dpToPx(context, 65);
+        int width = ScreenUtil.dpToPx(context, 30);
+        int height = ScreenUtil.dpToPx(context, 30);
+        int padding = ScreenUtil.dpToPx(context, 2);
+        for (MatchStats matchStats : matchStatsList) {
+            LinearLayout summonerLayout = new LinearLayout(context);
+            summonerLayout.setOrientation(LinearLayout.HORIZONTAL);
+            summonerLayout.setPadding(padding, padding, padding, padding);
+            summonerLayout.setGravity(Gravity.CENTER);
+
+            // champion icon
+            ImageView championIconView = new ImageView(context);
+            championIconView.setPadding(padding, padding, padding, padding);
+            int championIcon = ScreenUtil.championIcon(StatsUtil.championName(matchStats.champion));
+            Picasso.with(context).load(championIcon).resize(cWidth, cHeight).into(championIconView);
+            summonerLayout.addView(championIconView);
+
+            // summoner spells
+            LinearLayout summonerSpellLayout = new LinearLayout(context);
+            summonerSpellLayout.setOrientation(LinearLayout.VERTICAL);
+            ImageView summonerSpell1View = new ImageView(context);
+            ImageView summonerSpell2View = new ImageView(context);
+            summonerSpell1View.setPadding(padding, padding, padding, padding);
+            summonerSpell2View.setPadding(padding, padding, padding, padding);
+            String spell1URL = ScreenUtil.constructSummonerSpellURL(matchStats.spell1);
+            String spell2URL = ScreenUtil.constructSummonerSpellURL(matchStats.spell2);
+            Picasso.with(context).load(spell1URL).resize(width, height).into(summonerSpell1View);
+            Picasso.with(context).load(spell2URL).resize(width, height).into(summonerSpell2View);
+            summonerSpellLayout.addView(summonerSpell1View);
+            summonerSpellLayout.addView(summonerSpell2View);
+            summonerLayout.addView(summonerSpellLayout);
+
+            // keystone mastery and trinket
+            LinearLayout keystoneTrinketLayout = new LinearLayout(context);
+            keystoneTrinketLayout.setOrientation(LinearLayout.VERTICAL);
+            ImageView keystoneView = new ImageView(context);
+            keystoneView.setPadding(padding, padding, padding, padding);
+            String keystoneURL = ScreenUtil.constructMasteryURL(matchStats.keystone);
+            Picasso.with(context).load(keystoneURL).resize(width, height).into(keystoneView);
+            keystoneTrinketLayout.addView(keystoneView);
+            ImageView trinketView = new ImageView(context);
+            trinketView.setPadding(padding, padding, padding, padding);
+            String trinketURL = ScreenUtil.constructItemURL(matchStats.item6);
+            Picasso.with(context).load(trinketURL).resize(width, height).into(trinketView);
+            keystoneTrinketLayout.addView(trinketView);
+            summonerLayout.addView(keystoneTrinketLayout);
+
+            // items
+            GridLayout itemLayout = new GridLayout(context);
+            itemLayout.setColumnCount(3);
+            itemLayout.setRowCount(2);
+            for (int i = 0; i < 6; i++) {
+                String itemURL;
+                switch (i) {
+                    case 0:
+                        itemURL = ScreenUtil.constructItemURL(matchStats.item0);
+                        break;
+                    case 1:
+                        itemURL = ScreenUtil.constructItemURL(matchStats.item1);
+                        break;
+                    case 2:
+                        itemURL = ScreenUtil.constructItemURL(matchStats.item2);
+                        break;
+                    case 3:
+                        itemURL = ScreenUtil.constructItemURL(matchStats.item3);
+                        break;
+                    case 4:
+                        itemURL = ScreenUtil.constructItemURL(matchStats.item4);
+                        break;
+                    case 5:
+                        itemURL = ScreenUtil.constructItemURL(matchStats.item5);
+                        break;
+                    default:
+                        itemURL = ScreenUtil.constructItemURL(matchStats.item0);
+                        break;
+                }
+                ImageView itemView = new ImageView(context);
+                itemView.setPadding(padding, padding, padding, padding);
+                Picasso.with(context).load(itemURL).resize(width, height).into(itemView);
+                itemLayout.addView(itemView);
+            }
+            summonerLayout.addView(itemLayout);
+
+            // add the summoner to the table
+            summonerTable.addView(summonerLayout);
+        }
+    }
+
     public class withFriendsViewHolder extends RecyclerView.ViewHolder {
 
         final TextView victoryView;
@@ -351,4 +354,5 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             wardsChart = (BarChart) itemView.findViewById(R.id.wards_chart);
         }
     }
+
 }

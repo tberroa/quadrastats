@@ -191,22 +191,31 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
             messageSwipeLayout.setRefreshing(false);
 
             if (result[0]) { // successful http request
-                if (!useDataSwipeLayout) {
-                    // switch to data swipe layout
-                    messageSwipeLayout.setEnabled(false);
-                    ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
-                    scrollView.setVisibility(View.GONE);
-                    dataSwipeLayout.setEnabled(true);
-                    useDataSwipeLayout = true;
-                }
-
                 if (result[1]) { // and received new data
                     switch (activityId) {
                         case 1: // recent activity
+                            if (!useDataSwipeLayout) {
+                                // switch to data swipe layout
+                                messageSwipeLayout.setEnabled(false);
+                                ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
+                                scrollView.setVisibility(View.GONE);
+                                dataSwipeLayout.setEnabled(true);
+                                useDataSwipeLayout = true;
+                            }
                             delegateRecent.displayData(matchStatsList);
                             break;
                         case 3: // with friends activity
-                            delegateWithFriends.displayData(matchStatsMapMap);
+                            if (!matchStatsMapMap.isEmpty()) {
+                                if (!useDataSwipeLayout) {
+                                    // switch to data swipe layout
+                                    messageSwipeLayout.setEnabled(false);
+                                    ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
+                                    scrollView.setVisibility(View.GONE);
+                                    dataSwipeLayout.setEnabled(true);
+                                    useDataSwipeLayout = true;
+                                }
+                                delegateWithFriends.displayData(matchStatsMapMap);
+                            }
                             break;
                     }
                 }

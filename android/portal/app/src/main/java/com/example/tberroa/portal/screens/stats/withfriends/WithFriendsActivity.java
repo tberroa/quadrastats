@@ -96,7 +96,6 @@ public class WithFriendsActivity extends BaseStatsActivity implements WithFriend
 
     @Override
     public void onRefresh() {
-        onResume();
         RequestMatchStats requestMatchStats = new RequestMatchStats();
         requestMatchStats.delegateWithFriends = this;
         requestMatchStats.execute(3);
