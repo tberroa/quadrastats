@@ -3,23 +3,15 @@ from rest_framework import serializers
 from .models import Summoner
 from .models import User
 
+class SummonerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Summoner
+        fields = '__all__'
+        extra_kwargs = {'user': {'write_only': True}}
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        return User.objects.create(**validated_data)
-
-class SummonerSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=False)
-
-    class Meta:
-        model = Summoner
-        fields = '__all__'
-
-    def create(self, validated_data):
-        user_data = validated_data.pop("user")
-        user = User.objects.create(**user_data)
-        return Summoner.objects.create(user = user, **validated_data)
+        extra_kwargs = {'email': {'write_only': True}, \
+                        'password': {'write_only': True}}

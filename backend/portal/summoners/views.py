@@ -221,8 +221,17 @@ class LoginUser(APIView):
         if not hashers.check_password(password, summoner.user.password):
             return Response(invalid_credentials)
 
-        # return the users summoner object
-        return Response(SummonerSerializer(summoner).data)
+        # get the users email
+        email = summoner.user.email
+
+        # serialize the summoner object
+        returnJson = SummonerSerializer(summoner).data
+
+        # include the email
+        returnJson.update({"email":email})
+
+        # return the users summoner object with the email included
+        return Response(returnJson)
 
 class RegisterUser(APIView):
     def post(self, request, format = None):
@@ -264,8 +273,14 @@ class RegisterUser(APIView):
             summoner.user = User.objects.create(email = email, password = password)
             summoner.save()
            
-            # return the newly registered users summoner object
-            return Response(SummonerSerializer(summoner).data)
+            # serialize the summoner object
+            returnJson = SummonerSerializer(summoner).data
+
+            # include the email
+            returnJson.update({"email":email})
+
+            # return the users summoner object with the email included
+            return Response(returnJson)
 
         # summoner object did not already exist, need to create it
         except Summoner.DoesNotExist:
@@ -278,26 +293,40 @@ class RegisterUser(APIView):
         else:
             summoner = val[1]
 
-        # update the data before passing to serializer
-        data.get("user").update({"email" : email, \
-                                 "password" : password})
-        data.update({"key" : key, \
-                     "name" : summoner.get("name"), \
-                     "summoner_id" : summoner.get("id"), \
-                     "profile_icon" : summoner.get("profileIconId")})
+        # None check important fields
+        name = summoner.get("name")
+        summoner_id = summoner.get("id")
+        profile_icon = summoner.get("profileIconId")
+        if None in (name, summoner_id, profile_icon):
+            return Response(invalid_riot_response)
 
-        # use the data to create a serializer
-        serializer = SummonerSerializer(data = data)
+        # create a user data dictionary
+        user_data = {}
+        user_data["email"] = email
+        user_data["password"] = password
 
-        # make sure everything is okay
-        if not serializer.is_valid():
-            return Response(internal_processing_error)
+        # create a summoner data dictionary
+        summoner_data = {}
+        suummoner_data["region"] = region
+        suummoner_data["key"] = key
+        suummoner_data["name"] = name
+        suummoner_data["summoner_id"] = summoner_id
+        suummoner_data["profile_icon"] = profile_icon
 
-        # save the newly created summoner object with attached user object
-        serializer.save()
+        # create a new user object
+        user_o = User.objects.create(**user_data)
 
-        # return the newly registered users summoner object
-        return Response(serializer.data)
+        # create a new summoner object
+        summoner_o = Summoner.objects.create(user = user, **summoner_data)
+
+        # serialize the summoner object
+        returnJson = SummonerSerializer(summoner_o).data
+
+        # include the email
+        returnJson.update({"email":email})
+
+        # return the users summoner object with the email included
+        return Response(returnJson)
 
 class RemoveFriend(APIView):
     def post(Self, request, format=None):
