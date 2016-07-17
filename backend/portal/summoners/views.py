@@ -307,17 +307,17 @@ class RegisterUser(APIView):
 
         # create a summoner data dictionary
         summoner_data = {}
-        suummoner_data["region"] = region
-        suummoner_data["key"] = key
-        suummoner_data["name"] = name
-        suummoner_data["summoner_id"] = summoner_id
-        suummoner_data["profile_icon"] = profile_icon
+        summoner_data["region"] = region
+        summoner_data["key"] = key
+        summoner_data["name"] = name
+        summoner_data["summoner_id"] = summoner_id
+        summoner_data["profile_icon"] = profile_icon
 
         # create a new user object
         user_o = User.objects.create(**user_data)
 
         # create a new summoner object
-        summoner_o = Summoner.objects.create(user = user, **summoner_data)
+        summoner_o = Summoner.objects.create(user = user_o, **summoner_data)
 
         # serialize the summoner object
         returnJson = SummonerSerializer(summoner_o).data
