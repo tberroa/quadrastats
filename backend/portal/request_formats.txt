@@ -12,7 +12,6 @@ Request:
 Response:
 {
     "id": 39,
-    "user": null,
     "region": "na",
     "key": "luciaron",
     "name": "Luciaron",
@@ -35,18 +34,14 @@ Request:
 Response:
 {
     "id": 38,
-    "user": {
-        "id": 40,
-        "email": "tom.berroa@gmail.com",
-        "created": "2016-07-02T14:59:26.002589"
-    },
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
     "profile_icon": 539,
     "friends": "luciaron",
-    "modified": "2016-07-06T18:54:27.493591"
+    "modified": "2016-07-06T18:54:27.493591",
+    "email": "tom.berroa@gmail.com"
 }
 
 ---------------------------------------------------
@@ -62,11 +57,6 @@ Request:
 Response:
 {
     "id": 38,
-    "user": {
-        "id": 39,
-        "email": "tberroa@outlook.com",
-        "created": "2016-06-30T16:18:26.283332"
-    },
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
@@ -88,11 +78,6 @@ Response:
 [
     {
         "id": 38,
-        "user": {
-            "id": 39,
-            "email": "tberroa@outlook.com",
-            "created": "2016-06-30T16:18:26.283332"
-        },
         "region": "na",
         "key": "frosiph",
         "name": "Frosiph",
@@ -103,7 +88,6 @@ Response:
     },
     {
         "id": 39,
-        "user": null,
         "region": "na",
         "key": "luciaron",
         "name": "Luciaron",
@@ -126,18 +110,14 @@ Request:
 Response:
 {
     "id": 38,
-    "user": {
-        "id": 39,
-        "email": "tberroa@outlook.com",
-        "created": "2016-06-30T16:18:26.283332"
-    },
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
     "profile_icon": 539,
     "friends": "",
-    "modified": "2016-07-02T14:36:23.127745"
+    "modified": "2016-07-02T14:36:23.127745",
+    "email": "tberroa@outlook.com"
 }
 
 ---------------------------------------------------
@@ -145,28 +125,22 @@ Response:
 Register User
 Request:
 {
-    "user" : {
-        "email" : "tberroa@outlook.com",
-        "password" : "123456"
-    },
+    "email" : "tberroa@outlook.com",
+    "password" : "123456",
     "region" : "na",
     "key" : "frosiph"
 }
 Response:
 {
     "id": 38,
-    "user": {
-        "id": 40,
-        "email": "tberroa@outlook.com",
-        "created": "2016-07-02T14:59:26.002589"
-    },
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
     "profile_icon": 539,
     "friends": "acruz,luciaron",
-    "modified": "2016-07-02T14:59:26.012098"
+    "modified": "2016-07-02T14:59:26.012098",
+    "email": "tberroa@outlook.com"
 }
 
 ---------------------------------------------------
@@ -181,11 +155,6 @@ Request:
 Response:
 {
     "id": 38,
-    "user": {
-        "id": 40,
-        "email": "tberroa@outlook.com",
-        "created": "2016-07-02T14:59:26.002589"
-    },
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
@@ -206,11 +175,6 @@ Request:
 Response:
 {
     "id": 38,
-    "user": {
-        "id": 40,
-        "email": "tberroa@outlook.com",
-        "created": "2016-07-02T14:59:26.002589"
-    },
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
