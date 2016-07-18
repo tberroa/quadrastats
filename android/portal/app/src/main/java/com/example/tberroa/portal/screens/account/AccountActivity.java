@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.screens.authentication.AuthUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.screens.BaseActivity;
@@ -31,7 +33,7 @@ public class AccountActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_account);
 
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -50,6 +52,11 @@ public class AccountActivity extends BaseActivity {
             }
         });
 
+        // initialize views
+        TextView emailView = (TextView) findViewById(R.id.email_view);
+        emailView.setText(new UserInfo().getEmail(this));
+
+        // initialize buttons
         Button signOutButton = (Button) findViewById(R.id.sign_out_button);
         signOutButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {

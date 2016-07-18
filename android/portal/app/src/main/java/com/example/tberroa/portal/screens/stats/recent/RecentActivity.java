@@ -1,10 +1,7 @@
 package com.example.tberroa.portal.screens.stats.recent;
 
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,9 +9,9 @@ import android.support.design.widget.TabLayout.OnTabSelectedListener;
 import android.support.design.widget.TabLayout.Tab;
 import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -27,12 +24,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -140,17 +134,9 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             TextView textView = new TextView(this);
             textView.setText(name);
             textView.setTextSize(12);
-            textView.setTextColor(Color.WHITE);
+            textView.setTextColor(ContextCompat.getColor(this, ScreenUtil.intToColor(i)));
             textView.setPadding(ScreenUtil.dpToPx(this, 5), 0, ScreenUtil.dpToPx(this, 5), 0);
             legendNames.addView(textView);
-
-            ImageView imageView = new ImageView(this);
-            imageView.setMinimumWidth(ScreenUtil.dpToPx(this, 10));
-            imageView.setMinimumHeight(ScreenUtil.dpToPx(this, 10));
-            imageView.setPadding(0, ScreenUtil.dpToPx(this, 5), 0, 0);
-            imageView.setImageResource(ScreenUtil.intToColor(i));
-            legendNames.addView(imageView);
-
             i++;
         }
     }
@@ -248,13 +234,13 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             @Override
             public void onClick(View v) {
                 // copy the set of summoner names
-                final Set<String> selectedNames = new LinkedHashSet<>(names);
+                Set<String> selectedNames = new LinkedHashSet<>(names);
 
                 // copy the map of data
-                final Map<String, List<List<Number>>> selectedData = new LinkedHashMap<>(aggregateData);
+                Map<String, List<List<Number>>> selectedData = new LinkedHashMap<>(aggregateData);
 
                 // create a checkbox for each name
-                final List<CheckBox> checkBoxes = new ArrayList<>();
+                List<CheckBox> checkBoxes = new ArrayList<>();
                 for (String name : names) {
                     CheckBox checkBox = new CheckBox(RecentActivity.this);
                     checkBox.setText(name);
@@ -262,55 +248,17 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                     checkBoxes.add(checkBox);
                 }
 
-                // format the checkboxes in a layout
-                LinearLayout linearLayout = new LinearLayout(RecentActivity.this);
-                linearLayout.setOrientation(LinearLayout.VERTICAL);
-                int padding = ScreenUtil.dpToPx(RecentActivity.this, 5);
-                linearLayout.setPadding(0, padding, 0, padding);
-                for (CheckBox checkBox : checkBoxes) {
-                    linearLayout.addView(checkBox);
-                }
-                ScrollView scrollView = new ScrollView(RecentActivity.this);
-                scrollView.addView(linearLayout);
-
-                // construct dialog
-                ContextThemeWrapper theme = new ContextThemeWrapper(RecentActivity.this, R.style.DialogStyle);
-                Builder builder = new Builder(theme);
-                builder.setView(scrollView);
-                builder.setTitle(R.string.rg_summoners_to_chart);
-                builder.setCancelable(true);
-                builder.setPositiveButton(R.string.button_done, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // make sure at least one was selected
-                        boolean minimumSatisfied = false;
-                        for (CheckBox checkBox : checkBoxes) {
-                            if (checkBox.isChecked()) {
-                                minimumSatisfied = true;
-                                break;
-                            }
-                        }
-
-                        if (minimumSatisfied) {
-                            // go through and remove those that were not checked
-                            for (CheckBox checkBox : checkBoxes) {
-                                if (!checkBox.isChecked()) {
-                                    selectedNames.remove(checkBox.getText().toString());
-                                    selectedData.remove(checkBox.getText().toString());
-                                }
-                            }
-
-                            // update the views
-                            createLegend(selectedNames, champion, position);
-                            updateAdapter(titles, selectedData);
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(RecentActivity.this, R.string.must_select_one, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                // construct package required by dialog
+                GoButtonPackageSSD goButtonPackageSSD = new GoButtonPackageSSD();
+                goButtonPackageSSD.selectedNames = selectedNames;
+                goButtonPackageSSD.selectedData = selectedData;
+                goButtonPackageSSD.checkBoxes = checkBoxes;
+                goButtonPackageSSD.titles = titles;
+                goButtonPackageSSD.champion = champion;
+                goButtonPackageSSD.position = position;
 
                 // display dialog
-                builder.create().show();
+                new SelectSummonersDialog(RecentActivity.this, goButtonPackageSSD).show();
             }
         });
     }
@@ -350,8 +298,10 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
     }
 
     private class ChampionIcon {
+
         public final String name;
         public boolean isSelected;
+        public ImageView check;
 
         ChampionIcon(String name) {
             this.name = name;
@@ -374,18 +324,15 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         @Override
         public void onBindViewHolder(ChampionViewHolder clientViewHolder, int i) {
-            final ChampionIcon icon = champions.get(i);
+            champions.get(i).check = clientViewHolder.champIconCheck;
+            ChampionIcon icon = champions.get(i);
             Picasso.with(RecentActivity.this).load(ScreenUtil.championIcon(icon.name)).into(clientViewHolder.champIcon);
 
-            clientViewHolder.champIconCheckbox.setOnCheckedChangeListener(null);
-            clientViewHolder.champIconCheckbox.setChecked(icon.isSelected);
-
-            clientViewHolder.champIconCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    icon.isSelected = isChecked;
-                }
-            });
+            if (icon.isSelected) {
+                clientViewHolder.champIconCheck.setVisibility(View.VISIBLE);
+            } else {
+                clientViewHolder.champIconCheck.setVisibility(View.INVISIBLE);
+            }
         }
 
         @Override
@@ -397,20 +344,32 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         public class ChampionViewHolder extends ViewHolder {
 
-            final CheckBox champIconCheckbox;
+            final ImageView champIconCheck;
             final ImageView champIcon;
 
             ChampionViewHolder(View itemView) {
                 super(itemView);
                 champIcon = (ImageView) itemView.findViewById(R.id.champ_icon_view);
-                champIconCheckbox = (CheckBox) itemView.findViewById(R.id.champ_icon_checkbox);
+                champIconCheck = (ImageView) itemView.findViewById(R.id.champ_icon_check);
 
                 champIcon.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        for (int i = 0; i < champions.size(); i++) {
+                            if (i != getLayoutPosition()) {
+                                champions.get(i).isSelected = false;
+                                if (champions.get(i).check != null) {
+                                    champions.get(i).check.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        }
                         ChampionIcon icon = champions.get(getLayoutPosition());
                         icon.isSelected = !icon.isSelected;
-                        champIconCheckbox.setChecked(icon.isSelected);
+                        if (icon.isSelected) {
+                            champIconCheck.setVisibility(View.VISIBLE);
+                        } else {
+                            champIconCheck.setVisibility(View.INVISIBLE);
+                        }
                     }
                 });
             }
@@ -426,8 +385,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.dialog_filter);
-            setTitle(R.string.rg_filter_data);
+            setContentView(R.layout.dialog_data_filter);
             setCancelable(true);
 
             // initialize list of champion icons
@@ -444,66 +402,93 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new GridLayoutManager(RecentActivity.this, span));
 
-            // initialize the role check boxes
-            final CheckBox topCheckbox = (CheckBox) findViewById(R.id.top_checkbox);
-            final CheckBox jungleCheckbox = (CheckBox) findViewById(R.id.jungle_checkbox);
-            final CheckBox midCheckbox = (CheckBox) findViewById(R.id.mid_checkbox);
-            final CheckBox botCheckbox = (CheckBox) findViewById(R.id.bot_checkbox);
-            final CheckBox supportCheckbox = (CheckBox) findViewById(R.id.support_checkbox);
+            // initialize the role checks
+            final ImageView topCheck = (ImageView) findViewById(R.id.top_check);
+            final ImageView jungleCheck = (ImageView) findViewById(R.id.jungle_check);
+            final ImageView midCheck = (ImageView) findViewById(R.id.mid_check);
+            final ImageView botCheck = (ImageView) findViewById(R.id.bot_check);
+            final ImageView supportCheck = (ImageView) findViewById(R.id.support_check);
+            topCheck.setVisibility(View.INVISIBLE);
+            jungleCheck.setVisibility(View.INVISIBLE);
+            midCheck.setVisibility(View.INVISIBLE);
+            botCheck.setVisibility(View.INVISIBLE);
+            supportCheck.setVisibility(View.INVISIBLE);
+
+            // initialize the position images
+            ImageView topIcon = (ImageView) findViewById(R.id.top_view);
+            ImageView jungleIcon = (ImageView) findViewById(R.id.jungle_view);
+            ImageView midIcon = (ImageView) findViewById(R.id.mid_view);
+            ImageView botIcon = (ImageView) findViewById(R.id.bot_view);
+            ImageView supportIcon = (ImageView) findViewById(R.id.support_view);
 
             // set listeners to make them behave like radio buttons
-            topCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            topIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        jungleCheckbox.setChecked(false);
-                        midCheckbox.setChecked(false);
-                        botCheckbox.setChecked(false);
-                        supportCheckbox.setChecked(false);
+                public void onClick(View view) {
+                    jungleCheck.setVisibility(View.INVISIBLE);
+                    midCheck.setVisibility(View.INVISIBLE);
+                    botCheck.setVisibility(View.INVISIBLE);
+                    supportCheck.setVisibility(View.INVISIBLE);
+                    if (topCheck.getVisibility() == View.INVISIBLE) {
+                        topCheck.setVisibility(View.VISIBLE);
+                    } else {
+                        topCheck.setVisibility(View.INVISIBLE);
                     }
                 }
             });
-            jungleCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            jungleIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        topCheckbox.setChecked(false);
-                        midCheckbox.setChecked(false);
-                        botCheckbox.setChecked(false);
-                        supportCheckbox.setChecked(false);
+                public void onClick(View view) {
+                    topCheck.setVisibility(View.INVISIBLE);
+                    midCheck.setVisibility(View.INVISIBLE);
+                    botCheck.setVisibility(View.INVISIBLE);
+                    supportCheck.setVisibility(View.INVISIBLE);
+                    if (jungleCheck.getVisibility() == View.INVISIBLE) {
+                        jungleCheck.setVisibility(View.VISIBLE);
+                    } else {
+                        jungleCheck.setVisibility(View.INVISIBLE);
                     }
                 }
             });
-            midCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            midIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        topCheckbox.setChecked(false);
-                        jungleCheckbox.setChecked(false);
-                        botCheckbox.setChecked(false);
-                        supportCheckbox.setChecked(false);
+                public void onClick(View view) {
+                    topCheck.setVisibility(View.INVISIBLE);
+                    jungleCheck.setVisibility(View.INVISIBLE);
+                    botCheck.setVisibility(View.INVISIBLE);
+                    supportCheck.setVisibility(View.INVISIBLE);
+                    if (midCheck.getVisibility() == View.INVISIBLE) {
+                        midCheck.setVisibility(View.VISIBLE);
+                    } else {
+                        midCheck.setVisibility(View.INVISIBLE);
                     }
                 }
             });
-            botCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            botIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        topCheckbox.setChecked(false);
-                        jungleCheckbox.setChecked(false);
-                        midCheckbox.setChecked(false);
-                        supportCheckbox.setChecked(false);
+                public void onClick(View view) {
+                    topCheck.setVisibility(View.INVISIBLE);
+                    jungleCheck.setVisibility(View.INVISIBLE);
+                    midCheck.setVisibility(View.INVISIBLE);
+                    supportCheck.setVisibility(View.INVISIBLE);
+                    if (botCheck.getVisibility() == View.INVISIBLE) {
+                        botCheck.setVisibility(View.VISIBLE);
+                    } else {
+                        botCheck.setVisibility(View.INVISIBLE);
                     }
                 }
             });
-            supportCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            supportIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        topCheckbox.setChecked(false);
-                        jungleCheckbox.setChecked(false);
-                        midCheckbox.setChecked(false);
-                        botCheckbox.setChecked(false);
+                public void onClick(View view) {
+                    topCheck.setVisibility(View.INVISIBLE);
+                    jungleCheck.setVisibility(View.INVISIBLE);
+                    midCheck.setVisibility(View.INVISIBLE);
+                    botCheck.setVisibility(View.INVISIBLE);
+                    if (supportCheck.getVisibility() == View.INVISIBLE) {
+                        supportCheck.setVisibility(View.VISIBLE);
+                    } else {
+                        supportCheck.setVisibility(View.INVISIBLE);
                     }
                 }
             });
@@ -531,19 +516,19 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                     // get position
                     String lane;
                     String role;
-                    if (topCheckbox.isChecked()) {
+                    if (topCheck.getVisibility() == View.VISIBLE) {
                         lane = "TOP";
                         role = null;
-                    } else if (jungleCheckbox.isChecked()) {
+                    } else if (jungleCheck.getVisibility() == View.VISIBLE) {
                         lane = "JUNGLE";
                         role = null;
-                    } else if (midCheckbox.isChecked()) {
+                    } else if (midCheck.getVisibility() == View.VISIBLE) {
                         lane = "MIDDLE";
                         role = null;
-                    } else if (botCheckbox.isChecked()) {
+                    } else if (botCheck.getVisibility() == View.VISIBLE) {
                         lane = "BOTTOM";
                         role = "DUO_CARRY";
-                    } else if (supportCheckbox.isChecked()) {
+                    } else if (supportCheck.getVisibility() == View.VISIBLE) {
                         lane = "BOTTOM";
                         role = "DUO_SUPPORT";
                     } else {
@@ -551,7 +536,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                         role = null;
                     }
 
-                    GoButtonPackage goButtonPackage = new GoButtonPackage();
+                    GoButtonPackageFD goButtonPackage = new GoButtonPackageFD();
                     goButtonPackage.dialog = FilterDialog.this;
                     goButtonPackage.champion = champion;
                     goButtonPackage.lane = lane;
@@ -563,14 +548,14 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         }
     }
 
-    private class FilterDialogGoButton extends AsyncTask<GoButtonPackage, Void, List<MatchStats>> {
+    private class FilterDialogGoButton extends AsyncTask<GoButtonPackageFD, Void, List<MatchStats>> {
 
         int champion;
         FilterDialog dialog;
         String position;
 
         @Override
-        protected List<MatchStats> doInBackground(GoButtonPackage... params) {
+        protected List<MatchStats> doInBackground(GoButtonPackageFD... params) {
             LocalDB localDB = new LocalDB();
 
             // extract objects
@@ -610,10 +595,91 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         }
     }
 
-    private class GoButtonPackage {
+    private class GoButtonPackageFD {
         public int champion;
         public FilterDialog dialog;
         public String lane;
         public String role;
+    }
+
+    private class GoButtonPackageSSD {
+        public Set<String> selectedNames;
+        public Map<String, List<List<Number>>> selectedData;
+        public List<CheckBox> checkBoxes;
+        public ArrayList<String> titles;
+        public int champion;
+        public String position;
+    }
+
+    private class SelectSummonersDialog extends Dialog {
+
+        private final Context context;
+        private final Set<String> selectedNames;
+        private final Map<String, List<List<Number>>> selectedData;
+        private final List<CheckBox> checkBoxes;
+        private final ArrayList<String> titles;
+        private final int champion;
+        private final String position;
+
+        public SelectSummonersDialog(Context context, GoButtonPackageSSD goButtonPackageSSD) {
+            super(RecentActivity.this, R.style.DialogStyle);
+            this.context = context;
+            selectedNames = goButtonPackageSSD.selectedNames;
+            selectedData = goButtonPackageSSD.selectedData;
+            checkBoxes = goButtonPackageSSD.checkBoxes;
+            titles = goButtonPackageSSD.titles;
+            champion = goButtonPackageSSD.champion;
+            position = goButtonPackageSSD.position;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.dialog_select_summoners);
+            setCancelable(true);
+
+            // populate the view with the checkboxes
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.select_summoners_layout);
+            for (CheckBox checkBox : checkBoxes) {
+                linearLayout.addView(checkBox);
+                View divider = new View(context);
+                divider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                divider.setBackgroundColor(ContextCompat.getColor(context, R.color.divider));
+                linearLayout.addView(divider);
+            }
+
+            // initialize the go button
+            Button goButton = (Button) findViewById(R.id.go_button);
+            goButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // make sure at least one was selected
+                    boolean minimumSatisfied = false;
+                    for (CheckBox checkBox : checkBoxes) {
+                        if (checkBox.isChecked()) {
+                            minimumSatisfied = true;
+                            break;
+                        }
+                    }
+
+                    if (minimumSatisfied) {
+                        // go through and remove those that were not checked
+                        for (CheckBox checkBox : checkBoxes) {
+                            if (!checkBox.isChecked()) {
+                                selectedNames.remove(checkBox.getText().toString());
+                                selectedData.remove(checkBox.getText().toString());
+                            }
+                        }
+
+                        // update the views
+                        createLegend(selectedNames, champion, position);
+                        updateAdapter(titles, selectedData);
+                        dismiss();
+                    } else {
+                        Toast.makeText(RecentActivity.this, R.string.must_select_one, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 }

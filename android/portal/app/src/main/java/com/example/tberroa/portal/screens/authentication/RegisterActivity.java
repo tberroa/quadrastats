@@ -22,8 +22,8 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqRegister;
-import com.example.tberroa.portal.models.requests.User;
 import com.example.tberroa.portal.models.summoner.Summoner;
+import com.example.tberroa.portal.models.summoner.User;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
@@ -37,6 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String RELOAD = "-80";
     private String codeString;
     private EditText confirmPasswordField;
+    private String email;
+    private EditText emailField;
     private boolean inView;
     private String key;
     private EditText keyField;
@@ -64,6 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // initialize input fields
         keyField = (EditText) findViewById(R.id.summoner_name_field);
+        emailField = (EditText) findViewById(R.id.email_field);
         passwordField = (EditText) findViewById(R.id.password_field);
         confirmPasswordField = (EditText) findViewById(R.id.confirm_password_field);
         regionSelect = (Spinner) findViewById(R.id.region_select_spinner);
@@ -107,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void register() {
         key = keyField.getText().toString();
+        email = emailField.getText().toString();
         password = passwordField.getText().toString();
         String confirmPassword = confirmPasswordField.getText().toString();
 
@@ -172,8 +176,8 @@ public class RegisterActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             // create the request object
             ReqRegister request = new ReqRegister();
-            request.user = new User();
-            request.user.password = password;
+            request.email = email;
+            request.password = password;
             request.region = region;
             request.key = key;
             request.code = codeString;
@@ -195,8 +199,11 @@ public class RegisterActivity extends AppCompatActivity {
                 // get the summoner object
                 Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
 
+                // get the user object
+                User user = ModelUtil.fromJson(postResponse, User.class);
+
                 // sign in
-                AuthUtil.signIn(RegisterActivity.this, summoner, inView);
+                AuthUtil.signIn(RegisterActivity.this, summoner, user, inView);
             } else { // display error
                 Toast.makeText(RegisterActivity.this, postResponse, Toast.LENGTH_SHORT).show();
                 registerButton.setEnabled(true);

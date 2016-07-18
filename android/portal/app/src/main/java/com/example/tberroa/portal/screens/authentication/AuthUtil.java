@@ -8,6 +8,7 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.summoner.Summoner;
+import com.example.tberroa.portal.models.summoner.User;
 
 public class AuthUtil {
 
@@ -41,7 +42,7 @@ public class AuthUtil {
         }
     }
 
-    public static void signIn(Context context, Summoner summoner, boolean inView) {
+    public static void signIn(Context context, Summoner summoner, User user, boolean inView) {
         UserInfo userInfo = new UserInfo();
 
         // clear local database
@@ -51,6 +52,7 @@ public class AuthUtil {
         userInfo.clear(context);
 
         // save user info
+        userInfo.setEmail(context, user.email);
         userInfo.setId(context, summoner.summoner_id);
         userInfo.setSignInStatus(context, true);
 
@@ -79,7 +81,8 @@ public class AuthUtil {
         new LocalDB().clearDatabase(context);
 
         // go to sign in page
-        context.startActivity(new Intent(context, SignInActivity.class));
-        ((Activity) context).finish();
+        Intent signOutIntent = new Intent(context, SignInActivity.class);
+        signOutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(signOutIntent);
     }
 }

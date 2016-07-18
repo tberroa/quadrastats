@@ -56,60 +56,60 @@
             android:contentDescription="@string/image_view_description"
             android:src="@drawable/pos_support"/>
 
-        <CheckBox
-            android:id="@+id/top_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/top_check"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignBottom="@id/top_view"
             android:layout_alignEnd="@id/top_view"
             android:layout_alignStart="@id/top_view"
             android:layout_alignTop="@id/top_view"
-            android:scaleX="1.5"
-            android:scaleY="1.5"/>
+            android:contentDescription="@string/image_view_description"
+            android:src="@drawable/check"/>
 
-        <CheckBox
-            android:id="@+id/jungle_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/jungle_check"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignBottom="@id/jungle_view"
             android:layout_alignEnd="@id/jungle_view"
             android:layout_alignStart="@id/jungle_view"
             android:layout_alignTop="@id/jungle_view"
-            android:scaleX="1.5"
-            android:scaleY="1.5"/>
+            android:contentDescription="@string/image_view_description"
+            android:src="@drawable/check"/>
 
-        <CheckBox
-            android:id="@+id/mid_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/mid_check"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignBottom="@id/mid_view"
             android:layout_alignEnd="@id/mid_view"
             android:layout_alignStart="@id/mid_view"
             android:layout_alignTop="@id/mid_view"
-            android:scaleX="1.5"
-            android:scaleY="1.5"/>
+            android:contentDescription="@string/image_view_description"
+            android:src="@drawable/check"/>
 
-        <CheckBox
-            android:id="@+id/bot_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/bot_check"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignBottom="@id/bot_view"
             android:layout_alignEnd="@id/bot_view"
             android:layout_alignStart="@id/bot_view"
             android:layout_alignTop="@id/bot_view"
-            android:scaleX="1.5"
-            android:scaleY="1.5"/>
+            android:contentDescription="@string/image_view_description"
+            android:src="@drawable/check"/>
 
-        <CheckBox
-            android:id="@+id/support_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/support_check"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignBottom="@id/support_view"
             android:layout_alignEnd="@id/support_view"
             android:layout_alignStart="@id/support_view"
             android:layout_alignTop="@id/support_view"
-            android:scaleX="1.5"
-            android:scaleY="1.5"/>
+            android:contentDescription="@string/image_view_description"
+            android:src="@drawable/check"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -123,7 +123,8 @@
     <Button
         android:id="@+id/go_button"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/button_go"
         android:textSize="20sp"/>
 </LinearLayout>

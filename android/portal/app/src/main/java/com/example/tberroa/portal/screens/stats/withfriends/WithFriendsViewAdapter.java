@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.stats.IntValueFormat;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.github.mikephil.charting.charts.BarChart;
 import com.example.tberroa.portal.screens.stats.withfriends.WithFriendsViewAdapter.withFriendsViewHolder;
@@ -140,6 +141,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             barDataSet.setColors(colors, context);
             barDataSet.setValueTextColor(Color.WHITE);
             barDataSet.setValueTextSize(12);
+            barDataSet.setValueFormatter(new IntValueFormat());
             barDataSets.add(barDataSet);
         }
         List<PieDataSet> pieDataSets = new ArrayList<>();
@@ -150,6 +152,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             }
             pieDataSet.setColors(colors, context);
             pieDataSet.setSelectionShift(0);
+            pieDataSet.setValueFormatter(new IntValueFormat());
             pieDataSets.add(pieDataSet);
         }
 

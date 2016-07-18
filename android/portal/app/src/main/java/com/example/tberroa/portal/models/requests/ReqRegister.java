@@ -6,7 +6,9 @@ import com.google.gson.annotations.Expose;
 public class ReqRegister {
 
     @Expose
-    public User user;
+    public String email;
+    @Expose
+    public String password;
     @Expose
     public String region;
     @Expose

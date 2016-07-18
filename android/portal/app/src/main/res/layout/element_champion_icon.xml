@@ -24,12 +24,12 @@
             android:contentDescription="@string/image_view_description"/>
     </com.balysv.materialripple.MaterialRippleLayout>
 
-    <CheckBox
-        android:id="@+id/champ_icon_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/champ_icon_check"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/check"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:scaleX="2.0"
-        android:scaleY="2.0"/>
+        android:contentDescription="@string/image_view_description"/>
 </RelativeLayout>

@@ -1,8 +1,8 @@
 package com.example.tberroa.portal.screens.stats.withfriends;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,7 +42,7 @@ public class WithFriendsFragment extends Fragment {
 
                 // if it wasn't a five man queue, include label for non friends
                 boolean notFiveMan = false;
-                if (names.size() < 5){
+                if (names.size() < 5) {
                     notFiveMan = true;
                     names.add(getResources().getString(R.string.gwf_others));
                 }
@@ -77,21 +77,13 @@ public class WithFriendsFragment extends Fragment {
             TextView textView = new TextView(getActivity());
             textView.setText(name);
             textView.setTextSize(12);
-            textView.setTextColor(Color.WHITE);
+            if ((notFiveMan) && (i == (names.size() - 1))) {
+                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
+            } else {
+                textView.setTextColor(ContextCompat.getColor(getActivity(), ScreenUtil.intToColor(i)));
+            }
             textView.setPadding(ScreenUtil.dpToPx(getActivity(), 5), 0, ScreenUtil.dpToPx(getActivity(), 5), 0);
             legendNames.addView(textView);
-
-            ImageView imageView = new ImageView(getActivity());
-            imageView.setMinimumWidth(ScreenUtil.dpToPx(getActivity(), 10));
-            imageView.setMinimumHeight(ScreenUtil.dpToPx(getActivity(), 10));
-            imageView.setPadding(0, ScreenUtil.dpToPx(getActivity(), 5), 0, 0);
-            if ((notFiveMan) && (i == (names.size()-1))){
-                imageView.setImageResource(R.color.gray);
-            }else{
-                imageView.setImageResource(ScreenUtil.intToColor(i));
-            }
-            legendNames.addView(imageView);
-
             i++;
         }
     }

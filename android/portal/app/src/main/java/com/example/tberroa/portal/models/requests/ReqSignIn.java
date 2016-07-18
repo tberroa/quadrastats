@@ -10,5 +10,7 @@ public class ReqSignIn {
     @Expose
     public String key;
     @Expose
+    public String email;
+    @Expose
     public String password;
 }

@@ -19,6 +19,7 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqSignIn;
 import com.example.tberroa.portal.models.summoner.Summoner;
+import com.example.tberroa.portal.models.summoner.User;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
@@ -143,8 +144,11 @@ public class SignInActivity extends AppCompatActivity {
                 // get the summoner object
                 Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
 
+                // get the user object
+                User user = ModelUtil.fromJson(postResponse, User.class);
+
                 // sign in
-                AuthUtil.signIn(SignInActivity.this, summoner, inView);
+                AuthUtil.signIn(SignInActivity.this, summoner, user, inView);
             } else { // display error
                 Toast.makeText(SignInActivity.this, postResponse, Toast.LENGTH_SHORT).show();
                 signInButton.setEnabled(true);

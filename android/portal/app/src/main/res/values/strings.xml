@@ -5,6 +5,7 @@
 
     <!-- authentication activities -->
     <string name="auth_summoner_name">Summoner Name</string>
+    <string name="auth_email">Email</string>
     <string name="auth_password">Password</string>
     <string name="auth_confirm_password">Confirm password</string>
     <string name="auth_password_mismatch">Password mismatch</string>
@@ -40,10 +41,9 @@
     <!-- manage friends activity -->
     <string name="mf_activity_title">Manage Friends</string>
     <string name="mf_no_friends">Click the + button to add friends.</string>
-    <string name="mf_add_friend">Add Friend</string>
-    <string name="mf_remove_friend">Remove Friend</string>
+    <string name="mf_summoner_name">Friend Summoner Name</string>
     <string name="mf_remove_friend_confirm">
-        Are you sure you want to remove this person from your friends list?
+        Are you sure you want to remove this summoner from your friends list?
     </string>
 
     <!-- base stats activity -->
@@ -54,7 +54,6 @@
 
     <!-- recent games activity -->
     <string name="rg_activity_title">Recent Games</string>
-    <string name="rg_summoners_to_chart">Summoners to Chart</string>
     <string name="rg_filter_data">Filter Data</string>
     <string name="rg_average">Average</string>
     <!-- chart titles -->
@@ -93,6 +92,7 @@
     <string name="stats">Stats</string>
 
     <!-- generic button labels -->
+    <string name="button_edit">Edit</string>
     <string name="button_done">Done</string>
     <string name="button_yes">Yes</string>
     <string name="button_go">Go</string>

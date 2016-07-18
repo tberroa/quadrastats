@@ -2,13 +2,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary" tools:ignore="UnusedResources">#FF212121</color>
     <color name="colorPrimaryDark" tools:ignore="UnusedResources">#FF000000</color>
-    <color name="colorAccent">#FFB86200</color>
+    <color name="colorAccent">#FFCBB44D</color>
     <color name="colorBackground" tools:ignore="UnusedResources">#FF303030</color>
-    <color name="accent_material_dark" tools:override="true">#B86200</color>
+    <color name="accent_material_dark" tools:override="true">#CBB44D</color>
     <color name="logo_main">#FFC5E8EB</color>
-    <color name="logo_slogan">#FFF69729</color>
+    <color name="logo_slogan">#FFCBB44D</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black_transparent">#80000000</color>
+    <color name="divider">#80B3B3B3</color>
 
     <!-- chart colors-->
     <color name="blue">#1A8CFF</color>

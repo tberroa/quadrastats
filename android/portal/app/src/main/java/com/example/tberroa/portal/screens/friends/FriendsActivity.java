@@ -1,7 +1,6 @@
 package com.example.tberroa.portal.screens.friends;
 
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,11 +8,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog.Builder;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -80,30 +81,95 @@ public class FriendsActivity extends BaseActivity {
         FloatingActionButton addFriend = (FloatingActionButton) findViewById(R.id.add_friend_button);
         addFriend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // construct and display a dialog containing a single text field where the user enters
-                // the name of the summoner they want to add to their friends list
-                final EditText friendKeyField = new EditText(FriendsActivity.this);
-                friendKeyField.setSingleLine();
-
-                Builder builder = new Builder(FriendsActivity.this);
-                builder.setTitle(R.string.mf_add_friend);
-                builder.setView(friendKeyField);
-                builder.setCancelable(true);
-                builder.setPositiveButton(R.string.button_done, new OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String friendKey = friendKeyField.getText().toString();
-                        add = true;
-                        new RequestFriendOp().execute(friendKey);
-                    }
-                });
-                builder.show();
+                new AddFriendDialog().show();
             }
         });
 
         new ViewInitialization().execute();
     }
 
-    // makes add/remove friend request to backend via http
+    private class AddFriendDialog extends Dialog {
+
+        public AddFriendDialog() {
+            super(FriendsActivity.this, R.style.DialogStyle);
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.dialog_add_friend);
+            setCancelable(true);
+
+            // initialize input field
+            final EditText friendKeyField = (EditText) findViewById(R.id.friend_name_field);
+            friendKeyField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        String friendKey = friendKeyField.getText().toString();
+                        add = true;
+                        new RequestFriendOp().execute(friendKey);
+                        dismiss();
+                    }
+                    return false;
+                }
+            });
+
+            // initialize buttons
+            Button doneButton = (Button) findViewById(R.id.done_button);
+            doneButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String friendKey = friendKeyField.getText().toString();
+                    add = true;
+                    new RequestFriendOp().execute(friendKey);
+                    dismiss();
+                }
+            });
+            Button cancelButton = (Button) findViewById(R.id.cancel_button);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+        }
+    }
+
+    private class RemoveFriendDialog extends Dialog {
+
+        private final int position;
+
+        public RemoveFriendDialog(int position) {
+            super(FriendsActivity.this, R.style.DialogStyle);
+            this.position = position;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.dialog_remove_friend);
+            setCancelable(true);
+
+            // initialize buttons
+            Button yesButton = (Button) findViewById(R.id.yes_button);
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    add = false;
+                    new RequestFriendOp().execute(friends.get(position).key);
+                    dismiss();
+                }
+            });
+            Button cancelButton = (Button) findViewById(R.id.cancel_button);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+        }
+    }
+
     private class RequestFriendOp extends AsyncTask<String, Void, String[]> {
 
         Summoner friend;
@@ -214,7 +280,7 @@ public class FriendsActivity extends BaseActivity {
         }
 
         @Override
-        protected void onPostExecute(final List<Summoner> friends) {
+        protected void onPostExecute(List<Summoner> friends) {
             FriendsActivity.this.friends = friends;
 
             // initialize list view
@@ -223,25 +289,8 @@ public class FriendsActivity extends BaseActivity {
             listView.setAdapter(friendsAdapter);
             listView.setOnItemClickListener(new OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
-                    // construct and display a dialog asking the user if they want to remove the friend
-                    Builder builder = new Builder(FriendsActivity.this);
-                    builder.setTitle(R.string.mf_remove_friend);
-                    builder.setMessage(R.string.mf_remove_friend_confirm);
-                    builder.setCancelable(true);
-                    builder.setPositiveButton(R.string.button_yes, new OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            add = false;
-                            new RequestFriendOp().execute(friends.get(position).key);
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.setNegativeButton(R.string.button_cancel, new OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.show();
+                public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                    new RemoveFriendDialog(position).show();
                 }
             });
 

@@ -1,17 +1,52 @@
 <resources>
+
     <style
         name="AppTheme"
-        parent="Theme.AppCompat.NoActionBar" >
+        parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@null</item>
         <item name="android:colorButtonNormal">@color/colorAccent</item>
     </style>
+
     <style
         name="AppTheme.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
     <style
         name="AppTheme.PopupOverlay"
-        parent="ThemeOverlay.AppCompat.Light" />
+        parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AuthBackground" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_teemo</item>
+    </style>
+
+    <style name="SplashBackground" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_tristana</item>
+    </style>
+
+    <style name="AccountBackground" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_jayce</item>
+    </style>
+
+    <style name="FriendsBackground" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_annie</item>
+    </style>
+
+    <style name="RecentBackground" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_rengar</item>
+    </style>
+
+    <style name="SeasonBackground" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_jax</item>
+    </style>
+
+    <style name="WithFriendsBackground" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_akali</item>
+    </style>
+
     <style
-        name="DialogStyle" parent="android:style/Theme.Holo.Dialog">
+        name="DialogStyle"
+        parent="android:style/Theme.Holo.Dialog">
         <item name="android:layout_gravity">center</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>

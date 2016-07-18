@@ -196,11 +196,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                         case 1: // recent activity
                             if (!useDataSwipeLayout) {
                                 // switch to data swipe layout
-                                messageSwipeLayout.setEnabled(false);
-                                ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
-                                scrollView.setVisibility(View.GONE);
-                                dataSwipeLayout.setEnabled(true);
-                                useDataSwipeLayout = true;
+                                useDataSwipeLayout(messageSwipeLayout, dataSwipeLayout);
                             }
                             delegateRecent.displayData(matchStatsList);
                             break;
@@ -208,11 +204,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                             if (!matchStatsMapMap.isEmpty()) {
                                 if (!useDataSwipeLayout) {
                                     // switch to data swipe layout
-                                    messageSwipeLayout.setEnabled(false);
-                                    ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
-                                    scrollView.setVisibility(View.GONE);
-                                    dataSwipeLayout.setEnabled(true);
-                                    useDataSwipeLayout = true;
+                                    useDataSwipeLayout(messageSwipeLayout, dataSwipeLayout);
                                 }
                                 delegateWithFriends.displayData(matchStatsMapMap);
                             }
@@ -222,6 +214,14 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
             } else { // display error
                 Toast.makeText(BaseStatsActivity.this, postResponse, Toast.LENGTH_SHORT).show();
             }
+        }
+
+        private void useDataSwipeLayout(SwipeRefreshLayout messageSwipeLayout, SwipeRefreshLayout dataSwipeLayout) {
+            messageSwipeLayout.setEnabled(false);
+            ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
+            scrollView.setVisibility(View.GONE);
+            dataSwipeLayout.setEnabled(true);
+            useDataSwipeLayout = true;
         }
     }
 
