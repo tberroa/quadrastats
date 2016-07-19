@@ -2,10 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/filter"
-        android:icon="@drawable/ic_filter"
-        android:orderInCategory="1"
-        android:title="@string/rg_filter_data"
+        android:id="@+id/menu"
+        android:icon="@drawable/ic_menu"
+        android:orderInCategory="50"
+        android:title="@string/b_menu"
         app:showAsAction="ifRoom"/>
 </menu>
-

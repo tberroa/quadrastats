@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -100,18 +101,12 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
 
         // fill content layout with the provided layout
         content.addView(view);
+
+        // set content view
         super.setContentView(drawer);
 
-        // initialize toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        // initialize drawer
-        toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        // get the user's profile icon and name
-        new ViewInitialization().execute();
+        // call view initialization method
+        viewInitialization();
     }
 
     @SuppressLint("InflateParams")
@@ -124,19 +119,40 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
         // fill content layout with the provided layout
         getLayoutInflater().inflate(layoutResID, content, true);
 
-        // set the view
+        // set content view
         super.setContentView(drawer);
 
+        // call view initialization method
+        viewInitialization();
+    }
+
+    private void viewInitialization() {
         // initialize toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         // initialize drawer
         toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        toggle.setDrawerIndicatorEnabled(false);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // initialize base toolbar menu
+        toolbar.inflateMenu(R.menu.base_menu);
+        toolbar.setOnMenuItemClickListener(new MenuListener());
+
         // get the user's profile icon and name
         new ViewInitialization().execute();
+    }
+
+    public class MenuListener implements Toolbar.OnMenuItemClickListener {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.menu:
+                    drawer.openDrawer(GravityCompat.START);
+            }
+            return true;
+        }
     }
 
     private class SmoothActionBarDrawerToggle extends ActionBarDrawerToggle {

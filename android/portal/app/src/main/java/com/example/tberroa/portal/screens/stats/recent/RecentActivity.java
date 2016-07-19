@@ -63,9 +63,10 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.rg_activity_title);
         toolbar.inflateMenu(R.menu.recent_menu);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        toolbar.setOnMenuItemClickListener(new MenuListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                super.onMenuItemClick(item);
                 switch (item.getItemId()) {
                     case R.id.filter:
                         new FilterDialog().show();

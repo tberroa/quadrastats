@@ -33,6 +33,9 @@
         <item>Turkey</item>
     </string-array>
 
+    <!-- base activity -->
+    <string name="b_menu">Menu</string>
+
     <!-- manage account activity -->
     <string name="ma_activity_title">Manage Account</string>
     <string name="ma_sign_out">Sign Out</string>
