@@ -2,6 +2,7 @@ package com.example.tberroa.portal.screens.stats.withfriends;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -239,12 +240,14 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         int cHeight = ScreenUtil.dpToPx(context, 65);
         int width = ScreenUtil.dpToPx(context, 30);
         int height = ScreenUtil.dpToPx(context, 30);
-        int padding = ScreenUtil.dpToPx(context, 2);
+        int padding = ScreenUtil.dpToPx(context, 1);
+        int x = 0;
         for (MatchStats matchStats : matchStatsList) {
             LinearLayout summonerLayout = new LinearLayout(context);
             summonerLayout.setOrientation(LinearLayout.HORIZONTAL);
             summonerLayout.setPadding(padding, padding, padding, padding);
             summonerLayout.setGravity(Gravity.CENTER);
+            summonerLayout.setBackgroundColor(ContextCompat.getColor(context, ScreenUtil.intToColor(x)));
 
             // champion icon
             ImageView championIconView = new ImageView(context);
@@ -321,6 +324,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
 
             // add the summoner to the table
             summonerTable.addView(summonerLayout);
+            x++;
         }
     }
 

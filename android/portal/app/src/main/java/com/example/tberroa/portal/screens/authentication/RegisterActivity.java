@@ -200,8 +200,8 @@ public class RegisterActivity extends AppCompatActivity {
             codeView.setText(code);
 
             // initialize buttons
-            Button yesButton = (Button) findViewById(R.id.yes_button);
-            yesButton.setOnClickListener(new View.OnClickListener() {
+            Button doneButton = (Button) findViewById(R.id.done_button);
+            doneButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     new RequestRegister().execute();

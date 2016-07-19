@@ -120,7 +120,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="@string/auth_go_to_sign_in"
-                android:textColor="@color/white"
                 android:textSize="16sp"/>
         </com.balysv.materialripple.MaterialRippleLayout>
     </RelativeLayout>

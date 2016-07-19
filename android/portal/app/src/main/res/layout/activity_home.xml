@@ -39,7 +39,6 @@
                     android:gravity="start"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:textColor="@color/white"
                     android:textSize="25sp"/>
             </RelativeLayout>
         </com.balysv.materialripple.MaterialRippleLayout>
@@ -74,7 +73,6 @@
                     android:gravity="start"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:textColor="@color/white"
                     android:textSize="25sp"/>
             </RelativeLayout>
         </com.balysv.materialripple.MaterialRippleLayout>
@@ -109,7 +107,6 @@
                     android:gravity="start"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:textColor="@color/white"
                     android:textSize="25sp"/>
             </RelativeLayout>
         </com.balysv.materialripple.MaterialRippleLayout>
@@ -144,7 +141,6 @@
                     android:gravity="start"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:textColor="@color/white"
                     android:textSize="25sp"/>
             </RelativeLayout>
         </com.balysv.materialripple.MaterialRippleLayout>

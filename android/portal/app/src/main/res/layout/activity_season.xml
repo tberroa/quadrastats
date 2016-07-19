@@ -16,6 +16,5 @@
         android:drawableTop="@drawable/sticker_amumu"
         android:gravity="center"
         android:text="@string/st_nothing_here"
-        android:textColor="@color/white"
         android:textSize="25sp"/>
 </LinearLayout>

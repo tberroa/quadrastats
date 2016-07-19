@@ -13,7 +13,6 @@
         android:layout_margin="10dp"
         android:gravity="center"
         android:text="@string/mf_remove_friend_confirm"
-        android:textColor="@color/white"
         android:textSize="18sp"/>
 
     <LinearLayout

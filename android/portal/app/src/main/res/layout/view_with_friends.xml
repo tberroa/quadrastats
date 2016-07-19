@@ -56,7 +56,6 @@
         android:layout_marginBottom="-10dp"
         android:layout_marginTop="15dp"
         android:text="@string/gwf_damage"
-        android:textColor="@color/white"
         android:textSize="20sp"/>
 
     <com.github.mikephil.charting.charts.BarChart
@@ -115,7 +114,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/gwf_kda"
-                android:textColor="@color/white"
                 android:textSize="13sp"/>
 
             <com.github.mikephil.charting.charts.BarChart
@@ -133,7 +131,6 @@
         android:layout_marginBottom="-10dp"
         android:layout_marginTop="15dp"
         android:text="@string/gwf_cs"
-        android:textColor="@color/white"
         android:textSize="20sp"/>
 
     <com.github.mikephil.charting.charts.BarChart
@@ -149,7 +146,6 @@
         android:layout_marginBottom="-10dp"
         android:layout_marginTop="15dp"
         android:text="@string/gwf_wards"
-        android:textColor="@color/white"
         android:textSize="20sp"/>
 
     <com.github.mikephil.charting.charts.BarChart

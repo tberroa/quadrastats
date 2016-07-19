@@ -95,7 +95,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/auth_go_to_register"
-                android:textColor="@color/white"
                 android:textSize="16sp"/>
         </com.balysv.materialripple.MaterialRippleLayout>
     </RelativeLayout>

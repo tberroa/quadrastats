@@ -18,6 +18,5 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@id/friend_profile_icon_view"
-        android:textColor="@color/white"
         android:textSize="30sp"/>
 </RelativeLayout>
