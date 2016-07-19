@@ -14,11 +14,10 @@
     <string name="auth_go_to_register">No account yet? Create one</string>
     <string name="auth_go_to_sign_in">Already have an account? Sign In</string>
     <string name="auth_initializing_data">Grabbing your data &#8230;</string>
-    <string name="auth_validate_ownership">Validate Ownership</string>
     <string name="auth_validate_ownership_instructions">
         Almost done! Just change one of your rune pages to the number below in order
         to prove ownership of the summoner account. After changing your rune page, wait
-        about 5 seconds before pressing Done to allow for the Riot servers to update.
+        about 5 seconds before pressing DONE to allow for the Riot servers to update.
     </string>
     <string-array name="auth_select_region">
         <item>Select Region</item>

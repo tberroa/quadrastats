@@ -107,7 +107,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
 
         // initialize drawer
         toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         // get the user's profile icon and name
@@ -132,7 +132,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
 
         // initialize drawer
         toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         // get the user's profile icon and name

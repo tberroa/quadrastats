@@ -15,269 +15,269 @@ public class ScreenUtil {
     public static int championIcon(String name) {
         switch (name) {
             case "aatrox":
-                return R.drawable.aatrox;
+                return R.drawable.icon_aatrox;
             case "ahri":
-                return R.drawable.ahri;
+                return R.drawable.icon_ahri;
             case "akali":
-                return R.drawable.akali;
+                return R.drawable.icon_akali;
             case "alistar":
-                return R.drawable.alistar;
+                return R.drawable.icon_alistar;
             case "amumu":
-                return R.drawable.amumu;
+                return R.drawable.icon_amumu;
             case "anivia":
-                return R.drawable.anivia;
+                return R.drawable.icon_anivia;
             case "annie":
-                return R.drawable.annie;
+                return R.drawable.icon_annie;
             case "ashe":
-                return R.drawable.ashe;
+                return R.drawable.icon_ashe;
             case "aurelionsol":
-                return R.drawable.aurelionsol;
+                return R.drawable.icon_aurelionsol;
             case "azir":
-                return R.drawable.azir;
+                return R.drawable.icon_azir;
             case "bard":
-                return R.drawable.bard;
+                return R.drawable.icon_bard;
             case "blitzcrank":
-                return R.drawable.blitzcrank;
+                return R.drawable.icon_blitzcrank;
             case "brand":
-                return R.drawable.brand;
+                return R.drawable.icon_brand;
             case "braum":
-                return R.drawable.braum;
+                return R.drawable.icon_braum;
             case "caitlyn":
-                return R.drawable.caitlyn;
+                return R.drawable.icon_caitlyn;
             case "cassiopeia":
-                return R.drawable.cassiopeia;
+                return R.drawable.icon_cassiopeia;
             case "chogath":
-                return R.drawable.chogath;
+                return R.drawable.icon_chogath;
             case "corki":
-                return R.drawable.corki;
+                return R.drawable.icon_corki;
             case "darius":
-                return R.drawable.darius;
+                return R.drawable.icon_darius;
             case "diana":
-                return R.drawable.diana;
+                return R.drawable.icon_diana;
             case "draven":
-                return R.drawable.draven;
+                return R.drawable.icon_draven;
             case "drmundo":
-                return R.drawable.drmundo;
+                return R.drawable.icon_drmundo;
             case "ekko":
-                return R.drawable.ekko;
+                return R.drawable.icon_ekko;
             case "elise":
-                return R.drawable.elise;
+                return R.drawable.icon_elise;
             case "evelynn":
-                return R.drawable.evelynn;
+                return R.drawable.icon_evelynn;
             case "ezreal":
-                return R.drawable.ezreal;
+                return R.drawable.icon_ezreal;
             case "fiddlesticks":
-                return R.drawable.fiddlesticks;
+                return R.drawable.icon_fiddlesticks;
             case "fiora":
-                return R.drawable.fiora;
+                return R.drawable.icon_fiora;
             case "fizz":
-                return R.drawable.fizz;
+                return R.drawable.icon_fizz;
             case "galio":
-                return R.drawable.galio;
+                return R.drawable.icon_galio;
             case "gangplank":
-                return R.drawable.gangplank;
+                return R.drawable.icon_gangplank;
             case "garen":
-                return R.drawable.garen;
+                return R.drawable.icon_garen;
             case "gnar":
-                return R.drawable.gnar;
+                return R.drawable.icon_gnar;
             case "gragas":
-                return R.drawable.gragas;
+                return R.drawable.icon_gragas;
             case "graves":
-                return R.drawable.graves;
+                return R.drawable.icon_graves;
             case "hecarim":
-                return R.drawable.hecarim;
+                return R.drawable.icon_hecarim;
             case "heimerdinger":
-                return R.drawable.heimerdinger;
+                return R.drawable.icon_heimerdinger;
             case "illaoi":
-                return R.drawable.illaoi;
+                return R.drawable.icon_illaoi;
             case "irelia":
-                return R.drawable.irelia;
+                return R.drawable.icon_irelia;
             case "janna":
-                return R.drawable.janna;
+                return R.drawable.icon_janna;
             case "jarvaniv":
-                return R.drawable.jarvaniv;
+                return R.drawable.icon_jarvaniv;
             case "jax":
-                return R.drawable.jax;
+                return R.drawable.icon_jax;
             case "jayce":
-                return R.drawable.jayce;
+                return R.drawable.icon_jayce;
             case "jhin":
-                return R.drawable.jhin;
+                return R.drawable.icon_jhin;
             case "jinx":
-                return R.drawable.jinx;
+                return R.drawable.icon_jinx;
             case "kalista":
-                return R.drawable.kalista;
+                return R.drawable.icon_kalista;
             case "karma":
-                return R.drawable.karma;
+                return R.drawable.icon_karma;
             case "karthus":
-                return R.drawable.karthus;
+                return R.drawable.icon_karthus;
             case "kassadin":
-                return R.drawable.kassadin;
+                return R.drawable.icon_kassadin;
             case "katarina":
-                return R.drawable.katarina;
+                return R.drawable.icon_katarina;
             case "kayle":
-                return R.drawable.kayle;
+                return R.drawable.icon_kayle;
             case "kennen":
-                return R.drawable.kennen;
+                return R.drawable.icon_kennen;
             case "khazix":
-                return R.drawable.khazix;
+                return R.drawable.icon_khazix;
             case "kindred":
-                return R.drawable.kindred;
+                return R.drawable.icon_kindred;
             case "kogmaw":
-                return R.drawable.kogmaw;
+                return R.drawable.icon_kogmaw;
             case "leblanc":
-                return R.drawable.leblanc;
+                return R.drawable.icon_leblanc;
             case "leesin":
-                return R.drawable.leesin;
+                return R.drawable.icon_leesin;
             case "leona":
-                return R.drawable.leona;
+                return R.drawable.icon_leona;
             case "lissandra":
-                return R.drawable.lissandra;
+                return R.drawable.icon_lissandra;
             case "lucian":
-                return R.drawable.lucian;
+                return R.drawable.icon_lucian;
             case "lulu":
-                return R.drawable.lulu;
+                return R.drawable.icon_lulu;
             case "lux":
-                return R.drawable.lux;
+                return R.drawable.icon_lux;
             case "malphite":
-                return R.drawable.malphite;
+                return R.drawable.icon_malphite;
             case "malzahar":
-                return R.drawable.malzahar;
+                return R.drawable.icon_malzahar;
             case "maokai":
-                return R.drawable.maokai;
+                return R.drawable.icon_maokai;
             case "masteryi":
-                return R.drawable.masteryi;
+                return R.drawable.icon_masteryi;
             case "missfortune":
-                return R.drawable.missfortune;
+                return R.drawable.icon_missfortune;
             case "mordekaiser":
-                return R.drawable.mordekaiser;
+                return R.drawable.icon_mordekaiser;
             case "morgana":
-                return R.drawable.morgana;
+                return R.drawable.icon_morgana;
             case "nami":
-                return R.drawable.nami;
+                return R.drawable.icon_nami;
             case "nasus":
-                return R.drawable.nasus;
+                return R.drawable.icon_nasus;
             case "nauilus":
-                return R.drawable.nautilus;
+                return R.drawable.icon_nautilus;
             case "nidalee":
-                return R.drawable.nidalee;
+                return R.drawable.icon_nidalee;
             case "nocturne":
-                return R.drawable.nocturne;
+                return R.drawable.icon_nocturne;
             case "nunu":
-                return R.drawable.nunu;
+                return R.drawable.icon_nunu;
             case "olaf":
-                return R.drawable.olaf;
+                return R.drawable.icon_olaf;
             case "orianna":
-                return R.drawable.orianna;
+                return R.drawable.icon_orianna;
             case "pantheon":
-                return R.drawable.pantheon;
+                return R.drawable.icon_pantheon;
             case "poppy":
-                return R.drawable.poppy;
+                return R.drawable.icon_poppy;
             case "quinn":
-                return R.drawable.quinn;
+                return R.drawable.icon_quinn;
             case "rammus":
-                return R.drawable.rammus;
+                return R.drawable.icon_rammus;
             case "reksai":
-                return R.drawable.reksai;
+                return R.drawable.icon_reksai;
             case "renekton":
-                return R.drawable.renekton;
+                return R.drawable.icon_renekton;
             case "rengar":
-                return R.drawable.rengar;
+                return R.drawable.icon_rengar;
             case "riven":
-                return R.drawable.riven;
+                return R.drawable.icon_riven;
             case "rumble":
-                return R.drawable.rumble;
+                return R.drawable.icon_rumble;
             case "ryze":
-                return R.drawable.ryze;
+                return R.drawable.icon_ryze;
             case "sejuani":
-                return R.drawable.sejuani;
+                return R.drawable.icon_sejuani;
             case "shaco":
-                return R.drawable.shaco;
+                return R.drawable.icon_shaco;
             case "shen":
-                return R.drawable.shen;
+                return R.drawable.icon_shen;
             case "shyvana":
-                return R.drawable.shyvana;
+                return R.drawable.icon_shyvana;
             case "singed":
-                return R.drawable.singed;
+                return R.drawable.icon_singed;
             case "sion":
-                return R.drawable.sion;
+                return R.drawable.icon_sion;
             case "sivir":
-                return R.drawable.sivir;
+                return R.drawable.icon_sivir;
             case "skarner":
-                return R.drawable.skarner;
+                return R.drawable.icon_skarner;
             case "sona":
-                return R.drawable.sona;
+                return R.drawable.icon_sona;
             case "soraka":
-                return R.drawable.soraka;
+                return R.drawable.icon_soraka;
             case "swain":
-                return R.drawable.swain;
+                return R.drawable.icon_swain;
             case "syndra":
-                return R.drawable.syndra;
+                return R.drawable.icon_syndra;
             case "tahmkench":
-                return R.drawable.tahmkench;
+                return R.drawable.icon_tahmkench;
             case "taliyah":
-                return R.drawable.taliyah;
+                return R.drawable.icon_taliyah;
             case "talon":
-                return R.drawable.talon;
+                return R.drawable.icon_talon;
             case "taric":
-                return R.drawable.taric;
+                return R.drawable.icon_taric;
             case "teemo":
-                return R.drawable.teemo;
+                return R.drawable.icon_teemo;
             case "thresh":
-                return R.drawable.thresh;
+                return R.drawable.icon_thresh;
             case "tristana":
-                return R.drawable.tristana;
+                return R.drawable.icon_tristana;
             case "trundle":
-                return R.drawable.trundle;
+                return R.drawable.icon_trundle;
             case "tryndamere":
-                return R.drawable.tryndamere;
+                return R.drawable.icon_tryndamere;
             case "twistedfate":
-                return R.drawable.twistedfate;
+                return R.drawable.icon_twistedfate;
             case "twitch":
-                return R.drawable.twitch;
+                return R.drawable.icon_twitch;
             case "udyr":
-                return R.drawable.udyr;
+                return R.drawable.icon_udyr;
             case "urgot":
-                return R.drawable.urgot;
+                return R.drawable.icon_urgot;
             case "varus":
-                return R.drawable.varus;
+                return R.drawable.icon_varus;
             case "vayne":
-                return R.drawable.vayne;
+                return R.drawable.icon_vayne;
             case "veigar":
-                return R.drawable.veigar;
+                return R.drawable.icon_veigar;
             case "velkoz":
-                return R.drawable.velkoz;
+                return R.drawable.icon_velkoz;
             case "vi":
-                return R.drawable.vi;
+                return R.drawable.icon_vi;
             case "viktor":
-                return R.drawable.viktor;
+                return R.drawable.icon_viktor;
             case "vladimir":
-                return R.drawable.vladimir;
+                return R.drawable.icon_vladimir;
             case "volibear":
-                return R.drawable.volibear;
+                return R.drawable.icon_volibear;
             case "warwick":
-                return R.drawable.warwick;
+                return R.drawable.icon_warwick;
             case "wukong":
-                return R.drawable.wukong;
+                return R.drawable.icon_wukong;
             case "xerath":
-                return R.drawable.xerath;
+                return R.drawable.icon_xerath;
             case "xinzhao":
-                return R.drawable.xinzhao;
+                return R.drawable.icon_xinzhao;
             case "yasuo":
-                return R.drawable.yasuo;
+                return R.drawable.icon_yasuo;
             case "yorick":
-                return R.drawable.yorick;
+                return R.drawable.icon_yorick;
             case "zac":
-                return R.drawable.zac;
+                return R.drawable.icon_zac;
             case "zed":
-                return R.drawable.zed;
+                return R.drawable.icon_zed;
             case "ziggs":
-                return R.drawable.ziggs;
+                return R.drawable.icon_ziggs;
             case "zilean":
-                return R.drawable.zilean;
+                return R.drawable.icon_zilean;
             case "zyra":
-                return R.drawable.zyra;
+                return R.drawable.icon_zyra;
             default:
-                return R.drawable.aatrox;
+                return R.drawable.icon_aatrox;
         }
     }
 
@@ -370,17 +370,17 @@ public class ScreenUtil {
     public static int positionIcon(String position) {
         switch (position) {
             case "TOP":
-                return R.drawable.pos_top;
+                return R.drawable.ic_pos_top;
             case "JUNGLE":
-                return R.drawable.pos_jungle;
+                return R.drawable.ic_pos_jungle;
             case "MIDDLE":
-                return R.drawable.pos_mid;
+                return R.drawable.ic_pos_mid;
             case "DUO_CARRY":
-                return R.drawable.pos_bot;
+                return R.drawable.ic_pos_bot;
             case "DUO_SUPPORT":
-                return R.drawable.pos_support;
+                return R.drawable.ic_pos_support;
             default:
-                return R.drawable.pos_top;
+                return R.drawable.ic_pos_top;
         }
     }
 

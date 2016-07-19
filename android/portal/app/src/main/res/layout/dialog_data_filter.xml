@@ -19,7 +19,7 @@
             android:layout_height="35dp"
             android:layout_marginEnd="20dp"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/pos_top"/>
+            android:src="@drawable/ic_pos_top"/>
 
         <ImageView
             android:id="@+id/jungle_view"
@@ -28,7 +28,7 @@
             android:layout_marginEnd="20dp"
             android:layout_toEndOf="@id/top_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/pos_jungle"/>
+            android:src="@drawable/ic_pos_jungle"/>
 
         <ImageView
             android:id="@+id/mid_view"
@@ -37,7 +37,7 @@
             android:layout_marginEnd="20dp"
             android:layout_toEndOf="@id/jungle_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/pos_mid"/>
+            android:src="@drawable/ic_pos_mid"/>
 
         <ImageView
             android:id="@+id/bot_view"
@@ -46,7 +46,7 @@
             android:layout_marginEnd="20dp"
             android:layout_toEndOf="@id/mid_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/pos_bot"/>
+            android:src="@drawable/ic_pos_bot"/>
 
         <ImageView
             android:id="@+id/support_view"
@@ -54,7 +54,7 @@
             android:layout_height="35dp"
             android:layout_toEndOf="@id/bot_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/pos_support"/>
+            android:src="@drawable/ic_pos_support"/>
 
         <ImageView
             android:id="@+id/top_check"
@@ -65,7 +65,7 @@
             android:layout_alignStart="@id/top_view"
             android:layout_alignTop="@id/top_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/check"/>
+            android:src="@drawable/ic_check"/>
 
         <ImageView
             android:id="@+id/jungle_check"
@@ -76,7 +76,7 @@
             android:layout_alignStart="@id/jungle_view"
             android:layout_alignTop="@id/jungle_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/check"/>
+            android:src="@drawable/ic_check"/>
 
         <ImageView
             android:id="@+id/mid_check"
@@ -87,7 +87,7 @@
             android:layout_alignStart="@id/mid_view"
             android:layout_alignTop="@id/mid_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/check"/>
+            android:src="@drawable/ic_check"/>
 
         <ImageView
             android:id="@+id/bot_check"
@@ -98,7 +98,7 @@
             android:layout_alignStart="@id/bot_view"
             android:layout_alignTop="@id/bot_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/check"/>
+            android:src="@drawable/ic_check"/>
 
         <ImageView
             android:id="@+id/support_check"
@@ -109,7 +109,7 @@
             android:layout_alignStart="@id/support_view"
             android:layout_alignTop="@id/support_view"
             android:contentDescription="@string/image_view_description"
-            android:src="@drawable/check"/>
+            android:src="@drawable/ic_check"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

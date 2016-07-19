@@ -87,7 +87,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
 
         // set back button
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_back_button));
         toolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

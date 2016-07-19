@@ -34,7 +34,7 @@ public class SeasonActivity extends BaseActivity {
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.st_activity_title);
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_back_button));
         toolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

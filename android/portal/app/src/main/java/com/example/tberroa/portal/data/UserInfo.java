@@ -1,11 +1,10 @@
 package com.example.tberroa.portal.data;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-public class UserInfo extends Application {
+public class UserInfo {
 
     private final String EMAIL = "email";
     private final String ID = "id";
@@ -47,6 +46,6 @@ public class UserInfo extends Application {
     }
 
     private SharedPreferences sharedPreferences(Context context) {
-        return context.getSharedPreferences("user_info", MODE_PRIVATE);
+        return context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
     }
 }

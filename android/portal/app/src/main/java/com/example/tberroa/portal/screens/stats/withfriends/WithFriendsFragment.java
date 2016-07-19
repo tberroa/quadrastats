@@ -16,6 +16,7 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -35,7 +36,8 @@ public class WithFriendsFragment extends Fragment {
             String matchStatsMapJson = bundle.getString("match_stats_map");
             Type matchStatsMapType = new TypeToken<Map<String, MatchStats>>() {
             }.getType();
-            Map<String, MatchStats> matchStatsMap = new Gson().fromJson(matchStatsMapJson, matchStatsMapType);
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            Map<String, MatchStats> matchStatsMap = gson.fromJson(matchStatsMapJson, matchStatsMapType);
 
             if (matchStatsMap != null) {
                 List<String> names = new ArrayList<>(matchStatsMap.keySet());

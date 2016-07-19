@@ -141,7 +141,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         }
     }
 
-    private void populateActivity(List<MatchStats> matchStatsList, final int champion, final String position) {
+    private void populateActivity(List<MatchStats> matchStatsList, int champion, String position) {
         // Before the data can be presented, it needs to be organized. All the data will be put into one map object.
         // The map key is the summoner name and the value is a list of of lists where each list is a list of data
         // points corresponding to one stat chart.
@@ -151,7 +151,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         tabLayout.setVisibility(View.VISIBLE);
 
         // create list of chart titles
-        final ArrayList<String> titles = new ArrayList<>();
+        ArrayList<String> titles = new ArrayList<>();
         titles.add(getResources().getString(R.string.rg_cs_at_ten));
         titles.add(getResources().getString(R.string.rg_cs_diff_at_ten));
         titles.add(getResources().getString(R.string.rg_cs_per_min));
@@ -165,10 +165,10 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         titles.add(getResources().getString(R.string.rg_wards_killed));
 
         // clear set of summoner names
-        final Set<String> names = new LinkedHashSet<>();
+        Set<String> names = new LinkedHashSet<>();
 
         // clear the map which holds the data for each summoner
-        final Map<String, List<List<Number>>> aggregateData = new LinkedHashMap<>();
+        Map<String, List<List<Number>>> aggregateData = new LinkedHashMap<>();
 
         // populate the map
         for (MatchStats matchStats : matchStatsList) {
@@ -180,7 +180,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             if (summonerData == null) {
                 summonerData = new ArrayList<>();
                 for (int i = 0; i < titles.size(); i++) {
-                    summonerData.add(new ArrayList<Number>());
+                    summonerData.add(new ArrayList<>());
                 }
             }
 
@@ -268,7 +268,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         int numOfTabs = tabLayout.getTabCount();
         FragmentManager fM = getSupportFragmentManager();
         RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fM, numOfTabs, titles, aggregateData);
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(pagerAdapter);
         Tab tab = tabLayout.getTabAt(0);
         if (tab != null) {
@@ -281,7 +281,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 dataSwipeLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
             }
         });
-        tabLayout.setOnTabSelectedListener(new OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
             @Override
             public void onTabReselected(Tab tab) {
             }
@@ -398,16 +398,16 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             // initialize recycler view
             int span = ScreenUtil.screenWidth(RecentActivity.this) / ScreenUtil.dpToPx(RecentActivity.this, 75);
             RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-            final FilterAdapter adapter = new FilterAdapter(championIcons);
+            FilterAdapter adapter = new FilterAdapter(championIcons);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new GridLayoutManager(RecentActivity.this, span));
 
             // initialize the role checks
-            final ImageView topCheck = (ImageView) findViewById(R.id.top_check);
-            final ImageView jungleCheck = (ImageView) findViewById(R.id.jungle_check);
-            final ImageView midCheck = (ImageView) findViewById(R.id.mid_check);
-            final ImageView botCheck = (ImageView) findViewById(R.id.bot_check);
-            final ImageView supportCheck = (ImageView) findViewById(R.id.support_check);
+            ImageView topCheck = (ImageView) findViewById(R.id.top_check);
+            ImageView jungleCheck = (ImageView) findViewById(R.id.jungle_check);
+            ImageView midCheck = (ImageView) findViewById(R.id.mid_check);
+            ImageView botCheck = (ImageView) findViewById(R.id.bot_check);
+            ImageView supportCheck = (ImageView) findViewById(R.id.support_check);
             topCheck.setVisibility(View.INVISIBLE);
             jungleCheck.setVisibility(View.INVISIBLE);
             midCheck.setVisibility(View.INVISIBLE);

@@ -1,16 +1,12 @@
 package com.example.tberroa.portal.screens.authentication;
 
 import android.R.layout;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -137,37 +133,10 @@ public class RegisterActivity extends AppCompatActivity {
         int code = new Random().nextInt(80000 - 65000) + 15000;
         codeString = Integer.toString(code);
 
-        // format instructions regarding ownership validation within a text view
-        TextView dialogMessage = new TextView(this);
-        dialogMessage.setPadding(15, 15, 15, 0);
-        dialogMessage.setGravity(Gravity.CENTER);
-        dialogMessage.setText(Html.fromHtml(
-                "<h2>" + getString(R.string.auth_validate_ownership) + "</h2>" +
-                        "<p>" + getString(R.string.auth_validate_ownership_instructions) + "</p>" +
-                        codeString
-        ));
-
-        // construct dialog
-        Builder builder = new Builder(this);
-        builder.setView(dialogMessage);
-        builder.setCancelable(false);
-        builder.setNegativeButton(R.string.button_cancel, new OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                registerButton.setEnabled(true);
-            }
-        });
-        builder.setPositiveButton(R.string.button_done, new OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                new RequestRegister().execute();
-                dialog.dismiss();
-            }
-        });
-
         // display dialog
-        builder.create().show();
+        new ValidateDialog(codeString).show();
     }
 
-    // makes registration request to backend via http
     private class RequestRegister extends AsyncTask<Void, Void, Void> {
 
         private String postResponse;
@@ -211,4 +180,42 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    private class ValidateDialog extends Dialog {
+
+        final String code;
+
+        public ValidateDialog(String code) {
+            super(RegisterActivity.this, R.style.DialogStyle);
+            this.code = code;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.dialog_validate_ownership);
+            setCancelable(false);
+
+            // set code view
+            TextView codeView = (TextView) findViewById(R.id.code_view);
+            codeView.setText(code);
+
+            // initialize buttons
+            Button yesButton = (Button) findViewById(R.id.yes_button);
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new RequestRegister().execute();
+                    dismiss();
+                }
+            });
+            Button cancelButton = (Button) findViewById(R.id.cancel_button);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    registerButton.setEnabled(true);
+                    dismiss();
+                }
+            });
+        }
+    }
 }

@@ -28,7 +28,7 @@
         android:id="@+id/champ_icon_check"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/check"
+        android:src="@drawable/ic_check"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/image_view_description"/>

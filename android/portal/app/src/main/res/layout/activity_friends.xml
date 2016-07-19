@@ -30,5 +30,5 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/add_button"/>
+        android:src="@drawable/ic_add_button"/>
 </RelativeLayout>

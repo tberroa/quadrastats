@@ -88,7 +88,7 @@ public class LocalDB {
                     MatchStats matchStats = query.executeSingle();
                     if ((matchStats != null) && (matchStats.winner == userMatchStats.winner)) {
                         if (matchesWithFriends.get(matchId) == null) {
-                            matchesWithFriends.put(matchId, new LinkedHashMap<String, MatchStats>());
+                            matchesWithFriends.put(matchId, new LinkedHashMap<>());
                             matchesWithFriends.get(matchId).put(userMatchStats.summoner_name, userMatchStats);
                         }
                         matchesWithFriends.get(matchId).put(matchStats.summoner_name, matchStats);

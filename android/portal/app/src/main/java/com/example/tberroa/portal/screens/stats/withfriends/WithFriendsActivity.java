@@ -40,7 +40,7 @@ public class WithFriendsActivity extends BaseStatsActivity implements WithFriend
         tabLayout.setVisibility(View.VISIBLE);
 
         // initialize the view pager
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         int numOfTabs = tabLayout.getTabCount();
         FragmentManager fM = getSupportFragmentManager();
         viewPager.setAdapter(new WithFriendsPagerAdapter(fM, numOfTabs, matchStatsMapMap));
@@ -53,7 +53,7 @@ public class WithFriendsActivity extends BaseStatsActivity implements WithFriend
                 dataSwipeLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
             }
         });
-        tabLayout.setOnTabSelectedListener(new OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
             @Override
             public void onTabReselected(Tab tab) {
             }

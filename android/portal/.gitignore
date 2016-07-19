@@ -1,3 +1,6 @@
+# Heap dump files
+*.hprof
+
 # User specific configurations
 .idea
 

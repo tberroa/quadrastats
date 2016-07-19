@@ -43,8 +43,8 @@ public class RecentFragment extends Fragment {
             List<List<List<Entry>>> dataListList = new ArrayList<>();
             for (Map.Entry<String, List<List<Number>>> entry : chartData.entrySet()) {
                 for (int i = 0; i < entry.getValue().size(); i++) {
-                    dataListList.add(new ArrayList<List<Entry>>());
-                    labelsList.add(new ArrayList<String>());
+                    dataListList.add(new ArrayList<>());
+                    labelsList.add(new ArrayList<>());
                     List<Entry> data = new ArrayList<>();
                     for (int j = 0; j < entry.getValue().get(i).size(); j++) {
                         if (j > (labelsList.get(i).size() - 1)) {

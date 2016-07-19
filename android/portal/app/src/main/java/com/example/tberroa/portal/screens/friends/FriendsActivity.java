@@ -63,7 +63,7 @@ public class FriendsActivity extends BaseActivity {
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.mf_activity_title);
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_back_button));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +101,7 @@ public class FriendsActivity extends BaseActivity {
             setCancelable(true);
 
             // initialize input field
-            final EditText friendKeyField = (EditText) findViewById(R.id.friend_name_field);
+            EditText friendKeyField = (EditText) findViewById(R.id.friend_name_field);
             friendKeyField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {

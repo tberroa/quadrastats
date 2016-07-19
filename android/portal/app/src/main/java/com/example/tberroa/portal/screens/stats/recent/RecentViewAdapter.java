@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
@@ -54,7 +55,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(chartViewHolder chartViewHolder, final int i) {
+    public void onBindViewHolder(chartViewHolder chartViewHolder, int i) {
         // set title view
         chartViewHolder.title.setText(titles.get(i));
         chartViewHolder.title.setVisibility(View.VISIBLE);
@@ -76,17 +77,20 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
             chartViewHolder.lineChart.setDrawBorders(false);
             chartViewHolder.lineChart.getLegend().setEnabled(false);
             chartViewHolder.lineChart.getData().setHighlightEnabled(false);
+            chartViewHolder.lineChart.setTouchEnabled(false);
 
             // display chart
             chartViewHolder.lineChart.setVisibility(View.VISIBLE);
-            chartViewHolder.lineChart.setOnLongClickListener(new OnLongClickListener() {
+
+            // attach long click listener
+            int position = chartViewHolder.getAdapterPosition();
+            chartViewHolder.lineChartLayout.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    new BarChartDialog(titles.get(i), i).show();
+                    new BarChartDialog(titles.get(position), position).show();
                     return true;
                 }
             });
-
         } else {
             chartViewHolder.noData.setVisibility(View.VISIBLE);
         }
@@ -98,12 +102,14 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
     }
 
     public class chartViewHolder extends ViewHolder {
+        final RelativeLayout lineChartLayout;
         final LineChart lineChart;
         final TextView noData;
         final TextView title;
 
         chartViewHolder(View itemView) {
             super(itemView);
+            lineChartLayout = (RelativeLayout) itemView.findViewById(R.id.line_chart_layout);
             title = (TextView) itemView.findViewById(R.id.chart_title_view);
             title.setVisibility(View.GONE);
             lineChart = (LineChart) itemView.findViewById(R.id.line_chart);
@@ -128,7 +134,16 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.element_bar_chart);
-            setTitle(context.getResources().getString(R.string.rg_average) + " " + title);
+            int width = (95 * ScreenUtil.screenWidth(context)) / 100;
+            int height = (80 * ScreenUtil.screenHeight(context)) / 100;
+            getWindow().setLayout(width, height);
+
+            // initialize title
+            String chartTitle = context.getResources().getString(R.string.rg_average) + " " + title;
+            TextView chartTitleView = (TextView) findViewById(R.id.bar_chart_title);
+            chartTitleView.setText(chartTitle);
+
+            // declare bar chart
             BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
 
             // initialize the labels and data arrays
@@ -171,6 +186,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
             barChart.setDrawBorders(false);
             barChart.getLegend().setEnabled(false);
             barChart.getData().setHighlightEnabled(false);
+            barChart.setTouchEnabled(false);
         }
     }
 }

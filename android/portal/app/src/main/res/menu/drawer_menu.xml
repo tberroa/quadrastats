@@ -5,11 +5,11 @@
             <menu>
                 <item
                     android:id="@+id/view_profile"
-                    android:icon="@drawable/ic_view_profile"
+                    android:icon="@drawable/ic_nav_account"
                     android:title="@string/ma_activity_title" />
                 <item
                     android:id="@+id/manage_friends"
-                    android:icon="@drawable/ic_inner_circle"
+                    android:icon="@drawable/ic_nav_friends"
                     android:title="@string/mf_activity_title" />
             </menu>
         </item>
@@ -18,15 +18,15 @@
         <menu>
             <item
                 android:id="@+id/recent_games"
-                android:icon="@drawable/ic_recent_games"
+                android:icon="@drawable/ic_nav_recent"
                 android:title="@string/rg_activity_title" />
             <item
                 android:id="@+id/season_totals"
-                android:icon="@drawable/ic_season_totals"
+                android:icon="@drawable/ic_nav_season"
                 android:title="@string/st_activity_title" />
             <item
                 android:id="@+id/with_friends"
-                android:icon="@drawable/ic_with_friends"
+                android:icon="@drawable/ic_nav_gwf"
                 android:title="@string/gwf_activity_title" />
         </menu>
     </item>
