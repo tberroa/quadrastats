@@ -51,7 +51,7 @@ Request:
 {
    "region" : "na",
    "key" : "frosiph",
-   "old_password" : "123456",
+   "current_password" : "123456",
    "new_password": "654321"
 }
 Response:

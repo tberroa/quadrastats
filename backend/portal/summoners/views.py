@@ -135,11 +135,11 @@ class ChangePassword(APIView):
         data = request.data
         region = data.get("region")
         key = data.get("key")
-        old_password = data.get("old_password")
+        current_password = data.get("current_password")
         new_password = data.get("new_password")
 
         # validate
-        if None in (region, key, old_password, new_password):
+        if None in (region, key, current_password, new_password):
            return Response(invalid_request_format)
 
         # ensure proper key format
@@ -155,8 +155,8 @@ class ChangePassword(APIView):
         if summoner.user is None:
             return Response(summoner_not_registered)
 
-        # make sure old password is correct password
-        if not hashers.check_password(old_password, summoner.user.password):
+        # make sure entered password is correct password
+        if not hashers.check_password(current_password, summoner.user.password):
             return Response(invalid_credentials)
 
         # change password
