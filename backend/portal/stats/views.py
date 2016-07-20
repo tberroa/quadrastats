@@ -15,13 +15,14 @@ class GetMatchStats(APIView):
     def post(self, request, format=None):
         # extract data
         data = request.data
+        region = data.get("region")
         keys = data.get("keys")
         champion = data.get("champion")
         lane = data.get("lane")
         role = data.get("role")
 
         # validate required data
-        if keys is None:
+        if None in (region, keys):
             return Response(invalid_request_format)
 
         # initialize list for storing the requested match stats
@@ -31,7 +32,7 @@ class GetMatchStats(APIView):
         for key in keys:
             # get summoner object
             try:
-                summoner = Summoner.objects.get(key = format_key(key))
+                summoner = Summoner.objects.get(region = region, key = format_key(key))
             except Summoner.DoesNotExist:
                 return Response(summoner_does_not_exist)
 
