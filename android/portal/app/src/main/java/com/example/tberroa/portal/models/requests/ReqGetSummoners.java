@@ -8,7 +8,7 @@ import java.util.List;
 public class ReqGetSummoners {
 
     @Expose
-    public String region;
-    @Expose
     public List<String> keys;
+    @Expose
+    public String region;
 }

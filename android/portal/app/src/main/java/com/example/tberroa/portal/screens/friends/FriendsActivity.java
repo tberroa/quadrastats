@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,17 +20,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
+import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqFriend;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.screens.BaseActivity;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 
 import java.io.IOException;
@@ -116,6 +116,7 @@ public class FriendsActivity extends BaseActivity {
 
             // initialize buttons
             Button doneButton = (Button) findViewById(R.id.done_button);
+            Button cancelButton = (Button) findViewById(R.id.cancel_button);
             doneButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -125,7 +126,6 @@ public class FriendsActivity extends BaseActivity {
                     dismiss();
                 }
             });
-            Button cancelButton = (Button) findViewById(R.id.cancel_button);
             cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -152,6 +152,7 @@ public class FriendsActivity extends BaseActivity {
 
             // initialize buttons
             Button yesButton = (Button) findViewById(R.id.yes_button);
+            Button cancelButton = (Button) findViewById(R.id.cancel_button);
             yesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -160,7 +161,6 @@ public class FriendsActivity extends BaseActivity {
                     dismiss();
                 }
             });
-            Button cancelButton = (Button) findViewById(R.id.cancel_button);
             cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

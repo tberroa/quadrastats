@@ -16,14 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Params;
+import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqRegister;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.models.summoner.User;
-import com.example.tberroa.portal.screens.home.HomeActivity;
-import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.network.Http;
+import com.example.tberroa.portal.screens.home.HomeActivity;
 
 import java.io.IOException;
 import java.util.Random;
@@ -69,13 +69,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         // initialize buttons
         registerButton = (Button) findViewById(R.id.register_button);
+        TextView goToSignInButton = (TextView) findViewById(R.id.go_to_sign_in_view);
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 registerButton.setEnabled(false);
                 register();
             }
         });
-        TextView goToSignInButton = (TextView) findViewById(R.id.go_to_sign_in_view);
         goToSignInButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
@@ -201,6 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             // initialize buttons
             Button doneButton = (Button) findViewById(R.id.done_button);
+            Button cancelButton = (Button) findViewById(R.id.cancel_button);
             doneButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -208,7 +209,6 @@ public class RegisterActivity extends AppCompatActivity {
                     dismiss();
                 }
             });
-            Button cancelButton = (Button) findViewById(R.id.cancel_button);
             cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

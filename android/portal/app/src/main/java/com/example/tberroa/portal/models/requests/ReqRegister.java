@@ -6,13 +6,13 @@ import com.google.gson.annotations.Expose;
 public class ReqRegister {
 
     @Expose
-    public String region;
-    @Expose
-    public String key;
+    public String code;
     @Expose
     public String email;
     @Expose
+    public String key;
+    @Expose
     public String password;
     @Expose
-    public String code;
+    public String region;
 }

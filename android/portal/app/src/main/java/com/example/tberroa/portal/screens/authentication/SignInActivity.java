@@ -16,14 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Params;
+import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqSignIn;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.models.summoner.User;
-import com.example.tberroa.portal.screens.home.HomeActivity;
-import com.example.tberroa.portal.data.Params;
-import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.network.Http;
+import com.example.tberroa.portal.screens.home.HomeActivity;
 
 import java.io.IOException;
 
@@ -62,13 +62,13 @@ public class SignInActivity extends AppCompatActivity {
 
         // initialize buttons
         signInButton = (Button) findViewById(R.id.sign_in_button);
+        TextView goToRegisterButton = (TextView) findViewById(R.id.go_to_register_view);
         signInButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 signInButton.setEnabled(false);
                 signIn();
             }
         });
-        TextView goToRegisterButton = (TextView) findViewById(R.id.go_to_register_view);
         goToRegisterButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);

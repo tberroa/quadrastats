@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,9 +28,9 @@ import com.example.tberroa.portal.models.requests.ReqChangePassword;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.models.summoner.User;
 import com.example.tberroa.portal.network.Http;
+import com.example.tberroa.portal.screens.BaseActivity;
 import com.example.tberroa.portal.screens.authentication.AuthUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
-import com.example.tberroa.portal.screens.BaseActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class AccountActivity extends BaseActivity {
         });
     }
 
-    private void changeEmailDone(List<EditText> inputFields, ChangeEmailDialog dialog){
+    private void changeEmailDone(List<EditText> inputFields, ChangeEmailDialog dialog) {
         // extract input fields
         EditText newEmailField = inputFields.get(0);
         EditText passwordField = inputFields.get(1);
@@ -117,7 +117,7 @@ public class AccountActivity extends BaseActivity {
         dialog.dismiss();
     }
 
-    private void changePasswordDone(List<EditText> inputFields, ChangePasswordDialog dialog){
+    private void changePasswordDone(List<EditText> inputFields, ChangePasswordDialog dialog) {
         // extract input fields
         EditText currentPasswordField = inputFields.get(0);
         EditText newPasswordField = inputFields.get(1);
@@ -194,7 +194,7 @@ public class AccountActivity extends BaseActivity {
         }
     }
 
-    private class ChangePasswordDialog extends Dialog{
+    private class ChangePasswordDialog extends Dialog {
 
         public ChangePasswordDialog() {
             super(AccountActivity.this, R.style.DialogStyle);
@@ -233,7 +233,8 @@ public class AccountActivity extends BaseActivity {
                     inputFields.add(currentPasswordField);
                     inputFields.add(newPasswordField);
                     inputFields.add(confirmNewPasswordField);
-                    changePasswordDone(inputFields, ChangePasswordDialog.this);                }
+                    changePasswordDone(inputFields, ChangePasswordDialog.this);
+                }
             });
             cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override

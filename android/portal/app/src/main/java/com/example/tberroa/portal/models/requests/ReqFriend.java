@@ -6,9 +6,9 @@ import com.google.gson.annotations.Expose;
 public class ReqFriend {
 
     @Expose
+    public String friend_key;
+    @Expose
     public String region;
     @Expose
     public String user_key;
-    @Expose
-    public String friend_key;
 }

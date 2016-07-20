@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.View;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.example.tberroa.portal.R;

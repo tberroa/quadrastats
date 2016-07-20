@@ -8,8 +8,8 @@ import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.stats.MatchStats;

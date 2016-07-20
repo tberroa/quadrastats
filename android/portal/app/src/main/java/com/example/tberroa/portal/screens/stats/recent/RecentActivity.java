@@ -301,8 +301,8 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
     private class ChampionIcon {
 
         public final String name;
-        public boolean isSelected;
         public ImageView check;
+        public boolean isSelected;
 
         ChampionIcon(String name) {
             this.name = name;
@@ -345,8 +345,8 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         public class ChampionViewHolder extends ViewHolder {
 
-            final ImageView champIconCheck;
             final ImageView champIcon;
+            final ImageView champIconCheck;
 
             ChampionViewHolder(View itemView) {
                 super(itemView);
@@ -604,23 +604,23 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
     }
 
     private class GoButtonPackageSSD {
-        public Set<String> selectedNames;
-        public Map<String, List<List<Number>>> selectedData;
-        public List<CheckBox> checkBoxes;
-        public ArrayList<String> titles;
         public int champion;
+        public List<CheckBox> checkBoxes;
         public String position;
+        public Map<String, List<List<Number>>> selectedData;
+        public Set<String> selectedNames;
+        public ArrayList<String> titles;
     }
 
     private class SelectSummonersDialog extends Dialog {
 
-        private final Context context;
-        private final Set<String> selectedNames;
-        private final Map<String, List<List<Number>>> selectedData;
-        private final List<CheckBox> checkBoxes;
-        private final ArrayList<String> titles;
         private final int champion;
+        private final List<CheckBox> checkBoxes;
+        private final Context context;
         private final String position;
+        private final Map<String, List<List<Number>>> selectedData;
+        private final Set<String> selectedNames;
+        private final ArrayList<String> titles;
 
         public SelectSummonersDialog(Context context, GoButtonPackageSSD goButtonPackageSSD) {
             super(RecentActivity.this, R.style.DialogStyle);

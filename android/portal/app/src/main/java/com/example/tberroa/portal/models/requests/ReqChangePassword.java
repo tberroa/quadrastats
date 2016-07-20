@@ -6,11 +6,11 @@ import com.google.gson.annotations.Expose;
 public class ReqChangePassword {
 
     @Expose
-    public String region;
-    @Expose
     public String key;
+    @Expose
+    public String new_password;
     @Expose
     public String old_password;
     @Expose
-    public String new_password;
+    public String region;
 }

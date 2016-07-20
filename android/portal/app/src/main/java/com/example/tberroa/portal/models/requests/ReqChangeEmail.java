@@ -6,11 +6,11 @@ import com.google.gson.annotations.Expose;
 public class ReqChangeEmail {
 
     @Expose
-    public String region;
-    @Expose
     public String key;
+    @Expose
+    public String new_email;
     @Expose
     public String password;
     @Expose
-    public String new_email;
+    public String region;
 }

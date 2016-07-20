@@ -102,8 +102,8 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
     }
 
     public class chartViewHolder extends ViewHolder {
-        final RelativeLayout lineChartLayout;
         final LineChart lineChart;
+        final RelativeLayout lineChartLayout;
         final TextView noData;
         final TextView title;
 

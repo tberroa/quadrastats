@@ -8,9 +8,9 @@ public class IntValueFormat implements ValueFormatter {
 
     @Override
     public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-        if (Math.floor(value) == value){
+        if (Math.floor(value) == value) {
             return String.valueOf((int) Math.floor(value));
-        } else{
+        } else {
             return String.valueOf(Math.round(value * 100.0) / 100.0);
         }
     }

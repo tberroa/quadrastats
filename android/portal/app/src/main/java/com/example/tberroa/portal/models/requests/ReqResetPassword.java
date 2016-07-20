@@ -6,9 +6,9 @@ import com.google.gson.annotations.Expose;
 public class ReqResetPassword {
 
     @Expose
-    public String region;
+    public String email;
     @Expose
     public String key;
     @Expose
-    public String email;
+    public String region;
 }

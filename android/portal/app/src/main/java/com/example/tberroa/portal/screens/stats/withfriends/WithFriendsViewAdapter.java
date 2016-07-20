@@ -18,8 +18,8 @@ import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.stats.IntValueFormat;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
-import com.github.mikephil.charting.charts.BarChart;
 import com.example.tberroa.portal.screens.stats.withfriends.WithFriendsViewAdapter.withFriendsViewHolder;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -193,7 +193,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
             barChart.getLegend().setEnabled(false);
             barChart.getData().setHighlightEnabled(false);
             barChart.setTouchEnabled(false);
-            if (i == 1){ // kda chart
+            if (i == 1) { // kda chart
                 barChart.getAxisLeft().setDrawLabels(false);
                 barChart.getAxisLeft().setDrawGridLines(false);
                 barChart.getAxisLeft().setDrawAxisLine(false);
@@ -235,7 +235,7 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
         return new withFriendsViewHolder(LayoutInflater.from(c).inflate(R.layout.view_with_friends, vG, false));
     }
 
-    private void populateSummonerTable(GridLayout summonerTable, List<MatchStats> matchStatsList){
+    private void populateSummonerTable(GridLayout summonerTable, List<MatchStats> matchStatsList) {
         int cWidth = ScreenUtil.dpToPx(context, 65);
         int cHeight = ScreenUtil.dpToPx(context, 65);
         int width = ScreenUtil.dpToPx(context, 30);
@@ -330,17 +330,17 @@ public class WithFriendsViewAdapter extends RecyclerView.Adapter<withFriendsView
 
     public class withFriendsViewHolder extends RecyclerView.ViewHolder {
 
-        final TextView victoryView;
+        final PieChart assistsChart;
+        final BarChart csChart;
+        final PieChart deathsChart;
         final TextView defeatView;
-        final TextView teamKDAView;
+        final BarChart dmgChart;
+        final BarChart kdaChart;
+        final PieChart killsChart;
         final TextView matchDurationView;
         final GridLayout summonerTable;
-        final BarChart dmgChart;
-        final PieChart killsChart;
-        final PieChart deathsChart;
-        final PieChart assistsChart;
-        final BarChart kdaChart;
-        final BarChart csChart;
+        final TextView teamKDAView;
+        final TextView victoryView;
         final BarChart wardsChart;
 
         withFriendsViewHolder(View itemView) {
