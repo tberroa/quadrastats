@@ -138,7 +138,7 @@ public class AccountActivity extends BaseActivity {
 
         // create the partially complete request object
         ReqChangePassword request = new ReqChangePassword();
-        request.old_password = currentPassword;
+        request.current_password = currentPassword;
         request.new_password = newPassword;
 
         // execute request and close dialog

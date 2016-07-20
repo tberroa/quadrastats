@@ -6,9 +6,9 @@ import com.google.gson.annotations.Expose;
 public class ReqSignIn {
 
     @Expose
+    public String region;
+    @Expose
     public String key;
     @Expose
     public String password;
-    @Expose
-    public String region;
 }

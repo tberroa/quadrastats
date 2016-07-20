@@ -8,13 +8,13 @@ import java.util.List;
 public class ReqMatchStats {
 
     @Expose
-    public int champion;
+    public String region;
     @Expose
     public List<String> keys;
     @Expose
-    public String lane;
+    public int champion;
     @Expose
-    public String region;
+    public String lane;
     @Expose
     public String role;
 }

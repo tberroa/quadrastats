@@ -10,8 +10,8 @@ import com.google.gson.annotations.Expose;
 public class Summoner extends Model {
 
     @Expose
-    @Column(name = "friends")
-    public String friends;
+    @Column(name = "region")
+    public String region;
     @Expose
     @Column(name = "key")
     public String key;
@@ -19,14 +19,14 @@ public class Summoner extends Model {
     @Column(name = "name")
     public String name;
     @Expose
+    @Column(name = "summoner_id")
+    public long summoner_id;
+    @Expose
     @Column(name = "profile_icon")
     public int profile_icon;
     @Expose
-    @Column(name = "region")
-    public String region;
-    @Expose
-    @Column(name = "summoner_id")
-    public long summoner_id;
+    @Column(name = "friends")
+    public String friends;
 
     @SuppressWarnings("RedundantNoArgConstructor")
     public Summoner() {
