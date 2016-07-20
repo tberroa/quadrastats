@@ -145,10 +145,10 @@ public class RegisterActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             // create the request object
             ReqRegister request = new ReqRegister();
-            request.email = email;
-            request.password = password;
             request.region = region;
             request.key = key;
+            request.email = email;
+            request.password = password;
             request.code = codeString;
 
             // make the request

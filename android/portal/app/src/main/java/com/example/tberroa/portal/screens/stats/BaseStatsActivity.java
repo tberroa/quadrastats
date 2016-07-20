@@ -122,8 +122,9 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
             Summoner user = localDB.summoner(new UserInfo().getId(BaseStatsActivity.this));
 
             // create the request object
-            String keys = user.key + "," + user.friends;
             ReqMatchStats request = new ReqMatchStats();
+            request.region = user.region;
+            String keys = user.key + "," + user.friends;
             request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
 
             // make the request

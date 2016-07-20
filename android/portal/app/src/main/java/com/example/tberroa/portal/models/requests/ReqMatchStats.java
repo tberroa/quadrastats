@@ -8,6 +8,8 @@ import java.util.List;
 public class ReqMatchStats {
 
     @Expose
+    public String region;
+    @Expose
     public List<String> keys;
     @Expose
     public int champion;

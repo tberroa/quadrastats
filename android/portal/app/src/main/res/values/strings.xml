@@ -38,7 +38,15 @@
 
     <!-- manage account activity -->
     <string name="ma_activity_title">Manage Account</string>
+    <string name="ma_change_email">Change Email</string>
+    <string name="ma_change_password">Change Password</string>
     <string name="ma_sign_out">Sign Out</string>
+    <string name="ma_new_email">New Email</string>
+    <string name="ma_password">Password</string>
+    <string name="ma_current_password">Current Password</string>
+    <string name="ma_new_password">New Password</string>
+    <string name="ma_confirm_new_password">Confirm New Password</string>
+    <string name="ma_password_mismatch">Password mismatch</string>
 
     <!-- manage friends activity -->
     <string name="mf_activity_title">Manage Friends</string>
@@ -94,7 +102,6 @@
     <string name="stats">Stats</string>
 
     <!-- generic button labels -->
-    <string name="button_edit">Edit</string>
     <string name="button_done">Done</string>
     <string name="button_yes">Yes</string>
     <string name="button_go">Go</string>

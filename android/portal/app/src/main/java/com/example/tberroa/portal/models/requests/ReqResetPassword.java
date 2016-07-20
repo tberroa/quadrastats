@@ -3,7 +3,7 @@ package com.example.tberroa.portal.models.requests;
 import com.google.gson.annotations.Expose;
 
 @SuppressWarnings("unused")
-public class ReqRegister {
+public class ReqResetPassword {
 
     @Expose
     public String region;
@@ -11,8 +11,4 @@ public class ReqRegister {
     public String key;
     @Expose
     public String email;
-    @Expose
-    public String password;
-    @Expose
-    public String code;
 }
