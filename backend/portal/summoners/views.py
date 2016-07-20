@@ -243,13 +243,14 @@ class RegisterUser(APIView):
     def post(self, request, format = None):
         # extract data
         data = request.data
-        email = data.get("email")
-        password = data.get("password")
         region = data.get("region")
         key = data.get("key")
+        email = data.get("email")
+        password = data.get("password")
+        code = data.get("code")
 
         # validate
-        if None in (email, password, region, key):
+        if None in (region, key, email, password, code):
             return Response(invalid_request_format)
 
         # ensure proper key format
@@ -370,10 +371,11 @@ class ResetPassword(APIView):
         # extract data
         data = request.data
         region = data.get("region")
-        key = data.get("key")    
+        key = data.get("key") 
+        email = data.get("email")   
 
         # validate
-        if None in (region, key):
+        if None in (region, key, email):
             return Response(invalid_request_format)
 
         # ensure proper key format
@@ -384,6 +386,14 @@ class ResetPassword(APIView):
             summoner = Summoner.objects.get(region = region, key = key)
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
+
+        # make sure the user object exists
+        if summoner.user is None:
+            return Response(summoner_not_registered)
+
+        # make sure the provided email matches the stored email
+        if email != summoner.user.email:
+            return Response(invalid_credentials)
 
         # generate a random password
         new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
