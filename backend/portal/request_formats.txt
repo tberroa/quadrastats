@@ -125,10 +125,11 @@ Response:
 Register User
 Request:
 {
+    "region" : "na",
+    "key" : "frosiph",
     "email" : "tberroa@outlook.com",
     "password" : "123456",
-    "region" : "na",
-    "key" : "frosiph"
+    "code" : "16614"
 }
 Response:
 {
@@ -170,7 +171,8 @@ Reset Password
 Request:
 {
    "region" : "na",
-   "key" : "frosiph"
+   "key" : "frosiph",
+   "email" : "tberroa@outlook.com"
 }
 Response:
 {
@@ -193,6 +195,7 @@ Response:
 Get Match Stats
 Request:
 {
+    "region" : "na"
     "keys" : ["acruz"],
     "champion" : 1,
     "lane" : "MIDDLE",
