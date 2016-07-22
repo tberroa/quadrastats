@@ -256,7 +256,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<withFriendsViewHolder> {
             // champion icon
             ImageView championIconView = new ImageView(context);
             championIconView.setPadding(padding, padding, padding, padding);
-            String key = StatsUtil.championKey(matchStats.champion, null);
+            String key = StatsUtil.championKey(matchStats.champion, staticRiotData.championsMap);
             String url = StatsUtil.championIconURL(staticRiotData.version, key);
             Picasso.with(context).load(url).resize(cWidth, cHeight).into(championIconView);
             summonerLayout.addView(championIconView);

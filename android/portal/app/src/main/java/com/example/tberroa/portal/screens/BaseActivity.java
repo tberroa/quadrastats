@@ -217,9 +217,9 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
             }
 
             // parse the response
+            staticRiotData = new StaticRiotData();
             if (postResponse.contains(Constants.VALID_GET_CHAMPIONS)) {
                 Champions champions = ModelUtil.fromJson(postResponse, Champions.class);
-                staticRiotData = new StaticRiotData();
                 staticRiotData.version = champions.version;
                 staticRiotData.championsMap = champions.data;
                 staticRiotData.championsList = new ArrayList<>(staticRiotData.championsMap.values());

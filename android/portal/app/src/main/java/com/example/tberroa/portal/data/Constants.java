@@ -63,7 +63,7 @@ public class Constants {
     public static final String URL_IMAGE_TYPE = ".png";
 
     // riot response validity checks
-    public static final String VALID_GET_CHAMPIONS = "";
+    public static final String VALID_GET_CHAMPIONS = "version";
 
     // riot positions
     public static final String POS_TOP = "TOP";
