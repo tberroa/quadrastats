@@ -49,7 +49,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         }
 
         // set the profile icon
-        String url = ScreenUtil.constructProfileIconURL(friends.get(position).profile_icon);
+        String url = ScreenUtil.profileIconURL(friends.get(position).profile_icon);
         Picasso.with(context).load(url).fit().transform(new CircleTransform()).into(viewHolder.profileIcon);
 
         // set name

@@ -23,13 +23,15 @@ import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.account.AccountActivity;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
+import com.example.tberroa.portal.screens.stats.StaticRiotData;
 import com.example.tberroa.portal.screens.stats.recent.RecentActivity;
 import com.example.tberroa.portal.screens.stats.season.SeasonActivity;
-import com.example.tberroa.portal.screens.stats.withfriends.WithFriendsActivity;
+import com.example.tberroa.portal.screens.stats.withfriends.WFActivity;
 import com.squareup.picasso.Picasso;
 
 public class BaseActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
+    protected StaticRiotData staticRiotData;
     private DrawerLayout drawer;
     private SmoothActionBarDrawerToggle toggle;
 
@@ -82,7 +84,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(BaseActivity.this, WithFriendsActivity.class));
+                        startActivity(new Intent(BaseActivity.this, WFActivity.class));
                         finish();
                     }
                 });
@@ -145,6 +147,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public class MenuListener implements Toolbar.OnMenuItemClickListener {
+
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {
@@ -213,7 +216,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
 
             // display the profile icon
             ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.user_profile_icon_view);
-            String url = ScreenUtil.constructProfileIconURL(profileIcon);
+            String url = ScreenUtil.profileIconURL(staticRiotData.version, profileIcon);
             Picasso.with(BaseActivity.this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
         }
     }

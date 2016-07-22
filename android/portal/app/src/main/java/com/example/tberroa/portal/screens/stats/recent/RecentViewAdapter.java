@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.example.tberroa.portal.screens.stats.recent.RecentViewAdapter.chartViewHolder;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -169,7 +170,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
 
             // use the arrays to create a data set
             BarDataSet barDataSet = new BarDataSet(data, null);
-            barDataSet.setColors(ScreenUtil.chartColors(), context);
+            barDataSet.setColors(StatsUtil.chartColors(), context);
             barDataSet.setDrawValues(false);
             barChart.setData(new BarData(labels, barDataSet));
 

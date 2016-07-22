@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.models.datadragon.Champion;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.ScreenUtil;
@@ -111,7 +113,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         // set position icon
         ImageView positionIcon = (ImageView) findViewById(R.id.position_view);
         if (position != null) {
-            Picasso.with(this).load(ScreenUtil.positionIcon(position)).into(positionIcon);
+            Picasso.with(this).load(StatsUtil.positionIcon(position)).into(positionIcon);
             positionIcon.setVisibility(View.VISIBLE);
         } else {
             positionIcon.setVisibility(View.GONE);
@@ -120,8 +122,9 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         // set champion icon
         ImageView championIcon = (ImageView) findViewById(R.id.champ_icon_view);
         if (champion > 0) {
-            String name = StatsUtil.championName(champion);
-            Picasso.with(this).load(ScreenUtil.championIcon(name)).into(championIcon);
+            String key = StatsUtil.championKey(champion, staticRiotData.championsMap);
+            String url = StatsUtil.championIconURL(staticRiotData.version, key);
+            Picasso.with(this).load(url).into(championIcon);
             championIcon.setVisibility(View.VISIBLE);
         } else {
             championIcon.setVisibility(View.GONE);
@@ -135,14 +138,14 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             TextView textView = new TextView(this);
             textView.setText(name);
             textView.setTextSize(12);
-            textView.setTextColor(ContextCompat.getColor(this, ScreenUtil.intToColor(i)));
+            textView.setTextColor(ContextCompat.getColor(this, StatsUtil.intToColor(i)));
             textView.setPadding(ScreenUtil.dpToPx(this, 5), 0, ScreenUtil.dpToPx(this, 5), 0);
             legendNames.addView(textView);
             i++;
         }
     }
 
-    private void populateActivity(List<MatchStats> matchStatsList, int champion, String position) {
+    private void populateActivity(List<MatchStats> matchStatsList, long championId, String position) {
         // Before the data can be presented, it needs to be organized. All the data will be put into one map object.
         // The map key is the summoner name and the value is a list of of lists where each list is a list of data
         // points corresponding to one stat chart.
@@ -226,7 +229,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         updateAdapter(titles, aggregateData);
 
         // create the legend
-        createLegend(names, champion, position);
+        createLegend(names, championId, position);
 
         // display the legend
         LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
@@ -240,26 +243,16 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 // copy the map of data
                 Map<String, List<List<Number>>> selectedData = new LinkedHashMap<>(aggregateData);
 
-                // create a checkbox for each name
-                List<CheckBox> checkBoxes = new ArrayList<>();
-                for (String name : names) {
-                    CheckBox checkBox = new CheckBox(RecentActivity.this);
-                    checkBox.setText(name);
-                    checkBox.setTextSize(20);
-                    checkBoxes.add(checkBox);
-                }
-
                 // construct package required by dialog
                 GoButtonPackageSSD goButtonPackageSSD = new GoButtonPackageSSD();
                 goButtonPackageSSD.selectedNames = selectedNames;
                 goButtonPackageSSD.selectedData = selectedData;
-                goButtonPackageSSD.checkBoxes = checkBoxes;
                 goButtonPackageSSD.titles = titles;
-                goButtonPackageSSD.champion = champion;
+                goButtonPackageSSD.championId = championId;
                 goButtonPackageSSD.position = position;
 
                 // display dialog
-                new SelectSummonersDialog(RecentActivity.this, goButtonPackageSSD).show();
+                new SelectSummonersDialog(goButtonPackageSSD).show();
             }
         });
     }
@@ -300,39 +293,41 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class ChampionIcon {
 
-        public final String name;
+        public final Champion champion;
         public ImageView check;
         public boolean isSelected;
 
-        ChampionIcon(String name) {
-            this.name = name;
+        ChampionIcon(Champion champion) {
+            this.champion = champion;
             isSelected = false;
         }
     }
 
     private class FilterAdapter extends Adapter<FilterAdapter.ChampionViewHolder> {
 
-        public final List<ChampionIcon> champions;
+        public final List<ChampionIcon> championIcons;
 
-        public FilterAdapter(List<ChampionIcon> champions) {
-            this.champions = champions;
+        public FilterAdapter(List<ChampionIcon> championIcons) {
+            this.championIcons = championIcons;
         }
 
         @Override
         public int getItemCount() {
-            return champions.size();
+            return championIcons.size();
         }
 
         @Override
-        public void onBindViewHolder(ChampionViewHolder clientViewHolder, int i) {
-            champions.get(i).check = clientViewHolder.champIconCheck;
-            ChampionIcon icon = champions.get(i);
-            Picasso.with(RecentActivity.this).load(ScreenUtil.championIcon(icon.name)).into(clientViewHolder.champIcon);
+        public void onBindViewHolder(ChampionViewHolder viewHolder, int i) {
+            ChampionIcon icon = championIcons.get(i);
+            icon.check = viewHolder.champIconCheck;
+            String key = icon.champion.key;
+            String url = StatsUtil.championIconURL(staticRiotData.version, key);
+            Picasso.with(RecentActivity.this).load(url).into(viewHolder.champIconView);
 
             if (icon.isSelected) {
-                clientViewHolder.champIconCheck.setVisibility(View.VISIBLE);
+                viewHolder.champIconCheck.setVisibility(View.VISIBLE);
             } else {
-                clientViewHolder.champIconCheck.setVisibility(View.INVISIBLE);
+                viewHolder.champIconCheck.setVisibility(View.INVISIBLE);
             }
         }
 
@@ -345,26 +340,26 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         public class ChampionViewHolder extends ViewHolder {
 
-            final ImageView champIcon;
+            final ImageView champIconView;
             final ImageView champIconCheck;
 
             ChampionViewHolder(View itemView) {
                 super(itemView);
-                champIcon = (ImageView) itemView.findViewById(R.id.champ_icon_view);
+                champIconView = (ImageView) itemView.findViewById(R.id.champ_icon_view);
                 champIconCheck = (ImageView) itemView.findViewById(R.id.champ_icon_check);
 
-                champIcon.setOnClickListener(new OnClickListener() {
+                champIconView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for (int i = 0; i < champions.size(); i++) {
+                        for (int i = 0; i < championIcons.size(); i++) {
                             if (i != getLayoutPosition()) {
-                                champions.get(i).isSelected = false;
-                                if (champions.get(i).check != null) {
-                                    champions.get(i).check.setVisibility(View.INVISIBLE);
+                                championIcons.get(i).isSelected = false;
+                                if (championIcons.get(i).check != null) {
+                                    championIcons.get(i).check.setVisibility(View.INVISIBLE);
                                 }
                             }
                         }
-                        ChampionIcon icon = champions.get(getLayoutPosition());
+                        ChampionIcon icon = championIcons.get(getLayoutPosition());
                         icon.isSelected = !icon.isSelected;
                         if (icon.isSelected) {
                             champIconCheck.setVisibility(View.VISIBLE);
@@ -389,11 +384,10 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             setContentView(R.layout.dialog_data_filter);
             setCancelable(true);
 
-            // initialize list of champion icons
-            List<ChampionIcon> championIcons = new ArrayList<>(131);
-            List<String> names = StatsUtil.championNames();
-            for (String name : names) {
-                championIcons.add(new ChampionIcon(name));
+            // create the recycler view adapter data set
+            List<ChampionIcon> championIcons = new ArrayList<>();
+            for (Champion champion : staticRiotData.championsList) {
+                championIcons.add(new ChampionIcon(champion));
             }
 
             // initialize recycler view
@@ -499,22 +493,23 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             goButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // get champion key
-                    int champion = 0;
+                    // get the selected champion id
+                    long championId = 0;
                     boolean foundSelected = false;
-                    for (ChampionIcon icon : adapter.champions) {
+                    for (ChampionIcon icon : adapter.championIcons) {
                         if (icon.isSelected) {
                             if (!foundSelected) {
-                                champion = StatsUtil.championKey(icon.name);
+                                championId = icon.champion.id;
                                 foundSelected = true;
                             } else {
-                                Toast.makeText(RecentActivity.this, R.string.select_only_one, Toast.LENGTH_SHORT).show();
+                                String message = getString(R.string.select_only_one);
+                                Toast.makeText(RecentActivity.this, message, Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
                     }
 
-                    // get position
+                    // get the selected position
                     String lane;
                     String role;
                     if (topCheck.getVisibility() == View.VISIBLE) {
@@ -537,12 +532,14 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                         role = null;
                     }
 
+                    // construct the package to send to the async task
                     GoButtonPackageFD goButtonPackage = new GoButtonPackageFD();
                     goButtonPackage.dialog = FilterDialog.this;
-                    goButtonPackage.champion = champion;
+                    goButtonPackage.championId = championId;
                     goButtonPackage.lane = lane;
                     goButtonPackage.role = role;
 
+                    // execute the go button function
                     new FilterDialogGoButton().execute(goButtonPackage);
                 }
             });
@@ -551,7 +548,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class FilterDialogGoButton extends AsyncTask<GoButtonPackageFD, Void, List<MatchStats>> {
 
-        int champion;
+        long championId;
         FilterDialog dialog;
         String position;
 
@@ -561,7 +558,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
             // extract objects
             dialog = params[0].dialog;
-            champion = params[0].champion;
+            championId = params[0].championId;
             String lane = params[0].lane;
             String role = params[0].role;
 
@@ -581,14 +578,14 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             // construct list of keys
             List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));
 
-            return localDB.matchStatsList(keys, champion, lane, role);
+            return localDB.matchStatsList(keys, championId, lane, role);
         }
 
         @Override
         protected void onPostExecute(List<MatchStats> matchStatsList) {
             // display
             if (!matchStatsList.isEmpty()) {
-                populateActivity(matchStatsList, champion, position);
+                populateActivity(matchStatsList, championId, position);
                 dialog.dismiss();
             } else {
                 Toast.makeText(RecentActivity.this, R.string.no_data, Toast.LENGTH_SHORT).show();
@@ -597,15 +594,16 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
     }
 
     private class GoButtonPackageFD {
-        public int champion;
+
+        public long championId;
         public FilterDialog dialog;
         public String lane;
         public String role;
     }
 
     private class GoButtonPackageSSD {
-        public int champion;
-        public List<CheckBox> checkBoxes;
+
+        public long championId;
         public String position;
         public Map<String, List<List<Number>>> selectedData;
         public Set<String> selectedNames;
@@ -614,22 +612,18 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class SelectSummonersDialog extends Dialog {
 
-        private final int champion;
-        private final List<CheckBox> checkBoxes;
-        private final Context context;
+        private final long championId;
         private final String position;
         private final Map<String, List<List<Number>>> selectedData;
         private final Set<String> selectedNames;
         private final ArrayList<String> titles;
 
-        public SelectSummonersDialog(Context context, GoButtonPackageSSD goButtonPackageSSD) {
+        public SelectSummonersDialog(GoButtonPackageSSD goButtonPackageSSD) {
             super(RecentActivity.this, R.style.DialogStyle);
-            this.context = context;
             selectedNames = goButtonPackageSSD.selectedNames;
             selectedData = goButtonPackageSSD.selectedData;
-            checkBoxes = goButtonPackageSSD.checkBoxes;
             titles = goButtonPackageSSD.titles;
-            champion = goButtonPackageSSD.champion;
+            championId = goButtonPackageSSD.championId;
             position = goButtonPackageSSD.position;
         }
 
@@ -639,15 +633,17 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             setContentView(R.layout.dialog_select_summoners);
             setCancelable(true);
 
-            // populate the view with the checkboxes
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.select_summoners_layout);
-            for (CheckBox checkBox : checkBoxes) {
-                linearLayout.addView(checkBox);
-                View divider = new View(context);
-                divider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
-                divider.setBackgroundColor(ContextCompat.getColor(context, R.color.divider));
-                linearLayout.addView(divider);
+            // construct list of SSDNames
+            List<SSDName> names = new ArrayList<>();
+            for (String selectedName : selectedNames) {
+                names.add(new SSDName(selectedName));
             }
+
+            // initialize recycler view
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            SSDViewAdapter adapter = new SSDViewAdapter(names);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(RecentActivity.this));
 
             // initialize the go button
             Button goButton = (Button) findViewById(R.id.go_button);
@@ -656,8 +652,8 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 public void onClick(View v) {
                     // make sure at least one was selected
                     boolean minimumSatisfied = false;
-                    for (CheckBox checkBox : checkBoxes) {
-                        if (checkBox.isChecked()) {
+                    for (SSDName name : adapter.names) {
+                        if (name.isChecked) {
                             minimumSatisfied = true;
                             break;
                         }
@@ -665,15 +661,15 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
                     if (minimumSatisfied) {
                         // go through and remove those that were not checked
-                        for (CheckBox checkBox : checkBoxes) {
-                            if (!checkBox.isChecked()) {
-                                selectedNames.remove(checkBox.getText().toString());
-                                selectedData.remove(checkBox.getText().toString());
+                        for (SSDName name : adapter.names) {
+                            if (!name.isChecked) {
+                                selectedNames.remove(name.name);
+                                selectedData.remove(name.name);
                             }
                         }
 
                         // update the views
-                        createLegend(selectedNames, champion, position);
+                        createLegend(selectedNames, championId, position);
                         updateAdapter(titles, selectedData);
                         dismiss();
                     } else {
@@ -681,6 +677,59 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                     }
                 }
             });
+        }
+    }
+
+    private class SSDName {
+
+        public final String name;
+        public boolean isChecked;
+
+        public SSDName(String name) {
+            this.name = name;
+        }
+    }
+
+    private class SSDViewAdapter extends Adapter<SSDViewAdapter.SSDViewHolder> {
+
+        public final List<SSDName> names;
+
+        public SSDViewAdapter(List<SSDName> names) {
+            this.names = names;
+        }
+
+        @Override
+        public int getItemCount() {
+            return names.size();
+        }
+
+        @Override
+        public void onBindViewHolder(SSDViewHolder viewHolder, int i) {
+            viewHolder.checkbox.setText(names.get(i).name);
+            viewHolder.checkbox.setChecked(names.get(i).isChecked);
+        }
+
+        @Override
+        public SSDViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            Context c = viewGroup.getContext();
+            View v = LayoutInflater.from(c).inflate(R.layout.view_select_summoners, viewGroup, false);
+            return new SSDViewHolder(v);
+        }
+
+        public class SSDViewHolder extends ViewHolder {
+
+            final CheckBox checkbox;
+
+            SSDViewHolder(View itemView) {
+                super(itemView);
+                checkbox = (CheckBox) itemView.findViewById(R.id.summoner_checkbox);
+                checkbox.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        names.get(getAdapterPosition()).isChecked = !names.get(getAdapterPosition()).isChecked;
+                    }
+                });
+            }
         }
     }
 }

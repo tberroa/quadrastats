@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.summoner.Summoner;
@@ -18,25 +19,25 @@ public class AuthUtil {
     public static String decodeRegion(int position) {
         switch (position) {
             case 1:
-                return "br";
+                return Constants.REGION_BR;
             case 2:
-                return "eune";
+                return Constants.REGION_EUNE;
             case 3:
-                return "euw";
+                return Constants.REGION_EUW;
             case 4:
-                return "kr";
+                return Constants.REGION_KR;
             case 5:
-                return "lan";
+                return Constants.REGION_LAN;
             case 6:
-                return "las";
+                return Constants.REGION_LAS;
             case 7:
-                return "na";
+                return Constants.REGION_NA;
             case 8:
-                return "oce";
+                return Constants.REGION_OCE;
             case 9:
-                return "ru";
+                return Constants.REGION_RU;
             case 10:
-                return "tr";
+                return Constants.REGION_TR;
             default:
                 return "";
         }

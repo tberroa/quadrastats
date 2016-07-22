@@ -21,22 +21,22 @@ public class LocalDB {
         ActiveAndroid.initialize(context);
     }
 
-    public MatchStats matchStats(String key, long match_id) {
+    public MatchStats matchStats(String key, long matchId) {
         return new Select()
                 .from(MatchStats.class)
                 .where("summoner_key = ?", key)
-                .where("match_id = ?", match_id)
+                .where("match_id = ?", matchId)
                 .executeSingle();
     }
 
-    public List<MatchStats> matchStatsList(List<String> keys, long champion, String lane, String role) {
+    public List<MatchStats> matchStatsList(List<String> keys, long championId, String lane, String role) {
         List<MatchStats> matchStatsList = new ArrayList<>();
         ActiveAndroid.beginTransaction();
         try {
             for (String key : keys) {
                 From query = new Select().from(MatchStats.class).orderBy("match_creation DESC");
-                if (champion > 0) {
-                    query.where("champion = ?", champion);
+                if (championId > 0) {
+                    query.where("champion = ?", championId);
                 }
                 if (lane != null) {
                     query.where("lane = ?", lane);
@@ -73,11 +73,11 @@ public class LocalDB {
         return matchStatsList;
     }
 
-    public Map<Long, Map<String, MatchStats>> matchesWithFriends(List<Long> ids, List<String> keys) {
+    public Map<Long, Map<String, MatchStats>> matchesWithFriends(List<Long> matchIds, List<String> keys) {
         Map<Long, Map<String, MatchStats>> matchesWithFriends = new LinkedHashMap<>();
         ActiveAndroid.beginTransaction();
         try {
-            for (Long matchId : ids) {
+            for (Long matchId : matchIds) {
                 From userQuery = new Select().from(MatchStats.class);
                 userQuery.where("match_id = ?", matchId).where("summoner_key = ?", keys.get(0));
                 MatchStats userMatchStats = userQuery.executeSingle();
@@ -109,9 +109,9 @@ public class LocalDB {
                 .executeSingle();
     }
 
-    public Summoner summoner(long id) {
+    public Summoner summoner(long summonerId) {
         return new Select().from(Summoner.class)
-                .where("summoner_id = ?", id)
+                .where("summoner_id = ?", summonerId)
                 .executeSingle();
     }
 

@@ -68,7 +68,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/SeasonBackground"/>
         <activity
-            android:name=".screens.stats.withfriends.WithFriendsActivity"
+            android:name=".screens.stats.withfriends.WFActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WithFriendsBackground"/>
 

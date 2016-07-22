@@ -16,7 +16,7 @@ import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.stats.recent.RecentActivity;
 import com.example.tberroa.portal.screens.stats.season.SeasonActivity;
-import com.example.tberroa.portal.screens.stats.withfriends.WithFriendsActivity;
+import com.example.tberroa.portal.screens.stats.withfriends.WFActivity;
 import com.squareup.picasso.Picasso;
 
 public class HomeActivity extends BaseActivity {
@@ -96,7 +96,7 @@ public class HomeActivity extends BaseActivity {
         withFriendsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, WithFriendsActivity.class));
+                startActivity(new Intent(HomeActivity.this, WFActivity.class));
             }
         });
     }

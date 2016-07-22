@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -58,7 +58,7 @@ public class RecentFragment extends Fragment {
 
             // create the data sets
             List<List<ILineDataSet>> lineDataSetsList = new ArrayList<>();
-            int[] colors = ScreenUtil.chartColors();
+            int[] colors = StatsUtil.chartColors();
             for (List<List<Entry>> dataList : dataListList) {
                 int x = 0;
                 List<ILineDataSet> lineDataSets = new ArrayList<>();

@@ -4,8 +4,8 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqGetSummoners;
@@ -43,14 +43,14 @@ public class SignInIntentService extends IntentService {
             // make the request
             String postResponse = null;
             try {
-                String url = "http://52.90.34.48/summoners/get.json";
+                String url = Constants.URL_GET_SUMMONERS;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
             } catch (IOException e) {
-                Log.e(Params.TAG_EXCEPTIONS, "@SignInActivity: " + e.getMessage());
+                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
             // save
-            if ((postResponse != null) && postResponse.contains("summoner_id")) {
+            if ((postResponse != null) && postResponse.contains(Constants.VALID_GET_SUMMONERS)) {
                 Type type = new TypeToken<List<Summoner>>() {
                 }.getType();
                 List<Summoner> friends = ModelUtil.fromJsonList(postResponse, type);

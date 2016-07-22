@@ -19,8 +19,7 @@
             android:id="@+id/champ_icon_view"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginTop="1dp"
+            android:layout_margin="1dp"
             android:contentDescription="@string/image_view_description"/>
     </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -28,8 +27,8 @@
         android:id="@+id/champ_icon_check"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/ic_check"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:contentDescription="@string/image_view_description"/>
+        android:contentDescription="@string/image_view_description"
+        android:src="@drawable/ic_check"/>
 </RelativeLayout>

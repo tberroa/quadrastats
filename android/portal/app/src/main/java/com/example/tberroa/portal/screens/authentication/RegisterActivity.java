@@ -1,6 +1,5 @@
 package com.example.tberroa.portal.screens.authentication;
 
-import android.R.layout;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,13 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.data.Params;
+import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqRegister;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.models.summoner.User;
 import com.example.tberroa.portal.network.Http;
+import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 
 import java.io.IOException;
@@ -30,18 +30,7 @@ import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static final String RELOAD = "-80";
-    private String codeString;
-    private EditText confirmPasswordField;
-    private String email;
-    private EditText emailField;
     private boolean inView;
-    private String key;
-    private EditText keyField;
-    private String password;
-    private EditText passwordField;
-    private String region;
-    private Spinner regionSelect;
     private Button registerButton;
 
     @Override
@@ -50,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         // no animation if starting activity as a reload
-        if ((getIntent().getAction() != null) && getIntent().getAction().equals(RELOAD)) {
+        if ((getIntent().getAction() != null) && getIntent().getAction().equals(Constants.UI_RELOAD)) {
             overridePendingTransition(0, 0);
         }
 
@@ -61,11 +50,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // initialize input fields
-        keyField = (EditText) findViewById(R.id.summoner_name_field);
-        emailField = (EditText) findViewById(R.id.email_field);
-        passwordField = (EditText) findViewById(R.id.password_field);
-        confirmPasswordField = (EditText) findViewById(R.id.confirm_password_field);
-        regionSelect = (Spinner) findViewById(R.id.region_select_spinner);
+        EditText keyField = (EditText) findViewById(R.id.summoner_name_field);
+        EditText emailField = (EditText) findViewById(R.id.email_field);
+        EditText passwordField = (EditText) findViewById(R.id.password_field);
+        EditText confirmPasswordField = (EditText) findViewById(R.id.confirm_password_field);
+        Spinner regionSelect = (Spinner) findViewById(R.id.region_select_spinner);
 
         // initialize buttons
         registerButton = (Button) findViewById(R.id.register_button);
@@ -73,13 +62,54 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 registerButton.setEnabled(false);
-                register();
+
+                // extract user inputs
+                String key = keyField.getText().toString();
+                String email = emailField.getText().toString();
+                String password = passwordField.getText().toString();
+                String confirmPassword = confirmPasswordField.getText().toString();
+
+                // make sure passwords match
+                if (confirmPassword.equals(password)) {
+                    confirmPasswordField.setError(null);
+                } else { // display error
+                    confirmPasswordField.setError(getResources().getString(R.string.auth_password_mismatch));
+                    registerButton.setEnabled(true);
+                    return;
+                }
+
+                // make sure a region is selected
+                String region;
+                int regionSelection = regionSelect.getSelectedItemPosition();
+                if (regionSelection > 0) {
+                    region = AuthUtil.decodeRegion(regionSelection);
+                } else { // display error
+                    String message = getString(R.string.select_region);
+                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
+                    registerButton.setEnabled(true);
+                    return;
+                }
+
+                // initialize validation code
+                int code = new Random().nextInt(80000 - 65000) + 15000;
+                String codeString = Integer.toString(code);
+
+                // create request object
+                ReqRegister request = new ReqRegister();
+                request.region = region;
+                request.key = key;
+                request.email = email;
+                request.password = password;
+                request.code = codeString;
+
+                // display dialog
+                new ValidateDialog(request).show();
             }
         });
         goToSignInButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(RELOAD);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).setAction(Constants.UI_RELOAD);
                 startActivity(intent);
                 finish();
             }
@@ -87,8 +117,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         // initialize region select spinner
         ArrayAdapter<CharSequence> adapter;
-        adapter = ArrayAdapter.createFromResource(this, R.array.auth_select_region, layout.simple_spinner_item);
-        adapter.setDropDownViewResource(layout.simple_spinner_dropdown_item);
+        adapter = ArrayAdapter.createFromResource(this, R.array.auth_select_region, R.layout.spinner_textview);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_textview);
         regionSelect.setAdapter(adapter);
     }
 
@@ -104,67 +134,28 @@ public class RegisterActivity extends AppCompatActivity {
         inView = false;
     }
 
-    private void register() {
-        key = keyField.getText().toString();
-        email = emailField.getText().toString();
-        password = passwordField.getText().toString();
-        String confirmPassword = confirmPasswordField.getText().toString();
-
-        // make sure passwords match
-        if (confirmPassword.equals(password)) {
-            confirmPasswordField.setError(null);
-        } else { // display error
-            confirmPasswordField.setError(getResources().getString(R.string.auth_password_mismatch));
-            registerButton.setEnabled(true);
-            return;
-        }
-
-        // make sure a region is selected
-        int regionSelection = regionSelect.getSelectedItemPosition();
-        if (regionSelection > 0) {
-            region = AuthUtil.decodeRegion(regionSelection);
-        } else { // display error
-            Toast.makeText(this, getString(R.string.select_region), Toast.LENGTH_SHORT).show();
-            registerButton.setEnabled(true);
-            return;
-        }
-
-        // initialize validation code
-        int code = new Random().nextInt(80000 - 65000) + 15000;
-        codeString = Integer.toString(code);
-
-        // display dialog
-        new ValidateDialog(codeString).show();
-    }
-
-    private class RequestRegister extends AsyncTask<Void, Void, Void> {
-
-        private String postResponse;
+    private class RequestRegister extends AsyncTask<ReqRegister, Void, String> {
 
         @Override
-        protected Void doInBackground(Void... params) {
-            // create the request object
-            ReqRegister request = new ReqRegister();
-            request.region = region;
-            request.key = key;
-            request.email = email;
-            request.password = password;
-            request.code = codeString;
+        protected String doInBackground(ReqRegister... params) {
+            // extract the request object
+            ReqRegister request = params[0];
 
             // make the request
+            String postResponse = "";
             try {
-                String url = "http://52.90.34.48/summoners/register.json";
+                String url = Constants.URL_REGISTER;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqRegister.class));
             } catch (IOException e) {
-                Log.e(Params.TAG_EXCEPTIONS, "@RegisterActivity: " + e.getMessage());
+                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
-            return null;
+            return postResponse;
         }
 
         @Override
-        protected void onPostExecute(Void param) {
-            if (postResponse.contains("summoner_id")) {
+        protected void onPostExecute(String postResponse) {
+            if (postResponse.contains(Constants.VALID_REGISTER)) {
                 // get the summoner object
                 Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
 
@@ -174,7 +165,8 @@ public class RegisterActivity extends AppCompatActivity {
                 // sign in
                 AuthUtil.signIn(RegisterActivity.this, summoner, user, inView);
             } else { // display error
-                Toast.makeText(RegisterActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                 registerButton.setEnabled(true);
             }
         }
@@ -182,11 +174,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private class ValidateDialog extends Dialog {
 
-        final String code;
+        final ReqRegister request;
 
-        public ValidateDialog(String code) {
+        public ValidateDialog(ReqRegister request) {
             super(RegisterActivity.this, R.style.DialogStyle);
-            this.code = code;
+            this.request = request;
         }
 
         @Override
@@ -197,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             // set code view
             TextView codeView = (TextView) findViewById(R.id.code_view);
-            codeView.setText(code);
+            codeView.setText(request.code);
 
             // initialize buttons
             Button doneButton = (Button) findViewById(R.id.done_button);
@@ -205,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity {
             doneButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new RequestRegister().execute();
+                    new RequestRegister().execute(request);
                     dismiss();
                 }
             });

@@ -42,9 +42,11 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"
+            android:gravity="center"
             android:hint="@string/auth_summoner_name"
             android:imeOptions="actionNext"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:theme="@style/AppTheme.EditText"/>
 
         <EditText
             android:id="@+id/password_field"
@@ -54,9 +56,11 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:ems="12"
+            android:gravity="center"
             android:hint="@string/auth_password"
             android:imeOptions="actionDone"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:theme="@style/AppTheme.EditText"/>
 
         <Spinner
             android:id="@+id/region_select_spinner"
@@ -66,7 +70,8 @@
             android:layout_alignStart="@id/password_field"
             android:layout_below="@id/password_field"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:theme="@style/DialogStyle"/>
 
         <Button
             android:id="@+id/sign_in_button"
@@ -76,15 +81,35 @@
             android:layout_alignStart="@id/password_field"
             android:layout_below="@id/region_select_spinner"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="35dp"
+            android:layout_marginBottom="15dp"
             android:text="@string/auth_sign_in"/>
 
         <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/reset_password_ripple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/sign_in_button"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
+            app:mrl_rippleColor="@color/white"
+            app:mrl_rippleDimension="1dp"
+            app:mrl_rippleDuration="150"
+            app:mrl_rippleRoundedCorners="10dp">
+
+            <TextView
+                android:id="@+id/reset_password_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_reset_password"
+                android:textSize="16sp"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reset_password_ripple"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
             app:mrl_rippleColor="@color/white"
             app:mrl_rippleDimension="1dp"
             app:mrl_rippleDuration="150"

@@ -11,7 +11,9 @@
     <string name="auth_password_mismatch">Password mismatch</string>
     <string name="auth_sign_in">Sign In</string>
     <string name="auth_register">Register</string>
-    <string name="auth_go_to_register">No account yet? Create one</string>
+    <string name="auth_reset_password">Reset Password</string>
+    <string name="auth_successful_reset">Password successfully reset</string>
+    <string name="auth_go_to_register">No account yet? Register</string>
     <string name="auth_go_to_sign_in">Already have an account? Sign In</string>
     <string name="auth_initializing_data">Grabbing your data &#8230;</string>
     <string name="auth_validate_ownership_instructions">
@@ -47,6 +49,7 @@
     <string name="ma_new_password">New Password</string>
     <string name="ma_confirm_new_password">Confirm New Password</string>
     <string name="ma_password_mismatch">Password mismatch</string>
+    <string name="ma_successful_change">Password successfully changed</string>
 
     <!-- manage friends activity -->
     <string name="mf_activity_title">Manage Friends</string>
@@ -78,7 +81,7 @@
     <string name="rg_wards_bought">Wards Bought</string>
     <string name="rg_wards_placed">Wards Placed</string>
     <string name="rg_wards_killed">Wards Killed</string>
-    
+
     <!-- season totals activity -->
     <string name="st_activity_title">Season Totals</string>
     <string name="st_nothing_here">Sorry, there is nothing to see here.</string>

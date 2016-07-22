@@ -19,8 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqChangeEmail;
@@ -29,6 +29,7 @@ import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.models.summoner.User;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.screens.BaseActivity;
+import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.authentication.AuthUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 
@@ -261,14 +262,14 @@ public class AccountActivity extends BaseActivity {
             // make the request
             String postResponse = "";
             try {
-                String url = "http://52.90.34.48/summoners/change-email.json";
+                String url = Constants.URL_CHANGE_EMAIL;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqChangeEmail.class));
             } catch (IOException e) {
-                Log.e(Params.TAG_EXCEPTIONS, "@AccountActivity: " + e.getMessage());
+                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
             // if request was successful, update user info
-            if (postResponse.contains("email")) {
+            if (postResponse.contains(Constants.VALID_CHANGE_EMAIL)) {
                 User user = ModelUtil.fromJson(postResponse, User.class);
                 userInfo.setEmail(AccountActivity.this, user.email);
             }
@@ -276,15 +277,15 @@ public class AccountActivity extends BaseActivity {
             return postResponse;
         }
 
-
         @Override
         protected void onPostExecute(String postResponse) {
-            if (postResponse.contains("email")) {
+            if (postResponse.contains(Constants.VALID_CHANGE_EMAIL)) {
                 User user = ModelUtil.fromJson(postResponse, User.class);
                 TextView emailView = (TextView) findViewById(R.id.email_view);
                 emailView.setText(user.email);
             } else { // display error
-                Toast.makeText(AccountActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -304,10 +305,10 @@ public class AccountActivity extends BaseActivity {
             // make the request
             String postResponse = "";
             try {
-                String url = "http://52.90.34.48/summoners/change-password.json";
+                String url = Constants.URL_CHANGE_PASSWORD;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqChangePassword.class));
             } catch (IOException e) {
-                Log.e(Params.TAG_EXCEPTIONS, "@AccountActivity: " + e.getMessage());
+                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
             return postResponse;
@@ -315,10 +316,12 @@ public class AccountActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(String postResponse) {
-            if (postResponse.contains("summoner_id")) {
-                Toast.makeText(AccountActivity.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
+            if (postResponse.contains(Constants.VALID_CHANGE_PASSWORD)) {
+                String message = getString(R.string.ma_successful_change);
+                Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
-                Toast.makeText(AccountActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }
     }

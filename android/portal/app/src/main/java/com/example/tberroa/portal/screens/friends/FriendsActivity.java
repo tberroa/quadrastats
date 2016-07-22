@@ -22,14 +22,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.Params;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqFriend;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.screens.BaseActivity;
+import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 
 import java.io.IOException;
@@ -191,17 +192,17 @@ public class FriendsActivity extends BaseActivity {
             try {
                 String url;
                 if (add) {
-                    url = "http://52.90.34.48/summoners/add-friend.json";
+                    url = Constants.URL_ADD_FRIEND;
                 } else {
-                    url = "http://52.90.34.48/summoners/remove-friend.json";
+                    url = Constants.URL_REMOVE_FRIEND;
                 }
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqFriend.class));
             } catch (IOException e) {
-                Log.e(Params.TAG_EXCEPTIONS, "@FriendsActivity: " + e.getMessage());
+                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
             // a successful request requires further local database operations, do those here
-            if (postResponse.contains("summoner_id") && add) {
+            if (postResponse.contains(Constants.VALID_FRIEND_OP) && add) {
                 // save the new friend summoner object
                 friend = ModelUtil.fromJson(postResponse, Summoner.class);
                 friend.save();
@@ -209,7 +210,7 @@ public class FriendsActivity extends BaseActivity {
                 // add the new friend to the users local summoner object friend list
                 user.addFriend(friend.key);
                 user.save();
-            } else if (postResponse.contains("summoner_id") && !add) {
+            } else if (postResponse.contains(Constants.VALID_FRIEND_OP) && !add) {
                 // get the users updated friend list from the returned object
                 Summoner updatedUser = ModelUtil.fromJson(postResponse, Summoner.class);
                 user.friends = updatedUser.friends;
@@ -233,7 +234,7 @@ public class FriendsActivity extends BaseActivity {
             String friendKey = values[0];
             String postResponse = values[1];
 
-            if (postResponse.contains("summoner_id")) {
+            if (postResponse.contains(Constants.VALID_FRIEND_OP)) {
                 if (add) {
                     // update list view
                     friends.add(friend);
@@ -259,7 +260,8 @@ public class FriendsActivity extends BaseActivity {
                     }
                 }
             } else { // display error
-                Toast.makeText(FriendsActivity.this, postResponse, Toast.LENGTH_SHORT).show();
+                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }
     }
