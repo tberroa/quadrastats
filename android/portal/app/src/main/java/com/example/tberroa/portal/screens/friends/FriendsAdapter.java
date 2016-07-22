@@ -20,11 +20,13 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
 
     private final Context context;
     private final List<Summoner> friends;
+    private final String version;
 
-    public FriendsAdapter(Context context, List<Summoner> friends) {
+    public FriendsAdapter(Context context, List<Summoner> friends, String version) {
         super(context, -1, friends);
         this.context = context;
         this.friends = friends;
+        this.version = version;
     }
 
     @Override
@@ -49,7 +51,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         }
 
         // set the profile icon
-        String url = ScreenUtil.profileIconURL(friends.get(position).profile_icon);
+        String url = ScreenUtil.profileIconURL(version, friends.get(position).profile_icon);
         Picasso.with(context).load(url).fit().transform(new CircleTransform()).into(viewHolder.profileIcon);
 
         // set name

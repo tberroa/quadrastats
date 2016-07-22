@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.ScreenUtil;
-import com.example.tberroa.portal.screens.stats.StaticRiotData;
+import com.example.tberroa.portal.screens.StaticRiotData;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,7 +41,8 @@ public class WFFragment extends Fragment {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             Map<String, MatchStats> matchStatsMap = gson.fromJson(matchStatsMapJson, matchStatsMapType);
             String staticRiotDataJson = bundle.getString("static_riot_data");
-            Type staticRiotDataType = new TypeToken<StaticRiotData>(){}.getType();
+            Type staticRiotDataType = new TypeToken<StaticRiotData>() {
+            }.getType();
             StaticRiotData staticRiotData = new Gson().fromJson(staticRiotDataJson, staticRiotDataType);
 
             if (matchStatsMap != null) {

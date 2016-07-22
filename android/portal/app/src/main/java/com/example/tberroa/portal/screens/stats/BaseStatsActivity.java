@@ -26,8 +26,6 @@ import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.UserInfo;
 import com.example.tberroa.portal.models.ModelUtil;
-import com.example.tberroa.portal.models.datadragon.Champion;
-import com.example.tberroa.portal.models.datadragon.Champions;
 import com.example.tberroa.portal.models.requests.ReqMatchStats;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
@@ -44,8 +42,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -274,28 +270,6 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                         matchStatsMapMap = localDB.matchesWithFriends(matchIds, keys);
                         break;
                 }
-            }
-
-            // get the list of champions and data dragon version
-            String postResponse = "";
-            try {
-                String url = Constants.URL_GET_CHAMPIONS;
-                postResponse = new Http().get(url);
-            } catch (IOException e) {
-                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-            }
-
-            // parse the response
-            if (postResponse.contains(Constants.VALID_GET_CHAMPIONS)) {
-                Champions champions = ModelUtil.fromJson(postResponse, Champions.class);
-                staticRiotData.championsMap = champions.data;
-                staticRiotData.championsList = new ArrayList<>(staticRiotData.championsMap.values());
-                Collections.sort(staticRiotData.championsList, new Comparator<Champion>() {
-                    @Override
-                    public int compare(Champion object1, Champion object2) {
-                        return object1.name.compareTo(object2.name);
-                    }
-                } );
             }
 
             return keys;

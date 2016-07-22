@@ -1,4 +1,4 @@
-package com.example.tberroa.portal.screens.stats;
+package com.example.tberroa.portal.screens;
 
 import com.example.tberroa.portal.models.datadragon.Champion;
 

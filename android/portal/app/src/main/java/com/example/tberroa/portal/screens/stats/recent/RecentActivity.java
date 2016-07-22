@@ -340,8 +340,8 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         public class ChampionViewHolder extends ViewHolder {
 
-            final ImageView champIconView;
             final ImageView champIconCheck;
+            final ImageView champIconView;
 
             ChampionViewHolder(View itemView) {
                 super(itemView);
@@ -610,6 +610,59 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         public ArrayList<String> titles;
     }
 
+    private class SSDName {
+
+        public final String name;
+        public boolean isChecked;
+
+        public SSDName(String name) {
+            this.name = name;
+        }
+    }
+
+    private class SSDViewAdapter extends Adapter<SSDViewAdapter.SSDViewHolder> {
+
+        public final List<SSDName> names;
+
+        public SSDViewAdapter(List<SSDName> names) {
+            this.names = names;
+        }
+
+        @Override
+        public int getItemCount() {
+            return names.size();
+        }
+
+        @Override
+        public void onBindViewHolder(SSDViewHolder viewHolder, int i) {
+            viewHolder.checkbox.setText(names.get(i).name);
+            viewHolder.checkbox.setChecked(names.get(i).isChecked);
+        }
+
+        @Override
+        public SSDViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            Context c = viewGroup.getContext();
+            View v = LayoutInflater.from(c).inflate(R.layout.view_select_summoners, viewGroup, false);
+            return new SSDViewHolder(v);
+        }
+
+        public class SSDViewHolder extends ViewHolder {
+
+            final CheckBox checkbox;
+
+            SSDViewHolder(View itemView) {
+                super(itemView);
+                checkbox = (CheckBox) itemView.findViewById(R.id.summoner_checkbox);
+                checkbox.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        names.get(getAdapterPosition()).isChecked = !names.get(getAdapterPosition()).isChecked;
+                    }
+                });
+            }
+        }
+    }
+
     private class SelectSummonersDialog extends Dialog {
 
         private final long championId;
@@ -677,59 +730,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                     }
                 }
             });
-        }
-    }
-
-    private class SSDName {
-
-        public final String name;
-        public boolean isChecked;
-
-        public SSDName(String name) {
-            this.name = name;
-        }
-    }
-
-    private class SSDViewAdapter extends Adapter<SSDViewAdapter.SSDViewHolder> {
-
-        public final List<SSDName> names;
-
-        public SSDViewAdapter(List<SSDName> names) {
-            this.names = names;
-        }
-
-        @Override
-        public int getItemCount() {
-            return names.size();
-        }
-
-        @Override
-        public void onBindViewHolder(SSDViewHolder viewHolder, int i) {
-            viewHolder.checkbox.setText(names.get(i).name);
-            viewHolder.checkbox.setChecked(names.get(i).isChecked);
-        }
-
-        @Override
-        public SSDViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            Context c = viewGroup.getContext();
-            View v = LayoutInflater.from(c).inflate(R.layout.view_select_summoners, viewGroup, false);
-            return new SSDViewHolder(v);
-        }
-
-        public class SSDViewHolder extends ViewHolder {
-
-            final CheckBox checkbox;
-
-            SSDViewHolder(View itemView) {
-                super(itemView);
-                checkbox = (CheckBox) itemView.findViewById(R.id.summoner_checkbox);
-                checkbox.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        names.get(getAdapterPosition()).isChecked = !names.get(getAdapterPosition()).isChecked;
-                    }
-                });
-            }
         }
     }
 }

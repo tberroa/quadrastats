@@ -287,7 +287,7 @@ public class FriendsActivity extends BaseActivity {
 
             // initialize list view
             ListView listView = (ListView) findViewById(R.id.list_view);
-            friendsAdapter = new FriendsAdapter(FriendsActivity.this, friends);
+            friendsAdapter = new FriendsAdapter(FriendsActivity.this, friends, staticRiotData.version);
             listView.setAdapter(friendsAdapter);
             listView.setOnItemClickListener(new OnItemClickListener() {
                 @Override

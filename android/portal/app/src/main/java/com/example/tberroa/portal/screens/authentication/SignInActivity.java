@@ -127,6 +127,37 @@ public class SignInActivity extends AppCompatActivity {
         inView = false;
     }
 
+    private class RequestResetPassword extends AsyncTask<ReqResetPassword, Void, String> {
+
+        @Override
+        protected String doInBackground(ReqResetPassword... params) {
+            // extract the request object
+            ReqResetPassword request = params[0];
+
+            // make the request
+            String postResponse = "";
+            try {
+                String url = Constants.URL_RESET_PASSWORD;
+                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqResetPassword.class));
+            } catch (IOException e) {
+                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
+            }
+
+            return postResponse;
+        }
+
+        @Override
+        protected void onPostExecute(String postResponse) {
+            if (postResponse.contains(Constants.VALID_RESET_PASSWORD)) {
+                String message = getString(R.string.auth_successful_reset);
+                Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
+            } else { // display error
+                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private class RequestSignIn extends AsyncTask<ReqSignIn, Void, String> {
 
         @Override
@@ -161,37 +192,6 @@ public class SignInActivity extends AppCompatActivity {
                 String message = ScreenUtil.postResponseErrorMessage(postResponse);
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
                 signInButton.setEnabled(true);
-            }
-        }
-    }
-
-    private class RequestResetPassword extends AsyncTask<ReqResetPassword, Void, String> {
-
-        @Override
-        protected String doInBackground(ReqResetPassword... params) {
-            // extract the request object
-            ReqResetPassword request = params[0];
-
-            // make the request
-            String postResponse = "";
-            try {
-                String url = Constants.URL_RESET_PASSWORD;
-                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqResetPassword.class));
-            } catch (IOException e) {
-                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-            }
-
-            return postResponse;
-        }
-
-        @Override
-        protected void onPostExecute(String postResponse) {
-            if (postResponse.contains(Constants.VALID_RESET_PASSWORD)) {
-                String message = getString(R.string.auth_successful_reset);
-                Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
-            } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(postResponse);
-                Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }
     }
