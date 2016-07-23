@@ -13,12 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.StaticRiotData;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -38,8 +38,7 @@ public class WFFragment extends Fragment {
             String matchStatsMapJson = bundle.getString("match_stats_map");
             Type matchStatsMapType = new TypeToken<Map<String, MatchStats>>() {
             }.getType();
-            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-            Map<String, MatchStats> matchStatsMap = gson.fromJson(matchStatsMapJson, matchStatsMapType);
+            Map<String, MatchStats> matchStatsMap = ModelUtil.fromJsonStringMap(matchStatsMapJson, matchStatsMapType);
             String staticRiotDataJson = bundle.getString("static_riot_data");
             Type staticRiotDataType = new TypeToken<StaticRiotData>() {
             }.getType();

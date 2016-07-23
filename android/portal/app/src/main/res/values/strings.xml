@@ -112,6 +112,7 @@
 
     <!-- error messages -->
     <string name="select_region">Please select a region</string>
+    <string name="network_error">Network error occurred</string>
     <string name="internet_not_available">Internet not available</string>
     <string name="invalid_summoner_name">Invalid summoner name</string>
     <string name="code_not_found">Rune page code not found</string>

@@ -179,9 +179,10 @@ public class FriendsActivity extends BaseActivity {
         @Override
         protected String[] doInBackground(String... params) {
             LocalDB localDB = new LocalDB();
+            UserInfo userInfo = new UserInfo();
 
             // create the request object
-            user = localDB.summoner(new UserInfo().getId(FriendsActivity.this));
+            user = localDB.summoner(userInfo.getId(FriendsActivity.this));
             ReqFriend request = new ReqFriend();
             request.region = user.region;
             request.user_key = user.key;
@@ -273,9 +274,10 @@ public class FriendsActivity extends BaseActivity {
         @Override
         protected List<Summoner> doInBackground(Void... params) {
             LocalDB localDB = new LocalDB();
+            UserInfo userInfo = new UserInfo();
 
             // get user's friends
-            Summoner user = localDB.summoner(new UserInfo().getId(FriendsActivity.this));
+            Summoner user = localDB.summoner(userInfo.getId(FriendsActivity.this));
             List<String> keys = new ArrayList<>(Arrays.asList(user.friends.split(",")));
 
             return localDB.summoners(keys);

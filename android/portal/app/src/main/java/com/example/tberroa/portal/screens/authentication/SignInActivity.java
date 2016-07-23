@@ -33,7 +33,6 @@ import java.io.IOException;
 
 public class SignInActivity extends AppCompatActivity {
 
-    private boolean inView;
     private Button signInButton;
 
     @Override
@@ -115,18 +114,6 @@ public class SignInActivity extends AppCompatActivity {
         regionSelect.setAdapter(adapter);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        inView = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        inView = false;
-    }
-
     private class RequestResetPassword extends AsyncTask<ReqResetPassword, Void, String> {
 
         @Override
@@ -187,7 +174,7 @@ public class SignInActivity extends AppCompatActivity {
                 User user = ModelUtil.fromJson(postResponse, User.class);
 
                 // sign in
-                AuthUtil.signIn(SignInActivity.this, summoner, user, inView);
+                AuthUtil.signIn(SignInActivity.this, summoner, user);
             } else { // display error
                 String message = ScreenUtil.postResponseErrorMessage(postResponse);
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();

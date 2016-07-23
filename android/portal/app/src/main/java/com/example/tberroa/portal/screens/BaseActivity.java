@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,25 +18,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
-import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
+import com.example.tberroa.portal.data.RiotData;
 import com.example.tberroa.portal.data.UserInfo;
-import com.example.tberroa.portal.models.ModelUtil;
-import com.example.tberroa.portal.models.datadragon.Champion;
-import com.example.tberroa.portal.models.datadragon.Champions;
 import com.example.tberroa.portal.models.summoner.Summoner;
-import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.screens.account.AccountActivity;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.stats.recent.RecentActivity;
 import com.example.tberroa.portal.screens.stats.season.SeasonActivity;
 import com.example.tberroa.portal.screens.stats.withfriends.WFActivity;
 import com.squareup.picasso.Picasso;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class BaseActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
@@ -207,31 +197,16 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
 
         @Override
         protected Summoner doInBackground(Void... params) {
-            // get the list of champions and data dragon version
-            String postResponse = "";
-            try {
-                String url = Constants.URL_GET_CHAMPIONS;
-                postResponse = new Http().get(url);
-            } catch (IOException e) {
-                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-            }
+            LocalDB localDB = new LocalDB();
+            UserInfo userInfo = new UserInfo();
+            RiotData riotData = new RiotData();
 
-            // parse the response
             staticRiotData = new StaticRiotData();
-            if (postResponse.contains(Constants.VALID_GET_CHAMPIONS)) {
-                Champions champions = ModelUtil.fromJson(postResponse, Champions.class);
-                staticRiotData.version = champions.version;
-                staticRiotData.championsMap = champions.data;
-                staticRiotData.championsList = new ArrayList<>(staticRiotData.championsMap.values());
-                Collections.sort(staticRiotData.championsList, new Comparator<Champion>() {
-                    @Override
-                    public int compare(Champion object1, Champion object2) {
-                        return object1.name.compareTo(object2.name);
-                    }
-                });
-            }
+            staticRiotData.version = riotData.getVersion(BaseActivity.this);
+            staticRiotData.championsMap = riotData.getChampionsMap(BaseActivity.this);
+            staticRiotData.championsList = riotData.getChampionsList(BaseActivity.this);
 
-            return new LocalDB().summoner(new UserInfo().getId(BaseActivity.this));
+            return localDB.summoner(userInfo.getId(BaseActivity.this));
         }
 
         @Override

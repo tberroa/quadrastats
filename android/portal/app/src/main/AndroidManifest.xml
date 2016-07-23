@@ -71,10 +71,5 @@
             android:name=".screens.stats.withfriends.WFActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WithFriendsBackground"/>
-
-        <service
-            android:name=".screens.authentication.SignInIntentService"
-            android:exported="false">
-        </service>
     </application>
 </manifest>

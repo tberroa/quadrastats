@@ -30,7 +30,6 @@ import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private boolean inView;
     private Button registerButton;
 
     @Override
@@ -122,18 +121,6 @@ public class RegisterActivity extends AppCompatActivity {
         regionSelect.setAdapter(adapter);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        inView = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        inView = false;
-    }
-
     private class RequestRegister extends AsyncTask<ReqRegister, Void, String> {
 
         @Override
@@ -163,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                 User user = ModelUtil.fromJson(postResponse, User.class);
 
                 // sign in
-                AuthUtil.signIn(RegisterActivity.this, summoner, user, inView);
+                AuthUtil.signIn(RegisterActivity.this, summoner, user);
             } else { // display error
                 String message = ScreenUtil.postResponseErrorMessage(postResponse);
                 Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();

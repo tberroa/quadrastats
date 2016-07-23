@@ -295,9 +295,10 @@ public class AccountActivity extends BaseActivity {
         @Override
         protected String doInBackground(ReqChangePassword... params) {
             LocalDB localDB = new LocalDB();
+            UserInfo userInfo = new UserInfo();
 
             // complete the request object
-            Summoner user = localDB.summoner(new UserInfo().getId(AccountActivity.this));
+            Summoner user = localDB.summoner(userInfo.getId(AccountActivity.this));
             ReqChangePassword request = params[0];
             request.region = user.region;
             request.key = user.key;

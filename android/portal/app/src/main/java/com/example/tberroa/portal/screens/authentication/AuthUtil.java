@@ -43,7 +43,7 @@ public class AuthUtil {
         }
     }
 
-    public static void signIn(Context context, Summoner summoner, User user, boolean inView) {
+    public static void signIn(Context context, Summoner summoner, User user) {
         UserInfo userInfo = new UserInfo();
 
         // clear local database
@@ -60,17 +60,11 @@ public class AuthUtil {
         // save the user's summoner object locally
         summoner.save();
 
-        // start sign in intent service
-        context.startService(new Intent(context, SignInIntentService.class));
+        // apply animation for entering splash activity
+        ((Activity) context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
 
-        // go to splash page if app is in view
-        if (inView) {
-            context.startActivity(new Intent(context, SplashActivity.class));
-
-            // apply animation for entering splash page
-            ((Activity) context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-        }
-
+        // go to splash activity
+        context.startActivity(new Intent(context, SplashActivity.class));
         ((Activity) context).finish();
     }
 

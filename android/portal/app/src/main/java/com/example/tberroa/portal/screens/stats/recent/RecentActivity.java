@@ -555,6 +555,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         @Override
         protected List<MatchStats> doInBackground(GoButtonPackageFD... params) {
             LocalDB localDB = new LocalDB();
+            UserInfo userInfo = new UserInfo();
 
             // extract objects
             dialog = params[0].dialog;
@@ -573,7 +574,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             }
 
             // get user
-            Summoner user = localDB.summoner(new UserInfo().getId(RecentActivity.this));
+            Summoner user = localDB.summoner(userInfo.getId(RecentActivity.this));
 
             // construct list of keys
             List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));

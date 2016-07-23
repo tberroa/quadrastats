@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.StaticRiotData;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -42,8 +42,7 @@ class WFPagerAdapter extends FragmentStatePagerAdapter {
         Map<String, MatchStats> matchStatsMap = new ArrayList<>(matchStatsMapMap.values()).get(position);
         Type matchStatsMapType = new TypeToken<Map<String, MatchStats>>() {
         }.getType();
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        String matchStatMapJson = gson.toJson(matchStatsMap, matchStatsMapType);
+        String matchStatMapJson = ModelUtil.toJsonStringMap(matchStatsMap, matchStatsMapType);
 
         // serialize static riot data
         Type staticRiotDataType = new TypeToken<StaticRiotData>() {

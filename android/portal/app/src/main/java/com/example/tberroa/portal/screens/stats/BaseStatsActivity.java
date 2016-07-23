@@ -115,12 +115,13 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
         @Override
         protected Boolean[] doInBackground(Integer... params) {
             LocalDB localDB = new LocalDB();
+            UserInfo userInfo = new UserInfo();
 
             // save activity id
             activityId = params[0];
 
             // get user
-            Summoner user = localDB.summoner(new UserInfo().getId(BaseStatsActivity.this));
+            Summoner user = localDB.summoner(userInfo.getId(BaseStatsActivity.this));
 
             // create the request object
             ReqMatchStats request = new ReqMatchStats();
@@ -245,12 +246,13 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
         @Override
         protected List<String> doInBackground(Integer... params) {
             LocalDB localDB = new LocalDB();
+            UserInfo userInfo = new UserInfo();
 
             // save activity id
             activityId = params[0];
 
             // get user
-            Summoner user = localDB.summoner(new UserInfo().getId(BaseStatsActivity.this));
+            Summoner user = localDB.summoner(userInfo.getId(BaseStatsActivity.this));
 
             // construct list of keys
             List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));
