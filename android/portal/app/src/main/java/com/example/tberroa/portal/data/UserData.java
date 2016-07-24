@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-public class UserInfo {
+public class UserData {
 
     private final String EMAIL = "email";
     private final String ID = "id";

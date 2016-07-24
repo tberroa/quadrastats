@@ -36,6 +36,11 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // move to background if app is not in view
+        if (!getIntent().getBooleanExtra("in_view", true)){
+            moveTaskToBack(true);
+        }
+
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);

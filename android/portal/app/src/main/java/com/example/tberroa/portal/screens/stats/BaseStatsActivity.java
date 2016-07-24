@@ -24,7 +24,7 @@ import com.activeandroid.ActiveAndroid;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqMatchStats;
 import com.example.tberroa.portal.models.stats.MatchStats;
@@ -110,18 +110,18 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
         private int activityId;
         private List<MatchStats> matchStatsList;
         private Map<Long, Map<String, MatchStats>> matchStatsMapMap;
-        private String postResponse = "";
+        private String postResponse;
 
         @Override
         protected Boolean[] doInBackground(Integer... params) {
             LocalDB localDB = new LocalDB();
-            UserInfo userInfo = new UserInfo();
+            UserData userData = new UserData();
 
             // save activity id
             activityId = params[0];
 
             // get user
-            Summoner user = localDB.summoner(userInfo.getId(BaseStatsActivity.this));
+            Summoner user = localDB.summoner(userData.getId(BaseStatsActivity.this));
 
             // create the request object
             ReqMatchStats request = new ReqMatchStats();
@@ -130,6 +130,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
             request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
 
             // make the request
+            postResponse = "";
             try {
                 String url = Constants.URL_GET_MATCH_STATS;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqMatchStats.class));
@@ -246,13 +247,13 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
         @Override
         protected List<String> doInBackground(Integer... params) {
             LocalDB localDB = new LocalDB();
-            UserInfo userInfo = new UserInfo();
+            UserData userData = new UserData();
 
             // save activity id
             activityId = params[0];
 
             // get user
-            Summoner user = localDB.summoner(userInfo.getId(BaseStatsActivity.this));
+            Summoner user = localDB.summoner(userData.getId(BaseStatsActivity.this));
 
             // construct list of keys
             List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));

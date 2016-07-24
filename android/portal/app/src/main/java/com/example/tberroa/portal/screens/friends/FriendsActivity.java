@@ -24,7 +24,7 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqFriend;
 import com.example.tberroa.portal.models.summoner.Summoner;
@@ -179,10 +179,10 @@ public class FriendsActivity extends BaseActivity {
         @Override
         protected String[] doInBackground(String... params) {
             LocalDB localDB = new LocalDB();
-            UserInfo userInfo = new UserInfo();
+            UserData userData = new UserData();
 
             // create the request object
-            user = localDB.summoner(userInfo.getId(FriendsActivity.this));
+            user = localDB.summoner(userData.getId(FriendsActivity.this));
             ReqFriend request = new ReqFriend();
             request.region = user.region;
             request.user_key = user.key;
@@ -274,10 +274,10 @@ public class FriendsActivity extends BaseActivity {
         @Override
         protected List<Summoner> doInBackground(Void... params) {
             LocalDB localDB = new LocalDB();
-            UserInfo userInfo = new UserInfo();
+            UserData userData = new UserData();
 
             // get user's friends
-            Summoner user = localDB.summoner(userInfo.getId(FriendsActivity.this));
+            Summoner user = localDB.summoner(userData.getId(FriendsActivity.this));
             List<String> keys = new ArrayList<>(Arrays.asList(user.friends.split(",")));
 
             return localDB.summoners(keys);

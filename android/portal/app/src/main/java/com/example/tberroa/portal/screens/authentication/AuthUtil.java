@@ -7,7 +7,8 @@ import android.content.Intent;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.UserData;
+import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.models.summoner.User;
 
@@ -43,36 +44,32 @@ public class AuthUtil {
         }
     }
 
-    public static void signIn(Context context, Summoner summoner, User user) {
-        UserInfo userInfo = new UserInfo();
-
-        // clear local database
+    public static void signIn(Context context, Summoner summoner, User user, boolean inView) {
         new LocalDB().clearDatabase(context);
+        new UserData().clear(context);
 
-        // clear old user info
-        userInfo.clear(context);
+        // serialize the summoner and user objects
+        String summonerJson = ModelUtil.toJson(summoner, Summoner.class);
+        String userJson = ModelUtil.toJson(user, User.class);
 
-        // save user info
-        userInfo.setEmail(context, user.email);
-        userInfo.setId(context, summoner.summoner_id);
-        userInfo.setSignInStatus(context, true);
+        // create splash activity intent
+        Intent splashActivity = new Intent(context, SplashActivity.class);
+        splashActivity.putExtra("summoner", summonerJson);
+        splashActivity.putExtra("user", userJson);
+        splashActivity.putExtra("in_view", inView);
 
-        // save the user's summoner object locally
-        summoner.save();
+        // go to splash activity
+        context.startActivity(splashActivity);
 
         // apply animation for entering splash activity
         ((Activity) context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
 
-        // go to splash activity
-        context.startActivity(new Intent(context, SplashActivity.class));
+        // finish current activity
         ((Activity) context).finish();
     }
 
     public static void signOut(Context context) {
-        // clear user data
-        new UserInfo().clear(context);
-
-        // clear local database
+        new UserData().clear(context);
         new LocalDB().clearDatabase(context);
 
         // go to sign in page

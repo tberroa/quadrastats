@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqResetPassword;
 import com.example.tberroa.portal.models.requests.ReqSignIn;
@@ -33,6 +33,7 @@ import java.io.IOException;
 
 public class SignInActivity extends AppCompatActivity {
 
+    private boolean inView;
     private Button signInButton;
 
     @Override
@@ -46,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         // check if user is already signed in
-        if (new UserInfo().getSignInStatus(this)) {
+        if (new UserData().getSignInStatus(this)) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
@@ -114,6 +115,18 @@ public class SignInActivity extends AppCompatActivity {
         regionSelect.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inView = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        inView = false;
+    }
+
     private class RequestResetPassword extends AsyncTask<ReqResetPassword, Void, String> {
 
         @Override
@@ -174,7 +187,7 @@ public class SignInActivity extends AppCompatActivity {
                 User user = ModelUtil.fromJson(postResponse, User.class);
 
                 // sign in
-                AuthUtil.signIn(SignInActivity.this, summoner, user);
+                AuthUtil.signIn(SignInActivity.this, summoner, user, inView);
             } else { // display error
                 String message = ScreenUtil.postResponseErrorMessage(postResponse);
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();

@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqRegister;
 import com.example.tberroa.portal.models.summoner.Summoner;
@@ -30,6 +30,7 @@ import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private boolean inView;
     private Button registerButton;
 
     @Override
@@ -43,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // check if user is already signed in
-        if (new UserInfo().getSignInStatus(this)) {
+        if (new UserData().getSignInStatus(this)) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
@@ -121,6 +122,18 @@ public class RegisterActivity extends AppCompatActivity {
         regionSelect.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inView = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        inView = false;
+    }
+
     private class RequestRegister extends AsyncTask<ReqRegister, Void, String> {
 
         @Override
@@ -150,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
                 User user = ModelUtil.fromJson(postResponse, User.class);
 
                 // sign in
-                AuthUtil.signIn(RegisterActivity.this, summoner, user);
+                AuthUtil.signIn(RegisterActivity.this, summoner, user, inView);
             } else { // display error
                 String message = ScreenUtil.postResponseErrorMessage(postResponse);
                 Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();

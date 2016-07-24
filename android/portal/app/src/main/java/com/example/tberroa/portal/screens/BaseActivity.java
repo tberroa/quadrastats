@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.RiotData;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.account.AccountActivity;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
@@ -198,7 +198,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
         @Override
         protected Summoner doInBackground(Void... params) {
             LocalDB localDB = new LocalDB();
-            UserInfo userInfo = new UserInfo();
+            UserData userData = new UserData();
             RiotData riotData = new RiotData();
 
             staticRiotData = new StaticRiotData();
@@ -206,7 +206,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
             staticRiotData.championsMap = riotData.getChampionsMap(BaseActivity.this);
             staticRiotData.championsList = riotData.getChampionsList(BaseActivity.this);
 
-            return localDB.summoner(userInfo.getId(BaseActivity.this));
+            return localDB.summoner(userData.getId(BaseActivity.this));
         }
 
         @Override

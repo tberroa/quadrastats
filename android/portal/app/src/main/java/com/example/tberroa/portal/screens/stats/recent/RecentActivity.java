@@ -33,7 +33,7 @@ import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.datadragon.Champion;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
@@ -555,7 +555,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         @Override
         protected List<MatchStats> doInBackground(GoButtonPackageFD... params) {
             LocalDB localDB = new LocalDB();
-            UserInfo userInfo = new UserInfo();
+            UserData userData = new UserData();
 
             // extract objects
             dialog = params[0].dialog;
@@ -574,7 +574,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             }
 
             // get user
-            Summoner user = localDB.summoner(userInfo.getId(RecentActivity.this));
+            Summoner user = localDB.summoner(userData.getId(RecentActivity.this));
 
             // construct list of keys
             List<String> keys = new ArrayList<>(Arrays.asList((user.key + "," + user.friends).split(",")));

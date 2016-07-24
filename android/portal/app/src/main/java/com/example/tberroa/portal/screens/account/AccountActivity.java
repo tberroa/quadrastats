@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
-import com.example.tberroa.portal.data.UserInfo;
+import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqChangeEmail;
 import com.example.tberroa.portal.models.requests.ReqChangePassword;
@@ -74,7 +74,7 @@ public class AccountActivity extends BaseActivity {
 
         // initialize views
         TextView emailView = (TextView) findViewById(R.id.email_view);
-        emailView.setText(new UserInfo().getEmail(this));
+        emailView.setText(new UserData().getEmail(this));
 
         // initialize buttons
         Button changeEmailButton = (Button) findViewById(R.id.change_email_button);
@@ -251,10 +251,10 @@ public class AccountActivity extends BaseActivity {
         @Override
         protected String doInBackground(ReqChangeEmail... params) {
             LocalDB localDB = new LocalDB();
-            UserInfo userInfo = new UserInfo();
+            UserData userData = new UserData();
 
             // complete the request object
-            Summoner userSummoner = localDB.summoner(userInfo.getId(AccountActivity.this));
+            Summoner userSummoner = localDB.summoner(userData.getId(AccountActivity.this));
             ReqChangeEmail request = params[0];
             request.region = userSummoner.region;
             request.key = userSummoner.key;
@@ -271,7 +271,7 @@ public class AccountActivity extends BaseActivity {
             // if request was successful, update user info
             if (postResponse.contains(Constants.VALID_CHANGE_EMAIL)) {
                 User user = ModelUtil.fromJson(postResponse, User.class);
-                userInfo.setEmail(AccountActivity.this, user.email);
+                userData.setEmail(AccountActivity.this, user.email);
             }
 
             return postResponse;
@@ -295,10 +295,10 @@ public class AccountActivity extends BaseActivity {
         @Override
         protected String doInBackground(ReqChangePassword... params) {
             LocalDB localDB = new LocalDB();
-            UserInfo userInfo = new UserInfo();
+            UserData userData = new UserData();
 
             // complete the request object
-            Summoner user = localDB.summoner(userInfo.getId(AccountActivity.this));
+            Summoner user = localDB.summoner(userData.getId(AccountActivity.this));
             ReqChangePassword request = params[0];
             request.region = user.region;
             request.key = user.key;
