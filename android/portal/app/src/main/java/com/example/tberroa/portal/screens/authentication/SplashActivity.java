@@ -98,9 +98,9 @@ public class SplashActivity extends AppCompatActivity {
         inView = false;
     }
 
-    protected void next(boolean error) {
+    private void next(boolean error) {
         if (error) {
-            String message = getString(R.string.network_error);
+            String message = getString(R.string.err_network_error);
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, SignInActivity.class));
         } else {

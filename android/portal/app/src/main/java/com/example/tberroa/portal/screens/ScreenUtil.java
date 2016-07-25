@@ -5,7 +5,10 @@ import android.graphics.Point;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
+import com.example.tberroa.portal.models.ModelUtil;
+import com.example.tberroa.portal.models.requests.ReqError;
 
 public class ScreenUtil {
 
@@ -17,8 +20,41 @@ public class ScreenUtil {
         return (int) ((dp * scale) + 0.5f);
     }
 
-    public static String postResponseErrorMessage(String postResponse) {
-        return postResponse;
+    public static String postResponseErrorMessage(Context context, String postResponse) {
+        if ("".equals(postResponse)) {
+            return context.getString(R.string.err_network_error);
+        }
+
+        ReqError reqError = ModelUtil.fromJson(postResponse, ReqError.class);
+
+        if (reqError == null) {
+            return context.getString(R.string.err_unknown);
+        }
+
+        switch (reqError.error) {
+            case Constants.ERR_FRIEND_ALREADY_LISTED:
+                return context.getString(R.string.err_friend_already_listed);
+            case Constants.ERR_FRIEND_EQUALS_USER:
+                return context.getString(R.string.err_friend_equals_user);
+            case Constants.ERR_FRIEND_LIMIT_REACHED:
+                return context.getString(R.string.err_friend_limit_reached);
+            case Constants.ERR_INTERNAL_ERROR:
+                return context.getString(R.string.err_internal_error);
+            case Constants.ERR_INVALID_CREDENTIALS:
+                return context.getString(R.string.err_invalid_credentials);
+            case Constants.ERR_INVALID_REQUEST_FORMAT:
+                return context.getString(R.string.err_invalid_request_format);
+            case Constants.ERR_INVALID_RIOT_RESPONSE:
+                return context.getString(R.string.err_invalid_riot_response);
+            case Constants.ERR_SUMMONER_ALREADY_REGISTERED:
+                return context.getString(R.string.err_summoner_already_registered);
+            case Constants.ERR_SUMMONER_DOES_NOT_EXIST:
+                return context.getString(R.string.err_summoner_does_not_exist);
+            case Constants.ERR_SUMMONER_NOT_REGISTERED:
+                return context.getString(R.string.err_summoner_not_registered);
+            default:
+                return reqError.message;
+        }
     }
 
     public static String profileIconURL(String version, int iconId) {

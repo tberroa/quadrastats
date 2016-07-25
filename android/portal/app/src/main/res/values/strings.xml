@@ -1,7 +1,18 @@
 <resources>
     <!-- branding -->
     <string name="app_name">Portal</string>
-    <string name="app_slogan">Stats That Mean Something</string>
+
+    <!-- regions -->
+    <string name="region_br">Brazil</string>
+    <string name="region_eune">EU Nordic &amp; East</string>
+    <string name="region_euw">EU West</string>
+    <string name="region_kr">Korea</string>
+    <string name="region_lan">Latin America North</string>
+    <string name="region_las">Latin America South</string>
+    <string name="region_na">North America</string>
+    <string name="region_oce">Oceania</string>
+    <string name="region_ru">Russia</string>
+    <string name="region_tr">Turkey</string>
 
     <!-- authentication activities -->
     <string name="auth_summoner_name">Summoner Name</string>
@@ -16,22 +27,23 @@
     <string name="auth_go_to_register">No account yet? Register</string>
     <string name="auth_go_to_sign_in">Already have an account? Sign In</string>
     <string name="auth_validate_ownership_instructions">
-        Almost done! Just change one of your rune pages to the number below in order
+        Almost done! Change one of your rune pages to the number below in order
         to prove ownership of the summoner account. After changing your rune page, wait
-        about 5 seconds before pressing DONE to allow for the Riot servers to update.
+        about five seconds before pressing DONE to allow for the Riot servers to update.
     </string>
-    <string-array name="auth_select_region">
-        <item>Select Region</item>
-        <item>Brazil</item>
-        <item>Europe Nordic &amp; East</item>
-        <item>Europe West</item>
-        <item>Korea</item>
-        <item>Latin America North</item>
-        <item>Latin America South</item>
-        <item>North America</item>
-        <item>Oceania</item>
-        <item>Russia</item>
-        <item>Turkey</item>
+    <string name="auth_select_region">Select Region</string>
+    <string-array name="auth_select_region_array">
+        <item>@string/auth_select_region</item>
+        <item>@string/region_br</item>
+        <item>@string/region_eune</item>
+        <item>@string/region_euw</item>
+        <item>@string/region_kr</item>
+        <item>@string/region_lan</item>
+        <item>@string/region_las</item>
+        <item>@string/region_na</item>
+        <item>@string/region_oce</item>
+        <item>@string/region_ru</item>
+        <item>@string/region_tr</item>
     </string-array>
 
     <!-- base activity -->
@@ -52,7 +64,7 @@
 
     <!-- manage friends activity -->
     <string name="mf_activity_title">Manage Friends</string>
-    <string name="mf_no_friends">Click the + button to add friends.</string>
+    <string name="mf_no_friends">Click the + button to add friends</string>
     <string name="mf_summoner_name">Friend Summoner Name</string>
     <string name="mf_remove_friend_confirm">
         Are you sure you want to remove this summoner from your friends list?
@@ -69,21 +81,21 @@
     <string name="rg_filter_data">Filter Data</string>
     <string name="rg_average">Average</string>
     <!-- chart titles -->
-    <string name="rg_cs_at_ten">CS At 10</string>
-    <string name="rg_cs_diff_at_ten">CS Differential At 10</string>
-    <string name="rg_cs_per_min">CS Per Minute</string>
-    <string name="rg_gold_per_min">Gold Per Minute</string>
-    <string name="rg_dmg_per_min">Damage Per Minute</string>
-    <string name="rg_kills">Kills</string>
-    <string name="rg_kda">KDA</string>
-    <string name="rg_kill_participation">Kill Participation</string>
-    <string name="rg_wards_bought">Wards Bought</string>
-    <string name="rg_wards_placed">Wards Placed</string>
-    <string name="rg_wards_killed">Wards Killed</string>
+    <string name="rg_cs_at_ten" translatable="false">CS At 10</string>
+    <string name="rg_cs_diff_at_ten" translatable="false">CS Differential At 10</string>
+    <string name="rg_cs_per_min" translatable="false">CS Per Minute</string>
+    <string name="rg_gold_per_min" translatable="false">Gold Per Minute</string>
+    <string name="rg_dmg_per_min" translatable="false">Damage Per Minute</string>
+    <string name="rg_kills" translatable="false">Kills</string>
+    <string name="rg_kda" translatable="false">KDA</string>
+    <string name="rg_kill_participation" translatable="false">Kill Participation</string>
+    <string name="rg_wards_bought" translatable="false">Wards Bought</string>
+    <string name="rg_wards_placed" translatable="false">Wards Placed</string>
+    <string name="rg_wards_killed" translatable="false">Wards Killed</string>
 
     <!-- season totals activity -->
     <string name="st_activity_title">Season Totals</string>
-    <string name="st_nothing_here">Sorry, there is nothing to see here.</string>
+    <string name="st_nothing_here">There is nothing to see here</string>
 
     <!-- games with friends activity -->
     <string name="gwf_activity_title">Games With Friends</string>
@@ -91,17 +103,23 @@
     <string name="gwf_victory">Victory</string>
     <string name="gwf_defeat">Defeat</string>
     <!-- chart titles -->
-    <string name="gwf_damage">Damage</string>
-    <string name="gwf_kills">Kills</string>
-    <string name="gwf_deaths">Deaths</string>
-    <string name="gwf_assists">Assists</string>
-    <string name="gwf_kda">KDA</string>
-    <string name="gwf_cs">CS</string>
-    <string name="gwf_wards">Wards Bought/Placed/Killed</string>
+    <string name="gwf_cs" translatable="false">CS</string>
+    <string name="gwf_cs_at_10" translatable="false">CS At 10</string>
+    <string name="gwf_cs_diff_at_10" translatable="false">CS Differential At 10</string>
+    <string name="gwf_total_gold" translatable="false">Total Gold</string>
+    <string name="gwf_first_blood" translatable="false">First Blood Participation</string>
+    <string name="gwf_kills" translatable="false">Kills</string>
+    <string name="gwf_damage" translatable="false">Total Damage</string>
+    <string name="gwf_spree" translatable="false">Largest Killing Spree</string>
+    <string name="gwf_multi_kill" translatable="false">Largest Multi Kill</string>
+    <string name="gwf_assists" translatable="false">Assists</string>
+    <string name="gwf_kda" translatable="false">KDA</string>
+    <string name="gwf_kp" translatable="false">Kill Participation</string>
+    <string name="gwf_wards" translatable="false">Wards Bought/Placed/Killed</string>
 
     <!-- drawer navigation menu -->
-    <string name="account">Account</string>
-    <string name="stats">Stats</string>
+    <string name="nav_account">Account</string>
+    <string name="nav_stats">Stats</string>
 
     <!-- generic button labels -->
     <string name="button_done">Done</string>
@@ -110,17 +128,24 @@
     <string name="button_cancel">Cancel</string>
 
     <!-- error messages -->
-    <string name="select_region">Please select a region</string>
-    <string name="network_error">Network error occurred</string>
-    <string name="internet_not_available">Internet not available</string>
-    <string name="invalid_summoner_name">Invalid summoner name</string>
-    <string name="code_not_found">Rune page code not found</string>
-    <string name="cant_add_yourself_as_friend">Cannot add yourself as a friend.</string>
-    <string name="friend_limit_reached">Sorry, only up to 7 friends are allowed at this time.</string>
-    <string name="friend_already_exists">This friend is already on your list.</string>
-    <string name="must_select_one">Must select at least one</string>
-    <string name="no_data">No data</string>
-    <string name="select_only_one">Can only select one champion</string>
+    <string name="err_select_region">Please select a region</string>
+    <string name="err_network_error">Network error occurred</string>
+    <string name="err_no_data">No data</string>
+    <string name="err_select_only_one">Can only select one champion</string>
+    <string name="err_must_select_one">Must select at least one</string>
+
+    <!-- backend error messages -->
+    <string name="err_friend_already_listed">Friend already listed</string>
+    <string name="err_friend_equals_user">Cannot add yourself as a friend</string>
+    <string name="err_friend_limit_reached">Friend limit reached</string>
+    <string name="err_internal_error">Internal processing error</string>
+    <string name="err_invalid_credentials">Invalid credentials</string>
+    <string name="err_invalid_request_format">Invalid request format</string>
+    <string name="err_invalid_riot_response">Invalid response from Riot servers</string>
+    <string name="err_summoner_already_registered">Summoner already registered</string>
+    <string name="err_summoner_does_not_exist">Summoner not registered</string>
+    <string name="err_summoner_not_registered">Summoner not registered</string>
+    <string name="err_unknown">Unknown error</string>
 
     <!-- content descriptions -->
     <string name="drawer_open">Open Drawer</string>

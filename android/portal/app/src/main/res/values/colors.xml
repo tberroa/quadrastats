@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="colorPrimary" tools:ignore="UnusedResources">#FF212121</color>
-    <color name="colorPrimaryDark" tools:ignore="UnusedResources">#FF000000</color>
-    <color name="colorAccent">#FFCBB44D</color>
-    <color name="colorBackground" tools:ignore="UnusedResources">#FF303030</color>
+    <color name="primary">#FF212121</color>
+    <color name="primary_background">#FF303030</color>
+    <color name="accent">#FFCBB44D</color>
+    <color name="accent_light">#FFF7ECB8</color>
     <color name="accent_material_dark" tools:override="true">#CBB44D</color>
-    <color name="logo_main">#FFC5E8EB</color>
-    <color name="logo_slogan">#FFCBB44D</color>
+    <color name="divider">#80B3B3B3</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black_transparent">#80000000</color>
-    <color name="divider">#80B3B3B3</color>
+    <color name="white_transparent">#1AFFFFFF</color>
 
     <!-- chart colors-->
     <color name="blue">#1A8CFF</color>
-    <color name="green">#33ffAD</color>
+    <color name="green">#00D681</color>
     <color name="orange">#FFAD33</color>
     <color name="pink">#FF99FF</color>
     <color name="purple">#8000FF</color>
@@ -22,4 +21,11 @@
     <color name="yellow">#FFFF00</color>
     <!-- used for non friends "Others" label -->
     <color name="gray">#D3D3D3</color>
+
+    <!-- overlay colors -->
+    <color name="blue_transparent">#1A1A8CFF</color>
+    <color name="green_transparent">#1A00D681</color>
+    <color name="orange_transparent">#1AFFAD33</color>
+    <color name="pink_transparent">#1AFF99FF</color>
+    <color name="purple_transparent">#1A8000FF</color>
 </resources>

@@ -3,7 +3,10 @@
     android:id="@+id/line_chart_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:background="@drawable/bg_overlay_white"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/chart_title_view"
@@ -17,8 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_below="@id/chart_title_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"/>
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/no_data_view"
@@ -26,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/chart_title_view"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
-        android:text="@string/no_data"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/err_no_data"
         android:textSize="30sp"/>
 </RelativeLayout>

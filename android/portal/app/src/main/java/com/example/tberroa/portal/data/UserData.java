@@ -6,9 +6,9 @@ import android.content.SharedPreferences.Editor;
 
 public class UserData {
 
-    private final String EMAIL = "email";
-    private final String ID = "id";
-    private final String IS_SIGNED_IN = "is_signed_in";
+    private static final String EMAIL = "email";
+    private static final String ID = "id";
+    private static final String IS_SIGNED_IN = "is_signed_in";
 
     public void clear(Context context) {
         setId(context, 0);
@@ -23,7 +23,7 @@ public class UserData {
         return sharedPreferences(context).getLong(ID, 0);
     }
 
-    public Boolean getSignInStatus(Context context) {
+    public boolean isSignedIn(Context context) {
         return sharedPreferences(context).getBoolean(IS_SIGNED_IN, false);
     }
 
@@ -39,13 +39,13 @@ public class UserData {
         editor.apply();
     }
 
-    public void setSignInStatus(Context context, Boolean bool) {
+    public void setSignInStatus(Context context, Boolean status) {
         Editor editor = sharedPreferences(context).edit();
-        editor.putBoolean(IS_SIGNED_IN, bool);
+        editor.putBoolean(IS_SIGNED_IN, status);
         editor.apply();
     }
 
     private SharedPreferences sharedPreferences(Context context) {
-        return context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        return context.getSharedPreferences("user_data", Context.MODE_PRIVATE);
     }
 }

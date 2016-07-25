@@ -133,7 +133,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         // initialize drawer
-        toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        toggle = new SmoothActionBarDrawerToggle(this, drawer, toolbar);
         toggle.setDrawerIndicatorEnabled(false);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -160,11 +160,12 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
 
     private class SmoothActionBarDrawerToggle extends ActionBarDrawerToggle {
 
+        private static final int CLOSE = R.string.drawer_close;
+        private static final int OPEN = R.string.drawer_open;
         private Runnable runnable;
 
-        @SuppressWarnings("SameParameterValue")
-        public SmoothActionBarDrawerToggle(Activity a, DrawerLayout d, Toolbar t, int open, int close) {
-            super(a, d, t, open, close);
+        public SmoothActionBarDrawerToggle(Activity activity, DrawerLayout drawer, Toolbar toolbar) {
+            super(activity, drawer, toolbar, OPEN, CLOSE);
         }
 
         @Override

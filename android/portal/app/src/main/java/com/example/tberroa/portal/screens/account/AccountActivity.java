@@ -122,18 +122,18 @@ public class AccountActivity extends BaseActivity {
         // extract input fields
         EditText currentPasswordField = inputFields.get(0);
         EditText newPasswordField = inputFields.get(1);
-        EditText confirmNewPasswordField = inputFields.get(2);
+        EditText confirmNewPassField = inputFields.get(2);
 
         // get the user input
         String currentPassword = currentPasswordField.getText().toString();
         String newPassword = newPasswordField.getText().toString();
-        String confirmNewPassword = confirmNewPasswordField.getText().toString();
+        String confirmNewPassword = confirmNewPassField.getText().toString();
 
         // make sure passwords match
         if (confirmNewPassword.equals(newPassword)) {
-            confirmNewPasswordField.setError(null);
+            confirmNewPassField.setError(null);
         } else { // display error
-            confirmNewPasswordField.setError(getResources().getString(R.string.ma_password_mismatch));
+            confirmNewPassField.setError(getResources().getString(R.string.ma_password_mismatch));
             return;
         }
 
@@ -210,14 +210,14 @@ public class AccountActivity extends BaseActivity {
             // initialize input fields
             EditText currentPasswordField = (EditText) findViewById(R.id.current_password_field);
             EditText newPasswordField = (EditText) findViewById(R.id.new_password_field);
-            EditText confirmNewPasswordField = (EditText) findViewById(R.id.confirm_new_password_field);
-            confirmNewPasswordField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            EditText confirmNewPassField = (EditText) findViewById(R.id.confirm_new_password_field);
+            confirmNewPassField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
                         List<EditText> inputFields = new ArrayList<>();
                         inputFields.add(currentPasswordField);
                         inputFields.add(newPasswordField);
-                        inputFields.add(confirmNewPasswordField);
+                        inputFields.add(confirmNewPassField);
                         changePasswordDone(inputFields, ChangePasswordDialog.this);
                     }
                     return false;
@@ -233,7 +233,7 @@ public class AccountActivity extends BaseActivity {
                     List<EditText> inputFields = new ArrayList<>();
                     inputFields.add(currentPasswordField);
                     inputFields.add(newPasswordField);
-                    inputFields.add(confirmNewPasswordField);
+                    inputFields.add(confirmNewPassField);
                     changePasswordDone(inputFields, ChangePasswordDialog.this);
                 }
             });
@@ -268,7 +268,7 @@ public class AccountActivity extends BaseActivity {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
-            // if request was successful, update user info
+            // if request was successful, update user data
             if (postResponse.contains(Constants.VALID_CHANGE_EMAIL)) {
                 User user = ModelUtil.fromJson(postResponse, User.class);
                 userData.setEmail(AccountActivity.this, user.email);
@@ -284,7 +284,7 @@ public class AccountActivity extends BaseActivity {
                 TextView emailView = (TextView) findViewById(R.id.email_view);
                 emailView.setText(user.email);
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                String message = ScreenUtil.postResponseErrorMessage(AccountActivity.this, postResponse);
                 Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }
@@ -321,7 +321,7 @@ public class AccountActivity extends BaseActivity {
                 String message = getString(R.string.ma_successful_change);
                 Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                String message = ScreenUtil.postResponseErrorMessage(AccountActivity.this, postResponse);
                 Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }

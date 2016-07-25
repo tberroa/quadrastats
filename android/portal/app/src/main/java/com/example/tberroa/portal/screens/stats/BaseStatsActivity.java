@@ -216,7 +216,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                     }
                 }
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                String message = ScreenUtil.postResponseErrorMessage(BaseStatsActivity.this, postResponse);
                 Toast.makeText(BaseStatsActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }

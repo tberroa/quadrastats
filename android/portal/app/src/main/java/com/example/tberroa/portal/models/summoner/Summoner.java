@@ -5,13 +5,13 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "InstanceVariableNamingConvention"})
 @Table(name = "Summoner")
 public class Summoner extends Model {
 
     @Expose
-    @Column(name = "region")
-    public String region;
+    @Column(name = "friends")
+    public String friends;
     @Expose
     @Column(name = "key")
     public String key;
@@ -19,14 +19,14 @@ public class Summoner extends Model {
     @Column(name = "name")
     public String name;
     @Expose
-    @Column(name = "summoner_id")
-    public long summoner_id;
-    @Expose
     @Column(name = "profile_icon")
     public int profile_icon;
     @Expose
-    @Column(name = "friends")
-    public String friends;
+    @Column(name = "region")
+    public String region;
+    @Expose
+    @Column(name = "summoner_id")
+    public long summoner_id;
 
     @SuppressWarnings("RedundantNoArgConstructor")
     public Summoner() {

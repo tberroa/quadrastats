@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:backgroundTint="@color/colorAccent"
+            android:backgroundTint="@color/accent"
             android:text="@string/button_cancel"
             android:textSize="20sp"
             tools:ignore="ButtonStyle"/>
@@ -38,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:backgroundTint="@color/colorAccent"
+            android:backgroundTint="@color/accent"
             android:text="@string/button_yes"
             android:textSize="20sp"
             tools:ignore="ButtonStyle"/>

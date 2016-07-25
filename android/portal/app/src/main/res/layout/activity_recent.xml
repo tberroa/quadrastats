@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/primary"
         android:elevation="6dp"
         android:minHeight="?attr/actionBarSize"/>
 
@@ -30,11 +30,6 @@
         app:mrl_rippleOverlay="true">
 
         <include
-            layout="@layout/element_legend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"/>
+            layout="@layout/element_legend"/>
     </com.balysv.materialripple.MaterialRippleLayout>
 </LinearLayout>

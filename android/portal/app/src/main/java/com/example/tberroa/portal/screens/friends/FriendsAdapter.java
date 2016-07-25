@@ -31,7 +31,6 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ViewHolder viewHolder;
 
         if (convertView == null) {
@@ -61,6 +60,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
     }
 
     class ViewHolder {
+
         TextView name;
         ImageView profileIcon;
     }

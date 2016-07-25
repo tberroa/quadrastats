@@ -34,10 +34,10 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="240dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorBackground"
+        android:background="@color/primary_background"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_view_header"
         app:menu="@menu/drawer_menu"/>

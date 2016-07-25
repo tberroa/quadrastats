@@ -36,7 +36,7 @@ class WFPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        WFFragment WFFragment = new WFFragment();
+        WFFragment wfFragment = new WFFragment();
 
         // serialize match stats map
         Map<String, MatchStats> matchStatsMap = new ArrayList<>(matchStatsMapMap.values()).get(position);
@@ -53,7 +53,7 @@ class WFPagerAdapter extends FragmentStatePagerAdapter {
         bundle.putString("match_stats_map", matchStatMapJson);
         bundle.putString("static_riot_data", staticRiotDataJson);
 
-        WFFragment.setArguments(bundle);
-        return WFFragment;
+        wfFragment.setArguments(bundle);
+        return wfFragment;
     }
 }

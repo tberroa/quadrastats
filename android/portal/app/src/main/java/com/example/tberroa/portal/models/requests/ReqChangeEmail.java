@@ -2,15 +2,15 @@ package com.example.tberroa.portal.models.requests;
 
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "InstanceVariableNamingConvention"})
 public class ReqChangeEmail {
 
     @Expose
-    public String region;
-    @Expose
     public String key;
+    @Expose
+    public String new_email;
     @Expose
     public String password;
     @Expose
-    public String new_email;
+    public String region;
 }

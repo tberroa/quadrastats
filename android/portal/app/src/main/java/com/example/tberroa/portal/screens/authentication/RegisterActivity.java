@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // check if user is already signed in
-        if (new UserData().getSignInStatus(this)) {
+        if (new UserData().isSignedIn(this)) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (regionSelection > 0) {
                     region = AuthUtil.decodeRegion(regionSelection);
                 } else { // display error
-                    String message = getString(R.string.select_region);
+                    String message = getString(R.string.err_select_region);
                     Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                     registerButton.setEnabled(true);
                     return;
@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // initialize region select spinner
         ArrayAdapter<CharSequence> adapter;
-        adapter = ArrayAdapter.createFromResource(this, R.array.auth_select_region, R.layout.spinner_textview);
+        adapter = ArrayAdapter.createFromResource(this, R.array.auth_select_region_array, R.layout.spinner_textview);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_textview);
         regionSelect.setAdapter(adapter);
     }
@@ -165,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
                 // sign in
                 AuthUtil.signIn(RegisterActivity.this, summoner, user, inView);
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                String message = ScreenUtil.postResponseErrorMessage(RegisterActivity.this, postResponse);
                 Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                 registerButton.setEnabled(true);
             }

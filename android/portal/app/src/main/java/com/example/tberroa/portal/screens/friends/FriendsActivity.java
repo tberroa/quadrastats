@@ -261,7 +261,7 @@ public class FriendsActivity extends BaseActivity {
                     }
                 }
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                String message = ScreenUtil.postResponseErrorMessage(FriendsActivity.this, postResponse);
                 Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }

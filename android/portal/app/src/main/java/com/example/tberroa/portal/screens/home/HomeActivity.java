@@ -37,7 +37,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
 
         // move to background if app is not in view
-        if (!getIntent().getBooleanExtra("in_view", true)){
+        if (!getIntent().getBooleanExtra("in_view", true)) {
             moveTaskToBack(true);
         }
 

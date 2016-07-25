@@ -125,7 +125,7 @@
         android:id="@+id/go_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/accent"
         android:text="@string/button_go"
         android:textSize="20sp"/>
 </LinearLayout>

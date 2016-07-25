@@ -333,9 +333,9 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         @Override
         public ChampionViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            Context c = viewGroup.getContext();
-            View v = LayoutInflater.from(c).inflate(R.layout.element_champion_icon, viewGroup, false);
-            return new ChampionViewHolder(v);
+            Context context = viewGroup.getContext();
+            View view = LayoutInflater.from(context).inflate(R.layout.element_champion_icon, viewGroup, false);
+            return new ChampionViewHolder(view);
         }
 
         public class ChampionViewHolder extends ViewHolder {
@@ -502,7 +502,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                                 championId = icon.champion.id;
                                 foundSelected = true;
                             } else {
-                                String message = getString(R.string.select_only_one);
+                                String message = getString(R.string.err_select_only_one);
                                 Toast.makeText(RecentActivity.this, message, Toast.LENGTH_SHORT).show();
                                 return;
                             }
@@ -589,7 +589,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 populateActivity(matchStatsList, championId, position);
                 dialog.dismiss();
             } else {
-                Toast.makeText(RecentActivity.this, R.string.no_data, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecentActivity.this, R.string.err_no_data, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -642,8 +642,8 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         @Override
         public SSDViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            Context c = viewGroup.getContext();
-            View v = LayoutInflater.from(c).inflate(R.layout.view_select_summoners, viewGroup, false);
+            Context context = viewGroup.getContext();
+            View v = LayoutInflater.from(context).inflate(R.layout.view_select_summoners, viewGroup, false);
             return new SSDViewHolder(v);
         }
 
@@ -727,7 +727,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                         updateAdapter(titles, selectedData);
                         dismiss();
                     } else {
-                        Toast.makeText(RecentActivity.this, R.string.must_select_one, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RecentActivity.this, R.string.err_must_select_one, Toast.LENGTH_SHORT).show();
                     }
                 }
             });

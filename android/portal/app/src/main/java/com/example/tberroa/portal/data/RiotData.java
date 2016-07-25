@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class RiotData {
 
-    private final String CHAMPIONS_LIST = "champions_list";
-    private final String CHAMPIONS_MAP = "champions_map";
-    private final String VERSION = "version";
+    private static final String CHAMPIONS_LIST = "champions_list";
+    private static final String CHAMPIONS_MAP = "champions_map";
+    private static final String VERSION = "version";
 
     public List<Champion> getChampionsList(Context context) {
         String championsListJson = sharedPreferences(context).getString(CHAMPIONS_LIST, "");
@@ -71,6 +71,6 @@ public class RiotData {
     }
 
     private SharedPreferences sharedPreferences(Context context) {
-        return context.getSharedPreferences("riot_info", Context.MODE_PRIVATE);
+        return context.getSharedPreferences("riot_data", Context.MODE_PRIVATE);
     }
 }

@@ -2,13 +2,13 @@ package com.example.tberroa.portal.models.requests;
 
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "InstanceVariableNamingConvention"})
 public class ReqResetPassword {
 
     @Expose
-    public String region;
+    public String email;
     @Expose
     public String key;
     @Expose
-    public String email;
+    public String region;
 }

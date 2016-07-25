@@ -2,7 +2,7 @@ package com.example.tberroa.portal.models.datadragon;
 
 import com.google.gson.annotations.Expose;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "InstanceVariableNamingConvention"})
 public class Champion {
 
     @Expose

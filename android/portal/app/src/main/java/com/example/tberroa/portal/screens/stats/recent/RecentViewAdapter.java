@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
-import com.example.tberroa.portal.screens.stats.recent.RecentViewAdapter.chartViewHolder;
+import com.example.tberroa.portal.screens.stats.recent.RecentViewAdapter.ChartViewHolder;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class RecentViewAdapter extends Adapter<chartViewHolder> {
+public class RecentViewAdapter extends Adapter<ChartViewHolder> {
 
     private final Context context;
     private final Map<String, List<List<Number>>> data;
@@ -56,7 +56,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(chartViewHolder chartViewHolder, int i) {
+    public void onBindViewHolder(ChartViewHolder chartViewHolder, int i) {
         // set title view
         chartViewHolder.title.setText(titles.get(i));
         chartViewHolder.title.setVisibility(View.VISIBLE);
@@ -98,17 +98,18 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
     }
 
     @Override
-    public chartViewHolder onCreateViewHolder(ViewGroup vG, int i) {
-        return new chartViewHolder(LayoutInflater.from(vG.getContext()).inflate(R.layout.view_recent, vG, false));
+    public ChartViewHolder onCreateViewHolder(ViewGroup vG, int i) {
+        return new ChartViewHolder(LayoutInflater.from(vG.getContext()).inflate(R.layout.view_recent, vG, false));
     }
 
-    public class chartViewHolder extends ViewHolder {
+    public class ChartViewHolder extends ViewHolder {
+
         final LineChart lineChart;
         final RelativeLayout lineChartLayout;
         final TextView noData;
         final TextView title;
 
-        chartViewHolder(View itemView) {
+        ChartViewHolder(View itemView) {
             super(itemView);
             lineChartLayout = (RelativeLayout) itemView.findViewById(R.id.line_chart_layout);
             title = (TextView) itemView.findViewById(R.id.chart_title_view);
@@ -134,7 +135,7 @@ public class RecentViewAdapter extends Adapter<chartViewHolder> {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.element_bar_chart);
+            setContentView(R.layout.dialog_chart_average);
             int width = (95 * ScreenUtil.screenWidth(context)) / 100;
             int height = (80 * ScreenUtil.screenHeight(context)) / 100;
             getWindow().setLayout(width, height);

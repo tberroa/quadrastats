@@ -2,157 +2,207 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/victory_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/gwf_victory"
-        android:textColor="@color/blue"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:id="@+id/defeat_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/gwf_defeat"
-        android:textColor="@color/red"
-        android:textSize="30sp"/>
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_overlay_white"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:paddingTop="2dp">
+
+        <TextView
+            android:id="@+id/victory_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/gwf_victory"
+            android:textColor="@color/blue"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/defeat_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/gwf_defeat"
+            android:textColor="@color/red"
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/team_kda_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"/>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/match_duration_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <GridLayout
-        android:id="@+id/summoner_table_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:columnCount="1"
-        android:orientation="vertical"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-10dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/gwf_damage"
-        android:textSize="20sp"/>
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/dmg_chart"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/kills_chart"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_weight="0.5"/>
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/deaths_chart"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_weight="0.5"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/assists_chart"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_weight="0.5"/>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:textSize="12sp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/gwf_kda"
-                android:textSize="13sp"/>
+        <TextView
+            android:id="@+id/match_date_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="12sp"/>
+    </LinearLayout>
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/kda_chart"
+    <include
+        android:id="@+id/summoner_1_layout"
+        layout="@layout/element_summoner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_weight="3"/>
+
+    <include
+        android:id="@+id/summoner_2_layout"
+        layout="@layout/element_summoner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_weight="3"/>
+
+    <include
+        android:id="@+id/summoner_3_layout"
+        layout="@layout/element_summoner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_weight="3"/>
+
+    <include
+        android:id="@+id/summoner_4_layout"
+        layout="@layout/element_summoner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_weight="3"/>
+
+    <include
+        android:id="@+id/summoner_5_layout"
+        layout="@layout/element_summoner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_weight="3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:mrl_rippleColor="@color/white"
+            app:mrl_rippleDuration="250"
+            app:mrl_rippleFadeDuration="25"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleRoundedCorners="60dp">
+
+            <ImageView
+                android:id="@+id/income_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"/>
-        </LinearLayout>
+                android:contentDescription="@string/image_view_description"
+                android:padding="5dp"
+                android:src="@drawable/ic_income"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:mrl_rippleColor="@color/white"
+            app:mrl_rippleDuration="250"
+            app:mrl_rippleFadeDuration="25"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleRoundedCorners="60dp">
+
+            <ImageView
+                android:id="@+id/offense_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_view_description"
+                android:padding="5dp"
+                android:src="@drawable/ic_offense"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:mrl_rippleColor="@color/white"
+            app:mrl_rippleDuration="250"
+            app:mrl_rippleFadeDuration="25"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleRoundedCorners="60dp">
+
+            <ImageView
+                android:id="@+id/utility_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_view_description"
+                android:padding="1dp"
+                android:src="@drawable/ic_utility"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:mrl_rippleColor="@color/white"
+            app:mrl_rippleDuration="250"
+            app:mrl_rippleFadeDuration="25"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleRoundedCorners="60dp">
+
+            <ImageView
+                android:id="@+id/vision_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_view_description"
+                android:padding="1dp"
+                android:src="@drawable/ic_vision"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-10dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/gwf_cs"
-        android:textSize="20sp"/>
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/cs_chart"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-10dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/gwf_wards"
-        android:textSize="20sp"/>
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/wards_chart"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"/>
 </LinearLayout>
 

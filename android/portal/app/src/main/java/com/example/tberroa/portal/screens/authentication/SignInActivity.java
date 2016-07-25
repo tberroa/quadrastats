@@ -47,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         // check if user is already signed in
-        if (new UserData().getSignInStatus(this)) {
+        if (new UserData().isSignedIn(this)) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
@@ -56,7 +56,7 @@ public class SignInActivity extends AppCompatActivity {
         EditText keyField = (EditText) findViewById(R.id.summoner_name_field);
         EditText passwordField = (EditText) findViewById(R.id.password_field);
         Spinner regionSelect = (Spinner) findViewById(R.id.region_select_spinner);
-        int color = ContextCompat.getColor(this, R.color.colorAccent);
+        int color = ContextCompat.getColor(this, R.color.accent);
         regionSelect.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 
         // initialize buttons
@@ -77,7 +77,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (regionSelection > 0) {
                     region = AuthUtil.decodeRegion(regionSelection);
                 } else { // display error
-                    String message = getString(R.string.select_region);
+                    String message = getString(R.string.err_select_region);
                     Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
                     signInButton.setEnabled(true);
                     return;
@@ -110,7 +110,7 @@ public class SignInActivity extends AppCompatActivity {
 
         // populate region select spinner
         ArrayAdapter<CharSequence> adapter;
-        adapter = ArrayAdapter.createFromResource(this, R.array.auth_select_region, R.layout.spinner_textview);
+        adapter = ArrayAdapter.createFromResource(this, R.array.auth_select_region_array, R.layout.spinner_textview);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_textview);
         regionSelect.setAdapter(adapter);
     }
@@ -152,7 +152,7 @@ public class SignInActivity extends AppCompatActivity {
                 String message = getString(R.string.auth_successful_reset);
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                String message = ScreenUtil.postResponseErrorMessage(SignInActivity.this, postResponse);
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         }
@@ -189,7 +189,7 @@ public class SignInActivity extends AppCompatActivity {
                 // sign in
                 AuthUtil.signIn(SignInActivity.this, summoner, user, inView);
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(postResponse);
+                String message = ScreenUtil.postResponseErrorMessage(SignInActivity.this, postResponse);
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
                 signInButton.setEnabled(true);
             }
@@ -215,7 +215,7 @@ public class SignInActivity extends AppCompatActivity {
 
             // populate region select spinner
             ArrayAdapter<CharSequence> adapter;
-            int array = R.array.auth_select_region;
+            int array = R.array.auth_select_region_array;
             adapter = ArrayAdapter.createFromResource(SignInActivity.this, array, R.layout.spinner_textview);
             adapter.setDropDownViewResource(R.layout.spinner_dropdown_textview);
             regionSelect.setAdapter(adapter);
@@ -232,7 +232,7 @@ public class SignInActivity extends AppCompatActivity {
                     if (regionSelection > 0) {
                         region = AuthUtil.decodeRegion(regionSelection);
                     } else { // display error
-                        String message = getString(R.string.select_region);
+                        String message = getString(R.string.err_select_region);
                         Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
                         return;
                     }

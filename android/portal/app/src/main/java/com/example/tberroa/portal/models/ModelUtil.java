@@ -22,7 +22,7 @@ public class ModelUtil {
         return gson.fromJson(jsonString, type);
     }
 
-    public static <T> Map<String, T> fromJsonStringMap(String jsonString, Type type){
+    public static <T> Map<String, T> fromJsonStringMap(String jsonString, Type type) {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.fromJson(jsonString, type);
     }
@@ -32,7 +32,7 @@ public class ModelUtil {
         return gson.toJson(object, clazz);
     }
 
-    public static <T> String toJsonStringMap(T object, Type type){
+    public static <T> String toJsonStringMap(T object, Type type) {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.toJson(object, type);
     }

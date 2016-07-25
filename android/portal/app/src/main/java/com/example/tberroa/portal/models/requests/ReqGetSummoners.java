@@ -4,11 +4,11 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "InstanceVariableNamingConvention"})
 public class ReqGetSummoners {
 
     @Expose
-    public String region;
-    @Expose
     public List<String> keys;
+    @Expose
+    public String region;
 }

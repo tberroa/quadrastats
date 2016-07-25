@@ -11,7 +11,7 @@ public class IntValueFormat implements ValueFormatter {
         if (Math.floor(value) == value) {
             return String.valueOf((int) Math.floor(value));
         } else {
-            return String.valueOf(Math.round(value * 100.0) / 100.0);
+            return String.valueOf(Math.round(value * 10.0) / 10.0);
         }
     }
 }

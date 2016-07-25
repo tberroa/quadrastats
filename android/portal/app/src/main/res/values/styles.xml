@@ -4,7 +4,7 @@
         name="AppTheme"
         parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@null</item>
-        <item name="android:colorButtonNormal">@color/colorAccent</item>
+        <item name="android:colorButtonNormal">@color/accent</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
@@ -19,9 +19,9 @@
     <style
         name="AppTheme.EditText"
         parent="AppTheme">
-        <item name="colorControlNormal">@color/colorAccent</item>
-        <item name="colorControlActivated">@color/colorAccent</item>
-        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/accent</item>
+        <item name="colorControlActivated">@color/accent</item>
+        <item name="colorControlHighlight">@color/accent</item>
     </style>
 
     <style name="AuthBackground" parent="AppTheme">
