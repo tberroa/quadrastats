@@ -10,10 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.example.tberroa.portal.screens.stats.recent.RecentViewAdapter.ChartViewHolder;
@@ -62,6 +63,10 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
         chartViewHolder.title.setVisibility(View.VISIBLE);
 
         if (!emptyDataSets.contains(i)) {
+            // resize layout
+            chartViewHolder.lineChartLayout.getLayoutParams().height = (55 * ScreenUtil.screenHeight(context)) / 100;
+            chartViewHolder.lineChartLayout.setLayoutParams(chartViewHolder.lineChartLayout.getLayoutParams());
+
             // populate chart
             chartViewHolder.lineChart.setData(new LineData(labelsList.get(i), lineDataSetsList.get(i)));
 
@@ -88,7 +93,7 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
             chartViewHolder.lineChartLayout.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    new BarChartDialog(titles.get(position), position).show();
+                    new AverageChartDialog(titles.get(position), position).show();
                     return true;
                 }
             });
@@ -105,13 +110,13 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
     public class ChartViewHolder extends ViewHolder {
 
         final LineChart lineChart;
-        final RelativeLayout lineChartLayout;
+        final LinearLayout lineChartLayout;
         final TextView noData;
         final TextView title;
 
         ChartViewHolder(View itemView) {
             super(itemView);
-            lineChartLayout = (RelativeLayout) itemView.findViewById(R.id.line_chart_layout);
+            lineChartLayout = (LinearLayout) itemView.findViewById(R.id.line_chart_layout);
             title = (TextView) itemView.findViewById(R.id.chart_title_view);
             title.setVisibility(View.GONE);
             lineChart = (LineChart) itemView.findViewById(R.id.line_chart);
@@ -121,12 +126,12 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
         }
     }
 
-    private class BarChartDialog extends Dialog {
+    private class AverageChartDialog extends Dialog {
 
         final int i;
         final String title;
 
-        public BarChartDialog(String title, int i) {
+        public AverageChartDialog(String title, int i) {
             super(context, R.style.DialogStyle);
             this.title = title;
             this.i = i;
@@ -136,17 +141,22 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.dialog_chart_average);
-            int width = (95 * ScreenUtil.screenWidth(context)) / 100;
-            int height = (80 * ScreenUtil.screenHeight(context)) / 100;
+            int width = (Constants.UI_DIALOG_WIDTH * ScreenUtil.screenWidth(context)) / 100;
+            int height = (Constants.UI_DIALOG_HEIGHT * ScreenUtil.screenHeight(context)) / 100;
             getWindow().setLayout(width, height);
+
+            // resize chart layout
+            LinearLayout chartLayout = (LinearLayout) findViewById(R.id.average_chart_layout);
+            chartLayout.getLayoutParams().height = (75 * height) / 100;
+            chartLayout.setLayoutParams(chartLayout.getLayoutParams());
 
             // initialize title
             String chartTitle = context.getResources().getString(R.string.rg_average) + " " + title;
-            TextView chartTitleView = (TextView) findViewById(R.id.bar_chart_title);
+            TextView chartTitleView = (TextView) findViewById(R.id.average_chart_title);
             chartTitleView.setText(chartTitle);
 
             // declare bar chart
-            BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
+            BarChart averageChart = (BarChart) findViewById(R.id.average_chart);
 
             // initialize the labels and data arrays
             List<String> labels = new ArrayList<>();
@@ -173,22 +183,22 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
             BarDataSet barDataSet = new BarDataSet(data, null);
             barDataSet.setColors(StatsUtil.chartColors(), context);
             barDataSet.setDrawValues(false);
-            barChart.setData(new BarData(labels, barDataSet));
+            averageChart.setData(new BarData(labels, barDataSet));
 
             // chart formatting
-            barChart.getAxisLeft().setTextColor(Color.WHITE);
-            barChart.setDescription("");
-            barChart.getXAxis().setDrawLabels(false);
-            barChart.getXAxis().setDrawGridLines(false);
-            barChart.getXAxis().setDrawAxisLine(false);
-            barChart.getAxisRight().setDrawLabels(false);
-            barChart.getAxisRight().setDrawGridLines(false);
-            barChart.getAxisRight().setDrawAxisLine(false);
-            barChart.getAxisLeft().setDrawAxisLine(false);
-            barChart.setDrawBorders(false);
-            barChart.getLegend().setEnabled(false);
-            barChart.getData().setHighlightEnabled(false);
-            barChart.setTouchEnabled(false);
+            averageChart.getAxisLeft().setTextColor(Color.WHITE);
+            averageChart.setDescription("");
+            averageChart.getXAxis().setDrawLabels(false);
+            averageChart.getXAxis().setDrawGridLines(false);
+            averageChart.getXAxis().setDrawAxisLine(false);
+            averageChart.getAxisRight().setDrawLabels(false);
+            averageChart.getAxisRight().setDrawGridLines(false);
+            averageChart.getAxisRight().setDrawAxisLine(false);
+            averageChart.getAxisLeft().setDrawAxisLine(false);
+            averageChart.setDrawBorders(false);
+            averageChart.getLegend().setEnabled(false);
+            averageChart.getData().setHighlightEnabled(false);
+            averageChart.setTouchEnabled(false);
         }
     }
 }

@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
-import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +23,7 @@ import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.RoundTransform;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.StaticRiotData;
+import com.example.tberroa.portal.screens.stats.CreateLegendPackage;
 import com.example.tberroa.portal.screens.stats.IntValueFormat;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.example.tberroa.portal.screens.stats.withfriends.WFViewAdapter.WFViewHolder;
@@ -40,6 +40,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -70,7 +71,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
 
         // set summoner names
         int i = 0;
-        for (String name : names){
+        for (String name : names) {
             TextView nameView = (TextView) wfViewHolder.summonerLayouts.get(i).findViewById(R.id.summoner_name_view);
             nameView.setText(name);
             i++;
@@ -151,32 +152,6 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         return new WFViewHolder(LayoutInflater.from(context).inflate(R.layout.view_with_friends, vG, false));
     }
 
-    private void createLegend(List<String> names, LinearLayout legendLayout, boolean notFiveMan) {
-        // set unused elements to gone
-        ImageView positionIcon = (ImageView) legendLayout.findViewById(R.id.position_view);
-        positionIcon.setVisibility(View.GONE);
-        ImageView championIcon = (ImageView) legendLayout.findViewById(R.id.champ_icon_view);
-        championIcon.setVisibility(View.GONE);
-
-        // set names
-        GridLayout legendNames = (GridLayout) legendLayout.findViewById(R.id.names_layout);
-        legendNames.removeAllViews();
-        int i = 0;
-        for (String name : names) {
-            TextView textView = new TextView(context);
-            textView.setText(name);
-            textView.setTextSize(12);
-            if ((notFiveMan) && (i == (names.size() - 1))) {
-                textView.setTextColor(ContextCompat.getColor(context, R.color.gray));
-            } else {
-                textView.setTextColor(ContextCompat.getColor(context, StatsUtil.intToColor(i)));
-            }
-            textView.setPadding(ScreenUtil.dpToPx(context, 5), 0, ScreenUtil.dpToPx(context, 5), 0);
-            legendNames.addView(textView);
-            i++;
-        }
-    }
-
     private void formatBarChart(BarChart barChart) {
         barChart.getXAxis().setDrawLabels(false);
         barChart.getXAxis().setDrawGridLines(false);
@@ -205,9 +180,10 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         pieChart.getLegend().setEnabled(false);
         pieChart.setDrawSliceText(false);
         pieChart.setTouchEnabled(false);
-        pieChart.setDrawCenterText(false);
         pieChart.setTransparentCircleAlpha(0);
         pieChart.setHoleColor(Color.TRANSPARENT);
+        pieChart.setCenterTextColor(Color.WHITE);
+        pieChart.setCenterTextSize(20);
         pieChart.setHoleRadius(35);
         pieChart.setDescription("");
     }
@@ -410,8 +386,8 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.dialog_charts);
-            int width = (95 * ScreenUtil.screenWidth(context)) / 100;
-            int height = (80 * ScreenUtil.screenHeight(context)) / 100;
+            int width = (Constants.UI_DIALOG_WIDTH * ScreenUtil.screenWidth(context)) / 100;
+            int height = (Constants.UI_DIALOG_HEIGHT * ScreenUtil.screenHeight(context)) / 100;
             getWindow().setLayout(width, height);
 
             // if it wasn't a five man queue, include label for non friends in pie charts
@@ -423,26 +399,34 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             }
 
             // initialize legend and recycler view
-            LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
             RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            CreateLegendPackage createLegendPackage = new CreateLegendPackage();
+            createLegendPackage.context = context;
+            createLegendPackage.notFiveMan = notFiveMan;
+            createLegendPackage.staticRiotData = staticRiotData;
+            createLegendPackage.view = findViewById(R.id.legend_layout);
             switch (tab) {
                 case 0:
-                    createLegend(names, legendLayout, false);
+                    createLegendPackage.names = new HashSet<>(names);
+                    StatsUtil.createLegend(createLegendPackage);
                     IncomeAdapter incomeAdapter = new IncomeAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(incomeAdapter);
                     break;
                 case 1:
-                    createLegend(namesPie, legendLayout, notFiveMan);
+                    createLegendPackage.names = new HashSet<>(namesPie);
+                    StatsUtil.createLegend(createLegendPackage);
                     OffenseAdapter offenseAdapter = new OffenseAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(offenseAdapter);
                     break;
                 case 2:
-                    createLegend(namesPie, legendLayout, notFiveMan);
+                    createLegendPackage.names = new HashSet<>(namesPie);
+                    StatsUtil.createLegend(createLegendPackage);
                     UtilityAdapter utilityAdapter = new UtilityAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(utilityAdapter);
                     break;
                 case 3:
-                    createLegend(names, legendLayout, false);
+                    createLegendPackage.names = new HashSet<>(names);
+                    StatsUtil.createLegend(createLegendPackage);
                     VisionAdapter visionAdapter = new VisionAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(visionAdapter);
                     break;
@@ -788,7 +772,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                 formatPieChart(pieChart);
                 switch (j) {
                     case 0:
-                        pieChart.setCenterText(context.getResources().getString(R.string.gwf_kills));
+                        pieChart.setCenterText(context.getResources().getString(R.string.gwf_assists));
                         break;
                 }
                 j++;

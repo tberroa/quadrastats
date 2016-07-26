@@ -9,7 +9,6 @@ import android.support.design.widget.TabLayout.OnTabSelectedListener;
 import android.support.design.widget.TabLayout.Tab;
 import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,15 +22,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.datadragon.Champion;
@@ -39,6 +38,7 @@ import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.stats.BaseStatsActivity;
+import com.example.tberroa.portal.screens.stats.CreateLegendPackage;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.squareup.picasso.Picasso;
 
@@ -51,6 +51,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class RecentActivity extends BaseStatsActivity implements RecentAsync {
+
+    private int legendIconSide;
 
     public void displayData(List<MatchStats> matchStatsList) {
         populateActivity(matchStatsList, 0, null);
@@ -86,6 +88,9 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setVisibility(View.GONE);
 
+        // set default legend icon dimension
+        legendIconSide = ScreenUtil.dpToPx(this, 50);
+
         // initialize legend
         LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
         legendLayout.setVisibility(View.GONE);
@@ -107,42 +112,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         RequestMatchStats requestMatchStats = new RequestMatchStats();
         requestMatchStats.delegateRecent = this;
         requestMatchStats.execute(1);
-    }
-
-    private void createLegend(Set<String> names, long champion, String position) {
-        // set position icon
-        ImageView positionIcon = (ImageView) findViewById(R.id.position_view);
-        if (position != null) {
-            Picasso.with(this).load(StatsUtil.positionIcon(position)).into(positionIcon);
-            positionIcon.setVisibility(View.VISIBLE);
-        } else {
-            positionIcon.setVisibility(View.GONE);
-        }
-
-        // set champion icon
-        ImageView championIcon = (ImageView) findViewById(R.id.champ_icon_view);
-        if (champion > 0) {
-            String key = StatsUtil.championKey(champion, staticRiotData.championsMap);
-            String url = StatsUtil.championIconURL(staticRiotData.version, key);
-            Picasso.with(this).load(url).into(championIcon);
-            championIcon.setVisibility(View.VISIBLE);
-        } else {
-            championIcon.setVisibility(View.GONE);
-        }
-
-        // set names
-        GridLayout legendNames = (GridLayout) findViewById(R.id.names_layout);
-        legendNames.removeAllViews();
-        int i = 0;
-        for (String name : names) {
-            TextView textView = new TextView(this);
-            textView.setText(name);
-            textView.setTextSize(12);
-            textView.setTextColor(ContextCompat.getColor(this, StatsUtil.intToColor(i)));
-            textView.setPadding(ScreenUtil.dpToPx(this, 5), 0, ScreenUtil.dpToPx(this, 5), 0);
-            legendNames.addView(textView);
-            i++;
-        }
     }
 
     private void populateActivity(List<MatchStats> matchStatsList, long championId, String position) {
@@ -229,10 +198,18 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         updateAdapter(titles, aggregateData);
 
         // create the legend
-        createLegend(names, championId, position);
+        LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
+        CreateLegendPackage createLegendPackage = new CreateLegendPackage();
+        createLegendPackage.championId = championId;
+        createLegendPackage.context = this;
+        createLegendPackage.iconSide = legendIconSide;
+        createLegendPackage.names = names;
+        createLegendPackage.position = position;
+        createLegendPackage.staticRiotData = staticRiotData;
+        createLegendPackage.view = legendLayout;
+        StatsUtil.createLegend(createLegendPackage);
 
         // display the legend
-        LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
         legendLayout.setVisibility(View.VISIBLE);
         legendLayout.setOnClickListener(new OnClickListener() {
             @Override
@@ -306,9 +283,11 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
     private class FilterAdapter extends Adapter<FilterAdapter.ChampionViewHolder> {
 
         public final List<ChampionIcon> championIcons;
+        private final int side;
 
-        public FilterAdapter(List<ChampionIcon> championIcons) {
+        public FilterAdapter(List<ChampionIcon> championIcons, int side) {
             this.championIcons = championIcons;
+            this.side = side;
         }
 
         @Override
@@ -318,11 +297,18 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         @Override
         public void onBindViewHolder(ChampionViewHolder viewHolder, int i) {
+            viewHolder.champIconView.getLayoutParams().width = side;
+            viewHolder.champIconView.getLayoutParams().height = side;
+            viewHolder.champIconView.setLayoutParams(viewHolder.champIconView.getLayoutParams());
+            viewHolder.champIconCheck.getLayoutParams().width = side;
+            viewHolder.champIconCheck.getLayoutParams().height = side;
+            viewHolder.champIconCheck.setLayoutParams(viewHolder.champIconCheck.getLayoutParams());
+
             ChampionIcon icon = championIcons.get(i);
             icon.check = viewHolder.champIconCheck;
             String key = icon.champion.key;
             String url = StatsUtil.championIconURL(staticRiotData.version, key);
-            Picasso.with(RecentActivity.this).load(url).into(viewHolder.champIconView);
+            Picasso.with(RecentActivity.this).load(url).fit().into(viewHolder.champIconView);
 
             if (icon.isSelected) {
                 viewHolder.champIconCheck.setVisibility(View.VISIBLE);
@@ -347,7 +333,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 super(itemView);
                 champIconView = (ImageView) itemView.findViewById(R.id.champ_icon_view);
                 champIconCheck = (ImageView) itemView.findViewById(R.id.champ_icon_check);
-
                 champIconView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -384,18 +369,36 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             setContentView(R.layout.dialog_data_filter);
             setCancelable(true);
 
+            // resize dialog
+            int dialogWidth = (Constants.UI_DIALOG_WIDTH * ScreenUtil.screenWidth(RecentActivity.this)) / 100;
+            int dialogHeight = (Constants.UI_DIALOG_HEIGHT * ScreenUtil.screenHeight(RecentActivity.this)) / 100;
+            getWindow().setLayout(dialogWidth, dialogHeight);
+
+            // initialize champion icon dimensions
+            int champIconsPerRow = 4;
+            int champIconSide = dialogWidth / champIconsPerRow;
+
+            // set legend icon dimensions based off the champion icon dimensions
+            legendIconSide = champIconSide / 2;
+
             // create the recycler view adapter data set
             List<ChampionIcon> championIcons = new ArrayList<>();
             for (Champion champion : staticRiotData.championsList) {
                 championIcons.add(new ChampionIcon(champion));
             }
 
-            // initialize recycler view
-            int span = ScreenUtil.screenWidth(RecentActivity.this) / ScreenUtil.dpToPx(RecentActivity.this, 75);
-            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-            FilterAdapter adapter = new FilterAdapter(championIcons);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new GridLayoutManager(RecentActivity.this, span));
+            // use listener to get dialog width and initialize recycler view
+            FilterAdapter adapter = new FilterAdapter(championIcons, champIconSide);
+            LinearLayout filterLayout = (LinearLayout) findViewById(R.id.filter_layout);
+            filterLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    filterLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new GridLayoutManager(RecentActivity.this, champIconsPerRow));
+                }
+            });
 
             // initialize the role checks
             ImageView topCheck = (ImageView) findViewById(R.id.top_check);
@@ -723,7 +726,15 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                         }
 
                         // update the views
-                        createLegend(selectedNames, championId, position);
+                        CreateLegendPackage createLegendPackage = new CreateLegendPackage();
+                        createLegendPackage.championId = championId;
+                        createLegendPackage.context = RecentActivity.this;
+                        createLegendPackage.iconSide = legendIconSide;
+                        createLegendPackage.names = selectedNames;
+                        createLegendPackage.position = position;
+                        createLegendPackage.staticRiotData = staticRiotData;
+                        createLegendPackage.view = RecentActivity.this.findViewById(R.id.legend_layout);
+                        StatsUtil.createLegend(createLegendPackage);
                         updateAdapter(titles, selectedData);
                         dismiss();
                     } else {

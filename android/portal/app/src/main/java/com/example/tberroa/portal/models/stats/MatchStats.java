@@ -9,7 +9,6 @@ import com.google.gson.annotations.Expose;
 @Table(name = "MatchStats")
 public class MatchStats extends Model {
 
-    // raw stats
     @Expose
     @Column(name = "assists")
     public Long assists;
@@ -19,7 +18,6 @@ public class MatchStats extends Model {
     @Expose
     @Column(name = "champion")
     public Long champion;
-    // calculated stats
     @Expose
     @Column(name = "cs_at_ten")
     public Float cs_at_ten;
@@ -161,7 +159,6 @@ public class MatchStats extends Model {
     @Expose
     @Column(name = "quadra_kills")
     public Long quadra_kills;
-    // identity info
     @Expose
     @Column(name = "region")
     public String region;

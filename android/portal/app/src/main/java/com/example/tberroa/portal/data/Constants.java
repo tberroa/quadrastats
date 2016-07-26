@@ -2,7 +2,6 @@ package com.example.tberroa.portal.data;
 
 public class Constants {
 
-    // backend error codes
     public static final int ERR_FRIEND_ALREADY_LISTED = 50;
     public static final int ERR_FRIEND_EQUALS_USER = 55;
     public static final int ERR_FRIEND_LIMIT_REACHED = 60;
@@ -17,9 +16,7 @@ public class Constants {
     public static final String POS_JUNGLE = "JUNGLE";
     public static final String POS_MID = "MIDDLE";
     public static final String POS_SUPPORT = "DUO_SUPPORT";
-    // riot positions
     public static final String POS_TOP = "TOP";
-    // riot regions
     public static final String REGION_BR = "br";
     public static final String REGION_EUNE = "eune";
     public static final String REGION_EUW = "euw";
@@ -30,11 +27,11 @@ public class Constants {
     public static final String REGION_OCE = "oce";
     public static final String REGION_RU = "ru";
     public static final String REGION_TR = "tr";
-    // log tags
     public static final String TAG_DEBUG = "TAG_DEBUG";
     public static final String TAG_EXCEPTIONS = "TAG_EXCEPTIONS";
+    public static final int UI_DIALOG_HEIGHT = 80;
+    public static final int UI_DIALOG_WIDTH = 95;
     public static final String UI_NO_ITEM = "NO_ITEM";
-    // UI Control
     public static final String UI_RELOAD = "-80";
     public static final String URL_CHAMPION = "/img/champion/";
     public static final String URL_DATA_DRAGON = "http://ddragon.leagueoflegends.com/cdn/";
@@ -51,20 +48,16 @@ public class Constants {
     public static final String URL_SS_IGNITE = "/img/spell/SummonerDot.png";
     public static final String URL_SS_SMITE = "/img/spell/SummonerSmite.png";
     public static final String URL_SS_TELEPORT = "/img/spell/SummonerTeleport.png";
-    // crash report url
     public static final String URL_TRACEPOT = "https://collector.tracepot.com/dc940cee";
     public static final String VALID_CHANGE_EMAIL = "email";
     public static final String VALID_CHANGE_PASSWORD = "summoner_id";
-    // backend response validity checks
     public static final String VALID_FRIEND_OP = "summoner_id";
-    // riot response validity checks
     public static final String VALID_GET_CHAMPIONS = "version";
     public static final String VALID_GET_MATCH_STATS = "summoner_id";
     public static final String VALID_GET_SUMMONERS = "summoner_id";
     public static final String VALID_REGISTER = "summoner_id";
     public static final String VALID_RESET_PASSWORD = "summoner_id";
     public static final String VALID_SIGN_IN = "summoner_id";
-    // backend urls
     private static final String URL_BASE = "http://52.90.34.48/";
     public static final String URL_ADD_FRIEND = URL_BASE + "summoners/add-friend.json";
     public static final String URL_CHANGE_EMAIL = URL_BASE + "summoners/change-email.json";
@@ -75,7 +68,6 @@ public class Constants {
     public static final String URL_REMOVE_FRIEND = URL_BASE + "summoners/remove-friend.json";
     public static final String URL_RESET_PASSWORD = URL_BASE + "summoners/reset-password.json";
     public static final String URL_GET_MATCH_STATS = URL_BASE + "stats/match.json";
-    // riot urls
     private static final String URL_STATIC_BASE = "https://global.api.pvp.net/api/lol/static-data/na/v1.2";
     public static final String URL_GET_CHAMPIONS = URL_STATIC_BASE + "/champion?api_key=" + Keys.RIOT_API_KEY;
 

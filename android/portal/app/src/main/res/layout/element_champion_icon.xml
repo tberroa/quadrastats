@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="1dp">
 
     <com.balysv.materialripple.MaterialRippleLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,16 +18,15 @@
 
         <ImageView
             android:id="@+id/champ_icon_view"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/image_view_description"/>
     </com.balysv.materialripple.MaterialRippleLayout>
 
     <ImageView
         android:id="@+id/champ_icon_check"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/image_view_description"
