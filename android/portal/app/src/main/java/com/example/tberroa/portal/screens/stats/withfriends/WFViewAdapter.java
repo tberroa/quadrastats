@@ -40,7 +40,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -407,25 +407,25 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             createLegendPackage.view = findViewById(R.id.legend_layout);
             switch (tab) {
                 case 0:
-                    createLegendPackage.names = new HashSet<>(names);
+                    createLegendPackage.names = new LinkedHashSet<>(names);
                     StatsUtil.createLegend(createLegendPackage);
                     IncomeAdapter incomeAdapter = new IncomeAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(incomeAdapter);
                     break;
                 case 1:
-                    createLegendPackage.names = new HashSet<>(namesPie);
+                    createLegendPackage.names = new LinkedHashSet<>(namesPie);
                     StatsUtil.createLegend(createLegendPackage);
                     OffenseAdapter offenseAdapter = new OffenseAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(offenseAdapter);
                     break;
                 case 2:
-                    createLegendPackage.names = new HashSet<>(namesPie);
+                    createLegendPackage.names = new LinkedHashSet<>(namesPie);
                     StatsUtil.createLegend(createLegendPackage);
                     UtilityAdapter utilityAdapter = new UtilityAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(utilityAdapter);
                     break;
                 case 3:
-                    createLegendPackage.names = new HashSet<>(names);
+                    createLegendPackage.names = new LinkedHashSet<>(names);
                     StatsUtil.createLegend(createLegendPackage);
                     VisionAdapter visionAdapter = new VisionAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(visionAdapter);
