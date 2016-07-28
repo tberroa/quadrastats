@@ -6,8 +6,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
@@ -52,14 +52,14 @@ public class HomeActivity extends BaseActivity {
         ImageView recentView = (ImageView) findViewById(R.id.recent_image);
         ImageView seasonView = (ImageView) findViewById(R.id.season_image);
         ImageView withFriendsView = (ImageView) findViewById(R.id.with_friends_image);
-        Picasso.with(this).load(R.drawable.splash_pool_party)
-                .centerCrop().resize(width, height).into(manageFriendsView);
-        Picasso.with(this).load(R.drawable.splash_zed)
-                .centerCrop().resize(width, height).into(recentView);
-        Picasso.with(this).load(R.drawable.splash_shyvana)
-                .centerCrop().resize(width, height).into(seasonView);
-        Picasso.with(this).load(R.drawable.splash_jarvan)
-                .centerCrop().resize(width, height).into(withFriendsView);
+        Picasso.with(this).load(R.drawable.splash_pool_party).resize(width, height)
+                .centerCrop().into(manageFriendsView);
+        Picasso.with(this).load(R.drawable.splash_zed).resize(width, height)
+                .centerCrop().into(recentView);
+        Picasso.with(this).load(R.drawable.splash_shyvana).resize(width, height)
+                .centerCrop().into(seasonView);
+        Picasso.with(this).load(R.drawable.splash_jarvan).resize(width, height)
+                .centerCrop().into(withFriendsView);
 
         // initialize labels
         String manageFriends = getResources().getString(R.string.mf_activity_title);
@@ -76,10 +76,10 @@ public class HomeActivity extends BaseActivity {
         withFriendsText.setText(withFriends);
 
         // initialize on click listeners
-        RelativeLayout manageFriendsLayout = (RelativeLayout) findViewById(R.id.manage_friends_layout);
-        RelativeLayout recentLayout = (RelativeLayout) findViewById(R.id.recent_layout);
-        RelativeLayout seasonLayout = (RelativeLayout) findViewById(R.id.season_layout);
-        RelativeLayout withFriendsLayout = (RelativeLayout) findViewById(R.id.with_friends_layout);
+        FrameLayout manageFriendsLayout = (FrameLayout) findViewById(R.id.manage_friends_layout);
+        FrameLayout recentLayout = (FrameLayout) findViewById(R.id.recent_layout);
+        FrameLayout seasonLayout = (FrameLayout) findViewById(R.id.season_layout);
+        FrameLayout withFriendsLayout = (FrameLayout) findViewById(R.id.with_friends_layout);
         manageFriendsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

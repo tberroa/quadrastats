@@ -1,112 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
+    android:id="@+id/sign_in_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="@dimen/spacing_huge"
+    android:layout_marginTop="@dimen/spacing_huge"
+    android:background="@drawable/bg_overlay_black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_huge">
 
-    <RelativeLayout
+    <EditText
+        android:id="@+id/summoner_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:ems="12"
+        android:gravity="center"
+        android:hint="@string/auth_summoner_name"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/text_size_large"
+        android:theme="@style/AppTheme.EditText"/>
+
+    <EditText
+        android:id="@+id/password_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:ems="12"
+        android:gravity="center"
+        android:hint="@string/auth_password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/text_size_large"
+        android:theme="@style/AppTheme.EditText"/>
+
+    <Spinner
+        android:id="@+id/region_select_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:theme="@style/AppTheme.Dialog"/>
+
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        android:text="@string/auth_sign_in"
+        android:textSize="@dimen/text_size_huge"/>
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/reset_password_ripple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/bg_overlay_black"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:padding="15dp">
+        app:mrl_rippleColor="@color/white"
+        app:mrl_rippleDimension="@dimen/radius_tiny"
+        app:mrl_rippleDuration="150"
+        app:mrl_rippleRoundedCorners="@dimen/radius_large">
 
-        <EditText
-            android:id="@+id/summoner_name_field"
+        <TextView
+            android:id="@+id/reset_password_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:ems="12"
-            android:gravity="center"
-            android:hint="@string/auth_summoner_name"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:textColorHint="@color/white"
-            android:theme="@style/AppTheme.EditText"/>
+            android:padding="@dimen/spacing_large"
+            android:text="@string/auth_reset_password"
+            android:textSize="@dimen/text_size_standard"/>
+    </com.balysv.materialripple.MaterialRippleLayout>
 
-        <EditText
-            android:id="@+id/password_field"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_large"
+        app:mrl_rippleColor="@color/white"
+        app:mrl_rippleDimension="@dimen/radius_tiny"
+        app:mrl_rippleDuration="150"
+        app:mrl_rippleRoundedCorners="@dimen/radius_large">
+
+        <TextView
+            android:id="@+id/go_to_register_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/summoner_name_field"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:ems="12"
-            android:gravity="center"
-            android:hint="@string/auth_password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:textColorHint="@color/white"
-            android:theme="@style/AppTheme.EditText"/>
-
-        <Spinner
-            android:id="@+id/region_select_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/password_field"
-            android:layout_alignStart="@id/password_field"
-            android:layout_below="@id/password_field"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:theme="@style/DialogStyle"/>
-
-        <Button
-            android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/password_field"
-            android:layout_alignStart="@id/password_field"
-            android:layout_below="@id/region_select_spinner"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:text="@string/auth_sign_in"/>
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/reset_password_ripple"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sign_in_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            app:mrl_rippleColor="@color/white"
-            app:mrl_rippleDimension="1dp"
-            app:mrl_rippleDuration="150"
-            app:mrl_rippleRoundedCorners="30dp">
-
-            <TextView
-                android:id="@+id/reset_password_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/auth_reset_password"
-                android:textSize="16sp"/>
-        </com.balysv.materialripple.MaterialRippleLayout>
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/reset_password_ripple"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            app:mrl_rippleColor="@color/white"
-            app:mrl_rippleDimension="1dp"
-            app:mrl_rippleDuration="150"
-            app:mrl_rippleRoundedCorners="30dp">
-
-            <TextView
-                android:id="@+id/go_to_register_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/auth_go_to_register"
-                android:textSize="16sp"/>
-        </com.balysv.materialripple.MaterialRippleLayout>
-    </RelativeLayout>
-</ScrollView>
+            android:padding="@dimen/spacing_large"
+            android:text="@string/auth_go_to_register"
+            android:textSize="@dimen/text_size_standard"/>
+    </com.balysv.materialripple.MaterialRippleLayout>
+</LinearLayout>
 

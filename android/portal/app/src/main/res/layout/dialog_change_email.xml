@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="@dimen/dialog_width"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical">
@@ -11,37 +11,36 @@
         android:id="@+id/new_email_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_margin="@dimen/spacing_large"
         android:ems="12"
         android:gravity="center"
         android:hint="@string/ma_new_email"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_large"
         android:theme="@style/AppTheme.EditText"/>
 
     <EditText
         android:id="@+id/password_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_margin="@dimen/spacing_large"
         android:ems="12"
         android:gravity="center"
         android:hint="@string/ma_password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_large"
         android:theme="@style/AppTheme.EditText"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="@dimen/spacing_huge">
 
         <Button
             android:id="@+id/cancel_button"
@@ -50,7 +49,7 @@
             android:layout_weight="0.5"
             android:backgroundTint="@color/accent"
             android:text="@string/button_cancel"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_huge"
             tools:ignore="ButtonStyle"/>
 
         <Button
@@ -60,7 +59,7 @@
             android:layout_weight="0.5"
             android:backgroundTint="@color/accent"
             android:text="@string/button_done"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_huge"
             tools:ignore="ButtonStyle"/>
     </LinearLayout>
 </LinearLayout>

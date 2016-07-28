@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.models.datadragon.Champion;
+import com.example.tberroa.portal.screens.RoundTransform;
 import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.StaticRiotData;
 import com.squareup.picasso.Picasso;
@@ -58,14 +59,13 @@ public class StatsUtil {
         StaticRiotData staticRiotData = createLegendPackage.staticRiotData;
         View view = createLegendPackage.view;
 
-
         // set position icon
         ImageView positionIcon = (ImageView) view.findViewById(R.id.position_view);
         if (position != null) {
             positionIcon.getLayoutParams().width = iconSide;
             positionIcon.getLayoutParams().height = iconSide;
             positionIcon.setLayoutParams(positionIcon.getLayoutParams());
-            Picasso.with(context).load(positionIcon(position)).into(positionIcon);
+            positionIcon.setImageResource(positionIcon(position));
             positionIcon.setVisibility(View.VISIBLE);
         } else {
             positionIcon.setVisibility(View.GONE);
@@ -79,7 +79,8 @@ public class StatsUtil {
             championIcon.setLayoutParams(positionIcon.getLayoutParams());
             String key = championKey(championId, staticRiotData.championsMap);
             String url = championIconURL(staticRiotData.version, key);
-            Picasso.with(context).load(url).into(championIcon);
+            Picasso.with(context).load(url).resize(iconSide, iconSide)
+                    .transform(new RoundTransform()).into(championIcon);
             championIcon.setVisibility(View.VISIBLE);
         } else {
             championIcon.setVisibility(View.GONE);

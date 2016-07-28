@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +48,15 @@ public class RegisterActivity extends AppCompatActivity {
         if (new UserData().isSignedIn(this)) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
+            return;
         }
+
+        // resize layout according to screen
+        int layoutWidth = (80 * ScreenUtil.screenWidth(this)) / 100;
+        LinearLayout registerLayout = (LinearLayout) findViewById(R.id.register_layout);
+        registerLayout.getLayoutParams().width = layoutWidth;
+        registerLayout.setLayoutParams(registerLayout.getLayoutParams());
+
 
         // initialize input fields
         EditText keyField = (EditText) findViewById(R.id.summoner_name_field);
@@ -177,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
         final ReqRegister request;
 
         public ValidateDialog(ReqRegister request) {
-            super(RegisterActivity.this, R.style.DialogStyle);
+            super(RegisterActivity.this, R.style.AppTheme_Dialog);
             this.request = request;
         }
 

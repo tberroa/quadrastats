@@ -15,7 +15,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,7 +75,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
     public void setContentView(int layoutResID) {
         // base layout
         @SuppressLint("InflateParams")
-        RelativeLayout baseLayout = (RelativeLayout) getLayoutInflater().inflate(R.layout.activity_base_stats, null);
+        FrameLayout baseLayout = (FrameLayout) getLayoutInflater().inflate(R.layout.activity_base_stats, null);
         FrameLayout statsContentLayout = (FrameLayout) baseLayout.findViewById(R.id.stats_content_layout);
 
         // fill content layout with the provided layout

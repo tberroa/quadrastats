@@ -4,17 +4,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
+    android:layout_margin="@dimen/spacing_huge"
     android:background="@drawable/bg_overlay_white"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="@dimen/spacing_large">
 
     <TextView
         android:id="@+id/chart_title_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/text_size_huge"/>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/line_chart"
@@ -26,5 +26,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/err_no_data"
-        android:textSize="50sp"/>
+        android:textSize="@dimen/text_size_massive"/>
 </LinearLayout>

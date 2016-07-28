@@ -10,9 +10,8 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:background="@color/primary"
-        android:elevation="6dp"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:background="@color/primary_background"
         android:minHeight="?attr/actionBarSize"
         app:tabMode="scrollable"/>
 

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="wrap_content"
     android:baselineAligned="false"
     android:gravity="center"
-    android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="@dimen/spacing_large">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
@@ -25,15 +23,13 @@
             android:id="@+id/summoner_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom|center_horizontal"
             android:background="@drawable/bg_overlay_black"
             android:gravity="center"
-            android:paddingEnd="3dp"
-            android:paddingStart="3dp"
-            android:textSize="8sp"
-            tools:ignore="SmallSp"/>
-    </RelativeLayout>
+            android:paddingEnd="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_small"
+            android:textSize="@dimen/text_size_tiny"/>
+    </FrameLayout>
 
     <GridView
         android:id="@+id/summoner_grid_view"
@@ -41,7 +37,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_weight="3"
-        android:horizontalSpacing="3dp"
+        android:horizontalSpacing="@dimen/spacing_small"
         android:numColumns="5"
-        android:verticalSpacing="3dp"/>
+        android:verticalSpacing="@dimen/spacing_small"/>
 </LinearLayout>

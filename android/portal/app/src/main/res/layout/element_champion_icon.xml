@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="1dp">
+    android:padding="@dimen/spacing_tiny">
 
     <com.balysv.materialripple.MaterialRippleLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         app:mrl_rippleColor="@color/white"
         app:mrl_rippleDuration="250"
         app:mrl_rippleFadeDuration="25"
@@ -27,8 +25,6 @@
         android:id="@+id/champ_icon_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:contentDescription="@string/image_view_description"
         android:src="@drawable/ic_check"/>
-</RelativeLayout>
+</FrameLayout>

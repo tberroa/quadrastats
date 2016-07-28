@@ -1,6 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- padding and margins -->
+    <dimen name="spacing_tiny">2dp</dimen>
+    <dimen name="spacing_small">3dp</dimen>
+    <dimen name="spacing_standard">5dp</dimen>
+    <dimen name="spacing_large">10dp</dimen>
+    <dimen name="spacing_huge">15dp</dimen>
+    <dimen name="spacing_massive">30dp</dimen>
+
+    <!-- rounded corners -->
+    <dimen name="radius_tiny">2dp</dimen>
+    <dimen name="radius_standard">10dp</dimen>
+    <dimen name="radius_large">30dp</dimen>
+
+    <!-- ui elements -->
+    <dimen name="add_friend_button">24dp</dimen>
+    <dimen name="back_button">24dp</dimen>
+    <dimen name="menu_button">24dp</dimen>
+    <dimen name="loading_bar_height">30dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="profile_icon_side">160dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="dialog_width">300dp</dimen>
+
+    <!-- text -->
+    <dimen name="text_size_tiny">8sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_standard">16sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_huge">20sp</dimen>
+    <dimen name="text_size_massive">25sp</dimen>
+    <dimen name="text_size_friend_names">30sp</dimen>
 </resources>

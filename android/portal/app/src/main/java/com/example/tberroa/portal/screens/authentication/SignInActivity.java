@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +51,14 @@ public class SignInActivity extends AppCompatActivity {
         if (new UserData().isSignedIn(this)) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
+            return;
         }
+
+        // resize layout according to screen
+        int layoutWidth = (80 * ScreenUtil.screenWidth(this)) / 100;
+        LinearLayout signInLayout = (LinearLayout) findViewById(R.id.sign_in_layout);
+        signInLayout.getLayoutParams().width = layoutWidth;
+        signInLayout.setLayoutParams(signInLayout.getLayoutParams());
 
         // initialize input fields
         EditText keyField = (EditText) findViewById(R.id.summoner_name_field);
@@ -199,7 +207,7 @@ public class SignInActivity extends AppCompatActivity {
     private class ResetPasswordDialog extends Dialog {
 
         public ResetPasswordDialog() {
-            super(SignInActivity.this, R.style.DialogStyle);
+            super(SignInActivity.this, R.style.AppTheme_Dialog);
         }
 
         @Override

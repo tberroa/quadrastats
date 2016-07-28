@@ -9,14 +9,14 @@
         android:id="@+id/summoner_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textSize="20sp"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        android:layout_marginTop="@dimen/spacing_standard"
+        android:textSize="@dimen/text_size_huge"
         android:theme="@style/AppTheme"/>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider_height"
         android:contentDescription="@string/image_view_description"
         android:src="@color/divider"/>
 </LinearLayout>

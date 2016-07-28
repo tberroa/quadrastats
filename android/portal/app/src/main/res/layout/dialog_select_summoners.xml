@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="@dimen/dialog_width"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
@@ -22,5 +22,5 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/accent"
         android:text="@string/button_go"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/text_size_huge"/>
 </LinearLayout>

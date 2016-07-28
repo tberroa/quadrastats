@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- branding -->
     <string name="app_name">Portal</string>
@@ -102,6 +103,12 @@
     <string name="gwf_others">Others</string>
     <string name="gwf_victory">Victory</string>
     <string name="gwf_defeat">Defeat</string>
+    <string name="gwf_minute_ago">Minute Ago</string>
+    <string name="gwf_minutes_ago">Minutes Ago</string>
+    <string name="gwf_hour_ago">Hour Ago</string>
+    <string name="gwf_hours_ago">Hours Ago</string>
+    <string name="gwf_day_ago">Day Ago</string>
+    <string name="gwf_days_ago">Days Ago</string>
     <!-- chart titles -->
     <string name="gwf_cs" translatable="false">CS</string>
     <string name="gwf_cs_at_10" translatable="false">CS At 10</string>

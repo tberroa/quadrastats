@@ -10,17 +10,17 @@
         android:id="@+id/first_blood_view_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_first_blood"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_huge"/>
 
         <LinearLayout
             android:id="@+id/first_blood_view"
@@ -33,11 +33,11 @@
         android:id="@+id/kills_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/kills_chart"
@@ -49,17 +49,17 @@
         android:id="@+id/damage_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_damage"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/damage_chart"
@@ -71,17 +71,17 @@
         android:id="@+id/spree_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_spree"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/spree_chart"
@@ -93,17 +93,17 @@
         android:id="@+id/multi_kill_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_multi_kill"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/multi_kill_chart"

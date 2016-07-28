@@ -1,122 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
+    android:id="@+id/register_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_overlay_black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_huge">
 
-    <RelativeLayout
+    <EditText
+        android:id="@+id/summoner_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:ems="12"
+        android:gravity="center"
+        android:hint="@string/auth_summoner_name"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/text_size_large"
+        android:theme="@style/AppTheme.EditText"/>
+
+    <EditText
+        android:id="@+id/email_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:ems="12"
+        android:gravity="center"
+        android:hint="@string/auth_email"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/text_size_large"
+        android:theme="@style/AppTheme.EditText"/>
+
+    <EditText
+        android:id="@+id/password_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:ems="12"
+        android:gravity="center"
+        android:hint="@string/auth_password"
+        android:imeOptions="actionNext"
+        android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/text_size_large"
+        android:theme="@style/AppTheme.EditText"/>
+
+    <EditText
+        android:id="@+id/confirm_password_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:ems="12"
+        android:gravity="center"
+        android:hint="@string/auth_confirm_password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/text_size_large"
+        android:theme="@style/AppTheme.EditText"/>
+
+    <Spinner
+        android:id="@+id/region_select_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:theme="@style/AppTheme.Dialog"/>
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        android:text="@string/auth_register"
+        android:textSize="@dimen/text_size_huge"/>
+
+    <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/bg_overlay_black"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:padding="15dp">
+        android:layout_marginBottom="@dimen/spacing_large"
+        app:mrl_rippleColor="@color/white"
+        app:mrl_rippleDimension="@dimen/radius_tiny"
+        app:mrl_rippleDuration="150"
+        app:mrl_rippleRoundedCorners="@dimen/radius_large">
 
-        <EditText
-            android:id="@+id/summoner_name_field"
+        <TextView
+            android:id="@+id/go_to_sign_in_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:ems="12"
-            android:gravity="center"
-            android:hint="@string/auth_summoner_name"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:textColorHint="@color/white"
-            android:theme="@style/AppTheme.EditText"/>
-
-        <EditText
-            android:id="@+id/email_field"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/summoner_name_field"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:ems="12"
-            android:gravity="center"
-            android:hint="@string/auth_email"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/white"
-            android:theme="@style/AppTheme.EditText"/>
-
-        <EditText
-            android:id="@+id/password_field"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/email_field"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:ems="12"
-            android:gravity="center"
-            android:hint="@string/auth_password"
-            android:imeOptions="actionNext"
-            android:inputType="textPassword"
-            android:textColorHint="@color/white"
-            android:theme="@style/AppTheme.EditText"/>
-
-        <EditText
-            android:id="@+id/confirm_password_field"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/password_field"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:ems="12"
-            android:gravity="center"
-            android:hint="@string/auth_confirm_password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:textColorHint="@color/white"
-            android:theme="@style/AppTheme.EditText"/>
-
-        <Spinner
-            android:id="@+id/region_select_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/confirm_password_field"
-            android:layout_alignStart="@id/confirm_password_field"
-            android:layout_below="@id/confirm_password_field"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:theme="@style/DialogStyle"/>
-
-        <Button
-            android:id="@+id/register_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/password_field"
-            android:layout_alignStart="@id/password_field"
-            android:layout_below="@id/region_select_spinner"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:text="@string/auth_register"/>
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/register_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            app:mrl_rippleColor="@color/white"
-            app:mrl_rippleDimension="1dp"
-            app:mrl_rippleDuration="150"
-            app:mrl_rippleRoundedCorners="30dp">
-
-            <TextView
-                android:id="@+id/go_to_sign_in_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:padding="10dp"
-                android:text="@string/auth_go_to_sign_in"
-                android:textSize="16sp"/>
-        </com.balysv.materialripple.MaterialRippleLayout>
-    </RelativeLayout>
-</ScrollView>
+            android:padding="@dimen/spacing_standard"
+            android:text="@string/auth_go_to_sign_in"
+            android:textSize="@dimen/text_size_standard"/>
+    </com.balysv.materialripple.MaterialRippleLayout>
+</LinearLayout>
 

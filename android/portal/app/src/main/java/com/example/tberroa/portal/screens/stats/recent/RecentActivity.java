@@ -1,12 +1,11 @@
 package com.example.tberroa.portal.screens.stats.recent;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.TabLayout.OnTabSelectedListener;
-import android.support.design.widget.TabLayout.Tab;
 import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -25,6 +24,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -79,13 +79,11 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             }
         });
 
-        // initialize the tab layout
+        // initialize tab layout with four tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Income"));
-        tabLayout.addTab(tabLayout.newTab().setText("Offense"));
-        tabLayout.addTab(tabLayout.newTab().setText("Utility"));
-        tabLayout.addTab(tabLayout.newTab().setText("Vision"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        for (int i = 0; i < 4; i++) {
+            tabLayout.addTab(tabLayout.newTab());
+        }
         tabLayout.setVisibility(View.GONE);
 
         // set default legend icon dimension
@@ -235,16 +233,15 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
     }
 
     private void updateAdapter(ArrayList<String> titles, Map<String, List<List<Number>>> aggregateData) {
+        // initialize tab layout and view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        int numOfTabs = tabLayout.getTabCount();
-        FragmentManager fM = getSupportFragmentManager();
-        RecentPagerAdapter pagerAdapter = new RecentPagerAdapter(fM, numOfTabs, titles, aggregateData);
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setAdapter(pagerAdapter);
-        Tab tab = tabLayout.getTabAt(0);
-        if (tab != null) {
-            tab.select();
-        }
+
+        // set the view pager adapter
+        FragmentManager fM = getSupportFragmentManager();
+        viewPager.setAdapter(new RecentPagerAdapter(fM, tabLayout.getTabCount(), titles, aggregateData));
+
+        // set page change listener so user won't invoke refresh layout while changing views
         viewPager.addOnPageChangeListener(new TabLayoutOnPageChangeListener(tabLayout) {
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -252,20 +249,50 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 dataSwipeLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
             }
         });
-        tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
-            @Override
-            public void onTabReselected(Tab tab) {
-            }
 
-            @Override
-            public void onTabSelected(Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+        // integrate tab layout and view pager
+        tabLayout.setupWithViewPager(viewPager);
 
-            @Override
-            public void onTabUnselected(Tab tab) {
+        // set tab icons
+
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            @SuppressLint("InflateParams")
+            View view = getLayoutInflater().inflate(R.layout.header_tab, null);
+            switch (i) {
+                case 0:
+                    if (tab != null) {
+                        ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
+                        icon.setImageResource(R.drawable.ic_income);
+                        tab.setCustomView(view);
+                    }
+                    break;
+                case 1:
+                    if (tab != null) {
+                        ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
+                        icon.setImageResource(R.drawable.ic_offense);
+                        tab.setCustomView(view);
+                    }
+                    break;
+                case 2:
+                    if (tab != null) {
+                        ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
+                        icon.setImageResource(R.drawable.ic_utility);
+                        tab.setCustomView(view);
+                    }
+                    break;
+                case 3:
+                    if (tab != null) {
+                        ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
+                        icon.setImageResource(R.drawable.ic_vision);
+                        tab.setCustomView(view);
+                    }
+                    break;
+                default:
+                    break;
             }
-        });
+        }
     }
 
     private class ChampionIcon {
@@ -297,19 +324,14 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         @Override
         public void onBindViewHolder(ChampionViewHolder viewHolder, int i) {
-            viewHolder.champIconView.getLayoutParams().width = side;
-            viewHolder.champIconView.getLayoutParams().height = side;
-            viewHolder.champIconView.setLayoutParams(viewHolder.champIconView.getLayoutParams());
-            viewHolder.champIconCheck.getLayoutParams().width = side;
-            viewHolder.champIconCheck.getLayoutParams().height = side;
-            viewHolder.champIconCheck.setLayoutParams(viewHolder.champIconCheck.getLayoutParams());
-
+            // load champion icon into view
             ChampionIcon icon = championIcons.get(i);
             icon.check = viewHolder.champIconCheck;
             String key = icon.champion.key;
             String url = StatsUtil.championIconURL(staticRiotData.version, key);
-            Picasso.with(RecentActivity.this).load(url).fit().into(viewHolder.champIconView);
+            Picasso.with(RecentActivity.this).load(url).resize(side, side).into(viewHolder.champIconView);
 
+            // set check
             if (icon.isSelected) {
                 viewHolder.champIconCheck.setVisibility(View.VISIBLE);
             } else {
@@ -318,7 +340,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         }
 
         @Override
-        public ChampionViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        public ChampionViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
             Context context = viewGroup.getContext();
             View view = LayoutInflater.from(context).inflate(R.layout.element_champion_icon, viewGroup, false);
             return new ChampionViewHolder(view);
@@ -331,6 +353,8 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
             ChampionViewHolder(View itemView) {
                 super(itemView);
+
+                // initialize views
                 champIconView = (ImageView) itemView.findViewById(R.id.champ_icon_view);
                 champIconCheck = (ImageView) itemView.findViewById(R.id.champ_icon_check);
                 champIconView.setOnClickListener(new OnClickListener() {
@@ -353,6 +377,14 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                         }
                     }
                 });
+
+                // resize views according to screen
+                champIconView.getLayoutParams().width = side;
+                champIconView.getLayoutParams().height = side;
+                champIconView.setLayoutParams(champIconView.getLayoutParams());
+                champIconCheck.getLayoutParams().width = side;
+                champIconCheck.getLayoutParams().height = side;
+                champIconCheck.setLayoutParams(champIconCheck.getLayoutParams());
             }
         }
     }
@@ -360,7 +392,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
     private class FilterDialog extends Dialog {
 
         public FilterDialog() {
-            super(RecentActivity.this, R.style.DialogStyle);
+            super(RecentActivity.this, R.style.AppTheme_Dialog);
         }
 
         @Override
@@ -380,6 +412,11 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
             // set legend icon dimensions based off the champion icon dimensions
             legendIconSide = champIconSide / 2;
+
+            // set position icon dimensions based off the champion icon dimensions
+            FrameLayout iconLayout = (FrameLayout) findViewById(R.id.pos_icon_layout);
+            iconLayout.getLayoutParams().height = (70 * champIconSide) / 100;
+            iconLayout.setLayoutParams(iconLayout.getLayoutParams());
 
             // create the recycler view adapter data set
             List<ChampionIcon> championIcons = new ArrayList<>();
@@ -676,7 +713,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         private final ArrayList<String> titles;
 
         public SelectSummonersDialog(GoButtonPackageSSD goButtonPackageSSD) {
-            super(RecentActivity.this, R.style.DialogStyle);
+            super(RecentActivity.this, R.style.AppTheme_Dialog);
             selectedNames = goButtonPackageSSD.selectedNames;
             selectedData = goButtonPackageSSD.selectedData;
             titles = goButtonPackageSSD.titles;

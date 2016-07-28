@@ -9,17 +9,17 @@
         android:id="@+id/cs_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_cs"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/cs_chart"
@@ -31,17 +31,17 @@
         android:id="@+id/cs_10_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_cs_at_10"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/cs_10_chart"
@@ -53,17 +53,17 @@
         android:id="@+id/cs_diff_10_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_cs_diff_at_10"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/cs_diff_10_chart"
@@ -75,17 +75,17 @@
         android:id="@+id/gold_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/spacing_huge"
         android:background="@drawable/bg_overlay_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_total_gold"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/gold_chart"

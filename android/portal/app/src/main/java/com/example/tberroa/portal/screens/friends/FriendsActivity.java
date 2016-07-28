@@ -92,7 +92,7 @@ public class FriendsActivity extends BaseActivity {
     private class AddFriendDialog extends Dialog {
 
         public AddFriendDialog() {
-            super(FriendsActivity.this, R.style.DialogStyle);
+            super(FriendsActivity.this, R.style.AppTheme_Dialog);
         }
 
         @Override
@@ -141,7 +141,7 @@ public class FriendsActivity extends BaseActivity {
         private final int position;
 
         public RemoveFriendDialog(int position) {
-            super(FriendsActivity.this, R.style.DialogStyle);
+            super(FriendsActivity.this, R.style.AppTheme_Dialog);
             this.position = position;
         }
 

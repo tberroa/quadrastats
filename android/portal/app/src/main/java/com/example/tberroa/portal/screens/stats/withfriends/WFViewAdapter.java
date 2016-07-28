@@ -50,6 +50,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
     private final Context context;
     private final Map<String, MatchStats> matchStatsMap;
     private final StaticRiotData staticRiotData;
+    private List<String> champIconURLsList;
     private List<List<String>> iconURLsList;
 
     public WFViewAdapter(Context context, Map<String, MatchStats> matchStatsMap, StaticRiotData staticRiotData) {
@@ -119,12 +120,24 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         String timeAgo;
         if (daysAgo == 0) {
             if (hoursAgo == 0) {
-                timeAgo = minutesAgo + " minutes ago";
+                if (minutesAgo == 1) {
+                    timeAgo = minutesAgo + " " + context.getString(R.string.gwf_minute_ago);
+                } else {
+                    timeAgo = minutesAgo + " " + context.getString(R.string.gwf_minutes_ago);
+                }
             } else {
-                timeAgo = hoursAgo + " hours ago";
+                if (hoursAgo == 1) {
+                    timeAgo = hoursAgo + " " + context.getString(R.string.gwf_hour_ago);
+                } else {
+                    timeAgo = hoursAgo + " " + context.getString(R.string.gwf_hours_ago);
+                }
             }
         } else {
-            timeAgo = daysAgo + " days ago";
+            if (daysAgo == 1) {
+                timeAgo = daysAgo + " " + context.getString(R.string.gwf_day_ago);
+            } else {
+                timeAgo = daysAgo + " " + context.getString(R.string.gwf_days_ago);
+            }
         }
         wfViewHolder.matchDateView.setText(timeAgo);
 
@@ -201,8 +214,12 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
     }
 
     private void populateSummonerTable(List<LinearLayout> summonerLayouts, List<MatchStats> matchStatsList) {
-        int x = 0;
+        // initialize url array lists
         iconURLsList = new ArrayList<>();
+        champIconURLsList = new ArrayList<>();
+
+        // iterate over the match data
+        int x = 0;
         for (MatchStats matchStats : matchStatsList) {
             // initialize the layout
             LinearLayout summonerLayout = summonerLayouts.get(x);
@@ -230,11 +247,9 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             // turn on the layout
             summonerLayout.setVisibility(View.VISIBLE);
 
-            // set champion icon
-            ImageView championView = (ImageView) summonerLayout.findViewById(R.id.summoner_champ_view);
+            // gather the champion icon url
             String key = StatsUtil.championKey(matchStats.champion, staticRiotData.championsMap);
-            String url = StatsUtil.championIconURL(staticRiotData.version, key);
-            Picasso.with(context).load(url).transform(new RoundTransform()).into(championView);
+            champIconURLsList.add(StatsUtil.championIconURL(staticRiotData.version, key));
 
             // gather icon urls
             iconURLsList.add(new ArrayList<>());
@@ -289,11 +304,11 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
 
             // set the icon
             if (urls.get(position).equals(Constants.UI_NO_ITEM)) {
-                Picasso.with(context).load(R.drawable.ic_no_item).transform(new RoundTransform())
-                        .resize((int) (side / 2.1), (int) (side / 2.1)).into(viewHolder.icon);
+                Picasso.with(context).load(R.drawable.ic_no_item).resize((int) (side / 2.1), (int) (side / 2.1))
+                        .transform(new RoundTransform()).into(viewHolder.icon);
             } else {
-                Picasso.with(context).load(urls.get(position)).transform(new RoundTransform())
-                        .resize((int) (side / 2.1), (int) (side / 2.1)).into(viewHolder.icon);
+                Picasso.with(context).load(urls.get(position)).resize((int) (side / 2.1), (int) (side / 2.1))
+                        .transform(new RoundTransform()).into(viewHolder.icon);
             }
 
             return convertView;
@@ -338,6 +353,27 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             summonerLayouts.add((LinearLayout) itemView.findViewById(R.id.summoner_4_layout));
             summonerLayouts.add((LinearLayout) itemView.findViewById(R.id.summoner_5_layout));
 
+            // get the champ view dimensions
+            ImageView champView = (ImageView) summonerLayouts.get(0).findViewById(R.id.summoner_champ_view);
+            champView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    champView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    int height = champView.getHeight();
+                    int width = champView.getWidth();
+                    int side = Math.min(width, height);
+
+                    // set the champion icon
+                    for (int i = 0; i < champIconURLsList.size(); i++) {
+                        LinearLayout summonerLayout = summonerLayouts.get(i);
+                        ImageView champView = (ImageView) summonerLayout.findViewById(R.id.summoner_champ_view);
+                        String url = champIconURLsList.get(i);
+                        Picasso.with(context).load(url).resize(side, side)
+                                .transform(new RoundTransform()).into(champView);
+                    }
+                }
+            });
+
             // get the grid height
             GridView gridView = (GridView) summonerLayouts.get(0).findViewById(R.id.summoner_grid_view);
             gridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -376,7 +412,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final int tab;
 
         public ChartsDialog(List<String> names, List<MatchStats> matchStatsList, int tab) {
-            super(context, R.style.DialogStyle);
+            super(context, R.style.AppTheme_Dialog);
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.tab = tab;
@@ -402,7 +438,6 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             CreateLegendPackage createLegendPackage = new CreateLegendPackage();
             createLegendPackage.context = context;
-            createLegendPackage.notFiveMan = notFiveMan;
             createLegendPackage.staticRiotData = staticRiotData;
             createLegendPackage.view = findViewById(R.id.legend_layout);
             switch (tab) {
@@ -414,12 +449,14 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                     break;
                 case 1:
                     createLegendPackage.names = new LinkedHashSet<>(namesPie);
+                    createLegendPackage.notFiveMan = notFiveMan;
                     StatsUtil.createLegend(createLegendPackage);
                     OffenseAdapter offenseAdapter = new OffenseAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(offenseAdapter);
                     break;
                 case 2:
                     createLegendPackage.names = new LinkedHashSet<>(namesPie);
+                    createLegendPackage.notFiveMan = notFiveMan;
                     StatsUtil.createLegend(createLegendPackage);
                     UtilityAdapter utilityAdapter = new UtilityAdapter(names, matchStatsList, (75 * height) / 100);
                     recyclerView.setAdapter(utilityAdapter);

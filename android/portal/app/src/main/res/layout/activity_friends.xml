@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<merge
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/no_friends_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:drawableTop="@drawable/sticker_ahri"
-        android:gravity="center"
-        android:text="@string/mf_no_friends"
-        android:textSize="25sp"/>
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <TextView
+        android:id="@+id/no_friends_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/spacing_huge"
+        android:layout_marginStart="@dimen/spacing_huge"
+        android:drawableTop="@drawable/sticker_ahri"
+        android:gravity="center"
+        android:text="@string/mf_no_friends"
+        android:textSize="@dimen/text_size_massive"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_friend_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacing_huge"
         android:clickable="true"
         android:src="@drawable/ic_add_button"/>
-</RelativeLayout>
+</merge>

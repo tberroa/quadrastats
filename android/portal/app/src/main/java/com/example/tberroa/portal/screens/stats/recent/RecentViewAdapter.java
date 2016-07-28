@@ -132,7 +132,7 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
         final String title;
 
         public AverageChartDialog(String title, int i) {
-            super(context, R.style.DialogStyle);
+            super(context, R.style.AppTheme_Dialog);
             this.title = title;
             this.i = i;
         }

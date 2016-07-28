@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- padding and margins -->
+    <dimen name="spacing_tiny">3dp</dimen>
+    <dimen name="spacing_small">5dp</dimen>
+    <dimen name="spacing_standard">8dp</dimen>
+    <dimen name="spacing_large">15dp</dimen>
+    <dimen name="spacing_huge">23dp</dimen>
+    <dimen name="spacing_massive">45dp</dimen>
+
+    <!-- rounded corners -->
+    <dimen name="radius_tiny">3dp</dimen>
+    <dimen name="radius_standard">15dp</dimen>
+    <dimen name="radius_large">45dp</dimen>
+
+    <!-- ui elements -->
+    <dimen name="add_friend_button">36dp</dimen>
+    <dimen name="back_button">24dp</dimen>
+    <dimen name="menu_button">24dp</dimen>
+    <dimen name="loading_bar_height">45dp</dimen>
+    <dimen name="divider_height">2dp</dimen>
+    <dimen name="profile_icon_side">200dp</dimen>
+    <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="dialog_width">500dp</dimen>
+
+    <!-- text -->
+    <dimen name="text_size_tiny">12sp</dimen>
+    <dimen name="text_size_small">18sp</dimen>
+    <dimen name="text_size_standard">24sp</dimen>
+    <dimen name="text_size_large">27sp</dimen>
+    <dimen name="text_size_huge">30sp</dimen>
+    <dimen name="text_size_massive">38sp</dimen>
+    <dimen name="text_size_friend_names">50sp</dimen>
+</resources>

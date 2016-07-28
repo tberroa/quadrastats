@@ -1,28 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style
-        name="AppTheme"
-        parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@null</item>
         <item name="android:colorButtonNormal">@color/accent</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style
-        name="AppTheme.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.Dialog" parent="android:style/Theme.Holo.Dialog">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
-    <style
-        name="AppTheme.PopupOverlay"
-        parent="ThemeOverlay.AppCompat.Light"/>
-
-    <style
-        name="AppTheme.EditText"
-        parent="AppTheme">
+    <style name="AppTheme.EditText" parent="AppTheme">
         <item name="colorControlNormal">@color/accent</item>
         <item name="colorControlActivated">@color/accent</item>
         <item name="colorControlHighlight">@color/accent</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="AuthBackground" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_teemo</item>
@@ -50,12 +47,5 @@
 
     <style name="WithFriendsBackground" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_akali</item>
-    </style>
-
-    <style
-        name="DialogStyle"
-        parent="android:style/Theme.Holo.Dialog">
-        <item name="android:layout_gravity">center</item>
-        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>
