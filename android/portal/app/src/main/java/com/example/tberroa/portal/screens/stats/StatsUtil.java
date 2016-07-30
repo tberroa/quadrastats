@@ -1,20 +1,18 @@
 package com.example.tberroa.portal.screens.stats;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.models.datadragon.Champion;
 import com.example.tberroa.portal.screens.RoundTransform;
-import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.StaticRiotData;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,10 +40,10 @@ public class StatsUtil {
         colors[1] = R.color.green;
         colors[2] = R.color.orange;
         colors[3] = R.color.pink;
-        colors[4] = R.color.purple;
-        colors[5] = R.color.red;
+        colors[4] = R.color.yellow;
+        colors[5] = R.color.purple;
         colors[6] = R.color.sky_blue;
-        colors[7] = R.color.yellow;
+        colors[7] = R.color.red;
         return colors;
     }
 
@@ -58,6 +56,7 @@ public class StatsUtil {
         String position = createLegendPackage.position;
         StaticRiotData staticRiotData = createLegendPackage.staticRiotData;
         View view = createLegendPackage.view;
+        Integer viewWidth = createLegendPackage.viewWidth;
 
         // set position icon
         ImageView positionIcon = (ImageView) view.findViewById(R.id.position_view);
@@ -80,28 +79,41 @@ public class StatsUtil {
             String key = championKey(championId, staticRiotData.championsMap);
             String url = championIconURL(staticRiotData.version, key);
             Picasso.with(context).load(url).resize(iconSide, iconSide)
-                    .transform(new RoundTransform()).into(championIcon);
+                    .placeholder(R.drawable.ic_placeholder).transform(new RoundTransform()).into(championIcon);
             championIcon.setVisibility(View.VISIBLE);
         } else {
             championIcon.setVisibility(View.GONE);
         }
 
         // set names
-        GridLayout legendNames = (GridLayout) view.findViewById(R.id.names_layout);
-        legendNames.removeAllViews();
-        int i = 0;
-        for (String name : names) {
-            TextView textView = new TextView(context);
-            textView.setText(name);
-            textView.setTextSize(12);
-            if ((notFiveMan != null) && (notFiveMan) && (i == (names.size() - 1))) {
-                textView.setTextColor(ContextCompat.getColor(context, R.color.gray));
-            } else {
-                textView.setTextColor(ContextCompat.getColor(context, intToColor(i)));
-            }
-            textView.setPadding(ScreenUtil.dpToPx(context, 5), 0, ScreenUtil.dpToPx(context, 5), 0);
-            legendNames.addView(textView);
-            i++;
+        GridView legend = (GridView) view.findViewById(R.id.names_grid);
+        LegendAdapter adapter = new LegendAdapter(context, new ArrayList<>(names), notFiveMan, legend, viewWidth);
+        legend.setVisibility(View.INVISIBLE);
+        legend.setNumColumns(1);
+        legend.setColumnWidth(1000);
+        legend.setAdapter(adapter);
+    }
+
+    public static int intToColor(int i) {
+        switch (i % 8) {
+            case 0:
+                return R.color.blue;
+            case 1:
+                return R.color.green;
+            case 2:
+                return R.color.orange;
+            case 3:
+                return R.color.pink;
+            case 4:
+                return R.color.yellow;
+            case 5:
+                return R.color.purple;
+            case 6:
+                return R.color.sky_blue;
+            case 7:
+                return R.color.red;
+            default:
+                return R.color.blue;
         }
     }
 
@@ -139,29 +151,6 @@ public class StatsUtil {
                 return Constants.URL_DATA_DRAGON + version + Constants.URL_SS_BARRIER;
             default:
                 return Constants.URL_DATA_DRAGON + version + Constants.URL_SS_FLASH;
-        }
-    }
-
-    private static int intToColor(int i) {
-        switch (i % 8) {
-            case 0:
-                return R.color.blue;
-            case 1:
-                return R.color.green;
-            case 2:
-                return R.color.orange;
-            case 3:
-                return R.color.pink;
-            case 4:
-                return R.color.purple;
-            case 5:
-                return R.color.red;
-            case 6:
-                return R.color.sky_blue;
-            case 7:
-                return R.color.yellow;
-            default:
-                return R.color.blue;
         }
     }
 

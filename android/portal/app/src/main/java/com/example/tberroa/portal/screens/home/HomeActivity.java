@@ -46,12 +46,30 @@ public class HomeActivity extends BaseActivity {
         toolbar.setTitle(R.string.app_name);
 
         // initialize image views
-        int width = ScreenUtil.screenWidth(this);
-        int height = ScreenUtil.screenHeight(this) / 4;
         ImageView manageFriendsView = (ImageView) findViewById(R.id.manage_friends_image);
         ImageView recentView = (ImageView) findViewById(R.id.recent_image);
         ImageView seasonView = (ImageView) findViewById(R.id.season_image);
         ImageView withFriendsView = (ImageView) findViewById(R.id.with_friends_image);
+
+        // get dimensions for images
+        int width = ScreenUtil.screenWidth(this);
+        int height = ScreenUtil.screenHeight(this) / 4;
+
+        // resize image views
+        manageFriendsView.getLayoutParams().width = width;
+        manageFriendsView.getLayoutParams().height = height;
+        manageFriendsView.setLayoutParams(manageFriendsView.getLayoutParams());
+        recentView.getLayoutParams().width = width;
+        recentView.getLayoutParams().height = height;
+        recentView.setLayoutParams(recentView.getLayoutParams());
+        seasonView.getLayoutParams().width = width;
+        seasonView.getLayoutParams().height = height;
+        seasonView.setLayoutParams(seasonView.getLayoutParams());
+        withFriendsView.getLayoutParams().width = width;
+        withFriendsView.getLayoutParams().height = height;
+        withFriendsView.setLayoutParams(withFriendsView.getLayoutParams());
+
+        // load images into image views
         Picasso.with(this).load(R.drawable.splash_pool_party).resize(width, height)
                 .centerCrop().into(manageFriendsView);
         Picasso.with(this).load(R.drawable.splash_zed).resize(width, height)

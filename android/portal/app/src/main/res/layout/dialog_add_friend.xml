@@ -36,6 +36,7 @@
             android:layout_weight="0.5"
             android:backgroundTint="@color/accent"
             android:text="@string/button_cancel"
+            android:textAllCaps="true"
             android:textSize="@dimen/text_size_huge"
             tools:ignore="ButtonStyle"/>
 
@@ -46,6 +47,7 @@
             android:layout_weight="0.5"
             android:backgroundTint="@color/accent"
             android:text="@string/button_done"
+            android:textAllCaps="true"
             android:textSize="@dimen/text_size_huge"
             tools:ignore="ButtonStyle"/>
     </LinearLayout>

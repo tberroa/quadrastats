@@ -205,6 +205,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         createLegendPackage.position = position;
         createLegendPackage.staticRiotData = staticRiotData;
         createLegendPackage.view = legendLayout;
+        createLegendPackage.viewWidth = ScreenUtil.screenWidth(this);
         StatsUtil.createLegend(createLegendPackage);
 
         // display the legend
@@ -329,7 +330,8 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             icon.check = viewHolder.champIconCheck;
             String key = icon.champion.key;
             String url = StatsUtil.championIconURL(staticRiotData.version, key);
-            Picasso.with(RecentActivity.this).load(url).resize(side, side).into(viewHolder.champIconView);
+            Picasso.with(RecentActivity.this).load(url).resize(side, side)
+                    .placeholder(R.drawable.ic_placeholder).into(viewHolder.champIconView);
 
             // set check
             if (icon.isSelected) {
@@ -771,6 +773,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                         createLegendPackage.position = position;
                         createLegendPackage.staticRiotData = staticRiotData;
                         createLegendPackage.view = RecentActivity.this.findViewById(R.id.legend_layout);
+                        createLegendPackage.viewWidth = ScreenUtil.screenWidth(RecentActivity.this);
                         StatsUtil.createLegend(createLegendPackage);
                         updateAdapter(titles, selectedData);
                         dismiss();

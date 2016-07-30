@@ -12,7 +12,7 @@
     <color name="green">#00D681</color>
     <color name="orange">#FFAD33</color>
     <color name="pink">#FF99FF</color>
-    <color name="purple">#8000FF</color>
+    <color name="purple">#AE57FF</color>
     <color name="red">#FF0000</color>
     <color name="sky_blue">#CCFFFF</color>
     <color name="yellow">#FFFF00</color>
@@ -21,10 +21,10 @@
 
     <!-- overlay colors -->
     <color name="black_transparent">#80000000</color>
-    <color name="white_transparent">#4DFFFFFF</color>
+    <color name="white_transparent">#33FFFFFF</color>
     <color name="blue_transparent">#4D1A8CFF</color>
     <color name="green_transparent">#4D00D681</color>
     <color name="orange_transparent">#4DFFAD33</color>
     <color name="pink_transparent">#4DFF99FF</color>
-    <color name="purple_transparent">#4D8000FF</color>
+    <color name="purple_transparent">#4DAE57FF</color>
 </resources>

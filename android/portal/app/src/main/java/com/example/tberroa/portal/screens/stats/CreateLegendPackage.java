@@ -17,4 +17,5 @@ public class CreateLegendPackage {
     public String position;
     public StaticRiotData staticRiotData;
     public View view;
+    public int viewWidth;
 }

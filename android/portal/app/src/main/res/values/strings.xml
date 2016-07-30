@@ -100,15 +100,16 @@
 
     <!-- games with friends activity -->
     <string name="gwf_activity_title">Games With Friends</string>
+    <string name="gwf_win_rates">Win Rates</string>
     <string name="gwf_others">Others</string>
     <string name="gwf_victory">Victory</string>
     <string name="gwf_defeat">Defeat</string>
-    <string name="gwf_minute_ago">Minute Ago</string>
-    <string name="gwf_minutes_ago">Minutes Ago</string>
-    <string name="gwf_hour_ago">Hour Ago</string>
-    <string name="gwf_hours_ago">Hours Ago</string>
-    <string name="gwf_day_ago">Day Ago</string>
-    <string name="gwf_days_ago">Days Ago</string>
+    <string name="gwf_minute_ago" translatable="false">Minute Ago</string>
+    <string name="gwf_minutes_ago" translatable="false">Minutes Ago</string>
+    <string name="gwf_hour_ago" translatable="false">Hour Ago</string>
+    <string name="gwf_hours_ago" translatable="false">Hours Ago</string>
+    <string name="gwf_day_ago" translatable="false">Day Ago</string>
+    <string name="gwf_days_ago" translatable="false">Days Ago</string>
     <!-- chart titles -->
     <string name="gwf_cs" translatable="false">CS</string>
     <string name="gwf_cs_at_10" translatable="false">CS At 10</string>

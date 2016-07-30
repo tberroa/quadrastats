@@ -227,7 +227,8 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
             // display the profile icon
             ImageView summonerIcon = (ImageView) headerLayout.findViewById(R.id.user_profile_icon_view);
             String url = ScreenUtil.profileIconURL(staticRiotData.version, profileIcon);
-            Picasso.with(BaseActivity.this).load(url).fit().transform(new CircleTransform()).into(summonerIcon);
+            Picasso.with(BaseActivity.this).load(url).fit()
+                    .placeholder(R.drawable.ic_placeholder).transform(new CircleTransform()).into(summonerIcon);
         }
     }
 }

@@ -302,13 +302,18 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
+            // resize the image view
+            viewHolder.icon.getLayoutParams().width = (int) (side / 2.1);
+            viewHolder.icon.getLayoutParams().height = (int) (side / 2.1);
+            viewHolder.icon.setLayoutParams(viewHolder.icon.getLayoutParams());
+
             // set the icon
             if (urls.get(position).equals(Constants.UI_NO_ITEM)) {
                 Picasso.with(context).load(R.drawable.ic_no_item).resize((int) (side / 2.1), (int) (side / 2.1))
-                        .transform(new RoundTransform()).into(viewHolder.icon);
+                        .placeholder(R.drawable.ic_placeholder).transform(new RoundTransform()).into(viewHolder.icon);
             } else {
                 Picasso.with(context).load(urls.get(position)).resize((int) (side / 2.1), (int) (side / 2.1))
-                        .transform(new RoundTransform()).into(viewHolder.icon);
+                        .placeholder(R.drawable.ic_placeholder).transform(new RoundTransform()).into(viewHolder.icon);
             }
 
             return convertView;
@@ -369,7 +374,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                         ImageView champView = (ImageView) summonerLayout.findViewById(R.id.summoner_champ_view);
                         String url = champIconURLsList.get(i);
                         Picasso.with(context).load(url).resize(side, side)
-                                .transform(new RoundTransform()).into(champView);
+                                .placeholder(R.drawable.ic_placeholder).transform(new RoundTransform()).into(champView);
                     }
                 }
             });
@@ -440,6 +445,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             createLegendPackage.context = context;
             createLegendPackage.staticRiotData = staticRiotData;
             createLegendPackage.view = findViewById(R.id.legend_layout);
+            createLegendPackage.viewWidth = width;
             switch (tab) {
                 case 0:
                     createLegendPackage.names = new LinkedHashSet<>(names);

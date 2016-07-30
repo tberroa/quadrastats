@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.tberroa.portal.R;
@@ -22,6 +23,20 @@ import java.util.Map;
 public class WFActivity extends BaseStatsActivity implements WFAsync {
 
     public void displayData(Map<Long, Map<String, MatchStats>> matchStatsMapMap) {
+        // update the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.with_friends_menu);
+        toolbar.setOnMenuItemClickListener(new MenuListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                super.onMenuItemClick(item);
+                switch (item.getItemId()) {
+                    case R.id.win_rates:
+                }
+                return true;
+            }
+        });
+
         // initialize the tab layout
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.removeAllTabs();

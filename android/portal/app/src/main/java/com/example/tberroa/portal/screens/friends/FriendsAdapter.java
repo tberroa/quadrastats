@@ -52,10 +52,15 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         // get dimensions
         int side = ScreenUtil.screenHeight(context) / 7;
 
+        // resize the profile icon image view
+        viewHolder.profileIcon.getLayoutParams().width = side;
+        viewHolder.profileIcon.getLayoutParams().height = side;
+        viewHolder.profileIcon.setLayoutParams(viewHolder.profileIcon.getLayoutParams());
+
         // set the profile icon
         String url = ScreenUtil.profileIconURL(version, friends.get(position).profile_icon);
         Picasso.with(context).load(url).resize(side, side)
-                .transform(new CircleTransform()).into(viewHolder.profileIcon);
+                .placeholder(R.drawable.ic_placeholder).transform(new CircleTransform()).into(viewHolder.profileIcon);
 
         // set name
         viewHolder.name.setText(friends.get(position).name);

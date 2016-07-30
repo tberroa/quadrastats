@@ -120,5 +120,6 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/accent"
         android:text="@string/button_go"
+        android:textAllCaps="true"
         android:textSize="@dimen/text_size_huge"/>
 </LinearLayout>

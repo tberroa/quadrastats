@@ -14,9 +14,6 @@
     <dimen name="radius_large">30dp</dimen>
 
     <!-- ui elements -->
-    <dimen name="add_friend_button">24dp</dimen>
-    <dimen name="back_button">24dp</dimen>
-    <dimen name="menu_button">24dp</dimen>
     <dimen name="loading_bar_height">30dp</dimen>
     <dimen name="divider_height">1dp</dimen>
     <dimen name="profile_icon_side">160dp</dimen>
