@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacing_standard">
+
+    <TextView
+        android:id="@+id/summoner_name_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"/>
+
+    <TextView
+        android:id="@+id/played_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"/>
+
+    <TextView
+        android:id="@+id/wins_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"/>
+
+    <TextView
+        android:id="@+id/win_ratio_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"/>
+</LinearLayout>

@@ -40,6 +40,7 @@ import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.stats.BaseStatsActivity;
 import com.example.tberroa.portal.screens.stats.CreateLegendPackage;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
+import com.example.tberroa.portal.screens.stats.WinRatesDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -67,17 +68,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.rg_activity_title);
         toolbar.inflateMenu(R.menu.recent_menu);
-        toolbar.setOnMenuItemClickListener(new MenuListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                super.onMenuItemClick(item);
-                switch (item.getItemId()) {
-                    case R.id.filter:
-                        new FilterDialog().show();
-                }
-                return true;
-            }
-        });
 
         // initialize tab layout with four tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -113,6 +103,24 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
     }
 
     private void populateActivity(List<MatchStats> matchStatsList, long championId, String position) {
+        // update the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(new MenuListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                super.onMenuItemClick(item);
+                switch (item.getItemId()) {
+                    case R.id.filter:
+                        new FilterDialog().show();
+                        break;
+                    case R.id.win_rates:
+                        new WinRatesDialog(RecentActivity.this, matchStatsList, null).show();
+                        break;
+                }
+                return true;
+            }
+        });
+
         // Before the data can be presented, it needs to be organized. All the data will be put into one map object.
         // The map key is the summoner name and the value is a list of of lists where each list is a list of data
         // points corresponding to one stat chart.

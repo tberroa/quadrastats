@@ -77,22 +77,30 @@
     <string name="bs_no_friends">You have no friends to compare stats with!</string>
     <string name="bs_add_friends">Add Friends</string>
 
+    <!-- win rates dialog -->
+    <string name="wrd_win_ratio">Win Ratio</string>
+    <string name="wrd_summoner">Summoner</string>
+    <string name="wrd_played">Played</string>
+    <string name="wrd_won">Won</string>
+    <string name="wrd_ratio">Ratio</string>
+
     <!-- recent games activity -->
     <string name="rg_activity_title">Recent Games</string>
     <string name="rg_filter_data">Filter Data</string>
+    <string name="rg_win_rates">Win Rates</string>
     <string name="rg_average">Average</string>
     <!-- chart titles -->
-    <string name="rg_cs_at_ten" translatable="false">CS At 10</string>
-    <string name="rg_cs_diff_at_ten" translatable="false">CS Differential At 10</string>
-    <string name="rg_cs_per_min" translatable="false">CS Per Minute</string>
-    <string name="rg_gold_per_min" translatable="false">Gold Per Minute</string>
-    <string name="rg_dmg_per_min" translatable="false">Damage Per Minute</string>
-    <string name="rg_kills" translatable="false">Kills</string>
-    <string name="rg_kda" translatable="false">KDA</string>
-    <string name="rg_kill_participation" translatable="false">Kill Participation</string>
-    <string name="rg_wards_bought" translatable="false">Wards Bought</string>
-    <string name="rg_wards_placed" translatable="false">Wards Placed</string>
-    <string name="rg_wards_killed" translatable="false">Wards Killed</string>
+    <string name="rg_cs_at_ten">CS At 10</string>
+    <string name="rg_cs_diff_at_ten">CS Differential At 10</string>
+    <string name="rg_cs_per_min">CS Per Minute</string>
+    <string name="rg_gold_per_min">Gold Per Minute</string>
+    <string name="rg_dmg_per_min">Damage Per Minute</string>
+    <string name="rg_kills">Kills</string>
+    <string name="rg_kda">KDA</string>
+    <string name="rg_kill_participation">Kill Participation</string>
+    <string name="rg_wards_bought">Wards Bought</string>
+    <string name="rg_wards_placed">Wards Placed</string>
+    <string name="rg_wards_killed">Wards Killed</string>
 
     <!-- season totals activity -->
     <string name="st_activity_title">Season Totals</string>
@@ -104,26 +112,26 @@
     <string name="gwf_others">Others</string>
     <string name="gwf_victory">Victory</string>
     <string name="gwf_defeat">Defeat</string>
-    <string name="gwf_minute_ago" translatable="false">Minute Ago</string>
-    <string name="gwf_minutes_ago" translatable="false">Minutes Ago</string>
-    <string name="gwf_hour_ago" translatable="false">Hour Ago</string>
-    <string name="gwf_hours_ago" translatable="false">Hours Ago</string>
-    <string name="gwf_day_ago" translatable="false">Day Ago</string>
-    <string name="gwf_days_ago" translatable="false">Days Ago</string>
+    <string name="gwf_minute_ago">Minute Ago</string>
+    <string name="gwf_minutes_ago">Minutes Ago</string>
+    <string name="gwf_hour_ago">Hour Ago</string>
+    <string name="gwf_hours_ago">Hours Ago</string>
+    <string name="gwf_day_ago">Day Ago</string>
+    <string name="gwf_days_ago">Days Ago</string>
     <!-- chart titles -->
-    <string name="gwf_cs" translatable="false">CS</string>
-    <string name="gwf_cs_at_10" translatable="false">CS At 10</string>
-    <string name="gwf_cs_diff_at_10" translatable="false">CS Differential At 10</string>
-    <string name="gwf_total_gold" translatable="false">Total Gold</string>
-    <string name="gwf_first_blood" translatable="false">First Blood Participation</string>
-    <string name="gwf_kills" translatable="false">Kills</string>
-    <string name="gwf_damage" translatable="false">Total Damage</string>
-    <string name="gwf_spree" translatable="false">Largest Killing Spree</string>
-    <string name="gwf_multi_kill" translatable="false">Largest Multi Kill</string>
-    <string name="gwf_assists" translatable="false">Assists</string>
-    <string name="gwf_kda" translatable="false">KDA</string>
-    <string name="gwf_kp" translatable="false">Kill Participation</string>
-    <string name="gwf_wards" translatable="false">Wards Bought/Placed/Killed</string>
+    <string name="gwf_cs">CS</string>
+    <string name="gwf_cs_at_10">CS At 10</string>
+    <string name="gwf_cs_diff_at_10">CS Differential At 10</string>
+    <string name="gwf_total_gold">Total Gold</string>
+    <string name="gwf_first_blood">First Blood Participation</string>
+    <string name="gwf_kills">Kills</string>
+    <string name="gwf_damage">Total Damage</string>
+    <string name="gwf_spree">Largest Killing Spree</string>
+    <string name="gwf_multi_kill">Largest Multi Kill</string>
+    <string name="gwf_assists">Assists</string>
+    <string name="gwf_kda">KDA</string>
+    <string name="gwf_kp">Kill Participation</string>
+    <string name="gwf_wards">Wards Bought/Placed/Killed</string>
 
     <!-- drawer navigation menu -->
     <string name="nav_account">Account</string>

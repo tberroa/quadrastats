@@ -15,6 +15,7 @@ import android.view.View;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.stats.BaseStatsActivity;
+import com.example.tberroa.portal.screens.stats.WinRatesDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,13 @@ public class WFActivity extends BaseStatsActivity implements WFAsync {
     public void displayData(Map<Long, Map<String, MatchStats>> matchStatsMapMap) {
         // update the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.inflateMenu(R.menu.with_friends_menu);
         toolbar.setOnMenuItemClickListener(new MenuListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 super.onMenuItemClick(item);
                 switch (item.getItemId()) {
                     case R.id.win_rates:
+                        new WinRatesDialog(WFActivity.this, null, matchStatsMapMap).show();
                 }
                 return true;
             }
@@ -92,6 +93,7 @@ public class WFActivity extends BaseStatsActivity implements WFAsync {
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.gwf_activity_title);
+        toolbar.inflateMenu(R.menu.with_friends_menu);
 
         // set tab layout to gone while view is initialized
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
