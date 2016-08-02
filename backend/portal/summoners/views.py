@@ -25,8 +25,9 @@ from summoners.serializers import UserSerializer
 
 
 class AddFriend(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")
@@ -88,8 +89,9 @@ class AddFriend(APIView):
 
 
 class ChangeEmail(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")
@@ -134,8 +136,9 @@ class ChangeEmail(APIView):
 
 
 class ChangePassword(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")
@@ -174,8 +177,9 @@ class ChangePassword(APIView):
 
 
 class GetSummoners(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")
@@ -207,8 +211,9 @@ class GetSummoners(APIView):
 
 
 class LoginUser(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")
@@ -250,8 +255,9 @@ class LoginUser(APIView):
 
 
 class RegisterUser(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")
@@ -334,8 +340,9 @@ class RegisterUser(APIView):
 
 
 class RemoveFriend(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")
@@ -376,8 +383,9 @@ class RemoveFriend(APIView):
 
 
 class ResetPassword(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")

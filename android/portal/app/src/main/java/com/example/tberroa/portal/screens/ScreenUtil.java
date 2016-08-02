@@ -9,6 +9,7 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqError;
+import com.google.gson.JsonSyntaxException;
 
 public class ScreenUtil {
 
@@ -25,7 +26,12 @@ public class ScreenUtil {
             return context.getString(R.string.err_network_error);
         }
 
-        ReqError reqError = ModelUtil.fromJson(postResponse, ReqError.class);
+        ReqError reqError;
+        try {
+            reqError = ModelUtil.fromJson(postResponse, ReqError.class);
+        } catch (JsonSyntaxException e) {
+            return context.getString(R.string.err_unknown);
+        }
 
         if (reqError == null) {
             return context.getString(R.string.err_unknown);

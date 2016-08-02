@@ -12,8 +12,9 @@ from summoners.models import Summoner
 
 
 class GetMatchStats(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         # extract data
         data = request.data
         region = data.get("region")
@@ -54,7 +55,8 @@ class GetMatchStats(APIView):
 
 
 class GetSeasonStats(APIView):
+    # noinspection PyUnusedLocal
     @staticmethod
-    def post(request):
+    def post(request, format=None):
         data = request.data
         return Response(data)
