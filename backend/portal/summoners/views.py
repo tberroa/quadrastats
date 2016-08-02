@@ -289,7 +289,7 @@ class RegisterUser(APIView):
 
         # get more information on the summoner via riot
         args = {}
-        args["request"] = 1s
+        args["request"] = 1
         args["key"] = key 
         val = riot_request(region, args)
         if val[0] != 200:

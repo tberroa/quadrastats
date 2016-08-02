@@ -13,7 +13,7 @@ def format_key(key):
     # also remove white spaces and make lowercase
     return(key.translate(translator).replace(" ", "").lower())
 
-def riot_request(region, args)
+def riot_request(region, args):
     if region == "br":
         val = riot_request_br.delay(args)
         return val.wait(timeout=None, interval=0.5)
