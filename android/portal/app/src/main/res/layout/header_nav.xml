@@ -20,7 +20,7 @@
         android:layout_gravity="bottom"
         android:background="@color/black_transparent"
         android:paddingBottom="@dimen/spacing_tiny"
-        android:paddingEnd="@dimen/spacing_standard"
-        android:paddingStart="@dimen/spacing_standard"
+        android:paddingEnd="@dimen/drawer_name_spacing"
+        android:paddingStart="@dimen/drawer_name_spacing"
         android:textSize="@dimen/text_size_huge"/>
 </FrameLayout>
