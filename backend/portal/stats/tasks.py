@@ -57,42 +57,46 @@ def update_all():
 
 
 def update_one(summoner):
+    # extract required data
+    region = summoner.region
+    summoner_id = summoner.summoner_id
+
     # create match list request argument
     args = {"request": 2, "summoner_id": summoner.summoner_id}
 
     # chain tasks together
     if summoner.region == "br":
-        chain = riot_request_br.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_br.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "eune":
-        chain = riot_request_eune.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_eune.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "euw":
-        chain = riot_request_euw.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_euw.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "jp":
-        chain = riot_request_jp.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_jp.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "kr":
-        chain = riot_request_kr.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_kr.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "lan":
-        chain = riot_request_lan.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_lan.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "las":
-        chain = riot_request_las.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_las.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "na":
-        chain = riot_request_na.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_na.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "oce":
-        chain = riot_request_oce.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_oce.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "ru":
-        chain = riot_request_ru.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_ru.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
     if summoner.region == "tr":
-        chain = riot_request_tr.s(args) | process_match_list.s() | get_match_details.s(summoner.region)
+        chain = riot_request_tr.s(args) | process_match_list.s(summoner_id) | get_match_details.s(region)
         chain()
 
     # successful return
@@ -100,7 +104,7 @@ def update_one(summoner):
 
 
 @shared_task
-def process_match_list(val):
+def process_match_list(val, summoner_id):
     # check the Riot request response for error
     if val[0] != 200:
         return False, val
@@ -128,7 +132,7 @@ def process_match_list(val):
 
         try:
             # check if the match is already in database
-            MatchStats.objects.get(summoner_id=summoner.summoner_id, match_id=match_id)
+            MatchStats.objects.get(summoner_id=summoner_id, match_id=match_id)
         except MatchStats.DoesNotExist:
             # match not in database, create match detail request argument
             args = {"request": 3, "match_id": match_id}
