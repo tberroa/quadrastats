@@ -31,6 +31,7 @@ def is_keystone(mastery_id):
         return True
     return False
 
+
 @shared_task
 def update_all():
     # get all summoner objects
