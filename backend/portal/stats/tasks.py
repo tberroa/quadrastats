@@ -159,7 +159,7 @@ def get_match_details(val, summoner):
     # iterate over each matches list of request arguments
     for args in args_list:
         # extract match id
-        match_id = args_list.get("match_id")
+        match_id = args.get("match_id")
 
         # chain tasks together
         if region == "br":
