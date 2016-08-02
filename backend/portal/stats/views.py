@@ -4,15 +4,16 @@ from portal.errors import summoner_does_not_exist
 from portal.tasks import format_key
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from stats.models import MatchStats
+from stats.models import SeasonStats
+from stats.serializers import MatchStatsSerializer
+from stats.serializers import SeasonStatsSerializer
 from summoners.models import Summoner
 
-from .models import MatchStats
-from .models import SeasonStats
-from .serializers import MatchStatsSerializer
-from .serializers import SeasonStatsSerializer
 
 class GetMatchStats(APIView):
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request):
         # extract data
         data = request.data
         region = data.get("region")
@@ -32,18 +33,18 @@ class GetMatchStats(APIView):
         for key in keys:
             # get summoner object
             try:
-                summoner = Summoner.objects.get(region = region, key = format_key(key))
+                summoner = Summoner.objects.get(region=region, key=format_key(key))
             except Summoner.DoesNotExist:
                 return Response(summoner_does_not_exist)
 
             # construct the query based on given parameters
-            query = MatchStats.objects.filter(summoner_id = summoner.summoner_id).order_by("-match_creation")
+            query = MatchStats.objects.filter(summoner_id=summoner.summoner_id).order_by("-match_creation")
             if champion is not None and champion != 0:
-                query = query.filter(champion = champion)
+                query = query.filter(champion=champion)
             if lane is not None:
-                query = query.filter(lane = lane)
+                query = query.filter(lane=lane)
             if role is not None:
-                query = query.filter(role = role)
+                query = query.filter(role=role)
 
             # execute query, only store the 20 most recent entries
             stats += query[:20]
@@ -51,9 +52,9 @@ class GetMatchStats(APIView):
         # return the list of match stats
         return Response(MatchStatsSerializer(stats, many=True).data)
 
+
 class GetSeasonStats(APIView):
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request):
         data = request.data
         return Response(data)
-
-

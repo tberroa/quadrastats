@@ -6,7 +6,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('summoners', '0013_remove_summoner_total_games'),
     ]
