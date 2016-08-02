@@ -156,40 +156,44 @@ def get_match_details(val, summoner):
     # extract region
     region = summoner.region
 
-    # chain tasks together
+    # iterate over each matches list of request arguments
     for args in args_list:
+        # extract match id
+        match_id = args_list.get("match_id")
+
+        # chain tasks together
         if region == "br":
-            chain = riot_request_br.s(args) | process_match_details.s(summoner)
+            chain = riot_request_br.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "eune":
-            chain = riot_request_eune.s(args) | process_match_details.s(summoner)
+            chain = riot_request_eune.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "euw":
-            chain = riot_request_euw.s(args) | process_match_details.s(summoner)
+            chain = riot_request_euw.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "jp":
-            chain = riot_request_jp.s(args) | process_match_details.s(summoner)
+            chain = riot_request_jp.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "kr":
-            chain = riot_request_kr.s(args) | process_match_details.s(summoner)
+            chain = riot_request_kr.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "lan":
-            chain = riot_request_lan.s(args) | process_match_details.s(summoner)
+            chain = riot_request_lan.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "las":
-            chain = riot_request_las.s(args) | process_match_details.s(summoner)
+            chain = riot_request_las.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "na":
-            chain = riot_request_na.s(args) | process_match_details.s(summoner)
+            chain = riot_request_na.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "oce":
-            chain = riot_request_oce.s(args) | process_match_details.s(summoner)
+            chain = riot_request_oce.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "ru":
-            chain = riot_request_ru.s(args) | process_match_details.s(summoner)
+            chain = riot_request_ru.s(args) | process_match_details.s(summoner, match_id)
             chain()
         if region == "tr":
-            chain = riot_request_tr.s(args) | process_match_details.s(summoner)
+            chain = riot_request_tr.s(args) | process_match_details.s(summoner, match_id)
             chain()
 
     # successful return
@@ -197,7 +201,7 @@ def get_match_details(val, summoner):
 
 
 @shared_task
-def process_match_details(val, summoner):
+def process_match_details(val, summoner, match_id):
     # check the Riot request response for error
     if val[0] != 200:
         return False, val
