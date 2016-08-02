@@ -15,8 +15,8 @@ from portal.errors import invalid_riot_response
 from portal.errors import summoner_already_registered
 from portal.errors import summoner_does_not_exist
 from portal.errors import summoner_not_registered
-from portal.riot_api import format_key
-from portal.riot_api import get_summoner
+from portal.tasks import format_key
+from portal.tasks import riot_request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -64,7 +64,10 @@ class AddFriend(APIView):
         try:
             friend_o = Summoner.objects.get(region = region, key = friend_key)
         except Summoner.DoesNotExist:
-            val = get_summoner(region, friend_key)
+            args = {}
+            args["request"] = 1
+            args["key"] = friend_key 
+            val = riot_request(region, args)
             if val[0] != 200:
                 return Response(invalid_riot_response)
             else:
@@ -285,7 +288,10 @@ class RegisterUser(APIView):
             pass
 
         # get more information on the summoner via riot
-        val = get_summoner(region, key)
+        args = {}
+        args["request"] = 1s
+        args["key"] = key 
+        val = riot_request(region, args)
         if val[0] != 200:
             return Response(invalid_riot_response)
         else:

@@ -1,8 +1,7 @@
 from __future__ import absolute_import
 
 from celery import shared_task 
-from portal.riot_api import get_match_detail
-from portal.riot_api import get_match_list
+from portal.tasks import riot_request
 from summoners.models import Summoner
 
 from .models import MatchStats
@@ -37,14 +36,16 @@ def update_all():
     # get all summoner objects
     summoners = Summoner.objects.all().order_by("modified")
 
-    # update each summoner one at a time
+    # update each summoner
     for summoner in summoners:
-        update_one.delay(summoner)
+        update_one(summoner)
 
-@shared_task(rate_limit = "25/m")
 def update_one(summoner):
     # get the summoners match list
-    val = get_match_list(summoner.region, summoner.summoner_id)
+    args = {}
+    args["request"] = 2
+    args["summoner_id"] = summoner.summoner_id
+    val = riot_request(summoner.region, args)
     if val[0] != 200:
         # error occurrred, return http response
         return (False, val)
@@ -70,7 +71,10 @@ def update_one(summoner):
             MatchStats.objects.get(summoner_id = summoner.summoner_id, match_id = match_id)
         except MatchStats.DoesNotExist:
             # get match detail
-            val = get_match_detail(summoner.region, match_id)
+            args = {}
+            args["request"] = 3
+            args["match_id"] = match_id 
+            val = riot_request(summoner.region, args)
             if val[0] != 200:
                 # error occurred, return http response
                 return (False, val)
