@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import json
 import requests
 import string
@@ -15,38 +17,27 @@ def format_key(key):
 
 def riot_request(region, args):
     if region == "br":
-        val = riot_request_br.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_br.delay(args).get()
     if region == "eune":
-        val = riot_request_eune.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_eune.delay(args).get()
     if region == "euw":
-        val = riot_request_euw.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_euw.delay(args).get()
     if region == "jp":
-        val = riot_request_jp.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_jp.delay(args).get()
     if region == "kr":
-        val = riot_request_kr.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_kr.delay(args).get()
     if region == "lan":
-        val = riot_request_lan.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_lan.delay(args).get()
     if region == "las":
-        val = riot_request_las.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_las.delay(args).get()
     if region == "na":
-        val = riot_request_na.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_na.delay(args).get()
     if region == "oce":
-        val = riot_request_oce.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_oce.delay(args).get()
     if region == "ru":
-        val = riot_request_ru.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_ru.delay(args).get()
     if region == "tr":
-        val = riot_request_tr.delay(args)
-        return val.wait(timeout=None, interval=0.5)
+        return riot_request_tr.delay(args).get()
         
 @shared_task(rate_limit = "50/m")
 def riot_request_br(args):

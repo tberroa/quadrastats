@@ -159,9 +159,13 @@ from datetime import timedelta
 CELERYBEAT_SCHEDULE = {
     'update-all-summoners': {
         'task': 'stats.tasks.update_all',
-        'schedule': timedelta(minutes=20)
+        'schedule': timedelta(minutes=1)
     },
 }
+CELERY_RESULT_BACKEND = 'rpc'
+CELERY_ACCEPT_CONTENT = ['pickle']
+CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_RESULT_SERIALIZER = 'pickle'
 
 # Email config
 from .keys import email_password
