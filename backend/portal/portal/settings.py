@@ -122,9 +122,10 @@ REST_FRAMEWORK = {
 CELERYBEAT_SCHEDULE = {
     'update-all-summoners': {
         'task': 'stats.tasks.update_all',
-        'schedule': timedelta(minutes=1)
+        'schedule': timedelta(minutes=20)
     },
 }
+
 CELERY_RESULT_BACKEND = 'rpc'
 
 CELERY_ACCEPT_CONTENT = ['pickle']
