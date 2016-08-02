@@ -18,6 +18,7 @@ from portal.tasks import format_key
 from portal.tasks import riot_request
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from stats.tasks import update_one
 from summoners.models import Summoner
 from summoners.models import User
 from summoners.serializers import SummonerSerializer
@@ -76,6 +77,9 @@ class AddFriend(APIView):
                                                    name=friend.get("name"),
                                                    summoner_id=friend.get("id"),
                                                    profile_icon=friend.get("profileIconId"))
+
+                # get the match stats for the newly created summoner object
+                update_one(friend_o)
 
         # add the friends key to the users friend list
         if user.friends != "":
