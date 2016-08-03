@@ -17,6 +17,13 @@ public class Constants {
     public static final String POS_MID = "MIDDLE";
     public static final String POS_SUPPORT = "DUO_SUPPORT";
     public static final String POS_TOP = "TOP";
+    public static final String RANK_BRONZE = "BRONZE";
+    public static final String RANK_CHALLENGER = "CHALLENGER";
+    public static final String RANK_DIAMOND = "DIAMOND";
+    public static final String RANK_GOLD = "GOLD";
+    public static final String RANK_MASTER = "MASTER";
+    public static final String RANK_PLAT = "PLATINUM";
+    public static final String RANK_SILVER = "SILVER";
     public static final String REGION_BR = "br";
     public static final String REGION_EUNE = "eune";
     public static final String REGION_EUW = "euw";

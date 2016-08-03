@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
+import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.CircleTransform;
 import com.example.tberroa.portal.screens.ScreenUtil;
@@ -40,6 +41,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
             convertView = inflater.inflate(R.layout.view_friends, parent, false);
 
             // initialize views
+            viewHolder.rankedBorder = (ImageView) convertView.findViewById(R.id.ranked_border_view);
             viewHolder.profileIcon = (ImageView) convertView.findViewById(R.id.friend_profile_icon_view);
             viewHolder.name = (TextView) convertView.findViewById(R.id.friend_summoner_name_view);
 
@@ -65,6 +67,39 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         // set name
         viewHolder.name.setText(friends.get(position).name);
 
+        // set the ranked border
+        String rank = friends.get(position).rank;
+        if (rank == null) {
+            viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+        } else {
+            switch (rank) {
+                case Constants.RANK_BRONZE:
+                    viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                    break;
+                case Constants.RANK_SILVER:
+                    viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                    break;
+                case Constants.RANK_GOLD:
+                    viewHolder.rankedBorder.setImageResource(R.drawable.border_gold);
+                    break;
+                case Constants.RANK_PLAT:
+                    viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                    break;
+                case Constants.RANK_DIAMOND:
+                    viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                    break;
+                case Constants.RANK_MASTER:
+                    viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                    break;
+                case Constants.RANK_CHALLENGER:
+                    viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                    break;
+                default:
+                    viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                    break;
+            }
+        }
+
         return convertView;
     }
 
@@ -72,5 +107,6 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
 
         TextView name;
         ImageView profileIcon;
+        ImageView rankedBorder;
     }
 }

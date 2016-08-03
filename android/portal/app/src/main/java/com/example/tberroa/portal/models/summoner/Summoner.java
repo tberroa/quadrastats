@@ -22,6 +22,9 @@ public class Summoner extends Model {
     @Column(name = "profile_icon")
     public int profile_icon;
     @Expose
+    @Column(name = "rank")
+    public String rank;
+    @Expose
     @Column(name = "region")
     public String region;
     @Expose

@@ -27,4 +27,5 @@
     <color name="orange_transparent">#4DFFAD33</color>
     <color name="pink_transparent">#4DFF99FF</color>
     <color name="purple_transparent">#4DAE57FF</color>
+    <color name="primary_background_transparent">#80303030</color>
 </resources>

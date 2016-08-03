@@ -7,7 +7,13 @@
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_standard"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/spacing_large"/>
 
     <TextView
         android:id="@+id/no_friends_view"
