@@ -68,11 +68,11 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         viewHolder.name.setText(friends.get(position).name);
 
         // set the ranked border
-        String rank = friends.get(position).rank;
-        if (rank == null) {
+        String tier = friends.get(position).tier;
+        if (tier == null) {
             viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
         } else {
-            switch (rank) {
+            switch (tier) {
                 case Constants.RANK_BRONZE:
                     viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
                     break;
