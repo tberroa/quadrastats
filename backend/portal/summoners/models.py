@@ -26,7 +26,7 @@ class Summoner(models.Model):
     division = models.CharField(max_length=4)
     wins = models.IntegerField(default=0)
     losses = models.IntegerField(default=0)
-    series_progress = models.CharField(max_length=8, default="", blank=True)
+    series = models.CharField(max_length=8, default="", blank=True)
     profile_icon = models.IntegerField(default=0)
     friends = models.CharField(max_length=1024, default="", blank=True)
     modified = models.DateTimeField(null=True, blank=True)

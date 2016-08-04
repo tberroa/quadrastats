@@ -93,19 +93,19 @@ class AddFriend(APIView):
                 return Response(invalid_riot_response)
 
             # extract the league data
-            leagues = riot_response[1]
+            leagues = riot_response[1].get(str(friend_id))
 
             # iterate over the leagues looking for the dynamic queue league
             league = None
-            for object in leagues:
-                queue = object.get("queue")
+            for item in leagues:
+                queue = item.get("queue")
 
                 # ensure data is valid
                 if queue is None:
                     return Response(invalid_riot_response)
 
                 if  queue == "RANKED_SOLO_5x5":
-                    league = object
+                    league = item
 
             # ensure a league was found
             if league is None:
@@ -132,10 +132,14 @@ class AddFriend(APIView):
             series_progress = ""
             for entry in entries:
                 # get the players id
-                id = entry.get("playerOrTeamId")
+                player_id = entry.get("playerOrTeamId")
+
+                # ensure data is valid
+                if player_id is None:
+                    return Response(invalid_riot_response)
 
                 # check it against the friends id
-                if id == friend_id:
+                if player_id == str(friend_id):
                     # get division, wins, and losses
                     division = entry.get("division")
                     wins = entry.get("wins")
@@ -146,11 +150,11 @@ class AddFriend(APIView):
                         return Response(invalid_riot_response)
 
                     # check if summoner is in series
-                    series = entry.get("miniSeries")
+                    mini_series = entry.get("miniSeries")
 
                     # if summoner is not in series this is None
                     if series is not None:
-                        series_progress = series.get("progress")
+                        series = mini_series.get("progress")
 
             # division, wins, and losses cannot be None
             if None in (division, wins, losses):
@@ -165,7 +169,7 @@ class AddFriend(APIView):
                                                division=division,
                                                wins=wins,
                                                losses=losses,
-                                               series_progress=series_progress,
+                                               series=series,
                                                profile_icon=friend_profile_icon)
 
             # get the match stats for the newly created summoner object
