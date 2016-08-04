@@ -145,3 +145,25 @@ EMAIL_HOST_USER = 'tberroa@outlook.com'
 EMAIL_HOST_PASSWORD = email_password
 
 EMAIL_PORT = 587
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'handlers': {
+        'gunicorn': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/ubuntu/logs/gunicorn/gunicorn.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['gunicorn'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
+
