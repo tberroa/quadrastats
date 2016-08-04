@@ -1,5 +1,6 @@
 import random
 import string
+from datetime import datetime
 from django.contrib.auth import hashers
 from django.core import serializers
 from django.core.mail import EmailMessage
@@ -18,7 +19,7 @@ from portal.tasks import format_key
 from portal.tasks import riot_request
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from stats.tasks import update_one
+from stats.tasks import update_match_stats_one
 from summoners.models import Summoner
 from summoners.models import User
 from summoners.serializers import SummonerSerializer
@@ -47,9 +48,10 @@ class AddFriend(APIView):
         if user_key == friend_key:
             return Response(friend_equals_user)
 
-        # get the users summoner object
         try:
+            # get the users summoner object
             user = Summoner.objects.get(region=region, key=user_key)
+            Summoner.objects.filter(pk=user.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
 
@@ -65,6 +67,7 @@ class AddFriend(APIView):
         try:
             # check if a summoner object exists for the friend
             friend_o = Summoner.objects.get(region=region, key=friend_key)
+            Summoner.objects.filter(pk=friend_o.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
             # summoner not in database, request summoner data from Riot
             args = {"request": 1, "key": friend_key}
@@ -104,10 +107,10 @@ class AddFriend(APIView):
                 if queue is None:
                     return Response(invalid_riot_response)
 
-                if  queue == "RANKED_SOLO_5x5":
+                if queue == "RANKED_SOLO_5x5":
                     league = item
 
-            # ensure a league was found
+            # ensure the dynamic queue league was found
             if league is None:
                 return Response(invalid_riot_response)
 
@@ -129,7 +132,7 @@ class AddFriend(APIView):
             division = None
             wins = None
             losses = None
-            series_progress = ""
+            series = ""
             for entry in entries:
                 # get the players id
                 player_id = entry.get("playerOrTeamId")
@@ -153,7 +156,7 @@ class AddFriend(APIView):
                     mini_series = entry.get("miniSeries")
 
                     # if summoner is not in series this is None
-                    if series is not None:
+                    if mini_series is not None:
                         series = mini_series.get("progress")
 
             # division, wins, and losses cannot be None
@@ -173,14 +176,14 @@ class AddFriend(APIView):
                                                profile_icon=friend_profile_icon)
 
             # get the match stats for the newly created summoner object
-            update_one(friend_o)
+            update_match_stats_one(friend_o)
 
         # add the friends key to the users friend list
         if user.friends != "":
             user.friends += "," + friend_key
         else:
             user.friends = friend_key
-        user.save()
+        Summoner.objects.filter(pk=user.pk).update(friends=user.friends)
 
         # return the friends summoner object
         return Response(SummonerSerializer(friend_o).data)
@@ -204,9 +207,10 @@ class ChangeEmail(APIView):
         # ensure proper key format
         key = format_key(key)
 
-        # get summoner object
         try:
+            # get summoner object
             summoner = Summoner.objects.get(region=region, key=key)
+            Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
 
@@ -219,9 +223,8 @@ class ChangeEmail(APIView):
             return Response(invalid_credentials)
 
         # change email
-        summoner.user.email = new_email
-        summoner.user.save()
-        summoner.save()
+        User.objects.filter(pk=summoner.user.pk).update(email=new_email)
+        Summoner.objects.filter(pk=summoner.pk).update(user=User.objects.get(pk=summoner.user.pk))
 
         # serialize the summoner object
         return_json = SummonerSerializer(summoner).data
@@ -251,9 +254,10 @@ class ChangePassword(APIView):
         # ensure proper key format
         key = format_key(key)
 
-        # get summoner object
         try:
+            # get summoner object
             summoner = Summoner.objects.get(region=region, key=key)
+            Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
 
@@ -266,9 +270,8 @@ class ChangePassword(APIView):
             return Response(invalid_credentials)
 
         # change password
-        summoner.user.password = hashers.make_password(new_password)
-        summoner.user.save()
-        summoner.save()
+        User.objects.filter(pk=summoner.user.pk).update(password=hashers.make_password(new_password))
+        Summoner.objects.filter(pk=summoner.pk).update(user=User.objects.get(pk=summoner.user.pk))
 
         # return the users summoner object
         return Response(SummonerSerializer(summoner).data)
@@ -295,9 +298,13 @@ class GetSummoners(APIView):
             # ensure proper key format
             key = format_key(key)
 
-            # get summoner object and append to array
             try:
-                summoners.append(Summoner.objects.get(region=region, key=key))
+                # get summoner object
+                summoner = Summoner.objects.get(region=region, key=key)
+                Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
+
+                # append summoner object to array
+                summoners.append(summoner)
             except Summoner.DoesNotExist:
                 return Response(summoner_does_not_exist)
 
@@ -325,9 +332,10 @@ class LoginUser(APIView):
         # ensure proper key format
         key = format_key(key)
 
-        # get the summoner object
         try:
+            # get the summoner object
             summoner = Summoner.objects.get(region=region, key=key)
+            Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
 
@@ -374,9 +382,10 @@ class RegisterUser(APIView):
         # hash password
         password = hashers.make_password(password)
 
-        # check if the summoner object already exists
         try:
+            # check if the summoner object already exists
             summoner = Summoner.objects.get(region=region, key=key)
+            Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
 
             # check if the user object already exists
             if summoner.user is not None:
@@ -384,7 +393,7 @@ class RegisterUser(APIView):
 
             # create a user object for the summoner object
             summoner.user = User.objects.create(email=email, password=password)
-            summoner.save()
+            Summoner.objects.filter(pk=summoner.pk).update(user=User.objects.get(pk=summoner.user.pk))
 
             # serialize the summoner object
             return_json = SummonerSerializer(summoner).data
@@ -395,17 +404,20 @@ class RegisterUser(APIView):
             # return the users summoner object with the email included
             return Response(return_json)
 
-        # summoner object did not already exist, need to create it
         except Summoner.DoesNotExist:
+            # summoner object did not already exist, need to create it
             pass
 
         # get more information on the summoner via riot
         args = {"request": 1, "key": key}
         riot_response = riot_request(region, args)
+
+        # make sure the response is valid
         if riot_response[0] != 200:
             return Response(invalid_riot_response)
-        else:
-            summoner = riot_response[1]
+
+        # extract summoner from response
+        summoner = riot_response[1]
 
         # None check important fields
         name = summoner.get("name")
@@ -459,9 +471,10 @@ class RemoveFriend(APIView):
         if user_key == friend_key:
             return Response(friend_equals_user)
 
-        # get the users summoner object
         try:
+            # get the users summoner object
             user = Summoner.objects.get(region=region, key=user_key)
+            Summoner.objects.filter(pk=user.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
 
@@ -474,7 +487,7 @@ class RemoveFriend(APIView):
             user.friends = user.friends[1:]
         if user.friends != "" and user.friends[len(user.friends) - 1] == ",":
             user.friends = user.friends[:len(user.friends) - 1]
-        user.save()
+        Summoner.objects.filter(pk=user.pk).update(friends=user.friends)
 
         # return the users updated summoner object
         return Response(SummonerSerializer(user).data)
@@ -497,9 +510,10 @@ class ResetPassword(APIView):
         # ensure proper key format
         key = format_key(key)
 
-        # get summoner object
         try:
+            # get summoner object
             summoner = Summoner.objects.get(region=region, key=key)
+            Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
             return Response(summoner_does_not_exist)
 
@@ -515,9 +529,8 @@ class ResetPassword(APIView):
         new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
 
         # assign the generated password to the user object
-        summoner.user.password = hashers.make_password(new_password)
-        summoner.user.save()
-        summoner.save()
+        User.objects.filter(pk=summoner.user.pk).update(password=hashers.make_password(new_password))
+        Summoner.objects.filter(pk=summoner.pk).update(user=User.objects.get(pk=summoner.user.pk))
 
         # send email to user
         email = EmailMessage("Portal: Password Reset", 'New Password: ' + new_password, to=[summoner.user.email])

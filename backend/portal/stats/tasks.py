@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+from celery import shared_task
 from portal.tasks import riot_request_br
 from portal.tasks import riot_request_eune
 from portal.tasks import riot_request_euw
@@ -15,11 +16,6 @@ from stats.models import MatchStats
 from stats.models import SeasonStats
 from summoners.models import Summoner
 
-from celery import shared_task
-
-
-# The Riot api can potentially return None for any field.
-# Due to this, many None checks are in place.
 
 def is_keystone(mastery_id):
     if mastery_id == 6161:
@@ -46,17 +42,67 @@ def is_keystone(mastery_id):
 @shared_task
 def update_all():
     # get all summoner objects
-    summoners = Summoner.objects.all().order_by("modified")
+    summoners = Summoner.objects.all().order_by("-accessed")
 
-    # update each summoner
+    # create a list of regions and summoner ids
+    regions = []
+    summoner_ids = []
     for summoner in summoners:
-        update_one(summoner)
+        # append region to list
+        regions.append(summoner.region)
+
+        # append id to list
+        summoner_ids.append(str(summoner.summoner_id))
+
+        # trigger a match stats update for each summoner
+        update_stats_one(summoner)
+
+    # turn list into a comma separated string
+    summoner_ids = ",".join(summoner_ids)
+
+    # create argument for getting summoner league information
+    args = {"request": 4, "summoner_ids": str(summoner_ids)}
+
+    # chain tasks together
+    if region == "br":
+        chain = riot_request_br.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "eune":
+        chain = riot_request_eune.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "euw":
+        chain = riot_request_euw.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "jp":
+        chain = riot_request_jp.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "kr":
+        chain = riot_request_kr.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "lan":
+        chain = riot_request_lan.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "las":
+        chain = riot_request_las.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "na":
+        chain = riot_request_na.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "oce":
+        chain = riot_request_oce.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "ru":
+        chain = riot_request_ru.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
+    if region == "tr":
+        chain = riot_request_tr.s(args) | update_rank_all.s(regions, summoner_ids)
+        chain()
 
     # successful return
     return True, None
 
 
-def update_one(summoner):
+def update_match_stats_one(summoner):
     # extract required data
     region = summoner.region
     summoner_id = summoner.summoner_id
@@ -104,13 +150,13 @@ def update_one(summoner):
 
 
 @shared_task
-def process_match_list(val, summoner_id):
+def process_match_list(riot_response, summoner_id):
     # check the Riot request response for error
-    if val[0] != 200:
-        return False, val
+    if riot_response[0] != 200:
+        return False, riot_response
 
     # extract the matches from the Riot request response
-    matches = val[1].get("matches")
+    matches = riot_response[1].get("matches")
 
     # defensive check
     if matches is None:
@@ -145,13 +191,13 @@ def process_match_list(val, summoner_id):
 
 
 @shared_task
-def get_match_details(val, summoner):
+def get_match_details(return_val, summoner):
     # part of chain, make sure the process match list task returned successfully
-    if not val[0]:
-        return False, val[1]
+    if not return_val[0]:
+        return False, return_val[1]
 
     # extract the list of match detail request arguments
-    args_list = val[1]
+    args_list = return_val[1]
 
     # extract region
     region = summoner.region
@@ -201,13 +247,13 @@ def get_match_details(val, summoner):
 
 
 @shared_task
-def process_match_details(val, summoner, match_id):
+def process_match_details(riot_response, summoner, match_id):
     # check the Riot request response for error
-    if val[0] != 200:
-        return False, val
+    if riot_response[0] != 200:
+        return False, riot_response
 
     # extract the match details from the Riot request response
-    detail = val[1]
+    detail = riot_response[1]
 
     # defensive check
     if detail is None:
@@ -246,8 +292,8 @@ def process_match_details(val, summoner, match_id):
             # while here, update summoner profile icon
             profile_icon = player.get("profileIcon")
             if profile_icon is not None:
-                summoner.profile_icon = profile_icon
-                summoner.save()
+                Summoner.objects.filter(region=summoner.region, summoner_id=summoner.summoner_id) \
+                    .update(profile_icon=profile_icon)
 
     # defensive check, the summoners id could have been None
     if participant_id is None:
@@ -449,6 +495,99 @@ def process_match_details(val, summoner, match_id):
         team_kills=team_kills,
         team_deaths=team_deaths,
         team_assists=team_assists)
+
+    # successful return
+    return True, None
+
+
+@shared_task
+def update_rank_all(riot_response, regions, summoner_ids):
+    # make sure the response is valid
+    if riot_response[0] != 200:
+        return False, riot_response
+
+    # convert the comma separated string into a list
+    summoner_ids = summoner_ids.split(",")
+
+    # extract the league data
+    leagues_list = []
+    for summoner_id in summoner_ids:
+        leagues_list.append(riot_response[1].get(summoner_id))
+
+    # iterate over each summoners leagues
+    for index, leagues in enumerate(leagues_list):
+        # iterate over each league looking for the dynamic queue league
+        league = None
+        for item in leagues:
+            queue = item.get("queue")
+
+            # ensure data is valid
+            if queue is None:
+                return False, None
+
+            if queue == "RANKED_SOLO_5x5":
+                league = item
+
+        # ensure the dynamic queue league was found
+        if league is None:
+            return False, None
+
+        # use the league data to get the rank tier
+        tier = league.get("tier")
+
+        # ensure data is valid
+        if tier is None:
+            return False, None
+
+        # extract the player entries
+        entries = league.get("entries")
+
+        # ensure data is valid
+        if entries is None:
+            return False, None
+
+        # iterate over the league entries to get more detailed information
+        division = None
+        wins = None
+        losses = None
+        series = ""
+        for entry in entries:
+            # get the players id
+            player_id = entry.get("playerOrTeamId")
+
+            # ensure data is valid
+            if player_id is None:
+                return False, None
+
+            # check it against the friends id
+            if player_id == summoner_ids[index]:
+                # get division, wins, and losses
+                division = entry.get("division")
+                wins = entry.get("wins")
+                losses = entry.get("losses")
+
+                # ensure data is valid
+                if None in (division, wins, losses):
+                    return False, None
+
+                # check if summoner is in series
+                mini_series = entry.get("miniSeries")
+
+                # if summoner is not in series this is None
+                if mini_series is not None:
+                    series = mini_series.get("progress")
+
+        # division, wins, and losses cannot be None
+        if None in (division, wins, losses):
+            return False, None
+
+        # update the summoner object
+        Summoner.objects.filter(region=regions[index], summoner_id=summoner_ids[index]) \
+            .update(tier=tier,
+                    division=division,
+                    wins=wins,
+                    losses=losses,
+                    series=series)
 
     # successful return
     return True, None

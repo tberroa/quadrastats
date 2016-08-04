@@ -1,9 +1,8 @@
 from __future__ import absolute_import
 
 import os
-from django.conf import settings
-
 from celery import Celery
+from django.conf import settings
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portal.settings')
 

@@ -3,9 +3,8 @@ from __future__ import absolute_import
 import json
 import requests
 import string
-from portal.keys import riot_api_key
-
 from celery import shared_task
+from portal.keys import riot_api_key
 
 
 def format_key(key):
