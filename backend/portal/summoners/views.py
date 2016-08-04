@@ -85,7 +85,7 @@ class AddFriend(APIView):
                 return Response(invalid_riot_response)
 
             # use the summoner id to get the friends league information
-            args = {"request": 4, "summoner_ids": friend_id}
+            args = {"request": 4, "summoner_ids": str(friend_id)}
             riot_response = riot_request(region, args)
 
             # make sure the response is valid

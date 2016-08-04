@@ -567,7 +567,7 @@ def riot_request_na(args):
     if request == 4:
         # construct url
         url = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
+              + summoner_ids \
               + "?api_key=" + riot_api_key
 
         # make get request
