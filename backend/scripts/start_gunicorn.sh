@@ -2,8 +2,7 @@ APPNAME=portal
 BACKEND=$HOME/$APPNAME/backend
 APPDIR=$BACKEND/$APPNAME
 
-DATE=$(date +"%m-%d-%y")
-LOGFILE=$HOME/logs/gunicorn/$DATE'.log'
+LOGFILE=$HOME/logs/gunicorn/'gunicorn.log'
 
 NUM_WORKERS=3
 
