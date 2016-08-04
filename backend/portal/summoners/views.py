@@ -62,24 +62,114 @@ class AddFriend(APIView):
                 if friend == friend_key:
                     return Response(friend_already_listed)
 
-        # ensure a summoner object exists for the friend
         try:
+            # check if a summoner object exists for the friend
             friend_o = Summoner.objects.get(region=region, key=friend_key)
         except Summoner.DoesNotExist:
+            # summoner not in database, request summoner data from Riot
             args = {"request": 1, "key": friend_key}
-            val = riot_request(region, args)
-            if val[0] != 200:
-                return Response(invalid_riot_response)
-            else:
-                friend = val[1]
-                friend_o = Summoner.objects.create(region=region,
-                                                   key=friend_key,
-                                                   name=friend.get("name"),
-                                                   summoner_id=friend.get("id"),
-                                                   profile_icon=friend.get("profileIconId"))
+            riot_response = riot_request(region, args)
 
-                # get the match stats for the newly created summoner object
-                update_one(friend_o)
+            # make sure the response is valid
+            if riot_response[0] != 200:
+                return Response(invalid_riot_response)
+
+            # extract the summoner data
+            friend = riot_response[1]
+            friend_name = friend.get("name")
+            friend_id = friend.get("id")
+            friend_profile_icon = friend.get("profileIconId")
+
+            # ensure the data is valid
+            if None in (friend_name, friend_id, friend_profile_icon):
+                return Response(invalid_riot_response)
+
+            # use the summoner id to get the friends league information
+            args = {"request": 4, "summoner_ids": friend_id}
+            riot_response = riot_request(region, args)
+
+            # make sure the response is valid
+            if riot_response[0] != 200:
+                return Response(invalid_riot_response)
+
+            # extract the league data
+            leagues = riot_response[1]
+
+            # iterate over the leagues looking for the dynamic queue league
+            league = None
+            for object in leagues:
+                queue = object.get("queue")
+
+                # ensure data is valid
+                if queue is None:
+                    return Response(invalid_riot_response)
+
+                if  queue == "RANKED_SOLO_5x5":
+                    league = object
+
+            # ensure a league was found
+            if league is None:
+                return Response(invalid_riot_response)
+
+            # use the league data to get the rank tier
+            tier = league.get("tier")
+
+            # ensure data is valid
+            if tier is None:
+                return Response(invalid_riot_response)
+
+            # extract the player entries
+            entries = league.get("entries")
+
+            # ensure data is valid
+            if entries is None:
+                return Response(invalid_riot_response)
+
+            # iterate over the league entries to get more detailed information
+            division = None
+            wins = None
+            losses = None
+            series_progress = ""
+            for entry in entries:
+                # get the players id
+                id = entry.get("playerOrTeamId")
+
+                # check it against the friends id
+                if id == friend_id:
+                    # get division, wins, and losses
+                    division = entry.get("division")
+                    wins = entry.get("wins")
+                    losses = entry.get("losses")
+
+                    # ensure data is valid
+                    if None in (division, wins, losses):
+                        return Response(invalid_riot_response)
+
+                    # check if summoner is in series
+                    series = entry.get("miniSeries")
+
+                    # if summoner is not in series this is None
+                    if series is not None:
+                        series_progress = series.get("progress")
+
+            # division, wins, and losses cannot be None
+            if None in (division, wins, losses):
+                return Response(invalid_riot_response)
+
+            # use the gathered information to create a summoner object
+            friend_o = Summoner.objects.create(region=region,
+                                               key=friend_key,
+                                               name=friend_name,
+                                               summoner_id=friend_id,
+                                               tier=tier,
+                                               division=division,
+                                               wins=wins,
+                                               losses=losses,
+                                               series_progress=series_progress,
+                                               profile_icon=friend_profile_icon)
+
+            # get the match stats for the newly created summoner object
+            update_one(friend_o)
 
         # add the friends key to the users friend list
         if user.friends != "":
@@ -307,11 +397,11 @@ class RegisterUser(APIView):
 
         # get more information on the summoner via riot
         args = {"request": 1, "key": key}
-        val = riot_request(region, args)
-        if val[0] != 200:
+        riot_response = riot_request(region, args)
+        if riot_response[0] != 200:
             return Response(invalid_riot_response)
         else:
-            summoner = val[1]
+            summoner = riot_response[1]
 
         # None check important fields
         name = summoner.get("name")

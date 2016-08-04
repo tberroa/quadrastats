@@ -48,6 +48,7 @@ def riot_request_br(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -85,6 +86,19 @@ def riot_request_br(args):
         # construct url
         url = "https://br.api.pvp.net/api/lol/br/v2.2/match/" \
               + str(match_id) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://br.api.pvp.net/api/lol/br/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
               + "?api_key=" + riot_api_key
 
         # make get request
@@ -146,6 +160,19 @@ def riot_request_eune(args):
         # return response
         return r.status_code, json.loads(r.text)
 
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://eune.api.pvp.net/api/lol/eune/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
 
 @shared_task(rate_limit="50/m")
 def riot_request_euw(args):
@@ -191,6 +218,19 @@ def riot_request_euw(args):
         # construct url
         url = "https://euw.api.pvp.net/api/lol/euw/v2.2/match/" \
               + str(match_id) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://euw.api.pvp.net/api/lol/euw/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
               + "?api_key=" + riot_api_key
 
         # make get request
@@ -252,6 +292,19 @@ def riot_request_jp(args):
         # return response
         return r.status_code, json.loads(r.text)
 
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://jp.api.pvp.net/api/lol/jp/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
 
 @shared_task(rate_limit="50/m")
 def riot_request_kr(args):
@@ -297,6 +350,19 @@ def riot_request_kr(args):
         # construct url
         url = "https://kr.api.pvp.net/api/lol/kr/v2.2/match/" \
               + str(match_id) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://kr.api.pvp.net/api/lol/kr/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
               + "?api_key=" + riot_api_key
 
         # make get request
@@ -358,6 +424,19 @@ def riot_request_lan(args):
         # return response
         return r.status_code, json.loads(r.text)
 
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://lan.api.pvp.net/api/lol/lan/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
 
 @shared_task(rate_limit="50/m")
 def riot_request_las(args):
@@ -403,6 +482,19 @@ def riot_request_las(args):
         # construct url
         url = "https://las.api.pvp.net/api/lol/las/v2.2/match/" \
               + str(match_id) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://las.api.pvp.net/api/lol/las/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
               + "?api_key=" + riot_api_key
 
         # make get request
@@ -464,6 +556,19 @@ def riot_request_na(args):
         # return response
         return r.status_code, json.loads(r.text)
 
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
 
 @shared_task(rate_limit="50/m")
 def riot_request_oce(args):
@@ -509,6 +614,19 @@ def riot_request_oce(args):
         # construct url
         url = "https://oce.api.pvp.net/api/lol/oce/v2.2/match/" \
               + str(match_id) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://oce.api.pvp.net/api/lol/oce/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
               + "?api_key=" + riot_api_key
 
         # make get request
@@ -570,6 +688,19 @@ def riot_request_ru(args):
         # return response
         return r.status_code, json.loads(r.text)
 
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://ru.api.pvp.net/api/lol/ru/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
 
 @shared_task(rate_limit="50/m")
 def riot_request_tr(args):
@@ -615,6 +746,19 @@ def riot_request_tr(args):
         # construct url
         url = "https://tr.api.pvp.net/api/lol/tr/v2.2/match/" \
               + str(match_id) \
+              + "?api_key=" + riot_api_key
+
+        # make get request
+        r = requests.get(url)
+
+        # return response
+        return r.status_code, json.loads(r.text)
+
+    # get league
+    if request == 4:
+        # construct url
+        url = "https://tr.api.pvp.net/api/lol/tr/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
               + "?api_key=" + riot_api_key
 
         # make get request
