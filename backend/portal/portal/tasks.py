@@ -115,6 +115,7 @@ def riot_request_eune(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -181,6 +182,7 @@ def riot_request_euw(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -247,6 +249,7 @@ def riot_request_jp(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -313,6 +316,7 @@ def riot_request_kr(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -379,6 +383,7 @@ def riot_request_lan(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -445,6 +450,7 @@ def riot_request_las(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -511,6 +517,7 @@ def riot_request_na(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -577,6 +584,7 @@ def riot_request_oce(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -643,6 +651,7 @@ def riot_request_ru(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
@@ -709,6 +718,7 @@ def riot_request_tr(args):
     key = args.get("key")
     summoner_id = args.get("summoner_id")
     match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
 
     # get summoner
     if request == 1:
