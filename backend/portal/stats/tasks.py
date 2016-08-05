@@ -44,59 +44,90 @@ def update_all():
     # get all summoner objects
     summoners = Summoner.objects.all().order_by("-accessed")
 
-    # create a list of regions and summoner ids
-    regions = []
-    summoner_ids = []
+    # initialize dictionary to separate summoner ids by region
+    summoner_ids_dict = dict()
+
+    # iterate over the summoners
     for summoner in summoners:
-        # append region to list
-        regions.append(summoner.region)
+        # check if this is the first summoner for the region
+        if summoner_ids_dict.get(summoner.region) is None:
+            # initialize a list which will hold multiple lists
+            summoner_ids_list = []
 
-        # append id to list
-        summoner_ids.append(str(summoner.summoner_id))
+            # initialize the first list within the list of lists
+            summoner_ids = [str(summoner.summoner_id)]
 
-        # trigger a match stats update for each summoner
-        update_stats_one(summoner)
+            # insert the list into the list of lists
+            summoner_ids_list.append(summoner_ids)
 
-    # turn list into a comma separated string
-    summoner_ids = ",".join(summoner_ids)
+            # insert the list into the dictionary
+            summoner_ids_dict[summoner.region] = summoner_ids_list
+        else:
+            # get the list of lists of summoner ids for this region
+            summoner_ids_list = summoner_ids_dict.get(summoner.region)
 
-    # create argument for getting summoner league information
-    args = {"request": 4, "summoner_ids": str(summoner_ids)}
+            # iterate over the list of lists looking for a spot to insert the current id
+            inserted = False
+            for summoner_ids in summoner_ids_list:
+                if len(summoner_ids) < 10:
+                    summoner_ids.append(str(summoner.summoner_id))
+                    inserted = True
 
-    # chain tasks together
-    if region == "br":
-        chain = riot_request_br.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "eune":
-        chain = riot_request_eune.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "euw":
-        chain = riot_request_euw.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "jp":
-        chain = riot_request_jp.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "kr":
-        chain = riot_request_kr.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "lan":
-        chain = riot_request_lan.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "las":
-        chain = riot_request_las.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "na":
-        chain = riot_request_na.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "oce":
-        chain = riot_request_oce.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "ru":
-        chain = riot_request_ru.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
-    if region == "tr":
-        chain = riot_request_tr.s(args) | update_rank_all.s(regions, summoner_ids)
-        chain()
+            # if a spot wasn't found, create a new list
+            if not inserted:
+                summoner_ids = [str(summoner.summoner_id)]
+                summoner_ids_list.append(summoner_ids)
+
+        # trigger a match stats update for summoner
+        update_match_stats_one(summoner)
+    
+    # iterate over dictionary of summoner ids
+    for region in summoner_ids_dict:
+        # extract summoner ids list
+        summoner_ids_list = summoner_ids_dict.get(region)
+
+        # iterate over each list of summoner ids
+        for summoner_ids in summoner_ids_list:
+            # turn the list into a comma delimited string
+            summoner_ids = ",".join(summoner_ids)
+
+            # create argument for requesting ranked ladder related info from Riot
+            args = {"request": 4, "summoner_ids": summoner_ids}
+
+            # chain tasks together
+            if region == "br":
+                chain = riot_request_br.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "eune":
+                chain = riot_request_eune.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "euw":
+                chain = riot_request_euw.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "jp":
+                chain = riot_request_jp.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "kr":
+                chain = riot_request_kr.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "lan":
+                chain = riot_request_lan.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "las":
+                chain = riot_request_las.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "na":
+                chain = riot_request_na.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "oce":
+                chain = riot_request_oce.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "ru":
+                chain = riot_request_ru.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
+            if region == "tr":
+                chain = riot_request_tr.s(args) | update_rank_all.s(region, summoner_ids)
+                chain()
 
     # successful return
     return True, None
@@ -501,7 +532,7 @@ def process_match_details(riot_response, summoner, match_id):
 
 
 @shared_task
-def update_rank_all(riot_response, regions, summoner_ids):
+def update_rank_all(riot_response, region, summoner_ids):
     # make sure the response is valid
     if riot_response[0] != 200:
         return False, riot_response
@@ -548,6 +579,7 @@ def update_rank_all(riot_response, regions, summoner_ids):
 
         # iterate over the league entries to get more detailed information
         division = None
+        lp = None
         wins = None
         losses = None
         series = ""
@@ -561,13 +593,14 @@ def update_rank_all(riot_response, regions, summoner_ids):
 
             # check it against the friends id
             if player_id == summoner_ids[index]:
-                # get division, wins, and losses
+                # get division, lp, wins, and losses
                 division = entry.get("division")
+                lp = entry.get("leaguePoints")
                 wins = entry.get("wins")
                 losses = entry.get("losses")
 
                 # ensure data is valid
-                if None in (division, wins, losses):
+                if None in (division, lp, wins, losses):
                     return False, None
 
                 # check if summoner is in series
@@ -577,14 +610,15 @@ def update_rank_all(riot_response, regions, summoner_ids):
                 if mini_series is not None:
                     series = mini_series.get("progress")
 
-        # division, wins, and losses cannot be None
-        if None in (division, wins, losses):
+        # division, lp, wins, and losses cannot be None
+        if None in (division, lp, wins, losses):
             return False, None
 
         # update the summoner object
-        Summoner.objects.filter(region=regions[index], summoner_id=summoner_ids[index]) \
+        Summoner.objects.filter(region=region, summoner_id=summoner_ids[index]) \
             .update(tier=tier,
                     division=division,
+                    lp=lp,
                     wins=wins,
                     losses=losses,
                     series=series)

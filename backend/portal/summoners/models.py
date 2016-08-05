@@ -24,6 +24,7 @@ class Summoner(models.Model):
     summoner_id = models.BigIntegerField()
     tier = models.CharField(max_length=16)
     division = models.CharField(max_length=4)
+    lp = models.IntegerField()
     wins = models.IntegerField()
     losses = models.IntegerField()
     series = models.CharField(max_length=8, default="", blank=True)

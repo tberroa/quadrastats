@@ -130,6 +130,7 @@ class AddFriend(APIView):
 
             # iterate over the league entries to get more detailed information
             division = None
+            lp = None
             wins = None
             losses = None
             series = ""
@@ -143,13 +144,14 @@ class AddFriend(APIView):
 
                 # check it against the friends id
                 if player_id == str(friend_id):
-                    # get division, wins, and losses
+                    # get division, lp, wins, and losses
                     division = entry.get("division")
+                    lp = entry.get("leaguePoints")
                     wins = entry.get("wins")
                     losses = entry.get("losses")
 
                     # ensure data is valid
-                    if None in (division, wins, losses):
+                    if None in (division, lp, wins, losses):
                         return Response(invalid_riot_response)
 
                     # check if summoner is in series
@@ -159,8 +161,8 @@ class AddFriend(APIView):
                     if mini_series is not None:
                         series = mini_series.get("progress")
 
-            # division, wins, and losses cannot be None
-            if None in (division, wins, losses):
+            # division, lp, wins, and losses cannot be None
+            if None in (division, lp, wins, losses):
                 return Response(invalid_riot_response)
 
             # use the gathered information to create a summoner object
@@ -170,6 +172,7 @@ class AddFriend(APIView):
                                                summoner_id=friend_id,
                                                tier=tier,
                                                division=division,
+                                               lp=lp,
                                                wins=wins,
                                                losses=losses,
                                                series=series,
