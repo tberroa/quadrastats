@@ -29,6 +29,5 @@
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_huge">20sp</dimen>
     <dimen name="text_size_massive">25sp</dimen>
-    <dimen name="text_size_friend_names">30sp</dimen>
     <dimen name="text_size_win_ratio">40sp</dimen>
 </resources>

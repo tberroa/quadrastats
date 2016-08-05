@@ -2,6 +2,11 @@ package com.example.tberroa.portal.data;
 
 public class Constants {
 
+    public static final String DIVISION_1 = "I";
+    public static final String DIVISION_2 = "II";
+    public static final String DIVISION_3 = "III";
+    public static final String DIVISION_4 = "IV";
+    public static final String DIVISION_5 = "V";
     public static final int ERR_FRIEND_ALREADY_LISTED = 50;
     public static final int ERR_FRIEND_EQUALS_USER = 55;
     public static final int ERR_FRIEND_LIMIT_REACHED = 60;
@@ -17,13 +22,6 @@ public class Constants {
     public static final String POS_MID = "MIDDLE";
     public static final String POS_SUPPORT = "DUO_SUPPORT";
     public static final String POS_TOP = "TOP";
-    public static final String RANK_BRONZE = "BRONZE";
-    public static final String RANK_CHALLENGER = "CHALLENGER";
-    public static final String RANK_DIAMOND = "DIAMOND";
-    public static final String RANK_GOLD = "GOLD";
-    public static final String RANK_MASTER = "MASTER";
-    public static final String RANK_PLAT = "PLATINUM";
-    public static final String RANK_SILVER = "SILVER";
     public static final String REGION_BR = "br";
     public static final String REGION_EUNE = "eune";
     public static final String REGION_EUW = "euw";
@@ -36,6 +34,13 @@ public class Constants {
     public static final String REGION_TR = "tr";
     public static final String TAG_DEBUG = "TAG_DEBUG";
     public static final String TAG_EXCEPTIONS = "TAG_EXCEPTIONS";
+    public static final String TIER_BRONZE = "BRONZE";
+    public static final String TIER_CHALLENGER = "CHALLENGER";
+    public static final String TIER_DIAMOND = "DIAMOND";
+    public static final String TIER_GOLD = "GOLD";
+    public static final String TIER_MASTER = "MASTER";
+    public static final String TIER_PLAT = "PLATINUM";
+    public static final String TIER_SILVER = "SILVER";
     public static final int UI_DIALOG_HEIGHT = 80;
     public static final int UI_DIALOG_WIDTH = 95;
     public static final String UI_NO_ITEM = "NO_ITEM";

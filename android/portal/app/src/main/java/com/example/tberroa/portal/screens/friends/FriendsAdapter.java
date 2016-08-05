@@ -44,6 +44,11 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
             viewHolder.rankedBorder = (ImageView) convertView.findViewById(R.id.ranked_border_view);
             viewHolder.profileIcon = (ImageView) convertView.findViewById(R.id.friend_profile_icon_view);
             viewHolder.name = (TextView) convertView.findViewById(R.id.friend_summoner_name_view);
+            viewHolder.emblem = (ImageView) convertView.findViewById(R.id.emblem_view);
+            viewHolder.tierDivision = (TextView) convertView.findViewById(R.id.tier_division_view);
+            viewHolder.lp = (TextView) convertView.findViewById(R.id.lp_view);
+            viewHolder.winLossRatio = (TextView) convertView.findViewById(R.id.win_loss_ratio_view);
+            viewHolder.series = (TextView) convertView.findViewById(R.id.series_view);
 
             // set tag
             convertView.setTag(viewHolder);
@@ -67,46 +72,158 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         // set name
         viewHolder.name.setText(friends.get(position).name);
 
-        // set the ranked border
+        // resize the emblem image view
+        viewHolder.emblem.getLayoutParams().width = side;
+        viewHolder.emblem.getLayoutParams().height = side;
+        viewHolder.emblem.setLayoutParams(viewHolder.emblem.getLayoutParams());
+
+        // set the emblem
         String tier = friends.get(position).tier;
-        if (tier == null) {
-            viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
-        } else {
-            switch (tier) {
-                case Constants.RANK_BRONZE:
-                    viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
-                    break;
-                case Constants.RANK_SILVER:
-                    viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
-                    break;
-                case Constants.RANK_GOLD:
-                    viewHolder.rankedBorder.setImageResource(R.drawable.border_gold);
-                    break;
-                case Constants.RANK_PLAT:
-                    viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
-                    break;
-                case Constants.RANK_DIAMOND:
-                    viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
-                    break;
-                case Constants.RANK_MASTER:
-                    viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
-                    break;
-                case Constants.RANK_CHALLENGER:
-                    viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
-                    break;
-                default:
-                    viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
-                    break;
-            }
+        String division = friends.get(position).division;
+        viewHolder.emblem.setImageResource(getEmblem(tier, division));
+
+        // set the tier/division view
+        String tierDivision = tier + " " + division;
+        viewHolder.tierDivision.setText(tierDivision);
+
+        // set the lp view
+        int lp = friends.get(position).lp;
+        String lpText = lp + "LP";
+        viewHolder.lp.setText(lpText);
+
+        // set the win/loss/ratio view
+        int wins = friends.get(position).wins;
+        int losses = friends.get(position).losses;
+        String ratio = ((wins * 100) / (wins + losses)) + "%";
+        String winLossRatio = wins + "W " + losses + "L " + ratio;
+        viewHolder.winLossRatio.setText(winLossRatio);
+
+        // set the ranked border
+        switch (tier) {
+            case Constants.TIER_BRONZE:
+                viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                break;
+            case Constants.TIER_SILVER:
+                viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                break;
+            case Constants.TIER_GOLD:
+                viewHolder.rankedBorder.setImageResource(R.drawable.border_gold);
+                break;
+            case Constants.TIER_PLAT:
+                viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                break;
+            case Constants.TIER_DIAMOND:
+                viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                break;
+            case Constants.TIER_MASTER:
+                viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                break;
+            case Constants.TIER_CHALLENGER:
+                viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                break;
+            default:
+                viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                break;
         }
 
         return convertView;
     }
 
+    private int getEmblem(String tier, String division) {
+        if (Constants.TIER_BRONZE.equals(tier) && Constants.DIVISION_5.equals(division)) {
+            return R.drawable.emblem_b5;
+        }
+        if (Constants.TIER_BRONZE.equals(tier) && Constants.DIVISION_4.equals(division)) {
+            return R.drawable.emblem_b4;
+        }
+        if (Constants.TIER_BRONZE.equals(tier) && Constants.DIVISION_3.equals(division)) {
+            return R.drawable.emblem_b3;
+        }
+        if (Constants.TIER_BRONZE.equals(tier) && Constants.DIVISION_2.equals(division)) {
+            return R.drawable.emblem_b2;
+        }
+        if (Constants.TIER_BRONZE.equals(tier) && Constants.DIVISION_1.equals(division)) {
+            return R.drawable.emblem_b1;
+        }
+        if (Constants.TIER_SILVER.equals(tier) && Constants.DIVISION_5.equals(division)) {
+            return R.drawable.emblem_s5;
+        }
+        if (Constants.TIER_SILVER.equals(tier) && Constants.DIVISION_4.equals(division)) {
+            return R.drawable.emblem_s4;
+        }
+        if (Constants.TIER_SILVER.equals(tier) && Constants.DIVISION_3.equals(division)) {
+            return R.drawable.emblem_s3;
+        }
+        if (Constants.TIER_SILVER.equals(tier) && Constants.DIVISION_2.equals(division)) {
+            return R.drawable.emblem_s2;
+        }
+        if (Constants.TIER_SILVER.equals(tier) && Constants.DIVISION_1.equals(division)) {
+            return R.drawable.emblem_s1;
+        }
+        if (Constants.TIER_GOLD.equals(tier) && Constants.DIVISION_5.equals(division)) {
+            return R.drawable.emblem_g5;
+        }
+        if (Constants.TIER_GOLD.equals(tier) && Constants.DIVISION_4.equals(division)) {
+            return R.drawable.emblem_g4;
+        }
+        if (Constants.TIER_GOLD.equals(tier) && Constants.DIVISION_3.equals(division)) {
+            return R.drawable.emblem_g3;
+        }
+        if (Constants.TIER_GOLD.equals(tier) && Constants.DIVISION_2.equals(division)) {
+            return R.drawable.emblem_g2;
+        }
+        if (Constants.TIER_GOLD.equals(tier) && Constants.DIVISION_1.equals(division)) {
+            return R.drawable.emblem_g1;
+        }
+        if (Constants.TIER_PLAT.equals(tier) && Constants.DIVISION_5.equals(division)) {
+            return R.drawable.emblem_p5;
+        }
+        if (Constants.TIER_PLAT.equals(tier) && Constants.DIVISION_4.equals(division)) {
+            return R.drawable.emblem_p4;
+        }
+        if (Constants.TIER_PLAT.equals(tier) && Constants.DIVISION_3.equals(division)) {
+            return R.drawable.emblem_p3;
+        }
+        if (Constants.TIER_PLAT.equals(tier) && Constants.DIVISION_2.equals(division)) {
+            return R.drawable.emblem_p2;
+        }
+        if (Constants.TIER_PLAT.equals(tier) && Constants.DIVISION_1.equals(division)) {
+            return R.drawable.emblem_p1;
+        }
+        if (Constants.TIER_DIAMOND.equals(tier) && Constants.DIVISION_5.equals(division)) {
+            return R.drawable.emblem_d5;
+        }
+        if (Constants.TIER_DIAMOND.equals(tier) && Constants.DIVISION_4.equals(division)) {
+            return R.drawable.emblem_d4;
+        }
+        if (Constants.TIER_DIAMOND.equals(tier) && Constants.DIVISION_3.equals(division)) {
+            return R.drawable.emblem_d3;
+        }
+        if (Constants.TIER_DIAMOND.equals(tier) && Constants.DIVISION_2.equals(division)) {
+            return R.drawable.emblem_d2;
+        }
+        if (Constants.TIER_DIAMOND.equals(tier) && Constants.DIVISION_1.equals(division)) {
+            return R.drawable.emblem_d1;
+        }
+        if (Constants.TIER_MASTER.equals(tier)) {
+            return R.drawable.emblem_m;
+        }
+        if (Constants.TIER_CHALLENGER.equals(tier)) {
+            return R.drawable.emblem_c;
+        }
+
+        return R.drawable.emblem_s5;
+    }
+
     class ViewHolder {
 
+        ImageView emblem;
         TextView name;
         ImageView profileIcon;
         ImageView rankedBorder;
+        TextView series;
+        TextView tierDivision;
+        TextView lp;
+        TextView winLossRatio;
     }
 }

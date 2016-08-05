@@ -20,7 +20,10 @@ public class Summoner extends Model {
     public String key;
     @Expose
     @Column(name = "losses")
-    public String losses;
+    public int losses;
+    @Expose
+    @Column(name = "lp")
+    public int lp;
     @Expose
     @Column(name = "name")
     public String name;
@@ -41,7 +44,7 @@ public class Summoner extends Model {
     public String tier;
     @Expose
     @Column(name = "wins")
-    public String wins;
+    public int wins;
 
     @SuppressWarnings("RedundantNoArgConstructor")
     public Summoner() {

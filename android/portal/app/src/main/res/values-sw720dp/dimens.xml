@@ -28,6 +28,5 @@
     <dimen name="text_size_large">36sp</dimen>
     <dimen name="text_size_huge">40sp</dimen>
     <dimen name="text_size_massive">50sp</dimen>
-    <dimen name="text_size_friend_names">70sp</dimen>
     <dimen name="text_size_win_ratio">90sp</dimen>
 </resources>
