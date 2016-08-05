@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
@@ -41,14 +43,14 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
             convertView = inflater.inflate(R.layout.view_friends, parent, false);
 
             // initialize views
-            viewHolder.rankedBorder = (ImageView) convertView.findViewById(R.id.ranked_border_view);
+            viewHolder.rankedBorder = (FrameLayout) convertView.findViewById(R.id.ranked_border_layout);
             viewHolder.profileIcon = (ImageView) convertView.findViewById(R.id.friend_profile_icon_view);
             viewHolder.name = (TextView) convertView.findViewById(R.id.friend_summoner_name_view);
             viewHolder.emblem = (ImageView) convertView.findViewById(R.id.emblem_view);
             viewHolder.tierDivision = (TextView) convertView.findViewById(R.id.tier_division_view);
             viewHolder.lp = (TextView) convertView.findViewById(R.id.lp_view);
             viewHolder.winLossRatio = (TextView) convertView.findViewById(R.id.win_loss_ratio_view);
-            viewHolder.series = (TextView) convertView.findViewById(R.id.series_view);
+            viewHolder.series = (LinearLayout) convertView.findViewById(R.id.series_layout);
 
             // set tag
             convertView.setTag(viewHolder);
@@ -83,7 +85,33 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         viewHolder.emblem.setImageResource(getEmblem(tier, division));
 
         // set the tier/division view
-        String tierDivision = tier + " " + division;
+        String tierDivision;
+        switch (tier) {
+            case Constants.TIER_BRONZE:
+                tierDivision = context.getString(R.string.mf_bronze) + " " + division;
+                break;
+            case Constants.TIER_SILVER:
+                tierDivision = context.getString(R.string.mf_silver) + " " + division;
+                break;
+            case Constants.TIER_GOLD:
+                tierDivision = context.getString(R.string.mf_gold) + " " + division;
+                break;
+            case Constants.TIER_PLAT:
+                tierDivision = context.getString(R.string.mf_plat) + " " + division;
+                break;
+            case Constants.TIER_DIAMOND:
+                tierDivision = context.getString(R.string.mf_diamond) + " " + division;
+                break;
+            case Constants.TIER_MASTER:
+                tierDivision = context.getString(R.string.mf_master);
+                break;
+            case Constants.TIER_CHALLENGER:
+                tierDivision = context.getString(R.string.mf_challenger);
+                break;
+            default:
+                tierDivision = "";
+                break;
+        }
         viewHolder.tierDivision.setText(tierDivision);
 
         // set the lp view
@@ -98,31 +126,50 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         String winLossRatio = wins + "W " + losses + "L " + ratio;
         viewHolder.winLossRatio.setText(winLossRatio);
 
+        // set the series layout
+        String series = friends.get(position).series;
+        for (int i = 0; i < viewHolder.series.getChildCount(); i++) {
+            ImageView seriesIcon = (ImageView) viewHolder.series.getChildAt(i);
+            if (i < series.length()) {
+                switch (series.charAt(i)) {
+                    case Constants.SERIES_WIN:
+                        seriesIcon.setImageResource(R.drawable.ic_series_win);
+                        break;
+                    case Constants.SERIES_LOSS:
+                        seriesIcon.setImageResource(R.drawable.ic_series_loss);
+                        break;
+                    case Constants.SERIES_UNPLAYED:
+                        seriesIcon.setImageResource(R.drawable.ic_series_unplayed);
+                        break;
+                }
+                seriesIcon.setVisibility(View.VISIBLE);
+            } else {
+                seriesIcon.setVisibility(View.GONE);
+            }
+        }
+
         // set the ranked border
         switch (tier) {
             case Constants.TIER_BRONZE:
-                viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_silver);
                 break;
             case Constants.TIER_SILVER:
-                viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_silver);
                 break;
             case Constants.TIER_GOLD:
-                viewHolder.rankedBorder.setImageResource(R.drawable.border_gold);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_gold);
                 break;
             case Constants.TIER_PLAT:
-                viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_plat);
                 break;
             case Constants.TIER_DIAMOND:
-                viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_diamond);
                 break;
             case Constants.TIER_MASTER:
-                viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_master);
                 break;
             case Constants.TIER_CHALLENGER:
-                viewHolder.rankedBorder.setImageResource(R.drawable.border_plat);
-                break;
-            default:
-                viewHolder.rankedBorder.setImageResource(R.drawable.border_silver);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_master);
                 break;
         }
 
@@ -218,12 +265,12 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
     class ViewHolder {
 
         ImageView emblem;
+        TextView lp;
         TextView name;
         ImageView profileIcon;
-        ImageView rankedBorder;
-        TextView series;
+        FrameLayout rankedBorder;
+        LinearLayout series;
         TextView tierDivision;
-        TextView lp;
         TextView winLossRatio;
     }
 }

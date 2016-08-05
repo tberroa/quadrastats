@@ -26,13 +26,4 @@
         android:gravity="center"
         android:text="@string/mf_no_friends"
         android:textSize="@dimen/text_size_massive"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add_friend_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/spacing_huge"
-        android:clickable="true"
-        android:src="@drawable/ic_add_button"/>
 </merge>

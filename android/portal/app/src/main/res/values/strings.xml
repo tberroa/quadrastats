@@ -70,6 +70,14 @@
     <string name="mf_remove_friend_confirm">
         Are you sure you want to remove this summoner from your friends list?
     </string>
+    <string name="mf_add_friend">Add Friend</string>
+    <string name="mf_bronze">Bronze</string>
+    <string name="mf_silver">Silver</string>
+    <string name="mf_gold">Gold</string>
+    <string name="mf_plat">Platinum</string>
+    <string name="mf_diamond">Diamond</string>
+    <string name="mf_master">Master</string>
+    <string name="mf_challenger">Challenger</string>
 
     <!-- base stats activity -->
     <string name="bs_loading">Loading&#8230;</string>

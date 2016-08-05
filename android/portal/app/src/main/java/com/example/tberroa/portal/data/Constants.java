@@ -32,6 +32,9 @@ public class Constants {
     public static final String REGION_OCE = "oce";
     public static final String REGION_RU = "ru";
     public static final String REGION_TR = "tr";
+    public static final char SERIES_LOSS = 'L';
+    public static final char SERIES_UNPLAYED = 'N';
+    public static final char SERIES_WIN = 'W';
     public static final String TAG_DEBUG = "TAG_DEBUG";
     public static final String TAG_EXCEPTIONS = "TAG_EXCEPTIONS";
     public static final String TIER_BRONZE = "BRONZE";

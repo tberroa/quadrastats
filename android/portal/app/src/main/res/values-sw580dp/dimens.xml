@@ -20,6 +20,7 @@
     <dimen name="profile_icon_side">200dp</dimen>
     <dimen name="nav_header_height">200dp</dimen>
     <dimen name="dialog_width">500dp</dimen>
+    <dimen name="series_icon_side">30dp</dimen>
 
     <!-- text -->
     <dimen name="text_size_tiny">12sp</dimen>

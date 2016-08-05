@@ -4,13 +4,13 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
@@ -64,6 +64,7 @@ public class FriendsActivity extends BaseActivity {
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.mf_activity_title);
+        toolbar.inflateMenu(R.menu.friends_menu);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_back_button));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,12 +78,15 @@ public class FriendsActivity extends BaseActivity {
                 }
             }
         });
-
-        // initialize add friend button
-        FloatingActionButton addFriend = (FloatingActionButton) findViewById(R.id.add_friend_button);
-        addFriend.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new AddFriendDialog().show();
+        toolbar.setOnMenuItemClickListener(new MenuListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                super.onMenuItemClick(item);
+                switch (item.getItemId()) {
+                    case R.id.add_friend:
+                        new AddFriendDialog().show();
+                }
+                return true;
             }
         });
 

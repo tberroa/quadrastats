@@ -2,10 +2,17 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/primary_background_transparent">
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_view_description"
+        android:scaleType="fitXY"
+        android:src="@color/primary_background_transparent"/>
 
     <FrameLayout
+        android:id="@+id/ranked_border_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -56,19 +63,41 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_huge"/>
 
-            <TextView
-                android:id="@+id/series_view"
+            <LinearLayout
+                android:id="@+id/series_layout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_huge"
-                android:text="- - -"/>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/series_icon_side"
+                    android:layout_height="@dimen/series_icon_side"
+                    android:contentDescription="@string/image_view_description"
+                    android:padding="@dimen/spacing_small"/>
+
+                <ImageView
+                    android:layout_width="@dimen/series_icon_side"
+                    android:layout_height="@dimen/series_icon_side"
+                    android:contentDescription="@string/image_view_description"
+                    android:padding="@dimen/spacing_small"/>
+
+                <ImageView
+                    android:layout_width="@dimen/series_icon_side"
+                    android:layout_height="@dimen/series_icon_side"
+                    android:contentDescription="@string/image_view_description"
+                    android:padding="@dimen/spacing_small"/>
+
+                <ImageView
+                    android:layout_width="@dimen/series_icon_side"
+                    android:layout_height="@dimen/series_icon_side"
+                    android:contentDescription="@string/image_view_description"
+                    android:padding="@dimen/spacing_small"/>
+
+                <ImageView
+                    android:layout_width="@dimen/series_icon_side"
+                    android:layout_height="@dimen/series_icon_side"
+                    android:contentDescription="@string/image_view_description"
+                    android:padding="@dimen/spacing_small"/>
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
-
-    <ImageView
-        android:id="@+id/ranked_border_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/image_view_description"
-        android:scaleType="fitXY"/>
 </FrameLayout>
