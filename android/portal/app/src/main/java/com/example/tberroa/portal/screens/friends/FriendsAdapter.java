@@ -1,6 +1,7 @@
 package com.example.tberroa.portal.screens.friends;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
 
             // initialize views
             viewHolder.rankedBorder = (FrameLayout) convertView.findViewById(R.id.ranked_border_layout);
+            viewHolder.overlay = (ImageView) convertView.findViewById(R.id.overlay_view);
             viewHolder.profileIcon = (ImageView) convertView.findViewById(R.id.friend_profile_icon_view);
             viewHolder.name = (TextView) convertView.findViewById(R.id.friend_summoner_name_view);
             viewHolder.emblem = (ImageView) convertView.findViewById(R.id.emblem_view);
@@ -172,6 +174,9 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
                 viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_challenger);
                 break;
         }
+        Rect padding = new Rect();
+        viewHolder.rankedBorder.getBackground().getPadding(padding);
+        viewHolder.overlay.setPadding(padding.left, padding.top, padding.right, padding.bottom);
 
         return convertView;
     }
@@ -267,6 +272,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         ImageView emblem;
         TextView lp;
         TextView name;
+        ImageView overlay;
         ImageView profileIcon;
         FrameLayout rankedBorder;
         LinearLayout series;

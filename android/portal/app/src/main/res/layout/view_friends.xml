@@ -5,10 +5,10 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:id="@+id/overlay_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_view_description"
-        android:scaleType="fitXY"
         android:src="@color/primary_background_transparent"/>
 
     <FrameLayout
