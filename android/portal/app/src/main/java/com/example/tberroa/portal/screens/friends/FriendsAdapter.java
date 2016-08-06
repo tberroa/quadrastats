@@ -151,7 +151,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         // set the ranked border
         switch (tier) {
             case Constants.TIER_BRONZE:
-                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_silver);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_bronze);
                 break;
             case Constants.TIER_SILVER:
                 viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_silver);
@@ -169,7 +169,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
                 viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_master);
                 break;
             case Constants.TIER_CHALLENGER:
-                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_master);
+                viewHolder.rankedBorder.setBackgroundResource(R.drawable.border_challenger);
                 break;
         }
 
