@@ -482,7 +482,12 @@ class RemoveFriend(APIView):
             return Response(summoner_does_not_exist)
 
         # remove the friends key from the users friend list
-        user.friends = user.friends.replace(friend_key, "")
+        friends = user.friends.split(",")
+        updated_friends = []
+        for friend in friends:
+            if friend != friend_key:
+                updated_friends.append(friend)
+        user.friends = ",".join(updated_friends)
 
         # ensure proper formatting
         user.friends = user.friends.replace(",,", ",")
