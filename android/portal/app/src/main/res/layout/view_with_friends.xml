@@ -139,7 +139,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_view_description"
                 android:padding="@dimen/spacing_standard"
-                android:src="@drawable/ic_income"/>
+                android:src="@drawable/ic_tab_income"/>
         </com.balysv.materialripple.MaterialRippleLayout>
 
         <com.balysv.materialripple.MaterialRippleLayout
@@ -159,7 +159,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_view_description"
                 android:padding="@dimen/spacing_standard"
-                android:src="@drawable/ic_offense"/>
+                android:src="@drawable/ic_tab_offense"/>
         </com.balysv.materialripple.MaterialRippleLayout>
 
         <com.balysv.materialripple.MaterialRippleLayout
@@ -178,8 +178,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_view_description"
-                android:padding="@dimen/spacing_tiny"
-                android:src="@drawable/ic_utility"/>
+                android:padding="@dimen/spacing_standard"
+                android:src="@drawable/ic_tab_utility"/>
         </com.balysv.materialripple.MaterialRippleLayout>
 
         <com.balysv.materialripple.MaterialRippleLayout
@@ -198,8 +198,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_view_description"
-                android:padding="@dimen/spacing_tiny"
-                android:src="@drawable/ic_vision"/>
+                android:padding="@dimen/spacing_standard"
+                android:src="@drawable/ic_tab_vision"/>
         </com.balysv.materialripple.MaterialRippleLayout>
     </LinearLayout>
 </LinearLayout>

@@ -273,28 +273,28 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 case 0:
                     if (tab != null) {
                         ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
-                        icon.setImageResource(R.drawable.ic_income);
+                        icon.setImageResource(R.drawable.ic_tab_income);
                         tab.setCustomView(view);
                     }
                     break;
                 case 1:
                     if (tab != null) {
                         ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
-                        icon.setImageResource(R.drawable.ic_offense);
+                        icon.setImageResource(R.drawable.ic_tab_offense);
                         tab.setCustomView(view);
                     }
                     break;
                 case 2:
                     if (tab != null) {
                         ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
-                        icon.setImageResource(R.drawable.ic_utility);
+                        icon.setImageResource(R.drawable.ic_tab_utility);
                         tab.setCustomView(view);
                     }
                     break;
                 case 3:
                     if (tab != null) {
                         ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
-                        icon.setImageResource(R.drawable.ic_vision);
+                        icon.setImageResource(R.drawable.ic_tab_vision);
                         tab.setCustomView(view);
                     }
                     break;

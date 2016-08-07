@@ -40,5 +40,7 @@
         android:background="@color/primary_background"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_nav"
+        app:itemBackground="@color/accent"
+        app:itemIconTint="@android:color/white"
         app:menu="@menu/drawer_menu"/>
 </android.support.v4.widget.DrawerLayout>

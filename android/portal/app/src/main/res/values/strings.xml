@@ -141,10 +141,6 @@
     <string name="gwf_kp">Kill Participation</string>
     <string name="gwf_wards">Wards Bought/Placed/Killed</string>
 
-    <!-- drawer navigation menu -->
-    <string name="nav_account">Account</string>
-    <string name="nav_stats">Stats</string>
-
     <!-- generic button labels -->
     <string name="button_done">Done</string>
     <string name="button_yes">Yes</string>
