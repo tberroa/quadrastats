@@ -48,9 +48,15 @@ class WinRatesAdapter extends ArrayAdapter<WinRate> {
 
         // set text
         viewHolder.name.setText(names.get(position));
-        viewHolder.played.setText(String.valueOf(winRates.get(position).played()));
-        viewHolder.won.setText(String.valueOf(winRates.get(position).wins()));
-        viewHolder.ratio.setText(winRates.get(position).ratio());
+        if (winRates.get(position) != null) {
+            viewHolder.played.setText(String.valueOf(winRates.get(position).played()));
+            viewHolder.won.setText(String.valueOf(winRates.get(position).wins()));
+            viewHolder.ratio.setText(winRates.get(position).ratio());
+        } else {
+            viewHolder.played.setText("0");
+            viewHolder.won.setText("0");
+            viewHolder.ratio.setText(context.getString(R.string.wrd_not_applicable));
+        }
 
         return convertView;
     }

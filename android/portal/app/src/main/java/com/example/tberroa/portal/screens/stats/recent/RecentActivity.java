@@ -613,8 +613,12 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             String lane = params[0].lane;
             String role = params[0].role;
 
+            // determine position
+            String top = Constants.POS_TOP;
+            String jungle = Constants.POS_JUNGLE;
+            String mid = Constants.POS_MID;
             if (params[0].lane != null) {
-                if ("TOP".equals(lane) || "JUNGLE".equals(lane) || "MIDDLE".equals(lane)) {
+                if (lane.equals(top) || lane.equals(jungle) || lane.equals(mid)) {
                     position = lane;
                 } else {
                     position = role;

@@ -91,6 +91,7 @@
     <string name="wrd_played">Played</string>
     <string name="wrd_won">Won</string>
     <string name="wrd_ratio">Ratio</string>
+    <string name="wrd_not_applicable">N/A</string>
 
     <!-- recent games activity -->
     <string name="rg_activity_title">Recent Games</string>
@@ -146,6 +147,7 @@
     <string name="button_yes">Yes</string>
     <string name="button_go">Go</string>
     <string name="button_cancel">Cancel</string>
+    <string name="button_clear">Clear</string>
 
     <!-- error messages -->
     <string name="err_select_region">Please select a region</string>

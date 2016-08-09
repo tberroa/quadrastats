@@ -471,9 +471,9 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             listView.setAdapter(friendsAdapter);
             listView.setOnItemClickListener(new OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                    if (position > 0) {
-                        new RemoveFriendDialog(position).show();
+                public void onItemClick(AdapterView<?> adapter, View view, int i, long l) {
+                    if (i > 0) {
+                        new RemoveFriendDialog(i).show();
                     }
                 }
             });

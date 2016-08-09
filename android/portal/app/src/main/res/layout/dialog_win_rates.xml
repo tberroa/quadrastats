@@ -31,7 +31,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_transparent"
+        android:background="@color/accent"
         android:padding="@dimen/spacing_standard">
 
         <TextView
@@ -70,5 +70,114 @@
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="85"/>
+
+    <FrameLayout
+        android:id="@+id/pos_icon_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:background="@color/primary_background"
+        android:padding="@dimen/spacing_small">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/top_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_pos_top"/>
+
+            <ImageView
+                android:id="@+id/jungle_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_pos_jungle"/>
+
+            <ImageView
+                android:id="@+id/mid_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_pos_mid"/>
+
+            <ImageView
+                android:id="@+id/bot_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_pos_bot"/>
+
+            <ImageView
+                android:id="@+id/support_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_pos_support"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/top_check"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_check"/>
+
+            <ImageView
+                android:id="@+id/jungle_check"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_check"/>
+
+            <ImageView
+                android:id="@+id/mid_check"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_check"/>
+
+            <ImageView
+                android:id="@+id/bot_check"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_check"/>
+
+            <ImageView
+                android:id="@+id/support_check"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_view_description"
+                android:src="@drawable/ic_check"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/go_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/accent"
+        android:text="@string/button_clear"
+        android:textAllCaps="true"
+        android:textSize="@dimen/text_size_huge"/>
 </LinearLayout>
