@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -188,6 +189,24 @@ public class WinRatesDialog extends Dialog {
                 }
             }
         });
+
+        // initialize clear button
+        Button clearButton = (Button) findViewById(R.id.clear_button);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                topCheck.setVisibility(View.INVISIBLE);
+                jungleCheck.setVisibility(View.INVISIBLE);
+                midCheck.setVisibility(View.INVISIBLE);
+                botCheck.setVisibility(View.INVISIBLE);
+                supportCheck.setVisibility(View.INVISIBLE);
+                winRates.clear();
+                for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySummonerPos.entrySet()) {
+                    winRates.add(winRatesByPos.getValue().get(ALL));
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void updateWinRates(MatchStats matchStats) {
@@ -207,7 +226,15 @@ public class WinRatesDialog extends Dialog {
         if (lane.equals(top) || lane.equals(jungle) || lane.equals(mid)) {
             position = lane;
         } else {
-            position = role;
+            if (role.equals(Constants.POS_BOT) || role.equals(Constants.POS_SUPPORT)) {
+                position = role;
+            } else {
+                if ((matchStats.cs_per_min != null) && (matchStats.cs_per_min > 2)) {
+                    position = Constants.POS_BOT;
+                } else {
+                    position = Constants.POS_SUPPORT;
+                }
+            }
         }
 
         // update the win rate for this summoner in this position
