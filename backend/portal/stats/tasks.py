@@ -79,7 +79,7 @@ def update_all():
                 summoner_ids_list.append(summoner_ids)
 
         # trigger a season stats update for summoner
-
+        update_season_one(summoner)
 
         # trigger a match stats update for summoner
         update_match_stats_one(summoner)
@@ -641,37 +641,37 @@ def update_season_one(summoner):
 
     # chain tasks together
     if region == "br":
-        chain = riot_request_br.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_br.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "eune":
-        chain = riot_request_eune.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_eune.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "euw":
-        chain = riot_request_euw.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_euw.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "jp":
-        chain = riot_request_jp.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_jp.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "kr":
-        chain = riot_request_kr.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_kr.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "lan":
-        chain = riot_request_lan.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_lan.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "las":
-        chain = riot_request_las.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_las.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "na":
-        chain = riot_request_na.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_na.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "oce":
-        chain = riot_request_oce.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_oce.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "ru":
-        chain = riot_request_ru.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_ru.s(args) | process_season_stats.s(summoner)
         chain()
     if region == "tr":
-        chain = riot_request_tr.s(args) | process_season_stats.s(summoner_id)
+        chain = riot_request_tr.s(args) | process_season_stats.s(summoner)
         chain()
 
     # successful return
@@ -685,7 +685,7 @@ def process_season_stats(riot_response, summoner):
         return False, riot_response
 
     # extract the season stats by champions
-    stats_by_champion = riot_response.get("champions")
+    stats_by_champion = riot_response[1].get("champions")
 
     # ensure data is valid
     if stats_by_champion is None:

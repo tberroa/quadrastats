@@ -670,7 +670,7 @@ def riot_request_na(args):
     if request == 5:
         # construct url
         url = "https://na.api.pvp.net/api/lol/na/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
