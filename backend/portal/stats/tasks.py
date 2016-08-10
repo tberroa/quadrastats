@@ -78,9 +78,12 @@ def update_all():
                 summoner_ids = [str(summoner.summoner_id)]
                 summoner_ids_list.append(summoner_ids)
 
+        # trigger a season stats update for summoner
+
+
         # trigger a match stats update for summoner
         update_match_stats_one(summoner)
-    
+
     # iterate over dictionary of summoner ids
     for region in summoner_ids_dict:
         # extract summoner ids list
@@ -622,6 +625,148 @@ def update_rank_all(riot_response, region, summoner_ids):
                     wins=wins,
                     losses=losses,
                     series=series)
+
+    # successful return
+    return True, None
+
+
+@shared_task
+def update_season_one(summoner):
+    # extract required data
+    region = summoner.region
+    summoner_id = summoner.summoner_id
+
+    # create season stats request argument
+    args = {"request": 5, "summoner_id": summoner_id}
+
+    # chain tasks together
+    if region == "br":
+        chain = riot_request_br.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "eune":
+        chain = riot_request_eune.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "euw":
+        chain = riot_request_euw.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "jp":
+        chain = riot_request_jp.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "kr":
+        chain = riot_request_kr.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "lan":
+        chain = riot_request_lan.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "las":
+        chain = riot_request_las.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "na":
+        chain = riot_request_na.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "oce":
+        chain = riot_request_oce.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "ru":
+        chain = riot_request_ru.s(args) | process_season_stats.s(summoner_id)
+        chain()
+    if region == "tr":
+        chain = riot_request_tr.s(args) | process_season_stats.s(summoner_id)
+        chain()
+
+    # successful return
+    return True, None
+
+
+@shared_task
+def process_season_stats(riot_response, summoner):
+    # make sure the response is valid
+    if riot_response[0] != 200:
+        return False, riot_response
+
+    # extract the season stats by champions
+    stats_by_champion = riot_response.get("champions")
+
+    # ensure data is valid
+    if stats_by_champion is None:
+        return False, None
+
+    # iterate over list
+    for entry in stats_by_champion:
+        # get the champion id and stats
+        champion = entry.get("id")
+        stats = entry.get("stats")
+
+        # ensure data is valid
+        if None in (champion, stats):
+            return False, None
+
+        try:
+            # get the season stats for this champion
+            stats_o = SeasonStats.objects.get(region=summoner.region, summoner_key=summoner.key, champion=champion)
+
+            # update the stats
+            SeasonStats.objects.filter(pk=stats_o.pk).update(
+                # identity info
+                region=summoner.region,
+                summoner_key=summoner.key,
+                summoner_name=summoner.name,
+                summoner_id=summoner.summoner_id,
+                champion=champion,
+
+                # raw stats
+                assists=stats.get("totalAssists"),
+                damage_dealt=stats.get("totalDamageDealt"),
+                damage_taken=stats.get("totalDamageTaken"),
+                deaths=stats.get("totalDeathsPerSession"),
+                double_kills=stats.get("totalDoubleKills"),
+                games=stats.get("totalSessionsPlayed"),
+                gold_earned=stats.get("totalGoldEarned"),
+                kills=stats.get("totalChampionKills"),
+                losses=stats.get("totalSessionsLost"),
+                magic_damage_dealt=stats.get("totalMagicDamageDealt"),
+                max_deaths=stats.get("maxNumDeaths"),
+                max_killing_spree=stats.get("maxLargestKillingSpree"),
+                max_kills=stats.get("maxChampionsKilled"),
+                minion_kills=stats.get("totalMinionKills"),
+                neutral_minion_kills=stats.get("totalNeutralMinionsKilled"),
+                penta_kills=stats.get("totalPentaKills"),
+                physical_damage_dealt=stats.get("totalPhysicalDamageDealt"),
+                quadra_kills=stats.get("totalQuadraKills"),
+                triple_kills=stats.get("totalTripleKills"),
+                wins=stats.get("totalSessionsWon"))
+
+        except SeasonStats.DoesNotExist:
+            # season stats object did not already exist, need to create it
+            SeasonStats.objects.create(
+                # identity info
+                region=summoner.region,
+                summoner_key=summoner.key,
+                summoner_name=summoner.name,
+                summoner_id=summoner.summoner_id,
+                champion=champion,
+
+                # raw stats
+                assists=stats.get("totalAssists"),
+                damage_dealt=stats.get("totalDamageDealt"),
+                damage_taken=stats.get("totalDamageTaken"),
+                deaths=stats.get("totalDeathsPerSession"),
+                double_kills=stats.get("totalDoubleKills"),
+                games=stats.get("totalSessionsPlayed"),
+                gold_earned=stats.get("totalGoldEarned"),
+                kills=stats.get("totalChampionKills"),
+                losses=stats.get("totalSessionsLost"),
+                magic_damage_dealt=stats.get("totalMagicDamageDealt"),
+                max_deaths=stats.get("maxNumDeaths"),
+                max_killing_spree=stats.get("maxLargestKillingSpree"),
+                max_kills=stats.get("maxChampionsKilled"),
+                minion_kills=stats.get("totalMinionKills"),
+                neutral_minion_kills=stats.get("totalNeutralMinionsKilled"),
+                penta_kills=stats.get("totalPentaKills"),
+                physical_damage_dealt=stats.get("totalPhysicalDamageDealt"),
+                quadra_kills=stats.get("totalQuadraKills"),
+                triple_kills=stats.get("totalTripleKills"),
+                wins=stats.get("totalSessionsWon"))
 
     # successful return
     return True, None
