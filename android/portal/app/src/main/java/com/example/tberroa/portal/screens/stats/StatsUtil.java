@@ -75,7 +75,7 @@ public class StatsUtil {
         if (championId > 0) {
             championIcon.getLayoutParams().width = iconSide;
             championIcon.getLayoutParams().height = iconSide;
-            championIcon.setLayoutParams(positionIcon.getLayoutParams());
+            championIcon.setLayoutParams(championIcon.getLayoutParams());
             String key = championKey(championId, staticRiotData.championsMap);
             String url = championIconURL(staticRiotData.version, key);
             Picasso.with(context).load(url).resize(iconSide, iconSide)
