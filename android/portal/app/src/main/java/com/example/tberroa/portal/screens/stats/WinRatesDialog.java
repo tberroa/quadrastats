@@ -1,13 +1,19 @@
 package com.example.tberroa.portal.screens.stats;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,8 +21,12 @@ import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.StaticRiotData;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,17 +38,19 @@ public class WinRatesDialog extends Dialog {
     private final Context context;
     private final List<MatchStats> matchStatsList;
     private final Map<Long, Map<String, MatchStats>> matchStatsMapMap;
-    private final List<WinRate> winRates;
-    private final Map<String, Map<String, WinRate>> winRatesBySummonerPos;
-    private WinRatesAdapter adapter;
+    private final StaticRiotData staticRiotData;
+    private final Map<String, Map<String, Map<String, WinRate>>> winRatesBySumChamp;
+    private final Map<String, Map<String, WinRate>> winRatesBySumPos;
+    private String selectedRole;
 
-    public WinRatesDialog(Context context, List<MatchStats> matchList, Map<Long, Map<String, MatchStats>> matchMap) {
-        super(context, R.style.AppTheme_Dialog);
-        this.context = context;
-        matchStatsList = matchList;
-        matchStatsMapMap = matchMap;
-        winRatesBySummonerPos = new LinkedHashMap<>();
-        winRates = new ArrayList<>();
+    public WinRatesDialog(Context co, List<MatchStats> mL, Map<Long, Map<String, MatchStats>> mM, StaticRiotData sRD) {
+        super(co, R.style.AppTheme_Dialog);
+        context = co;
+        matchStatsList = mL;
+        matchStatsMapMap = mM;
+        staticRiotData = sRD;
+        winRatesBySumPos = new LinkedHashMap<>();
+        winRatesBySumChamp = new HashMap<>();
     }
 
     @Override
@@ -64,8 +76,9 @@ public class WinRatesDialog extends Dialog {
         }
 
         // convert map into two lists
-        List<String> names = new ArrayList<>(winRatesBySummonerPos.keySet());
-        for (Map.Entry<String, Map<String, WinRate>> winRatesByPosition : winRatesBySummonerPos.entrySet()) {
+        List<String> names = new ArrayList<>(winRatesBySumPos.keySet());
+        List<WinRate> winRates = new ArrayList<>();
+        for (Map.Entry<String, Map<String, WinRate>> winRatesByPosition : winRatesBySumPos.entrySet()) {
             winRates.add(winRatesByPosition.getValue().get(ALL));
         }
 
@@ -74,13 +87,94 @@ public class WinRatesDialog extends Dialog {
         userWinRatio.setText(winRates.get(0).ratio());
 
         // populate list view
+        selectedRole = ALL;
         ListView listView = (ListView) findViewById(R.id.list_view);
-        adapter = new WinRatesAdapter(context, winRates, names);
+        WinRatesAdapter adapter = new WinRatesAdapter(context, winRates, names);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int i, long l) {
+                // cast the view to a linear layout
+                LinearLayout layout = (LinearLayout) view;
 
+                // get the number of child views
+                int children = layout.getChildCount();
+
+                // toggle champ win ratios
+                if (children == 1) {
+                    // get the win rate objects map
+                    Map<String, Map<String, WinRate>> intermediate = winRatesBySumChamp.get(names.get(i));
+                    Map<String, WinRate> winRatesByChamp = intermediate.get(selectedRole);
+
+                    // make sure the map is not null
+                    if (winRatesByChamp != null) {
+                        // initialize a list to hold the champ views
+                        List<ChampView> champLayouts = new ArrayList<>();
+
+                        // iterate over the win rate map
+                        for (Map.Entry<String, WinRate> entry : winRatesByChamp.entrySet()) {
+                            // initialize views
+                            @SuppressLint("InflateParams")
+                            View champLayout = getLayoutInflater().inflate(R.layout.view_win_rates_champ, null);
+                            ImageView champIcon = (ImageView) champLayout.findViewById(R.id.champ_icon_view);
+                            TextView played = (TextView) champLayout.findViewById(R.id.champ_played_view);
+                            TextView won = (TextView) champLayout.findViewById(R.id.champ_wins_view);
+                            TextView ratio = (TextView) champLayout.findViewById(R.id.champ_win_ratio_view);
+
+                            // set champion icon
+                            int side = (20 * ScreenUtil.screenWidth(context)) / 100;
+                            Drawable placeholder = ContextCompat.getDrawable(context, R.drawable.ic_placeholder);
+                            Bitmap bitmap = ((BitmapDrawable) placeholder).getBitmap();
+                            Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, side, side, true);
+                            Drawable resizedPlaceholder = new BitmapDrawable(context.getResources(), resizedBitmap);
+                            String url = StatsUtil.championIconURL(staticRiotData.version, entry.getKey());
+                            Picasso.with(context).load(url).resize(side, side)
+                                    .placeholder(resizedPlaceholder).into(champIcon);
+
+                            // set text views
+                            played.setText(String.valueOf(entry.getValue().played()));
+                            won.setText(String.valueOf(entry.getValue().wins()));
+                            ratio.setText(entry.getValue().ratio());
+
+                            // add view to list
+                            ChampView champView = new ChampView();
+                            champView.played = entry.getValue().played();
+                            champView.ratio = entry.getValue().ratio();
+                            champView.champLayout = champLayout;
+                            champLayouts.add(champView);
+                        }
+
+                        // sort the champ views by most played
+                        Collections.sort(champLayouts, new Comparator<ChampView>() {
+                            @Override
+                            public int compare(ChampView object1, ChampView object2) {
+                                int compareVal = object1.played - object2.played;
+                                if (compareVal != 0) {
+                                    return compareVal;
+                                } else {
+                                    return object1.ratio.compareTo(object2.ratio);
+                                }
+                            }
+                        });
+
+                        // insert the champ views into the main layout
+                        boolean color = true;
+                        for (int j = champLayouts.size() - 1; i >= 0; j--) {
+                            View champLayout = champLayouts.get(j).champLayout;
+                            if (color) {
+                                int bgColor = ContextCompat.getColor(context, R.color.white_transparent);
+                                champLayout.setBackgroundColor(bgColor);
+                            }
+                            layout.addView(champLayout);
+                            color = !color;
+                        }
+                    }
+                } else {
+                    for (int j = 1; j < children; ) {
+                        layout.removeViewAt(j);
+                        children = layout.getChildCount();
+                    }
+                }
             }
         });
 
@@ -112,9 +206,10 @@ public class WinRatesDialog extends Dialog {
                 botCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 if (topCheck.getVisibility() == View.INVISIBLE) {
+                    clear(listView, winRates, names);
+                    selectedRole = Constants.POS_TOP;
                     topCheck.setVisibility(View.VISIBLE);
-                    winRates.clear();
-                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySummonerPos.entrySet()) {
+                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
                         winRates.add(winRatesByPos.getValue().get(Constants.POS_TOP));
                     }
                     adapter.notifyDataSetChanged();
@@ -129,9 +224,10 @@ public class WinRatesDialog extends Dialog {
                 botCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 if (jungleCheck.getVisibility() == View.INVISIBLE) {
+                    clear(listView, winRates, names);
+                    selectedRole = Constants.POS_JUNGLE;
                     jungleCheck.setVisibility(View.VISIBLE);
-                    winRates.clear();
-                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySummonerPos.entrySet()) {
+                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
                         winRates.add(winRatesByPos.getValue().get(Constants.POS_JUNGLE));
                     }
                     adapter.notifyDataSetChanged();
@@ -146,9 +242,10 @@ public class WinRatesDialog extends Dialog {
                 botCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 if (midCheck.getVisibility() == View.INVISIBLE) {
+                    clear(listView, winRates, names);
+                    selectedRole = Constants.POS_MID;
                     midCheck.setVisibility(View.VISIBLE);
-                    winRates.clear();
-                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySummonerPos.entrySet()) {
+                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
                         winRates.add(winRatesByPos.getValue().get(Constants.POS_MID));
                     }
                     adapter.notifyDataSetChanged();
@@ -163,9 +260,10 @@ public class WinRatesDialog extends Dialog {
                 midCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 if (botCheck.getVisibility() == View.INVISIBLE) {
+                    clear(listView, winRates, names);
+                    selectedRole = Constants.POS_BOT;
                     botCheck.setVisibility(View.VISIBLE);
-                    winRates.clear();
-                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySummonerPos.entrySet()) {
+                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
                         winRates.add(winRatesByPos.getValue().get(Constants.POS_BOT));
                     }
                     adapter.notifyDataSetChanged();
@@ -180,9 +278,10 @@ public class WinRatesDialog extends Dialog {
                 midCheck.setVisibility(View.INVISIBLE);
                 botCheck.setVisibility(View.INVISIBLE);
                 if (supportCheck.getVisibility() == View.INVISIBLE) {
+                    clear(listView, winRates, names);
+                    selectedRole = Constants.POS_SUPPORT;
                     supportCheck.setVisibility(View.VISIBLE);
-                    winRates.clear();
-                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySummonerPos.entrySet()) {
+                    for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
                         winRates.add(winRatesByPos.getValue().get(Constants.POS_SUPPORT));
                     }
                     adapter.notifyDataSetChanged();
@@ -195,13 +294,14 @@ public class WinRatesDialog extends Dialog {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                clear(listView, winRates, names);
+                selectedRole = ALL;
                 topCheck.setVisibility(View.INVISIBLE);
                 jungleCheck.setVisibility(View.INVISIBLE);
                 midCheck.setVisibility(View.INVISIBLE);
                 botCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
-                winRates.clear();
-                for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySummonerPos.entrySet()) {
+                for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
                     winRates.add(winRatesByPos.getValue().get(ALL));
                 }
                 adapter.notifyDataSetChanged();
@@ -209,11 +309,23 @@ public class WinRatesDialog extends Dialog {
         });
     }
 
+    private void clear(ListView listView, List<WinRate> winRates, List<String> names) {
+        winRates.clear();
+        WinRatesAdapter adapter = new WinRatesAdapter(context, winRates, names);
+        listView.setAdapter(adapter);
+    }
+
     private void updateWinRates(MatchStats matchStats) {
         // get the win rate by position map for the summoner
-        Map<String, WinRate> winRatesByPosition = winRatesBySummonerPos.get(matchStats.summoner_name);
-        if (winRatesByPosition == null) {
-            winRatesByPosition = new HashMap<>();
+        Map<String, WinRate> winRatesByPos = winRatesBySumPos.get(matchStats.summoner_name);
+        if (winRatesByPos == null) {
+            winRatesByPos = new HashMap<>();
+        }
+
+        // get the win rate by champion map for the summoner
+        Map<String, Map<String, WinRate>> winRatesByChamp = winRatesBySumChamp.get(matchStats.summoner_name);
+        if (winRatesByChamp == null) {
+            winRatesByChamp = new HashMap<>();
         }
 
         // determine the position played by the summoner in this match
@@ -238,15 +350,40 @@ public class WinRatesDialog extends Dialog {
         }
 
         // update the win rate for this summoner in this position
-        WinRate winRate = winRatesByPosition.get(position);
-        if (winRate == null) {
-            winRate = new WinRate(matchStats.winner);
+        WinRate winRatePos = winRatesByPos.get(position);
+        if (winRatePos == null) {
+            winRatePos = new WinRate(matchStats.winner);
         } else {
-            winRate.update(matchStats.winner);
+            winRatePos.update(matchStats.winner);
         }
 
+        // update the win rate for this summoner with this champ
+        Map<String, WinRate> intermediate = winRatesByChamp.get(position);
+        if (intermediate == null) {
+            intermediate = new HashMap<>();
+        }
+        String champKey = StatsUtil.championKey(matchStats.champion, staticRiotData.championsMap);
+        WinRate winRateChamp = intermediate.get(champKey);
+        if (winRateChamp == null) {
+            winRateChamp = new WinRate(matchStats.winner);
+        } else {
+            winRateChamp.update(matchStats.winner);
+        }
+        intermediate.put(champKey, winRateChamp);
+        Map<String, WinRate> intermediateAll = winRatesByChamp.get(ALL);
+        if (intermediateAll == null) {
+            intermediateAll = new HashMap<>();
+        }
+        WinRate winRateChampAll = intermediateAll.get(champKey);
+        if (winRateChampAll == null) {
+            winRateChampAll = new WinRate(matchStats.winner);
+        } else {
+            winRateChampAll.update(matchStats.winner);
+        }
+        intermediateAll.put(champKey, winRateChampAll);
+
         // update the overall win rate for this summoner
-        WinRate winRateAll = winRatesByPosition.get(ALL);
+        WinRate winRateAll = winRatesByPos.get(ALL);
         if (winRateAll == null) {
             winRateAll = new WinRate(matchStats.winner);
         } else {
@@ -254,8 +391,17 @@ public class WinRatesDialog extends Dialog {
         }
 
         // insert the updated win rates into the maps
-        winRatesByPosition.put(position, winRate);
-        winRatesByPosition.put(ALL, winRateAll);
-        winRatesBySummonerPos.put(matchStats.summoner_name, winRatesByPosition);
+        winRatesByPos.put(position, winRatePos);
+        winRatesByPos.put(ALL, winRateAll);
+        winRatesBySumPos.put(matchStats.summoner_name, winRatesByPos);
+        winRatesByChamp.put(position, intermediate);
+        winRatesByChamp.put(ALL, intermediateAll);
+        winRatesBySumChamp.put(matchStats.summoner_name, winRatesByChamp);
+    }
+
+    private class ChampView {
+        View champLayout;
+        int played;
+        String ratio;
     }
 }

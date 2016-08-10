@@ -32,7 +32,7 @@ public class WFActivity extends BaseStatsActivity implements WFAsync {
                 super.onMenuItemClick(item);
                 switch (item.getItemId()) {
                     case R.id.win_rates:
-                        new WinRatesDialog(WFActivity.this, null, matchStatsMapMap).show();
+                        new WinRatesDialog(WFActivity.this, null, matchStatsMapMap, staticRiotData).show();
                 }
                 return true;
             }

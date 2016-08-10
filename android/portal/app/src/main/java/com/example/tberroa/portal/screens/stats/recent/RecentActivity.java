@@ -114,7 +114,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                         new FilterDialog().show();
                         break;
                     case R.id.win_rates:
-                        new WinRatesDialog(RecentActivity.this, matchStatsList, null).show();
+                        new WinRatesDialog(RecentActivity.this, matchStatsList, null, staticRiotData).show();
                         break;
                 }
                 return true;

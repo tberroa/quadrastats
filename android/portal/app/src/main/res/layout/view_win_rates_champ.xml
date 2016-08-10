@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/champ_icon_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:layout_weight="40"
+        android:contentDescription="@string/image_view_description"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/champ_played_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"/>
+
+    <TextView
+        android:id="@+id/champ_wins_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"/>
+
+    <TextView
+        android:id="@+id/champ_win_ratio_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"/>
+</LinearLayout>
