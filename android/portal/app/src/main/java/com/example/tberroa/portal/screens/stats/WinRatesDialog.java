@@ -159,7 +159,7 @@ public class WinRatesDialog extends Dialog {
 
                         // insert the champ views into the main layout
                         boolean color = true;
-                        for (int j = champLayouts.size() - 1; i >= 0; j--) {
+                        for (int j = champLayouts.size() - 1; j >= 0; j--) {
                             View champLayout = champLayouts.get(j).champLayout;
                             if (color) {
                                 int bgColor = ContextCompat.getColor(context, R.color.white_transparent);
