@@ -110,7 +110,7 @@ def riot_request_br(args):
     if request == 5:
         # construct url
         url = "https://br.api.pvp.net/api/lol/br/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -190,7 +190,7 @@ def riot_request_eune(args):
     if request == 5:
         # construct url
         url = "https://eune.api.pvp.net/api/lol/eune/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -270,7 +270,7 @@ def riot_request_euw(args):
     if request == 5:
         # construct url
         url = "https://euw.api.pvp.net/api/lol/euw/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -350,7 +350,7 @@ def riot_request_jp(args):
     if request == 5:
         # construct url
         url = "https://jp.api.pvp.net/api/lol/jp/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -430,7 +430,7 @@ def riot_request_kr(args):
     if request == 5:
         # construct url
         url = "https://kr.api.pvp.net/api/lol/kr/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -510,7 +510,7 @@ def riot_request_lan(args):
     if request == 5:
         # construct url
         url = "https://lan.api.pvp.net/api/lol/lan/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -590,7 +590,7 @@ def riot_request_las(args):
     if request == 5:
         # construct url
         url = "https://las.api.pvp.net/api/lol/las/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -750,7 +750,7 @@ def riot_request_oce(args):
     if request == 5:
         # construct url
         url = "https://oce.api.pvp.net/api/lol/oce/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -830,7 +830,7 @@ def riot_request_ru(args):
     if request == 5:
         # construct url
         url = "https://ru.api.pvp.net/api/lol/ru/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request
@@ -910,7 +910,7 @@ def riot_request_tr(args):
     if request == 5:
         # construct url
         url = "https://tr.api.pvp.net/api/lol/tr/v1.3/stats/by-summoner/" \
-              + str(summoner_ids) + "/" \
+              + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
 
         # make get request

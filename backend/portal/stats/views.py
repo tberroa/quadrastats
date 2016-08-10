@@ -8,6 +8,7 @@ from stats.models import SeasonStats
 from stats.serializers import MatchStatsSerializer
 from stats.serializers import SeasonStatsSerializer
 
+
 class GetMatchStats(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
