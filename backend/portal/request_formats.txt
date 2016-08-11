@@ -16,9 +16,15 @@ Response:
     "key": "luciaron",
     "name": "Luciaron",
     "summoner_id": 21203379,
+    "tier": "SILVER",
+    "division": "I",
+    "lp": 59,
+    "wins": 23,
+    "losses": 22,
+    "series": "",
     "profile_icon": 7,
     "friends": "",
-    "modified": "2016-07-02T14:54:04.400771"
+    "accessed": "2016-08-06T16:11:27.465872"
 }
 
 ---------------------------------------------------
@@ -33,14 +39,20 @@ Request:
 }
 Response:
 {
-    "id": 38,
+    "id": 42,
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
+    "tier": "GOLD",
+    "division": "II",
+    "lp": 14,
+    "wins": 138,
+    "losses": 120,
+    "series": "",
     "profile_icon": 539,
-    "friends": "luciaron",
-    "modified": "2016-07-06T18:54:27.493591",
+    "friends": "acruz,clapyohands,economite,thedelusion,xluunatic,anniebot,luciaron",
+    "accessed": "2016-08-11T15:30:39.309999",
     "email": "tom.berroa@gmail.com"
 }
 
@@ -56,14 +68,20 @@ Request:
 }
 Response:
 {
-    "id": 38,
+    "id": 42,
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
+    "tier": "GOLD",
+    "division": "II",
+    "lp": 14,
+    "wins": 138,
+    "losses": 120,
+    "series": "",
     "profile_icon": 539,
-    "friends": "",
-    "modified": "2016-07-02T14:36:23.127745"
+    "friends": "acruz,clapyohands,economite,thedelusion,xluunatic,anniebot,luciaron",
+    "accessed": "2016-08-11T15:31:04.758609"
 }
 
 ---------------------------------------------------
@@ -72,29 +90,25 @@ Get Summoners
 Request:
 { 
     "region" : "na",
-    "keys" : ["frosiph", "luciaron"]
+    "keys" : ["frosiph"]
 }
 Response:
 [
     {
-        "id": 38,
+        "id": 42,
         "region": "na",
         "key": "frosiph",
         "name": "Frosiph",
         "summoner_id": 26155824,
+        "tier": "GOLD",
+        "division": "II",
+        "lp": 14,
+        "wins": 138,
+        "losses": 120,
+        "series": "",
         "profile_icon": 539,
-        "friends": "acruz,luciaron",
-        "modified": "2016-07-02T14:54:04.407578"
-    },
-    {
-        "id": 39,
-        "region": "na",
-        "key": "luciaron",
-        "name": "Luciaron",
-        "summoner_id": 21203379,
-        "profile_icon": 7,
-        "friends": "",
-        "modified": "2016-07-02T14:54:04.400771"
+        "friends": "acruz,clapyohands,economite,thedelusion,xluunatic,anniebot,luciaron",
+        "accessed": "2016-08-11T15:31:57.156458"
     }
 ]
 
@@ -109,15 +123,21 @@ Request:
 }
 Response:
 {
-    "id": 38,
+    "id": 42,
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
+    "tier": "GOLD",
+    "division": "II",
+    "lp": 14,
+    "wins": 138,
+    "losses": 120,
+    "series": "",
     "profile_icon": 539,
-    "friends": "",
-    "modified": "2016-07-02T14:36:23.127745",
-    "email": "tberroa@outlook.com"
+    "friends": "acruz,clapyohands,economite,thedelusion,xluunatic,anniebot,luciaron",
+    "accessed": "2016-08-11T15:33:12.216039",
+    "email": "tom.berroa@gmail.com"
 }
 
 ---------------------------------------------------
@@ -133,14 +153,20 @@ Request:
 }
 Response:
 {
-    "id": 38,
+    "id": 84,
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
+    "tier": "GOLD",
+    "division": "II",
+    "lp": 14,
+    "wins": 138,
+    "losses": 120,
+    "series": "",
     "profile_icon": 539,
-    "friends": "acruz,luciaron",
-    "modified": "2016-07-02T14:59:26.012098",
+    "friends": "",
+    "accessed": "2016-08-11T15:35:38.484297",
     "email": "tberroa@outlook.com"
 }
 
@@ -155,14 +181,20 @@ Request:
 }
 Response:
 {
-    "id": 38,
+    "id": 84,
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
+    "tier": "GOLD",
+    "division": "II",
+    "lp": 14,
+    "wins": 138,
+    "losses": 120,
+    "series": "",
     "profile_icon": 539,
-    "friends": "luciaron",
-    "modified": "2016-07-02T15:01:30.248845"
+    "friends": "",
+    "accessed": "2016-08-11T15:35:38.484297"
 }
 
 ---------------------------------------------------
@@ -176,14 +208,20 @@ Request:
 }
 Response:
 {
-    "id": 38,
+    "id": 84,
     "region": "na",
     "key": "frosiph",
     "name": "Frosiph",
     "summoner_id": 26155824,
+    "tier": "GOLD",
+    "division": "II",
+    "lp": 14,
+    "wins": 138,
+    "losses": 120,
+    "series": "",
     "profile_icon": 539,
-    "friends": "luciaron",
-    "modified": "2016-07-02T17:16:07.194324"
+    "friends": "",
+    "accessed": "2016-08-11T15:38:14.306362"
 }
 
 ---------------------------------------------------
@@ -195,88 +233,136 @@ Response:
 Get Match Stats
 Request:
 {
-    "region" : "na"
-    "keys" : ["acruz"],
-    "champion" : 1,
-    "lane" : "MIDDLE",
+    "region" : "na",
+    "keys" : ["frosiph"],
+    "champion" : 8,
+    "lane" : "TOP",
     "role" : null
 } 
 Response:
 [
     {
-        "id": 631,
+        "id": 2357,
         "region": "na",
-        "summoner_name": "Acruz",
-        "summoner_id": 40323106,
-        "match_id": 2214327417,
-        "match_duration": 1935,
-        "champion": 1,
-        "lane": "MIDDLE",
+        "summoner_key": "frosiph",
+        "summoner_name": "Frosiph",
+        "summoner_id": 26155824,
+        "match_id": 2252496102,
+        "match_creation": 1469738683371,
+        "match_duration": 1514,
+        "champion": 8,
+        "lane": "TOP",
         "role": "SOLO",
+        "spell1": 12,
+        "spell2": 4,
+        "keystone": 6362,
         "assists": 5,
-        "champ_level": 14,
-        "deaths": 3,
+        "champ_level": 13,
+        "deaths": 5,
         "double_kills": 0,
         "first_blood_assist": false,
         "first_blood_kill": false,
         "first_inhibitor_assist": false,
         "first_inhibitor_kill": false,
         "first_tower_assist": false,
-        "first_tower_kill": true,
-        "gold_earned": 11523,
-        "gold_spent": 9750,
+        "first_tower_kill": false,
+        "gold_earned": 7738,
+        "gold_spent": 7275,
         "inhibitor_kills": 0,
-        "item0": 1056,
-        "item1": 3152,
-        "item2": 3020,
-        "item3": 3285,
-        "item4": 1026,
-        "item5": 1058,
-        "item6": 3363,
+        "item0": 3116,
+        "item1": 3157,
+        "item2": 0,
+        "item3": 0,
+        "item4": 1054,
+        "item5": 1001,
+        "item6": 3340,
         "killing_sprees": 1,
-        "kills": 4,
-        "largest_critical_strike": 99,
+        "kills": 3,
+        "largest_critical_strike": 495,
         "largest_killing_spree": 2,
         "largest_multi_kill": 1,
-        "magic_damage_dealt": 93026,
-        "magic_damage_dealt_to_champions": 17620,
-        "magic_damage_taken": 6749,
-        "minions_killed": 136,
-        "neutral_minions_killed": 12,
-        "neutral_minions_killed_enemy_jungle": 5,
-        "neutral_minions_killed_team_jungle": 7,
+        "magic_damage_dealt": 65081,
+        "magic_damage_dealt_to_champions": 7340,
+        "magic_damage_taken": 2899,
+        "minions_killed": 128,
+        "neutral_minions_killed": 2,
+        "neutral_minions_killed_enemy_jungle": 0,
+        "neutral_minions_killed_team_jungle": 2,
         "penta_kills": 0,
-        "physical_damage_dealt": 10253,
-        "physical_damage_dealt_to_champions": 394,
-        "physical_damage_taken": 3746,
+        "physical_damage_dealt": 6986,
+        "physical_damage_dealt_to_champions": 388,
+        "physical_damage_taken": 14838,
         "quadra_kills": 0,
         "sight_wards_bought_in_game": 0,
-        "total_damage_dealt": 104936,
-        "total_damage_dealt_to_champions": 18686,
-        "total_damage_taken": 11184,
-        "total_heal": 1705,
-        "total_time_crowd_control_dealt": 103,
+        "total_damage_dealt": 72067,
+        "total_damage_dealt_to_champions": 7729,
+        "total_damage_taken": 17946,
+        "total_heal": 9722,
+        "total_time_crowd_control_dealt": 411,
         "total_units_healed": 1,
-        "tower_kills": 2,
+        "tower_kills": 0,
         "triple_kills": 0,
-        "true_damage_dealt": 1656,
-        "true_damage_dealt_to_champions": 671,
-        "true_damage_taken": 688,
+        "true_damage_dealt": 0,
+        "true_damage_dealt_to_champions": 0,
+        "true_damage_taken": 208,
         "unreal_kills": 0,
-        "vision_wards_bought_in_game": 2,
-        "wards_killed": 0,
-        "wards_placed": 14,
-        "winner": true,
-        "cs_at_ten": 62.0,
-        "cs_diff_at_ten": -3.0,
-        "cs_per_min": 4.589,
-        "dmg_per_min": 579.411,
-        "gold_per_min": 357.302,
-        "kda": 3.0,
-        "kill_participation": 0.375
+        "vision_wards_bought_in_game": 5,
+        "wards_killed": 3,
+        "wards_placed": 16,
+        "winner": false,
+        "cs_at_ten": 35.0,
+        "cs_diff_at_ten": -40.0,
+        "cs_per_min": 5.073,
+        "dmg_per_min": 306.301,
+        "gold_per_min": 306.658,
+        "kda": 1.6,
+        "kill_participation": 66.667,
+        "team_kills": 12,
+        "team_deaths": 32,
+        "team_assists": 23
     }
 ]
 
+---------------------------------------------------
+
+Get Season Stats
+Request:
+{
+    "region" : "na",
+    "keys" : ["frosiph"],
+    "champion" : 8
+}
+Response:
+[
+    {
+        "id": 1561,
+        "region": "na",
+        "summoner_key": "frosiph",
+        "summoner_name": "Frosiph",
+        "summoner_id": 26155824,
+        "champion": 8,
+        "assists": 27,
+        "damage_dealt": 534591,
+        "damage_taken": 116620,
+        "deaths": 18,
+        "double_kills": 4,
+        "games": 4,
+        "gold_earned": 44921,
+        "kills": 26,
+        "losses": 3,
+        "magic_damage_dealt": 492951,
+        "max_deaths": 6,
+        "max_killing_spree": null,
+        "max_kills": 10,
+        "minion_kills": 721,
+        "neutral_minion_kills": null,
+        "penta_kills": 0,
+        "physical_damage_dealt": 41583,
+        "quadra_kills": 0,
+        "triple_kills": 0,
+        "wins": 1
+    }
+]
 
 
 
