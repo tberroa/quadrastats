@@ -419,21 +419,108 @@ class RegisterUser(APIView):
         if riot_response[0] != 200:
             return Response(invalid_riot_response)
 
-        # extract summoner from response
+        # extract the summoner data
         summoner = riot_response[1]
+        name = friend.get("name")
+        summoner_id = friend.get("id")
+        profile_icon = friend.get("profileIconId")
 
-        # None check important fields
-        name = summoner.get("name")
-        summoner_id = summoner.get("id")
-        profile_icon = summoner.get("profileIconId")
+        # ensure the data is valid
         if None in (name, summoner_id, profile_icon):
+            return Response(invalid_riot_response)
+
+        # use the summoner id to get the summoners league information
+        args = {"request": 4, "summoner_ids": str(summoner_id)}
+        riot_response = riot_request(region, args)
+
+        # make sure the response is valid
+        if riot_response[0] != 200:
+            return Response(invalid_riot_response)
+
+        # extract the league data
+        leagues = riot_response[1].get(str(summoner_id))
+
+        # iterate over the leagues looking for the dynamic queue league
+        league = None
+        for item in leagues:
+            queue = item.get("queue")
+
+            # ensure data is valid
+            if queue is None:
+                return Response(invalid_riot_response)
+
+            if queue == "RANKED_SOLO_5x5":
+                league = item
+
+        # ensure the dynamic queue league was found
+        if league is None:
+            return Response(invalid_riot_response)
+
+        # use the league data to get the rank tier
+        tier = league.get("tier")
+
+        # ensure data is valid
+        if tier is None:
+            return Response(invalid_riot_response)
+
+        # extract the player entries
+        entries = league.get("entries")
+
+        # ensure data is valid
+        if entries is None:
+            return Response(invalid_riot_response)
+
+        # iterate over the league entries to get more detailed information
+        division = None
+        lp = None
+        wins = None
+        losses = None
+        series = ""
+        for entry in entries:
+            # get the players id
+            player_id = entry.get("playerOrTeamId")
+
+            # ensure data is valid
+            if player_id is None:
+                return Response(invalid_riot_response)
+
+            # check it against the summoners id
+            if player_id == str(summoner_id):
+                # get division, lp, wins, and losses
+                division = entry.get("division")
+                lp = entry.get("leaguePoints")
+                wins = entry.get("wins")
+                losses = entry.get("losses")
+
+                # ensure data is valid
+                if None in (division, lp, wins, losses):
+                    return Response(invalid_riot_response)
+
+                # check if summoner is in series
+                mini_series = entry.get("miniSeries")
+
+                # if summoner is not in series this is None
+                if mini_series is not None:
+                    series = mini_series.get("progress")
+
+        # division, lp, wins, and losses cannot be None
+        if None in (division, lp, wins, losses):
             return Response(invalid_riot_response)
 
         # create a user data dictionary
         user_data = {"email": email, "password": password}
 
         # create a summoner data dictionary
-        summoner_data = {"region": region, "key": key, "name": name, "summoner_id": summoner_id,
+        summoner_data = {"region": region,
+                         "key": key,
+                         "name": name,
+                         "summoner_id": summoner_id,
+                         "tier": tier,
+                         "division": division,
+                         "lp": lp,
+                         "wins": wins,
+                         "losses": losses,
+                         "series": series,
                          "profile_icon": profile_icon}
 
         # create a new user object
@@ -441,6 +528,9 @@ class RegisterUser(APIView):
 
         # create a new summoner object
         summoner_o = Summoner.objects.create(user=user_o, **summoner_data)
+
+        # get the match stats for the newly created summoner object
+        update_match_stats_one(summoner_o)
 
         # serialize the summoner object
         return_json = SummonerSerializer(summoner_o).data
