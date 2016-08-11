@@ -13,7 +13,7 @@ class User(models.Model):
         super(User, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.email
+        return self.email + "," + str(self.created)
 
 
 class Summoner(models.Model):

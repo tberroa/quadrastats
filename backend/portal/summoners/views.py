@@ -421,9 +421,9 @@ class RegisterUser(APIView):
 
         # extract the summoner data
         summoner = riot_response[1]
-        name = friend.get("name")
-        summoner_id = friend.get("id")
-        profile_icon = friend.get("profileIconId")
+        name = summoner.get("name")
+        summoner_id = summoner.get("id")
+        profile_icon = summoner.get("profileIconId")
 
         # ensure the data is valid
         if None in (name, summoner_id, profile_icon):

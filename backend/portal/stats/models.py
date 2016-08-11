@@ -124,3 +124,8 @@ class SeasonStats(models.Model):
     quadra_kills = models.IntegerField(null=True, blank=True)
     triple_kills = models.IntegerField(null=True, blank=True)
     wins = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.region + "," + self.summoner_name + "," + str(self.champion)
+
+

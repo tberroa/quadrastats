@@ -50,5 +50,30 @@ class GetSeasonStats(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
     def post(request, format=None):
+        # extract data
         data = request.data
-        return Response(data)
+        region = data.get("region")
+        keys = data.get("keys")
+        champion = data.get("champion")
+
+        # validate required data
+        if None in (region, keys):
+            return Response(invalid_request_format)
+
+        # initialize list for storing the requested season stats
+        stats = []
+
+        # iterate over the list of keys
+        for key in keys:
+            # construct the query based on given parameters
+            query = SeasonStats.objects.filter(summoner_key=format_key(key))
+            if champion is not None:
+                query = query.filter(champion=champion)
+
+            # execute query and append to list of season stats
+            stats += query
+
+        # return the list of season stats
+        return Response(SeasonStatsSerializer(stats, many=True).data)
+
+
