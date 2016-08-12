@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.models.stats.SeasonStats;
@@ -47,6 +48,15 @@ public class SeasonViewAdapter extends RecyclerView.Adapter<ChartViewHolder> {
         for (RadarChart chart : chartViewHolder.charts) {
             chart.getLayoutParams().height = (55 * ScreenUtil.screenHeight(context)) / 100;
             chart.setLayoutParams(chart.getLayoutParams());
+        }
+
+        // modify chart titles if necessary
+        if (perGame) {
+            for (TextView titleView : chartViewHolder.titleViews) {
+                String currentTitle = titleView.getText().toString();
+                String newTitle = currentTitle + " " + context.getString(R.string.st_per_game);
+                titleView.setText(newTitle);
+            }
         }
 
         // initialize list to hold labels
@@ -153,6 +163,7 @@ public class SeasonViewAdapter extends RecyclerView.Adapter<ChartViewHolder> {
     public class ChartViewHolder extends RecyclerView.ViewHolder {
 
         final List<RadarChart> charts;
+        final List<TextView> titleViews;
 
         ChartViewHolder(View itemView) {
             super(itemView);
@@ -166,6 +177,16 @@ public class SeasonViewAdapter extends RecyclerView.Adapter<ChartViewHolder> {
             charts.add((RadarChart) itemView.findViewById(R.id.triples_chart));
             charts.add((RadarChart) itemView.findViewById(R.id.quadras_chart));
             charts.add((RadarChart) itemView.findViewById(R.id.pentas_chart));
+
+            // initialize titles
+            titleViews = new ArrayList<>();
+            titleViews.add((TextView) itemView.findViewById(R.id.kills_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.deaths_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.assists_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.doubles_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.triples_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.quadras_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.pentas_chart_title));
         }
     }
 }

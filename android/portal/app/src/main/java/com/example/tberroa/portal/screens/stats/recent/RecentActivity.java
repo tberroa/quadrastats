@@ -407,7 +407,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.dialog_data_filter);
+            setContentView(R.layout.dialog_data_filter_r);
             setCancelable(true);
 
             // resize dialog
