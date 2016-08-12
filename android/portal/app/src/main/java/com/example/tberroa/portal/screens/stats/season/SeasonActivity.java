@@ -49,6 +49,7 @@ public class SeasonActivity extends BaseStatsActivity implements SeasonAsync {
         SeasonViewAdapter adapter = new SeasonViewAdapter(this, viewPackage);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setVisibility(View.VISIBLE);
 
         // create legend labels
         int i = 0;
@@ -102,6 +103,10 @@ public class SeasonActivity extends BaseStatsActivity implements SeasonAsync {
         // initialize legend
         LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
         legendLayout.setVisibility(View.GONE);
+
+        // initialize the recycler view to gone
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setVisibility(View.GONE);
 
         // initialize view
         ViewInitialization viewInitialization = new ViewInitialization();
