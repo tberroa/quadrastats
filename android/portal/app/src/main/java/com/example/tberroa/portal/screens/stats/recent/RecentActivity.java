@@ -263,7 +263,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         tabLayout.setupWithViewPager(viewPager);
 
         // set tab icons
-
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);

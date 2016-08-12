@@ -2,8 +2,6 @@ package com.example.tberroa.portal.screens.stats.withfriends;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.TabLayout.OnTabSelectedListener;
-import android.support.design.widget.TabLayout.Tab;
 import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -17,8 +15,6 @@ import com.example.tberroa.portal.models.stats.MatchStats;
 import com.example.tberroa.portal.screens.stats.BaseStatsActivity;
 import com.example.tberroa.portal.screens.stats.WinRatesDialog;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class WFActivity extends BaseStatsActivity implements WFAsync {
@@ -41,19 +37,10 @@ public class WFActivity extends BaseStatsActivity implements WFAsync {
         // initialize the tab layout
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.removeAllTabs();
-        List<String> tabs = new ArrayList<>();
         for (int i = 0; i < matchStatsMapMap.size(); i++) {
-            tabs.add(String.valueOf(i + 1));
-        }
-        for (String tab : tabs) {
-            tabLayout.addTab(tabLayout.newTab().setText(tab));
-        }
-        Tab tab = tabLayout.getTabAt(0);
-        if (tab != null) {
-            tab.select();
+            tabLayout.addTab(tabLayout.newTab());
         }
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.setVisibility(View.VISIBLE);
 
         // initialize the view pager
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -61,7 +48,7 @@ public class WFActivity extends BaseStatsActivity implements WFAsync {
         FragmentManager fM = getSupportFragmentManager();
         viewPager.setAdapter(new WFPagerAdapter(fM, numOfTabs, matchStatsMapMap, staticRiotData));
 
-        // sync together the tab layout and view pager
+        // set page change listener so user won't invoke refresh layout while changing views
         viewPager.addOnPageChangeListener(new TabLayoutOnPageChangeListener(tabLayout) {
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -69,20 +56,19 @@ public class WFActivity extends BaseStatsActivity implements WFAsync {
                 dataSwipeLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
             }
         });
-        tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
-            @Override
-            public void onTabReselected(Tab tab) {
-            }
 
-            @Override
-            public void onTabSelected(Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+        // sync together the tab layout and view pager
+        tabLayout.setupWithViewPager(viewPager);
 
-            @Override
-            public void onTabUnselected(Tab tab) {
+        // set tab labels
+        for (int i = 0; i < matchStatsMapMap.size(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab != null) {
+                tab.setText(String.valueOf(i));
             }
-        });
+        }
+
+        tabLayout.setVisibility(View.VISIBLE);
     }
 
     @Override

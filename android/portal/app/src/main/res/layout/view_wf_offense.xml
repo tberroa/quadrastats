@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_first_blood"
+            android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
         <LinearLayout
@@ -59,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_damage"
+            android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
@@ -81,6 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_spree"
+            android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
@@ -103,6 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_multi_kill"
+            android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart

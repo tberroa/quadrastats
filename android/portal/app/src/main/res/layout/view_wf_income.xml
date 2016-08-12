@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_cs"
+            android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
@@ -41,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_cs_at_10"
+            android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
@@ -63,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_cs_diff_at_10"
+            android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart
@@ -85,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gwf_total_gold"
+            android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
         <com.github.mikephil.charting.charts.BarChart

@@ -1,120 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        android:layout_weight="90"
+        android:fadeScrollbars="true"
+        android:scrollbars="vertical"/>
+
+    <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
+        app:mrl_rippleColor="@color/white"
+        app:mrl_rippleOverlay="true">
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_huge"
-            android:background="@drawable/bg_overlay_white"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.RadarChart
-                android:id="@+id/kills_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_huge"
-            android:background="@drawable/bg_overlay_white"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.RadarChart
-                android:id="@+id/deaths_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_huge"
-            android:background="@drawable/bg_overlay_white"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.RadarChart
-                android:id="@+id/assists_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_huge"
-            android:background="@drawable/bg_overlay_white"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.RadarChart
-                android:id="@+id/doubles_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_huge"
-            android:background="@drawable/bg_overlay_white"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.RadarChart
-                android:id="@+id/triples_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_huge"
-            android:background="@drawable/bg_overlay_white"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.RadarChart
-                android:id="@+id/quadras_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_huge"
-            android:background="@drawable/bg_overlay_white"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.RadarChart
-                android:id="@+id/pentas_chart"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"/>
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+        <include
+            layout="@layout/element_legend"/>
+    </com.balysv.materialripple.MaterialRippleLayout>
+</LinearLayout>

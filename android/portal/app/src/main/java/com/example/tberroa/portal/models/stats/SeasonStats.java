@@ -6,7 +6,7 @@ import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 
 @SuppressWarnings({"unused", "InstanceVariableNamingConvention"})
-@Table(name = "MatchStats")
+@Table(name = "SeasonStats")
 public class SeasonStats extends Model {
 
     @Expose
@@ -14,7 +14,7 @@ public class SeasonStats extends Model {
     public Integer assists;
     @Expose
     @Column(name = "champion")
-    public Integer champion;
+    public int champion;
     @Expose
     @Column(name = "damage_dealt")
     public Integer damage_dealt;
@@ -71,7 +71,7 @@ public class SeasonStats extends Model {
     public String region;
     @Expose
     @Column(name = "summoner_id")
-    public Long summoner_id;
+    public long summoner_id;
     @Expose
     @Column(name = "summoner_key")
     public String summoner_key;

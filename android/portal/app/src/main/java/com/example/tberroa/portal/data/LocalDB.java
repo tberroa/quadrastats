@@ -6,9 +6,11 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 import com.example.tberroa.portal.models.stats.MatchStats;
+import com.example.tberroa.portal.models.stats.SeasonStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,6 +102,41 @@ public class LocalDB {
             ActiveAndroid.endTransaction();
         }
         return matchesWithFriends;
+    }
+
+    public SeasonStats seasonStats(String key, int champion) {
+        return new Select()
+                .from(SeasonStats.class)
+                .where("summoner_key = ?", key)
+                .where("champion = ?", champion)
+                .executeSingle();
+    }
+
+    public Map<String, Map<Long, SeasonStats>> seasonStatsMap(List<String> keys) {
+        List<SeasonStats> seasonStatsList = new ArrayList<>();
+        ActiveAndroid.beginTransaction();
+        try {
+            for (String key : keys) {
+                From query = new Select().from(SeasonStats.class);
+                List<SeasonStats> stats = query.where("summoner_key = ?", key).execute();
+                if (stats != null) {
+                    seasonStatsList.addAll(stats);
+                }
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        } finally {
+            ActiveAndroid.endTransaction();
+        }
+        Map<String, Map<Long, SeasonStats>> seasonStatsMapMap = new LinkedHashMap<>();
+        for (SeasonStats seasonStats : seasonStatsList) {
+            Map<Long, SeasonStats> summonerMap = seasonStatsMapMap.get(seasonStats.summoner_name);
+            if (summonerMap == null) {
+                summonerMap = new HashMap<>();
+            }
+            summonerMap.put((long) seasonStats.champion, seasonStats);
+            seasonStatsMapMap.put(seasonStats.summoner_name, summonerMap);
+        }
+        return seasonStatsMapMap;
     }
 
     public Summoner summoner(String key) {

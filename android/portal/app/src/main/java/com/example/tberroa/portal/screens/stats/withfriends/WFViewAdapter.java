@@ -181,22 +181,26 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
     }
 
     private void formatBarDataSet(BarDataSet barDataSet) {
+        float rawTextSize = context.getResources().getDimension(R.dimen.text_size_small);
+        int textSize = (int) (rawTextSize / context.getResources().getDisplayMetrics().density);
         int[] colors = StatsUtil.chartColors();
         barDataSet.setColors(colors, context);
         barDataSet.setValueFormatter(new IntValueFormat());
         barDataSet.setValueTextColor(Color.WHITE);
-        barDataSet.setValueTextSize(12);
+        barDataSet.setValueTextSize(textSize);
         barDataSet.setHighlightEnabled(false);
     }
 
     private void formatPieChart(PieChart pieChart) {
+        float rawTextSize = context.getResources().getDimension(R.dimen.text_size_huge);
+        int textSize = (int) (rawTextSize / context.getResources().getDisplayMetrics().density);
         pieChart.getLegend().setEnabled(false);
         pieChart.setDrawSliceText(false);
         pieChart.setTouchEnabled(false);
         pieChart.setTransparentCircleAlpha(0);
         pieChart.setHoleColor(Color.TRANSPARENT);
-        pieChart.setCenterTextColor(Color.WHITE);
-        pieChart.setCenterTextSize(20);
+        pieChart.setCenterTextColor(ContextCompat.getColor(context, R.color.accent));
+        pieChart.setCenterTextSize(textSize);
         pieChart.setHoleRadius(35);
         pieChart.setDescription("");
     }
@@ -206,10 +210,12 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         if (notFiveMan) {
             colors[entries.size() - 1] = R.color.gray;
         }
+        float rawTextSize = context.getResources().getDimension(R.dimen.text_size_large);
+        int textSize = (int) (rawTextSize / context.getResources().getDisplayMetrics().density);
         pieDataSet.setColors(colors, context);
         pieDataSet.setValueFormatter(new IntValueFormat());
         pieDataSet.setValueTextColor(Color.WHITE);
-        pieDataSet.setValueTextSize(18);
+        pieDataSet.setValueTextSize(textSize);
         pieDataSet.setSelectionShift(0);
     }
 

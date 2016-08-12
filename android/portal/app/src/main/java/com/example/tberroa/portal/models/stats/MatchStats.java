@@ -17,7 +17,7 @@ public class MatchStats extends Model {
     public Long champ_level;
     @Expose
     @Column(name = "champion")
-    public Long champion;
+    public long champion;
     @Expose
     @Column(name = "cs_at_ten")
     public Float cs_at_ten;
@@ -125,13 +125,13 @@ public class MatchStats extends Model {
     public Long magic_damage_taken;
     @Expose
     @Column(name = "match_creation")
-    public Long match_creation;
+    public long match_creation;
     @Expose
     @Column(name = "match_duration")
-    public Long match_duration;
+    public long match_duration;
     @Expose
     @Column(name = "match_id")
-    public Long match_id;
+    public long match_id;
     @Expose
     @Column(name = "minions_killed")
     public Long minions_killed;
@@ -176,7 +176,7 @@ public class MatchStats extends Model {
     public int spell2;
     @Expose
     @Column(name = "summoner_id")
-    public Long summoner_id;
+    public long summoner_id;
     @Expose
     @Column(name = "summoner_key")
     public String summoner_key;

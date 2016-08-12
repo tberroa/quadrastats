@@ -113,7 +113,16 @@
 
     <!-- season totals activity -->
     <string name="st_activity_title">Season Totals</string>
-    <string name="st_nothing_here">There is nothing to see here</string>
+    <string name="st_kills">Kills</string>
+    <string name="st_deaths">Deaths</string>
+    <string name="st_assists">Assists</string>
+    <string name="st_kda">KDA</string>
+    <string name="st_doubles">Doubles</string>
+    <string name="st_triples">Triples</string>
+    <string name="st_quadras">Quadras</string>
+    <string name="st_pentas">Pentas</string>
+    <string name="st_per_game">Per Game</string>
+
 
     <!-- games with friends activity -->
     <string name="gwf_activity_title">Games With Friends</string>
