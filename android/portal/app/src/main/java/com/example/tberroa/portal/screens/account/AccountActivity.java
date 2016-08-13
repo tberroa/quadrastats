@@ -149,7 +149,7 @@ public class AccountActivity extends BaseActivity {
 
     private class ChangeEmailDialog extends Dialog {
 
-        public ChangeEmailDialog() {
+        ChangeEmailDialog() {
             super(AccountActivity.this, R.style.AppTheme_Dialog);
         }
 
@@ -197,7 +197,7 @@ public class AccountActivity extends BaseActivity {
 
     private class ChangePasswordDialog extends Dialog {
 
-        public ChangePasswordDialog() {
+        ChangePasswordDialog() {
             super(AccountActivity.this, R.style.AppTheme_Dialog);
         }
 

@@ -15,14 +15,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
-class WFPagerAdapter extends FragmentStatePagerAdapter {
+class PageAdapter extends FragmentStatePagerAdapter {
 
     private final Map<Long, Map<String, MatchStats>> matchStatsMapMap;
     private final int numberOfTabs;
     private final StaticRiotData staticRiotData;
 
-    public WFPagerAdapter(FragmentManager fM, int numOfTabs,
-                          Map<Long, Map<String, MatchStats>> matchStatsMapMap, StaticRiotData staticRiotData) {
+    public PageAdapter(FragmentManager fM, int numOfTabs,
+                       Map<Long, Map<String, MatchStats>> matchStatsMapMap, StaticRiotData staticRiotData) {
         super(fM);
         numberOfTabs = numOfTabs;
         this.matchStatsMapMap = matchStatsMapMap;

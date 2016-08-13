@@ -26,7 +26,7 @@ import com.example.tberroa.portal.screens.StaticRiotData;
 import com.example.tberroa.portal.screens.stats.CreateLegendPackage;
 import com.example.tberroa.portal.screens.stats.IntValueFormat;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
-import com.example.tberroa.portal.screens.stats.withfriends.WFViewAdapter.WFViewHolder;
+import com.example.tberroa.portal.screens.stats.withfriends.ViewAdapter.WFViewHolder;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
+public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
 
     private final Context context;
     private final Map<String, MatchStats> matchStatsMap;
@@ -53,7 +53,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
     private List<String> champIconURLsList;
     private List<List<String>> iconURLsList;
 
-    public WFViewAdapter(Context context, Map<String, MatchStats> matchStatsMap, StaticRiotData staticRiotData) {
+    public ViewAdapter(Context context, Map<String, MatchStats> matchStatsMap, StaticRiotData staticRiotData) {
         this.context = context;
         this.matchStatsMap = matchStatsMap;
         this.staticRiotData = staticRiotData;
@@ -280,7 +280,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         private final int side;
         private final List<String> urls;
 
-        public SummonerGridAdapter(Context context, int side, List<String> urls) {
+        SummonerGridAdapter(Context context, int side, List<String> urls) {
             super(context, -1, urls);
             this.context = context;
             this.side = side;
@@ -422,7 +422,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<String> names;
         final int tab;
 
-        public ChartsDialog(List<String> names, List<MatchStats> matchStatsList, int tab) {
+        ChartsDialog(List<String> names, List<MatchStats> matchStatsList, int tab) {
             super(context, R.style.AppTheme_Dialog);
             this.matchStatsList = matchStatsList;
             this.names = names;
@@ -490,7 +490,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<MatchStats> matchStatsList;
         final List<String> names;
 
-        public IncomeAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
+        IncomeAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.height = height;
@@ -570,7 +570,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             return new IncomeViewHolder(view);
         }
 
-        public class IncomeViewHolder extends RecyclerView.ViewHolder {
+        class IncomeViewHolder extends RecyclerView.ViewHolder {
 
             final List<BarChart> barCharts;
             final List<LinearLayout> chartLayouts;
@@ -597,7 +597,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<MatchStats> matchStatsList;
         final List<String> names;
 
-        public OffenseAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
+        OffenseAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.height = height;
@@ -708,7 +708,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             return new OffenseViewHolder(view);
         }
 
-        public class OffenseViewHolder extends RecyclerView.ViewHolder {
+        class OffenseViewHolder extends RecyclerView.ViewHolder {
 
             final List<BarChart> barCharts;
             final List<LinearLayout> chartLayouts;
@@ -737,7 +737,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<MatchStats> matchStatsList;
         final List<String> names;
 
-        public UtilityAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
+        UtilityAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.height = height;
@@ -841,7 +841,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             return new UtilityViewHolder(view);
         }
 
-        public class UtilityViewHolder extends RecyclerView.ViewHolder {
+        class UtilityViewHolder extends RecyclerView.ViewHolder {
 
             final List<BarChart> barCharts;
             final List<LinearLayout> chartLayouts;
@@ -868,7 +868,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<MatchStats> matchStatsList;
         final List<String> names;
 
-        public VisionAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
+        VisionAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.height = height;
@@ -950,7 +950,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             return new VisionViewHolder(view);
         }
 
-        public class VisionViewHolder extends RecyclerView.ViewHolder {
+        class VisionViewHolder extends RecyclerView.ViewHolder {
 
             final List<BarChart> barCharts;
             final List<LinearLayout> chartLayouts;

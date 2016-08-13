@@ -85,11 +85,6 @@ class LegendAdapter extends ArrayAdapter<String> {
         return convertView;
     }
 
-    class ViewHolder {
-
-        TextView nameView;
-    }
-
     private class SetLegendColumnWidth extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -120,5 +115,10 @@ class LegendAdapter extends ArrayAdapter<String> {
             legend.setColumnWidth(Collections.max(widths));
             legend.setVisibility(View.VISIBLE);
         }
+    }
+
+    private class ViewHolder {
+
+        TextView nameView;
     }
 }

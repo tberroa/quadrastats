@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-class RecentPagerAdapter extends FragmentStatePagerAdapter {
+class PageAdapter extends FragmentStatePagerAdapter {
 
     private final Bundle incomeBundle = new Bundle();
     private final int numberOfTabs;
@@ -23,8 +23,8 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
     private final Bundle utilityBundle = new Bundle();
     private final Bundle visionBundle = new Bundle();
 
-    public RecentPagerAdapter(FragmentManager fM, int numOfTabs,
-                              ArrayList<String> titles, Map<String, List<List<Number>>> data) {
+    public PageAdapter(FragmentManager fM, int numOfTabs,
+                       ArrayList<String> titles, Map<String, List<List<Number>>> data) {
         super(fM);
         numberOfTabs = numOfTabs;
 

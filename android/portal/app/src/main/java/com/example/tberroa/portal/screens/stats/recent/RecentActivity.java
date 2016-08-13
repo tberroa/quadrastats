@@ -248,7 +248,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         // set the view pager adapter
         FragmentManager fM = getSupportFragmentManager();
-        viewPager.setAdapter(new RecentPagerAdapter(fM, tabLayout.getTabCount(), titles, aggregateData));
+        viewPager.setAdapter(new PageAdapter(fM, tabLayout.getTabCount(), titles, aggregateData));
 
         // set page change listener so user won't invoke refresh layout while changing views
         viewPager.addOnPageChangeListener(new TabLayoutOnPageChangeListener(tabLayout) {
@@ -305,9 +305,9 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class ChampionIcon {
 
-        public final Champion champion;
-        public ImageView check;
-        public boolean isSelected;
+        final Champion champion;
+        ImageView check;
+        boolean isSelected;
 
         ChampionIcon(Champion champion) {
             this.champion = champion;
@@ -317,10 +317,10 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class FilterAdapter extends Adapter<FilterAdapter.ChampionViewHolder> {
 
-        public final List<ChampionIcon> championIcons;
+        final List<ChampionIcon> championIcons;
         private final int side;
 
-        public FilterAdapter(List<ChampionIcon> championIcons, int side) {
+        FilterAdapter(List<ChampionIcon> championIcons, int side) {
             this.championIcons = championIcons;
             this.side = side;
         }
@@ -355,7 +355,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             return new ChampionViewHolder(view);
         }
 
-        public class ChampionViewHolder extends ViewHolder {
+        class ChampionViewHolder extends ViewHolder {
 
             final ImageView champIconCheck;
             final ImageView champIconView;
@@ -400,7 +400,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class FilterDialog extends Dialog {
 
-        public FilterDialog() {
+        FilterDialog() {
             super(RecentActivity.this, R.style.AppTheme_Dialog);
         }
 
@@ -649,36 +649,36 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class GoButtonPackageFD {
 
-        public long championId;
-        public FilterDialog dialog;
-        public String lane;
-        public String role;
+        long championId;
+        FilterDialog dialog;
+        String lane;
+        String role;
     }
 
     private class GoButtonPackageSSD {
 
-        public long championId;
-        public String position;
-        public Map<String, List<List<Number>>> selectedData;
-        public Set<String> selectedNames;
-        public ArrayList<String> titles;
+        long championId;
+        String position;
+        Map<String, List<List<Number>>> selectedData;
+        Set<String> selectedNames;
+        ArrayList<String> titles;
     }
 
     private class SSDName {
 
-        public final String name;
-        public boolean isChecked;
+        final String name;
+        boolean isChecked;
 
-        public SSDName(String name) {
+        SSDName(String name) {
             this.name = name;
         }
     }
 
     private class SSDViewAdapter extends Adapter<SSDViewAdapter.SSDViewHolder> {
 
-        public final List<SSDName> names;
+        final List<SSDName> names;
 
-        public SSDViewAdapter(List<SSDName> names) {
+        SSDViewAdapter(List<SSDName> names) {
             this.names = names;
         }
 
@@ -700,7 +700,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             return new SSDViewHolder(v);
         }
 
-        public class SSDViewHolder extends ViewHolder {
+        class SSDViewHolder extends ViewHolder {
 
             final CheckBox checkbox;
 
@@ -725,7 +725,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         private final Set<String> selectedNames;
         private final ArrayList<String> titles;
 
-        public SelectSummonersDialog(GoButtonPackageSSD goButtonPackageSSD) {
+        SelectSummonersDialog(GoButtonPackageSSD goButtonPackageSSD) {
             super(RecentActivity.this, R.style.AppTheme_Dialog);
             selectedNames = goButtonPackageSSD.selectedNames;
             selectedData = goButtonPackageSSD.selectedData;

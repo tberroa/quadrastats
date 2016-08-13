@@ -206,7 +206,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private class ResetPasswordDialog extends Dialog {
 
-        public ResetPasswordDialog() {
+        ResetPasswordDialog() {
             super(SignInActivity.this, R.style.AppTheme_Dialog);
         }
 

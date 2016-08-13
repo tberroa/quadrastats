@@ -46,7 +46,7 @@ public class WFActivity extends BaseStatsActivity implements WFAsync {
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         int numOfTabs = tabLayout.getTabCount();
         FragmentManager fM = getSupportFragmentManager();
-        viewPager.setAdapter(new WFPagerAdapter(fM, numOfTabs, matchStatsMapMap, staticRiotData));
+        viewPager.setAdapter(new PageAdapter(fM, numOfTabs, matchStatsMapMap, staticRiotData));
 
         // set page change listener so user won't invoke refresh layout while changing views
         viewPager.addOnPageChangeListener(new TabLayoutOnPageChangeListener(tabLayout) {

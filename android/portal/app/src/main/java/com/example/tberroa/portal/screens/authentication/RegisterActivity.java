@@ -185,7 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         final ReqRegister request;
 
-        public ValidateDialog(ReqRegister request) {
+        ValidateDialog(ReqRegister request) {
             super(RegisterActivity.this, R.style.AppTheme_Dialog);
             this.request = request;
         }

@@ -61,7 +61,7 @@ class WinRatesAdapter extends ArrayAdapter<WinRate> {
         return convertView;
     }
 
-    class ViewHolder {
+    private class ViewHolder {
 
         TextView name;
         TextView played;
