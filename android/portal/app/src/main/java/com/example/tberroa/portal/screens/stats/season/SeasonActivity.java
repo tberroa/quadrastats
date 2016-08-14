@@ -2,11 +2,8 @@ package com.example.tberroa.portal.screens.stats.season;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,7 +28,6 @@ import com.example.tberroa.portal.models.datadragon.Champion;
 import com.example.tberroa.portal.models.stats.SeasonStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.screens.ScreenUtil;
-import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.screens.stats.BaseStatsActivity;
 import com.example.tberroa.portal.screens.stats.CreateLegendPackage;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
@@ -73,17 +69,6 @@ public class SeasonActivity extends BaseStatsActivity implements SeasonAsync {
         viewPackage.perGame = false;
 
         populateActivity(viewPackage);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
-        }
     }
 
     @Override
