@@ -89,7 +89,7 @@ class WinRatesAdapter extends ArrayAdapter<WinRate> {
         }
 
         // check if layout is supposed to be expanded
-        if (winRates.get(position).expanded) {
+        if ((winRates.get(position) != null) && winRates.get(position).expanded) {
             // get the win rate objects map
             Map<String, Map<String, WinRate>> intermediate = winRatesBySumChamp.get(names.get(position));
             Map<String, WinRate> winRatesByChamp = intermediate.get(selectedRole);
