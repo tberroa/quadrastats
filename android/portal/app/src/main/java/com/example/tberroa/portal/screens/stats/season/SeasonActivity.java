@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -314,18 +313,11 @@ public class SeasonActivity extends BaseStatsActivity implements SeasonAsync {
                 championIcons.add(new ChampionIcon(champion));
             }
 
-            // use listener to get dialog width and initialize recycler view
+            // initialize recycler view
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             FilterAdapter adapter = new FilterAdapter(championIcons, champIconSide);
-            LinearLayout filterLayout = (LinearLayout) findViewById(R.id.filter_layout);
-            filterLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    filterLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new GridLayoutManager(SeasonActivity.this, champIconsPerRow));
-                }
-            });
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new GridLayoutManager(SeasonActivity.this, champIconsPerRow));
 
             // initialize the go button
             Button goButton = (Button) findViewById(R.id.go_button);

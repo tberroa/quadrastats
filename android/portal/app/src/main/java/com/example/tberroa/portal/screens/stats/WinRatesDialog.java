@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -86,14 +87,22 @@ public class WinRatesDialog extends Dialog {
         TextView userWinRatio = (TextView) findViewById(R.id.user_win_ratio_view);
         userWinRatio.setText(winRates.get(0).ratio());
 
-        // populate list view
+        // construct adapter package
         selectedRole = ALL;
+        WinRatePackage winRatePackage = new WinRatePackage();
+        winRatePackage.winRates = winRates;
+        winRatePackage.names = names;
+        winRatePackage.staticRiotData = staticRiotData;
+        winRatePackage.winRatesBySumChamp = winRatesBySumChamp;
+        winRatePackage.selectedRole = selectedRole;
+
+        // populate list view
         ListView listView = (ListView) findViewById(R.id.list_view);
-        WinRatesAdapter adapter = new WinRatesAdapter(context, winRates, names);
+        WinRatesAdapter adapter = new WinRatesAdapter(context, winRatePackage);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // cast the view to a linear layout
                 LinearLayout layout = (LinearLayout) view;
 
@@ -108,25 +117,28 @@ public class WinRatesDialog extends Dialog {
 
                     // make sure the map is not null
                     if (winRatesByChamp != null) {
+                        adapter.winRates.get(i).expanded = true;
+
                         // initialize a list to hold the champ views
                         List<ChampView> champLayouts = new ArrayList<>();
 
                         // iterate over the win rate map
+                        LayoutInflater inflater = getLayoutInflater();
+                        int side = (20 * ScreenUtil.screenWidth(context)) / 100;
+                        Drawable placeholder = ContextCompat.getDrawable(context, R.drawable.ic_placeholder);
+                        Bitmap bitmap = ((BitmapDrawable) placeholder).getBitmap();
+                        Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, side, side, true);
+                        Drawable resizedPlaceholder = new BitmapDrawable(context.getResources(), resizedBitmap);
                         for (Map.Entry<String, WinRate> entry : winRatesByChamp.entrySet()) {
                             // initialize views
                             @SuppressLint("InflateParams")
-                            View champLayout = getLayoutInflater().inflate(R.layout.view_win_rates_champ, null);
+                            View champLayout = inflater.inflate(R.layout.view_win_rates_champ, null);
                             ImageView champIcon = (ImageView) champLayout.findViewById(R.id.champ_icon_view);
                             TextView played = (TextView) champLayout.findViewById(R.id.champ_played_view);
                             TextView won = (TextView) champLayout.findViewById(R.id.champ_wins_view);
                             TextView ratio = (TextView) champLayout.findViewById(R.id.champ_win_ratio_view);
 
                             // set champion icon
-                            int side = (20 * ScreenUtil.screenWidth(context)) / 100;
-                            Drawable placeholder = ContextCompat.getDrawable(context, R.drawable.ic_placeholder);
-                            Bitmap bitmap = ((BitmapDrawable) placeholder).getBitmap();
-                            Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, side, side, true);
-                            Drawable resizedPlaceholder = new BitmapDrawable(context.getResources(), resizedBitmap);
                             String url = StatsUtil.championIconURL(staticRiotData.version, entry.getKey());
                             Picasso.with(context).load(url).resize(side, side)
                                     .placeholder(resizedPlaceholder).into(champIcon);
@@ -170,6 +182,7 @@ public class WinRatesDialog extends Dialog {
                         }
                     }
                 } else {
+                    adapter.winRates.get(i).expanded = false;
                     for (int j = 1; j < children; ) {
                         layout.removeViewAt(j);
                         children = layout.getChildCount();
@@ -206,11 +219,12 @@ public class WinRatesDialog extends Dialog {
                 botCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 if (topCheck.getVisibility() == View.INVISIBLE) {
-                    clear(listView, winRates, names);
+                    clear(listView, winRatePackage);
                     selectedRole = Constants.POS_TOP;
+                    adapter.selectedRole = Constants.POS_TOP;
                     topCheck.setVisibility(View.VISIBLE);
                     for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
-                        winRates.add(winRatesByPos.getValue().get(Constants.POS_TOP));
+                        winRatePackage.winRates.add(winRatesByPos.getValue().get(Constants.POS_TOP));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -224,11 +238,12 @@ public class WinRatesDialog extends Dialog {
                 botCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 if (jungleCheck.getVisibility() == View.INVISIBLE) {
-                    clear(listView, winRates, names);
+                    clear(listView, winRatePackage);
                     selectedRole = Constants.POS_JUNGLE;
+                    adapter.selectedRole = Constants.POS_JUNGLE;
                     jungleCheck.setVisibility(View.VISIBLE);
                     for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
-                        winRates.add(winRatesByPos.getValue().get(Constants.POS_JUNGLE));
+                        winRatePackage.winRates.add(winRatesByPos.getValue().get(Constants.POS_JUNGLE));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -242,11 +257,12 @@ public class WinRatesDialog extends Dialog {
                 botCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 if (midCheck.getVisibility() == View.INVISIBLE) {
-                    clear(listView, winRates, names);
+                    clear(listView, winRatePackage);
                     selectedRole = Constants.POS_MID;
+                    adapter.selectedRole = Constants.POS_MID;
                     midCheck.setVisibility(View.VISIBLE);
                     for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
-                        winRates.add(winRatesByPos.getValue().get(Constants.POS_MID));
+                        winRatePackage.winRates.add(winRatesByPos.getValue().get(Constants.POS_MID));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -260,11 +276,12 @@ public class WinRatesDialog extends Dialog {
                 midCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 if (botCheck.getVisibility() == View.INVISIBLE) {
-                    clear(listView, winRates, names);
+                    clear(listView, winRatePackage);
                     selectedRole = Constants.POS_BOT;
+                    adapter.selectedRole = Constants.POS_BOT;
                     botCheck.setVisibility(View.VISIBLE);
                     for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
-                        winRates.add(winRatesByPos.getValue().get(Constants.POS_BOT));
+                        winRatePackage.winRates.add(winRatesByPos.getValue().get(Constants.POS_BOT));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -278,11 +295,12 @@ public class WinRatesDialog extends Dialog {
                 midCheck.setVisibility(View.INVISIBLE);
                 botCheck.setVisibility(View.INVISIBLE);
                 if (supportCheck.getVisibility() == View.INVISIBLE) {
-                    clear(listView, winRates, names);
+                    clear(listView, winRatePackage);
                     selectedRole = Constants.POS_SUPPORT;
+                    adapter.selectedRole = Constants.POS_SUPPORT;
                     supportCheck.setVisibility(View.VISIBLE);
                     for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
-                        winRates.add(winRatesByPos.getValue().get(Constants.POS_SUPPORT));
+                        winRatePackage.winRates.add(winRatesByPos.getValue().get(Constants.POS_SUPPORT));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -294,24 +312,25 @@ public class WinRatesDialog extends Dialog {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clear(listView, winRates, names);
+                clear(listView, winRatePackage);
                 selectedRole = ALL;
+                adapter.selectedRole = ALL;
                 topCheck.setVisibility(View.INVISIBLE);
                 jungleCheck.setVisibility(View.INVISIBLE);
                 midCheck.setVisibility(View.INVISIBLE);
                 botCheck.setVisibility(View.INVISIBLE);
                 supportCheck.setVisibility(View.INVISIBLE);
                 for (Map.Entry<String, Map<String, WinRate>> winRatesByPos : winRatesBySumPos.entrySet()) {
-                    winRates.add(winRatesByPos.getValue().get(ALL));
+                    winRatePackage.winRates.add(winRatesByPos.getValue().get(ALL));
                 }
                 adapter.notifyDataSetChanged();
             }
         });
     }
 
-    private void clear(ListView listView, List<WinRate> winRates, List<String> names) {
-        winRates.clear();
-        WinRatesAdapter adapter = new WinRatesAdapter(context, winRates, names);
+    private void clear(ListView listView, WinRatePackage winRatePackage) {
+        winRatePackage.winRates.clear();
+        WinRatesAdapter adapter = new WinRatesAdapter(context, winRatePackage);
         listView.setAdapter(adapter);
     }
 

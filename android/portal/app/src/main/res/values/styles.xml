@@ -29,6 +29,10 @@
         <item name="android:windowBackground">@drawable/bg_tristana</item>
     </style>
 
+    <style name="HomeBackground" parent="AppTheme">
+        <item name="android:windowBackground">@color/primary_background</item>
+    </style>
+
     <style name="AccountBackground" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_jayce</item>
     </style>

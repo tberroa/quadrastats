@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
@@ -433,18 +432,11 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 championIcons.add(new ChampionIcon(champion));
             }
 
-            // use listener to get dialog width and initialize recycler view
+            // initialize the recycler view
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             FilterAdapter adapter = new FilterAdapter(championIcons, champIconSide);
-            LinearLayout filterLayout = (LinearLayout) findViewById(R.id.filter_layout);
-            filterLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    filterLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new GridLayoutManager(RecentActivity.this, champIconsPerRow));
-                }
-            });
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new GridLayoutManager(RecentActivity.this, champIconsPerRow));
 
             // initialize the role checks
             ImageView topCheck = (ImageView) findViewById(R.id.top_check);

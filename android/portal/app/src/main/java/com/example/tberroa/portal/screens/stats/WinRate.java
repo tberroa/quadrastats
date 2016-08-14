@@ -2,6 +2,7 @@ package com.example.tberroa.portal.screens.stats;
 
 class WinRate {
 
+    public boolean expanded;
     private int loss;
     private int win;
 

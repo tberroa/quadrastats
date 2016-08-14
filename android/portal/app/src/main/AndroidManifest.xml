@@ -48,7 +48,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.home.HomeActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/HomeBackground"/>
         <activity
             android:name=".screens.account.AccountActivity"
             android:screenOrientation="portrait"
