@@ -23,7 +23,9 @@ import com.example.tberroa.portal.models.datadragon.Champion;
 import com.example.tberroa.portal.models.datadragon.Champions;
 import com.example.tberroa.portal.models.requests.ReqGetSummoners;
 import com.example.tberroa.portal.models.requests.ReqMatchStats;
+import com.example.tberroa.portal.models.requests.ReqSeasonStats;
 import com.example.tberroa.portal.models.stats.MatchStats;
+import com.example.tberroa.portal.models.stats.SeasonStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.models.summoner.User;
 import com.example.tberroa.portal.network.Http;
@@ -144,7 +146,7 @@ public class SplashActivity extends AppCompatActivity {
             } else {
                 return true;
             }
-            publishProgress(333);
+            publishProgress(250);
 
             // 2. get and save locally each friend summoner object
             if (!"".equals(summoner.friends)) {
@@ -180,7 +182,7 @@ public class SplashActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            publishProgress(666);
+            publishProgress(500);
 
             // 3. get match stats for user and friends
             if (!"".equals(summoner.friends)) {
@@ -213,6 +215,45 @@ public class SplashActivity extends AppCompatActivity {
                     } finally {
                         ActiveAndroid.endTransaction();
                     }
+                } else {
+                    return true;
+                }
+            }
+            publishProgress(750);
+
+            // 4. get season stats for user and friends
+            if (!"".equals(summoner.friends)) {
+                // create the request object
+                ReqSeasonStats request = new ReqSeasonStats();
+                request.region = summoner.region;
+                String keys = summoner.key + "," + summoner.friends;
+                request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
+
+                // make the request
+                String postResponse4 = "";
+                try {
+                    String url = Constants.URL_GET_SEASON_STATS;
+                    postResponse4 = new Http().post(url, ModelUtil.toJson(request, ReqSeasonStats.class));
+                } catch (IOException e) {
+                    Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
+                }
+
+                // save
+                if (postResponse4.contains(Constants.VALID_GET_SEASON_STATS)) {
+                    Type type = new TypeToken<List<SeasonStats>>() {
+                    }.getType();
+                    List<SeasonStats> seasonsStatsList = ModelUtil.fromJsonList(postResponse4, type);
+                    ActiveAndroid.beginTransaction();
+                    try {
+                        for (SeasonStats seasonStats : seasonsStatsList) {
+                            seasonStats.save();
+                        }
+                        ActiveAndroid.setTransactionSuccessful();
+                    } finally {
+                        ActiveAndroid.endTransaction();
+                    }
+                } else {
+                    return true;
                 }
             }
             publishProgress(1000);

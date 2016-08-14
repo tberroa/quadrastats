@@ -102,24 +102,28 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, FriendsActivity.class));
+                finish();
             }
         });
         recentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, RecentActivity.class));
+                finish();
             }
         });
         seasonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, SeasonActivity.class));
+                finish();
             }
         });
         withFriendsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, WFActivity.class));
+                finish();
             }
         });
     }

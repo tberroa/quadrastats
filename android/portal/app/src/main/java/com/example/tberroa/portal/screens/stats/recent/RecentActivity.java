@@ -70,10 +70,10 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         // initialize tab layout with four tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setVisibility(View.GONE);
         for (int i = 0; i < 4; i++) {
             tabLayout.addTab(tabLayout.newTab());
         }
-        tabLayout.setVisibility(View.GONE);
 
         // set default legend icon dimension
         legendIconSide = ScreenUtil.dpToPx(this, 50);
@@ -124,9 +124,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         // The map key is the summoner name and the value is a list of of lists where each list is a list of data
         // points corresponding to one stat chart.
         // Example: Key: Frosiph | Value: list[0] = List<csAtTen>, list[1] = List<csDiffAtTen>, etc.
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setVisibility(View.VISIBLE);
 
         // create list of chart titles
         ArrayList<String> titles = new ArrayList<>();
@@ -199,9 +196,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             aggregateData.put(summoner, summonerData);
         }
 
-        // update adapter
-        updateAdapter(titles, aggregateData);
-
         // create the legend
         LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
         CreateLegendPackage createLegendPackage = new CreateLegendPackage();
@@ -238,6 +232,9 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 new SelectSummonersDialog(goButtonPackageSSD).show();
             }
         });
+
+        // update adapter
+        updateAdapter(titles, aggregateData);
     }
 
     private void updateAdapter(ArrayList<String> titles, Map<String, List<List<Number>>> aggregateData) {
@@ -300,6 +297,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                     break;
             }
         }
+        tabLayout.setVisibility(View.VISIBLE);
     }
 
     private class ChampionIcon {

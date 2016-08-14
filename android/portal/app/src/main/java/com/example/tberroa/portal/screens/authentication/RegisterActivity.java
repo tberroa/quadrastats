@@ -57,7 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
         registerLayout.getLayoutParams().width = layoutWidth;
         registerLayout.setLayoutParams(registerLayout.getLayoutParams());
 
-
         // initialize input fields
         EditText keyField = (EditText) findViewById(R.id.summoner_name_field);
         EditText emailField = (EditText) findViewById(R.id.email_field);
