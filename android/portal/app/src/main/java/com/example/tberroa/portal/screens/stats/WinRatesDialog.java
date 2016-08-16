@@ -313,87 +313,89 @@ public class WinRatesDialog extends Dialog {
     }
 
     private void updateWinRates(MatchStats matchStats) {
-        // get the win rate by position map for the summoner
-        Map<String, WinRate> winRatesByPos = winRatesBySumPos.get(matchStats.summoner_name);
-        if (winRatesByPos == null) {
-            winRatesByPos = new HashMap<>();
-        }
+        if (matchStats.winner != null) {
+            // get the win rate by position map for the summoner
+            Map<String, WinRate> winRatesByPos = winRatesBySumPos.get(matchStats.summoner_name);
+            if (winRatesByPos == null) {
+                winRatesByPos = new HashMap<>();
+            }
 
-        // get the win rate by champion map for the summoner
-        Map<String, Map<String, WinRate>> winRatesByChamp = winRatesBySumChamp.get(matchStats.summoner_name);
-        if (winRatesByChamp == null) {
-            winRatesByChamp = new HashMap<>();
-        }
+            // get the win rate by champion map for the summoner
+            Map<String, Map<String, WinRate>> winRatesByChamp = winRatesBySumChamp.get(matchStats.summoner_name);
+            if (winRatesByChamp == null) {
+                winRatesByChamp = new HashMap<>();
+            }
 
-        // determine the position played by the summoner in this match
-        String position;
-        String lane = matchStats.lane;
-        String role = matchStats.role;
-        String top = Constants.POS_TOP;
-        String jungle = Constants.POS_JUNGLE;
-        String mid = Constants.POS_MID;
-        if (lane.equals(top) || lane.equals(jungle) || lane.equals(mid)) {
-            position = lane;
-        } else {
-            if (role.equals(Constants.POS_BOT) || role.equals(Constants.POS_SUPPORT)) {
-                position = role;
+            // determine the position played by the summoner in this match
+            String position;
+            String lane = matchStats.lane;
+            String role = matchStats.role;
+            String top = Constants.POS_TOP;
+            String jungle = Constants.POS_JUNGLE;
+            String mid = Constants.POS_MID;
+            if (lane.equals(top) || lane.equals(jungle) || lane.equals(mid)) {
+                position = lane;
             } else {
-                if ((matchStats.cs_per_min != null) && (matchStats.cs_per_min > 2)) {
-                    position = Constants.POS_BOT;
+                if (role.equals(Constants.POS_BOT) || role.equals(Constants.POS_SUPPORT)) {
+                    position = role;
                 } else {
-                    position = Constants.POS_SUPPORT;
+                    if ((matchStats.cs_per_min != null) && (matchStats.cs_per_min > 2)) {
+                        position = Constants.POS_BOT;
+                    } else {
+                        position = Constants.POS_SUPPORT;
+                    }
                 }
             }
-        }
 
-        // update the win rate for this summoner in this position
-        WinRate winRatePos = winRatesByPos.get(position);
-        if (winRatePos == null) {
-            winRatePos = new WinRate(matchStats.winner);
-        } else {
-            winRatePos.update(matchStats.winner);
-        }
+            // update the win rate for this summoner in this position
+            WinRate winRatePos = winRatesByPos.get(position);
+            if (winRatePos == null) {
+                winRatePos = new WinRate(matchStats.winner);
+            } else {
+                winRatePos.update(matchStats.winner);
+            }
 
-        // update the win rate for this summoner with this champ
-        Map<String, WinRate> intermediate = winRatesByChamp.get(position);
-        if (intermediate == null) {
-            intermediate = new HashMap<>();
-        }
-        String champKey = StatsUtil.championKey(matchStats.champion, staticRiotData.championsMap);
-        WinRate winRateChamp = intermediate.get(champKey);
-        if (winRateChamp == null) {
-            winRateChamp = new WinRate(matchStats.winner);
-        } else {
-            winRateChamp.update(matchStats.winner);
-        }
-        intermediate.put(champKey, winRateChamp);
-        Map<String, WinRate> intermediateAll = winRatesByChamp.get(ALL);
-        if (intermediateAll == null) {
-            intermediateAll = new HashMap<>();
-        }
-        WinRate winRateChampAll = intermediateAll.get(champKey);
-        if (winRateChampAll == null) {
-            winRateChampAll = new WinRate(matchStats.winner);
-        } else {
-            winRateChampAll.update(matchStats.winner);
-        }
-        intermediateAll.put(champKey, winRateChampAll);
+            // update the win rate for this summoner with this champ
+            Map<String, WinRate> intermediate = winRatesByChamp.get(position);
+            if (intermediate == null) {
+                intermediate = new HashMap<>();
+            }
+            String champKey = StatsUtil.championKey(matchStats.champion, staticRiotData.championsMap);
+            WinRate winRateChamp = intermediate.get(champKey);
+            if (winRateChamp == null) {
+                winRateChamp = new WinRate(matchStats.winner);
+            } else {
+                winRateChamp.update(matchStats.winner);
+            }
+            intermediate.put(champKey, winRateChamp);
+            Map<String, WinRate> intermediateAll = winRatesByChamp.get(ALL);
+            if (intermediateAll == null) {
+                intermediateAll = new HashMap<>();
+            }
+            WinRate winRateChampAll = intermediateAll.get(champKey);
+            if (winRateChampAll == null) {
+                winRateChampAll = new WinRate(matchStats.winner);
+            } else {
+                winRateChampAll.update(matchStats.winner);
+            }
+            intermediateAll.put(champKey, winRateChampAll);
 
-        // update the overall win rate for this summoner
-        WinRate winRateAll = winRatesByPos.get(ALL);
-        if (winRateAll == null) {
-            winRateAll = new WinRate(matchStats.winner);
-        } else {
-            winRateAll.update(matchStats.winner);
-        }
+            // update the overall win rate for this summoner
+            WinRate winRateAll = winRatesByPos.get(ALL);
+            if (winRateAll == null) {
+                winRateAll = new WinRate(matchStats.winner);
+            } else {
+                winRateAll.update(matchStats.winner);
+            }
 
-        // insert the updated win rates into the maps
-        winRatesByPos.put(position, winRatePos);
-        winRatesByPos.put(ALL, winRateAll);
-        winRatesBySumPos.put(matchStats.summoner_name, winRatesByPos);
-        winRatesByChamp.put(position, intermediate);
-        winRatesByChamp.put(ALL, intermediateAll);
-        winRatesBySumChamp.put(matchStats.summoner_name, winRatesByChamp);
+            // insert the updated win rates into the maps
+            winRatesByPos.put(position, winRatePos);
+            winRatesByPos.put(ALL, winRateAll);
+            winRatesBySumPos.put(matchStats.summoner_name, winRatesByPos);
+            winRatesByChamp.put(position, intermediate);
+            winRatesByChamp.put(ALL, intermediateAll);
+            winRatesBySumChamp.put(matchStats.summoner_name, winRatesByChamp);
+        }
     }
 
     private class ChampView {

@@ -7,6 +7,32 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/games_chart_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_huge"
+        android:background="@drawable/bg_overlay_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/games_chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_small"
+            android:text="@string/st_games"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_size_huge"/>
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/games_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/kills_chart_layout"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -106,6 +132,136 @@
 
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/kda_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/damage_chart_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_huge"
+        android:background="@drawable/bg_overlay_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/damage_chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_small"
+            android:text="@string/st_damage"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_size_huge"/>
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/damage_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gold_chart_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_huge"
+        android:background="@drawable/bg_overlay_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/gold_chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_small"
+            android:text="@string/st_gold"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_size_huge"/>
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/gold_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cs_chart_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_huge"
+        android:background="@drawable/bg_overlay_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/cs_chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_small"
+            android:text="@string/st_cs"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_size_huge"/>
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/cs_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/max_kills_chart_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_huge"
+        android:background="@drawable/bg_overlay_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/max_kills_chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_small"
+            android:text="@string/st_max_kills"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_size_huge"/>
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/max_kills_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/max_deaths_chart_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_huge"
+        android:background="@drawable/bg_overlay_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/max_deaths_chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_small"
+            android:text="@string/st_max_deaths"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_size_huge"/>
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/max_deaths_chart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

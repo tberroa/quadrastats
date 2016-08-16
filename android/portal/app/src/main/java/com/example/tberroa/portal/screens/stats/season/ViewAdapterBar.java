@@ -64,10 +64,16 @@ public class ViewAdapterBar extends RecyclerView.Adapter<ChartViewHolder> {
 
         // initialize entries
         List<List<BarEntry>> entriesList = new ArrayList<>();
+        List<BarEntry> gamesEntries = new ArrayList<>();
         List<BarEntry> killsEntries = new ArrayList<>();
         List<BarEntry> deathsEntries = new ArrayList<>();
         List<BarEntry> assistsEntries = new ArrayList<>();
         List<BarEntry> kdaEntries = new ArrayList<>();
+        List<BarEntry> dmgEntries = new ArrayList<>();
+        List<BarEntry> goldEntries = new ArrayList<>();
+        List<BarEntry> csEntries = new ArrayList<>();
+        List<BarEntry> maxKillsEntries = new ArrayList<>();
+        List<BarEntry> maxDeathsEntries = new ArrayList<>();
         List<BarEntry> doublesEntries = new ArrayList<>();
         List<BarEntry> triplesEntries = new ArrayList<>();
         List<BarEntry> quadrasEntries = new ArrayList<>();
@@ -80,39 +86,103 @@ public class ViewAdapterBar extends RecyclerView.Adapter<ChartViewHolder> {
             SeasonStats seasonStats = summonerMap.getValue().get(champion);
 
             // calculate kda
-            float kda = (seasonStats.kills + seasonStats.assists) / (float) seasonStats.deaths;
+            Float kda = null;
+            if ((seasonStats.kills != null) && (seasonStats.deaths != null) && (seasonStats.assists != null)) {
+                if (seasonStats.deaths != 0) {
+                    kda = (seasonStats.kills + seasonStats.assists) / (float) seasonStats.deaths;
+                } else {
+                    kda = (float) (seasonStats.kills + seasonStats.assists);
+                }
+            }
 
-            // populate entries
-            if (perGame) {
-                killsEntries.add(new BarEntry(seasonStats.kills / seasonStats.games, j));
-                deathsEntries.add(new BarEntry(seasonStats.deaths / seasonStats.games, j));
-                assistsEntries.add(new BarEntry(seasonStats.assists / seasonStats.games, j));
+            // calculate cs
+            Integer cs = null;
+            if ((seasonStats.minion_kills != null) && (seasonStats.neutral_minion_kills != null)) {
+                cs = seasonStats.minion_kills + seasonStats.neutral_minion_kills;
+            }
+
+            // populate non per game entries
+            if (seasonStats.games != null) {
+                gamesEntries.add(new BarEntry(seasonStats.games, j));
+            }
+            if (kda != null) {
                 kdaEntries.add(new BarEntry(kda, j));
-                doublesEntries.add(new BarEntry(seasonStats.double_kills / seasonStats.games, j));
-                triplesEntries.add(new BarEntry(seasonStats.triple_kills / seasonStats.games, j));
-                quadrasEntries.add(new BarEntry(seasonStats.quadra_kills / seasonStats.games, j));
-                pentasEntries.add(new BarEntry(seasonStats.penta_kills / seasonStats.games, j));
-            } else {
-                killsEntries.add(new BarEntry(seasonStats.kills, j));
-                deathsEntries.add(new BarEntry(seasonStats.deaths, j));
-                assistsEntries.add(new BarEntry(seasonStats.assists, j));
-                kdaEntries.add(new BarEntry(kda, j));
+            }
+            if (seasonStats.max_kills != null) {
+                maxKillsEntries.add(new BarEntry(seasonStats.max_kills, j));
+            }
+            if (seasonStats.max_deaths != null) {
+                maxDeathsEntries.add(new BarEntry(seasonStats.max_deaths, j));
+            }
+            if (seasonStats.double_kills != null) {
                 doublesEntries.add(new BarEntry(seasonStats.double_kills, j));
+            }
+            if (seasonStats.triple_kills != null) {
                 triplesEntries.add(new BarEntry(seasonStats.triple_kills, j));
+            }
+            if (seasonStats.quadra_kills != null) {
                 quadrasEntries.add(new BarEntry(seasonStats.quadra_kills, j));
+            }
+            if (seasonStats.penta_kills != null) {
                 pentasEntries.add(new BarEntry(seasonStats.penta_kills, j));
             }
 
+            // populate per game entries
+            if (perGame) {
+                if ((seasonStats.kills != null) && (seasonStats.games != null)) {
+                    killsEntries.add(new BarEntry(seasonStats.kills / seasonStats.games, j));
+                }
+                if ((seasonStats.deaths != null) && (seasonStats.games != null)) {
+                    deathsEntries.add(new BarEntry(seasonStats.deaths / seasonStats.games, j));
+                }
+                if ((seasonStats.assists != null) && (seasonStats.games != null)) {
+                    assistsEntries.add(new BarEntry(seasonStats.assists / seasonStats.games, j));
+                }
+                if ((seasonStats.damage_dealt != null) && (seasonStats.games != null)) {
+                    dmgEntries.add(new BarEntry(seasonStats.damage_dealt / seasonStats.games, j));
+                }
+                if ((seasonStats.gold_earned != null) && (seasonStats.games != null)) {
+                    goldEntries.add(new BarEntry(seasonStats.gold_earned / seasonStats.games, j));
+                }
+                if ((cs != null) && (seasonStats.games != null)) {
+                    csEntries.add(new BarEntry(cs / seasonStats.games, j));
+                }
+            } else {
+                if (seasonStats.kills != null) {
+                    killsEntries.add(new BarEntry(seasonStats.kills, j));
+                }
+                if (seasonStats.deaths != null) {
+                    deathsEntries.add(new BarEntry(seasonStats.deaths, j));
+                }
+                if (seasonStats.assists != null) {
+                    assistsEntries.add(new BarEntry(seasonStats.assists, j));
+                }
+                if (seasonStats.damage_dealt != null) {
+                    dmgEntries.add(new BarEntry(seasonStats.damage_dealt, j));
+                }
+                if (seasonStats.gold_earned != null) {
+                    goldEntries.add(new BarEntry(seasonStats.gold_earned, j));
+                }
+                if (cs != null) {
+                    csEntries.add(new BarEntry(cs, j));
+                }
+            }
 
             // populate labels
             labels.add(String.valueOf(j));
 
             j++;
         }
+        entriesList.add(gamesEntries);
         entriesList.add(killsEntries);
         entriesList.add(deathsEntries);
         entriesList.add(assistsEntries);
         entriesList.add(kdaEntries);
+        entriesList.add(dmgEntries);
+        entriesList.add(goldEntries);
+        entriesList.add(csEntries);
+        entriesList.add(maxKillsEntries);
+        entriesList.add(maxDeathsEntries);
         entriesList.add(doublesEntries);
         entriesList.add(triplesEntries);
         entriesList.add(quadrasEntries);
@@ -138,19 +208,23 @@ public class ViewAdapterBar extends RecyclerView.Adapter<ChartViewHolder> {
         // populate and format charts
         j = 0;
         for (BarChart chart : chartViewHolder.charts) {
-            chart.setData(new BarData(labels, dataSets.get(j)));
-            chart.getXAxis().setDrawLabels(false);
-            chart.getXAxis().setDrawGridLines(false);
-            chart.getXAxis().setDrawAxisLine(false);
-            chart.getAxisLeft().setTextColor(Color.WHITE);
-            chart.getAxisLeft().setDrawAxisLine(false);
-            chart.getAxisRight().setDrawLabels(false);
-            chart.getAxisRight().setDrawGridLines(false);
-            chart.getAxisRight().setDrawAxisLine(false);
-            chart.getLegend().setEnabled(false);
-            chart.setDrawBorders(false);
-            chart.setTouchEnabled(false);
-            chart.setDescription("");
+            if (dataSets.get(j).getEntryCount() == 0) {
+                chartViewHolder.chartLayouts.get(j).setVisibility(View.GONE);
+            } else {
+                chart.setData(new BarData(labels, dataSets.get(j)));
+                chart.getXAxis().setDrawLabels(false);
+                chart.getXAxis().setDrawGridLines(false);
+                chart.getXAxis().setDrawAxisLine(false);
+                chart.getAxisLeft().setTextColor(Color.WHITE);
+                chart.getAxisLeft().setDrawAxisLine(false);
+                chart.getAxisRight().setDrawLabels(false);
+                chart.getAxisRight().setDrawGridLines(false);
+                chart.getAxisRight().setDrawAxisLine(false);
+                chart.getLegend().setEnabled(false);
+                chart.setDrawBorders(false);
+                chart.setTouchEnabled(false);
+                chart.setDescription("");
+            }
 
             j++;
         }
@@ -163,17 +237,41 @@ public class ViewAdapterBar extends RecyclerView.Adapter<ChartViewHolder> {
 
     class ChartViewHolder extends RecyclerView.ViewHolder {
 
+        final List<View> chartLayouts;
         final List<BarChart> charts;
         final List<TextView> titleViews;
 
         ChartViewHolder(View itemView) {
             super(itemView);
+            // initialize chart layouts
+            chartLayouts = new ArrayList<>();
+            chartLayouts.add(itemView.findViewById(R.id.games_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.kills_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.deaths_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.assists_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.kda_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.damage_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.gold_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.cs_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.max_kills_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.max_deaths_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.doubles_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.triples_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.quadras_chart_layout));
+            chartLayouts.add(itemView.findViewById(R.id.pentas_chart_layout));
+
             // initialize charts
             charts = new ArrayList<>();
+            charts.add((BarChart) itemView.findViewById(R.id.games_chart));
             charts.add((BarChart) itemView.findViewById(R.id.kills_chart));
             charts.add((BarChart) itemView.findViewById(R.id.deaths_chart));
             charts.add((BarChart) itemView.findViewById(R.id.assists_chart));
             charts.add((BarChart) itemView.findViewById(R.id.kda_chart));
+            charts.add((BarChart) itemView.findViewById(R.id.damage_chart));
+            charts.add((BarChart) itemView.findViewById(R.id.gold_chart));
+            charts.add((BarChart) itemView.findViewById(R.id.cs_chart));
+            charts.add((BarChart) itemView.findViewById(R.id.max_kills_chart));
+            charts.add((BarChart) itemView.findViewById(R.id.max_deaths_chart));
             charts.add((BarChart) itemView.findViewById(R.id.doubles_chart));
             charts.add((BarChart) itemView.findViewById(R.id.triples_chart));
             charts.add((BarChart) itemView.findViewById(R.id.quadras_chart));
@@ -184,10 +282,9 @@ public class ViewAdapterBar extends RecyclerView.Adapter<ChartViewHolder> {
             titleViews.add((TextView) itemView.findViewById(R.id.kills_chart_title));
             titleViews.add((TextView) itemView.findViewById(R.id.deaths_chart_title));
             titleViews.add((TextView) itemView.findViewById(R.id.assists_chart_title));
-            titleViews.add((TextView) itemView.findViewById(R.id.doubles_chart_title));
-            titleViews.add((TextView) itemView.findViewById(R.id.triples_chart_title));
-            titleViews.add((TextView) itemView.findViewById(R.id.quadras_chart_title));
-            titleViews.add((TextView) itemView.findViewById(R.id.pentas_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.damage_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.gold_chart_title));
+            titleViews.add((TextView) itemView.findViewById(R.id.cs_chart_title));
         }
     }
 }

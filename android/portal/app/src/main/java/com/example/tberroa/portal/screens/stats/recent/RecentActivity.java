@@ -131,10 +131,16 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         titles.add(getResources().getString(R.string.rg_cs_diff_at_ten));
         titles.add(getResources().getString(R.string.rg_cs_per_min));
         titles.add(getResources().getString(R.string.rg_gold_per_min));
+        titles.add(getResources().getString(R.string.rg_first_blood));
         titles.add(getResources().getString(R.string.rg_dmg_per_min));
         titles.add(getResources().getString(R.string.rg_kills));
+        titles.add(getResources().getString(R.string.rg_killing_spree));
+        titles.add(getResources().getString(R.string.rg_multi_kills));
+        titles.add(getResources().getString(R.string.rg_first_tower));
         titles.add(getResources().getString(R.string.rg_kda));
+        titles.add(getResources().getString(R.string.rg_assists));
         titles.add(getResources().getString(R.string.rg_kill_participation));
+        titles.add(getResources().getString(R.string.rg_dmg_taken_per_death));
         titles.add(getResources().getString(R.string.rg_wards_bought));
         titles.add(getResources().getString(R.string.rg_wards_placed));
         titles.add(getResources().getString(R.string.rg_wards_killed));
@@ -171,26 +177,56 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             if (matchStats.gold_per_min != null) {
                 summonerData.get(3).add(matchStats.gold_per_min);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(4).add(matchStats.dmg_per_min);
+            if ((matchStats.first_blood_assist != null) && (matchStats.first_blood_kill != null)) {
+                if (matchStats.first_blood_assist || matchStats.first_blood_kill) {
+                    summonerData.get(4).add(1);
+                } else {
+                    summonerData.get(4).add(0);
+                }
             }
             if (matchStats.dmg_per_min != null) {
-                summonerData.get(5).add(matchStats.kills);
+                summonerData.get(5).add(matchStats.dmg_per_min);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(6).add(matchStats.kda);
+            if (matchStats.kills != null) {
+                summonerData.get(6).add(matchStats.kills);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(7).add(matchStats.kill_participation);
+            if (matchStats.largest_killing_spree != null) {
+                summonerData.get(7).add(matchStats.largest_killing_spree);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(8).add(matchStats.vision_wards_bought_in_game);
+            if (matchStats.largest_multi_kill != null) {
+                summonerData.get(8).add(matchStats.largest_multi_kill);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(9).add(matchStats.wards_placed);
+            if ((matchStats.first_tower_assist != null) && (matchStats.first_tower_kill != null)) {
+                if (matchStats.first_tower_assist || matchStats.first_tower_kill) {
+                    summonerData.get(9).add(1);
+                } else {
+                    summonerData.get(9).add(0);
+                }
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(10).add(matchStats.wards_killed);
+            if (matchStats.kda != null) {
+                summonerData.get(10).add(matchStats.kda);
+            }
+            if (matchStats.assists != null) {
+                summonerData.get(11).add(matchStats.assists);
+            }
+            if (matchStats.kill_participation != null) {
+                summonerData.get(12).add(matchStats.kill_participation);
+            }
+            if ((matchStats.total_damage_taken != null) && (matchStats.deaths != null)) {
+                if (matchStats.deaths != 0) {
+                    summonerData.get(13).add(matchStats.total_damage_taken / matchStats.deaths);
+                } else {
+                    summonerData.get(13).add(matchStats.total_damage_taken);
+                }
+            }
+            if (matchStats.vision_wards_bought_in_game != null) {
+                summonerData.get(14).add(matchStats.vision_wards_bought_in_game);
+            }
+            if (matchStats.wards_placed != null) {
+                summonerData.get(15).add(matchStats.wards_placed);
+            }
+            if (matchStats.wards_killed != null) {
+                summonerData.get(16).add(matchStats.wards_killed);
             }
 
             aggregateData.put(summoner, summonerData);

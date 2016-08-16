@@ -105,10 +105,13 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         });
 
         // display appropriate victory/defeat text
-        if (matchStatsList.get(0).winner) {
-            wfViewHolder.victoryView.setVisibility(View.VISIBLE);
-        } else {
-            wfViewHolder.defeatView.setVisibility(View.VISIBLE);
+        Boolean winner = matchStatsList.get(0).winner;
+        if (winner != null) {
+            if (winner) {
+                wfViewHolder.victoryView.setVisibility(View.VISIBLE);
+            } else {
+                wfViewHolder.defeatView.setVisibility(View.VISIBLE);
+            }
         }
 
         // match date
@@ -260,15 +263,47 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             // gather icon urls
             iconURLsList.add(new ArrayList<>());
             iconURLsList.get(x).add(StatsUtil.summonerSpellURL(staticRiotData.version, matchStats.spell1));
-            iconURLsList.get(x).add(StatsUtil.masteryURL(staticRiotData.version, matchStats.keystone));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item0));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item1));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item2));
+            if (matchStats.keystone != null) {
+                iconURLsList.get(x).add(StatsUtil.masteryURL(staticRiotData.version, matchStats.keystone));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item0 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item0));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item1 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item1));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item2 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item2));
+            } else {
+                iconURLsList.get(x).add("");
+            }
             iconURLsList.get(x).add(StatsUtil.summonerSpellURL(staticRiotData.version, matchStats.spell2));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item6));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item3));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item4));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item5));
+            if (matchStats.item6 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item6));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item3 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item3));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item4 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item4));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item5 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item5));
+            } else {
+                iconURLsList.get(x).add("");
+            }
 
             x++;
         }
@@ -314,9 +349,12 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             viewHolder.icon.setLayoutParams(viewHolder.icon.getLayoutParams());
 
             // set the icon
-            if (urls.get(position).equals(Constants.UI_NO_ITEM)) {
+            if ("".equals(urls.get(position))) {
+                Picasso.with(context).load(R.drawable.ic_placeholder).resize((int) (side / 2.1), (int) (side / 2.1))
+                        .transform(new RoundTransform()).into(viewHolder.icon);
+            } else if (urls.get(position).equals(Constants.UI_NO_ITEM)) {
                 Picasso.with(context).load(R.drawable.ic_no_item).resize((int) (side / 2.1), (int) (side / 2.1))
-                        .placeholder(R.drawable.ic_placeholder).transform(new RoundTransform()).into(viewHolder.icon);
+                        .transform(new RoundTransform()).into(viewHolder.icon);
             } else {
                 Picasso.with(context).load(urls.get(position)).resize((int) (side / 2.1), (int) (side / 2.1))
                         .placeholder(R.drawable.ic_placeholder).transform(new RoundTransform()).into(viewHolder.icon);
@@ -626,7 +664,11 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
 
             // create the entries
             List<Entry> entriesKills = new ArrayList<>();
-            long othersKills = matchStatsList.get(0).team_kills;
+            Long teamKills = matchStatsList.get(0).team_kills;
+            Long othersKills = null;
+            if (teamKills != null) {
+                othersKills = teamKills;
+            }
             List<BarEntry> entriesDamage = new ArrayList<>();
             List<BarEntry> entriesSpree = new ArrayList<>();
             List<BarEntry> entriesMultiKill = new ArrayList<>();
@@ -634,7 +676,9 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             for (MatchStats matchStats : matchStatsList) {
                 if (matchStats.kills != null) {
                     entriesKills.add(new BarEntry(matchStats.kills, j));
-                    othersKills = othersKills - matchStats.kills;
+                    if (othersKills != null) {
+                        othersKills = othersKills - matchStats.kills;
+                    }
                 } else {
                     entriesKills.add(new BarEntry(0, j));
                 }
@@ -656,7 +700,11 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                 j++;
             }
             if (notFiveMan) {
-                entriesKills.add(new Entry(othersKills, j));
+                if (othersKills != null) {
+                    entriesKills.add(new Entry(othersKills, j));
+                } else {
+                    namesPie.remove(namesPie.size() - 1);
+                }
             }
 
             // organize entries
@@ -671,7 +719,11 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             List<PieDataSet> pieDataSets = new ArrayList<>();
             for (List<Entry> entries : pieEntries) {
                 PieDataSet pieDataSet = new PieDataSet(entries, "");
-                formatPieDataSet(entries, pieDataSet, notFiveMan);
+                if (othersKills != null) {
+                    formatPieDataSet(entries, pieDataSet, notFiveMan);
+                } else {
+                    formatPieDataSet(entries, pieDataSet, false);
+                }
                 pieDataSets.add(pieDataSet);
             }
             List<BarDataSet> barDataSets = new ArrayList<>();
@@ -766,14 +818,20 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
 
             // create the entries
             List<Entry> entriesAssists = new ArrayList<>();
-            long othersAssists = matchStatsList.get(0).team_assists;
+            Long teamAssists = matchStatsList.get(0).team_assists;
+            Long othersAssists = null;
+            if (teamAssists != null) {
+                othersAssists = teamAssists;
+            }
             List<BarEntry> entriesKDA = new ArrayList<>();
             List<BarEntry> entriesKP = new ArrayList<>();
             int j = 0;
             for (MatchStats matchStats : matchStatsList) {
                 if (matchStats.assists != null) {
                     entriesAssists.add(new BarEntry(matchStats.assists, j));
-                    othersAssists = othersAssists - matchStats.assists;
+                    if (othersAssists != null) {
+                        othersAssists = othersAssists - matchStats.assists;
+                    }
                 } else {
                     entriesAssists.add(new BarEntry(0, j));
                 }
@@ -790,7 +848,11 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                 j++;
             }
             if (notFiveMan) {
-                entriesAssists.add(new Entry(othersAssists, j));
+                if (othersAssists != null) {
+                    entriesAssists.add(new Entry(othersAssists, j));
+                } else {
+                    namesPie.remove(namesPie.size() - 1);
+                }
             }
 
             // organize entries
@@ -804,7 +866,11 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             List<PieDataSet> pieDataSets = new ArrayList<>();
             for (List<Entry> entries : pieEntries) {
                 PieDataSet pieDataSet = new PieDataSet(entries, "");
-                formatPieDataSet(entries, pieDataSet, notFiveMan);
+                if (othersAssists != null) {
+                    formatPieDataSet(entries, pieDataSet, notFiveMan);
+                } else {
+                    formatPieDataSet(entries, pieDataSet, false);
+                }
                 pieDataSets.add(pieDataSet);
             }
             List<BarDataSet> barDataSets = new ArrayList<>();

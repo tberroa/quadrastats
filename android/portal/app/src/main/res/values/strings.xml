@@ -103,10 +103,16 @@
     <string name="rg_cs_diff_at_ten">CS Differential At 10</string>
     <string name="rg_cs_per_min">CS Per Minute</string>
     <string name="rg_gold_per_min">Gold Per Minute</string>
+    <string name="rg_first_blood">First Blood Participation</string>
     <string name="rg_dmg_per_min">Damage Per Minute</string>
     <string name="rg_kills">Kills</string>
+    <string name="rg_killing_spree">Largest Killing Spree</string>
+    <string name="rg_multi_kills">Largest Multi Kill</string>
+    <string name="rg_first_tower">First Tower Participation</string>
     <string name="rg_kda">KDA</string>
+    <string name="rg_assists">Assists</string>
     <string name="rg_kill_participation">Kill Participation</string>
+    <string name="rg_dmg_taken_per_death">Damage Taken Per Death</string>
     <string name="rg_wards_bought">Wards Bought</string>
     <string name="rg_wards_placed">Wards Placed</string>
     <string name="rg_wards_killed">Wards Killed</string>
@@ -117,10 +123,16 @@
     <string name="st_per_game">Per Game</string>
     <string name="st_totals">Totals</string>
     <!-- chart titles -->
+    <string name="st_games">Games</string>
     <string name="st_kills">Kills</string>
     <string name="st_deaths">Deaths</string>
     <string name="st_assists">Assists</string>
     <string name="st_kda">KDA</string>
+    <string name="st_damage">Damage Dealt</string>
+    <string name="st_gold">Gold Earned</string>
+    <string name="st_cs">CS</string>
+    <string name="st_max_kills">Max Kills</string>
+    <string name="st_max_deaths">Max Deaths</string>
     <string name="st_doubles">Doubles</string>
     <string name="st_triples">Triples</string>
     <string name="st_quadras">Quadras</string>
