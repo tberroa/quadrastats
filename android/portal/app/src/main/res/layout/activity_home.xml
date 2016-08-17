@@ -3,7 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="true"
+    android:paddingBottom="@dimen/spacing_small"
+    android:paddingTop="@dimen/spacing_small"
+    android:scrollbars="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,6 +17,37 @@
         <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            app:mrl_rippleOverlay="true">
+
+            <FrameLayout
+                android:id="@+id/manage_account_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/manage_account_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:contentDescription="@string/image_view_description"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/black_transparent"
+                    android:gravity="start"
+                    android:padding="@dimen/spacing_standard"
+                    android:text="@string/ma_activity_title"
+                    android:textSize="@dimen/text_size_massive"/>
+            </FrameLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
             app:mrl_rippleOverlay="true">
 
             <FrameLayout
@@ -28,13 +63,13 @@
                     android:contentDescription="@string/image_view_description"/>
 
                 <TextView
-                    android:id="@+id/manage_friends_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@color/black_transparent"
                     android:gravity="start"
                     android:padding="@dimen/spacing_standard"
+                    android:text="@string/mf_activity_title"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
         </com.balysv.materialripple.MaterialRippleLayout>
@@ -42,6 +77,7 @@
         <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
             app:mrl_rippleOverlay="true">
 
             <FrameLayout
@@ -57,13 +93,13 @@
                     android:contentDescription="@string/image_view_description"/>
 
                 <TextView
-                    android:id="@+id/recent_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@color/black_transparent"
                     android:gravity="start"
                     android:padding="@dimen/spacing_standard"
+                    android:text="@string/rg_activity_title"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
         </com.balysv.materialripple.MaterialRippleLayout>
@@ -71,6 +107,7 @@
         <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
             app:mrl_rippleOverlay="true">
 
             <FrameLayout
@@ -86,13 +123,13 @@
                     android:contentDescription="@string/image_view_description"/>
 
                 <TextView
-                    android:id="@+id/season_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@color/black_transparent"
                     android:gravity="start"
                     android:padding="@dimen/spacing_standard"
+                    android:text="@string/st_activity_title"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
         </com.balysv.materialripple.MaterialRippleLayout>
@@ -115,13 +152,13 @@
                     android:contentDescription="@string/image_view_description"/>
 
                 <TextView
-                    android:id="@+id/with_friends_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@color/black_transparent"
                     android:gravity="start"
                     android:padding="@dimen/spacing_standard"
+                    android:text="@string/gwf_activity_title"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
         </com.balysv.materialripple.MaterialRippleLayout>

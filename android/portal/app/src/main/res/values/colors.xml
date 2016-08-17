@@ -20,6 +20,8 @@
     <color name="gray">#D3D3D3</color>
 
     <!-- overlay colors -->
+    <color name="primary_background_transparent">#80303030</color>
+    <color name="accent_transparent">#80CBB44D</color>
     <color name="black_transparent">#80000000</color>
     <color name="white_transparent">#33FFFFFF</color>
     <color name="blue_transparent">#4D1A8CFF</color>
@@ -27,5 +29,4 @@
     <color name="orange_transparent">#4DFFAD33</color>
     <color name="pink_transparent">#4DFF99FF</color>
     <color name="purple_transparent">#4DAE57FF</color>
-    <color name="primary_background_transparent">#80303030</color>
 </resources>

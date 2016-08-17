@@ -6,11 +6,17 @@
     android:background="@color/primary_background"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_transparent"
+        android:gravity="bottom"/>
+
     <ImageView
         android:id="@+id/user_profile_icon_view"
         android:layout_width="@dimen/profile_icon_side"
         android:layout_height="@dimen/profile_icon_side"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom|center_horizontal"
         android:contentDescription="@string/image_view_description"/>
 
     <TextView

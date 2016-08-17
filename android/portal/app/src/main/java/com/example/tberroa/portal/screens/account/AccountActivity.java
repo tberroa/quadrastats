@@ -1,20 +1,26 @@
 package com.example.tberroa.portal.screens.account;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,9 +83,10 @@ public class AccountActivity extends BaseActivity {
         emailView.setText(new UserData().getEmail(this));
 
         // initialize buttons
-        Button changeEmailButton = (Button) findViewById(R.id.change_email_button);
-        Button changePasswordButton = (Button) findViewById(R.id.change_password_button);
-        Button signOutButton = (Button) findViewById(R.id.sign_out_button);
+        ImageView changeEmailButton = (ImageView) findViewById(R.id.change_email_button);
+        ImageView changePasswordButton = (ImageView) findViewById(R.id.change_password_button);
+        ImageView licenseButton = (ImageView) findViewById(R.id.license_button);
+        ImageView signOutButton = (ImageView) findViewById(R.id.sign_out_button);
         changeEmailButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +97,12 @@ public class AccountActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 new ChangePasswordDialog().show();
+            }
+        });
+        licenseButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new LicenseDialog().show();
             }
         });
         signOutButton.setOnClickListener(new OnClickListener() {
@@ -243,6 +256,51 @@ public class AccountActivity extends BaseActivity {
                     dismiss();
                 }
             });
+        }
+    }
+
+    private class LicenseAdapter extends RecyclerView.Adapter<LicenseAdapter.LicenseViewHolder> {
+
+        @Override
+        public int getItemCount() {
+            return 1;
+        }
+
+        @Override
+        public void onBindViewHolder(LicenseViewHolder viewHolder, int i) {
+        }
+
+        @Override
+        public LicenseViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            Context context = viewGroup.getContext();
+            View v = LayoutInflater.from(context).inflate(R.layout.view_licenses, viewGroup, false);
+            return new LicenseViewHolder(v);
+        }
+
+        class LicenseViewHolder extends RecyclerView.ViewHolder {
+
+            LicenseViewHolder(View itemView) {
+                super(itemView);
+            }
+        }
+    }
+
+    private class LicenseDialog extends Dialog {
+
+        LicenseDialog() {
+            super(AccountActivity.this, R.style.AppTheme_Dialog);
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.dialog_licenses);
+            setCancelable(true);
+
+            // initialize recycler view
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            recyclerView.setAdapter(new LicenseAdapter());
+            recyclerView.setLayoutManager(new LinearLayoutManager(AccountActivity.this));
         }
     }
 

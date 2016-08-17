@@ -55,6 +55,8 @@
     <string name="ma_change_email">Change Email</string>
     <string name="ma_change_password">Change Password</string>
     <string name="ma_sign_out">Sign Out</string>
+    <string name="ma_licenses">Licenses</string>
+    <string name="ma_license_info">License Information</string>
     <string name="ma_new_email">New Email</string>
     <string name="ma_password">Password</string>
     <string name="ma_current_password">Current Password</string>
@@ -198,4 +200,124 @@
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
     <string name="image_view_description">Image View Description</string>
+
+    <!-- Licenses -->
+    <string name="license_mp_android_chart">
+        This software uses MPAndroidChart \n \n
+
+        Copyright 2016 Philipp Jahoda \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+        WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+        License for the specific language governing permissions and limitations
+        under the License. \n \n
+
+        Special thanks to danielgindi, mikegr, tony and jitpack.io for their
+        contributions to this project.
+    </string>
+    <string name="license_picasso">
+        This software uses Picasso \n \n
+
+        Copyright 2013 Square, Inc. \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_ok_http">
+        This software uses OkHttp \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_active_android">
+        This software uses ActiveAndroid \n \n
+
+        Copyright &#169; 2010 Michael Pardo \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_material_ripple">
+        This software uses Material Ripple \n \n
+
+        Copyright 2015 Balys Valentukevicius \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_gson">
+        This software uses Gson \n \n
+
+        Copyright 2008 Google Inc. \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_acra">
+        This software uses ACRA \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
 </resources>

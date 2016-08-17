@@ -34,7 +34,7 @@
     </style>
 
     <style name="AccountBackground" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/bg_jayce</item>
+        <item name="android:windowBackground">@color/primary_background</item>
     </style>
 
     <style name="FriendsBackground" parent="AppTheme">

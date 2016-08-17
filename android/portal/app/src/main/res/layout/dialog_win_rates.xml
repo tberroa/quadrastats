@@ -71,7 +71,9 @@
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="85"/>
+        android:layout_weight="85"
+        android:fadeScrollbars="true"
+        android:scrollbars="vertical"/>
 
     <FrameLayout
         android:id="@+id/pos_icon_layout"
