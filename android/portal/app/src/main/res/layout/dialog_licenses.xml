@@ -9,8 +9,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_large"
         android:gravity="center"
+        android:paddingBottom="@dimen/spacing_standard"
+        android:paddingTop="@dimen/spacing_standard"
         android:text="@string/ma_license_info"
         android:textColor="@color/accent"
         android:textSize="@dimen/text_size_huge"
@@ -21,8 +22,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/primary_background"
         android:fadeScrollbars="true"
+        android:paddingBottom="@dimen/spacing_standard"
+        android:paddingTop="@dimen/spacing_standard"
         android:scrollbars="vertical">
     </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        android:background="@color/divider"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/spacing_standard"
+        android:paddingTop="@dimen/spacing_standard"
+        android:text="@string/legal_riot_notice"
+        android:textSize="@dimen/text_size_tiny"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/spacing_standard"
+        android:paddingTop="@dimen/spacing_standard"
+        android:text="@string/legal_copyright"/>
 </LinearLayout>
 

@@ -201,7 +201,16 @@
     <string name="drawer_close">Close Drawer</string>
     <string name="image_view_description">Image View Description</string>
 
-    <!-- Licenses -->
+    <!-- Legal and Licenses -->
+    <string name="legal_copyright">
+        &#169; Copyright 2016 Thomas Berroa All Rights Reserved.
+    </string>
+    <string name="legal_riot_notice">
+        QuadraStats isn\'t endorsed by Riot Games and doesn\'t reflect the views
+        or opinions of Riot Games or anyone officially involved in producing or
+        managing League of Legends. League of Legends and Riot Games are trademarks
+        or registered trademarks of Riot Games, Inc. League of Legends &#169; Riot Games, Inc.
+    </string>
     <string name="license_mp_android_chart">
         This software uses MPAndroidChart \n \n
 
