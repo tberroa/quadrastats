@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- branding -->
-    <string name="app_name">Portal</string>
+    <string name="app_name">Quadra Stats</string>
 
     <!-- regions -->
     <string name="region_br">Brazil</string>

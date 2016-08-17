@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/user_profile_icon_view"
-        android:layout_width="@dimen/profile_icon_side"
-        android:layout_height="@dimen/profile_icon_side"
+        android:layout_width="@dimen/nav_icon_side"
+        android:layout_height="@dimen/nav_icon_side"
         android:layout_gravity="bottom|center_horizontal"
         android:contentDescription="@string/image_view_description"/>
 
@@ -29,5 +29,5 @@
         android:paddingBottom="@dimen/spacing_tiny"
         android:paddingEnd="@dimen/drawer_name_spacing"
         android:paddingStart="@dimen/drawer_name_spacing"
-        android:textSize="@dimen/text_size_huge"/>
+        android:textSize="@dimen/nav_label_text_size"/>
 </FrameLayout>

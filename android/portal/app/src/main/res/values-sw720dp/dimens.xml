@@ -15,9 +15,11 @@
     <dimen name="radius_large">60dp</dimen>
 
     <!-- ui elements -->
+    <dimen name="drawer_name_spacing">16dp</dimen>
     <dimen name="loading_bar_height">60dp</dimen>
     <dimen name="divider_height">1px</dimen>
-    <dimen name="profile_icon_side">80dp</dimen>
+    <dimen name="nav_icon_side">80dp</dimen>
+    <dimen name="nav_label_text_size">20sp</dimen>
     <dimen name="nav_header_height">100dp</dimen>
     <dimen name="dialog_width">600dp</dimen>
     <dimen name="series_icon_side">40dp</dimen>
