@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/first_blood_view_layout"
+        android:id="@+id/first_blood_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_huge"
@@ -23,11 +23,10 @@
             android:textColor="@color/accent"
             android:textSize="@dimen/text_size_huge"/>
 
-        <LinearLayout
-            android:id="@+id/first_blood_view"
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/first_blood_chart"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <LinearLayout

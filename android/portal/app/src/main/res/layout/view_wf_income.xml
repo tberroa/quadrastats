@@ -6,29 +6,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/cs_chart_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_huge"
-        android:background="@drawable/bg_overlay_white"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/spacing_large">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gwf_cs"
-            android:textColor="@color/accent"
-            android:textSize="@dimen/text_size_huge"/>
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/cs_chart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/cs_10_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,6 +47,29 @@
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/cs_diff_10_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cs_chart_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_huge"
+        android:background="@drawable/bg_overlay_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gwf_cs"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_size_huge"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/cs_chart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.stats.IntValueFormat;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
 import com.example.tberroa.portal.screens.stats.recent.ViewAdapter.ChartViewHolder;
 import com.github.mikephil.charting.charts.BarChart;
@@ -182,7 +183,15 @@ public class ViewAdapter extends Adapter<ChartViewHolder> {
             // use the arrays to create a data set
             BarDataSet barDataSet = new BarDataSet(data, null);
             barDataSet.setColors(StatsUtil.chartColors(), context);
-            barDataSet.setDrawValues(false);
+            if (x < 8) {
+                float rawTextSize = context.getResources().getDimension(R.dimen.text_size_small);
+                int textSize = (int) (rawTextSize / context.getResources().getDisplayMetrics().density);
+                barDataSet.setValueFormatter(new IntValueFormat());
+                barDataSet.setValueTextColor(Color.WHITE);
+                barDataSet.setValueTextSize(textSize);
+            } else {
+                barDataSet.setDrawValues(false);
+            }
             averageChart.setData(new BarData(labels, barDataSet));
 
             // chart formatting

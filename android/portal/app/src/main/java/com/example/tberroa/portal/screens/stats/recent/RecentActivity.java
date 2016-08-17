@@ -132,13 +132,13 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         titles.add(getResources().getString(R.string.rg_cs_per_min));
         titles.add(getResources().getString(R.string.rg_gold_per_min));
         titles.add(getResources().getString(R.string.rg_first_blood));
-        titles.add(getResources().getString(R.string.rg_dmg_per_min));
         titles.add(getResources().getString(R.string.rg_kills));
+        titles.add(getResources().getString(R.string.rg_dmg_per_min));
         titles.add(getResources().getString(R.string.rg_killing_spree));
         titles.add(getResources().getString(R.string.rg_multi_kills));
         titles.add(getResources().getString(R.string.rg_first_tower));
-        titles.add(getResources().getString(R.string.rg_kda));
         titles.add(getResources().getString(R.string.rg_assists));
+        titles.add(getResources().getString(R.string.rg_kda));
         titles.add(getResources().getString(R.string.rg_kill_participation));
         titles.add(getResources().getString(R.string.rg_dmg_taken_per_death));
         titles.add(getResources().getString(R.string.rg_wards_bought));
@@ -184,11 +184,11 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                     summonerData.get(4).add(0);
                 }
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(5).add(matchStats.dmg_per_min);
-            }
             if (matchStats.kills != null) {
-                summonerData.get(6).add(matchStats.kills);
+                summonerData.get(5).add(matchStats.kills);
+            }
+            if (matchStats.dmg_per_min != null) {
+                summonerData.get(6).add(matchStats.dmg_per_min);
             }
             if (matchStats.largest_killing_spree != null) {
                 summonerData.get(7).add(matchStats.largest_killing_spree);
@@ -203,11 +203,11 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                     summonerData.get(9).add(0);
                 }
             }
-            if (matchStats.kda != null) {
-                summonerData.get(10).add(matchStats.kda);
-            }
             if (matchStats.assists != null) {
-                summonerData.get(11).add(matchStats.assists);
+                summonerData.get(10).add(matchStats.assists);
+            }
+            if (matchStats.kda != null) {
+                summonerData.get(11).add(matchStats.kda);
             }
             if (matchStats.kill_participation != null) {
                 summonerData.get(12).add(matchStats.kill_participation);

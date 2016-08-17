@@ -548,17 +548,12 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             }
 
             // create the entries
-            List<BarEntry> entriesCS = new ArrayList<>();
             List<BarEntry> entriesCS10 = new ArrayList<>();
             List<BarEntry> entriesCSDiff10 = new ArrayList<>();
+            List<BarEntry> entriesCS = new ArrayList<>();
             List<BarEntry> entriesGold = new ArrayList<>();
             int j = 0;
             for (MatchStats matchStats : matchStatsList) {
-                if (matchStats.minions_killed != null) {
-                    entriesCS.add(new BarEntry(matchStats.minions_killed, j));
-                } else {
-                    entriesCS.add(new BarEntry(0, j));
-                }
                 if (matchStats.cs_at_ten != null) {
                     entriesCS10.add(new BarEntry(matchStats.cs_at_ten, j));
                 } else {
@@ -568,6 +563,11 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                     entriesCSDiff10.add(new BarEntry(matchStats.cs_diff_at_ten, j));
                 } else {
                     entriesCSDiff10.add(new BarEntry(0, j));
+                }
+                if (matchStats.minions_killed != null) {
+                    entriesCS.add(new BarEntry(matchStats.minions_killed, j));
+                } else {
+                    entriesCS.add(new BarEntry(0, j));
                 }
                 if (matchStats.gold_earned != null) {
                     entriesGold.add(new BarEntry(matchStats.gold_earned, j));
@@ -579,9 +579,9 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
 
             // organize entries
             List<List<BarEntry>> barEntries = new ArrayList<>();
-            barEntries.add(entriesCS);
             barEntries.add(entriesCS10);
             barEntries.add(entriesCSDiff10);
+            barEntries.add(entriesCS);
             barEntries.add(entriesGold);
 
             // create the data sets
@@ -616,14 +616,14 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             IncomeViewHolder(View itemView) {
                 super(itemView);
                 chartLayouts = new ArrayList<>();
-                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.cs_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.cs_10_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.cs_diff_10_chart_layout));
+                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.cs_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.gold_chart_layout));
                 barCharts = new ArrayList<>();
-                barCharts.add((BarChart) itemView.findViewById(R.id.cs_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.cs_10_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.cs_diff_10_chart));
+                barCharts.add((BarChart) itemView.findViewById(R.id.cs_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.gold_chart));
             }
         }
@@ -663,6 +663,7 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             }
 
             // create the entries
+            List<BarEntry> entriesFB = new ArrayList<>();
             List<Entry> entriesKills = new ArrayList<>();
             Long teamKills = matchStatsList.get(0).team_kills;
             Long othersKills = null;
@@ -674,13 +675,22 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             List<BarEntry> entriesMultiKill = new ArrayList<>();
             int j = 0;
             for (MatchStats matchStats : matchStatsList) {
+                if ((matchStats.first_blood_assist != null) && (matchStats.first_blood_kill != null)) {
+                    if (matchStats.first_blood_assist || matchStats.first_blood_kill) {
+                        entriesFB.add(new BarEntry(1, j));
+                    } else {
+                        entriesFB.add(new BarEntry(0, j));
+                    }
+                } else {
+                    entriesFB.add(new BarEntry(0, j));
+                }
                 if (matchStats.kills != null) {
-                    entriesKills.add(new BarEntry(matchStats.kills, j));
+                    entriesKills.add(new Entry(matchStats.kills, j));
                     if (othersKills != null) {
                         othersKills = othersKills - matchStats.kills;
                     }
                 } else {
-                    entriesKills.add(new BarEntry(0, j));
+                    entriesKills.add(new Entry(0, j));
                 }
                 if (matchStats.total_damage_dealt_to_champions != null) {
                     entriesDamage.add(new BarEntry(matchStats.total_damage_dealt_to_champions, j));
@@ -711,6 +721,7 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             List<List<Entry>> pieEntries = new ArrayList<>();
             pieEntries.add(entriesKills);
             List<List<BarEntry>> barEntries = new ArrayList<>();
+            barEntries.add(entriesFB);
             barEntries.add(entriesDamage);
             barEntries.add(entriesSpree);
             barEntries.add(entriesMultiKill);
@@ -769,6 +780,7 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             OffenseViewHolder(View itemView) {
                 super(itemView);
                 chartLayouts = new ArrayList<>();
+                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.first_blood_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.kills_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.damage_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.spree_chart_layout));
@@ -776,6 +788,7 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                 pieCharts = new ArrayList<>();
                 pieCharts.add((PieChart) itemView.findViewById(R.id.kills_chart));
                 barCharts = new ArrayList<>();
+                barCharts.add((BarChart) itemView.findViewById(R.id.first_blood_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.damage_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.spree_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.multi_kill_chart));
@@ -817,6 +830,7 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             }
 
             // create the entries
+            List<BarEntry> entriesFT = new ArrayList<>();
             List<Entry> entriesAssists = new ArrayList<>();
             Long teamAssists = matchStatsList.get(0).team_assists;
             Long othersAssists = null;
@@ -825,15 +839,25 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             }
             List<BarEntry> entriesKDA = new ArrayList<>();
             List<BarEntry> entriesKP = new ArrayList<>();
+            List<BarEntry> entriesDmgTaken = new ArrayList<>();
             int j = 0;
             for (MatchStats matchStats : matchStatsList) {
+                if ((matchStats.first_tower_assist != null) && (matchStats.first_tower_kill != null)) {
+                    if (matchStats.first_tower_assist || matchStats.first_tower_kill) {
+                        entriesFT.add(new BarEntry(1, j));
+                    } else {
+                        entriesFT.add(new BarEntry(0, j));
+                    }
+                } else {
+                    entriesFT.add(new BarEntry(0, j));
+                }
                 if (matchStats.assists != null) {
-                    entriesAssists.add(new BarEntry(matchStats.assists, j));
+                    entriesAssists.add(new Entry(matchStats.assists, j));
                     if (othersAssists != null) {
                         othersAssists = othersAssists - matchStats.assists;
                     }
                 } else {
-                    entriesAssists.add(new BarEntry(0, j));
+                    entriesAssists.add(new Entry(0, j));
                 }
                 if (matchStats.kda != null) {
                     entriesKDA.add(new BarEntry(matchStats.kda, j));
@@ -844,6 +868,15 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                     entriesKP.add(new BarEntry(matchStats.kill_participation, j));
                 } else {
                     entriesKP.add(new BarEntry(0, j));
+                }
+                if ((matchStats.total_damage_taken != null) && (matchStats.deaths != null)) {
+                    if (matchStats.deaths != 0) {
+                        entriesDmgTaken.add(new BarEntry(matchStats.total_damage_taken / matchStats.deaths, j));
+                    } else {
+                        entriesDmgTaken.add(new BarEntry(matchStats.total_damage_taken, j));
+                    }
+                } else {
+                    entriesDmgTaken.add(new BarEntry(0, j));
                 }
                 j++;
             }
@@ -859,8 +892,10 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             List<List<Entry>> pieEntries = new ArrayList<>();
             pieEntries.add(entriesAssists);
             List<List<BarEntry>> barEntries = new ArrayList<>();
+            barEntries.add(entriesFT);
             barEntries.add(entriesKDA);
             barEntries.add(entriesKP);
+            barEntries.add(entriesDmgTaken);
 
             // create the data sets
             List<PieDataSet> pieDataSets = new ArrayList<>();
@@ -916,14 +951,18 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             UtilityViewHolder(View itemView) {
                 super(itemView);
                 chartLayouts = new ArrayList<>();
+                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.first_tower_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.assists_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.kda_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.kp_chart_layout));
+                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.dmg_taken_chart_layout));
                 pieCharts = new ArrayList<>();
                 pieCharts.add((PieChart) itemView.findViewById(R.id.assists_chart));
                 barCharts = new ArrayList<>();
+                barCharts.add((BarChart) itemView.findViewById(R.id.first_tower_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.kda_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.kp_chart));
+                barCharts.add((BarChart) itemView.findViewById(R.id.dmg_taken_chart));
             }
         }
     }

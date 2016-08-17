@@ -104,13 +104,13 @@
     <string name="rg_cs_per_min">CS Per Minute</string>
     <string name="rg_gold_per_min">Gold Per Minute</string>
     <string name="rg_first_blood">First Blood Participation</string>
-    <string name="rg_dmg_per_min">Damage Per Minute</string>
     <string name="rg_kills">Kills</string>
+    <string name="rg_dmg_per_min">Damage Per Minute</string>
     <string name="rg_killing_spree">Largest Killing Spree</string>
     <string name="rg_multi_kills">Largest Multi Kill</string>
     <string name="rg_first_tower">First Tower Participation</string>
-    <string name="rg_kda">KDA</string>
     <string name="rg_assists">Assists</string>
+    <string name="rg_kda">KDA</string>
     <string name="rg_kill_participation">Kill Participation</string>
     <string name="rg_dmg_taken_per_death">Damage Taken Per Death</string>
     <string name="rg_wards_bought">Wards Bought</string>
@@ -151,18 +151,20 @@
     <string name="gwf_day_ago">Day Ago</string>
     <string name="gwf_days_ago">Days Ago</string>
     <!-- chart titles -->
-    <string name="gwf_cs">CS</string>
     <string name="gwf_cs_at_10">CS At 10</string>
     <string name="gwf_cs_diff_at_10">CS Differential At 10</string>
+    <string name="gwf_cs">CS</string>
     <string name="gwf_total_gold">Total Gold</string>
     <string name="gwf_first_blood">First Blood Participation</string>
     <string name="gwf_kills">Kills</string>
     <string name="gwf_damage">Total Damage</string>
     <string name="gwf_spree">Largest Killing Spree</string>
     <string name="gwf_multi_kill">Largest Multi Kill</string>
+    <string name="gwf_first_tower">First Tower Participation</string>
     <string name="gwf_assists">Assists</string>
     <string name="gwf_kda">KDA</string>
     <string name="gwf_kp">Kill Participation</string>
+    <string name="gwf_dmg_taken_per_death">Damage Taken Per Death</string>
     <string name="gwf_wards">Wards Bought/Placed/Killed</string>
 
     <!-- generic button labels -->
