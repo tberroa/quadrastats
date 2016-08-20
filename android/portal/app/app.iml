@@ -114,8 +114,8 @@
     <orderEntry type="library" exported="" name="MPAndroidChart-v2.2.5" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-24.1.0" level="project" />
-    <orderEntry type="library" exported="" name="activeandroid-3.1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="gson-2.7" level="project" />
+    <orderEntry type="library" exported="" name="activeandroid-3.1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="material-ripple-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-24.1.0" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-24.1.0" level="project" />
