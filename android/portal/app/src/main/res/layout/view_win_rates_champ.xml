@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/spacing_small"
-    android:paddingBottom="@dimen/spacing_small">
+    android:paddingBottom="@dimen/spacing_small"
+    android:paddingTop="@dimen/spacing_small">
 
     <ImageView
         android:id="@+id/champ_icon_view"

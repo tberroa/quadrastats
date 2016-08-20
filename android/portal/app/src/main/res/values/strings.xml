@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- branding -->
-    <string name="app_name">Portal</string>
+    <string name="app_name">Quadra Stats</string>
 
     <!-- regions -->
     <string name="region_br">Brazil</string>
@@ -55,6 +55,8 @@
     <string name="ma_change_email">Change Email</string>
     <string name="ma_change_password">Change Password</string>
     <string name="ma_sign_out">Sign Out</string>
+    <string name="ma_licenses">Licenses</string>
+    <string name="ma_license_info">License Information</string>
     <string name="ma_new_email">New Email</string>
     <string name="ma_password">Password</string>
     <string name="ma_current_password">Current Password</string>
@@ -103,17 +105,40 @@
     <string name="rg_cs_diff_at_ten">CS Differential At 10</string>
     <string name="rg_cs_per_min">CS Per Minute</string>
     <string name="rg_gold_per_min">Gold Per Minute</string>
-    <string name="rg_dmg_per_min">Damage Per Minute</string>
+    <string name="rg_first_blood">First Blood Participation</string>
     <string name="rg_kills">Kills</string>
+    <string name="rg_dmg_per_min">Damage Per Minute</string>
+    <string name="rg_killing_spree">Largest Killing Spree</string>
+    <string name="rg_multi_kills">Largest Multi Kill</string>
+    <string name="rg_first_tower">First Tower Participation</string>
+    <string name="rg_assists">Assists</string>
     <string name="rg_kda">KDA</string>
     <string name="rg_kill_participation">Kill Participation</string>
+    <string name="rg_dmg_taken_per_death">Damage Taken Per Death</string>
     <string name="rg_wards_bought">Wards Bought</string>
     <string name="rg_wards_placed">Wards Placed</string>
     <string name="rg_wards_killed">Wards Killed</string>
 
     <!-- season totals activity -->
     <string name="st_activity_title">Season Totals</string>
-    <string name="st_nothing_here">There is nothing to see here</string>
+    <string name="st_filter_data">Filter Data</string>
+    <string name="st_per_game">Per Game</string>
+    <string name="st_totals">Totals</string>
+    <!-- chart titles -->
+    <string name="st_games">Games</string>
+    <string name="st_kills">Kills</string>
+    <string name="st_deaths">Deaths</string>
+    <string name="st_assists">Assists</string>
+    <string name="st_kda">KDA</string>
+    <string name="st_damage">Damage Dealt</string>
+    <string name="st_gold">Gold Earned</string>
+    <string name="st_cs">CS</string>
+    <string name="st_max_kills">Max Kills</string>
+    <string name="st_max_deaths">Max Deaths</string>
+    <string name="st_doubles">Doubles</string>
+    <string name="st_triples">Triples</string>
+    <string name="st_quadras">Quadras</string>
+    <string name="st_pentas">Pentas</string>
 
     <!-- games with friends activity -->
     <string name="gwf_activity_title">Games With Friends</string>
@@ -128,18 +153,20 @@
     <string name="gwf_day_ago">Day Ago</string>
     <string name="gwf_days_ago">Days Ago</string>
     <!-- chart titles -->
-    <string name="gwf_cs">CS</string>
     <string name="gwf_cs_at_10">CS At 10</string>
     <string name="gwf_cs_diff_at_10">CS Differential At 10</string>
+    <string name="gwf_cs">CS</string>
     <string name="gwf_total_gold">Total Gold</string>
     <string name="gwf_first_blood">First Blood Participation</string>
     <string name="gwf_kills">Kills</string>
     <string name="gwf_damage">Total Damage</string>
     <string name="gwf_spree">Largest Killing Spree</string>
     <string name="gwf_multi_kill">Largest Multi Kill</string>
+    <string name="gwf_first_tower">First Tower Participation</string>
     <string name="gwf_assists">Assists</string>
     <string name="gwf_kda">KDA</string>
     <string name="gwf_kp">Kill Participation</string>
+    <string name="gwf_dmg_taken_per_death">Damage Taken Per Death</string>
     <string name="gwf_wards">Wards Bought/Placed/Killed</string>
 
     <!-- generic button labels -->
@@ -173,4 +200,133 @@
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
     <string name="image_view_description">Image View Description</string>
+
+    <!-- Legal and Licenses -->
+    <string name="legal_copyright">
+        &#169; Copyright 2016 Thomas Berroa All Rights Reserved.
+    </string>
+    <string name="legal_riot_notice">
+        QuadraStats isn\'t endorsed by Riot Games and doesn\'t reflect the views
+        or opinions of Riot Games or anyone officially involved in producing or
+        managing League of Legends. League of Legends and Riot Games are trademarks
+        or registered trademarks of Riot Games, Inc. League of Legends &#169; Riot Games, Inc.
+    </string>
+    <string name="license_mp_android_chart">
+        This software uses MPAndroidChart \n \n
+
+        Copyright 2016 Philipp Jahoda \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+        WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+        License for the specific language governing permissions and limitations
+        under the License. \n \n
+
+        Special thanks to danielgindi, mikegr, tony and jitpack.io for their
+        contributions to this project.
+    </string>
+    <string name="license_picasso">
+        This software uses Picasso \n \n
+
+        Copyright 2013 Square, Inc. \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_ok_http">
+        This software uses OkHttp \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_active_android">
+        This software uses ActiveAndroid \n \n
+
+        Copyright &#169; 2010 Michael Pardo \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_material_ripple">
+        This software uses Material Ripple \n \n
+
+        Copyright 2015 Balys Valentukevicius \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_gson">
+        This software uses Gson \n \n
+
+        Copyright 2008 Google Inc. \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
+    <string name="license_acra">
+        This software uses ACRA \n \n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at \n \n
+
+        http://www.apache.org/licenses/LICENSE-2.0 \n \n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+    </string>
 </resources>

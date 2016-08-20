@@ -267,7 +267,7 @@ class FriendsAdapter extends ArrayAdapter<Summoner> {
         return R.drawable.emblem_s5;
     }
 
-    class ViewHolder {
+    private class ViewHolder {
 
         ImageView emblem;
         TextView lp;

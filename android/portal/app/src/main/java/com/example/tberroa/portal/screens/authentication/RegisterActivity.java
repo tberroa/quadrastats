@@ -57,7 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
         registerLayout.getLayoutParams().width = layoutWidth;
         registerLayout.setLayoutParams(registerLayout.getLayoutParams());
 
-
         // initialize input fields
         EditText keyField = (EditText) findViewById(R.id.summoner_name_field);
         EditText emailField = (EditText) findViewById(R.id.email_field);
@@ -185,7 +184,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         final ReqRegister request;
 
-        public ValidateDialog(ReqRegister request) {
+        ValidateDialog(ReqRegister request) {
             super(RegisterActivity.this, R.style.AppTheme_Dialog);
             this.request = request;
         }

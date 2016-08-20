@@ -26,7 +26,9 @@ import com.example.tberroa.portal.data.LocalDB;
 import com.example.tberroa.portal.data.UserData;
 import com.example.tberroa.portal.models.ModelUtil;
 import com.example.tberroa.portal.models.requests.ReqMatchStats;
+import com.example.tberroa.portal.models.requests.ReqSeasonStats;
 import com.example.tberroa.portal.models.stats.MatchStats;
+import com.example.tberroa.portal.models.stats.SeasonStats;
 import com.example.tberroa.portal.models.summoner.Summoner;
 import com.example.tberroa.portal.network.Http;
 import com.example.tberroa.portal.screens.BaseActivity;
@@ -34,6 +36,7 @@ import com.example.tberroa.portal.screens.ScreenUtil;
 import com.example.tberroa.portal.screens.friends.FriendsActivity;
 import com.example.tberroa.portal.screens.home.HomeActivity;
 import com.example.tberroa.portal.screens.stats.recent.RecentAsync;
+import com.example.tberroa.portal.screens.stats.season.SeasonAsync;
 import com.example.tberroa.portal.screens.stats.withfriends.WFAsync;
 import com.google.gson.reflect.TypeToken;
 
@@ -148,12 +151,12 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                 // get the match stats objects
                 Type type = new TypeToken<List<MatchStats>>() {
                 }.getType();
-                List<MatchStats> serverMatchStatsList = ModelUtil.fromJsonList(postResponse, type);
+                List<MatchStats> serverMatchStats = ModelUtil.fromJsonList(postResponse, type);
 
                 // save any new match stats
                 ActiveAndroid.beginTransaction();
                 try {
-                    for (MatchStats matchStats : serverMatchStatsList) {
+                    for (MatchStats matchStats : serverMatchStats) {
                         if (localDB.matchStats(matchStats.summoner_key, matchStats.match_id) == null) {
                             // received new data
                             result[1] = true;
@@ -229,9 +232,108 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
         }
     }
 
+    public class RequestSeasonStats extends AsyncTask<Void, Void, Boolean[]> {
+
+        public SeasonAsync delegateSeason;
+        private String postResponse;
+        private Map<String, Map<Long, SeasonStats>> seasonStatsMapMap;
+
+        @Override
+        protected Boolean[] doInBackground(Void... params) {
+            LocalDB localDB = new LocalDB();
+            UserData userData = new UserData();
+
+            // get user
+            Summoner user = localDB.summoner(userData.getId(BaseStatsActivity.this));
+
+            // create the request object
+            ReqSeasonStats request = new ReqSeasonStats();
+            request.region = user.region;
+            String keys = user.key + "," + user.friends;
+            request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
+
+            // make the request
+            postResponse = "";
+            try {
+                String url = Constants.URL_GET_SEASON_STATS;
+                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqSeasonStats.class));
+            } catch (IOException e) {
+                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
+            }
+
+            // initialize the result array which is returned
+            Boolean[] result = {false, false};
+
+            // process the response
+            if (postResponse.contains(Constants.VALID_GET_SEASON_STATS)) {
+                // successful http request
+                result[0] = true;
+
+                // get the season stats objects
+                Type type = new TypeToken<List<SeasonStats>>() {
+                }.getType();
+                List<SeasonStats> serverSeasonStats = ModelUtil.fromJsonList(postResponse, type);
+
+                // save any new match stats
+                ActiveAndroid.beginTransaction();
+                try {
+                    for (SeasonStats seasonStats : serverSeasonStats) {
+                        if (localDB.seasonStats(seasonStats.summoner_key, seasonStats.champion) == null) {
+                            // received new data
+                            result[1] = true;
+                            seasonStats.save();
+                        }
+                    }
+                    ActiveAndroid.setTransactionSuccessful();
+                } finally {
+                    ActiveAndroid.endTransaction();
+                }
+            }
+
+            // gather the appropriate data
+            List<String> keysList = new ArrayList<>(Arrays.asList(keys.split(",")));
+            seasonStatsMapMap = localDB.seasonStatsMap(keysList);
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean[] result) {
+            // clear swipe refresh layouts
+            SwipeRefreshLayout dataSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.data_swipe_layout);
+            dataSwipeLayout.setRefreshing(false);
+            SwipeRefreshLayout messageSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.message_swipe_layout);
+            messageSwipeLayout.setRefreshing(false);
+
+            if (result[0]) { // successful http request
+                if (result[1]) { // and received new data
+                    if (!seasonStatsMapMap.isEmpty()) {
+                        if (!useDataSwipeLayout) {
+                            // switch to data swipe layout
+                            useDataSwipeLayout(messageSwipeLayout, dataSwipeLayout);
+                        }
+                        delegateSeason.displayData(seasonStatsMapMap);
+                    }
+                }
+            } else { // display error
+                String message = ScreenUtil.postResponseErrorMessage(BaseStatsActivity.this, postResponse);
+                Toast.makeText(BaseStatsActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        private void useDataSwipeLayout(SwipeRefreshLayout messageSwipeLayout, SwipeRefreshLayout dataSwipeLayout) {
+            messageSwipeLayout.setEnabled(false);
+            ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
+            scrollView.setVisibility(View.GONE);
+            dataSwipeLayout.setEnabled(true);
+            useDataSwipeLayout = true;
+        }
+    }
+
     public class ViewInitialization extends AsyncTask<Integer, Void, List<String>> {
 
         public RecentAsync delegateRecent;
+        public SeasonAsync delegateSeason;
         public WFAsync delegateWithFriends;
         private int activityId;
         private SwipeRefreshLayout dataSwipeLayout;
@@ -242,6 +344,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
         private TextView noDataView;
         private LinearLayout noFriendsLayout;
         private ScrollView scrollView;
+        private Map<String, Map<Long, SeasonStats>> seasonStatsMapMap;
 
         @Override
         protected List<String> doInBackground(Integer... params) {
@@ -262,6 +365,9 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                 switch (activityId) {
                     case 1: // recent activity
                         matchStatsList = localDB.matchStatsList(keys, 0, null, null);
+                        break;
+                    case 2: // season activity
+                        seasonStatsMapMap = localDB.seasonStatsMap(keys);
                         break;
                     case 3: // with friends activity
                         List<MatchStats> matches = localDB.matchStatsList(user.key);
@@ -306,6 +412,14 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                         return;
                     }
                     break;
+                case 2:
+                    if (seasonStatsMapMap.isEmpty()) {
+                        useDataSwipeLayout = false;
+                        messageSwipeLayout.setEnabled(true);
+                        noDataView.setVisibility(View.VISIBLE);
+                        return;
+                    }
+                    break;
                 case 3:
                     if (matchStatsMapMap.isEmpty()) {
                         useDataSwipeLayout = false;
@@ -323,6 +437,9 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
             switch (activityId) {
                 case 1:
                     delegateRecent.displayData(matchStatsList);
+                    break;
+                case 2:
+                    delegateSeason.displayData(seasonStatsMapMap);
                     break;
                 case 3:
                     delegateWithFriends.displayData(matchStatsMapMap);

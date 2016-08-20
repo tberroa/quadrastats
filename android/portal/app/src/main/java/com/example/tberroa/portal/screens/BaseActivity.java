@@ -164,7 +164,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
         private static final int OPEN = R.string.drawer_open;
         private Runnable runnable;
 
-        public SmoothActionBarDrawerToggle(Activity activity, DrawerLayout drawer, Toolbar toolbar) {
+        SmoothActionBarDrawerToggle(Activity activity, DrawerLayout drawer, Toolbar toolbar) {
             super(activity, drawer, toolbar, OPEN, CLOSE);
         }
 
@@ -189,7 +189,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
             }
         }
 
-        public void runWhenIdle(Runnable runnable) {
+        void runWhenIdle(Runnable runnable) {
             this.runnable = runnable;
         }
     }

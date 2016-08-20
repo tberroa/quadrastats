@@ -69,6 +69,7 @@ public class Constants {
     public static final String VALID_FRIEND_OP = "summoner_id";
     public static final String VALID_GET_CHAMPIONS = "version";
     public static final String VALID_GET_MATCH_STATS = "summoner_id";
+    public static final String VALID_GET_SEASON_STATS = "summoner_id";
     public static final String VALID_GET_SUMMONERS = "summoner_id";
     public static final String VALID_REGISTER = "summoner_id";
     public static final String VALID_RESET_PASSWORD = "summoner_id";
@@ -83,6 +84,7 @@ public class Constants {
     public static final String URL_REMOVE_FRIEND = URL_BASE + "summoners/remove-friend.json";
     public static final String URL_RESET_PASSWORD = URL_BASE + "summoners/reset-password.json";
     public static final String URL_GET_MATCH_STATS = URL_BASE + "stats/match.json";
+    public static final String URL_GET_SEASON_STATS = URL_BASE + "stats/season.json";
     private static final String URL_STATIC_BASE = "https://global.api.pvp.net/api/lol/static-data/na/v1.2";
     public static final String URL_GET_CHAMPIONS = URL_STATIC_BASE + "/champion?api_key=" + Keys.RIOT_API_KEY;
 

@@ -22,15 +22,19 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="AuthBackground" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/bg_teemo</item>
+        <item name="android:windowBackground">@drawable/bg_teemo_branded</item>
     </style>
 
     <style name="SplashBackground" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_tristana</item>
     </style>
 
+    <style name="HomeBackground" parent="AppTheme">
+        <item name="android:windowBackground">@color/primary_background</item>
+    </style>
+
     <style name="AccountBackground" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/bg_jayce</item>
+        <item name="android:windowBackground">@color/primary_background</item>
     </style>
 
     <style name="FriendsBackground" parent="AppTheme">

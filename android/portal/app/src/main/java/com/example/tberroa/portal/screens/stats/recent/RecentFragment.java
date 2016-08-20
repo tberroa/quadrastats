@@ -103,7 +103,7 @@ public class RecentFragment extends Fragment {
             recyclerView.setHasFixedSize(true);
 
             // populate recycler view
-            recyclerView.setAdapter(new RecentViewAdapter(getActivity(), viewPackage));
+            recyclerView.setAdapter(new ViewAdapter(getActivity(), viewPackage));
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
         return v;

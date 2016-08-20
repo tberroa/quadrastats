@@ -42,7 +42,7 @@ public class WFFragment extends Fragment {
                 recyclerView.setHasFixedSize(true);
 
                 // populate recycler view
-                recyclerView.setAdapter(new WFViewAdapter(getActivity(), matchStatsMap, staticRiotData));
+                recyclerView.setAdapter(new ViewAdapter(getActivity(), matchStatsMap, staticRiotData));
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
         }

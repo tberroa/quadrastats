@@ -14,6 +14,8 @@
         android:id="@+id/average_chart_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/accent"
         android:textSize="@dimen/text_size_huge"/>
 
     <com.github.mikephil.charting.charts.BarChart

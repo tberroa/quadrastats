@@ -16,8 +16,9 @@ import android.widget.TextView;
 import com.example.tberroa.portal.R;
 import com.example.tberroa.portal.data.Constants;
 import com.example.tberroa.portal.screens.ScreenUtil;
+import com.example.tberroa.portal.screens.stats.IntValueFormat;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
-import com.example.tberroa.portal.screens.stats.recent.RecentViewAdapter.ChartViewHolder;
+import com.example.tberroa.portal.screens.stats.recent.ViewAdapter.ChartViewHolder;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
@@ -31,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class RecentViewAdapter extends Adapter<ChartViewHolder> {
+public class ViewAdapter extends Adapter<ChartViewHolder> {
 
     private final Context context;
     private final Map<String, List<List<Number>>> data;
@@ -41,7 +42,7 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
     private final int numberOfCharts;
     private final List<String> titles;
 
-    public RecentViewAdapter(Context context, ViewPackage viewPackage) {
+    public ViewAdapter(Context context, ViewPackage viewPackage) {
         this.context = context;
         titles = viewPackage.titles;
         labelsList = viewPackage.labelsList;
@@ -107,7 +108,7 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
         return new ChartViewHolder(LayoutInflater.from(vG.getContext()).inflate(R.layout.view_recent, vG, false));
     }
 
-    public class ChartViewHolder extends ViewHolder {
+    class ChartViewHolder extends ViewHolder {
 
         final LineChart lineChart;
         final LinearLayout lineChartLayout;
@@ -131,7 +132,7 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
         final int i;
         final String title;
 
-        public AverageChartDialog(String title, int i) {
+        AverageChartDialog(String title, int i) {
             super(context, R.style.AppTheme_Dialog);
             this.title = title;
             this.i = i;
@@ -164,7 +165,7 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
 
             // populate the arrays
             int x = 0;
-            for (Entry<String, List<List<Number>>> entry : RecentViewAdapter.this.data.entrySet()) {
+            for (Entry<String, List<List<Number>>> entry : ViewAdapter.this.data.entrySet()) {
                 labels.add("");
 
                 // calculate average
@@ -182,7 +183,15 @@ public class RecentViewAdapter extends Adapter<ChartViewHolder> {
             // use the arrays to create a data set
             BarDataSet barDataSet = new BarDataSet(data, null);
             barDataSet.setColors(StatsUtil.chartColors(), context);
-            barDataSet.setDrawValues(false);
+            if (x < 8) {
+                float rawTextSize = context.getResources().getDimension(R.dimen.text_size_small);
+                int textSize = (int) (rawTextSize / context.getResources().getDisplayMetrics().density);
+                barDataSet.setValueFormatter(new IntValueFormat());
+                barDataSet.setValueTextColor(Color.WHITE);
+                barDataSet.setValueTextSize(textSize);
+            } else {
+                barDataSet.setDrawValues(false);
+            }
             averageChart.setData(new BarData(labels, barDataSet));
 
             // chart formatting

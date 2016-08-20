@@ -113,7 +113,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
 
     private class AddFriendDialog extends Dialog {
 
-        public AddFriendDialog() {
+        AddFriendDialog() {
             super(FriendsActivity.this, R.style.AppTheme_Dialog);
         }
 
@@ -162,7 +162,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
 
         private final int position;
 
-        public RemoveFriendDialog(int position) {
+        RemoveFriendDialog(int position) {
             super(FriendsActivity.this, R.style.AppTheme_Dialog);
             this.position = position;
         }

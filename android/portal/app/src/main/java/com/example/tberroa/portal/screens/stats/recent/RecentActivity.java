@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
@@ -71,10 +70,10 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         // initialize tab layout with four tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setVisibility(View.GONE);
         for (int i = 0; i < 4; i++) {
             tabLayout.addTab(tabLayout.newTab());
         }
-        tabLayout.setVisibility(View.GONE);
 
         // set default legend icon dimension
         legendIconSide = ScreenUtil.dpToPx(this, 50);
@@ -126,19 +125,22 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         // points corresponding to one stat chart.
         // Example: Key: Frosiph | Value: list[0] = List<csAtTen>, list[1] = List<csDiffAtTen>, etc.
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setVisibility(View.VISIBLE);
-
         // create list of chart titles
         ArrayList<String> titles = new ArrayList<>();
         titles.add(getResources().getString(R.string.rg_cs_at_ten));
         titles.add(getResources().getString(R.string.rg_cs_diff_at_ten));
         titles.add(getResources().getString(R.string.rg_cs_per_min));
         titles.add(getResources().getString(R.string.rg_gold_per_min));
-        titles.add(getResources().getString(R.string.rg_dmg_per_min));
+        titles.add(getResources().getString(R.string.rg_first_blood));
         titles.add(getResources().getString(R.string.rg_kills));
+        titles.add(getResources().getString(R.string.rg_dmg_per_min));
+        titles.add(getResources().getString(R.string.rg_killing_spree));
+        titles.add(getResources().getString(R.string.rg_multi_kills));
+        titles.add(getResources().getString(R.string.rg_first_tower));
+        titles.add(getResources().getString(R.string.rg_assists));
         titles.add(getResources().getString(R.string.rg_kda));
         titles.add(getResources().getString(R.string.rg_kill_participation));
+        titles.add(getResources().getString(R.string.rg_dmg_taken_per_death));
         titles.add(getResources().getString(R.string.rg_wards_bought));
         titles.add(getResources().getString(R.string.rg_wards_placed));
         titles.add(getResources().getString(R.string.rg_wards_killed));
@@ -175,33 +177,60 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             if (matchStats.gold_per_min != null) {
                 summonerData.get(3).add(matchStats.gold_per_min);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(4).add(matchStats.dmg_per_min);
+            if ((matchStats.first_blood_assist != null) && (matchStats.first_blood_kill != null)) {
+                if (matchStats.first_blood_assist || matchStats.first_blood_kill) {
+                    summonerData.get(4).add(1);
+                } else {
+                    summonerData.get(4).add(0);
+                }
             }
-            if (matchStats.dmg_per_min != null) {
+            if (matchStats.kills != null) {
                 summonerData.get(5).add(matchStats.kills);
             }
             if (matchStats.dmg_per_min != null) {
-                summonerData.get(6).add(matchStats.kda);
+                summonerData.get(6).add(matchStats.dmg_per_min);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(7).add(matchStats.kill_participation);
+            if (matchStats.largest_killing_spree != null) {
+                summonerData.get(7).add(matchStats.largest_killing_spree);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(8).add(matchStats.vision_wards_bought_in_game);
+            if (matchStats.largest_multi_kill != null) {
+                summonerData.get(8).add(matchStats.largest_multi_kill);
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(9).add(matchStats.wards_placed);
+            if ((matchStats.first_tower_assist != null) && (matchStats.first_tower_kill != null)) {
+                if (matchStats.first_tower_assist || matchStats.first_tower_kill) {
+                    summonerData.get(9).add(1);
+                } else {
+                    summonerData.get(9).add(0);
+                }
             }
-            if (matchStats.dmg_per_min != null) {
-                summonerData.get(10).add(matchStats.wards_killed);
+            if (matchStats.assists != null) {
+                summonerData.get(10).add(matchStats.assists);
+            }
+            if (matchStats.kda != null) {
+                summonerData.get(11).add(matchStats.kda);
+            }
+            if (matchStats.kill_participation != null) {
+                summonerData.get(12).add(matchStats.kill_participation);
+            }
+            if ((matchStats.total_damage_taken != null) && (matchStats.deaths != null)) {
+                if (matchStats.deaths != 0) {
+                    summonerData.get(13).add(matchStats.total_damage_taken / matchStats.deaths);
+                } else {
+                    summonerData.get(13).add(matchStats.total_damage_taken);
+                }
+            }
+            if (matchStats.vision_wards_bought_in_game != null) {
+                summonerData.get(14).add(matchStats.vision_wards_bought_in_game);
+            }
+            if (matchStats.wards_placed != null) {
+                summonerData.get(15).add(matchStats.wards_placed);
+            }
+            if (matchStats.wards_killed != null) {
+                summonerData.get(16).add(matchStats.wards_killed);
             }
 
             aggregateData.put(summoner, summonerData);
         }
-
-        // update adapter
-        updateAdapter(titles, aggregateData);
 
         // create the legend
         LinearLayout legendLayout = (LinearLayout) findViewById(R.id.legend_layout);
@@ -239,6 +268,9 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 new SelectSummonersDialog(goButtonPackageSSD).show();
             }
         });
+
+        // update adapter
+        updateAdapter(titles, aggregateData);
     }
 
     private void updateAdapter(ArrayList<String> titles, Map<String, List<List<Number>>> aggregateData) {
@@ -248,7 +280,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
         // set the view pager adapter
         FragmentManager fM = getSupportFragmentManager();
-        viewPager.setAdapter(new RecentPagerAdapter(fM, tabLayout.getTabCount(), titles, aggregateData));
+        viewPager.setAdapter(new PageAdapter(fM, tabLayout.getTabCount(), titles, aggregateData));
 
         // set page change listener so user won't invoke refresh layout while changing views
         viewPager.addOnPageChangeListener(new TabLayoutOnPageChangeListener(tabLayout) {
@@ -263,7 +295,6 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         tabLayout.setupWithViewPager(viewPager);
 
         // set tab icons
-
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
@@ -302,13 +333,14 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                     break;
             }
         }
+        tabLayout.setVisibility(View.VISIBLE);
     }
 
     private class ChampionIcon {
 
-        public final Champion champion;
-        public ImageView check;
-        public boolean isSelected;
+        final Champion champion;
+        ImageView check;
+        boolean isSelected;
 
         ChampionIcon(Champion champion) {
             this.champion = champion;
@@ -318,10 +350,10 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class FilterAdapter extends Adapter<FilterAdapter.ChampionViewHolder> {
 
-        public final List<ChampionIcon> championIcons;
+        final List<ChampionIcon> championIcons;
         private final int side;
 
-        public FilterAdapter(List<ChampionIcon> championIcons, int side) {
+        FilterAdapter(List<ChampionIcon> championIcons, int side) {
             this.championIcons = championIcons;
             this.side = side;
         }
@@ -356,7 +388,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             return new ChampionViewHolder(view);
         }
 
-        public class ChampionViewHolder extends ViewHolder {
+        class ChampionViewHolder extends ViewHolder {
 
             final ImageView champIconCheck;
             final ImageView champIconView;
@@ -401,14 +433,14 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class FilterDialog extends Dialog {
 
-        public FilterDialog() {
+        FilterDialog() {
             super(RecentActivity.this, R.style.AppTheme_Dialog);
         }
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.dialog_data_filter);
+            setContentView(R.layout.dialog_data_filter_r);
             setCancelable(true);
 
             // resize dialog
@@ -434,18 +466,11 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
                 championIcons.add(new ChampionIcon(champion));
             }
 
-            // use listener to get dialog width and initialize recycler view
+            // initialize the recycler view
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             FilterAdapter adapter = new FilterAdapter(championIcons, champIconSide);
-            LinearLayout filterLayout = (LinearLayout) findViewById(R.id.filter_layout);
-            filterLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    filterLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new GridLayoutManager(RecentActivity.this, champIconsPerRow));
-                }
-            });
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new GridLayoutManager(RecentActivity.this, champIconsPerRow));
 
             // initialize the role checks
             ImageView topCheck = (ImageView) findViewById(R.id.top_check);
@@ -650,36 +675,36 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
 
     private class GoButtonPackageFD {
 
-        public long championId;
-        public FilterDialog dialog;
-        public String lane;
-        public String role;
+        long championId;
+        FilterDialog dialog;
+        String lane;
+        String role;
     }
 
     private class GoButtonPackageSSD {
 
-        public long championId;
-        public String position;
-        public Map<String, List<List<Number>>> selectedData;
-        public Set<String> selectedNames;
-        public ArrayList<String> titles;
+        long championId;
+        String position;
+        Map<String, List<List<Number>>> selectedData;
+        Set<String> selectedNames;
+        ArrayList<String> titles;
     }
 
     private class SSDName {
 
-        public final String name;
-        public boolean isChecked;
+        final String name;
+        boolean isChecked;
 
-        public SSDName(String name) {
+        SSDName(String name) {
             this.name = name;
         }
     }
 
     private class SSDViewAdapter extends Adapter<SSDViewAdapter.SSDViewHolder> {
 
-        public final List<SSDName> names;
+        final List<SSDName> names;
 
-        public SSDViewAdapter(List<SSDName> names) {
+        SSDViewAdapter(List<SSDName> names) {
             this.names = names;
         }
 
@@ -701,7 +726,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             return new SSDViewHolder(v);
         }
 
-        public class SSDViewHolder extends ViewHolder {
+        class SSDViewHolder extends ViewHolder {
 
             final CheckBox checkbox;
 
@@ -726,7 +751,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
         private final Set<String> selectedNames;
         private final ArrayList<String> titles;
 
-        public SelectSummonersDialog(GoButtonPackageSSD goButtonPackageSSD) {
+        SelectSummonersDialog(GoButtonPackageSSD goButtonPackageSSD) {
             super(RecentActivity.this, R.style.AppTheme_Dialog);
             selectedNames = goButtonPackageSSD.selectedNames;
             selectedData = goButtonPackageSSD.selectedData;

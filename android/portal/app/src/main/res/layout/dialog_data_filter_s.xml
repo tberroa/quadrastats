@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/filter_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_standard">
+
+        <RadioButton
+            android:id="@+id/totals_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/accent"
+            android:text="@string/st_totals"
+            android:textSize="@dimen/text_size_large"/>
+
+        <RadioButton
+            android:id="@+id/per_game_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/accent"
+            android:text="@string/st_per_game"
+            android:textSize="@dimen/text_size_large"/>
+    </RadioGroup>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fadeScrollbars="true"
+        android:paddingEnd="@dimen/spacing_tiny"
+        android:paddingStart="@dimen/spacing_tiny"
+        android:scrollbars="vertical"/>
+
+    <Button
+        android:id="@+id/go_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/accent"
+        android:text="@string/button_go"
+        android:textAllCaps="true"
+        android:textSize="@dimen/text_size_huge"/>
+</LinearLayout>

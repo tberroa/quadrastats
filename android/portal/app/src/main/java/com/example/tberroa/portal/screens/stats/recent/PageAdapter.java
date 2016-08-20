@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-class RecentPagerAdapter extends FragmentStatePagerAdapter {
+class PageAdapter extends FragmentStatePagerAdapter {
 
     private final Bundle incomeBundle = new Bundle();
     private final int numberOfTabs;
@@ -23,8 +23,8 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
     private final Bundle utilityBundle = new Bundle();
     private final Bundle visionBundle = new Bundle();
 
-    public RecentPagerAdapter(FragmentManager fM, int numOfTabs,
-                              ArrayList<String> titles, Map<String, List<List<Number>>> data) {
+    public PageAdapter(FragmentManager fM, int numOfTabs,
+                       ArrayList<String> titles, Map<String, List<List<Number>>> data) {
         super(fM);
         numberOfTabs = numOfTabs;
 
@@ -38,9 +38,9 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
             for (Entry<String, List<List<Number>>> entry : data.entrySet()) {
                 List<List<Number>> summonerData = entry.getValue();
                 incomeData.put(entry.getKey(), summonerData.subList(0, 4));
-                offenseData.put(entry.getKey(), summonerData.subList(4, 6));
-                utilityData.put(entry.getKey(), summonerData.subList(6, 8));
-                visionData.put(entry.getKey(), summonerData.subList(8, 11));
+                offenseData.put(entry.getKey(), summonerData.subList(4, 9));
+                utilityData.put(entry.getKey(), summonerData.subList(9, 14));
+                visionData.put(entry.getKey(), summonerData.subList(14, 17));
             }
         }
 
@@ -56,11 +56,11 @@ class RecentPagerAdapter extends FragmentStatePagerAdapter {
         // create bundles
         incomeBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(0, 4)));
         incomeBundle.putString("chart_data", incomeDataJson);
-        offenseBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(4, 6)));
+        offenseBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(4, 9)));
         offenseBundle.putString("chart_data", offenseDataJson);
-        utilityBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(6, 8)));
+        utilityBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(9, 14)));
         utilityBundle.putString("chart_data", utilityDataJson);
-        visionBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(8, 11)));
+        visionBundle.putStringArrayList("titles", new ArrayList<>(titles.subList(14, 17)));
         visionBundle.putString("chart_data", visionDataJson);
     }
 

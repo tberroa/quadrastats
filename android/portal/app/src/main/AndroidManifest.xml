@@ -21,7 +21,8 @@
         <meta-data
             android:name="AA_MODELS"
             android:value="com.example.tberroa.portal.models.summoner.Summoner,
-            com.example.tberroa.portal.models.stats.MatchStats"/>
+            com.example.tberroa.portal.models.stats.MatchStats,
+            com.example.tberroa.portal.models.stats.SeasonStats"/>
 
         <activity
             android:name=".screens.authentication.SignInActivity"
@@ -47,7 +48,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.home.HomeActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/HomeBackground"/>
         <activity
             android:name=".screens.account.AccountActivity"
             android:screenOrientation="portrait"

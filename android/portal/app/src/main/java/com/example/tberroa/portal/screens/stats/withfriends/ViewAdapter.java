@@ -26,7 +26,7 @@ import com.example.tberroa.portal.screens.StaticRiotData;
 import com.example.tberroa.portal.screens.stats.CreateLegendPackage;
 import com.example.tberroa.portal.screens.stats.IntValueFormat;
 import com.example.tberroa.portal.screens.stats.StatsUtil;
-import com.example.tberroa.portal.screens.stats.withfriends.WFViewAdapter.WFViewHolder;
+import com.example.tberroa.portal.screens.stats.withfriends.ViewAdapter.WFViewHolder;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
+public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
 
     private final Context context;
     private final Map<String, MatchStats> matchStatsMap;
@@ -53,7 +53,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
     private List<String> champIconURLsList;
     private List<List<String>> iconURLsList;
 
-    public WFViewAdapter(Context context, Map<String, MatchStats> matchStatsMap, StaticRiotData staticRiotData) {
+    public ViewAdapter(Context context, Map<String, MatchStats> matchStatsMap, StaticRiotData staticRiotData) {
         this.context = context;
         this.matchStatsMap = matchStatsMap;
         this.staticRiotData = staticRiotData;
@@ -105,10 +105,13 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         });
 
         // display appropriate victory/defeat text
-        if (matchStatsList.get(0).winner) {
-            wfViewHolder.victoryView.setVisibility(View.VISIBLE);
-        } else {
-            wfViewHolder.defeatView.setVisibility(View.VISIBLE);
+        Boolean winner = matchStatsList.get(0).winner;
+        if (winner != null) {
+            if (winner) {
+                wfViewHolder.victoryView.setVisibility(View.VISIBLE);
+            } else {
+                wfViewHolder.defeatView.setVisibility(View.VISIBLE);
+            }
         }
 
         // match date
@@ -181,22 +184,26 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
     }
 
     private void formatBarDataSet(BarDataSet barDataSet) {
+        float rawTextSize = context.getResources().getDimension(R.dimen.text_size_small);
+        int textSize = (int) (rawTextSize / context.getResources().getDisplayMetrics().density);
         int[] colors = StatsUtil.chartColors();
         barDataSet.setColors(colors, context);
         barDataSet.setValueFormatter(new IntValueFormat());
         barDataSet.setValueTextColor(Color.WHITE);
-        barDataSet.setValueTextSize(12);
+        barDataSet.setValueTextSize(textSize);
         barDataSet.setHighlightEnabled(false);
     }
 
     private void formatPieChart(PieChart pieChart) {
+        float rawTextSize = context.getResources().getDimension(R.dimen.text_size_huge);
+        int textSize = (int) (rawTextSize / context.getResources().getDisplayMetrics().density);
         pieChart.getLegend().setEnabled(false);
         pieChart.setDrawSliceText(false);
         pieChart.setTouchEnabled(false);
         pieChart.setTransparentCircleAlpha(0);
         pieChart.setHoleColor(Color.TRANSPARENT);
-        pieChart.setCenterTextColor(Color.WHITE);
-        pieChart.setCenterTextSize(20);
+        pieChart.setCenterTextColor(ContextCompat.getColor(context, R.color.accent));
+        pieChart.setCenterTextSize(textSize);
         pieChart.setHoleRadius(35);
         pieChart.setDescription("");
     }
@@ -206,10 +213,12 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         if (notFiveMan) {
             colors[entries.size() - 1] = R.color.gray;
         }
+        float rawTextSize = context.getResources().getDimension(R.dimen.text_size_large);
+        int textSize = (int) (rawTextSize / context.getResources().getDisplayMetrics().density);
         pieDataSet.setColors(colors, context);
         pieDataSet.setValueFormatter(new IntValueFormat());
         pieDataSet.setValueTextColor(Color.WHITE);
-        pieDataSet.setValueTextSize(18);
+        pieDataSet.setValueTextSize(textSize);
         pieDataSet.setSelectionShift(0);
     }
 
@@ -254,15 +263,47 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             // gather icon urls
             iconURLsList.add(new ArrayList<>());
             iconURLsList.get(x).add(StatsUtil.summonerSpellURL(staticRiotData.version, matchStats.spell1));
-            iconURLsList.get(x).add(StatsUtil.masteryURL(staticRiotData.version, matchStats.keystone));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item0));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item1));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item2));
+            if (matchStats.keystone != null) {
+                iconURLsList.get(x).add(StatsUtil.masteryURL(staticRiotData.version, matchStats.keystone));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item0 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item0));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item1 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item1));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item2 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item2));
+            } else {
+                iconURLsList.get(x).add("");
+            }
             iconURLsList.get(x).add(StatsUtil.summonerSpellURL(staticRiotData.version, matchStats.spell2));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item6));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item3));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item4));
-            iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item5));
+            if (matchStats.item6 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item6));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item3 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item3));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item4 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item4));
+            } else {
+                iconURLsList.get(x).add("");
+            }
+            if (matchStats.item5 != null) {
+                iconURLsList.get(x).add(StatsUtil.itemURL(staticRiotData.version, matchStats.item5));
+            } else {
+                iconURLsList.get(x).add("");
+            }
 
             x++;
         }
@@ -274,7 +315,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         private final int side;
         private final List<String> urls;
 
-        public SummonerGridAdapter(Context context, int side, List<String> urls) {
+        SummonerGridAdapter(Context context, int side, List<String> urls) {
             super(context, -1, urls);
             this.context = context;
             this.side = side;
@@ -308,9 +349,12 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             viewHolder.icon.setLayoutParams(viewHolder.icon.getLayoutParams());
 
             // set the icon
-            if (urls.get(position).equals(Constants.UI_NO_ITEM)) {
+            if ("".equals(urls.get(position))) {
+                Picasso.with(context).load(R.drawable.ic_placeholder).resize((int) (side / 2.1), (int) (side / 2.1))
+                        .transform(new RoundTransform()).into(viewHolder.icon);
+            } else if (urls.get(position).equals(Constants.UI_NO_ITEM)) {
                 Picasso.with(context).load(R.drawable.ic_no_item).resize((int) (side / 2.1), (int) (side / 2.1))
-                        .placeholder(R.drawable.ic_placeholder).transform(new RoundTransform()).into(viewHolder.icon);
+                        .transform(new RoundTransform()).into(viewHolder.icon);
             } else {
                 Picasso.with(context).load(urls.get(position)).resize((int) (side / 2.1), (int) (side / 2.1))
                         .placeholder(R.drawable.ic_placeholder).transform(new RoundTransform()).into(viewHolder.icon);
@@ -416,7 +460,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<String> names;
         final int tab;
 
-        public ChartsDialog(List<String> names, List<MatchStats> matchStatsList, int tab) {
+        ChartsDialog(List<String> names, List<MatchStats> matchStatsList, int tab) {
             super(context, R.style.AppTheme_Dialog);
             this.matchStatsList = matchStatsList;
             this.names = names;
@@ -484,7 +528,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<MatchStats> matchStatsList;
         final List<String> names;
 
-        public IncomeAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
+        IncomeAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.height = height;
@@ -504,17 +548,12 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             }
 
             // create the entries
-            List<BarEntry> entriesCS = new ArrayList<>();
             List<BarEntry> entriesCS10 = new ArrayList<>();
             List<BarEntry> entriesCSDiff10 = new ArrayList<>();
+            List<BarEntry> entriesCS = new ArrayList<>();
             List<BarEntry> entriesGold = new ArrayList<>();
             int j = 0;
             for (MatchStats matchStats : matchStatsList) {
-                if (matchStats.minions_killed != null) {
-                    entriesCS.add(new BarEntry(matchStats.minions_killed, j));
-                } else {
-                    entriesCS.add(new BarEntry(0, j));
-                }
                 if (matchStats.cs_at_ten != null) {
                     entriesCS10.add(new BarEntry(matchStats.cs_at_ten, j));
                 } else {
@@ -524,6 +563,11 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                     entriesCSDiff10.add(new BarEntry(matchStats.cs_diff_at_ten, j));
                 } else {
                     entriesCSDiff10.add(new BarEntry(0, j));
+                }
+                if (matchStats.minions_killed != null) {
+                    entriesCS.add(new BarEntry(matchStats.minions_killed, j));
+                } else {
+                    entriesCS.add(new BarEntry(0, j));
                 }
                 if (matchStats.gold_earned != null) {
                     entriesGold.add(new BarEntry(matchStats.gold_earned, j));
@@ -535,9 +579,9 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
 
             // organize entries
             List<List<BarEntry>> barEntries = new ArrayList<>();
-            barEntries.add(entriesCS);
             barEntries.add(entriesCS10);
             barEntries.add(entriesCSDiff10);
+            barEntries.add(entriesCS);
             barEntries.add(entriesGold);
 
             // create the data sets
@@ -564,7 +608,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             return new IncomeViewHolder(view);
         }
 
-        public class IncomeViewHolder extends RecyclerView.ViewHolder {
+        class IncomeViewHolder extends RecyclerView.ViewHolder {
 
             final List<BarChart> barCharts;
             final List<LinearLayout> chartLayouts;
@@ -572,14 +616,14 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             IncomeViewHolder(View itemView) {
                 super(itemView);
                 chartLayouts = new ArrayList<>();
-                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.cs_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.cs_10_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.cs_diff_10_chart_layout));
+                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.cs_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.gold_chart_layout));
                 barCharts = new ArrayList<>();
-                barCharts.add((BarChart) itemView.findViewById(R.id.cs_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.cs_10_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.cs_diff_10_chart));
+                barCharts.add((BarChart) itemView.findViewById(R.id.cs_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.gold_chart));
             }
         }
@@ -591,7 +635,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<MatchStats> matchStatsList;
         final List<String> names;
 
-        public OffenseAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
+        OffenseAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.height = height;
@@ -619,18 +663,34 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             }
 
             // create the entries
+            List<BarEntry> entriesFB = new ArrayList<>();
             List<Entry> entriesKills = new ArrayList<>();
-            long othersKills = matchStatsList.get(0).team_kills;
+            Long teamKills = matchStatsList.get(0).team_kills;
+            Long othersKills = null;
+            if (teamKills != null) {
+                othersKills = teamKills;
+            }
             List<BarEntry> entriesDamage = new ArrayList<>();
             List<BarEntry> entriesSpree = new ArrayList<>();
             List<BarEntry> entriesMultiKill = new ArrayList<>();
             int j = 0;
             for (MatchStats matchStats : matchStatsList) {
-                if (matchStats.kills != null) {
-                    entriesKills.add(new BarEntry(matchStats.kills, j));
-                    othersKills = othersKills - matchStats.kills;
+                if ((matchStats.first_blood_assist != null) && (matchStats.first_blood_kill != null)) {
+                    if (matchStats.first_blood_assist || matchStats.first_blood_kill) {
+                        entriesFB.add(new BarEntry(1, j));
+                    } else {
+                        entriesFB.add(new BarEntry(0, j));
+                    }
                 } else {
-                    entriesKills.add(new BarEntry(0, j));
+                    entriesFB.add(new BarEntry(0, j));
+                }
+                if (matchStats.kills != null) {
+                    entriesKills.add(new Entry(matchStats.kills, j));
+                    if (othersKills != null) {
+                        othersKills = othersKills - matchStats.kills;
+                    }
+                } else {
+                    entriesKills.add(new Entry(0, j));
                 }
                 if (matchStats.total_damage_dealt_to_champions != null) {
                     entriesDamage.add(new BarEntry(matchStats.total_damage_dealt_to_champions, j));
@@ -650,13 +710,18 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                 j++;
             }
             if (notFiveMan) {
-                entriesKills.add(new Entry(othersKills, j));
+                if (othersKills != null) {
+                    entriesKills.add(new Entry(othersKills, j));
+                } else {
+                    namesPie.remove(namesPie.size() - 1);
+                }
             }
 
             // organize entries
             List<List<Entry>> pieEntries = new ArrayList<>();
             pieEntries.add(entriesKills);
             List<List<BarEntry>> barEntries = new ArrayList<>();
+            barEntries.add(entriesFB);
             barEntries.add(entriesDamage);
             barEntries.add(entriesSpree);
             barEntries.add(entriesMultiKill);
@@ -665,7 +730,11 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             List<PieDataSet> pieDataSets = new ArrayList<>();
             for (List<Entry> entries : pieEntries) {
                 PieDataSet pieDataSet = new PieDataSet(entries, "");
-                formatPieDataSet(entries, pieDataSet, notFiveMan);
+                if (othersKills != null) {
+                    formatPieDataSet(entries, pieDataSet, notFiveMan);
+                } else {
+                    formatPieDataSet(entries, pieDataSet, false);
+                }
                 pieDataSets.add(pieDataSet);
             }
             List<BarDataSet> barDataSets = new ArrayList<>();
@@ -702,7 +771,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             return new OffenseViewHolder(view);
         }
 
-        public class OffenseViewHolder extends RecyclerView.ViewHolder {
+        class OffenseViewHolder extends RecyclerView.ViewHolder {
 
             final List<BarChart> barCharts;
             final List<LinearLayout> chartLayouts;
@@ -711,6 +780,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             OffenseViewHolder(View itemView) {
                 super(itemView);
                 chartLayouts = new ArrayList<>();
+                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.first_blood_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.kills_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.damage_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.spree_chart_layout));
@@ -718,6 +788,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                 pieCharts = new ArrayList<>();
                 pieCharts.add((PieChart) itemView.findViewById(R.id.kills_chart));
                 barCharts = new ArrayList<>();
+                barCharts.add((BarChart) itemView.findViewById(R.id.first_blood_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.damage_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.spree_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.multi_kill_chart));
@@ -731,7 +802,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<MatchStats> matchStatsList;
         final List<String> names;
 
-        public UtilityAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
+        UtilityAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.height = height;
@@ -759,17 +830,34 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             }
 
             // create the entries
+            List<BarEntry> entriesFT = new ArrayList<>();
             List<Entry> entriesAssists = new ArrayList<>();
-            long othersAssists = matchStatsList.get(0).team_assists;
+            Long teamAssists = matchStatsList.get(0).team_assists;
+            Long othersAssists = null;
+            if (teamAssists != null) {
+                othersAssists = teamAssists;
+            }
             List<BarEntry> entriesKDA = new ArrayList<>();
             List<BarEntry> entriesKP = new ArrayList<>();
+            List<BarEntry> entriesDmgTaken = new ArrayList<>();
             int j = 0;
             for (MatchStats matchStats : matchStatsList) {
-                if (matchStats.assists != null) {
-                    entriesAssists.add(new BarEntry(matchStats.assists, j));
-                    othersAssists = othersAssists - matchStats.assists;
+                if ((matchStats.first_tower_assist != null) && (matchStats.first_tower_kill != null)) {
+                    if (matchStats.first_tower_assist || matchStats.first_tower_kill) {
+                        entriesFT.add(new BarEntry(1, j));
+                    } else {
+                        entriesFT.add(new BarEntry(0, j));
+                    }
                 } else {
-                    entriesAssists.add(new BarEntry(0, j));
+                    entriesFT.add(new BarEntry(0, j));
+                }
+                if (matchStats.assists != null) {
+                    entriesAssists.add(new Entry(matchStats.assists, j));
+                    if (othersAssists != null) {
+                        othersAssists = othersAssists - matchStats.assists;
+                    }
+                } else {
+                    entriesAssists.add(new Entry(0, j));
                 }
                 if (matchStats.kda != null) {
                     entriesKDA.add(new BarEntry(matchStats.kda, j));
@@ -781,24 +869,43 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
                 } else {
                     entriesKP.add(new BarEntry(0, j));
                 }
+                if ((matchStats.total_damage_taken != null) && (matchStats.deaths != null)) {
+                    if (matchStats.deaths != 0) {
+                        entriesDmgTaken.add(new BarEntry(matchStats.total_damage_taken / matchStats.deaths, j));
+                    } else {
+                        entriesDmgTaken.add(new BarEntry(matchStats.total_damage_taken, j));
+                    }
+                } else {
+                    entriesDmgTaken.add(new BarEntry(0, j));
+                }
                 j++;
             }
             if (notFiveMan) {
-                entriesAssists.add(new Entry(othersAssists, j));
+                if (othersAssists != null) {
+                    entriesAssists.add(new Entry(othersAssists, j));
+                } else {
+                    namesPie.remove(namesPie.size() - 1);
+                }
             }
 
             // organize entries
             List<List<Entry>> pieEntries = new ArrayList<>();
             pieEntries.add(entriesAssists);
             List<List<BarEntry>> barEntries = new ArrayList<>();
+            barEntries.add(entriesFT);
             barEntries.add(entriesKDA);
             barEntries.add(entriesKP);
+            barEntries.add(entriesDmgTaken);
 
             // create the data sets
             List<PieDataSet> pieDataSets = new ArrayList<>();
             for (List<Entry> entries : pieEntries) {
                 PieDataSet pieDataSet = new PieDataSet(entries, "");
-                formatPieDataSet(entries, pieDataSet, notFiveMan);
+                if (othersAssists != null) {
+                    formatPieDataSet(entries, pieDataSet, notFiveMan);
+                } else {
+                    formatPieDataSet(entries, pieDataSet, false);
+                }
                 pieDataSets.add(pieDataSet);
             }
             List<BarDataSet> barDataSets = new ArrayList<>();
@@ -835,7 +942,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             return new UtilityViewHolder(view);
         }
 
-        public class UtilityViewHolder extends RecyclerView.ViewHolder {
+        class UtilityViewHolder extends RecyclerView.ViewHolder {
 
             final List<BarChart> barCharts;
             final List<LinearLayout> chartLayouts;
@@ -844,14 +951,18 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             UtilityViewHolder(View itemView) {
                 super(itemView);
                 chartLayouts = new ArrayList<>();
+                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.first_tower_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.assists_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.kda_chart_layout));
                 chartLayouts.add((LinearLayout) itemView.findViewById(R.id.kp_chart_layout));
+                chartLayouts.add((LinearLayout) itemView.findViewById(R.id.dmg_taken_chart_layout));
                 pieCharts = new ArrayList<>();
                 pieCharts.add((PieChart) itemView.findViewById(R.id.assists_chart));
                 barCharts = new ArrayList<>();
+                barCharts.add((BarChart) itemView.findViewById(R.id.first_tower_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.kda_chart));
                 barCharts.add((BarChart) itemView.findViewById(R.id.kp_chart));
+                barCharts.add((BarChart) itemView.findViewById(R.id.dmg_taken_chart));
             }
         }
     }
@@ -862,7 +973,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
         final List<MatchStats> matchStatsList;
         final List<String> names;
 
-        public VisionAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
+        VisionAdapter(List<String> names, List<MatchStats> matchStatsList, int height) {
             this.matchStatsList = matchStatsList;
             this.names = names;
             this.height = height;
@@ -944,7 +1055,7 @@ public class WFViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             return new VisionViewHolder(view);
         }
 
-        public class VisionViewHolder extends RecyclerView.ViewHolder {
+        class VisionViewHolder extends RecyclerView.ViewHolder {
 
             final List<BarChart> barCharts;
             final List<LinearLayout> chartLayouts;
