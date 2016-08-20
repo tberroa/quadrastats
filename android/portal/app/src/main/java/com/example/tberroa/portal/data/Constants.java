@@ -74,7 +74,7 @@ public class Constants {
     public static final String VALID_REGISTER = "summoner_id";
     public static final String VALID_RESET_PASSWORD = "summoner_id";
     public static final String VALID_SIGN_IN = "summoner_id";
-    private static final String URL_BASE = "http://52.90.34.48/";
+    private static final String URL_BASE = "http://54.196.223.185/";
     public static final String URL_ADD_FRIEND = URL_BASE + "summoners/add-friend.json";
     public static final String URL_CHANGE_EMAIL = URL_BASE + "summoners/change-email.json";
     public static final String URL_CHANGE_PASSWORD = URL_BASE + "summoners/change-password.json";
