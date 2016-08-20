@@ -101,13 +101,11 @@ class AddFriend(APIView):
             # iterate over the leagues looking for the dynamic queue league
             league = None
             for item in leagues:
-                queue = item.get("queue")
-
                 # ensure data is valid
-                if queue is None:
+                if item.get("queue") is None:
                     return Response(invalid_riot_response)
 
-                if queue == "RANKED_SOLO_5x5":
+                if item.get("queue") == "RANKED_SOLO_5x5":
                     league = item
 
             # ensure the dynamic queue league was found
@@ -135,15 +133,12 @@ class AddFriend(APIView):
             losses = None
             series = ""
             for entry in entries:
-                # get the players id
-                player_id = entry.get("playerOrTeamId")
-
                 # ensure data is valid
-                if player_id is None:
+                if entry.get("playerOrTeamId") is None:
                     return Response(invalid_riot_response)
 
-                # check it against the friends id
-                if player_id == str(friend_id):
+                # check player id against the friends id
+                if entry.get("playerOrTeamId") == str(friend_id):
                     # get division, lp, wins, and losses
                     division = entry.get("division")
                     lp = entry.get("leaguePoints")
@@ -443,13 +438,11 @@ class RegisterUser(APIView):
         # iterate over the leagues looking for the dynamic queue league
         league = None
         for item in leagues:
-            queue = item.get("queue")
-
             # ensure data is valid
-            if queue is None:
+            if item.get("queue") is None:
                 return Response(invalid_riot_response)
 
-            if queue == "RANKED_SOLO_5x5":
+            if item.get("queue") == "RANKED_SOLO_5x5":
                 league = item
 
         # ensure the dynamic queue league was found
@@ -477,15 +470,12 @@ class RegisterUser(APIView):
         losses = None
         series = ""
         for entry in entries:
-            # get the players id
-            player_id = entry.get("playerOrTeamId")
-
             # ensure data is valid
-            if player_id is None:
+            if entry.get("playerOrTeamId") is None:
                 return Response(invalid_riot_response)
 
-            # check it against the summoners id
-            if player_id == str(summoner_id):
+            # check player id against the summoners id
+            if entry.get("playerOrTeamId") == str(summoner_id):
                 # get division, lp, wins, and losses
                 division = entry.get("division")
                 lp = entry.get("leaguePoints")
