@@ -51,10 +51,14 @@ def request_function(region, args):
     # make get request
     r = requests.get(url)
 
-    # try again if status code is 429
+    # if status code is 429, attempt four more times
+    i = 1;
     while r.status_code == 429:
-        time.sleep(1)
+        time.sleep(1 * i)
         r = requests.get(url)
+        i += 1
+        if i > 4:
+            break;
 
     # return response
     return r.status_code, json.loads(r.text)
@@ -85,58 +89,58 @@ def riot_request(region, args):
         return riot_request_tr.delay(args).get()
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_br(args):
-    request_function("br", args)
+    return request_function("br", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_eune(args):
-    request_function("eune", args)
+    return request_function("eune", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_euw(args):
-    request_function("euw", args)
+    return request_function("euw", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_jp(args):
-    request_function("jp", args)
+    return request_function("jp", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_kr(args):
-    request_function("kr", args)
+    return request_function("kr", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_lan(args):
-    request_function("lan", args)
+    return request_function("lan", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_las(args):
-    request_function("las", args)
+    return request_function("las", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_na(args):
-    request_function("na", args)
+    return request_function("na", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_oce(args):
-    request_function("oce", args)
+    return request_function("oce", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_ru(args):
-    request_function("ru", args)
+    return request_function("ru", args)
 
 
-@shared_task(rate_limit="50/m")
+@shared_task(rate_limit="40/m")
 def riot_request_tr(args):
-    request_function("tr", args)
+    return request_function("tr", args)
 
 
