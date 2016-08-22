@@ -677,7 +677,7 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             for (MatchStats matchStats : matchStatsList) {
                 if ((matchStats.first_blood_assist != null) && (matchStats.first_blood_kill != null)) {
                     if (matchStats.first_blood_assist || matchStats.first_blood_kill) {
-                        entriesFB.add(new BarEntry(1, j));
+                        entriesFB.add(new BarEntry(100, j));
                     } else {
                         entriesFB.add(new BarEntry(0, j));
                     }
@@ -844,7 +844,7 @@ public class ViewAdapter extends RecyclerView.Adapter<WFViewHolder> {
             for (MatchStats matchStats : matchStatsList) {
                 if ((matchStats.first_tower_assist != null) && (matchStats.first_tower_kill != null)) {
                     if (matchStats.first_tower_assist || matchStats.first_tower_kill) {
-                        entriesFT.add(new BarEntry(1, j));
+                        entriesFT.add(new BarEntry(100, j));
                     } else {
                         entriesFT.add(new BarEntry(0, j));
                     }

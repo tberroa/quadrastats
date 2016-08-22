@@ -36,7 +36,7 @@ public class LocalDB {
         ActiveAndroid.beginTransaction();
         try {
             for (String key : keys) {
-                From query = new Select().from(MatchStats.class).orderBy("match_creation DESC");
+                From query = new Select().from(MatchStats.class).orderBy("match_creation DESC").limit(20);
                 if (championId > 0) {
                     query.where("champion = ?", championId);
                 }
@@ -62,7 +62,7 @@ public class LocalDB {
         List<MatchStats> matchStatsList = new ArrayList<>();
         ActiveAndroid.beginTransaction();
         try {
-            From query = new Select().from(MatchStats.class).orderBy("match_creation DESC");
+            From query = new Select().from(MatchStats.class).orderBy("match_creation DESC").limit(20);
             List<MatchStats> stats = query.where("summoner_key = ?", key).execute();
             if (stats != null) {
                 matchStatsList.addAll(stats);

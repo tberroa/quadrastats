@@ -179,7 +179,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             }
             if ((matchStats.first_blood_assist != null) && (matchStats.first_blood_kill != null)) {
                 if (matchStats.first_blood_assist || matchStats.first_blood_kill) {
-                    summonerData.get(4).add(1);
+                    summonerData.get(4).add(100);
                 } else {
                     summonerData.get(4).add(0);
                 }
@@ -198,7 +198,7 @@ public class RecentActivity extends BaseStatsActivity implements RecentAsync {
             }
             if ((matchStats.first_tower_assist != null) && (matchStats.first_tower_kill != null)) {
                 if (matchStats.first_tower_assist || matchStats.first_tower_kill) {
-                    summonerData.get(9).add(1);
+                    summonerData.get(9).add(100);
                 } else {
                     summonerData.get(9).add(0);
                 }
