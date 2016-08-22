@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import json
 import requests
 import string
+import time
 from celery import shared_task
 from portal.keys import riot_api_key
 
@@ -13,6 +14,50 @@ def format_key(key):
 
     # also remove white spaces and make lowercase
     return key.translate(translator).replace(" ", "").lower()
+
+
+def request_function(region, args):
+    # extract arguments
+    request = args.get("request")
+    key = args.get("key")
+    summoner_id = args.get("summoner_id")
+    match_id = args.get("match_id")
+    summoner_ids = args.get("summoner_ids")
+
+    # construct url
+    if request == 1:
+        url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" \
+              + format_key(key) \
+              + "?api_key=" + riot_api_key
+    elif request == 2:
+        url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.2/matchlist/by-summoner/" \
+              + str(summoner_id) \
+              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
+              + "&seasons=SEASON2016" \
+              + "&api_key=" + riot_api_key
+    elif request == 3:
+        url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.2/match/" \
+              + str(match_id) \
+              + "?api_key=" + riot_api_key
+    elif request == 4:
+        url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" \
+              + str(summoner_ids) \
+              + "?api_key=" + riot_api_key
+    elif request == 5:
+        url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" \
+              + str(summoner_id) + "/" \
+              + "ranked?season=SEASON2016&api_key=" + riot_api_key
+
+    # make get request
+    r = requests.get(url)
+
+    # try again if status code is 429
+    while r.status_code == 429:
+        time.sleep(1)
+        r = requests.get(url)
+
+    # return response
+    return r.status_code, json.loads(r.text)
 
 
 def riot_request(region, args):
@@ -42,879 +87,56 @@ def riot_request(region, args):
 
 @shared_task(rate_limit="50/m")
 def riot_request_br(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://br.api.pvp.net/api/lol/br/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://br.api.pvp.net/api/lol/br/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://br.api.pvp.net/api/lol/br/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://br.api.pvp.net/api/lol/br/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://br.api.pvp.net/api/lol/br/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("br", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_eune(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://eune.api.pvp.net/api/lol/eune/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://eune.api.pvp.net/api/lol/eune/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://eune.api.pvp.net/api/lol/eune/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://eune.api.pvp.net/api/lol/eune/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://eune.api.pvp.net/api/lol/eune/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("eune", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_euw(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://euw.api.pvp.net/api/lol/euw/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://euw.api.pvp.net/api/lol/euw/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://euw.api.pvp.net/api/lol/euw/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://euw.api.pvp.net/api/lol/euw/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("euw", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_jp(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://jp.api.pvp.net/api/lol/jp/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://jp.api.pvp.net/api/lol/jp/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://jp.api.pvp.net/api/lol/jp/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://jp.api.pvp.net/api/lol/jp/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://jp.api.pvp.net/api/lol/jp/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("jp", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_kr(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://kr.api.pvp.net/api/lol/kr/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://kr.api.pvp.net/api/lol/kr/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://kr.api.pvp.net/api/lol/kr/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://kr.api.pvp.net/api/lol/kr/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://kr.api.pvp.net/api/lol/kr/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("kr", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_lan(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://lan.api.pvp.net/api/lol/lan/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://lan.api.pvp.net/api/lol/lan/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://lan.api.pvp.net/api/lol/lan/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://lan.api.pvp.net/api/lol/lan/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://lan.api.pvp.net/api/lol/lan/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("lan", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_las(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://las.api.pvp.net/api/lol/las/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://las.api.pvp.net/api/lol/las/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://las.api.pvp.net/api/lol/las/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://las.api.pvp.net/api/lol/las/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://las.api.pvp.net/api/lol/las/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("las", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_na(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://na.api.pvp.net/api/lol/na/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/" \
-              + summoner_ids \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://na.api.pvp.net/api/lol/na/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("na", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_oce(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://oce.api.pvp.net/api/lol/oce/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://oce.api.pvp.net/api/lol/oce/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://oce.api.pvp.net/api/lol/oce/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://oce.api.pvp.net/api/lol/oce/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://oce.api.pvp.net/api/lol/oce/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("oce", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_ru(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
-
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
-
-        # construct url
-        url = "https://ru.api.pvp.net/api/lol/ru/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://ru.api.pvp.net/api/lol/ru/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://ru.api.pvp.net/api/lol/ru/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://ru.api.pvp.net/api/lol/ru/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://ru.api.pvp.net/api/lol/ru/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
+    request_function("ru", args)
 
 
 @shared_task(rate_limit="50/m")
 def riot_request_tr(args):
-    # extract arguments
-    request = args.get("request")
-    key = args.get("key")
-    summoner_id = args.get("summoner_id")
-    match_id = args.get("match_id")
-    summoner_ids = args.get("summoner_ids")
+    request_function("tr", args)
 
-    # get summoner
-    if request == 1:
-        # ensure key has proper format
-        key = format_key(key)
 
-        # construct url
-        url = "https://tr.api.pvp.net/api/lol/tr/v1.4/summoner/by-name/" \
-              + key \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text).get(key)
-
-    # get match list
-    if request == 2:
-        # construct url
-        url = "https://tr.api.pvp.net/api/lol/tr/v2.2/matchlist/by-summoner/" \
-              + str(summoner_id) \
-              + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
-              + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get match detail
-    if request == 3:
-        # construct url
-        url = "https://tr.api.pvp.net/api/lol/tr/v2.2/match/" \
-              + str(match_id) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get league
-    if request == 4:
-        # construct url
-        url = "https://tr.api.pvp.net/api/lol/tr/v2.5/league/by-summoner/" \
-              + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
-
-    # get season stats
-    if request == 5:
-        # construct url
-        url = "https://tr.api.pvp.net/api/lol/tr/v1.3/stats/by-summoner/" \
-              + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
-
-        # make get request
-        r = requests.get(url)
-
-        # return response
-        return r.status_code, json.loads(r.text)
