@@ -20,21 +20,21 @@ from summoners.models import Summoner
 def is_keystone(mastery_id):
     if mastery_id == 6161:
         return True
-    if mastery_id == 6162:
+    elif mastery_id == 6162:
         return True
-    if mastery_id == 6164:
+    elif mastery_id == 6164:
         return True
-    if mastery_id == 6361:
+    elif mastery_id == 6361:
         return True
-    if mastery_id == 6362:
+    elif mastery_id == 6362:
         return True
-    if mastery_id == 6363:
+    elif mastery_id == 6363:
         return True
-    if mastery_id == 6261:
+    elif mastery_id == 6261:
         return True
-    if mastery_id == 6262:
+    elif mastery_id == 6262:
         return True
-    if mastery_id == 6263:
+    elif mastery_id == 6263:
         return True
     return False
 
@@ -101,34 +101,34 @@ def update_all():
             if region == "br":
                 chain = riot_request_br.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "eune":
+            elif region == "eune":
                 chain = riot_request_eune.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "euw":
+            elif region == "euw":
                 chain = riot_request_euw.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "jp":
+            elif region == "jp":
                 chain = riot_request_jp.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "kr":
+            elif region == "kr":
                 chain = riot_request_kr.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "lan":
+            elif region == "lan":
                 chain = riot_request_lan.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "las":
+            elif region == "las":
                 chain = riot_request_las.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "na":
+            elif region == "na":
                 chain = riot_request_na.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "oce":
+            elif region == "oce":
                 chain = riot_request_oce.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "ru":
+            elif region == "ru":
                 chain = riot_request_ru.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
-            if region == "tr":
+            elif region == "tr":
                 chain = riot_request_tr.s(args) | update_rank_all.s(region, summoner_ids)
                 chain()
 
@@ -146,37 +146,37 @@ def update_match_stats_one(summoner):
 
     # chain tasks together
     if region == "br":
-        chain = riot_request_br.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+        chain = riot_request_br.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "eune":
-        chain = riot_request_eune.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "eune":
+        chain = riot_request_eune.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "euw":
-        chain = riot_request_euw.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "euw":
+        chain = riot_request_euw.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "jp":
-        chain = riot_request_jp.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "jp":
+        chain = riot_request_jp.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "kr":
-        chain = riot_request_kr.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "kr":
+        chain = riot_request_kr.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "lan":
-        chain = riot_request_lan.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "lan":
+        chain = riot_request_lan.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "las":
-        chain = riot_request_las.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "las":
+        chain = riot_request_las.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "na":
-        chain = riot_request_na.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "na":
+        chain = riot_request_na.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "oce":
-        chain = riot_request_oce.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "oce":
+        chain = riot_request_oce.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "ru":
-        chain = riot_request_ru.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "ru":
+        chain = riot_request_ru.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
-    if region == "tr":
-        chain = riot_request_tr.s(args) | process_match_list.s(summoner_id) | get_match_details.s(summoner)
+    elif region == "tr":
+        chain = riot_request_tr.s(args) | process_match_list.s(region, summoner_id) | get_match_details.s(summoner)
         chain()
 
     # successful return
@@ -184,7 +184,7 @@ def update_match_stats_one(summoner):
 
 
 @shared_task
-def process_match_list(riot_response, summoner_id):
+def process_match_list(riot_response, region, summoner_id):
     # check the Riot request response for error
     if riot_response[0] != 200:
         return False, riot_response
@@ -212,7 +212,7 @@ def process_match_list(riot_response, summoner_id):
 
         try:
             # check if the match is already in database
-            MatchStats.objects.get(summoner_id=summoner_id, match_id=match_id)
+            MatchStats.objects.get(region=region, summoner_id=summoner_id, match_id=match_id)
         except MatchStats.DoesNotExist:
             # match not in database, create match detail request argument
             args = {"request": 3, "match_id": match_id}
@@ -245,34 +245,34 @@ def get_match_details(return_val, summoner):
         if region == "br":
             chain = riot_request_br.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "eune":
+        elif region == "eune":
             chain = riot_request_eune.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "euw":
+        elif region == "euw":
             chain = riot_request_euw.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "jp":
+        elif region == "jp":
             chain = riot_request_jp.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "kr":
+        elif region == "kr":
             chain = riot_request_kr.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "lan":
+        elif region == "lan":
             chain = riot_request_lan.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "las":
+        elif region == "las":
             chain = riot_request_las.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "na":
+        elif region == "na":
             chain = riot_request_na.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "oce":
+        elif region == "oce":
             chain = riot_request_oce.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "ru":
+        elif region == "ru":
             chain = riot_request_ru.s(args) | process_match_details.s(summoner, match_id)
             chain()
-        if region == "tr":
+        elif region == "tr":
             chain = riot_request_tr.s(args) | process_match_details.s(summoner, match_id)
             chain()
 
@@ -643,34 +643,34 @@ def update_season_one(summoner):
     if region == "br":
         chain = riot_request_br.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "eune":
+    elif region == "eune":
         chain = riot_request_eune.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "euw":
+    elif region == "euw":
         chain = riot_request_euw.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "jp":
+    elif region == "jp":
         chain = riot_request_jp.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "kr":
+    elif region == "kr":
         chain = riot_request_kr.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "lan":
+    elif region == "lan":
         chain = riot_request_lan.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "las":
+    elif region == "las":
         chain = riot_request_las.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "na":
+    elif region == "na":
         chain = riot_request_na.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "oce":
+    elif region == "oce":
         chain = riot_request_oce.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "ru":
+    elif region == "ru":
         chain = riot_request_ru.s(args) | process_season_stats.s(summoner)
         chain()
-    if region == "tr":
+    elif region == "tr":
         chain = riot_request_tr.s(args) | process_season_stats.s(summoner)
         chain()
 
