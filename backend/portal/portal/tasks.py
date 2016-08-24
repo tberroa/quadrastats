@@ -47,18 +47,20 @@ def request_function(region, args):
         url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" \
               + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
+    else:
+        url = ""
 
     # make get request
     r = requests.get(url)
 
     # if status code is 429, attempt four more times
-    i = 1;
+    i = 1
     while r.status_code == 429:
         time.sleep(1 * i)
         r = requests.get(url)
         i += 1
         if i > 4:
-            break;
+            break
 
     # return response
     return r.status_code, json.loads(r.text)
