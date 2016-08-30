@@ -31,6 +31,8 @@ import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.home.HomeActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -78,6 +80,20 @@ public class SignInActivity extends AppCompatActivity {
                 // get user inputs
                 String key = keyField.getText().toString();
                 String password = passwordField.getText().toString();
+
+                // organize into lists
+                List<String> inputs = new ArrayList<>();
+                inputs.add(key);
+                inputs.add(password);
+                List<EditText> editTexts = new ArrayList<>();
+                editTexts.add(keyField);
+                editTexts.add(passwordField);
+
+                // validate inputs
+                if (AuthUtil.isNotValid(SignInActivity.this, inputs, editTexts)) {
+                    signInButton.setEnabled(true);
+                    return;
+                }
 
                 // make sure a region is selected
                 String region;
@@ -234,6 +250,23 @@ public class SignInActivity extends AppCompatActivity {
             doneButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // get user inputs
+                    String key = summonerNameField.getText().toString();
+                    String email = emailField.getText().toString();
+
+                    // organize into lists
+                    List<String> inputs = new ArrayList<>();
+                    inputs.add(key);
+                    inputs.add(email);
+                    List<EditText> editTexts = new ArrayList<>();
+                    editTexts.add(summonerNameField);
+                    editTexts.add(emailField);
+
+                    // validate inputs
+                    if (AuthUtil.isNotValid(SignInActivity.this, inputs, editTexts)) {
+                        return;
+                    }
+
                     // make sure a region is selected
                     String region;
                     int regionSelection = regionSelect.getSelectedItemPosition();
@@ -248,8 +281,8 @@ public class SignInActivity extends AppCompatActivity {
                     // create the request object
                     ReqResetPassword request = new ReqResetPassword();
                     request.region = region;
-                    request.key = summonerNameField.getText().toString();
-                    request.email = emailField.getText().toString();
+                    request.key = key;
+                    request.email = email;
 
                     // execute the request
                     new RequestResetPassword().execute(request);

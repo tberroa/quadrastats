@@ -27,6 +27,8 @@ import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.home.HomeActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -77,11 +79,20 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = passwordField.getText().toString();
                 String confirmPassword = confirmPasswordField.getText().toString();
 
-                // make sure passwords match
-                if (confirmPassword.equals(password)) {
-                    confirmPasswordField.setError(null);
-                } else { // display error
-                    confirmPasswordField.setError(getResources().getString(R.string.auth_password_mismatch));
+                // organize into lists
+                List<String> inputs = new ArrayList<>();
+                inputs.add(key);
+                inputs.add(password);
+                inputs.add(email);
+                inputs.add(confirmPassword);
+                List<EditText> editTexts = new ArrayList<>();
+                editTexts.add(keyField);
+                editTexts.add(passwordField);
+                editTexts.add(emailField);
+                editTexts.add(confirmPasswordField);
+
+                // validate inputs
+                if (AuthUtil.isNotValid(RegisterActivity.this, inputs, editTexts)) {
                     registerButton.setEnabled(true);
                     return;
                 }

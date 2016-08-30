@@ -21,6 +21,7 @@
     <string name="auth_password">Password</string>
     <string name="auth_confirm_password">Confirm password</string>
     <string name="auth_password_mismatch">Password mismatch</string>
+    <string name="auth_empty_field">Field cannot be empty</string>
     <string name="auth_sign_in">Sign In</string>
     <string name="auth_register">Register</string>
     <string name="auth_reset_password">Reset Password</string>
