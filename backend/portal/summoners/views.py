@@ -105,6 +105,10 @@ class AddFriend(APIView):
             # extract the league data
             leagues = riot_response[1].get(str(friend_id))
 
+            # ensure data is valid
+            if leagues is None:
+                return Response(invalid_riot_response)
+
             # iterate over the leagues looking for the dynamic queue league
             league = None
             for item in leagues:
@@ -414,8 +418,14 @@ class RegisterUser(APIView):
             if riot_response[0] != 200:
                 return Response(invalid_riot_response)
 
-            # extract the summoner data
-            summoner = riot_response[1]
+            # extract the summoner
+            summoner = riot_response[1].get(key)
+
+            # ensure data is valid
+            if summoner is None:
+                return Response(invalid_riot_response)
+
+            # extract summoner field values
             name = summoner.get("name")
             summoner_id = summoner.get("id")
             profile_icon = summoner.get("profileIconId")
@@ -432,8 +442,12 @@ class RegisterUser(APIView):
         if riot_response[0] != 200:
             return Response(invalid_riot_response)
 
-        # extract the rune page set
+        # extract the set of rune pages
         rune_pages = riot_response[1].get("pages")
+
+        # ensure data is valid
+        if rune_pages is None:
+            return Response(invalid_riot_response)
 
         # iterate over the pages looking for one whose name matches the code
         no_match = True
@@ -479,6 +493,10 @@ class RegisterUser(APIView):
 
         # extract the league data
         leagues = riot_response[1].get(str(summoner_id))
+
+        # ensure the data is valid
+        if leagues is None:
+            return Response(invalid_riot_response)
 
         # iterate over the leagues looking for the dynamic queue league
         league = None
