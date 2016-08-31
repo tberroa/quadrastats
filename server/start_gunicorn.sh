@@ -10,7 +10,7 @@ ADDRESS=127.0.0.1:8000
 
 cd $APPDIR
 
-source ../myvenv/bin/activate
+source $BACKEND/myvenv/bin/activate
 
 exec gunicorn $APPNAME.wsgi:application \
 -w $NUM_WORKERS \

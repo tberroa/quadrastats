@@ -1,2 +1,2 @@
 # Portal
-Social Mobile App for League of Legends Players
+League of Legends app for easily comparing in-game stats and player performance.
