@@ -148,5 +148,3 @@ def riot_request_ru(args):
 @shared_task(rate_limit="40/m")
 def riot_request_tr(args):
     return request_function("tr", args)
-
-
