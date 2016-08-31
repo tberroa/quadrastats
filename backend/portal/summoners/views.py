@@ -1,5 +1,6 @@
 import random
 import string
+import time
 from datetime import datetime
 from django.contrib.auth import hashers
 from django.core import serializers
@@ -434,6 +435,9 @@ class RegisterUser(APIView):
             if None in (name, summoner_id, profile_icon):
                 return Response(invalid_riot_response)
 
+        # sleep for a bit to allow for riot servers to update rune page names before continuing
+        time.sleep(4)
+
         # use the summoner id to get rune page information to validate ownership
         args = {"request": 6, "summoner_id": summoner_id}
         riot_response = riot_request(region, args)
@@ -442,8 +446,15 @@ class RegisterUser(APIView):
         if riot_response[0] != 200:
             return Response(invalid_riot_response)
 
+        # extract the summoners rune page data
+        rune_data = riot_response[1].get(str(summoner_id))
+
+        # ensure data is valid
+        if rune_data is None:
+            return Response(invalid_riot_response)
+
         # extract the set of rune pages
-        rune_pages = riot_response[1].get("pages")
+        rune_pages = rune_data.get("pages")
 
         # ensure data is valid
         if rune_pages is None:
