@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,11 +57,21 @@ public class SignInActivity extends AppCompatActivity {
             return;
         }
 
+        // get screen width
+        int screenWidth = ScreenUtil.screenWidth(this);
+
         // resize layout according to screen
-        int layoutWidth = (80 * ScreenUtil.screenWidth(this)) / 100;
+        int layoutWidth = (80 * screenWidth) / 100;
         LinearLayout signInLayout = (LinearLayout) findViewById(R.id.sign_in_layout);
         signInLayout.getLayoutParams().width = layoutWidth;
         signInLayout.setLayoutParams(signInLayout.getLayoutParams());
+
+        // initialize loading spinner
+        ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        loadingSpinner.getLayoutParams().width = (25 * screenWidth) / 100;
+        loadingSpinner.getLayoutParams().height = (25 * screenWidth) / 100;
+        loadingSpinner.setLayoutParams(loadingSpinner.getLayoutParams());
+        loadingSpinner.setVisibility(View.GONE);
 
         // initialize input fields
         EditText keyField = (EditText) findViewById(R.id.summoner_name_field);
@@ -203,6 +214,10 @@ public class SignInActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String postResponse) {
+            // turn loading spinner off
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.GONE);
+
             if (postResponse.contains(Constants.VALID_SIGN_IN)) {
                 // get the summoner object
                 Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
@@ -217,6 +232,13 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
                 signInButton.setEnabled(true);
             }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // turn loading spinner on
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.VISIBLE);
         }
     }
 

@@ -1,97 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/sign_in_layout"
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginBottom="@dimen/spacing_huge"
-    android:layout_marginTop="@dimen/spacing_huge"
-    android:background="@drawable/bg_overlay_black"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="@dimen/spacing_huge">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/summoner_name_field"
+    <LinearLayout
+        android:id="@+id/sign_in_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_huge"
-        android:ems="12"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_overlay_black"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center"
-        android:hint="@string/auth_summoner_name"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        android:textColorHint="@color/white"
-        android:textSize="@dimen/text_size_large"
-        android:theme="@style/AppTheme.EditText"/>
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_huge">
 
-    <EditText
-        android:id="@+id/password_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_huge"
-        android:ems="12"
-        android:gravity="center"
-        android:hint="@string/auth_password"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:textColorHint="@color/white"
-        android:textSize="@dimen/text_size_large"
-        android:theme="@style/AppTheme.EditText"/>
+        <EditText
+            android:id="@+id/summoner_name_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_huge"
+            android:ems="12"
+            android:gravity="center"
+            android:hint="@string/auth_summoner_name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/text_size_large"
+            android:theme="@style/AppTheme.EditText"/>
 
-    <Spinner
-        android:id="@+id/region_select_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_huge"
-        android:theme="@style/AppTheme.Dialog"/>
+        <EditText
+            android:id="@+id/password_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_huge"
+            android:ems="12"
+            android:gravity="center"
+            android:hint="@string/auth_password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/text_size_large"
+            android:theme="@style/AppTheme.EditText"/>
 
-    <Button
-        android:id="@+id/sign_in_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_standard"
-        android:text="@string/auth_sign_in"
-        android:textSize="@dimen/text_size_huge"/>
+        <Spinner
+            android:id="@+id/region_select_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_huge"
+            android:theme="@style/AppTheme.Dialog"/>
 
-    <com.balysv.materialripple.MaterialRippleLayout
-        android:id="@+id/reset_password_ripple"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:mrl_rippleColor="@color/white"
-        app:mrl_rippleDimension="@dimen/radius_tiny"
-        app:mrl_rippleDuration="150"
-        app:mrl_rippleRoundedCorners="@dimen/radius_large">
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_standard"
+            android:text="@string/auth_sign_in"
+            android:textSize="@dimen/text_size_huge"/>
 
-        <TextView
-            android:id="@+id/reset_password_view"
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/reset_password_ripple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_large"
-            android:text="@string/auth_reset_password"
-            android:textSize="@dimen/text_size_standard"/>
-    </com.balysv.materialripple.MaterialRippleLayout>
+            app:mrl_rippleColor="@color/white"
+            app:mrl_rippleDimension="@dimen/radius_tiny"
+            app:mrl_rippleDuration="150"
+            app:mrl_rippleRoundedCorners="@dimen/radius_large">
 
-    <com.balysv.materialripple.MaterialRippleLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_large"
-        app:mrl_rippleColor="@color/white"
-        app:mrl_rippleDimension="@dimen/radius_tiny"
-        app:mrl_rippleDuration="150"
-        app:mrl_rippleRoundedCorners="@dimen/radius_large">
+            <TextView
+                android:id="@+id/reset_password_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_large"
+                android:text="@string/auth_reset_password"
+                android:textSize="@dimen/text_size_standard"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
-        <TextView
-            android:id="@+id/go_to_register_view"
+        <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_large"
-            android:text="@string/auth_go_to_register"
-            android:textSize="@dimen/text_size_standard"/>
-    </com.balysv.materialripple.MaterialRippleLayout>
-</LinearLayout>
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:mrl_rippleColor="@color/white"
+            app:mrl_rippleDimension="@dimen/radius_tiny"
+            app:mrl_rippleDuration="150"
+            app:mrl_rippleRoundedCorners="@dimen/radius_large">
 
+            <TextView
+                android:id="@+id/go_to_register_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_large"
+                android:text="@string/auth_go_to_register"
+                android:textSize="@dimen/text_size_standard"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="@dimen/spacing_massive"/>
+</FrameLayout>
