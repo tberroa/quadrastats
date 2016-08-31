@@ -5,6 +5,7 @@
 # invalid credentials = 70
 # invalid request format = 75
 # invalid response from riot servers = 80
+# rune page code not found = 83
 # summoner already registered = 85
 # summoner does not exist = 90
 # summoner not registered = 95
@@ -29,6 +30,9 @@ invalid_request_format = {"error": 75,
 
 invalid_riot_response = {"error": 80,
                          "message": "invalid response from riot servers"}
+
+rune_page_code_not_found = {"error": 83,
+                            "message": "rune page code not found"}
 
 summoner_already_registered = {"error": 85,
                                "message": "summoner already registered"}

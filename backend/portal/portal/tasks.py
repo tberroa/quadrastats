@@ -47,16 +47,20 @@ def request_function(region, args):
         url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" \
               + str(summoner_id) + "/" \
               + "ranked?season=SEASON2016&api_key=" + riot_api_key
+    elif request == 6:
+        url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/" \
+              + str(summoner_id) + "/" \
+              + "runes?api_key=" + riot_api_key
     else:
         url = ""
 
     # make get request
     r = requests.get(url)
 
-    # if status code is 429, attempt four more times
+    # if status code is 429, attempt again up to four more times
     i = 1
     while r.status_code == 429:
-        time.sleep(1 * i)
+        time.sleep(2)
         r = requests.get(url)
         i += 1
         if i > 4:

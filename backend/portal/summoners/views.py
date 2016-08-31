@@ -12,6 +12,7 @@ from portal.errors import internal_processing_error
 from portal.errors import invalid_credentials
 from portal.errors import invalid_request_format
 from portal.errors import invalid_riot_response
+from portal.errors import rune_page_code_not_found
 from portal.errors import summoner_already_registered
 from portal.errors import summoner_does_not_exist
 from portal.errors import summoner_not_registered
@@ -380,49 +381,87 @@ class RegisterUser(APIView):
         # hash password
         password = hashers.make_password(password)
 
+        # initialize summoner object value to None
+        summoner_o = None
+
+        # initialize summoner name and profile icon to None
+        name = None
+        profile_icon = None
+
         try:
-            # check if the summoner object already exists
-            summoner = Summoner.objects.get(region=region, key=key)
-            Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
+            # get the summoner object
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
+
+            # get the summoner id
+            summoner_id = summoner_o.summoner_id
 
             # check if the user object already exists
-            if summoner.user is not None:
+            if summoner_o.user is not None:
                 return Response(summoner_already_registered)
-
-            # create a user object for the summoner object
-            summoner.user = User.objects.create(email=email, password=password)
-            Summoner.objects.filter(pk=summoner.pk).update(user=User.objects.get(pk=summoner.user.pk))
-
-            # serialize the summoner object
-            return_json = SummonerSerializer(summoner).data
-
-            # include the email
-            return_json.update({"email": email})
-
-            # return the users summoner object with the email included
-            return Response(return_json)
-
         except Summoner.DoesNotExist:
-            # summoner object did not already exist, need to create it
-            pass
+            # get more information on the summoner via riot
+            args = {"request": 1, "key": key}
+            riot_response = riot_request(region, args)
 
-        # get more information on the summoner via riot
-        args = {"request": 1, "key": key}
+            # make sure the response is valid
+            if riot_response[0] != 200:
+                return Response(invalid_riot_response)
+
+            # extract the summoner data
+            summoner = riot_response[1]
+            name = summoner.get("name")
+            summoner_id = summoner.get("id")
+            profile_icon = summoner.get("profileIconId")
+
+            # ensure the data is valid
+            if None in (name, summoner_id, profile_icon):
+                return Response(invalid_riot_response)
+
+        # use the summoner id to get rune page information to validate ownership
+        args = {"request": 6, "summoner_id": summoner_id}
         riot_response = riot_request(region, args)
 
         # make sure the response is valid
         if riot_response[0] != 200:
             return Response(invalid_riot_response)
 
-        # extract the summoner data
-        summoner = riot_response[1]
-        name = summoner.get("name")
-        summoner_id = summoner.get("id")
-        profile_icon = summoner.get("profileIconId")
+        # extract the rune page set
+        rune_pages = riot_response[1].get("pages")
 
-        # ensure the data is valid
-        if None in (name, summoner_id, profile_icon):
-            return Response(invalid_riot_response)
+        # iterate over the pages looking for one whose name matches the code
+        no_match = True
+        for page in rune_pages:
+            # get the name
+            page_name = page.get("name")
+
+            # ensure data is valid
+            if page_name is None:
+                return Response(invalid_riot_response)
+
+            # check if name matches code
+            if page_name == code:
+                no_match = False
+                break
+
+        # return error if no match found
+        if no_match:
+            return Response(rune_page_code_not_found)
+
+        # if summoner object already exists simply create user object and attach it to summoner object
+        if summoner_o is not None:
+            # create a user object for the summoner object
+            summoner_o.user = User.objects.create(email=email, password=password)
+            Summoner.objects.filter(pk=summoner_o.pk).update(user=User.objects.get(pk=summoner_o.user.pk))
+
+            # serialize the summoner object
+            return_json = SummonerSerializer(summoner_o).data
+
+            # include the email
+            return_json.update({"email": email})
+
+            # return the users summoner object with the email included
+            return Response(return_json)
 
         # use the summoner id to get the summoners league information
         args = {"request": 4, "summoner_ids": str(summoner_id)}
