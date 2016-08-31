@@ -1,0 +1,5000 @@
+    time_namelookup:  0.000
+       time_connect:  0.031
+    time_appconnect:  0.000
+   time_pretransfer:  0.031
+      time_redirect:  0.000
+ time_starttransfer:  0.101
+                    ----------
+         time_total:  0.102
+
+
+    time_namelookup:  0.000
+       time_connect:  0.032
+    time_appconnect:  0.000
+   time_pretransfer:  0.032
+      time_redirect:  0.000
+ time_starttransfer:  0.131
+                    ----------
+         time_total:  0.131
+
+
+    time_namelookup:  0.000
+       time_connect:  0.030
+    time_appconnect:  0.000
+   time_pretransfer:  0.030
+      time_redirect:  0.000
+ time_starttransfer:  0.126
+                    ----------
+         time_total:  0.126
+
+
+    time_namelookup:  0.000
+       time_connect:  0.031
+    time_appconnect:  0.000
+   time_pretransfer:  0.031
+      time_redirect:  0.000
+ time_starttransfer:  0.183
+                    ----------
+         time_total:  0.183
+
+
+    time_namelookup:  0.000
+       time_connect:  0.031
+    time_appconnect:  0.000
+   time_pretransfer:  0.031
+      time_redirect:  0.000
+ time_starttransfer:  0.172
+                    ----------
+         time_total:  0.172
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  0.182
+                    ----------
+         time_total:  0.182
+
+
+    time_namelookup:  0.000
+       time_connect:  0.028
+    time_appconnect:  0.000
+   time_pretransfer:  0.028
+      time_redirect:  0.000
+ time_starttransfer:  0.179
+                    ----------
+         time_total:  0.179
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  0.210
+                    ----------
+         time_total:  0.210
+
+
+    time_namelookup:  0.000
+       time_connect:  0.030
+    time_appconnect:  0.000
+   time_pretransfer:  0.030
+      time_redirect:  0.000
+ time_starttransfer:  0.223
+                    ----------
+         time_total:  0.223
+
+
+    time_namelookup:  0.000
+       time_connect:  0.027
+    time_appconnect:  0.000
+   time_pretransfer:  0.027
+      time_redirect:  0.000
+ time_starttransfer:  0.296
+                    ----------
+         time_total:  0.296
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  0.240
+                    ----------
+         time_total:  0.240
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  0.288
+                    ----------
+         time_total:  0.288
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  0.286
+                    ----------
+         time_total:  0.286
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  0.268
+                    ----------
+         time_total:  0.269
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  0.296
+                    ----------
+         time_total:  0.296
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  0.326
+                    ----------
+         time_total:  0.326
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  0.314
+                    ----------
+         time_total:  0.315
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  0.347
+                    ----------
+         time_total:  0.347
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  0.364
+                    ----------
+         time_total:  0.364
+
+
+    time_namelookup:  0.000
+       time_connect:  0.045
+    time_appconnect:  0.000
+   time_pretransfer:  0.045
+      time_redirect:  0.000
+ time_starttransfer:  0.360
+                    ----------
+         time_total:  0.360
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  0.373
+                    ----------
+         time_total:  0.373
+
+
+    time_namelookup:  0.000
+       time_connect:  0.057
+    time_appconnect:  0.000
+   time_pretransfer:  0.057
+      time_redirect:  0.000
+ time_starttransfer:  0.381
+                    ----------
+         time_total:  0.381
+
+
+    time_namelookup:  0.000
+       time_connect:  0.052
+    time_appconnect:  0.000
+   time_pretransfer:  0.052
+      time_redirect:  0.000
+ time_starttransfer:  0.380
+                    ----------
+         time_total:  0.380
+
+
+    time_namelookup:  0.000
+       time_connect:  0.059
+    time_appconnect:  0.000
+   time_pretransfer:  0.059
+      time_redirect:  0.000
+ time_starttransfer:  0.419
+                    ----------
+         time_total:  0.419
+
+
+    time_namelookup:  0.000
+       time_connect:  0.056
+    time_appconnect:  0.000
+   time_pretransfer:  0.056
+      time_redirect:  0.000
+ time_starttransfer:  0.427
+                    ----------
+         time_total:  0.427
+
+
+    time_namelookup:  0.000
+       time_connect:  0.050
+    time_appconnect:  0.000
+   time_pretransfer:  0.051
+      time_redirect:  0.000
+ time_starttransfer:  0.421
+                    ----------
+         time_total:  0.421
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.066
+      time_redirect:  0.000
+ time_starttransfer:  0.473
+                    ----------
+         time_total:  0.473
+
+
+    time_namelookup:  0.000
+       time_connect:  0.062
+    time_appconnect:  0.000
+   time_pretransfer:  0.062
+      time_redirect:  0.000
+ time_starttransfer:  0.499
+                    ----------
+         time_total:  0.499
+
+
+    time_namelookup:  0.000
+       time_connect:  0.050
+    time_appconnect:  0.000
+   time_pretransfer:  0.050
+      time_redirect:  0.000
+ time_starttransfer:  0.485
+                    ----------
+         time_total:  0.485
+
+
+    time_namelookup:  0.000
+       time_connect:  0.048
+    time_appconnect:  0.000
+   time_pretransfer:  0.048
+      time_redirect:  0.000
+ time_starttransfer:  0.480
+                    ----------
+         time_total:  0.481
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  0.487
+                    ----------
+         time_total:  0.487
+
+
+    time_namelookup:  0.000
+       time_connect:  0.061
+    time_appconnect:  0.000
+   time_pretransfer:  0.062
+      time_redirect:  0.000
+ time_starttransfer:  0.501
+                    ----------
+         time_total:  0.502
+
+
+    time_namelookup:  0.000
+       time_connect:  0.061
+    time_appconnect:  0.000
+   time_pretransfer:  0.061
+      time_redirect:  0.000
+ time_starttransfer:  0.501
+                    ----------
+         time_total:  0.501
+
+
+    time_namelookup:  0.000
+       time_connect:  0.067
+    time_appconnect:  0.000
+   time_pretransfer:  0.068
+      time_redirect:  0.000
+ time_starttransfer:  0.515
+                    ----------
+         time_total:  0.515
+
+
+    time_namelookup:  0.000
+       time_connect:  0.062
+    time_appconnect:  0.000
+   time_pretransfer:  0.062
+      time_redirect:  0.000
+ time_starttransfer:  0.524
+                    ----------
+         time_total:  0.524
+
+
+    time_namelookup:  0.000
+       time_connect:  0.064
+    time_appconnect:  0.000
+   time_pretransfer:  0.064
+      time_redirect:  0.000
+ time_starttransfer:  0.545
+                    ----------
+         time_total:  0.545
+
+
+    time_namelookup:  0.000
+       time_connect:  0.083
+    time_appconnect:  0.000
+   time_pretransfer:  0.083
+      time_redirect:  0.000
+ time_starttransfer:  0.523
+                    ----------
+         time_total:  0.523
+
+
+    time_namelookup:  0.000
+       time_connect:  0.096
+    time_appconnect:  0.000
+   time_pretransfer:  0.096
+      time_redirect:  0.000
+ time_starttransfer:  0.541
+                    ----------
+         time_total:  0.541
+
+
+    time_namelookup:  0.000
+       time_connect:  0.097
+    time_appconnect:  0.000
+   time_pretransfer:  0.098
+      time_redirect:  0.000
+ time_starttransfer:  0.565
+                    ----------
+         time_total:  0.566
+
+
+    time_namelookup:  0.000
+       time_connect:  0.101
+    time_appconnect:  0.000
+   time_pretransfer:  0.101
+      time_redirect:  0.000
+ time_starttransfer:  0.602
+                    ----------
+         time_total:  0.602
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  0.577
+                    ----------
+         time_total:  0.578
+
+
+    time_namelookup:  0.000
+       time_connect:  0.074
+    time_appconnect:  0.000
+   time_pretransfer:  0.074
+      time_redirect:  0.000
+ time_starttransfer:  0.598
+                    ----------
+         time_total:  0.598
+
+
+    time_namelookup:  0.000
+       time_connect:  0.072
+    time_appconnect:  0.000
+   time_pretransfer:  0.072
+      time_redirect:  0.000
+ time_starttransfer:  0.596
+                    ----------
+         time_total:  0.596
+
+
+    time_namelookup:  0.000
+       time_connect:  0.085
+    time_appconnect:  0.000
+   time_pretransfer:  0.086
+      time_redirect:  0.000
+ time_starttransfer:  0.641
+                    ----------
+         time_total:  0.642
+
+
+    time_namelookup:  0.000
+       time_connect:  0.060
+    time_appconnect:  0.000
+   time_pretransfer:  0.060
+      time_redirect:  0.000
+ time_starttransfer:  0.618
+                    ----------
+         time_total:  0.618
+
+
+    time_namelookup:  0.000
+       time_connect:  0.064
+    time_appconnect:  0.000
+   time_pretransfer:  0.064
+      time_redirect:  0.000
+ time_starttransfer:  0.621
+                    ----------
+         time_total:  0.622
+
+
+    time_namelookup:  0.000
+       time_connect:  0.090
+    time_appconnect:  0.000
+   time_pretransfer:  0.090
+      time_redirect:  0.000
+ time_starttransfer:  0.619
+                    ----------
+         time_total:  0.619
+
+
+    time_namelookup:  0.000
+       time_connect:  0.099
+    time_appconnect:  0.000
+   time_pretransfer:  0.099
+      time_redirect:  0.000
+ time_starttransfer:  0.647
+                    ----------
+         time_total:  0.647
+
+
+    time_namelookup:  0.000
+       time_connect:  0.068
+    time_appconnect:  0.000
+   time_pretransfer:  0.068
+      time_redirect:  0.000
+ time_starttransfer:  0.668
+                    ----------
+         time_total:  0.668
+
+
+    time_namelookup:  0.000
+       time_connect:  0.106
+    time_appconnect:  0.000
+   time_pretransfer:  0.107
+      time_redirect:  0.000
+ time_starttransfer:  0.675
+                    ----------
+         time_total:  0.675
+
+
+    time_namelookup:  0.000
+       time_connect:  0.076
+    time_appconnect:  0.000
+   time_pretransfer:  0.076
+      time_redirect:  0.000
+ time_starttransfer:  0.650
+                    ----------
+         time_total:  0.650
+
+
+    time_namelookup:  0.000
+       time_connect:  0.091
+    time_appconnect:  0.000
+   time_pretransfer:  0.091
+      time_redirect:  0.000
+ time_starttransfer:  0.704
+                    ----------
+         time_total:  0.704
+
+
+    time_namelookup:  0.000
+       time_connect:  0.078
+    time_appconnect:  0.000
+   time_pretransfer:  0.078
+      time_redirect:  0.000
+ time_starttransfer:  0.698
+                    ----------
+         time_total:  0.698
+
+
+    time_namelookup:  0.000
+       time_connect:  0.079
+    time_appconnect:  0.000
+   time_pretransfer:  0.079
+      time_redirect:  0.000
+ time_starttransfer:  0.707
+                    ----------
+         time_total:  0.707
+
+
+    time_namelookup:  0.000
+       time_connect:  0.078
+    time_appconnect:  0.000
+   time_pretransfer:  0.078
+      time_redirect:  0.000
+ time_starttransfer:  0.718
+                    ----------
+         time_total:  0.718
+
+
+    time_namelookup:  0.000
+       time_connect:  0.085
+    time_appconnect:  0.000
+   time_pretransfer:  0.085
+      time_redirect:  0.000
+ time_starttransfer:  0.708
+                    ----------
+         time_total:  0.708
+
+
+    time_namelookup:  0.000
+       time_connect:  0.088
+    time_appconnect:  0.000
+   time_pretransfer:  0.088
+      time_redirect:  0.000
+ time_starttransfer:  0.706
+                    ----------
+         time_total:  0.706
+
+
+    time_namelookup:  0.000
+       time_connect:  0.089
+    time_appconnect:  0.000
+   time_pretransfer:  0.089
+      time_redirect:  0.000
+ time_starttransfer:  0.750
+                    ----------
+         time_total:  0.750
+
+
+    time_namelookup:  0.000
+       time_connect:  0.081
+    time_appconnect:  0.000
+   time_pretransfer:  0.082
+      time_redirect:  0.000
+ time_starttransfer:  0.758
+                    ----------
+         time_total:  0.758
+
+
+    time_namelookup:  0.000
+       time_connect:  0.087
+    time_appconnect:  0.000
+   time_pretransfer:  0.087
+      time_redirect:  0.000
+ time_starttransfer:  0.743
+                    ----------
+         time_total:  0.743
+
+
+    time_namelookup:  0.000
+       time_connect:  0.097
+    time_appconnect:  0.000
+   time_pretransfer:  0.097
+      time_redirect:  0.000
+ time_starttransfer:  0.766
+                    ----------
+         time_total:  0.766
+
+
+    time_namelookup:  0.000
+       time_connect:  0.092
+    time_appconnect:  0.000
+   time_pretransfer:  0.092
+      time_redirect:  0.000
+ time_starttransfer:  0.789
+                    ----------
+         time_total:  0.789
+
+
+    time_namelookup:  0.000
+       time_connect:  0.100
+    time_appconnect:  0.000
+   time_pretransfer:  0.100
+      time_redirect:  0.000
+ time_starttransfer:  0.835
+                    ----------
+         time_total:  0.835
+
+
+    time_namelookup:  0.000
+       time_connect:  0.096
+    time_appconnect:  0.000
+   time_pretransfer:  0.096
+      time_redirect:  0.000
+ time_starttransfer:  0.799
+                    ----------
+         time_total:  0.799
+
+
+    time_namelookup:  0.000
+       time_connect:  0.086
+    time_appconnect:  0.000
+   time_pretransfer:  0.087
+      time_redirect:  0.000
+ time_starttransfer:  0.820
+                    ----------
+         time_total:  0.820
+
+
+    time_namelookup:  0.000
+       time_connect:  0.095
+    time_appconnect:  0.000
+   time_pretransfer:  0.095
+      time_redirect:  0.000
+ time_starttransfer:  0.838
+                    ----------
+         time_total:  0.838
+
+
+    time_namelookup:  0.000
+       time_connect:  0.091
+    time_appconnect:  0.000
+   time_pretransfer:  0.091
+      time_redirect:  0.000
+ time_starttransfer:  0.892
+                    ----------
+         time_total:  0.893
+
+
+    time_namelookup:  0.000
+       time_connect:  0.096
+    time_appconnect:  0.000
+   time_pretransfer:  0.096
+      time_redirect:  0.000
+ time_starttransfer:  0.913
+                    ----------
+         time_total:  0.913
+
+
+    time_namelookup:  0.000
+       time_connect:  0.078
+    time_appconnect:  0.000
+   time_pretransfer:  0.078
+      time_redirect:  0.000
+ time_starttransfer:  0.884
+                    ----------
+         time_total:  0.884
+
+
+    time_namelookup:  0.000
+       time_connect:  0.076
+    time_appconnect:  0.000
+   time_pretransfer:  0.076
+      time_redirect:  0.000
+ time_starttransfer:  0.883
+                    ----------
+         time_total:  0.883
+
+
+    time_namelookup:  0.000
+       time_connect:  0.098
+    time_appconnect:  0.000
+   time_pretransfer:  0.098
+      time_redirect:  0.000
+ time_starttransfer:  0.933
+                    ----------
+         time_total:  0.933
+
+
+    time_namelookup:  0.000
+       time_connect:  0.087
+    time_appconnect:  0.000
+   time_pretransfer:  0.087
+      time_redirect:  0.000
+ time_starttransfer:  0.995
+                    ----------
+         time_total:  0.995
+
+
+    time_namelookup:  0.000
+       time_connect:  0.081
+    time_appconnect:  0.000
+   time_pretransfer:  0.082
+      time_redirect:  0.000
+ time_starttransfer:  0.967
+                    ----------
+         time_total:  0.967
+
+
+    time_namelookup:  0.000
+       time_connect:  0.081
+    time_appconnect:  0.000
+   time_pretransfer:  0.081
+      time_redirect:  0.000
+ time_starttransfer:  0.966
+                    ----------
+         time_total:  0.966
+
+
+    time_namelookup:  0.000
+       time_connect:  0.102
+    time_appconnect:  0.000
+   time_pretransfer:  0.102
+      time_redirect:  0.000
+ time_starttransfer:  0.952
+                    ----------
+         time_total:  0.953
+
+
+    time_namelookup:  0.000
+       time_connect:  0.108
+    time_appconnect:  0.000
+   time_pretransfer:  0.108
+      time_redirect:  0.000
+ time_starttransfer:  1.013
+                    ----------
+         time_total:  1.013
+
+
+    time_namelookup:  0.000
+       time_connect:  0.128
+    time_appconnect:  0.000
+   time_pretransfer:  0.128
+      time_redirect:  0.000
+ time_starttransfer:  1.035
+                    ----------
+         time_total:  1.035
+
+
+    time_namelookup:  0.000
+       time_connect:  0.121
+    time_appconnect:  0.000
+   time_pretransfer:  0.121
+      time_redirect:  0.000
+ time_starttransfer:  1.026
+                    ----------
+         time_total:  1.026
+
+
+    time_namelookup:  0.000
+       time_connect:  0.106
+    time_appconnect:  0.000
+   time_pretransfer:  0.106
+      time_redirect:  0.000
+ time_starttransfer:  1.048
+                    ----------
+         time_total:  1.048
+
+
+    time_namelookup:  0.000
+       time_connect:  0.121
+    time_appconnect:  0.000
+   time_pretransfer:  0.121
+      time_redirect:  0.000
+ time_starttransfer:  1.027
+                    ----------
+         time_total:  1.027
+
+
+    time_namelookup:  0.000
+       time_connect:  0.139
+    time_appconnect:  0.000
+   time_pretransfer:  0.139
+      time_redirect:  0.000
+ time_starttransfer:  1.032
+                    ----------
+         time_total:  1.032
+
+
+    time_namelookup:  0.000
+       time_connect:  0.133
+    time_appconnect:  0.000
+   time_pretransfer:  0.133
+      time_redirect:  0.000
+ time_starttransfer:  1.025
+                    ----------
+         time_total:  1.025
+
+
+    time_namelookup:  0.000
+       time_connect:  0.145
+    time_appconnect:  0.000
+   time_pretransfer:  0.145
+      time_redirect:  0.000
+ time_starttransfer:  1.012
+                    ----------
+         time_total:  1.013
+
+
+    time_namelookup:  0.000
+       time_connect:  0.135
+    time_appconnect:  0.000
+   time_pretransfer:  0.135
+      time_redirect:  0.000
+ time_starttransfer:  1.076
+                    ----------
+         time_total:  1.076
+
+
+    time_namelookup:  0.000
+       time_connect:  0.129
+    time_appconnect:  0.000
+   time_pretransfer:  0.129
+      time_redirect:  0.000
+ time_starttransfer:  1.093
+                    ----------
+         time_total:  1.094
+
+
+    time_namelookup:  0.000
+       time_connect:  0.131
+    time_appconnect:  0.000
+   time_pretransfer:  0.131
+      time_redirect:  0.000
+ time_starttransfer:  1.079
+                    ----------
+         time_total:  1.079
+
+
+    time_namelookup:  0.000
+       time_connect:  0.135
+    time_appconnect:  0.000
+   time_pretransfer:  0.135
+      time_redirect:  0.000
+ time_starttransfer:  1.170
+                    ----------
+         time_total:  1.170
+
+
+    time_namelookup:  0.000
+       time_connect:  0.111
+    time_appconnect:  0.000
+   time_pretransfer:  0.111
+      time_redirect:  0.000
+ time_starttransfer:  1.143
+                    ----------
+         time_total:  1.143
+
+
+    time_namelookup:  0.000
+       time_connect:  0.138
+    time_appconnect:  0.000
+   time_pretransfer:  0.138
+      time_redirect:  0.000
+ time_starttransfer:  1.192
+                    ----------
+         time_total:  1.193
+
+
+    time_namelookup:  0.000
+       time_connect:  0.124
+    time_appconnect:  0.000
+   time_pretransfer:  0.124
+      time_redirect:  0.000
+ time_starttransfer:  1.178
+                    ----------
+         time_total:  1.178
+
+
+    time_namelookup:  0.000
+       time_connect:  0.132
+    time_appconnect:  0.000
+   time_pretransfer:  0.132
+      time_redirect:  0.000
+ time_starttransfer:  1.166
+                    ----------
+         time_total:  1.166
+
+
+    time_namelookup:  0.000
+       time_connect:  0.121
+    time_appconnect:  0.000
+   time_pretransfer:  0.121
+      time_redirect:  0.000
+ time_starttransfer:  1.208
+                    ----------
+         time_total:  1.208
+
+
+    time_namelookup:  0.000
+       time_connect:  0.119
+    time_appconnect:  0.000
+   time_pretransfer:  0.119
+      time_redirect:  0.000
+ time_starttransfer:  1.274
+                    ----------
+         time_total:  1.274
+
+
+    time_namelookup:  0.000
+       time_connect:  0.103
+    time_appconnect:  0.000
+   time_pretransfer:  0.103
+      time_redirect:  0.000
+ time_starttransfer:  1.258
+                    ----------
+         time_total:  1.258
+
+
+    time_namelookup:  0.000
+       time_connect:  0.139
+    time_appconnect:  0.000
+   time_pretransfer:  0.139
+      time_redirect:  0.000
+ time_starttransfer:  1.239
+                    ----------
+         time_total:  1.239
+
+
+    time_namelookup:  0.000
+       time_connect:  0.105
+    time_appconnect:  0.000
+   time_pretransfer:  0.105
+      time_redirect:  0.000
+ time_starttransfer:  1.260
+                    ----------
+         time_total:  1.260
+
+
+    time_namelookup:  0.000
+       time_connect:  0.145
+    time_appconnect:  0.000
+   time_pretransfer:  0.145
+      time_redirect:  0.000
+ time_starttransfer:  1.248
+                    ----------
+         time_total:  1.248
+
+
+    time_namelookup:  0.000
+       time_connect:  0.128
+    time_appconnect:  0.000
+   time_pretransfer:  0.128
+      time_redirect:  0.000
+ time_starttransfer:  1.224
+                    ----------
+         time_total:  1.224
+
+
+    time_namelookup:  0.000
+       time_connect:  0.141
+    time_appconnect:  0.000
+   time_pretransfer:  0.141
+      time_redirect:  0.000
+ time_starttransfer:  1.240
+                    ----------
+         time_total:  1.241
+
+
+    time_namelookup:  0.000
+       time_connect:  0.144
+    time_appconnect:  0.000
+   time_pretransfer:  0.144
+      time_redirect:  0.000
+ time_starttransfer:  1.242
+                    ----------
+         time_total:  1.242
+
+
+    time_namelookup:  0.000
+       time_connect:  0.137
+    time_appconnect:  0.000
+   time_pretransfer:  0.138
+      time_redirect:  0.000
+ time_starttransfer:  1.277
+                    ----------
+         time_total:  1.277
+
+
+    time_namelookup:  0.000
+       time_connect:  0.130
+    time_appconnect:  0.000
+   time_pretransfer:  0.130
+      time_redirect:  0.000
+ time_starttransfer:  1.270
+                    ----------
+         time_total:  1.270
+
+
+    time_namelookup:  0.000
+       time_connect:  0.094
+    time_appconnect:  0.000
+   time_pretransfer:  0.094
+      time_redirect:  0.000
+ time_starttransfer:  1.262
+                    ----------
+         time_total:  1.262
+
+
+    time_namelookup:  0.000
+       time_connect:  0.097
+    time_appconnect:  0.000
+   time_pretransfer:  0.097
+      time_redirect:  0.000
+ time_starttransfer:  1.269
+                    ----------
+         time_total:  1.269
+
+
+    time_namelookup:  0.000
+       time_connect:  0.119
+    time_appconnect:  0.000
+   time_pretransfer:  0.119
+      time_redirect:  0.000
+ time_starttransfer:  1.293
+                    ----------
+         time_total:  1.293
+
+
+    time_namelookup:  0.000
+       time_connect:  0.095
+    time_appconnect:  0.000
+   time_pretransfer:  0.095
+      time_redirect:  0.000
+ time_starttransfer:  1.245
+                    ----------
+         time_total:  1.245
+
+
+    time_namelookup:  0.000
+       time_connect:  0.109
+    time_appconnect:  0.000
+   time_pretransfer:  0.109
+      time_redirect:  0.000
+ time_starttransfer:  1.297
+                    ----------
+         time_total:  1.297
+
+
+    time_namelookup:  0.000
+       time_connect:  0.103
+    time_appconnect:  0.000
+   time_pretransfer:  0.103
+      time_redirect:  0.000
+ time_starttransfer:  1.291
+                    ----------
+         time_total:  1.291
+
+
+    time_namelookup:  0.000
+       time_connect:  0.097
+    time_appconnect:  0.000
+   time_pretransfer:  0.097
+      time_redirect:  0.000
+ time_starttransfer:  1.301
+                    ----------
+         time_total:  1.301
+
+
+    time_namelookup:  0.002
+       time_connect:  0.127
+    time_appconnect:  0.000
+   time_pretransfer:  0.127
+      time_redirect:  0.000
+ time_starttransfer:  1.320
+                    ----------
+         time_total:  1.320
+
+
+    time_namelookup:  0.000
+       time_connect:  0.135
+    time_appconnect:  0.000
+   time_pretransfer:  0.135
+      time_redirect:  0.000
+ time_starttransfer:  1.311
+                    ----------
+         time_total:  1.312
+
+
+    time_namelookup:  0.009
+       time_connect:  0.136
+    time_appconnect:  0.000
+   time_pretransfer:  0.136
+      time_redirect:  0.000
+ time_starttransfer:  1.319
+                    ----------
+         time_total:  1.319
+
+
+    time_namelookup:  0.000
+       time_connect:  0.127
+    time_appconnect:  0.000
+   time_pretransfer:  0.127
+      time_redirect:  0.000
+ time_starttransfer:  1.344
+                    ----------
+         time_total:  1.344
+
+
+    time_namelookup:  0.000
+       time_connect:  0.126
+    time_appconnect:  0.000
+   time_pretransfer:  0.126
+      time_redirect:  0.000
+ time_starttransfer:  1.352
+                    ----------
+         time_total:  1.352
+
+
+    time_namelookup:  0.000
+       time_connect:  0.125
+    time_appconnect:  0.000
+   time_pretransfer:  0.125
+      time_redirect:  0.000
+ time_starttransfer:  1.371
+                    ----------
+         time_total:  1.371
+
+
+    time_namelookup:  0.000
+       time_connect:  0.103
+    time_appconnect:  0.000
+   time_pretransfer:  0.103
+      time_redirect:  0.000
+ time_starttransfer:  1.353
+                    ----------
+         time_total:  1.354
+
+
+    time_namelookup:  0.000
+       time_connect:  0.100
+    time_appconnect:  0.000
+   time_pretransfer:  0.100
+      time_redirect:  0.000
+ time_starttransfer:  1.350
+                    ----------
+         time_total:  1.350
+
+
+    time_namelookup:  0.000
+       time_connect:  0.115
+    time_appconnect:  0.000
+   time_pretransfer:  0.115
+      time_redirect:  0.000
+ time_starttransfer:  1.371
+                    ----------
+         time_total:  1.371
+
+
+    time_namelookup:  0.000
+       time_connect:  0.090
+    time_appconnect:  0.000
+   time_pretransfer:  0.090
+      time_redirect:  0.000
+ time_starttransfer:  1.377
+                    ----------
+         time_total:  1.377
+
+
+    time_namelookup:  0.000
+       time_connect:  0.105
+    time_appconnect:  0.000
+   time_pretransfer:  0.105
+      time_redirect:  0.000
+ time_starttransfer:  1.404
+                    ----------
+         time_total:  1.404
+
+
+    time_namelookup:  0.000
+       time_connect:  0.116
+    time_appconnect:  0.000
+   time_pretransfer:  0.117
+      time_redirect:  0.000
+ time_starttransfer:  1.396
+                    ----------
+         time_total:  1.396
+
+
+    time_namelookup:  0.000
+       time_connect:  0.103
+    time_appconnect:  0.000
+   time_pretransfer:  0.103
+      time_redirect:  0.000
+ time_starttransfer:  1.404
+                    ----------
+         time_total:  1.404
+
+
+    time_namelookup:  0.000
+       time_connect:  0.115
+    time_appconnect:  0.000
+   time_pretransfer:  0.115
+      time_redirect:  0.000
+ time_starttransfer:  1.413
+                    ----------
+         time_total:  1.413
+
+
+    time_namelookup:  0.000
+       time_connect:  0.085
+    time_appconnect:  0.000
+   time_pretransfer:  0.085
+      time_redirect:  0.000
+ time_starttransfer:  1.423
+                    ----------
+         time_total:  1.423
+
+
+    time_namelookup:  0.000
+       time_connect:  0.121
+    time_appconnect:  0.000
+   time_pretransfer:  0.121
+      time_redirect:  0.000
+ time_starttransfer:  1.487
+                    ----------
+         time_total:  1.487
+
+
+    time_namelookup:  0.000
+       time_connect:  0.098
+    time_appconnect:  0.000
+   time_pretransfer:  0.099
+      time_redirect:  0.000
+ time_starttransfer:  1.463
+                    ----------
+         time_total:  1.463
+
+
+    time_namelookup:  0.000
+       time_connect:  0.101
+    time_appconnect:  0.000
+   time_pretransfer:  0.101
+      time_redirect:  0.000
+ time_starttransfer:  1.480
+                    ----------
+         time_total:  1.480
+
+
+    time_namelookup:  0.000
+       time_connect:  0.094
+    time_appconnect:  0.000
+   time_pretransfer:  0.095
+      time_redirect:  0.000
+ time_starttransfer:  1.471
+                    ----------
+         time_total:  1.471
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  1.463
+                    ----------
+         time_total:  1.463
+
+
+    time_namelookup:  0.000
+       time_connect:  0.066
+    time_appconnect:  0.000
+   time_pretransfer:  0.066
+      time_redirect:  0.000
+ time_starttransfer:  1.460
+                    ----------
+         time_total:  1.460
+
+
+    time_namelookup:  0.000
+       time_connect:  0.069
+    time_appconnect:  0.000
+   time_pretransfer:  0.069
+      time_redirect:  0.000
+ time_starttransfer:  1.522
+                    ----------
+         time_total:  1.522
+
+
+    time_namelookup:  0.000
+       time_connect:  0.080
+    time_appconnect:  0.000
+   time_pretransfer:  0.080
+      time_redirect:  0.000
+ time_starttransfer:  1.500
+                    ----------
+         time_total:  1.501
+
+
+    time_namelookup:  0.000
+       time_connect:  0.072
+    time_appconnect:  0.000
+   time_pretransfer:  0.072
+      time_redirect:  0.000
+ time_starttransfer:  1.553
+                    ----------
+         time_total:  1.554
+
+
+    time_namelookup:  0.000
+       time_connect:  0.078
+    time_appconnect:  0.000
+   time_pretransfer:  0.078
+      time_redirect:  0.000
+ time_starttransfer:  1.564
+                    ----------
+         time_total:  1.564
+
+
+    time_namelookup:  0.000
+       time_connect:  0.085
+    time_appconnect:  0.000
+   time_pretransfer:  0.085
+      time_redirect:  0.000
+ time_starttransfer:  1.557
+                    ----------
+         time_total:  1.557
+
+
+    time_namelookup:  0.000
+       time_connect:  0.077
+    time_appconnect:  0.000
+   time_pretransfer:  0.077
+      time_redirect:  0.000
+ time_starttransfer:  1.568
+                    ----------
+         time_total:  1.568
+
+
+    time_namelookup:  0.000
+       time_connect:  0.070
+    time_appconnect:  0.000
+   time_pretransfer:  0.070
+      time_redirect:  0.000
+ time_starttransfer:  1.572
+                    ----------
+         time_total:  1.572
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  1.567
+                    ----------
+         time_total:  1.567
+
+
+    time_namelookup:  0.000
+       time_connect:  0.070
+    time_appconnect:  0.000
+   time_pretransfer:  0.070
+      time_redirect:  0.000
+ time_starttransfer:  1.593
+                    ----------
+         time_total:  1.593
+
+
+    time_namelookup:  0.000
+       time_connect:  0.074
+    time_appconnect:  0.000
+   time_pretransfer:  0.074
+      time_redirect:  0.000
+ time_starttransfer:  1.601
+                    ----------
+         time_total:  1.601
+
+
+    time_namelookup:  0.000
+       time_connect:  0.057
+    time_appconnect:  0.000
+   time_pretransfer:  0.057
+      time_redirect:  0.000
+ time_starttransfer:  1.600
+                    ----------
+         time_total:  1.600
+
+
+    time_namelookup:  0.000
+       time_connect:  0.073
+    time_appconnect:  0.000
+   time_pretransfer:  0.073
+      time_redirect:  0.000
+ time_starttransfer:  1.629
+                    ----------
+         time_total:  1.629
+
+
+    time_namelookup:  0.000
+       time_connect:  0.068
+    time_appconnect:  0.000
+   time_pretransfer:  0.068
+      time_redirect:  0.000
+ time_starttransfer:  1.626
+                    ----------
+         time_total:  1.626
+
+
+    time_namelookup:  0.000
+       time_connect:  0.052
+    time_appconnect:  0.000
+   time_pretransfer:  0.053
+      time_redirect:  0.000
+ time_starttransfer:  1.622
+                    ----------
+         time_total:  1.622
+
+
+    time_namelookup:  0.000
+       time_connect:  0.058
+    time_appconnect:  0.000
+   time_pretransfer:  0.058
+      time_redirect:  0.000
+ time_starttransfer:  1.639
+                    ----------
+         time_total:  1.639
+
+
+    time_namelookup:  0.000
+       time_connect:  0.051
+    time_appconnect:  0.000
+   time_pretransfer:  0.051
+      time_redirect:  0.000
+ time_starttransfer:  1.635
+                    ----------
+         time_total:  1.635
+
+
+    time_namelookup:  0.000
+       time_connect:  0.061
+    time_appconnect:  0.000
+   time_pretransfer:  0.061
+      time_redirect:  0.000
+ time_starttransfer:  1.661
+                    ----------
+         time_total:  1.662
+
+
+    time_namelookup:  0.000
+       time_connect:  0.061
+    time_appconnect:  0.000
+   time_pretransfer:  0.061
+      time_redirect:  0.000
+ time_starttransfer:  1.663
+                    ----------
+         time_total:  1.663
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  1.663
+                    ----------
+         time_total:  1.663
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  1.739
+                    ----------
+         time_total:  1.740
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  1.700
+                    ----------
+         time_total:  1.700
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  1.716
+                    ----------
+         time_total:  1.717
+
+
+    time_namelookup:  0.000
+       time_connect:  0.039
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  1.711
+                    ----------
+         time_total:  1.711
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  1.686
+                    ----------
+         time_total:  1.686
+
+
+    time_namelookup:  0.000
+       time_connect:  0.044
+    time_appconnect:  0.000
+   time_pretransfer:  0.045
+      time_redirect:  0.000
+ time_starttransfer:  1.752
+                    ----------
+         time_total:  1.752
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  1.735
+                    ----------
+         time_total:  1.736
+
+
+    time_namelookup:  0.000
+       time_connect:  0.045
+    time_appconnect:  0.000
+   time_pretransfer:  0.045
+      time_redirect:  0.000
+ time_starttransfer:  1.745
+                    ----------
+         time_total:  1.745
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  1.751
+                    ----------
+         time_total:  1.751
+
+
+    time_namelookup:  0.000
+       time_connect:  0.042
+    time_appconnect:  0.000
+   time_pretransfer:  0.042
+      time_redirect:  0.000
+ time_starttransfer:  1.763
+                    ----------
+         time_total:  1.763
+
+
+    time_namelookup:  0.000
+       time_connect:  0.037
+    time_appconnect:  0.000
+   time_pretransfer:  0.037
+      time_redirect:  0.000
+ time_starttransfer:  1.755
+                    ----------
+         time_total:  1.755
+
+
+    time_namelookup:  0.000
+       time_connect:  0.046
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  1.813
+                    ----------
+         time_total:  1.813
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  1.822
+                    ----------
+         time_total:  1.822
+
+
+    time_namelookup:  0.000
+       time_connect:  0.039
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  1.835
+                    ----------
+         time_total:  1.835
+
+
+    time_namelookup:  0.000
+       time_connect:  0.037
+    time_appconnect:  0.000
+   time_pretransfer:  0.037
+      time_redirect:  0.000
+ time_starttransfer:  1.844
+                    ----------
+         time_total:  1.844
+
+
+    time_namelookup:  0.004
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  1.882
+                    ----------
+         time_total:  1.882
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  1.855
+                    ----------
+         time_total:  1.855
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  1.858
+                    ----------
+         time_total:  1.858
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  1.855
+                    ----------
+         time_total:  1.855
+
+
+    time_namelookup:  0.000
+       time_connect:  0.030
+    time_appconnect:  0.000
+   time_pretransfer:  0.031
+      time_redirect:  0.000
+ time_starttransfer:  1.887
+                    ----------
+         time_total:  1.887
+
+
+    time_namelookup:  0.001
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  1.897
+                    ----------
+         time_total:  1.897
+
+
+    time_namelookup:  0.000
+       time_connect:  0.032
+    time_appconnect:  0.000
+   time_pretransfer:  0.032
+      time_redirect:  0.000
+ time_starttransfer:  1.919
+                    ----------
+         time_total:  1.919
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  1.931
+                    ----------
+         time_total:  1.931
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  1.944
+                    ----------
+         time_total:  1.944
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  1.920
+                    ----------
+         time_total:  1.920
+
+
+    time_namelookup:  0.000
+       time_connect:  0.030
+    time_appconnect:  0.000
+   time_pretransfer:  0.030
+      time_redirect:  0.000
+ time_starttransfer:  1.936
+                    ----------
+         time_total:  1.936
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  1.983
+                    ----------
+         time_total:  1.983
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  2.011
+                    ----------
+         time_total:  2.011
+
+
+    time_namelookup:  0.000
+       time_connect:  0.032
+    time_appconnect:  0.000
+   time_pretransfer:  0.032
+      time_redirect:  0.000
+ time_starttransfer:  1.982
+                    ----------
+         time_total:  1.982
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  2.007
+                    ----------
+         time_total:  2.007
+
+
+    time_namelookup:  0.000
+       time_connect:  0.084
+    time_appconnect:  0.000
+   time_pretransfer:  0.084
+      time_redirect:  0.000
+ time_starttransfer:  2.097
+                    ----------
+         time_total:  2.097
+
+
+    time_namelookup:  0.000
+       time_connect:  0.084
+    time_appconnect:  0.000
+   time_pretransfer:  0.086
+      time_redirect:  0.000
+ time_starttransfer:  2.116
+                    ----------
+         time_total:  2.116
+
+
+    time_namelookup:  0.000
+       time_connect:  0.224
+    time_appconnect:  0.000
+   time_pretransfer:  0.224
+      time_redirect:  0.000
+ time_starttransfer:  2.107
+                    ----------
+         time_total:  2.107
+
+
+    time_namelookup:  0.000
+       time_connect:  0.109
+    time_appconnect:  0.000
+   time_pretransfer:  0.109
+      time_redirect:  0.000
+ time_starttransfer:  2.147
+                    ----------
+         time_total:  2.147
+
+
+    time_namelookup:  0.000
+       time_connect:  0.094
+    time_appconnect:  0.000
+   time_pretransfer:  0.094
+      time_redirect:  0.000
+ time_starttransfer:  2.161
+                    ----------
+         time_total:  2.161
+
+
+    time_namelookup:  0.000
+       time_connect:  0.099
+    time_appconnect:  0.000
+   time_pretransfer:  0.099
+      time_redirect:  0.000
+ time_starttransfer:  2.169
+                    ----------
+         time_total:  2.169
+
+
+    time_namelookup:  0.000
+       time_connect:  0.205
+    time_appconnect:  0.000
+   time_pretransfer:  0.205
+      time_redirect:  0.000
+ time_starttransfer:  2.123
+                    ----------
+         time_total:  2.123
+
+
+    time_namelookup:  0.000
+       time_connect:  0.217
+    time_appconnect:  0.000
+   time_pretransfer:  0.217
+      time_redirect:  0.000
+ time_starttransfer:  2.134
+                    ----------
+         time_total:  2.134
+
+
+    time_namelookup:  0.000
+       time_connect:  0.222
+    time_appconnect:  0.000
+   time_pretransfer:  0.222
+      time_redirect:  0.000
+ time_starttransfer:  2.250
+                    ----------
+         time_total:  2.251
+
+
+    time_namelookup:  0.000
+       time_connect:  0.194
+    time_appconnect:  0.000
+   time_pretransfer:  0.194
+      time_redirect:  0.000
+ time_starttransfer:  2.247
+                    ----------
+         time_total:  2.247
+
+
+    time_namelookup:  0.000
+       time_connect:  0.182
+    time_appconnect:  0.000
+   time_pretransfer:  0.183
+      time_redirect:  0.000
+ time_starttransfer:  2.234
+                    ----------
+         time_total:  2.234
+
+
+    time_namelookup:  0.000
+       time_connect:  0.194
+    time_appconnect:  0.000
+   time_pretransfer:  0.194
+      time_redirect:  0.000
+ time_starttransfer:  2.250
+                    ----------
+         time_total:  2.250
+
+
+    time_namelookup:  0.000
+       time_connect:  0.214
+    time_appconnect:  0.000
+   time_pretransfer:  0.214
+      time_redirect:  0.000
+ time_starttransfer:  2.270
+                    ----------
+         time_total:  2.270
+
+
+    time_namelookup:  0.000
+       time_connect:  0.164
+    time_appconnect:  0.000
+   time_pretransfer:  0.165
+      time_redirect:  0.000
+ time_starttransfer:  2.222
+                    ----------
+         time_total:  2.222
+
+
+    time_namelookup:  0.000
+       time_connect:  0.164
+    time_appconnect:  0.000
+   time_pretransfer:  0.164
+      time_redirect:  0.000
+ time_starttransfer:  2.226
+                    ----------
+         time_total:  2.226
+
+
+    time_namelookup:  0.000
+       time_connect:  0.178
+    time_appconnect:  0.000
+   time_pretransfer:  0.178
+      time_redirect:  0.000
+ time_starttransfer:  2.241
+                    ----------
+         time_total:  2.241
+
+
+    time_namelookup:  0.000
+       time_connect:  0.178
+    time_appconnect:  0.000
+   time_pretransfer:  0.179
+      time_redirect:  0.000
+ time_starttransfer:  2.202
+                    ----------
+         time_total:  2.202
+
+
+    time_namelookup:  0.000
+       time_connect:  0.160
+    time_appconnect:  0.000
+   time_pretransfer:  0.160
+      time_redirect:  0.000
+ time_starttransfer:  2.238
+                    ----------
+         time_total:  2.239
+
+
+    time_namelookup:  0.000
+       time_connect:  0.170
+    time_appconnect:  0.000
+   time_pretransfer:  0.170
+      time_redirect:  0.000
+ time_starttransfer:  2.220
+                    ----------
+         time_total:  2.220
+
+
+    time_namelookup:  0.000
+       time_connect:  0.170
+    time_appconnect:  0.000
+   time_pretransfer:  0.170
+      time_redirect:  0.000
+ time_starttransfer:  2.263
+                    ----------
+         time_total:  2.264
+
+
+    time_namelookup:  0.000
+       time_connect:  0.198
+    time_appconnect:  0.000
+   time_pretransfer:  0.198
+      time_redirect:  0.000
+ time_starttransfer:  2.197
+                    ----------
+         time_total:  2.197
+
+
+    time_namelookup:  0.000
+       time_connect:  0.251
+    time_appconnect:  0.000
+   time_pretransfer:  0.251
+      time_redirect:  0.000
+ time_starttransfer:  2.254
+                    ----------
+         time_total:  2.254
+
+
+    time_namelookup:  0.000
+       time_connect:  0.204
+    time_appconnect:  0.000
+   time_pretransfer:  0.204
+      time_redirect:  0.000
+ time_starttransfer:  2.262
+                    ----------
+         time_total:  2.262
+
+
+    time_namelookup:  0.000
+       time_connect:  0.254
+    time_appconnect:  0.000
+   time_pretransfer:  0.254
+      time_redirect:  0.000
+ time_starttransfer:  2.312
+                    ----------
+         time_total:  2.313
+
+
+    time_namelookup:  0.000
+       time_connect:  0.257
+    time_appconnect:  0.000
+   time_pretransfer:  0.257
+      time_redirect:  0.000
+ time_starttransfer:  2.313
+                    ----------
+         time_total:  2.313
+
+
+    time_namelookup:  0.000
+       time_connect:  0.219
+    time_appconnect:  0.000
+   time_pretransfer:  0.219
+      time_redirect:  0.000
+ time_starttransfer:  2.282
+                    ----------
+         time_total:  2.282
+
+
+    time_namelookup:  0.000
+       time_connect:  0.216
+    time_appconnect:  0.000
+   time_pretransfer:  0.216
+      time_redirect:  0.000
+ time_starttransfer:  2.311
+                    ----------
+         time_total:  2.311
+
+
+    time_namelookup:  0.000
+       time_connect:  0.240
+    time_appconnect:  0.000
+   time_pretransfer:  0.240
+      time_redirect:  0.000
+ time_starttransfer:  2.339
+                    ----------
+         time_total:  2.339
+
+
+    time_namelookup:  0.000
+       time_connect:  0.226
+    time_appconnect:  0.000
+   time_pretransfer:  0.226
+      time_redirect:  0.000
+ time_starttransfer:  2.327
+                    ----------
+         time_total:  2.327
+
+
+    time_namelookup:  0.000
+       time_connect:  0.187
+    time_appconnect:  0.000
+   time_pretransfer:  0.187
+      time_redirect:  0.000
+ time_starttransfer:  2.306
+                    ----------
+         time_total:  2.306
+
+
+    time_namelookup:  0.000
+       time_connect:  0.217
+    time_appconnect:  0.000
+   time_pretransfer:  0.218
+      time_redirect:  0.000
+ time_starttransfer:  2.342
+                    ----------
+         time_total:  2.342
+
+
+    time_namelookup:  0.000
+       time_connect:  0.178
+    time_appconnect:  0.000
+   time_pretransfer:  0.178
+      time_redirect:  0.000
+ time_starttransfer:  2.308
+                    ----------
+         time_total:  2.309
+
+
+    time_namelookup:  0.000
+       time_connect:  0.244
+    time_appconnect:  0.000
+   time_pretransfer:  0.244
+      time_redirect:  0.000
+ time_starttransfer:  2.383
+                    ----------
+         time_total:  2.383
+
+
+    time_namelookup:  0.000
+       time_connect:  0.175
+    time_appconnect:  0.000
+   time_pretransfer:  0.175
+      time_redirect:  0.000
+ time_starttransfer:  2.315
+                    ----------
+         time_total:  2.315
+
+
+    time_namelookup:  0.000
+       time_connect:  0.199
+    time_appconnect:  0.000
+   time_pretransfer:  0.199
+      time_redirect:  0.000
+ time_starttransfer:  2.353
+                    ----------
+         time_total:  2.353
+
+
+    time_namelookup:  0.000
+       time_connect:  0.164
+    time_appconnect:  0.000
+   time_pretransfer:  0.164
+      time_redirect:  0.000
+ time_starttransfer:  2.325
+                    ----------
+         time_total:  2.325
+
+
+    time_namelookup:  0.000
+       time_connect:  0.178
+    time_appconnect:  0.000
+   time_pretransfer:  0.178
+      time_redirect:  0.000
+ time_starttransfer:  2.369
+                    ----------
+         time_total:  2.369
+
+
+    time_namelookup:  0.000
+       time_connect:  0.163
+    time_appconnect:  0.000
+   time_pretransfer:  0.163
+      time_redirect:  0.000
+ time_starttransfer:  2.392
+                    ----------
+         time_total:  2.392
+
+
+    time_namelookup:  0.000
+       time_connect:  0.208
+    time_appconnect:  0.000
+   time_pretransfer:  0.208
+      time_redirect:  0.000
+ time_starttransfer:  2.356
+                    ----------
+         time_total:  2.356
+
+
+    time_namelookup:  0.000
+       time_connect:  0.221
+    time_appconnect:  0.000
+   time_pretransfer:  0.221
+      time_redirect:  0.000
+ time_starttransfer:  2.373
+                    ----------
+         time_total:  2.373
+
+
+    time_namelookup:  0.000
+       time_connect:  0.154
+    time_appconnect:  0.000
+   time_pretransfer:  0.154
+      time_redirect:  0.000
+ time_starttransfer:  2.427
+                    ----------
+         time_total:  2.427
+
+
+    time_namelookup:  0.000
+       time_connect:  0.226
+    time_appconnect:  0.000
+   time_pretransfer:  0.226
+      time_redirect:  0.000
+ time_starttransfer:  2.425
+                    ----------
+         time_total:  2.425
+
+
+    time_namelookup:  0.000
+       time_connect:  0.211
+    time_appconnect:  0.000
+   time_pretransfer:  0.211
+      time_redirect:  0.000
+ time_starttransfer:  2.413
+                    ----------
+         time_total:  2.413
+
+
+    time_namelookup:  0.000
+       time_connect:  0.216
+    time_appconnect:  0.000
+   time_pretransfer:  0.216
+      time_redirect:  0.000
+ time_starttransfer:  2.453
+                    ----------
+         time_total:  2.453
+
+
+    time_namelookup:  0.000
+       time_connect:  0.204
+    time_appconnect:  0.000
+   time_pretransfer:  0.205
+      time_redirect:  0.000
+ time_starttransfer:  2.437
+                    ----------
+         time_total:  2.437
+
+
+    time_namelookup:  0.000
+       time_connect:  0.210
+    time_appconnect:  0.000
+   time_pretransfer:  0.211
+      time_redirect:  0.000
+ time_starttransfer:  2.463
+                    ----------
+         time_total:  2.463
+
+
+    time_namelookup:  0.000
+       time_connect:  0.214
+    time_appconnect:  0.000
+   time_pretransfer:  0.214
+      time_redirect:  0.000
+ time_starttransfer:  2.472
+                    ----------
+         time_total:  2.473
+
+
+    time_namelookup:  0.000
+       time_connect:  0.182
+    time_appconnect:  0.000
+   time_pretransfer:  0.183
+      time_redirect:  0.000
+ time_starttransfer:  2.456
+                    ----------
+         time_total:  2.456
+
+
+    time_namelookup:  0.000
+       time_connect:  0.200
+    time_appconnect:  0.000
+   time_pretransfer:  0.200
+      time_redirect:  0.000
+ time_starttransfer:  2.483
+                    ----------
+         time_total:  2.483
+
+
+    time_namelookup:  0.000
+       time_connect:  0.195
+    time_appconnect:  0.000
+   time_pretransfer:  0.195
+      time_redirect:  0.000
+ time_starttransfer:  2.506
+                    ----------
+         time_total:  2.506
+
+
+    time_namelookup:  0.000
+       time_connect:  0.184
+    time_appconnect:  0.000
+   time_pretransfer:  0.184
+      time_redirect:  0.000
+ time_starttransfer:  2.509
+                    ----------
+         time_total:  2.509
+
+
+    time_namelookup:  0.000
+       time_connect:  0.168
+    time_appconnect:  0.000
+   time_pretransfer:  0.168
+      time_redirect:  0.000
+ time_starttransfer:  2.509
+                    ----------
+         time_total:  2.509
+
+
+    time_namelookup:  0.000
+       time_connect:  0.193
+    time_appconnect:  0.000
+   time_pretransfer:  0.193
+      time_redirect:  0.000
+ time_starttransfer:  2.538
+                    ----------
+         time_total:  2.538
+
+
+    time_namelookup:  0.000
+       time_connect:  0.136
+    time_appconnect:  0.000
+   time_pretransfer:  0.137
+      time_redirect:  0.000
+ time_starttransfer:  2.503
+                    ----------
+         time_total:  2.503
+
+
+    time_namelookup:  0.000
+       time_connect:  0.164
+    time_appconnect:  0.000
+   time_pretransfer:  0.165
+      time_redirect:  0.000
+ time_starttransfer:  2.542
+                    ----------
+         time_total:  2.542
+
+
+    time_namelookup:  0.000
+       time_connect:  0.137
+    time_appconnect:  0.000
+   time_pretransfer:  0.137
+      time_redirect:  0.000
+ time_starttransfer:  2.525
+                    ----------
+         time_total:  2.525
+
+
+    time_namelookup:  0.000
+       time_connect:  0.161
+    time_appconnect:  0.000
+   time_pretransfer:  0.162
+      time_redirect:  0.000
+ time_starttransfer:  2.583
+                    ----------
+         time_total:  2.583
+
+
+    time_namelookup:  0.000
+       time_connect:  0.175
+    time_appconnect:  0.000
+   time_pretransfer:  0.175
+      time_redirect:  0.000
+ time_starttransfer:  2.599
+                    ----------
+         time_total:  2.600
+
+
+    time_namelookup:  0.000
+       time_connect:  0.154
+    time_appconnect:  0.000
+   time_pretransfer:  0.154
+      time_redirect:  0.000
+ time_starttransfer:  2.601
+                    ----------
+         time_total:  2.601
+
+
+    time_namelookup:  0.000
+       time_connect:  0.176
+    time_appconnect:  0.000
+   time_pretransfer:  0.176
+      time_redirect:  0.000
+ time_starttransfer:  2.532
+                    ----------
+         time_total:  2.532
+
+
+    time_namelookup:  0.000
+       time_connect:  0.150
+    time_appconnect:  0.000
+   time_pretransfer:  0.150
+      time_redirect:  0.000
+ time_starttransfer:  2.628
+                    ----------
+         time_total:  2.629
+
+
+    time_namelookup:  0.000
+       time_connect:  0.148
+    time_appconnect:  0.000
+   time_pretransfer:  0.148
+      time_redirect:  0.000
+ time_starttransfer:  2.550
+                    ----------
+         time_total:  2.550
+
+
+    time_namelookup:  0.000
+       time_connect:  0.164
+    time_appconnect:  0.000
+   time_pretransfer:  0.164
+      time_redirect:  0.000
+ time_starttransfer:  2.534
+                    ----------
+         time_total:  2.534
+
+
+    time_namelookup:  0.000
+       time_connect:  0.194
+    time_appconnect:  0.000
+   time_pretransfer:  0.194
+      time_redirect:  0.000
+ time_starttransfer:  2.613
+                    ----------
+         time_total:  2.613
+
+
+    time_namelookup:  0.000
+       time_connect:  0.183
+    time_appconnect:  0.000
+   time_pretransfer:  0.184
+      time_redirect:  0.000
+ time_starttransfer:  2.533
+                    ----------
+         time_total:  2.534
+
+
+    time_namelookup:  0.000
+       time_connect:  0.105
+    time_appconnect:  0.000
+   time_pretransfer:  0.106
+      time_redirect:  0.000
+ time_starttransfer:  2.459
+                    ----------
+         time_total:  2.459
+
+
+    time_namelookup:  0.000
+       time_connect:  0.116
+    time_appconnect:  0.000
+   time_pretransfer:  0.116
+      time_redirect:  0.000
+ time_starttransfer:  2.483
+                    ----------
+         time_total:  2.483
+
+
+    time_namelookup:  0.000
+       time_connect:  0.130
+    time_appconnect:  0.000
+   time_pretransfer:  0.130
+      time_redirect:  0.000
+ time_starttransfer:  2.537
+                    ----------
+         time_total:  2.537
+
+
+    time_namelookup:  0.000
+       time_connect:  0.081
+    time_appconnect:  0.000
+   time_pretransfer:  0.081
+      time_redirect:  0.000
+ time_starttransfer:  2.427
+                    ----------
+         time_total:  2.427
+
+
+    time_namelookup:  0.000
+       time_connect:  0.103
+    time_appconnect:  0.000
+   time_pretransfer:  0.104
+      time_redirect:  0.000
+ time_starttransfer:  2.483
+                    ----------
+         time_total:  2.483
+
+
+    time_namelookup:  0.000
+       time_connect:  0.092
+    time_appconnect:  0.000
+   time_pretransfer:  0.093
+      time_redirect:  0.000
+ time_starttransfer:  2.421
+                    ----------
+         time_total:  2.422
+
+
+    time_namelookup:  0.000
+       time_connect:  0.098
+    time_appconnect:  0.000
+   time_pretransfer:  0.098
+      time_redirect:  0.000
+ time_starttransfer:  2.448
+                    ----------
+         time_total:  2.448
+
+
+    time_namelookup:  0.000
+       time_connect:  0.095
+    time_appconnect:  0.000
+   time_pretransfer:  0.095
+      time_redirect:  0.000
+ time_starttransfer:  2.455
+                    ----------
+         time_total:  2.455
+
+
+    time_namelookup:  0.000
+       time_connect:  0.062
+    time_appconnect:  0.000
+   time_pretransfer:  0.062
+      time_redirect:  0.000
+ time_starttransfer:  2.448
+                    ----------
+         time_total:  2.448
+
+
+    time_namelookup:  0.000
+       time_connect:  0.072
+    time_appconnect:  0.000
+   time_pretransfer:  0.072
+      time_redirect:  0.000
+ time_starttransfer:  2.432
+                    ----------
+         time_total:  2.432
+
+
+    time_namelookup:  0.000
+       time_connect:  0.051
+    time_appconnect:  0.000
+   time_pretransfer:  0.051
+      time_redirect:  0.000
+ time_starttransfer:  2.428
+                    ----------
+         time_total:  2.428
+
+
+    time_namelookup:  0.000
+       time_connect:  0.051
+    time_appconnect:  0.000
+   time_pretransfer:  0.051
+      time_redirect:  0.000
+ time_starttransfer:  2.399
+                    ----------
+         time_total:  2.399
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  2.390
+                    ----------
+         time_total:  2.390
+
+
+    time_namelookup:  0.000
+       time_connect:  0.043
+    time_appconnect:  0.000
+   time_pretransfer:  0.044
+      time_redirect:  0.000
+ time_starttransfer:  2.364
+                    ----------
+         time_total:  2.364
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  2.364
+                    ----------
+         time_total:  2.364
+
+
+    time_namelookup:  0.000
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  2.375
+                    ----------
+         time_total:  2.376
+
+
+    time_namelookup:  0.000
+       time_connect:  0.053
+    time_appconnect:  0.000
+   time_pretransfer:  0.053
+      time_redirect:  0.000
+ time_starttransfer:  2.380
+                    ----------
+         time_total:  2.380
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  2.404
+                    ----------
+         time_total:  2.404
+
+
+    time_namelookup:  0.000
+       time_connect:  0.042
+    time_appconnect:  0.000
+   time_pretransfer:  0.042
+      time_redirect:  0.000
+ time_starttransfer:  2.359
+                    ----------
+         time_total:  2.359
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  2.437
+                    ----------
+         time_total:  2.437
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  2.379
+                    ----------
+         time_total:  2.379
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  2.382
+                    ----------
+         time_total:  2.382
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  2.359
+                    ----------
+         time_total:  2.359
+
+
+    time_namelookup:  0.000
+       time_connect:  0.042
+    time_appconnect:  0.000
+   time_pretransfer:  0.042
+      time_redirect:  0.000
+ time_starttransfer:  2.411
+                    ----------
+         time_total:  2.411
+
+
+    time_namelookup:  0.000
+       time_connect:  0.037
+    time_appconnect:  0.000
+   time_pretransfer:  0.037
+      time_redirect:  0.000
+ time_starttransfer:  2.353
+                    ----------
+         time_total:  2.353
+
+
+    time_namelookup:  0.000
+       time_connect:  0.046
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  2.386
+                    ----------
+         time_total:  2.386
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  2.369
+                    ----------
+         time_total:  2.369
+
+
+    time_namelookup:  0.000
+       time_connect:  0.027
+    time_appconnect:  0.000
+   time_pretransfer:  0.027
+      time_redirect:  0.000
+ time_starttransfer:  2.377
+                    ----------
+         time_total:  2.377
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  2.347
+                    ----------
+         time_total:  2.347
+
+
+    time_namelookup:  0.000
+       time_connect:  0.037
+    time_appconnect:  0.000
+   time_pretransfer:  0.037
+      time_redirect:  0.000
+ time_starttransfer:  2.391
+                    ----------
+         time_total:  2.391
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  2.360
+                    ----------
+         time_total:  2.360
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  2.374
+                    ----------
+         time_total:  2.374
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  2.374
+                    ----------
+         time_total:  2.374
+
+
+    time_namelookup:  0.000
+       time_connect:  0.029
+    time_appconnect:  0.000
+   time_pretransfer:  0.029
+      time_redirect:  0.000
+ time_starttransfer:  2.372
+                    ----------
+         time_total:  2.372
+
+
+    time_namelookup:  0.000
+       time_connect:  0.037
+    time_appconnect:  0.000
+   time_pretransfer:  0.037
+      time_redirect:  0.000
+ time_starttransfer:  2.384
+                    ----------
+         time_total:  2.384
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  2.399
+                    ----------
+         time_total:  2.399
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  2.341
+                    ----------
+         time_total:  2.341
+
+
+    time_namelookup:  0.000
+       time_connect:  0.029
+    time_appconnect:  0.000
+   time_pretransfer:  0.029
+      time_redirect:  0.000
+ time_starttransfer:  2.350
+                    ----------
+         time_total:  2.350
+
+
+    time_namelookup:  0.000
+       time_connect:  0.042
+    time_appconnect:  0.000
+   time_pretransfer:  0.042
+      time_redirect:  0.000
+ time_starttransfer:  2.356
+                    ----------
+         time_total:  2.357
+
+
+    time_namelookup:  0.000
+       time_connect:  0.057
+    time_appconnect:  0.000
+   time_pretransfer:  0.058
+      time_redirect:  0.000
+ time_starttransfer:  2.356
+                    ----------
+         time_total:  2.357
+
+
+    time_namelookup:  0.000
+       time_connect:  0.059
+    time_appconnect:  0.000
+   time_pretransfer:  0.059
+      time_redirect:  0.000
+ time_starttransfer:  2.373
+                    ----------
+         time_total:  2.373
+
+
+    time_namelookup:  0.000
+       time_connect:  0.052
+    time_appconnect:  0.000
+   time_pretransfer:  0.052
+      time_redirect:  0.000
+ time_starttransfer:  2.357
+                    ----------
+         time_total:  2.358
+
+
+    time_namelookup:  0.000
+       time_connect:  0.046
+    time_appconnect:  0.000
+   time_pretransfer:  0.046
+      time_redirect:  0.000
+ time_starttransfer:  2.355
+                    ----------
+         time_total:  2.356
+
+
+    time_namelookup:  0.000
+       time_connect:  0.045
+    time_appconnect:  0.000
+   time_pretransfer:  0.046
+      time_redirect:  0.000
+ time_starttransfer:  2.391
+                    ----------
+         time_total:  2.392
+
+
+    time_namelookup:  0.000
+       time_connect:  0.043
+    time_appconnect:  0.000
+   time_pretransfer:  0.043
+      time_redirect:  0.000
+ time_starttransfer:  2.371
+                    ----------
+         time_total:  2.371
+
+
+    time_namelookup:  0.000
+       time_connect:  0.039
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  2.395
+                    ----------
+         time_total:  2.395
+
+
+    time_namelookup:  0.000
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  2.487
+                    ----------
+         time_total:  2.487
+
+
+    time_namelookup:  0.000
+       time_connect:  0.045
+    time_appconnect:  0.000
+   time_pretransfer:  0.045
+      time_redirect:  0.000
+ time_starttransfer:  2.380
+                    ----------
+         time_total:  2.381
+
+
+    time_namelookup:  0.000
+       time_connect:  0.040
+    time_appconnect:  0.000
+   time_pretransfer:  0.040
+      time_redirect:  0.000
+ time_starttransfer:  2.380
+                    ----------
+         time_total:  2.380
+
+
+    time_namelookup:  0.000
+       time_connect:  0.043
+    time_appconnect:  0.000
+   time_pretransfer:  0.043
+      time_redirect:  0.000
+ time_starttransfer:  2.376
+                    ----------
+         time_total:  2.376
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  2.409
+                    ----------
+         time_total:  2.409
+
+
+    time_namelookup:  0.000
+       time_connect:  0.163
+    time_appconnect:  0.000
+   time_pretransfer:  0.163
+      time_redirect:  0.000
+ time_starttransfer:  3.502
+                    ----------
+         time_total:  3.502
+
+
+    time_namelookup:  0.000
+       time_connect:  0.057
+    time_appconnect:  0.000
+   time_pretransfer:  0.057
+      time_redirect:  0.000
+ time_starttransfer:  2.371
+                    ----------
+         time_total:  2.371
+
+
+    time_namelookup:  0.000
+       time_connect:  0.224
+    time_appconnect:  0.000
+   time_pretransfer:  0.224
+      time_redirect:  0.000
+ time_starttransfer:  3.607
+                    ----------
+         time_total:  3.607
+
+
+    time_namelookup:  0.000
+       time_connect:  0.044
+    time_appconnect:  0.000
+   time_pretransfer:  0.044
+      time_redirect:  0.000
+ time_starttransfer:  2.438
+                    ----------
+         time_total:  2.438
+
+
+    time_namelookup:  0.000
+       time_connect:  0.152
+    time_appconnect:  0.000
+   time_pretransfer:  0.152
+      time_redirect:  0.000
+ time_starttransfer:  3.549
+                    ----------
+         time_total:  3.549
+
+
+    time_namelookup:  0.000
+       time_connect:  0.054
+    time_appconnect:  0.000
+   time_pretransfer:  0.054
+      time_redirect:  0.000
+ time_starttransfer:  2.367
+                    ----------
+         time_total:  2.367
+
+
+    time_namelookup:  0.000
+       time_connect:  0.163
+    time_appconnect:  0.000
+   time_pretransfer:  0.163
+      time_redirect:  0.000
+ time_starttransfer:  3.611
+                    ----------
+         time_total:  3.611
+
+
+    time_namelookup:  0.000
+       time_connect:  0.073
+    time_appconnect:  0.000
+   time_pretransfer:  0.073
+      time_redirect:  0.000
+ time_starttransfer:  2.399
+                    ----------
+         time_total:  2.399
+
+
+    time_namelookup:  0.000
+       time_connect:  0.053
+    time_appconnect:  0.000
+   time_pretransfer:  0.053
+      time_redirect:  0.000
+ time_starttransfer:  2.413
+                    ----------
+         time_total:  2.413
+
+
+    time_namelookup:  0.000
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  2.477
+                    ----------
+         time_total:  2.477
+
+
+    time_namelookup:  0.000
+       time_connect:  0.056
+    time_appconnect:  0.000
+   time_pretransfer:  0.056
+      time_redirect:  0.000
+ time_starttransfer:  2.403
+                    ----------
+         time_total:  2.403
+
+
+    time_namelookup:  0.000
+       time_connect:  0.052
+    time_appconnect:  0.000
+   time_pretransfer:  0.052
+      time_redirect:  0.000
+ time_starttransfer:  2.419
+                    ----------
+         time_total:  2.419
+
+
+    time_namelookup:  0.000
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  2.418
+                    ----------
+         time_total:  2.418
+
+
+    time_namelookup:  0.000
+       time_connect:  0.191
+    time_appconnect:  0.000
+   time_pretransfer:  0.191
+      time_redirect:  0.000
+ time_starttransfer:  3.734
+                    ----------
+         time_total:  3.734
+
+
+    time_namelookup:  0.000
+       time_connect:  0.053
+    time_appconnect:  0.000
+   time_pretransfer:  0.053
+      time_redirect:  0.000
+ time_starttransfer:  3.360
+                    ----------
+         time_total:  3.360
+
+
+    time_namelookup:  0.000
+       time_connect:  0.055
+    time_appconnect:  0.000
+   time_pretransfer:  0.055
+      time_redirect:  0.000
+ time_starttransfer:  3.386
+                    ----------
+         time_total:  3.386
+
+
+    time_namelookup:  0.000
+       time_connect:  0.061
+    time_appconnect:  0.000
+   time_pretransfer:  0.061
+      time_redirect:  0.000
+ time_starttransfer:  2.464
+                    ----------
+         time_total:  2.464
+
+
+    time_namelookup:  0.000
+       time_connect:  0.084
+    time_appconnect:  0.000
+   time_pretransfer:  0.084
+      time_redirect:  0.000
+ time_starttransfer:  2.436
+                    ----------
+         time_total:  2.436
+
+
+    time_namelookup:  0.000
+       time_connect:  0.089
+    time_appconnect:  0.000
+   time_pretransfer:  0.089
+      time_redirect:  0.000
+ time_starttransfer:  2.439
+                    ----------
+         time_total:  2.439
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  3.314
+                    ----------
+         time_total:  3.314
+
+
+    time_namelookup:  0.000
+       time_connect:  0.221
+    time_appconnect:  0.000
+   time_pretransfer:  0.221
+      time_redirect:  0.000
+ time_starttransfer:  3.906
+                    ----------
+         time_total:  3.906
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  3.320
+                    ----------
+         time_total:  3.321
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  3.333
+                    ----------
+         time_total:  3.333
+
+
+    time_namelookup:  0.000
+       time_connect:  0.039
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  3.386
+                    ----------
+         time_total:  3.386
+
+
+    time_namelookup:  0.000
+       time_connect:  0.043
+    time_appconnect:  0.000
+   time_pretransfer:  0.043
+      time_redirect:  0.000
+ time_starttransfer:  3.346
+                    ----------
+         time_total:  3.346
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  3.375
+                    ----------
+         time_total:  3.375
+
+
+    time_namelookup:  0.000
+       time_connect:  0.039
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  3.335
+                    ----------
+         time_total:  3.335
+
+
+    time_namelookup:  0.000
+       time_connect:  0.042
+    time_appconnect:  0.000
+   time_pretransfer:  0.042
+      time_redirect:  0.000
+ time_starttransfer:  3.397
+                    ----------
+         time_total:  3.397
+
+
+    time_namelookup:  0.000
+       time_connect:  0.060
+    time_appconnect:  0.000
+   time_pretransfer:  0.061
+      time_redirect:  0.000
+ time_starttransfer:  3.578
+                    ----------
+         time_total:  3.578
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  3.348
+                    ----------
+         time_total:  3.348
+
+
+    time_namelookup:  0.000
+       time_connect:  0.040
+    time_appconnect:  0.000
+   time_pretransfer:  0.040
+      time_redirect:  0.000
+ time_starttransfer:  3.363
+                    ----------
+         time_total:  3.363
+
+
+    time_namelookup:  0.000
+       time_connect:  0.077
+    time_appconnect:  0.000
+   time_pretransfer:  0.077
+      time_redirect:  0.000
+ time_starttransfer:  2.588
+                    ----------
+         time_total:  2.588
+
+
+    time_namelookup:  0.000
+       time_connect:  0.048
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  3.333
+                    ----------
+         time_total:  3.333
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  3.381
+                    ----------
+         time_total:  3.382
+
+
+    time_namelookup:  0.003
+       time_connect:  0.044
+    time_appconnect:  0.000
+   time_pretransfer:  0.044
+      time_redirect:  0.000
+ time_starttransfer:  3.375
+                    ----------
+         time_total:  3.375
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  3.373
+                    ----------
+         time_total:  3.374
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  3.344
+                    ----------
+         time_total:  3.345
+
+
+    time_namelookup:  0.000
+       time_connect:  0.032
+    time_appconnect:  0.000
+   time_pretransfer:  0.032
+      time_redirect:  0.000
+ time_starttransfer:  3.321
+                    ----------
+         time_total:  3.321
+
+
+    time_namelookup:  0.000
+       time_connect:  0.200
+    time_appconnect:  0.000
+   time_pretransfer:  0.200
+      time_redirect:  0.000
+ time_starttransfer:  4.147
+                    ----------
+         time_total:  4.147
+
+
+    time_namelookup:  0.000
+       time_connect:  0.037
+    time_appconnect:  0.000
+   time_pretransfer:  0.037
+      time_redirect:  0.000
+ time_starttransfer:  3.357
+                    ----------
+         time_total:  3.357
+
+
+    time_namelookup:  0.000
+       time_connect:  0.360
+    time_appconnect:  0.000
+   time_pretransfer:  0.360
+      time_redirect:  0.000
+ time_starttransfer:  2.702
+                    ----------
+         time_total:  2.702
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  3.381
+                    ----------
+         time_total:  3.382
+
+
+    time_namelookup:  0.000
+       time_connect:  0.296
+    time_appconnect:  0.000
+   time_pretransfer:  0.296
+      time_redirect:  0.000
+ time_starttransfer:  2.643
+                    ----------
+         time_total:  2.643
+
+
+    time_namelookup:  0.000
+       time_connect:  0.030
+    time_appconnect:  0.000
+   time_pretransfer:  0.030
+      time_redirect:  0.000
+ time_starttransfer:  3.357
+                    ----------
+         time_total:  3.357
+
+
+    time_namelookup:  0.000
+       time_connect:  0.031
+    time_appconnect:  0.000
+   time_pretransfer:  0.032
+      time_redirect:  0.000
+ time_starttransfer:  3.379
+                    ----------
+         time_total:  3.379
+
+
+    time_namelookup:  0.000
+       time_connect:  0.333
+    time_appconnect:  0.000
+   time_pretransfer:  0.333
+      time_redirect:  0.000
+ time_starttransfer:  2.709
+                    ----------
+         time_total:  2.709
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  3.389
+                    ----------
+         time_total:  3.389
+
+
+    time_namelookup:  0.000
+       time_connect:  0.182
+    time_appconnect:  0.000
+   time_pretransfer:  0.182
+      time_redirect:  0.000
+ time_starttransfer:  2.604
+                    ----------
+         time_total:  2.604
+
+
+    time_namelookup:  0.000
+       time_connect:  0.279
+    time_appconnect:  0.000
+   time_pretransfer:  0.279
+      time_redirect:  0.000
+ time_starttransfer:  2.607
+                    ----------
+         time_total:  2.607
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  3.341
+                    ----------
+         time_total:  3.341
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  3.354
+                    ----------
+         time_total:  3.354
+
+
+    time_namelookup:  0.000
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  3.348
+                    ----------
+         time_total:  3.348
+
+
+    time_namelookup:  0.000
+       time_connect:  0.048
+    time_appconnect:  0.000
+   time_pretransfer:  0.048
+      time_redirect:  0.000
+ time_starttransfer:  3.362
+                    ----------
+         time_total:  3.362
+
+
+    time_namelookup:  0.000
+       time_connect:  0.053
+    time_appconnect:  0.000
+   time_pretransfer:  0.053
+      time_redirect:  0.000
+ time_starttransfer:  3.393
+                    ----------
+         time_total:  3.393
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  3.317
+                    ----------
+         time_total:  3.317
+
+
+    time_namelookup:  0.000
+       time_connect:  0.040
+    time_appconnect:  0.000
+   time_pretransfer:  0.040
+      time_redirect:  0.000
+ time_starttransfer:  3.376
+                    ----------
+         time_total:  3.376
+
+
+    time_namelookup:  0.000
+       time_connect:  0.044
+    time_appconnect:  0.000
+   time_pretransfer:  0.044
+      time_redirect:  0.000
+ time_starttransfer:  3.312
+                    ----------
+         time_total:  3.312
+
+
+    time_namelookup:  0.000
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  3.327
+                    ----------
+         time_total:  3.327
+
+
+    time_namelookup:  0.000
+       time_connect:  0.054
+    time_appconnect:  0.000
+   time_pretransfer:  0.054
+      time_redirect:  0.000
+ time_starttransfer:  3.367
+                    ----------
+         time_total:  3.368
+
+
+    time_namelookup:  0.000
+       time_connect:  0.050
+    time_appconnect:  0.000
+   time_pretransfer:  0.050
+      time_redirect:  0.000
+ time_starttransfer:  3.356
+                    ----------
+         time_total:  3.357
+
+
+    time_namelookup:  0.000
+       time_connect:  0.054
+    time_appconnect:  0.000
+   time_pretransfer:  0.054
+      time_redirect:  0.000
+ time_starttransfer:  3.337
+                    ----------
+         time_total:  3.337
+
+
+    time_namelookup:  0.000
+       time_connect:  0.064
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  4.167
+                    ----------
+         time_total:  4.167
+
+
+    time_namelookup:  0.000
+       time_connect:  0.046
+    time_appconnect:  0.000
+   time_pretransfer:  0.046
+      time_redirect:  0.000
+ time_starttransfer:  3.392
+                    ----------
+         time_total:  3.392
+
+
+    time_namelookup:  0.000
+       time_connect:  0.068
+    time_appconnect:  0.000
+   time_pretransfer:  0.068
+      time_redirect:  0.000
+ time_starttransfer:  4.198
+                    ----------
+         time_total:  4.198
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  3.545
+                    ----------
+         time_total:  3.545
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  3.349
+                    ----------
+         time_total:  3.349
+
+
+    time_namelookup:  0.000
+       time_connect:  0.058
+    time_appconnect:  0.000
+   time_pretransfer:  0.058
+      time_redirect:  0.000
+ time_starttransfer:  3.394
+                    ----------
+         time_total:  3.394
+
+
+    time_namelookup:  0.000
+       time_connect:  0.063
+    time_appconnect:  0.000
+   time_pretransfer:  0.063
+      time_redirect:  0.000
+ time_starttransfer:  3.313
+                    ----------
+         time_total:  3.313
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.037
+      time_redirect:  0.000
+ time_starttransfer:  3.571
+                    ----------
+         time_total:  3.571
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  3.327
+                    ----------
+         time_total:  3.327
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.066
+      time_redirect:  0.000
+ time_starttransfer:  3.411
+                    ----------
+         time_total:  3.411
+
+
+    time_namelookup:  0.000
+       time_connect:  0.058
+    time_appconnect:  0.000
+   time_pretransfer:  0.058
+      time_redirect:  0.000
+ time_starttransfer:  3.382
+                    ----------
+         time_total:  3.382
+
+
+    time_namelookup:  0.000
+       time_connect:  0.073
+    time_appconnect:  0.000
+   time_pretransfer:  0.074
+      time_redirect:  0.000
+ time_starttransfer:  3.361
+                    ----------
+         time_total:  3.361
+
+
+    time_namelookup:  0.000
+       time_connect:  0.078
+    time_appconnect:  0.000
+   time_pretransfer:  0.078
+      time_redirect:  0.000
+ time_starttransfer:  3.367
+                    ----------
+         time_total:  3.368
+
+
+    time_namelookup:  0.000
+       time_connect:  0.063
+    time_appconnect:  0.000
+   time_pretransfer:  0.063
+      time_redirect:  0.000
+ time_starttransfer:  3.404
+                    ----------
+         time_total:  3.404
+
+
+    time_namelookup:  0.000
+       time_connect:  0.077
+    time_appconnect:  0.000
+   time_pretransfer:  0.077
+      time_redirect:  0.000
+ time_starttransfer:  3.399
+                    ----------
+         time_total:  3.399
+
+
+    time_namelookup:  0.000
+       time_connect:  0.045
+    time_appconnect:  0.000
+   time_pretransfer:  0.045
+      time_redirect:  0.000
+ time_starttransfer:  3.539
+                    ----------
+         time_total:  3.539
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  4.135
+                    ----------
+         time_total:  4.135
+
+
+    time_namelookup:  0.000
+       time_connect:  0.233
+    time_appconnect:  0.000
+   time_pretransfer:  0.234
+      time_redirect:  0.000
+ time_starttransfer:  4.894
+                    ----------
+         time_total:  4.894
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  4.433
+                    ----------
+         time_total:  4.433
+
+
+    time_namelookup:  0.000
+       time_connect:  0.070
+    time_appconnect:  0.000
+   time_pretransfer:  0.070
+      time_redirect:  0.000
+ time_starttransfer:  3.465
+                    ----------
+         time_total:  3.466
+
+
+    time_namelookup:  0.000
+       time_connect:  0.040
+    time_appconnect:  0.000
+   time_pretransfer:  0.040
+      time_redirect:  0.000
+ time_starttransfer:  4.021
+                    ----------
+         time_total:  4.021
+
+
+    time_namelookup:  0.000
+       time_connect:  0.073
+    time_appconnect:  0.000
+   time_pretransfer:  0.074
+      time_redirect:  0.000
+ time_starttransfer:  3.490
+                    ----------
+         time_total:  3.490
+
+
+    time_namelookup:  0.000
+       time_connect:  0.073
+    time_appconnect:  0.000
+   time_pretransfer:  0.073
+      time_redirect:  0.000
+ time_starttransfer:  3.478
+                    ----------
+         time_total:  3.478
+
+
+    time_namelookup:  0.000
+       time_connect:  0.084
+    time_appconnect:  0.000
+   time_pretransfer:  0.084
+      time_redirect:  0.000
+ time_starttransfer:  3.530
+                    ----------
+         time_total:  3.530
+
+
+    time_namelookup:  0.000
+       time_connect:  0.089
+    time_appconnect:  0.000
+   time_pretransfer:  0.089
+      time_redirect:  0.000
+ time_starttransfer:  3.537
+                    ----------
+         time_total:  3.537
+
+
+    time_namelookup:  0.000
+       time_connect:  0.083
+    time_appconnect:  0.000
+   time_pretransfer:  0.083
+      time_redirect:  0.000
+ time_starttransfer:  3.559
+                    ----------
+         time_total:  3.559
+
+
+    time_namelookup:  0.000
+       time_connect:  0.065
+    time_appconnect:  0.000
+   time_pretransfer:  0.065
+      time_redirect:  0.000
+ time_starttransfer:  3.531
+                    ----------
+         time_total:  3.531
+
+
+    time_namelookup:  0.000
+       time_connect:  0.059
+    time_appconnect:  0.000
+   time_pretransfer:  0.059
+      time_redirect:  0.000
+ time_starttransfer:  3.733
+                    ----------
+         time_total:  3.733
+
+
+    time_namelookup:  0.000
+       time_connect:  0.204
+    time_appconnect:  0.000
+   time_pretransfer:  0.204
+      time_redirect:  0.000
+ time_starttransfer:  3.548
+                    ----------
+         time_total:  3.548
+
+
+    time_namelookup:  0.000
+       time_connect:  0.209
+    time_appconnect:  0.000
+   time_pretransfer:  0.209
+      time_redirect:  0.000
+ time_starttransfer:  3.585
+                    ----------
+         time_total:  3.585
+
+
+    time_namelookup:  0.000
+       time_connect:  0.183
+    time_appconnect:  0.000
+   time_pretransfer:  0.183
+      time_redirect:  0.000
+ time_starttransfer:  3.592
+                    ----------
+         time_total:  3.592
+
+
+    time_namelookup:  0.000
+       time_connect:  0.198
+    time_appconnect:  0.000
+   time_pretransfer:  0.198
+      time_redirect:  0.000
+ time_starttransfer:  3.596
+                    ----------
+         time_total:  3.596
+
+
+    time_namelookup:  0.000
+       time_connect:  0.188
+    time_appconnect:  0.000
+   time_pretransfer:  0.188
+      time_redirect:  0.000
+ time_starttransfer:  3.590
+                    ----------
+         time_total:  3.591
+
+
+    time_namelookup:  0.000
+       time_connect:  0.192
+    time_appconnect:  0.000
+   time_pretransfer:  0.192
+      time_redirect:  0.000
+ time_starttransfer:  3.616
+                    ----------
+         time_total:  3.616
+
+
+    time_namelookup:  0.000
+       time_connect:  0.079
+    time_appconnect:  0.000
+   time_pretransfer:  0.079
+      time_redirect:  0.000
+ time_starttransfer:  4.749
+                    ----------
+         time_total:  4.749
+
+
+    time_namelookup:  0.000
+       time_connect:  0.352
+    time_appconnect:  0.000
+   time_pretransfer:  0.352
+      time_redirect:  0.000
+ time_starttransfer:  3.647
+                    ----------
+         time_total:  3.647
+
+
+    time_namelookup:  0.000
+       time_connect:  0.351
+    time_appconnect:  0.000
+   time_pretransfer:  0.352
+      time_redirect:  0.000
+ time_starttransfer:  3.653
+                    ----------
+         time_total:  3.653
+
+
+    time_namelookup:  0.000
+       time_connect:  0.341
+    time_appconnect:  0.000
+   time_pretransfer:  0.341
+      time_redirect:  0.000
+ time_starttransfer:  3.632
+                    ----------
+         time_total:  3.632
+
+
+    time_namelookup:  0.000
+       time_connect:  0.353
+    time_appconnect:  0.000
+   time_pretransfer:  0.353
+      time_redirect:  0.000
+ time_starttransfer:  3.647
+                    ----------
+         time_total:  3.647
+
+
+    time_namelookup:  0.000
+       time_connect:  0.354
+    time_appconnect:  0.000
+   time_pretransfer:  0.354
+      time_redirect:  0.000
+ time_starttransfer:  3.660
+                    ----------
+         time_total:  3.660
+
+
+    time_namelookup:  0.002
+       time_connect:  0.330
+    time_appconnect:  0.000
+   time_pretransfer:  0.330
+      time_redirect:  0.000
+ time_starttransfer:  3.693
+                    ----------
+         time_total:  3.693
+
+
+    time_namelookup:  0.000
+       time_connect:  0.343
+    time_appconnect:  0.000
+   time_pretransfer:  0.343
+      time_redirect:  0.000
+ time_starttransfer:  3.712
+                    ----------
+         time_total:  3.712
+
+
+    time_namelookup:  0.000
+       time_connect:  0.279
+    time_appconnect:  0.000
+   time_pretransfer:  0.279
+      time_redirect:  0.000
+ time_starttransfer:  3.651
+                    ----------
+         time_total:  3.651
+
+
+    time_namelookup:  0.000
+       time_connect:  0.253
+    time_appconnect:  0.000
+   time_pretransfer:  0.253
+      time_redirect:  0.000
+ time_starttransfer:  3.648
+                    ----------
+         time_total:  3.648
+
+
+    time_namelookup:  0.000
+       time_connect:  0.236
+    time_appconnect:  0.000
+   time_pretransfer:  0.236
+      time_redirect:  0.000
+ time_starttransfer:  3.637
+                    ----------
+         time_total:  3.637
+
+
+    time_namelookup:  0.000
+       time_connect:  0.060
+    time_appconnect:  0.000
+   time_pretransfer:  0.060
+      time_redirect:  0.000
+ time_starttransfer:  4.915
+                    ----------
+         time_total:  4.915
+
+
+    time_namelookup:  0.000
+       time_connect:  0.317
+    time_appconnect:  0.000
+   time_pretransfer:  0.317
+      time_redirect:  0.000
+ time_starttransfer:  3.759
+                    ----------
+         time_total:  3.759
+
+
+    time_namelookup:  0.000
+       time_connect:  0.265
+    time_appconnect:  0.000
+   time_pretransfer:  0.265
+      time_redirect:  0.000
+ time_starttransfer:  3.774
+                    ----------
+         time_total:  3.774
+
+
+    time_namelookup:  0.000
+       time_connect:  0.196
+    time_appconnect:  0.000
+   time_pretransfer:  0.196
+      time_redirect:  0.000
+ time_starttransfer:  3.702
+                    ----------
+         time_total:  3.702
+
+
+    time_namelookup:  0.000
+       time_connect:  0.271
+    time_appconnect:  0.000
+   time_pretransfer:  0.271
+      time_redirect:  0.000
+ time_starttransfer:  3.801
+                    ----------
+         time_total:  3.801
+
+
+    time_namelookup:  0.000
+       time_connect:  0.274
+    time_appconnect:  0.000
+   time_pretransfer:  0.274
+      time_redirect:  0.000
+ time_starttransfer:  3.693
+                    ----------
+         time_total:  3.693
+
+
+    time_namelookup:  0.000
+       time_connect:  0.257
+    time_appconnect:  0.000
+   time_pretransfer:  0.257
+      time_redirect:  0.000
+ time_starttransfer:  4.029
+                    ----------
+         time_total:  4.029
+
+
+    time_namelookup:  0.000
+       time_connect:  0.233
+    time_appconnect:  0.000
+   time_pretransfer:  0.233
+      time_redirect:  0.000
+ time_starttransfer:  4.006
+                    ----------
+         time_total:  4.006
+
+
+    time_namelookup:  0.000
+       time_connect:  0.215
+    time_appconnect:  0.000
+   time_pretransfer:  0.215
+      time_redirect:  0.000
+ time_starttransfer:  3.984
+                    ----------
+         time_total:  3.985
+
+
+    time_namelookup:  0.000
+       time_connect:  0.237
+    time_appconnect:  0.000
+   time_pretransfer:  0.237
+      time_redirect:  0.000
+ time_starttransfer:  3.963
+                    ----------
+         time_total:  3.963
+
+
+    time_namelookup:  0.000
+       time_connect:  0.188
+    time_appconnect:  0.000
+   time_pretransfer:  0.188
+      time_redirect:  0.000
+ time_starttransfer:  5.583
+                    ----------
+         time_total:  5.583
+
+
+    time_namelookup:  0.000
+       time_connect:  0.224
+    time_appconnect:  0.000
+   time_pretransfer:  0.224
+      time_redirect:  0.000
+ time_starttransfer:  5.695
+                    ----------
+         time_total:  5.696
+
+
+    time_namelookup:  0.000
+       time_connect:  0.292
+    time_appconnect:  0.000
+   time_pretransfer:  0.292
+      time_redirect:  0.000
+ time_starttransfer:  4.064
+                    ----------
+         time_total:  4.064
+
+
+    time_namelookup:  0.000
+       time_connect:  0.252
+    time_appconnect:  0.000
+   time_pretransfer:  0.252
+      time_redirect:  0.000
+ time_starttransfer:  3.919
+                    ----------
+         time_total:  3.919
+
+
+    time_namelookup:  0.000
+       time_connect:  0.220
+    time_appconnect:  0.000
+   time_pretransfer:  0.220
+      time_redirect:  0.000
+ time_starttransfer:  3.990
+                    ----------
+         time_total:  3.990
+
+
+    time_namelookup:  0.000
+       time_connect:  0.187
+    time_appconnect:  0.000
+   time_pretransfer:  0.187
+      time_redirect:  0.000
+ time_starttransfer:  5.591
+                    ----------
+         time_total:  5.592
+
+
+    time_namelookup:  0.000
+       time_connect:  0.144
+    time_appconnect:  0.000
+   time_pretransfer:  0.144
+      time_redirect:  0.000
+ time_starttransfer:  5.538
+                    ----------
+         time_total:  5.538
+
+
+    time_namelookup:  0.000
+       time_connect:  0.247
+    time_appconnect:  0.000
+   time_pretransfer:  0.247
+      time_redirect:  0.000
+ time_starttransfer:  3.911
+                    ----------
+         time_total:  3.911
+
+
+    time_namelookup:  0.000
+       time_connect:  0.204
+    time_appconnect:  0.000
+   time_pretransfer:  0.204
+      time_redirect:  0.000
+ time_starttransfer:  3.978
+                    ----------
+         time_total:  3.978
+
+
+    time_namelookup:  0.000
+       time_connect:  0.111
+    time_appconnect:  0.000
+   time_pretransfer:  0.111
+      time_redirect:  0.000
+ time_starttransfer:  5.476
+                    ----------
+         time_total:  5.476
+
+
+    time_namelookup:  0.000
+       time_connect:  0.128
+    time_appconnect:  0.000
+   time_pretransfer:  0.128
+      time_redirect:  0.000
+ time_starttransfer:  5.493
+                    ----------
+         time_total:  5.493
+
+
+    time_namelookup:  0.000
+       time_connect:  0.225
+    time_appconnect:  0.000
+   time_pretransfer:  0.226
+      time_redirect:  0.000
+ time_starttransfer:  4.091
+                    ----------
+         time_total:  4.091
+
+
+    time_namelookup:  0.000
+       time_connect:  0.078
+    time_appconnect:  0.000
+   time_pretransfer:  0.079
+      time_redirect:  0.000
+ time_starttransfer:  5.447
+                    ----------
+         time_total:  5.447
+
+
+    time_namelookup:  0.000
+       time_connect:  0.084
+    time_appconnect:  0.000
+   time_pretransfer:  0.084
+      time_redirect:  0.000
+ time_starttransfer:  5.452
+                    ----------
+         time_total:  5.452
+
+
+    time_namelookup:  0.000
+       time_connect:  0.072
+    time_appconnect:  0.000
+   time_pretransfer:  0.072
+      time_redirect:  0.000
+ time_starttransfer:  5.438
+                    ----------
+         time_total:  5.438
+
+
+    time_namelookup:  0.000
+       time_connect:  0.071
+    time_appconnect:  0.000
+   time_pretransfer:  0.071
+      time_redirect:  0.000
+ time_starttransfer:  5.443
+                    ----------
+         time_total:  5.443
+
+
+    time_namelookup:  0.000
+       time_connect:  0.174
+    time_appconnect:  0.000
+   time_pretransfer:  0.175
+      time_redirect:  0.000
+ time_starttransfer:  5.715
+                    ----------
+         time_total:  5.715
+
+
+    time_namelookup:  0.000
+       time_connect:  0.188
+    time_appconnect:  0.000
+   time_pretransfer:  0.188
+      time_redirect:  0.000
+ time_starttransfer:  5.804
+                    ----------
+         time_total:  5.805
+
+
+    time_namelookup:  0.000
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.050
+      time_redirect:  0.000
+ time_starttransfer:  5.372
+                    ----------
+         time_total:  5.372
+
+
+    time_namelookup:  0.000
+       time_connect:  0.156
+    time_appconnect:  0.000
+   time_pretransfer:  0.156
+      time_redirect:  0.000
+ time_starttransfer:  5.713
+                    ----------
+         time_total:  5.713
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  5.350
+                    ----------
+         time_total:  5.350
+
+
+    time_namelookup:  0.000
+       time_connect:  0.043
+    time_appconnect:  0.000
+   time_pretransfer:  0.044
+      time_redirect:  0.000
+ time_starttransfer:  5.392
+                    ----------
+         time_total:  5.392
+
+
+    time_namelookup:  0.000
+       time_connect:  0.120
+    time_appconnect:  0.000
+   time_pretransfer:  0.120
+      time_redirect:  0.000
+ time_starttransfer:  5.651
+                    ----------
+         time_total:  5.651
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  5.312
+                    ----------
+         time_total:  5.312
+
+
+    time_namelookup:  0.000
+       time_connect:  0.039
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  5.295
+                    ----------
+         time_total:  5.295
+
+
+    time_namelookup:  0.000
+       time_connect:  0.217
+    time_appconnect:  0.000
+   time_pretransfer:  0.217
+      time_redirect:  0.000
+ time_starttransfer:  5.940
+                    ----------
+         time_total:  5.941
+
+
+    time_namelookup:  0.000
+       time_connect:  0.039
+    time_appconnect:  0.000
+   time_pretransfer:  0.039
+      time_redirect:  0.000
+ time_starttransfer:  5.311
+                    ----------
+         time_total:  5.311
+
+
+    time_namelookup:  0.000
+       time_connect:  0.170
+    time_appconnect:  0.000
+   time_pretransfer:  0.170
+      time_redirect:  0.000
+ time_starttransfer:  5.912
+                    ----------
+         time_total:  5.913
+
+
+    time_namelookup:  0.000
+       time_connect:  0.208
+    time_appconnect:  0.000
+   time_pretransfer:  0.208
+      time_redirect:  0.000
+ time_starttransfer:  5.987
+                    ----------
+         time_total:  5.987
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  5.332
+                    ----------
+         time_total:  5.332
+
+
+    time_namelookup:  0.000
+       time_connect:  0.043
+    time_appconnect:  0.000
+   time_pretransfer:  0.043
+      time_redirect:  0.000
+ time_starttransfer:  5.541
+                    ----------
+         time_total:  5.541
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  5.567
+                    ----------
+         time_total:  5.567
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  5.286
+                    ----------
+         time_total:  5.286
+
+
+    time_namelookup:  0.000
+       time_connect:  0.035
+    time_appconnect:  0.000
+   time_pretransfer:  0.035
+      time_redirect:  0.000
+ time_starttransfer:  5.359
+                    ----------
+         time_total:  5.359
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.042
+      time_redirect:  0.000
+ time_starttransfer:  5.323
+                    ----------
+         time_total:  5.324
+
+
+    time_namelookup:  0.000
+       time_connect:  0.027
+    time_appconnect:  0.000
+   time_pretransfer:  0.027
+      time_redirect:  0.000
+ time_starttransfer:  5.284
+                    ----------
+         time_total:  5.285
+
+
+    time_namelookup:  0.000
+       time_connect:  0.237
+    time_appconnect:  0.000
+   time_pretransfer:  0.237
+      time_redirect:  0.000
+ time_starttransfer:  4.316
+                    ----------
+         time_total:  4.316
+
+
+    time_namelookup:  0.000
+       time_connect:  0.266
+    time_appconnect:  0.000
+   time_pretransfer:  0.266
+      time_redirect:  0.000
+ time_starttransfer:  4.381
+                    ----------
+         time_total:  4.381
+
+
+    time_namelookup:  0.000
+       time_connect:  0.033
+    time_appconnect:  0.000
+   time_pretransfer:  0.033
+      time_redirect:  0.000
+ time_starttransfer:  5.263
+                    ----------
+         time_total:  5.263
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  5.302
+                    ----------
+         time_total:  5.302
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  5.315
+                    ----------
+         time_total:  5.315
+
+
+    time_namelookup:  0.000
+       time_connect:  0.041
+    time_appconnect:  0.000
+   time_pretransfer:  0.041
+      time_redirect:  0.000
+ time_starttransfer:  5.703
+                    ----------
+         time_total:  5.703
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  5.704
+                    ----------
+         time_total:  5.704
+
+
+    time_namelookup:  0.000
+       time_connect:  0.039
+    time_appconnect:  0.000
+   time_pretransfer:  0.040
+      time_redirect:  0.000
+ time_starttransfer:  5.312
+                    ----------
+         time_total:  5.312
+
+
+    time_namelookup:  0.000
+       time_connect:  0.031
+    time_appconnect:  0.000
+   time_pretransfer:  0.031
+      time_redirect:  0.000
+ time_starttransfer:  5.277
+                    ----------
+         time_total:  5.277
+
+
+    time_namelookup:  0.000
+       time_connect:  0.042
+    time_appconnect:  0.000
+   time_pretransfer:  0.042
+      time_redirect:  0.000
+ time_starttransfer:  5.348
+                    ----------
+         time_total:  5.348
+
+
+    time_namelookup:  0.000
+       time_connect:  0.045
+    time_appconnect:  0.000
+   time_pretransfer:  0.045
+      time_redirect:  0.000
+ time_starttransfer:  5.314
+                    ----------
+         time_total:  5.314
+
+
+    time_namelookup:  0.000
+       time_connect:  0.043
+    time_appconnect:  0.000
+   time_pretransfer:  0.043
+      time_redirect:  0.000
+ time_starttransfer:  5.319
+                    ----------
+         time_total:  5.319
+
+
+    time_namelookup:  0.000
+       time_connect:  0.034
+    time_appconnect:  0.000
+   time_pretransfer:  0.034
+      time_redirect:  0.000
+ time_starttransfer:  5.301
+                    ----------
+         time_total:  5.301
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  5.211
+                    ----------
+         time_total:  5.211
+
+
+    time_namelookup:  0.000
+       time_connect:  0.049
+    time_appconnect:  0.000
+   time_pretransfer:  0.049
+      time_redirect:  0.000
+ time_starttransfer:  5.186
+                    ----------
+         time_total:  5.186
+
+
+    time_namelookup:  0.000
+       time_connect:  0.036
+    time_appconnect:  0.000
+   time_pretransfer:  0.036
+      time_redirect:  0.000
+ time_starttransfer:  5.292
+                    ----------
+         time_total:  5.292
+
+
+    time_namelookup:  0.000
+       time_connect:  0.038
+    time_appconnect:  0.000
+   time_pretransfer:  0.038
+      time_redirect:  0.000
+ time_starttransfer:  5.277
+                    ----------
+         time_total:  5.277
+
+
+    time_namelookup:  0.000
+       time_connect:  0.047
+    time_appconnect:  0.000
+   time_pretransfer:  0.047
+      time_redirect:  0.000
+ time_starttransfer:  5.176
+                    ----------
+         time_total:  5.176
+
+
+    time_namelookup:  0.000
+       time_connect:  0.048
+    time_appconnect:  0.000
+   time_pretransfer:  0.048
+      time_redirect:  0.000
+ time_starttransfer:  5.219
+                    ----------
+         time_total:  5.219
+
+
+    time_namelookup:  0.000
+       time_connect:  0.051
+    time_appconnect:  0.000
+   time_pretransfer:  0.051
+      time_redirect:  0.000
+ time_starttransfer:  5.237
+                    ----------
+         time_total:  5.238
+
+
+    time_namelookup:  0.000
+       time_connect:  0.063
+    time_appconnect:  0.000
+   time_pretransfer:  0.063
+      time_redirect:  0.000
+ time_starttransfer:  5.231
+                    ----------
+         time_total:  5.232
+
+
+    time_namelookup:  0.000
+       time_connect:  0.069
+    time_appconnect:  0.000
+   time_pretransfer:  0.069
+      time_redirect:  0.000
+ time_starttransfer:  5.065
+                    ----------
+         time_total:  5.065
+
+
+    time_namelookup:  0.000
+       time_connect:  0.055
+    time_appconnect:  0.000
+   time_pretransfer:  0.055
+      time_redirect:  0.000
+ time_starttransfer:  5.251
+                    ----------
+         time_total:  5.251
+
+
+    time_namelookup:  0.000
+       time_connect:  0.051
+    time_appconnect:  0.000
+   time_pretransfer:  0.051
+      time_redirect:  0.000
+ time_starttransfer:  5.288
+                    ----------
+         time_total:  5.288
+
+
+    time_namelookup:  0.000
+       time_connect:  0.060
+    time_appconnect:  0.000
+   time_pretransfer:  0.061
+      time_redirect:  0.000
+ time_starttransfer:  5.116
+                    ----------
+         time_total:  5.116
+
+
+    time_namelookup:  0.000
+       time_connect:  0.314
+    time_appconnect:  0.000
+   time_pretransfer:  0.314
+      time_redirect:  0.000
+ time_starttransfer:  4.969
+                    ----------
+         time_total:  4.969
+
+
+    time_namelookup:  0.000
+       time_connect:  0.285
+    time_appconnect:  0.000
+   time_pretransfer:  0.285
+      time_redirect:  0.000
+ time_starttransfer:  4.955
+                    ----------
+         time_total:  4.956
+
+
+    time_namelookup:  0.003
+       time_connect:  0.304
+    time_appconnect:  0.000
+   time_pretransfer:  0.304
+      time_redirect:  0.000
+ time_starttransfer:  4.989
+                    ----------
+         time_total:  4.989
+
+
+    time_namelookup:  0.000
+       time_connect:  0.244
+    time_appconnect:  0.000
+   time_pretransfer:  0.244
+      time_redirect:  0.000
+ time_starttransfer:  4.951
+                    ----------
+         time_total:  4.951
+
+
+    time_namelookup:  0.000
+       time_connect:  0.300
+    time_appconnect:  0.000
+   time_pretransfer:  0.300
+      time_redirect:  0.000
+ time_starttransfer:  5.011
+                    ----------
+         time_total:  5.011
+
+
+    time_namelookup:  0.000
+       time_connect:  0.259
+    time_appconnect:  0.000
+   time_pretransfer:  0.259
+      time_redirect:  0.000
+ time_starttransfer:  4.864
+                    ----------
+         time_total:  4.864
+
+
+    time_namelookup:  0.000
+       time_connect:  0.262
+    time_appconnect:  0.000
+   time_pretransfer:  0.263
+      time_redirect:  0.000
+ time_starttransfer:  4.878
+                    ----------
+         time_total:  4.878
+
+
+    time_namelookup:  0.000
+       time_connect:  0.137
+    time_appconnect:  0.000
+   time_pretransfer:  0.137
+      time_redirect:  0.000
+ time_starttransfer:  7.281
+                    ----------
+         time_total:  7.281
+
+
+    time_namelookup:  0.000
+       time_connect:  0.131
+    time_appconnect:  0.000
+   time_pretransfer:  0.131
+      time_redirect:  0.000
+ time_starttransfer:  7.285
+                    ----------
+         time_total:  7.286
+
+
+    time_namelookup:  0.000
+       time_connect:  0.128
+    time_appconnect:  0.000
+   time_pretransfer:  0.129
+      time_redirect:  0.000
+ time_starttransfer:  7.251
+                    ----------
+         time_total:  7.252
+
+
+    time_namelookup:  0.000
+       time_connect:  0.135
+    time_appconnect:  0.000
+   time_pretransfer:  0.135
+      time_redirect:  0.000
+ time_starttransfer:  7.286
+                    ----------
+         time_total:  7.286
+
+
+    time_namelookup:  0.000
+       time_connect:  0.113
+    time_appconnect:  0.000
+   time_pretransfer:  0.114
+      time_redirect:  0.000
+ time_starttransfer:  7.343
+                    ----------
+         time_total:  7.344
+
+
+    time_namelookup:  0.000
+       time_connect:  0.152
+    time_appconnect:  0.000
+   time_pretransfer:  0.153
+      time_redirect:  0.000
+ time_starttransfer:  7.383
+                    ----------
+         time_total:  7.383
+
+
+    time_namelookup:  0.000
+       time_connect:  0.161
+    time_appconnect:  0.000
+   time_pretransfer:  0.161
+      time_redirect:  0.000
+ time_starttransfer:  7.393
+                    ----------
+         time_total:  7.393
+
+
+    time_namelookup:  0.000
+       time_connect:  0.117
+    time_appconnect:  0.000
+   time_pretransfer:  0.118
+      time_redirect:  0.000
+ time_starttransfer:  7.398
+                    ----------
+         time_total:  7.398
+
+
+    time_namelookup:  0.000
+       time_connect:  0.173
+    time_appconnect:  0.000
+   time_pretransfer:  0.173
+      time_redirect:  0.000
+ time_starttransfer:  7.482
+                    ----------
+         time_total:  7.482
+
+
+    time_namelookup:  0.000
+       time_connect:  0.102
+    time_appconnect:  0.000
+   time_pretransfer:  0.102
+      time_redirect:  0.000
+ time_starttransfer:  7.412
+                    ----------
+         time_total:  7.412
+
+
+    time_namelookup:  0.000
+       time_connect:  0.084
+    time_appconnect:  0.000
+   time_pretransfer:  0.084
+      time_redirect:  0.000
+ time_starttransfer:  7.355
+                    ----------
+         time_total:  7.356
+
+
+    time_namelookup:  0.000
+       time_connect:  0.093
+    time_appconnect:  0.000
+   time_pretransfer:  0.093
+      time_redirect:  0.000
+ time_starttransfer:  7.430
+                    ----------
+         time_total:  7.430
+
+
+    time_namelookup:  0.000
+       time_connect:  0.094
+    time_appconnect:  0.000
+   time_pretransfer:  0.094
+      time_redirect:  0.000
+ time_starttransfer:  7.372
+                    ----------
+         time_total:  7.372
+
+
+    time_namelookup:  0.000
+       time_connect:  0.116
+    time_appconnect:  0.000
+   time_pretransfer:  0.116
+      time_redirect:  0.000
+ time_starttransfer:  7.394
+                    ----------
+         time_total:  7.394
+
+
+    time_namelookup:  0.000
+       time_connect:  0.099
+    time_appconnect:  0.000
+   time_pretransfer:  0.099
+      time_redirect:  0.000
+ time_starttransfer:  7.376
+                    ----------
+         time_total:  7.377
+
+
+    time_namelookup:  0.000
+       time_connect:  0.081
+    time_appconnect:  0.000
+   time_pretransfer:  0.081
+      time_redirect:  0.000
+ time_starttransfer:  7.386
+                    ----------
+         time_total:  7.386
+
+
+    time_namelookup:  0.000
+       time_connect:  0.069
+    time_appconnect:  0.000
+   time_pretransfer:  0.069
+      time_redirect:  0.000
+ time_starttransfer:  7.292
+                    ----------
+         time_total:  7.292
+
+
+    time_namelookup:  0.000
+       time_connect:  0.101
+    time_appconnect:  0.000
+   time_pretransfer:  0.101
+      time_redirect:  0.000
+ time_starttransfer:  7.408
+                    ----------
+         time_total:  7.408
+
+
+    time_namelookup:  0.000
+       time_connect:  0.073
+    time_appconnect:  0.000
+   time_pretransfer:  0.073
+      time_redirect:  0.000
+ time_starttransfer:  7.317
+                    ----------
+         time_total:  7.317
+
+
+    time_namelookup:  0.000
+       time_connect:  0.080
+    time_appconnect:  0.000
+   time_pretransfer:  0.080
+      time_redirect:  0.000
+ time_starttransfer:  7.419
+                    ----------
+         time_total:  7.419
+
+
+    time_namelookup:  0.000
+       time_connect:  0.032
+    time_appconnect:  0.000
+   time_pretransfer:  0.032
+      time_redirect:  0.000
+ time_starttransfer:  7.125
+                    ----------
+         time_total:  7.125
+
+
