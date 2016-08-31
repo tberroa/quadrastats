@@ -78,15 +78,21 @@ class AddFriend(APIView):
             if riot_response[0] != 200:
                 return Response(invalid_riot_response)
 
-            # extract the summoner data
-            friend = riot_response[1]
+            # extract the summoner
+            friend = riot_response[1].get(friend_key)
+
+            # ensure the data is valid
+            if friend is None:
+                return Response(invalid_riot_response)
+
+            # extract the specific summoner field values
             friend_name = friend.get("name")
             friend_id = friend.get("id")
             friend_profile_icon = friend.get("profileIconId")
 
             # ensure the data is valid
             if None in (friend_name, friend_id, friend_profile_icon):
-                return Response(invalid_riot_response)
+                return Response(friend)
 
             # use the summoner id to get the friends league information
             args = {"request": 4, "summoner_ids": str(friend_id)}
