@@ -6,7 +6,7 @@ rm -f results/st_2.txt
 
 # constants
 BODY='{"region":"na","key":"frosiph","password":"123456"}'
-FORMAT="@../config/curl-format.txt"
+FORMAT="@config/curl-format.txt"
 START=$(date +%s)
 URL=54.196.223.185/summoners/login/
 
