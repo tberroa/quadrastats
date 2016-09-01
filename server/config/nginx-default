@@ -1,0 +1,36 @@
+# Portal server
+server {
+	listen 80;
+        server_name 54.196.223.185
+		    ec2-54-196-223-185.compute-1.amazonaws.com;
+
+	location /loaderio-7a9dae2598143cb94ae9babcda11b9d1.txt {
+		root /home/ubuntu/portal/server/verification;
+		autoindex off;
+        }
+
+	location /static/ {
+		root /home/ubuntu;
+		autoindex off;
+        }
+
+	location / {
+		include /home/ubuntu/portal/backend/portal/uwsgi_params;
+		uwsgi_pass unix:/home/ubuntu/portal/backend/portal/portal.sock;
+	}
+}
+
+# default server
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+
+	root /usr/share/nginx/html;
+	index index.html index.htm;
+
+	server_name localhost;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}
