@@ -4,7 +4,7 @@ server {
         server_name 54.82.255.85
 		    ec2-54-82-255-85.compute-1.amazonaws.com;
 
-	location /loaderio-7a9dae2598143cb94ae9babcda11b9d1.txt {
+	location /loaderio-562fde5f829b67b8907016b274dce120.txt {
 		root /home/ubuntu/portal/server/verification;
 		autoindex off;
         }
