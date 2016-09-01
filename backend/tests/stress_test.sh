@@ -8,7 +8,7 @@ rm -f results/st_2.txt
 BODY='{"region":"na","key":"frosiph","password":"123456"}'
 FORMAT="@config/curl-format.txt"
 START=$(date +%s)
-URL=54.196.223.185/summoners/login/
+URL=portal-domain.us-east-1.elasticbeanstalk.com/summoners/login/
 
 # execute test
 for i in {1..500}; do
