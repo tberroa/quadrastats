@@ -2,7 +2,7 @@
 USER=ec2-user
 
 # Absolute or relative path to the 'celery' command:
-CELERY_BIN="/home/${USER}/portal/backend/myvenv/bin/celery"
+CELERY_BIN="/opt/python/run/venv/bin/celery"
 
 # App instance to use
 CELERY_APP="portal"
