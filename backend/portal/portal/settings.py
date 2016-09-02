@@ -6,9 +6,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '5w&-z-f($wngx=iix#mp@k1ryah^q52y_l!pv-qj**vb1x(5(c'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'summoners',
@@ -127,14 +127,14 @@ REST_FRAMEWORK = {
     }
 }
 
-CELERYBEAT_SCHEDULE = {
-    'update-all-summoners': {
-        'task': 'stats.tasks.update_all',
-        'schedule': timedelta(minutes=20)
-    },
+BROKER_URL = 'redis://localhost:6379/0'
+
+BROKER_TRANSPORT_OPTIONS = {
+    'fanout_prefix': True,
+    'fanout_patterns': True
 }
 
-CELERY_RESULT_BACKEND = 'rpc'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 CELERY_ACCEPT_CONTENT = ['pickle']
 

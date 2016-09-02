@@ -1,6 +1,3 @@
-Django==1.9.6
-PyMySQL==0.7.8
-PyYAML==3.12
 amqp==1.4.9
 anyjson==0.3.3
 awsebcli==3.7.8
@@ -10,6 +7,7 @@ botocore==1.4.50
 celery==3.1.23
 cement==2.8.2
 colorama==0.3.7
+Django==1.9.6
 djangorestframework==3.3.3
 docker-py==1.7.2
 dockerpty==0.4.1
@@ -18,9 +16,12 @@ docutils==0.12
 jmespath==0.9.0
 kombu==3.0.35
 pathspec==0.3.4
+PyMySQL==0.7.8
 python-dateutil==2.5.3
 pytz==2016.4
-regex==2016.06.05
+PyYAML==3.12
+redis==2.10.5
+regex==2016.6.5
 requests==2.9.1
 semantic-version==2.5.0
 six==1.10.0
