@@ -3,12 +3,13 @@
 # clean project directory
 ./clean.sh
 
-# move celery config files to proper location
-if [ "$1" = "-dev" ]; then
-    cd celery/config/dev/
-    sudo ./update.sh
-else 
+# set up configuration
+if [ "$1" = "--prod" ]; then
     cd celery/config/prod
+    sudo ./update.sh
+    sudo chmod 777 /opt/python/current/app
+else 
+    cd celery/config/dev
     sudo ./update.sh
 fi;
 
