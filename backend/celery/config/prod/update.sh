@@ -6,7 +6,7 @@
 # ran from.
 
 # get user
-USER=tberroa
+USER=ec2-user
 
 # update files
 cp /home/${USER}/portal/backend/celery/config/prod/celerybeat-init /etc/init.d/celerybeat
