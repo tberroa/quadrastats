@@ -13,4 +13,5 @@ Create python3 virtual environment in /backend: virtualenv -p python3 myvenv
 Activate myvenv and pip install requirements: pip install -r requirements.txt
 Create backend/portal/keys.py
 Update database: python manage.py migrate
+Set up AWS Elastic Beanstalk files in /backend/portal: eb init
 
