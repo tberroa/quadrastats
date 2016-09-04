@@ -11,3 +11,6 @@ sudo chmod 777 /opt/python/current/app/
 
 # start up celery
 sudo /home/${USER}/portal/backend/celery/./restart.sh
+
+# restart apache server
+sudo service httpd restart
