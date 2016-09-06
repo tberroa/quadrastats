@@ -1,7 +1,5 @@
 import os
 from datetime import timedelta
-from portal.keys import AWS_ACCESS_KEY_ID
-from portal.keys import AWS_SECRET_KEY 
 from portal.keys import DJANGO_SECRET_KEY
 from portal.keys import EMAIL_PASSWORD
 
@@ -133,15 +131,12 @@ REST_FRAMEWORK = {
 ##########################################################
 
 ################## Celery Settings #######################
-BROKER_TRANSPORT = 'sqs'
+BROKER_URL = 'redis://localhost:6379/0'
 
 BROKER_TRANSPORT_OPTIONS = {
-    'region': 'us-east-1',
+    'fanout_prefix': True,
+    'fanout_patterns': True,
 }
-
-BROKER_USER = AWS_ACCESS_KEY_ID
-
-BROKER_PASSWORD = AWS_SECRET_KEY
 
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
