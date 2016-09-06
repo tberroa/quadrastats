@@ -13,4 +13,4 @@ sudo chmod 777 /opt/python/current/app/
 sudo /home/${USER}/portal/backend/celery/./restart.sh
 
 # restart apache server
-sudo service httpd restart
+#sudo service httpd restart
