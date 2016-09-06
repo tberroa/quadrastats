@@ -1,12 +1,16 @@
 import os
 from datetime import timedelta
-from portal.keys import email_password
+from portal.keys import AWS_ACCESS_KEY_ID
+from portal.keys import AWS_SECRET_KEY 
+from portal.keys import DJANGO_SECRET_KEY
+from portal.keys import EMAIL_PASSWORD
 
+################## Django Settings #######################
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '5w&-z-f($wngx=iix#mp@k1ryah^q52y_l!pv-qj**vb1x(5(c'
+SECRET_KEY = DJANGO_SECRET_KEY
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -126,13 +130,18 @@ REST_FRAMEWORK = {
         'user': '500000/sec'
     }
 }
+##########################################################
 
-BROKER_URL = 'redis://localhost:6379/0'
+################## Celery Settings #######################
+BROKER_TRANSPORT = 'sqs'
 
 BROKER_TRANSPORT_OPTIONS = {
-    'fanout_prefix': True,
-    'fanout_patterns': True
+    'region': 'us-east-1',
 }
+
+BROKER_USER = AWS_ACCESS_KEY_ID
+
+BROKER_PASSWORD = AWS_SECRET_KEY
 
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
@@ -141,7 +150,9 @@ CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_TASK_SERIALIZER = 'pickle'
 
 CELERY_RESULT_SERIALIZER = 'pickle'
+##########################################################
 
+################## Email Settings ########################
 DEFAULT_FROM_EMAIL = 'tberroa@outlook.com'
 
 EMAIL_USE_TLS = True
@@ -150,7 +161,8 @@ EMAIL_HOST = 'smtp-mail.outlook.com'
 
 EMAIL_HOST_USER = 'tberroa@outlook.com'
 
-EMAIL_HOST_PASSWORD = email_password
+EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
 
 EMAIL_PORT = 587
+##########################################################
 

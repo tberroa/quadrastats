@@ -5,7 +5,7 @@ import requests
 import string
 import time
 from celery import shared_task
-from portal.keys import riot_api_key
+from portal.keys import RIOT_API_KEY
 
 
 def format_key(key):
@@ -28,29 +28,29 @@ def request_function(region, args):
     if request == 1:
         url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" \
               + format_key(key) \
-              + "?api_key=" + riot_api_key
+              + "?api_key=" + RIOT_API_KEY
     elif request == 2:
         url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.2/matchlist/by-summoner/" \
               + str(summoner_id) \
               + "?rankedQueues=TEAM_BUILDER_DRAFT_RANKED_5x5" \
               + "&seasons=SEASON2016" \
-              + "&api_key=" + riot_api_key
+              + "&api_key=" + RIOT_API_KEY
     elif request == 3:
         url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.2/match/" \
               + str(match_id) \
-              + "?api_key=" + riot_api_key
+              + "?api_key=" + RIOT_API_KEY
     elif request == 4:
         url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" \
               + str(summoner_ids) \
-              + "?api_key=" + riot_api_key
+              + "?api_key=" + RIOT_API_KEY
     elif request == 5:
         url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" \
               + str(summoner_id) + "/" \
-              + "ranked?season=SEASON2016&api_key=" + riot_api_key
+              + "ranked?season=SEASON2016&api_key=" + RIOT_API_KEY
     elif request == 6:
         url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/" \
               + str(summoner_id) + "/" \
-              + "runes?api_key=" + riot_api_key
+              + "runes?api_key=" + RIOT_API_KEY
     else:
         url = ""
 
