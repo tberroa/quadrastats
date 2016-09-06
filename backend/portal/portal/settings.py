@@ -56,15 +56,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portal.wsgi.application'
 
-if not DEBUG:
+if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'portaldb',
-            'USER': 'tberroa',
-            'PASSWORD': RDS_PASSWORD,
-            'HOST': 'portaldb.cflq9mp1c8f1.us-east-1.rds.amazonaws.com',
-            'PORT': '3306',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
         }
     }
 else:
