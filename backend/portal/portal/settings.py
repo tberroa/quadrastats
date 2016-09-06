@@ -2,13 +2,14 @@ import os
 from datetime import timedelta
 from portal.keys import DJANGO_SECRET_KEY
 from portal.keys import EMAIL_PASSWORD
+from portal.keys import RDS_PASSWORD
 
 ################## Django Settings #######################
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = DJANGO_SECRET_KEY
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -55,15 +56,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portal.wsgi.application'
 
-if 'RDS_DB_NAME' in os.environ:
+if not DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
+            'NAME': 'portaldb',
+            'USER': 'tberroa',
+            'PASSWORD': RDS_PASSWORD,
+            'HOST': 'portaldb.cflq9mp1c8f1.us-east-1.rds.amazonaws.com',
+            'PORT': '3306',
         }
     }
 else:
