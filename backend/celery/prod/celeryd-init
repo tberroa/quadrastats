@@ -335,6 +335,7 @@ case "$1" in
     start)
         check_dev_null
         check_paths
+        rm -f $CELERYD_LOG_FILE
         start_workers
     ;;
 
@@ -355,11 +356,13 @@ case "$1" in
     restart)
         check_dev_null
         check_paths
+        rm -f $CELERYD_LOG_FILE
         restart_workers
     ;;
 
     graceful)
         check_dev_null
+        rm -f $CELERYD_LOG_FILE
         restart_workers_graceful
     ;;
 
@@ -376,6 +379,7 @@ case "$1" in
     try-restart)
         check_dev_null
         check_paths
+        rm -f $CELERYD_LOG_FILE
         restart_workers
     ;;
 

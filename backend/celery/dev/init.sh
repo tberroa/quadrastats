@@ -7,4 +7,7 @@ USER=tberroa
 sudo /home/${USER}/portal/backend/celery/dev/./update.sh
 
 # start up celery
-sudo /home/${USER}/portal/backend/celery/./restart.sh
+sudo service celerybeat stop
+sudo service celeryd stop
+sudo service celeryd start
+sudo service celerybeat start

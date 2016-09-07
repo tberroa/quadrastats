@@ -287,6 +287,7 @@ case "$1" in
     start)
         check_dev_null
         check_paths
+        rm -f $CELERYBEAT_LOG_FILE
         start_beat
     ;;
     stop)
@@ -304,6 +305,7 @@ case "$1" in
         check_paths
         stop_beat
         check_dev_null
+        rm -f $CELERYBEAT_LOG_FILE
         start_beat
     ;;
     create-paths)

@@ -146,6 +146,13 @@ CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_TASK_SERIALIZER = 'pickle'
 
 CELERY_RESULT_SERIALIZER = 'pickle'
+
+CELERYBEAT_SCHEDULE = {
+    'update-all-summoners': {
+        'task': 'stats.tasks.update_all',
+        'schedule': timedelta(minutes=20)
+    },
+}
 ##########################################################
 
 ################## Email Settings ########################
