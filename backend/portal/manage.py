@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-import pymysql
-import os
-import sys
 
+import os
+import pymysql
+import sys
 
 pymysql.install_as_MySQLdb()
 

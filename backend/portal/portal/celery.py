@@ -1,8 +1,11 @@
 from __future__ import absolute_import
 
 import os
+import pymysql
 from celery import Celery
 from django.conf import settings
+
+pymysql.install_as_MySQLdb()
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portal.settings')
 
