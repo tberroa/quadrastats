@@ -11,7 +11,6 @@ SETTING UP FOR DEVELOPMENT - Linux
 - Install virtualenv: sudo pip install virtualenv
 - Create python3 virtual environment in /backend: virtualenv -p python3 myvenv
 - Activate myvenv and pip install requirements: pip install -r requirements.txt
-- Create backend/portal/keys.py
-- Update database: python manage.py migrate
+- Create file /backend/portal/keys.py
 - Set up AWS Elastic Beanstalk files in /backend/portal: eb init
 
