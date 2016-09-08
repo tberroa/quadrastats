@@ -20,7 +20,6 @@ from portal.tasks import format_key
 from portal.tasks import riot_request
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from stats.tasks import update_match_stats_one
 from summoners.models import Summoner
 from summoners.models import User
 from summoners.serializers import SummonerSerializer
@@ -92,7 +91,7 @@ class AddFriend(APIView):
 
             # ensure the data is valid
             if None in (friend_name, friend_id, friend_profile_icon):
-                return Response(friend)
+                return Response(invalid_riot_response)
 
             # use the summoner id to get the friends league information
             args = {"request": 4, "summoner_ids": str(friend_id)}
@@ -183,9 +182,6 @@ class AddFriend(APIView):
                                                losses=losses,
                                                series=series,
                                                profile_icon=friend_profile_icon)
-
-            # get the match stats for the newly created summoner object
-            update_match_stats_one(friend_o)
 
         # add the friends key to the users friend list
         if user.friends != "":
@@ -588,9 +584,6 @@ class RegisterUser(APIView):
 
         # create a new summoner object
         summoner_o = Summoner.objects.create(user=user_o, **summoner_data)
-
-        # get the match stats for the newly created summoner object
-        update_match_stats_one(summoner_o)
 
         # serialize the summoner object
         return_json = SummonerSerializer(summoner_o).data

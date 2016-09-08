@@ -15,6 +15,7 @@ except User.DoesNotExist:
 
 
 # setup verification file for loaderio
+# noinspection PyUnusedLocal
 def loaderio(request):
     return HttpResponse('loaderio-89fb758787fb03c2be250691d3565029', content_type='text/plain')
 
