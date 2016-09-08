@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
+import com.google.gson.reflect.TypeToken;
 import com.quadrastats.R;
 import com.quadrastats.data.Constants;
 import com.quadrastats.data.RiotData;
@@ -29,8 +30,9 @@ import com.quadrastats.models.stats.SeasonStats;
 import com.quadrastats.models.summoner.Summoner;
 import com.quadrastats.models.summoner.User;
 import com.quadrastats.network.Http;
+import com.quadrastats.network.HttpResponse;
+import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.home.HomeActivity;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -122,7 +124,7 @@ public class SplashActivity extends AppCompatActivity {
 
             // 1. get list of current champions and the most recent data dragon version
             // make the request
-            String postResponse1 = "";
+            HttpResponse postResponse1 = null;
             try {
                 String url = Constants.URL_GET_CHAMPIONS;
                 postResponse1 = new Http().get(url);
@@ -130,9 +132,12 @@ public class SplashActivity extends AppCompatActivity {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse1 = ScreenUtil.responseHandler(SplashActivity.this, postResponse1);
+
             // parse the response
-            if (postResponse1.contains(Constants.VALID_GET_CHAMPIONS)) {
-                Champions champions = ModelUtil.fromJson(postResponse1, Champions.class);
+            if (postResponse1.valid) {
+                Champions champions = ModelUtil.fromJson(postResponse1.body, Champions.class);
                 riotData.setVersion(SplashActivity.this, champions.version);
                 riotData.setChampionsMap(SplashActivity.this, champions.data);
                 List<Champion> championsList = new ArrayList<>(champions.data.values());
@@ -156,7 +161,7 @@ public class SplashActivity extends AppCompatActivity {
                 request.keys = new ArrayList<>(Arrays.asList(summoner.friends.split(",")));
 
                 // make the request
-                String postResponse2 = "";
+                HttpResponse postResponse2 = null;
                 try {
                     String url = Constants.URL_GET_SUMMONERS;
                     postResponse2 = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
@@ -164,11 +169,14 @@ public class SplashActivity extends AppCompatActivity {
                     Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
                 }
 
+                // handle the response
+                postResponse2 = ScreenUtil.responseHandler(SplashActivity.this, postResponse2);
+
                 // save
-                if (postResponse2.contains(Constants.VALID_GET_SUMMONERS)) {
+                if (postResponse2.valid) {
                     Type type = new TypeToken<List<Summoner>>() {
                     }.getType();
-                    List<Summoner> friends = ModelUtil.fromJsonList(postResponse2, type);
+                    List<Summoner> friends = ModelUtil.fromJsonList(postResponse2.body, type);
                     ActiveAndroid.beginTransaction();
                     try {
                         for (Summoner friend : friends) {
@@ -193,7 +201,7 @@ public class SplashActivity extends AppCompatActivity {
                 request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
 
                 // make the request
-                String postResponse3 = "";
+                HttpResponse postResponse3 = null;
                 try {
                     String url = Constants.URL_GET_MATCH_STATS;
                     postResponse3 = new Http().post(url, ModelUtil.toJson(request, ReqMatchStats.class));
@@ -201,11 +209,14 @@ public class SplashActivity extends AppCompatActivity {
                     Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
                 }
 
+                // handle the response
+                postResponse3 = ScreenUtil.responseHandler(SplashActivity.this, postResponse3);
+
                 // save
-                if (postResponse3.contains(Constants.VALID_GET_MATCH_STATS)) {
+                if (postResponse3.valid) {
                     Type type = new TypeToken<List<MatchStats>>() {
                     }.getType();
-                    List<MatchStats> matchStatsList = ModelUtil.fromJsonList(postResponse3, type);
+                    List<MatchStats> matchStatsList = ModelUtil.fromJsonList(postResponse3.body, type);
                     ActiveAndroid.beginTransaction();
                     try {
                         for (MatchStats matchStats : matchStatsList) {
@@ -230,7 +241,7 @@ public class SplashActivity extends AppCompatActivity {
                 request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
 
                 // make the request
-                String postResponse4 = "";
+                HttpResponse postResponse4 = null;
                 try {
                     String url = Constants.URL_GET_SEASON_STATS;
                     postResponse4 = new Http().post(url, ModelUtil.toJson(request, ReqSeasonStats.class));
@@ -238,11 +249,14 @@ public class SplashActivity extends AppCompatActivity {
                     Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
                 }
 
+                // handle the response
+                postResponse4 = ScreenUtil.responseHandler(SplashActivity.this, postResponse4);
+
                 // save
-                if (postResponse4.contains(Constants.VALID_GET_SEASON_STATS)) {
+                if (postResponse4.valid) {
                     Type type = new TypeToken<List<SeasonStats>>() {
                     }.getType();
-                    List<SeasonStats> seasonsStatsList = ModelUtil.fromJsonList(postResponse4, type);
+                    List<SeasonStats> seasonsStatsList = ModelUtil.fromJsonList(postResponse4.body, type);
                     ActiveAndroid.beginTransaction();
                     try {
                         for (SeasonStats seasonStats : seasonsStatsList) {

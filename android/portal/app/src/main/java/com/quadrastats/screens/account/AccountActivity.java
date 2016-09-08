@@ -34,6 +34,7 @@ import com.quadrastats.models.requests.ReqChangePassword;
 import com.quadrastats.models.summoner.Summoner;
 import com.quadrastats.models.summoner.User;
 import com.quadrastats.network.Http;
+import com.quadrastats.network.HttpResponse;
 import com.quadrastats.screens.BaseActivity;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.authentication.AuthUtil;
@@ -304,10 +305,10 @@ public class AccountActivity extends BaseActivity {
         }
     }
 
-    private class RequestChangeEmail extends AsyncTask<ReqChangeEmail, Void, String> {
+    private class RequestChangeEmail extends AsyncTask<ReqChangeEmail, Void, HttpResponse> {
 
         @Override
-        protected String doInBackground(ReqChangeEmail... params) {
+        protected HttpResponse doInBackground(ReqChangeEmail... params) {
             LocalDB localDB = new LocalDB();
             UserData userData = new UserData();
 
@@ -318,7 +319,7 @@ public class AccountActivity extends BaseActivity {
             request.key = userSummoner.key;
 
             // make the request
-            String postResponse = "";
+            HttpResponse postResponse = null;
             try {
                 String url = Constants.URL_CHANGE_EMAIL;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqChangeEmail.class));
@@ -326,9 +327,11 @@ public class AccountActivity extends BaseActivity {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
-            // if request was successful, update user data
-            if (postResponse.contains(Constants.VALID_CHANGE_EMAIL)) {
-                User user = ModelUtil.fromJson(postResponse, User.class);
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(AccountActivity.this, postResponse);
+
+            if (postResponse.valid) {
+                User user = ModelUtil.fromJson(postResponse.body, User.class);
                 userData.setEmail(AccountActivity.this, user.email);
             }
 
@@ -336,22 +339,21 @@ public class AccountActivity extends BaseActivity {
         }
 
         @Override
-        protected void onPostExecute(String postResponse) {
-            if (postResponse.contains(Constants.VALID_CHANGE_EMAIL)) {
-                User user = ModelUtil.fromJson(postResponse, User.class);
+        protected void onPostExecute(HttpResponse postResponse) {
+            if (postResponse.valid) {
+                User user = ModelUtil.fromJson(postResponse.body, User.class);
                 TextView emailView = (TextView) findViewById(R.id.email_view);
                 emailView.setText(user.email);
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(AccountActivity.this, postResponse);
-                Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private class RequestChangePassword extends AsyncTask<ReqChangePassword, Void, String> {
+    private class RequestChangePassword extends AsyncTask<ReqChangePassword, Void, HttpResponse> {
 
         @Override
-        protected String doInBackground(ReqChangePassword... params) {
+        protected HttpResponse doInBackground(ReqChangePassword... params) {
             LocalDB localDB = new LocalDB();
             UserData userData = new UserData();
 
@@ -362,7 +364,7 @@ public class AccountActivity extends BaseActivity {
             request.key = user.key;
 
             // make the request
-            String postResponse = "";
+            HttpResponse postResponse = null;
             try {
                 String url = Constants.URL_CHANGE_PASSWORD;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqChangePassword.class));
@@ -370,17 +372,19 @@ public class AccountActivity extends BaseActivity {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(AccountActivity.this, postResponse);
+
             return postResponse;
         }
 
         @Override
-        protected void onPostExecute(String postResponse) {
-            if (postResponse.contains(Constants.VALID_CHANGE_PASSWORD)) {
+        protected void onPostExecute(HttpResponse postResponse) {
+            if (postResponse.valid) {
                 String message = getString(R.string.ma_successful_change);
                 Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(AccountActivity.this, postResponse);
-                Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
         }
     }

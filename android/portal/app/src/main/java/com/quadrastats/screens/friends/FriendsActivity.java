@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
+import com.google.gson.reflect.TypeToken;
 import com.quadrastats.R;
 import com.quadrastats.data.Constants;
 import com.quadrastats.data.LocalDB;
@@ -33,10 +34,10 @@ import com.quadrastats.models.requests.ReqFriend;
 import com.quadrastats.models.requests.ReqGetSummoners;
 import com.quadrastats.models.summoner.Summoner;
 import com.quadrastats.network.Http;
+import com.quadrastats.network.HttpResponse;
 import com.quadrastats.screens.BaseActivity;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.home.HomeActivity;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -193,25 +194,29 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
         }
     }
 
-    private class RequestFriendOp extends AsyncTask<String, Void, String[]> {
+    private class RequestFriendOp extends AsyncTask<String, Void, HttpResponse> {
 
         Summoner friend;
+        String friendKey;
         Summoner user;
 
         @Override
-        protected String[] doInBackground(String... params) {
+        protected HttpResponse doInBackground(String... params) {
             LocalDB localDB = new LocalDB();
             UserData userData = new UserData();
+
+            // store friend key
+            friendKey = params[0];
 
             // create the request object
             user = localDB.summoner(userData.getId(FriendsActivity.this));
             ReqFriend request = new ReqFriend();
             request.region = user.region;
             request.user_key = user.key;
-            request.friend_key = params[0];
+            request.friend_key = friendKey;
 
             // make the request
-            String postResponse = "";
+            HttpResponse postResponse = null;
             try {
                 String url;
                 if (add) {
@@ -224,18 +229,21 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(FriendsActivity.this, postResponse);
+
             // a successful request requires further local database operations, do those here
-            if (postResponse.contains(Constants.VALID_FRIEND_OP) && add) {
+            if (postResponse.valid && add) {
                 // save the new friend summoner object
-                friend = ModelUtil.fromJson(postResponse, Summoner.class);
+                friend = ModelUtil.fromJson(postResponse.body, Summoner.class);
                 friend.save();
 
                 // add the new friend to the users local summoner object friend list
                 user.addFriend(friend.key);
                 user.save();
-            } else if (postResponse.contains(Constants.VALID_FRIEND_OP) && !add) {
+            } else if (postResponse.valid && !add) {
                 // get the users updated friend list from the returned object
-                Summoner updatedUser = ModelUtil.fromJson(postResponse, Summoner.class);
+                Summoner updatedUser = ModelUtil.fromJson(postResponse.body, Summoner.class);
                 user.friends = updatedUser.friends;
 
                 // profile icon might have updated too
@@ -246,18 +254,12 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 localDB.summoner(request.friend_key).delete();
             }
 
-            String[] values = new String[2];
-            values[0] = params[0];
-            values[1] = postResponse;
-            return values;
+            return postResponse;
         }
 
         @Override
-        protected void onPostExecute(String[] values) {
-            String friendKey = values[0];
-            String postResponse = values[1];
-
-            if (postResponse.contains(Constants.VALID_FRIEND_OP)) {
+        protected void onPostExecute(HttpResponse postResponse) {
+            if (postResponse.valid) {
                 if (add) {
                     // update list view
                     friends.add(friend);
@@ -283,16 +285,15 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                     }
                 }
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(FriendsActivity.this, postResponse);
-                Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FriendsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private class UpdateSummoners extends AsyncTask<Void, Void, String> {
+    private class UpdateSummoners extends AsyncTask<Void, Void, HttpResponse> {
 
         @Override
-        protected String doInBackground(Void... params) {
+        protected HttpResponse doInBackground(Void... params) {
             LocalDB localDB = new LocalDB();
             UserData userData = new UserData();
 
@@ -306,7 +307,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             requestUpdatedUser.keys.add(user.key);
 
             // make the request
-            String postResponse1 = "";
+            HttpResponse postResponse1 = null;
             try {
                 String url = Constants.URL_GET_SUMMONERS;
                 postResponse1 = new Http().post(url, ModelUtil.toJson(requestUpdatedUser, ReqGetSummoners.class));
@@ -314,11 +315,14 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse1 = ScreenUtil.responseHandler(FriendsActivity.this, postResponse1);
+
             // update the original user object
-            if (postResponse1.contains(Constants.VALID_GET_SUMMONERS)) {
+            if (postResponse1.valid) {
                 Type type = new TypeToken<List<Summoner>>() {
                 }.getType();
-                List<Summoner> updatedUserList = ModelUtil.fromJsonList(postResponse1, type);
+                List<Summoner> updatedUserList = ModelUtil.fromJsonList(postResponse1.body, type);
                 Summoner updatedUser = updatedUserList.get(0);
                 user.tier = updatedUser.tier;
                 user.division = updatedUser.division;
@@ -350,7 +354,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 } finally {
                     ActiveAndroid.endTransaction();
                 }
-                return Constants.VALID_GET_SUMMONERS;
+                return postResponse1;
             }
 
             // use the updated user to create request object for getting the friends updated objects from the server
@@ -359,7 +363,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             request.keys = new ArrayList<>(Arrays.asList(user.friends.split(",")));
 
             // make the request
-            String postResponse2 = "";
+            HttpResponse postResponse2 = null;
             try {
                 String url = Constants.URL_GET_SUMMONERS;
                 postResponse2 = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
@@ -367,11 +371,14 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse2 = ScreenUtil.responseHandler(FriendsActivity.this, postResponse2);
+
             // update the friend summoner objects
-            if (postResponse2.contains(Constants.VALID_GET_SUMMONERS)) {
+            if (postResponse2.valid) {
                 Type type = new TypeToken<List<Summoner>>() {
                 }.getType();
-                List<Summoner> updatedFriends = ModelUtil.fromJsonList(postResponse2, type);
+                List<Summoner> updatedFriends = ModelUtil.fromJsonList(postResponse2.body, type);
                 ActiveAndroid.beginTransaction();
                 try {
                     // update the original friends that are on the new list and delete any not on the new list
@@ -418,7 +425,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
         }
 
         @Override
-        protected void onPostExecute(String postResponse) {
+        protected void onPostExecute(HttpResponse postResponse) {
             // turn off refresh animation
             SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
             swipeLayout.setRefreshing(false);
@@ -427,9 +434,8 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             friendsAdapter.notifyDataSetChanged();
 
             // check if an error occurred
-            if (!postResponse.contains(Constants.VALID_GET_SUMMONERS)) {
-                String message = ScreenUtil.postResponseErrorMessage(FriendsActivity.this, postResponse);
-                Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
+            if (!postResponse.valid) {
+                Toast.makeText(FriendsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
 
             // check if user has no friends

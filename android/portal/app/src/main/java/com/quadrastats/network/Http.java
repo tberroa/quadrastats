@@ -18,21 +18,53 @@ public class Http {
     private final OkHttpClient client = new OkHttpClient();
     private final MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
 
-    public String get(String url) throws IOException {
+    public HttpResponse get(String url) throws IOException {
+        // create the request
         Request request = new Builder().url(url).get().build();
-        Response rawResponse = client.newCall(request).execute();
-        String response = rawResponse.body().string().trim();
-        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + ": response is " + response);
-        return response;
+
+        // execute the request
+        Response response = client.newCall(request).execute();
+
+        // get response code
+        int code = response.code();
+
+        // log response code
+        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + "response code is " + code);
+
+        // get response body
+        String body = response.body().string().trim();
+
+        // log response body
+        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + ": response body is " + body);
+
+        // return HttpResponse object
+        return new HttpResponse(code, body);
     }
 
-    public String post(String url, String jsonString) throws IOException {
-        Log.d(Constants.TAG_DEBUG, "@HttpPostJson: post body is " + jsonString);
-        RequestBody body = RequestBody.create(mediaType, jsonString);
-        Request request = new Builder().url(url).post(body).build();
-        Response rawResponse = client.newCall(request).execute();
-        String response = rawResponse.body().string().trim();
-        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + ": response is " + response);
-        return response;
+    public HttpResponse post(String url, String jsonString) throws IOException {
+        // log the post body
+        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + "post body is " + jsonString);
+
+        // create the request
+        RequestBody requestBody = RequestBody.create(mediaType, jsonString);
+        Request request = new Builder().url(url).post(requestBody).build();
+
+        // execute the request
+        Response response = client.newCall(request).execute();
+
+        // get response code
+        int code = response.code();
+
+        // log response code
+        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + "response code is " + code);
+
+        // get response body
+        String body = response.body().string().trim();
+
+        // log response body
+        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + ": response body is " + body);
+
+        // return HttpResponse object
+        return new HttpResponse(code, body);
     }
 }

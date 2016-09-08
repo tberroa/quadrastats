@@ -24,6 +24,7 @@ import com.quadrastats.models.requests.ReqRegister;
 import com.quadrastats.models.summoner.Summoner;
 import com.quadrastats.models.summoner.User;
 import com.quadrastats.network.Http;
+import com.quadrastats.network.HttpResponse;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.home.HomeActivity;
 
@@ -164,15 +165,15 @@ public class RegisterActivity extends AppCompatActivity {
         inView = false;
     }
 
-    private class RequestRegister extends AsyncTask<ReqRegister, Void, String> {
+    private class RequestRegister extends AsyncTask<ReqRegister, Void, HttpResponse> {
 
         @Override
-        protected String doInBackground(ReqRegister... params) {
+        protected HttpResponse doInBackground(ReqRegister... params) {
             // extract the request object
             ReqRegister request = params[0];
 
             // make the request
-            String postResponse = "";
+            HttpResponse postResponse = null;
             try {
                 String url = Constants.URL_REGISTER;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqRegister.class));
@@ -180,27 +181,29 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(RegisterActivity.this, postResponse);
+
             return postResponse;
         }
 
         @Override
-        protected void onPostExecute(String postResponse) {
+        protected void onPostExecute(HttpResponse postResponse) {
             // turn loading spinner off
             ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
             loadingSpinner.setVisibility(View.GONE);
 
-            if (postResponse.contains(Constants.VALID_REGISTER)) {
+            if (postResponse.valid) {
                 // get the summoner object
-                Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
+                Summoner summoner = ModelUtil.fromJson(postResponse.body, Summoner.class);
 
                 // get the user object
-                User user = ModelUtil.fromJson(postResponse, User.class);
+                User user = ModelUtil.fromJson(postResponse.body, User.class);
 
                 // sign in
                 AuthUtil.signIn(RegisterActivity.this, summoner, user, inView);
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(RegisterActivity.this, postResponse);
-                Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
                 registerButton.setEnabled(true);
             }
         }

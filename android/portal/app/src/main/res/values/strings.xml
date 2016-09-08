@@ -195,7 +195,6 @@
     <string name="err_summoner_already_registered">Summoner already registered</string>
     <string name="err_summoner_does_not_exist">Summoner not registered</string>
     <string name="err_summoner_not_registered">Summoner not registered</string>
-    <string name="err_unknown">Unknown error</string>
 
     <!-- content descriptions -->
     <string name="drawer_open">Open Drawer</string>

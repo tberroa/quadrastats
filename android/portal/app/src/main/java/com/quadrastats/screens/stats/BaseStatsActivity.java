@@ -31,6 +31,7 @@ import com.quadrastats.models.stats.MatchStats;
 import com.quadrastats.models.stats.SeasonStats;
 import com.quadrastats.models.summoner.Summoner;
 import com.quadrastats.network.Http;
+import com.quadrastats.network.HttpResponse;
 import com.quadrastats.screens.BaseActivity;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.friends.FriendsActivity;
@@ -112,7 +113,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
         private int activityId;
         private List<MatchStats> matchStatsList;
         private Map<Long, Map<String, MatchStats>> matchStatsMapMap;
-        private String postResponse;
+        private HttpResponse postResponse;
 
         @Override
         protected Boolean[] doInBackground(Integer... params) {
@@ -132,7 +133,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
             request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
 
             // make the request
-            postResponse = "";
+            postResponse = null;
             try {
                 String url = Constants.URL_GET_MATCH_STATS;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqMatchStats.class));
@@ -140,18 +141,21 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(BaseStatsActivity.this, postResponse);
+
             // initialize the result array which is returned
             Boolean[] result = {false, false};
 
             // process the response
-            if (postResponse.contains(Constants.VALID_GET_MATCH_STATS)) {
+            if (postResponse.valid) {
                 // successful http request
                 result[0] = true;
 
                 // get the match stats objects
                 Type type = new TypeToken<List<MatchStats>>() {
                 }.getType();
-                List<MatchStats> serverMatchStats = ModelUtil.fromJsonList(postResponse, type);
+                List<MatchStats> serverMatchStats = ModelUtil.fromJsonList(postResponse.body, type);
 
                 // save any new match stats
                 ActiveAndroid.beginTransaction();
@@ -218,8 +222,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                     }
                 }
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(BaseStatsActivity.this, postResponse);
-                Toast.makeText(BaseStatsActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BaseStatsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -235,7 +238,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
     public class RequestSeasonStats extends AsyncTask<Void, Void, Boolean[]> {
 
         public SeasonAsync delegateSeason;
-        private String postResponse;
+        private HttpResponse postResponse;
         private Map<String, Map<Long, SeasonStats>> seasonStatsMapMap;
 
         @Override
@@ -253,7 +256,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
             request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
 
             // make the request
-            postResponse = "";
+            postResponse = null;
             try {
                 String url = Constants.URL_GET_SEASON_STATS;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqSeasonStats.class));
@@ -261,18 +264,21 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(BaseStatsActivity.this, postResponse);
+
             // initialize the result array which is returned
             Boolean[] result = {false, false};
 
             // process the response
-            if (postResponse.contains(Constants.VALID_GET_SEASON_STATS)) {
+            if (postResponse.valid) {
                 // successful http request
                 result[0] = true;
 
                 // get the season stats objects
                 Type type = new TypeToken<List<SeasonStats>>() {
                 }.getType();
-                List<SeasonStats> serverSeasonStats = ModelUtil.fromJsonList(postResponse, type);
+                List<SeasonStats> serverSeasonStats = ModelUtil.fromJsonList(postResponse.body, type);
 
                 // save any new match stats
                 ActiveAndroid.beginTransaction();
@@ -316,8 +322,7 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
                     }
                 }
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(BaseStatsActivity.this, postResponse);
-                Toast.makeText(BaseStatsActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BaseStatsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
         }
 

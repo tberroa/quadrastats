@@ -28,6 +28,7 @@ import com.quadrastats.models.requests.ReqSignIn;
 import com.quadrastats.models.summoner.Summoner;
 import com.quadrastats.models.summoner.User;
 import com.quadrastats.network.Http;
+import com.quadrastats.network.HttpResponse;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.home.HomeActivity;
 
@@ -162,15 +163,15 @@ public class SignInActivity extends AppCompatActivity {
         inView = false;
     }
 
-    private class RequestResetPassword extends AsyncTask<ReqResetPassword, Void, String> {
+    private class RequestResetPassword extends AsyncTask<ReqResetPassword, Void, HttpResponse> {
 
         @Override
-        protected String doInBackground(ReqResetPassword... params) {
+        protected HttpResponse doInBackground(ReqResetPassword... params) {
             // extract the request object
             ReqResetPassword request = params[0];
 
             // make the request
-            String postResponse = "";
+            HttpResponse postResponse = null;
             try {
                 String url = Constants.URL_RESET_PASSWORD;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqResetPassword.class));
@@ -178,30 +179,32 @@ public class SignInActivity extends AppCompatActivity {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(SignInActivity.this, postResponse);
+
             return postResponse;
         }
 
         @Override
-        protected void onPostExecute(String postResponse) {
-            if (postResponse.contains(Constants.VALID_RESET_PASSWORD)) {
+        protected void onPostExecute(HttpResponse postResponse) {
+            if (postResponse.valid) {
                 String message = getString(R.string.auth_successful_reset);
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(SignInActivity.this, postResponse);
-                Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private class RequestSignIn extends AsyncTask<ReqSignIn, Void, String> {
+    private class RequestSignIn extends AsyncTask<ReqSignIn, Void, HttpResponse> {
 
         @Override
-        protected String doInBackground(ReqSignIn... params) {
+        protected HttpResponse doInBackground(ReqSignIn... params) {
             // extract the request object
             ReqSignIn request = params[0];
 
             // make the request
-            String postResponse = "";
+            HttpResponse postResponse = null;
             try {
                 String url = Constants.URL_SIGN_IN;
                 postResponse = new Http().post(url, ModelUtil.toJson(request, ReqSignIn.class));
@@ -209,27 +212,29 @@ public class SignInActivity extends AppCompatActivity {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(SignInActivity.this, postResponse);
+
             return postResponse;
         }
 
         @Override
-        protected void onPostExecute(String postResponse) {
+        protected void onPostExecute(HttpResponse postResponse) {
             // turn loading spinner off
             ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
             loadingSpinner.setVisibility(View.GONE);
 
-            if (postResponse.contains(Constants.VALID_SIGN_IN)) {
+            if (postResponse.valid) {
                 // get the summoner object
-                Summoner summoner = ModelUtil.fromJson(postResponse, Summoner.class);
+                Summoner summoner = ModelUtil.fromJson(postResponse.body, Summoner.class);
 
                 // get the user object
-                User user = ModelUtil.fromJson(postResponse, User.class);
+                User user = ModelUtil.fromJson(postResponse.body, User.class);
 
                 // sign in
                 AuthUtil.signIn(SignInActivity.this, summoner, user, inView);
             } else { // display error
-                String message = ScreenUtil.postResponseErrorMessage(SignInActivity.this, postResponse);
-                Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
                 signInButton.setEnabled(true);
             }
         }
