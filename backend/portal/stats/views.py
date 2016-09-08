@@ -75,5 +75,3 @@ class GetSeasonStats(APIView):
 
         # return the list of season stats
         return Response(SeasonStatsSerializer(stats, many=True).data)
-
-

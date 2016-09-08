@@ -13,9 +13,11 @@ try:
 except User.DoesNotExist:
     User.objects.create_superuser(username='tberroa', email='tberroa@outlook.com', password=SUPER_USER_PASSWORD)
 
+
 # setup verification file for loaderio
 def loaderio(request):
     return HttpResponse('loaderio-89fb758787fb03c2be250691d3565029', content_type='text/plain')
+
 
 urlpatterns = [
     url(r'^summoners/', include('summoners.urls')),
@@ -23,5 +25,3 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^loaderio-89fb758787fb03c2be250691d3565029/', loaderio),
 ]
-
-

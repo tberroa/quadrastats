@@ -160,4 +160,3 @@ EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
 
 EMAIL_PORT = 587
 ##########################################################
-

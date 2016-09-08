@@ -127,5 +127,3 @@ class SeasonStats(models.Model):
 
     def __str__(self):
         return self.region + "," + self.summoner_name + "," + str(self.champion)
-
-

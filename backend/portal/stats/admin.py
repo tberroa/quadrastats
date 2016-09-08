@@ -10,5 +10,6 @@ class MatchStatsAdmin(admin.ModelAdmin):
 class SeasonStatsAdmin(admin.ModelAdmin):
     search_fields = ["region", "summoner_key", "summoner_name", "champion"]
 
+
 admin.site.register(MatchStats, MatchStatsAdmin)
 admin.site.register(SeasonStats, SeasonStatsAdmin)

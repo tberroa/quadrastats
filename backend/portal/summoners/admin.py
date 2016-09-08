@@ -10,5 +10,6 @@ class SummonerAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     search_fields = ["email", "created"]
 
+
 admin.site.register(Summoner, SummonerAdmin)
 admin.site.register(User, UserAdmin)
