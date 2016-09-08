@@ -45,6 +45,7 @@ import java.util.List;
 public class SplashActivity extends AppCompatActivity {
 
     private boolean error;
+    private String errorMessage;
     private boolean inView;
     private boolean paused;
     private ProgressBar progressBar;
@@ -104,8 +105,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void next(boolean error) {
         if (error) {
-            String message = getString(R.string.err_network_error);
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, SignInActivity.class));
         } else {
             Intent homeActivity = new Intent(this, HomeActivity.class);
@@ -149,6 +149,7 @@ public class SplashActivity extends AppCompatActivity {
                 });
                 riotData.setChampionsList(SplashActivity.this, championsList);
             } else {
+                errorMessage = postResponse1.error;
                 return true;
             }
             publishProgress(250);
@@ -187,6 +188,7 @@ public class SplashActivity extends AppCompatActivity {
                         ActiveAndroid.endTransaction();
                     }
                 } else {
+                    errorMessage = postResponse2.error;
                     return true;
                 }
             }
@@ -227,6 +229,7 @@ public class SplashActivity extends AppCompatActivity {
                         ActiveAndroid.endTransaction();
                     }
                 } else {
+                    errorMessage = postResponse3.error;
                     return true;
                 }
             }
@@ -267,6 +270,7 @@ public class SplashActivity extends AppCompatActivity {
                         ActiveAndroid.endTransaction();
                     }
                 } else {
+                    errorMessage = postResponse4.error;
                     return true;
                 }
             }

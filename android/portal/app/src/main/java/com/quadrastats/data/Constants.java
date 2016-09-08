@@ -64,7 +64,7 @@ public class Constants {
     public static final String URL_SS_SMITE = "/img/spell/SummonerSmite.png";
     public static final String URL_SS_TELEPORT = "/img/spell/SummonerTeleport.png";
     public static final String URL_TRACEPOT = "https://collector.tracepot.com/dc940cee";
-    public static final String VALID_ERROR = "{\"error\":";
+    public static final String VALID_ERROR = "\"error\":";
     private static final String URL_BASE = "http://portal-domain.us-east-1.elasticbeanstalk.com/";
     public static final String URL_ADD_FRIEND = URL_BASE + "summoners/add-friend.json";
     public static final String URL_CHANGE_EMAIL = URL_BASE + "summoners/change-email.json";
