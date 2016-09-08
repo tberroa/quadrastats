@@ -34,4 +34,11 @@
         android:gravity="center"
         android:text="@string/mf_no_friends"
         android:textSize="@dimen/text_size_massive"/>
+
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="@dimen/spacing_massive"/>
 </merge>

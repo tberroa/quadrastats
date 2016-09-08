@@ -20,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ import java.util.ListIterator;
 public class FriendsActivity extends BaseActivity implements OnRefreshListener {
 
     private boolean add;
+    private boolean busy;
     private List<Summoner> friends;
     private FriendsAdapter friendsAdapter;
 
@@ -59,8 +61,10 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
+            if (!busy) {
+                startActivity(new Intent(this, HomeActivity.class));
+                finish();
+            }
         }
     }
 
@@ -81,8 +85,10 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 } else {
-                    startActivity(new Intent(FriendsActivity.this, HomeActivity.class));
-                    finish();
+                    if (!busy) {
+                        startActivity(new Intent(FriendsActivity.this, HomeActivity.class));
+                        finish();
+                    }
                 }
             }
         });
@@ -92,11 +98,21 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 super.onMenuItemClick(item);
                 switch (item.getItemId()) {
                     case R.id.add_friend:
-                        new AddFriendDialog().show();
+                        if (!busy) {
+                            new AddFriendDialog().show();
+                        }
                 }
                 return true;
             }
         });
+
+        // initialize loading spinner
+        int screenWidth = ScreenUtil.screenWidth(this);
+        ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        loadingSpinner.getLayoutParams().width = (25 * screenWidth) / 100;
+        loadingSpinner.getLayoutParams().height = (25 * screenWidth) / 100;
+        loadingSpinner.setLayoutParams(loadingSpinner.getLayoutParams());
+        loadingSpinner.setVisibility(View.GONE);
 
         // initialize swipe layout
         SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
@@ -108,8 +124,12 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
     @Override
     public void onRefresh() {
         SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
-        swipeLayout.setRefreshing(true);
-        new UpdateSummoners().execute();
+        if (busy) {
+            swipeLayout.setRefreshing(false);
+        } else {
+            swipeLayout.setRefreshing(true);
+            new UpdateSummoners().execute();
+        }
     }
 
     private class AddFriendDialog extends Dialog {
@@ -287,6 +307,19 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             } else { // display error
                 Toast.makeText(FriendsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
+
+            // lower busy flag
+            busy = false;
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // set busy flag
+            busy = true;
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.VISIBLE);
         }
     }
 
@@ -445,6 +478,15 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             } else {
                 noFriends.setVisibility(View.GONE);
             }
+
+            // lower busy flag
+            busy = false;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // set busy flag
+            busy = true;
         }
     }
 
@@ -479,7 +521,9 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 @Override
                 public void onItemClick(AdapterView<?> adapter, View view, int i, long l) {
                     if (i > 0) {
-                        new RemoveFriendDialog(i).show();
+                        if (!busy) {
+                            new RemoveFriendDialog(i).show();
+                        }
                     }
                 }
             });

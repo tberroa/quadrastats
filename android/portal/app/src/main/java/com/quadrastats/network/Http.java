@@ -29,7 +29,7 @@ public class Http {
         int code = response.code();
 
         // log response code
-        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + "response code is " + code);
+        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + ": response code is " + code);
 
         // get response body
         String body = response.body().string().trim();
@@ -43,7 +43,7 @@ public class Http {
 
     public HttpResponse post(String url, String jsonString) throws IOException {
         // log the post body
-        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + "post body is " + jsonString);
+        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + ": post body is " + jsonString);
 
         // create the request
         RequestBody requestBody = RequestBody.create(mediaType, jsonString);
@@ -56,7 +56,7 @@ public class Http {
         int code = response.code();
 
         // log response code
-        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + "response code is " + code);
+        Log.d(Constants.TAG_DEBUG, "@" + getClass().getSimpleName() + ": response code is " + code);
 
         // get response body
         String body = response.body().string().trim();
