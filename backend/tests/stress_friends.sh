@@ -18,6 +18,7 @@ echo "Starting Add/Remove Friend Test"
 while read name; do
     # construct body
     NAME=${name::-1}
+    NAME=${NAME//[[:blank:]]/}
     BODY="{\"region\":\"na\",\"user_key\":\"frosiph\",\"friend_key\":\"$NAME\"}"
 
     # make add friend api call
