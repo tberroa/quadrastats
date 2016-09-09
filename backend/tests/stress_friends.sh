@@ -16,7 +16,6 @@ while read name; do
     # construct body
     NAME=${name::-1}
     BODY="{\"region\":\"na\",\"user_key\":\"frosiph\",\"friend_key\":\"$NAME\"}"
-    echo $BODY
 
     # make add friend api call
     curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_ADD >> results/friends
