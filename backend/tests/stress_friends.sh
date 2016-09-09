@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# ensure results directory exists
+mkdir -p results
+
 # remove old results file
 rm -f results/friends
 
@@ -18,10 +21,10 @@ while read name; do
     BODY="{\"region\":\"na\",\"user_key\":\"frosiph\",\"friend_key\":\"$NAME\"}"
 
     # make add friend api call
-    curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_ADD >> results/friends
+    curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_ADD >> results/friends &
 
     # make remove friend api call
-    curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_REMOVE >> results/friends
+    curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_REMOVE >> results/friends &
 done <config/summoner_names
 
 # print end of test

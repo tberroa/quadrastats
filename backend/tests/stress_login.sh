@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# ensure results directory exists
+mkdir -p results
+
 # remove old results files
 rm -f results/login_1
 rm -f results/login_2
