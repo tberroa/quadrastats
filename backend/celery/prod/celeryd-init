@@ -335,7 +335,17 @@ case "$1" in
     start)
         check_dev_null
         check_paths
-        rm -f $CELERYD_LOG_FILE
+        rm -f /var/log/celery/w1.log
+        rm -f /var/log/celery/w2.log
+        rm -f /var/log/celery/w3.log
+        rm -f /var/log/celery/w4.log
+        rm -f /var/log/celery/w5.log
+        rm -f /var/log/celery/w6.log
+        rm -f /var/log/celery/w7.log
+        rm -f /var/log/celery/w8.log
+        rm -f /var/log/celery/w9.log
+        rm -f /var/log/celery/w10.log
+        rm -f /var/log/celery/w11.log
         start_workers
     ;;
 
@@ -356,13 +366,33 @@ case "$1" in
     restart)
         check_dev_null
         check_paths
-        rm -f $CELERYD_LOG_FILE
+        rm -f /var/log/celery/w1.log
+        rm -f /var/log/celery/w2.log
+        rm -f /var/log/celery/w3.log
+        rm -f /var/log/celery/w4.log
+        rm -f /var/log/celery/w5.log
+        rm -f /var/log/celery/w6.log
+        rm -f /var/log/celery/w7.log
+        rm -f /var/log/celery/w8.log
+        rm -f /var/log/celery/w9.log
+        rm -f /var/log/celery/w10.log
+        rm -f /var/log/celery/w11.log
         restart_workers
     ;;
 
     graceful)
         check_dev_null
-        rm -f $CELERYD_LOG_FILE
+        rm -f /var/log/celery/w1.log
+        rm -f /var/log/celery/w2.log
+        rm -f /var/log/celery/w3.log
+        rm -f /var/log/celery/w4.log
+        rm -f /var/log/celery/w5.log
+        rm -f /var/log/celery/w6.log
+        rm -f /var/log/celery/w7.log
+        rm -f /var/log/celery/w8.log
+        rm -f /var/log/celery/w9.log
+        rm -f /var/log/celery/w10.log
+        rm -f /var/log/celery/w11.log
         restart_workers_graceful
     ;;
 
@@ -379,7 +409,17 @@ case "$1" in
     try-restart)
         check_dev_null
         check_paths
-        rm -f $CELERYD_LOG_FILE
+        rm -f /var/log/celery/w1.log
+        rm -f /var/log/celery/w2.log
+        rm -f /var/log/celery/w3.log
+        rm -f /var/log/celery/w4.log
+        rm -f /var/log/celery/w5.log
+        rm -f /var/log/celery/w6.log
+        rm -f /var/log/celery/w7.log
+        rm -f /var/log/celery/w8.log
+        rm -f /var/log/celery/w9.log
+        rm -f /var/log/celery/w10.log
+        rm -f /var/log/celery/w11.log
         restart_workers
     ;;
 
