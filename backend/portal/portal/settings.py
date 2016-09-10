@@ -115,7 +115,7 @@ CELERY_RESULT_SERIALIZER = 'pickle'
 CELERYBEAT_SCHEDULE = {
     'update_all': {
         'task': 'portal.tasks.update_all',
-        'schedule': timedelta(minutes=1)
+        'schedule': timedelta(minutes=20)
     },
 }
 
