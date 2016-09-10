@@ -1,9 +1,11 @@
 import random
 import string
+from cassiopeia.type.api.exception import APIError
 from datetime import datetime
 from django.contrib.auth import hashers
 from django.core import serializers
 from django.core.mail import EmailMessage
+from django.db.utils import IntegrityError
 from django.shortcuts import render
 from portal.errors import FRIEND_ALREADY_LISTED
 from portal.errors import FRIEND_EQUALS_USER
@@ -121,7 +123,7 @@ class AddFriend(APIView):
                                                    losses=losses,
                                                    series=series,
                                                    profile_icon=friend.profileIconId)
-            except:
+            except (APIError, AttributeError, IntegrityError):
                 return Response(INVALID_RIOT_RESPONSE)
 
         # add the friends key to the users friend list
