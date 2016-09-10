@@ -8,7 +8,6 @@ from django.shortcuts import render
 from portal.errors import FRIEND_ALREADY_LISTED
 from portal.errors import FRIEND_EQUALS_USER
 from portal.errors import FRIEND_LIMIT_REACHED
-from portal.errors import INTERNAL_PROCESSING_ERROR
 from portal.errors import INVALID_CREDENTIALS
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.errors import INVALID_RIOT_RESPONSE
@@ -96,6 +95,10 @@ class AddFriend(APIView):
                     return Response(SUMMONER_NOT_RANKED)
 
                 # iterate over the league entries to get more detailed information
+                division = None
+                lp = None
+                wins = None
+                losses = None
                 series = ""
                 for entry in league.entries:
                     if entry.playerOrTeamId == str(friend.id):
@@ -145,7 +148,7 @@ class ChangeEmail(APIView):
 
         # validate
         if None in (region, key, password, new_email):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # ensure proper key format
         key = format_key(key)
@@ -155,15 +158,15 @@ class ChangeEmail(APIView):
             summoner = Summoner.objects.get(region=region, key=key)
             Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(summoner_does_not_exist)
+            return Response(SUMMONER_DOES_NOT_EXIST)
 
         # make sure user object exists
         if summoner.user is None:
-            return Response(summoner_not_registered)
+            return Response(SUMMONER_NOT_REGISTERED)
 
         # ensure password is correct
         if not hashers.check_password(password, summoner.user.password):
-            return Response(invalid_credentials)
+            return Response(INVALID_CREDENTIALS)
 
         # change email
         User.objects.filter(pk=summoner.user.pk).update(email=new_email)
@@ -192,7 +195,7 @@ class ChangePassword(APIView):
 
         # validate
         if None in (region, key, current_password, new_password):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # ensure proper key format
         key = format_key(key)
@@ -202,15 +205,15 @@ class ChangePassword(APIView):
             summoner = Summoner.objects.get(region=region, key=key)
             Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(summoner_does_not_exist)
+            return Response(SUMMONER_DOES_NOT_EXIST)
 
         # make sure user object exists
         if summoner.user is None:
-            return Response(summoner_not_registered)
+            return Response(SUMMONER_NOT_REGISTERED)
 
         # make sure entered password is correct password
         if not hashers.check_password(current_password, summoner.user.password):
-            return Response(invalid_credentials)
+            return Response(INVALID_CREDENTIALS)
 
         # change password
         User.objects.filter(pk=summoner.user.pk).update(password=hashers.make_password(new_password))
@@ -231,7 +234,7 @@ class GetSummoners(APIView):
 
         # validate
         if None in (region, keys):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # initialize empty array, to be populated with requested summoner objects
         summoners = []
@@ -249,7 +252,7 @@ class GetSummoners(APIView):
                 # append summoner object to array
                 summoners.append(summoner)
             except Summoner.DoesNotExist:
-                return Response(summoner_does_not_exist)
+                return Response(SUMMONER_DOES_NOT_EXIST)
 
         # remove duplicates
         summoners = set(summoners)
@@ -270,7 +273,7 @@ class LoginUser(APIView):
 
         # validate
         if None in (region, key, password):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # ensure proper key format
         key = format_key(key)
@@ -280,15 +283,15 @@ class LoginUser(APIView):
             summoner = Summoner.objects.get(region=region, key=key)
             Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(summoner_does_not_exist)
+            return Response(SUMMONER_DOES_NOT_EXIST)
 
         # make sure user object exists
         if summoner.user is None:
-            return Response(summoner_not_registered)
+            return Response(SUMMONER_NOT_REGISTERED)
 
         # make sure passwords match
         if not hashers.check_password(password, summoner.user.password):
-            return Response(invalid_credentials)
+            return Response(INVALID_CREDENTIALS)
 
         # get the users email
         email = summoner.user.email
@@ -317,7 +320,7 @@ class RegisterUser(APIView):
 
         # validate
         if None in (region, key, email, password, code):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # ensure proper key format
         key = format_key(key)
@@ -342,7 +345,7 @@ class RegisterUser(APIView):
 
             # check if the user object already exists
             if summoner_o.user is not None:
-                return Response(summoner_already_registered)
+                return Response(SUMMONER_ALREADY_REGISTERED)
         except Summoner.DoesNotExist:
             # get more information on the summoner via riot
             args = {"request": 1, "key": key}
@@ -353,7 +356,7 @@ class RegisterUser(APIView):
 
             # ensure data is valid
             if summoner is None:
-                return Response(invalid_riot_response)
+                return Response(INVALID_RIOT_RESPONSE)
 
             # extract summoner field values
             name = summoner.get("name")
@@ -362,7 +365,7 @@ class RegisterUser(APIView):
 
             # ensure the data is valid
             if None in (name, summoner_id, profile_icon):
-                return Response(invalid_riot_response)
+                return Response(INVALID_RIOT_RESPONSE)
 
         # use the summoner id to get rune page information to validate ownership
         args = {"request": 6, "summoner_id": summoner_id}
@@ -370,21 +373,21 @@ class RegisterUser(APIView):
 
         # make sure the response is valid
         if riot_response[0] != 200:
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # extract the summoners rune page data
         rune_data = riot_response[1].get(str(summoner_id))
 
         # ensure data is valid
         if rune_data is None:
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # extract the set of rune pages
         rune_pages = rune_data.get("pages")
 
         # ensure data is valid
         if rune_pages is None:
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # iterate over the pages looking for one whose name matches the code
         no_match = True
@@ -394,7 +397,7 @@ class RegisterUser(APIView):
 
             # ensure data is valid
             if page_name is None:
-                return Response(invalid_riot_response)
+                return Response(INVALID_RIOT_RESPONSE)
 
             # check if name matches code
             if page_name == code:
@@ -403,7 +406,7 @@ class RegisterUser(APIView):
 
         # return error if no match found
         if no_match:
-            return Response(rune_page_code_not_found)
+            return Response(RUNE_PAGE_CODE_NOT_FOUND)
 
         # if summoner object already exists simply create user object and attach it to summoner object
         if summoner_o is not None:
@@ -426,42 +429,42 @@ class RegisterUser(APIView):
 
         # make sure the response is valid
         if riot_response[0] != 200:
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # extract the league data
         leagues = riot_response[1].get(str(summoner_id))
 
         # ensure the data is valid
         if leagues is None:
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # iterate over the leagues looking for the dynamic queue league
         league = None
         for item in leagues:
             # ensure data is valid
             if item.get("queue") is None:
-                return Response(invalid_riot_response)
+                return Response(INVALID_RIOT_RESPONSE)
 
             if item.get("queue") == "RANKED_SOLO_5x5":
                 league = item
 
         # ensure the dynamic queue league was found
         if league is None:
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # use the league data to get the rank tier
         tier = league.get("tier")
 
         # ensure data is valid
         if tier is None:
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # extract the player entries
         entries = league.get("entries")
 
         # ensure data is valid
         if entries is None:
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # iterate over the league entries to get more detailed information
         division = None
@@ -472,7 +475,7 @@ class RegisterUser(APIView):
         for entry in entries:
             # ensure data is valid
             if entry.get("playerOrTeamId") is None:
-                return Response(invalid_riot_response)
+                return Response(INVALID_RIOT_RESPONSE)
 
             # check player id against the summoners id
             if entry.get("playerOrTeamId") == str(summoner_id):
@@ -484,7 +487,7 @@ class RegisterUser(APIView):
 
                 # ensure data is valid
                 if None in (division, lp, wins, losses):
-                    return Response(invalid_riot_response)
+                    return Response(INVALID_RIOT_RESPONSE)
 
                 # check if summoner is in series
                 mini_series = entry.get("miniSeries")
@@ -495,7 +498,7 @@ class RegisterUser(APIView):
 
         # division, lp, wins, and losses cannot be None
         if None in (division, lp, wins, losses):
-            return Response(invalid_riot_response)
+            return Response(INVALID_RIOT_RESPONSE)
 
         # create a user data dictionary
         user_data = {"email": email, "password": password}
@@ -541,7 +544,7 @@ class RemoveFriend(APIView):
 
         # validate
         if None in (region, user_key, friend_key):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # ensure proper key format
         user_key = format_key(user_key)
@@ -549,14 +552,14 @@ class RemoveFriend(APIView):
 
         # make sure friend is not the user
         if user_key == friend_key:
-            return Response(friend_equals_user)
+            return Response(FRIEND_EQUALS_USER)
 
         try:
             # get the users summoner object
             user = Summoner.objects.get(region=region, key=user_key)
             Summoner.objects.filter(pk=user.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(summoner_does_not_exist)
+            return Response(SUMMONER_DOES_NOT_EXIST)
 
         # remove the friends key from the users friend list
         friends = user.friends.split(",")
@@ -590,7 +593,7 @@ class ResetPassword(APIView):
 
         # validate
         if None in (region, key, email):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # ensure proper key format
         key = format_key(key)
@@ -600,15 +603,15 @@ class ResetPassword(APIView):
             summoner = Summoner.objects.get(region=region, key=key)
             Summoner.objects.filter(pk=summoner.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(summoner_does_not_exist)
+            return Response(SUMMONER_DOES_NOT_EXIST)
 
         # make sure the user object exists
         if summoner.user is None:
-            return Response(summoner_not_registered)
+            return Response(SUMMONER_NOT_REGISTERED)
 
         # make sure the provided email matches the stored email
         if email != summoner.user.email:
-            return Response(invalid_credentials)
+            return Response(INVALID_CREDENTIALS)
 
         # generate a random password
         new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))

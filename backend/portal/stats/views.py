@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from portal.errors import invalid_request_format
+from portal.errors import INVALID_REQUEST_FORMAT
 from portal.tasks import format_key
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -23,7 +23,7 @@ class GetMatchStats(APIView):
 
         # validate required data
         if None in (region, keys):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # initialize list for storing the requested match stats
         stats = []
@@ -58,7 +58,7 @@ class GetSeasonStats(APIView):
 
         # validate required data
         if None in (region, keys):
-            return Response(invalid_request_format)
+            return Response(INVALID_REQUEST_FORMAT)
 
         # initialize list for storing the requested season stats
         stats = []

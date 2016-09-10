@@ -7,9 +7,6 @@ FRIEND_EQUALS_USER = {"error": 55,
 FRIEND_LIMIT_REACHED = {"error": 60,
                         "message": "friend limit reached"}
 
-INTERNAL_PROCESSING_ERROR = {"error": 65,
-                             "message": "internal processing error"}
-
 INVALID_CREDENTIALS = {"error": 70,
                        "message": "invalid credentials"}
 
