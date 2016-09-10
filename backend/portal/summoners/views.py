@@ -414,7 +414,7 @@ class RegisterUser(APIView):
             for entry in league.entries:
                 if entry.playerOrTeamId == str(summoner_id):
                     division = entry.division
-                    lp = entryleaguePoints
+                    lp = entry.leaguePoints
                     wins = entry.wins
                     losses = entry.losses
                     if entry.miniSeries is not None:
@@ -424,7 +424,7 @@ class RegisterUser(APIView):
             user_o = User.objects.create(email=email, password=password)
 
             # use the gathered information to create a summoner object
-            friend_o = Summoner.objects.create(
+            summoner_o = Summoner.objects.create(
                 user=user_o,
                 region=region,
                 key=key,
