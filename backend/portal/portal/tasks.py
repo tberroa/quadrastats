@@ -150,9 +150,12 @@ def update_league(region, summoner_ids):
         leagues_list = []
         for summoner_id in summoner_ids:
             leagues_list.append(riot_response.get(str(summoner_id)))
+    except (APIError, AttributeError):
+        return False
 
-        # iterate over each summoner's leagues
-        for index, leagues in enumerate(leagues_list):
+    # iterate over each summoner's leagues
+    for index, leagues in enumerate(leagues_list):
+        try:
             # iterate over the leagues looking for the dynamic queue league
             league = None
             for item in leagues:
@@ -161,7 +164,7 @@ def update_league(region, summoner_ids):
 
             # ensure the dynamic queue league was found
             if league is None:
-                return False
+                continue
 
             # iterate over the league entries to get more detailed information
             division, lp, wins, losses, series = None, None, None, None, ""
@@ -182,11 +185,11 @@ def update_league(region, summoner_ids):
                         wins=wins,
                         losses=losses,
                         series=series)
+        except (APIError, AttributeError, IntegrityError):
+            pass
 
-        # successful return
-        return True
-    except (APIError, AttributeError, IntegrityError):
-        return False
+    # successful return
+    return True
 
 
 def update_match(summoner_o):
@@ -205,10 +208,8 @@ def update_match(summoner_o):
         # slice out the 20 most recent games
         matches = matches[:20]
 
-        # initialize list of match details
-        match_details = []
-
         # iterate over the matches looking for new matches
+        match_details = []
         for match in matches:
             try:
                 MatchStats.objects.get(region=region, summoner_id=summoner_id, match_id=match.matchId)
@@ -220,8 +221,9 @@ def update_match(summoner_o):
     except (APIError, AttributeError):
         return False
 
-        # iterate over the match details
-        for match_detail in match_details:
+    # iterate over the match details
+    for match_detail in match_details:
+        try:
             # get the summoner's participant id for this match
             participant_id = None
             for identity in match_detail.participantIdentities:
@@ -363,11 +365,11 @@ def update_match(summoner_o):
                 team_kills=team_kills,
                 team_deaths=team_deaths,
                 team_assists=team_assists)
+        except (APIError, AttributeError, IntegrityError, TypeError):
+            pass
 
-        # successful return
-        return True
-    except (APIError, AttributeError, IntegrityError, TypeError):
-        return False
+    # successful return
+    return True
 
 
 def update_season(summoner_o):
@@ -378,79 +380,80 @@ def update_season(summoner_o):
 
         # extract the season stats by champions
         stats_by_champion = riot_response.champions
-
-        # iterate over list of season stats by champion
-        for entry in stats_by_champion:
-            try:
-                # get the season stats for this champion
-                stats_o = SeasonStats.objects.get(
-                    region=summoner_o.region,
-                    summoner_key=summoner_o.key,
-                    champion=entry.id)
-
-                # update the stats
-                SeasonStats.objects.filter(pk=stats_o.pk).update(
-                    # identity info
-                    region=summoner_o.region,
-                    summoner_key=summoner_o.key,
-                    summoner_name=summoner_o.name,
-                    summoner_id=summoner_o.summoner_id,
-                    champion=entry.id,
-
-                    # raw stats
-                    assists=entry.stats.totalAssists,
-                    damage_dealt=entry.stats.totalDamageDealt,
-                    damage_taken=entry.stats.totalDamageTaken,
-                    deaths=entry.stats.totalDeathsPerSession,
-                    double_kills=entry.stats.totalDoubleKills,
-                    games=entry.stats.totalSessionsPlayed,
-                    gold_earned=entry.stats.totalGoldEarned,
-                    kills=entry.stats.totalChampionKills,
-                    losses=entry.stats.totalSessionsLost,
-                    magic_damage_dealt=entry.stats.totalMagicDamageDealt,
-                    max_deaths=entry.stats.maxNumDeaths,
-                    max_killing_spree=entry.stats.maxLargestKillingSpree,
-                    max_kills=entry.stats.maxChampionsKilled,
-                    minion_kills=entry.stats.totalMinionKills,
-                    neutral_minion_kills=entry.stats.totalNeutralMinionsKilled,
-                    penta_kills=entry.stats.totalPentaKills,
-                    physical_damage_dealt=entry.stats.totalPhysicalDamageDealt,
-                    quadra_kills=entry.stats.totalQuadraKills,
-                    triple_kills=entry.stats.totalTripleKills,
-                    wins=entry.stats.totalSessionsWon)
-
-            except SeasonStats.DoesNotExist:
-                SeasonStats.objects.create(
-                    # identity info
-                    region=summoner_o.region,
-                    summoner_key=summoner_o.key,
-                    summoner_name=summoner_o.name,
-                    summoner_id=summoner_o.summoner_id,
-                    champion=entry.id,
-
-                    # raw stats
-                    assists=entry.stats.totalAssists,
-                    damage_dealt=entry.stats.totalDamageDealt,
-                    damage_taken=entry.stats.totalDamageTaken,
-                    deaths=entry.stats.totalDeathsPerSession,
-                    double_kills=entry.stats.totalDoubleKills,
-                    games=entry.stats.totalSessionsPlayed,
-                    gold_earned=entry.stats.totalGoldEarned,
-                    kills=entry.stats.totalChampionKills,
-                    losses=entry.stats.totalSessionsLost,
-                    magic_damage_dealt=entry.stats.totalMagicDamageDealt,
-                    max_deaths=entry.stats.maxNumDeaths,
-                    max_killing_spree=entry.stats.maxLargestKillingSpree,
-                    max_kills=entry.stats.maxChampionsKilled,
-                    minion_kills=entry.stats.totalMinionKills,
-                    neutral_minion_kills=entry.stats.totalNeutralMinionsKilled,
-                    penta_kills=entry.stats.totalPentaKills,
-                    physical_damage_dealt=entry.stats.totalPhysicalDamageDealt,
-                    quadra_kills=entry.stats.totalQuadraKills,
-                    triple_kills=entry.stats.totalTripleKills,
-                    wins=entry.stats.totalSessionsWon)
-
-        # successful return
-        return True
-    except (APIError, AttributeError, IntegrityError):
+    except (APIError, AttributeError):
         return False
+
+    # iterate over list of season stats by champion
+    for entry in stats_by_champion:
+        try:
+            # get the season stats for this champion
+            stats_o = SeasonStats.objects.get(
+                region=summoner_o.region,
+                summoner_key=summoner_o.key,
+                champion=entry.id)
+
+            # update the stats
+            SeasonStats.objects.filter(pk=stats_o.pk).update(
+                # identity info
+                region=summoner_o.region,
+                summoner_key=summoner_o.key,
+                summoner_name=summoner_o.name,
+                summoner_id=summoner_o.summoner_id,
+                champion=entry.id,
+
+                # raw stats
+                assists=entry.stats.totalAssists,
+                damage_dealt=entry.stats.totalDamageDealt,
+                damage_taken=entry.stats.totalDamageTaken,
+                deaths=entry.stats.totalDeathsPerSession,
+                double_kills=entry.stats.totalDoubleKills,
+                games=entry.stats.totalSessionsPlayed,
+                gold_earned=entry.stats.totalGoldEarned,
+                kills=entry.stats.totalChampionKills,
+                losses=entry.stats.totalSessionsLost,
+                magic_damage_dealt=entry.stats.totalMagicDamageDealt,
+                max_deaths=entry.stats.maxNumDeaths,
+                max_killing_spree=entry.stats.maxLargestKillingSpree,
+                max_kills=entry.stats.maxChampionsKilled,
+                minion_kills=entry.stats.totalMinionKills,
+                neutral_minion_kills=entry.stats.totalNeutralMinionsKilled,
+                penta_kills=entry.stats.totalPentaKills,
+                physical_damage_dealt=entry.stats.totalPhysicalDamageDealt,
+                quadra_kills=entry.stats.totalQuadraKills,
+                triple_kills=entry.stats.totalTripleKills,
+                wins=entry.stats.totalSessionsWon)
+        except SeasonStats.DoesNotExist:
+            SeasonStats.objects.create(
+                # identity info
+                region=summoner_o.region,
+                summoner_key=summoner_o.key,
+                summoner_name=summoner_o.name,
+                summoner_id=summoner_o.summoner_id,
+                champion=entry.id,
+
+                # raw stats
+                assists=entry.stats.totalAssists,
+                damage_dealt=entry.stats.totalDamageDealt,
+                damage_taken=entry.stats.totalDamageTaken,
+                deaths=entry.stats.totalDeathsPerSession,
+                double_kills=entry.stats.totalDoubleKills,
+                games=entry.stats.totalSessionsPlayed,
+                gold_earned=entry.stats.totalGoldEarned,
+                kills=entry.stats.totalChampionKills,
+                losses=entry.stats.totalSessionsLost,
+                magic_damage_dealt=entry.stats.totalMagicDamageDealt,
+                max_deaths=entry.stats.maxNumDeaths,
+                max_killing_spree=entry.stats.maxLargestKillingSpree,
+                max_kills=entry.stats.maxChampionsKilled,
+                minion_kills=entry.stats.totalMinionKills,
+                neutral_minion_kills=entry.stats.totalNeutralMinionsKilled,
+                penta_kills=entry.stats.totalPentaKills,
+                physical_damage_dealt=entry.stats.totalPhysicalDamageDealt,
+                quadra_kills=entry.stats.totalQuadraKills,
+                triple_kills=entry.stats.totalTripleKills,
+                wins=entry.stats.totalSessionsWon)
+        except (APIError, AttributeError, IntegrityError):
+            pass
+
+    # successful return
+    return True
