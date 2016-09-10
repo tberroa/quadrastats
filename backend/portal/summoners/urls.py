@@ -12,5 +12,4 @@ urlpatterns = [
     url(r'^remove-friend/$', views.RemoveFriend.as_view()),
     url(r'^reset-password/$', views.ResetPassword.as_view()),
 ]
-
 urlpatterns = format_suffix_patterns(urlpatterns)

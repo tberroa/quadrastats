@@ -21,7 +21,7 @@ class GetMatchStats(APIView):
         lane = data.get("lane")
         role = data.get("role")
 
-        # validate required data
+        # ensure the data is valid
         if None in (region, keys):
             return Response(INVALID_REQUEST_FORMAT)
 
@@ -56,7 +56,7 @@ class GetSeasonStats(APIView):
         keys = data.get("keys")
         champion = data.get("champion")
 
-        # validate required data
+        # ensure the data is valid
         if None in (region, keys):
             return Response(INVALID_REQUEST_FORMAT)
 

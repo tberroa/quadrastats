@@ -4,15 +4,11 @@ from portal.keys import DJANGO_SECRET_KEY
 from portal.keys import EMAIL_PASSWORD
 from portal.keys import RDS_PASSWORD
 
-################## Django Settings #######################
+# Django Settings
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 SECRET_KEY = DJANGO_SECRET_KEY
-
 DEBUG = True
-
 ALLOWED_HOSTS = ['*']
-
 INSTALLED_APPS = [
     'summoners',
     'stats',
@@ -24,7 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -35,9 +30,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'portal.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -53,9 +46,7 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'portal.wsgi.application'
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -66,7 +57,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -81,7 +71,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
@@ -91,26 +80,17 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.MD5PasswordHasher',
     'django.contrib.auth.hashers.CryptPasswordHasher',
 ]
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = False
-
 STATIC_URL = '/static/'
-
 STATIC_ROOT = BASE_DIR + '/static/'
-
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-
 REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_CLASSES': (
         'rest_framework.throttling.AnonRateThrottle',
@@ -121,42 +101,28 @@ REST_FRAMEWORK = {
         'user': '500000/sec'
     }
 }
-##########################################################
 
-################## Celery Settings #######################
+# Celery Settings
 BROKER_URL = 'redis://localhost:6379/0'
-
 BROKER_TRANSPORT_OPTIONS = {
     'fanout_prefix': True,
     'fanout_patterns': True,
 }
-
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-
 CELERY_ACCEPT_CONTENT = ['pickle']
-
 CELERY_TASK_SERIALIZER = 'pickle'
-
 CELERY_RESULT_SERIALIZER = 'pickle'
-
 CELERYBEAT_SCHEDULE = {
     'update-all-summoners': {
         'task': 'stats.tasks.update_all',
         'schedule': timedelta(minutes=20)
     },
 }
-##########################################################
 
-################## Email Settings ########################
+# Email Settings
 DEFAULT_FROM_EMAIL = 'tberroa@outlook.com'
-
 EMAIL_USE_TLS = True
-
 EMAIL_HOST = 'smtp-mail.outlook.com'
-
 EMAIL_HOST_USER = 'tberroa@outlook.com'
-
 EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
-
 EMAIL_PORT = 587
-##########################################################

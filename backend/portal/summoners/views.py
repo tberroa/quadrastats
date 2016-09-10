@@ -97,11 +97,7 @@ class AddFriend(APIView):
                     return Response(SUMMONER_NOT_RANKED)
 
                 # iterate over the league entries to get more detailed information
-                division = None
-                lp = None
-                wins = None
-                losses = None
-                series = ""
+                division, lp, wins, losses, series = None, None, None, None, ""
                 for entry in league.entries:
                     if entry.playerOrTeamId == str(friend.id):
                         division = entry.division
@@ -244,12 +240,9 @@ class GetSummoners(APIView):
 
         # iterate over each key
         for key in keys:
-            # ensure proper key format
-            key = format_key(key)
-
             try:
                 # get summoner object
-                summoner_o = Summoner.objects.get(region=region, key=key)
+                summoner_o = Summoner.objects.get(region=region, key=format_key(key))
                 Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
 
                 # append summoner object to array
@@ -417,11 +410,7 @@ class RegisterUser(APIView):
                 return Response(SUMMONER_NOT_RANKED)
 
             # iterate over the league entries to get more detailed information
-            division = None
-            lp = None
-            wins = None
-            losses = None
-            series = ""
+            division, lp, wins, losses, series = None, None, None, None, ""
             for entry in league.entries:
                 if entry.playerOrTeamId == str(summoner_id):
                     division = entry.division
