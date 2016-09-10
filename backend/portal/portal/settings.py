@@ -7,7 +7,7 @@ from portal.keys import RDS_PASSWORD
 # Django Settings
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = DJANGO_SECRET_KEY
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'summoners',
@@ -113,9 +113,9 @@ CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_RESULT_SERIALIZER = 'pickle'
 CELERYBEAT_SCHEDULE = {
-    'update-all-summoners': {
-        'task': 'stats.tasks.update_all',
-        'schedule': timedelta(minutes=20)
+    'update_all': {
+        'task': 'portal.tasks.update_all',
+        'schedule': timedelta(minutes=1)
     },
 }
 

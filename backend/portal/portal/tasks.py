@@ -168,7 +168,7 @@ def update_league(region, summoner_ids):
             for entry in league.entries:
                 if entry.playerOrTeamId == summoner_ids[index]:
                     division = entry.division
-                    lp = entryleaguePoints
+                    lp = entry.leaguePoints
                     wins = entry.wins
                     losses = entry.losses
                     if entry.miniSeries is not None:
@@ -215,7 +215,10 @@ def update_match(summoner_o):
             except MatchStats.DoesNotExist:
                 args = {"request": 3, "match_id": match.matchId}
                 riot_response = riot_request(region, args)
-                match_details.append(riot_response)
+                if riot_response.matchDuration > 600:
+                    match_details.append(riot_response)
+    except (APIError, AttributeError, IntegrityError, TypeError):
+        return False
 
         # iterate over the match details
         for match_detail in match_details:
