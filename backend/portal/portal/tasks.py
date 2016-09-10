@@ -15,6 +15,8 @@ from summoners.models import Summoner
 
 QUEUE = "TEAM_BUILDER_DRAFT_RANKED_5x5"
 SEASON = "SEASON2016"
+baseriotapi.set_api_key(RIOT_API_KEY)
+baseriotapi.set_rate_limits((8, 10), (400, 600))
 
 
 def format_key(key):
@@ -48,9 +50,6 @@ def is_keystone(mastery_id):
 
 
 def riot_request(region, args):
-    # set api key
-    baseriotapi.set_api_key(RIOT_API_KEY)
-
     # set region
     baseriotapi.set_region(region)
 
@@ -81,57 +80,38 @@ def riot_request(region, args):
     return riot_response
 
 
-@shared_task
-def update_all():
+@shared_task()
+def update(region):
     # get the 10 most recently acessed summoner objects
-    summoners = Summoner.objects.all().order_by("-accessed")[:10]
+    summoners = Summoner.objects.filter(region=region).order_by("-accessed")[:10]
 
-    # initialize dictionary to separate summoner ids by region
-    summoner_ids_dict = dict()
+    # initialize list of lists for summoner ids
+    summoner_ids_list = []
 
     # iterate over the summoners
     for summoner in summoners:
-        # check if this is the first summoner for the region
-        if summoner_ids_dict.get(summoner.region) is None:
-            # initialize a list which will hold multiple lists
-            summoner_ids_list = []
+        # iterate over the list of lists looking for a spot to insert the current id
+        inserted = False
+        for summoner_ids in summoner_ids_list:
+            if len(summoner_ids) < 10:
+                summoner_ids.append(str(summoner.summoner_id))
+                inserted = True
 
-            # initialize the first list within the list of lists
+        # if a spot wasn't found, create a new list
+        if not inserted:
             summoner_ids = [str(summoner.summoner_id)]
-
-            # insert the list into the list of lists
             summoner_ids_list.append(summoner_ids)
 
-            # insert the list into the dictionary
-            summoner_ids_dict[summoner.region] = summoner_ids_list
-        else:
-            # get the list of lists of summoner ids for this region
-            summoner_ids_list = summoner_ids_dict.get(summoner.region)
-
-            # iterate over the list of lists looking for a spot to insert the current id
-            inserted = False
-            for summoner_ids in summoner_ids_list:
-                if len(summoner_ids) < 10:
-                    summoner_ids.append(str(summoner.summoner_id))
-                    inserted = True
-
-            # if a spot wasn't found, create a new list
-            if not inserted:
-                summoner_ids = [str(summoner.summoner_id)]
-                summoner_ids_list.append(summoner_ids)
-
-        # trigger a season stats update for summoner
+        # update the summoners season stats
         update_season(summoner)
 
-        # trigger a match stats update for summoner
+        # update the summoners match stats
         update_match(summoner)
 
-    # trigger a ranked stats update for all summoners
-    for region in summoner_ids_dict:
-        summoner_ids_list = summoner_ids_dict.get(region)
-        for summoner_ids in summoner_ids_list:
-            summoner_ids = ",".join(summoner_ids)
-            update_league(region, summoner_ids)
+    # update the league stats for summoners 10 at a time
+    for summoner_ids in summoner_ids_list:
+        summoner_ids = ",".join(summoner_ids)
+        update_league(region, summoner_ids)
 
     # successful return
     return True
