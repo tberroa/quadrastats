@@ -217,7 +217,7 @@ def update_match(summoner_o):
                 riot_response = riot_request(region, args)
                 if riot_response.matchDuration > 600:
                     match_details.append(riot_response)
-    except (APIError, AttributeError, IntegrityError, TypeError):
+    except (APIError, AttributeError):
         return False
 
         # iterate over the match details
