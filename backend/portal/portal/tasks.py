@@ -259,10 +259,15 @@ def update_match(summoner_o):
                 team_deaths += participants[i].stats.deaths
                 team_assists += participants[i].stats.assists
 
+            try:
+                # calculate @10 stats separately because they bug often
+                cs_at_ten = float('%.3f' % (timeline.creepsPerMinDeltas.zeroToTen * 10))
+                cs_diff_at_ten = float('%.3f' % (timeline.csDiffPerMinDeltas.zeroToTen * 10))
+            except AttributeError:
+                cs_at_ten, cs_diff_at_ten = None, None
+
             # calculate other stats
             minutes = match_detail.matchDuration / 60
-            cs_at_ten = float('%.3f' % (timeline.creepsPerMinDeltas.zeroToTen * 10))
-            cs_diff_at_ten = float('%.3f' % (timeline.csDiffPerMinDeltas.zeroToTen * 10))
             cs_per_min = float('%.3f' % ((stats.minionsKilled + stats.neutralMinionsKilled) / minutes))
             dmg_per_min = float('%.3f' % (stats.totalDamageDealtToChampions / minutes))
             gold_per_min = float('%.3f' % (stats.goldEarned / minutes))
