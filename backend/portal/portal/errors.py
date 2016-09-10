@@ -1,44 +1,35 @@
-# friend already listed = 50
-# friend equals user = 55
-# friend limit reached = 60
-# internal processing error = 65
-# invalid credentials = 70
-# invalid request format = 75
-# invalid response from riot servers = 80
-# rune page code not found = 83
-# summoner already registered = 85
-# summoner does not exist = 90
-# summoner not registered = 95
-
-friend_already_listed = {"error": 50,
+FRIEND_ALREADY_LISTED = {"error": 50,
                          "message": "friend already listed"}
 
-friend_equals_user = {"error": 55,
+FRIEND_EQUALS_USER = {"error": 55,
                       "message": "friend key matches users key"}
 
-friend_limit_reached = {"error": 60,
+FRIEND_LIMIT_REACHED = {"error": 60,
                         "message": "friend limit reached"}
 
-internal_processing_error = {"error": 65,
+INTERNAL_PROCESSING_ERROR = {"error": 65,
                              "message": "internal processing error"}
 
-invalid_credentials = {"error": 70,
+INVALID_CREDENTIALS = {"error": 70,
                        "message": "invalid credentials"}
 
-invalid_request_format = {"error": 75,
+INVALID_REQUEST_FORMAT = {"error": 75,
                           "message": "invalid request format"}
 
-invalid_riot_response = {"error": 80,
+INVALID_RIOT_RESPONSE = {"error": 80,
                          "message": "invalid response from riot servers"}
 
-rune_page_code_not_found = {"error": 83,
+RUNE_PAGE_CODE_NOT_FOUND = {"error": 83,
                             "message": "rune page code not found"}
 
-summoner_already_registered = {"error": 85,
+SUMMONER_ALREADY_REGISTERED = {"error": 85,
                                "message": "summoner already registered"}
 
-summoner_does_not_exist = {"error": 90,
+SUMMONER_DOES_NOT_EXIST = {"error": 90,
                            "message": "summoner does not exist"}
 
-summoner_not_registered = {"error": 95,
+SUMMONER_NOT_RANKED = {"error": 94,
+                           "message": "summoner not ranked"}
+
+SUMMONER_NOT_REGISTERED = {"error": 95,
                            "message": "summoner not registered"}
