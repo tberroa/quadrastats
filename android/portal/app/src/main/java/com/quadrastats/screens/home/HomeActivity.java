@@ -1,6 +1,7 @@
 package com.quadrastats.screens.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.quadrastats.R;
+import com.quadrastats.data.Constants;
 import com.quadrastats.screens.BaseActivity;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.account.AccountActivity;
@@ -93,7 +95,7 @@ public class HomeActivity extends BaseActivity {
                 .centerCrop().into(seasonView);
         Picasso.with(this).load(R.drawable.splash_pentakill).resize(width, height)
                 .centerCrop().into(withFriendsView);
-        Picasso.with(this).load(R.drawable.splash_lucian).resize(width, height)
+        Picasso.with(this).load(R.drawable.splash_varus).resize(width, height)
                 .centerCrop().into(teamSplyceView);
 
         // initialize on click listeners
@@ -141,8 +143,8 @@ public class HomeActivity extends BaseActivity {
         teamSplyceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, WFActivity.class));
-                finish();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.SPLYCE_SITE));
+                startActivity(browserIntent);
             }
         });
     }

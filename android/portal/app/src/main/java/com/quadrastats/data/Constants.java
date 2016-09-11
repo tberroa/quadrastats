@@ -35,6 +35,7 @@ public class Constants {
     public static final char SERIES_LOSS = 'L';
     public static final char SERIES_UNPLAYED = 'N';
     public static final char SERIES_WIN = 'W';
+    public static final String SPLYCE_SITE = "https://splyce.gg/";
     public static final String TAG_DEBUG = "TAG_DEBUG";
     public static final String TAG_EXCEPTIONS = "TAG_EXCEPTIONS";
     public static final String TIER_BRONZE = "BRONZE";
