@@ -2,6 +2,7 @@
 <resources>
     <!-- branding -->
     <string name="app_name">QuadraStats</string>
+    <string name="team_splyce">Team Splyce</string>
 
     <!-- regions -->
     <string name="region_br">Brazil</string>

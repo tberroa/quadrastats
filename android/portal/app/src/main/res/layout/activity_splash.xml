@@ -13,5 +13,6 @@
         android:layout_height="@dimen/loading_bar_height"
         android:layout_marginEnd="@dimen/spacing_massive"
         android:layout_marginStart="@dimen/spacing_massive"
+        android:layout_marginTop="@dimen/loading_bar_spacing"
         android:progressDrawable="@drawable/progress_bar"/>
 </LinearLayout>

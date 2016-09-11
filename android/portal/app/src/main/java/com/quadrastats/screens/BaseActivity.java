@@ -218,6 +218,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
             // initialize navigation view
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(BaseActivity.this);
+            navigationView.setItemIconTintList(null);
             View headerLayout = navigationView.getHeaderView(0);
 
             // display the user's name

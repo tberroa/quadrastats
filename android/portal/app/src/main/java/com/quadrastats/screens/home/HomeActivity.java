@@ -51,10 +51,13 @@ public class HomeActivity extends BaseActivity {
         ImageView recentView = (ImageView) findViewById(R.id.recent_image);
         ImageView seasonView = (ImageView) findViewById(R.id.season_image);
         ImageView withFriendsView = (ImageView) findViewById(R.id.with_friends_image);
+        ImageView teamSplyceView = (ImageView) findViewById(R.id.team_splyce_image);
+        ImageView teamSplyceIconView = (ImageView) findViewById(R.id.team_splyce_icon);
 
         // get dimensions for images
         int width = ScreenUtil.screenWidth(this);
         int height = ScreenUtil.screenHeight(this) / 4;
+        int side = (75 * height) / 100;
 
         // resize image views
         manageAccountView.getLayoutParams().width = width;
@@ -72,18 +75,26 @@ public class HomeActivity extends BaseActivity {
         withFriendsView.getLayoutParams().width = width;
         withFriendsView.getLayoutParams().height = height;
         withFriendsView.setLayoutParams(withFriendsView.getLayoutParams());
+        teamSplyceView.getLayoutParams().width = width;
+        teamSplyceView.getLayoutParams().height = height;
+        teamSplyceView.setLayoutParams(teamSplyceView.getLayoutParams());
+        teamSplyceIconView.getLayoutParams().width = side;
+        teamSplyceIconView.getLayoutParams().height = side;
+        teamSplyceIconView.setLayoutParams(teamSplyceIconView.getLayoutParams());
 
         // load images into image views
         Picasso.with(this).load(R.drawable.splash_blitz).resize(width, height)
                 .centerCrop().into(manageAccountView);
         Picasso.with(this).load(R.drawable.splash_pool_party).resize(width, height)
                 .centerCrop().into(manageFriendsView);
-        Picasso.with(this).load(R.drawable.splash_sivir).resize(width, height)
+        Picasso.with(this).load(R.drawable.splash_maokai).resize(width, height)
                 .centerCrop().into(recentView);
-        Picasso.with(this).load(R.drawable.splash_veigar).resize(width, height)
+        Picasso.with(this).load(R.drawable.splash_sivir).resize(width, height)
                 .centerCrop().into(seasonView);
-        Picasso.with(this).load(R.drawable.splash_skt).resize(width, height)
+        Picasso.with(this).load(R.drawable.splash_pentakill).resize(width, height)
                 .centerCrop().into(withFriendsView);
+        Picasso.with(this).load(R.drawable.splash_lucian).resize(width, height)
+                .centerCrop().into(teamSplyceView);
 
         // initialize on click listeners
         FrameLayout manageAccountLayout = (FrameLayout) findViewById(R.id.manage_account_layout);
@@ -91,6 +102,7 @@ public class HomeActivity extends BaseActivity {
         FrameLayout recentLayout = (FrameLayout) findViewById(R.id.recent_layout);
         FrameLayout seasonLayout = (FrameLayout) findViewById(R.id.season_layout);
         FrameLayout withFriendsLayout = (FrameLayout) findViewById(R.id.with_friends_layout);
+        FrameLayout teamSplyceLayout = (FrameLayout) findViewById(R.id.team_splyce_layout);
         manageAccountLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +132,13 @@ public class HomeActivity extends BaseActivity {
             }
         });
         withFriendsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, WFActivity.class));
+                finish();
+            }
+        });
+        teamSplyceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, WFActivity.class));
