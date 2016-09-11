@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
+import com.google.gson.reflect.TypeToken;
 import com.quadrastats.R;
 import com.quadrastats.data.Constants;
 import com.quadrastats.data.LocalDB;
@@ -39,7 +40,6 @@ import com.quadrastats.screens.home.HomeActivity;
 import com.quadrastats.screens.stats.recent.RecentAsync;
 import com.quadrastats.screens.stats.season.SeasonAsync;
 import com.quadrastats.screens.stats.withfriends.WFAsync;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

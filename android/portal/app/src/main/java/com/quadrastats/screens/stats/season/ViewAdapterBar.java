@@ -8,16 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.quadrastats.R;
 import com.quadrastats.models.stats.SeasonStats;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.stats.IntValueFormat;
 import com.quadrastats.screens.stats.StatsUtil;
 import com.quadrastats.screens.stats.season.ViewAdapterBar.ChartViewHolder;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 import java.util.List;

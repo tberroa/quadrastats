@@ -8,15 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
 import com.quadrastats.R;
 import com.quadrastats.models.stats.SeasonStats;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.stats.IntValueFormat;
 import com.quadrastats.screens.stats.season.ViewAdapter.ChartViewHolder;
-import com.github.mikephil.charting.charts.RadarChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.RadarData;
-import com.github.mikephil.charting.data.RadarDataSet;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,6 @@ package com.quadrastats;
 import com.activeandroid.app.Application;
 import com.quadrastats.data.Constants;
 
-
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 

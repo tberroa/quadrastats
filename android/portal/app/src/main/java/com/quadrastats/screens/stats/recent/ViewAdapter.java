@@ -13,12 +13,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.quadrastats.R;
-import com.quadrastats.data.Constants;
-import com.quadrastats.screens.ScreenUtil;
-import com.quadrastats.screens.stats.IntValueFormat;
-import com.quadrastats.screens.stats.StatsUtil;
-import com.quadrastats.screens.stats.recent.ViewAdapter.ChartViewHolder;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
@@ -26,6 +20,12 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.quadrastats.R;
+import com.quadrastats.data.Constants;
+import com.quadrastats.screens.ScreenUtil;
+import com.quadrastats.screens.stats.IntValueFormat;
+import com.quadrastats.screens.stats.StatsUtil;
+import com.quadrastats.screens.stats.recent.ViewAdapter.ChartViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

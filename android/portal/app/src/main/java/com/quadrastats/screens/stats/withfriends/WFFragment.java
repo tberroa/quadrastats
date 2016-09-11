@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.quadrastats.R;
 import com.quadrastats.models.ModelUtil;
 import com.quadrastats.models.stats.MatchStats;
 import com.quadrastats.screens.StaticRiotData;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.Map;

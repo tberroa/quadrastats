@@ -9,14 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.quadrastats.R;
-import com.quadrastats.screens.stats.StatsUtil;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.quadrastats.R;
+import com.quadrastats.screens.stats.StatsUtil;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
