@@ -168,8 +168,7 @@ class ChangeEmail(APIView):
             return Response(INVALID_CREDENTIALS)
 
         # change email
-        user_o = User.objects.filter(pk=summoner_o.user.pk).update(email=new_email)
-        Summoner.objects.filter(pk=summoner_o.pk).update(user=user_o)
+        User.objects.filter(pk=summoner_o.user.pk).update(email=new_email)
 
         # serialize the summoner object
         return_json = SummonerSerializer(summoner_o).data
@@ -215,8 +214,7 @@ class ChangePassword(APIView):
             return Response(INVALID_CREDENTIALS)
 
         # change password
-        user_o = User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
-        Summoner.objects.filter(pk=summoner_o.pk).update(user=user_o)
+        User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
 
         # return the users summoner object
         return Response(SummonerSerializer(summoner_o).data)
@@ -414,7 +412,7 @@ class RegisterUser(APIView):
             for entry in league.entries:
                 if entry.playerOrTeamId == str(summoner_id):
                     division = entry.division
-                    lp = entryleaguePoints
+                    lp = entry.leaguePoints
                     wins = entry.wins
                     losses = entry.losses
                     if entry.miniSeries is not None:
@@ -424,7 +422,7 @@ class RegisterUser(APIView):
             user_o = User.objects.create(email=email, password=password)
 
             # use the gathered information to create a summoner object
-            friend_o = Summoner.objects.create(
+            summoner_o = Summoner.objects.create(
                 user=user_o,
                 region=region,
                 key=key,
@@ -535,8 +533,7 @@ class ResetPassword(APIView):
         new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
 
         # assign the generated password to the user object
-        user_o = User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
-        Summoner.objects.filter(pk=summoner_o.pk).update(user=user_o)
+        User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
 
         # send email to user
         email = EmailMessage("Portal: Password Reset", 'New Password: ' + new_password, to=[summoner_o.user.email])
