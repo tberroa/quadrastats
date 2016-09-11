@@ -168,8 +168,7 @@ class ChangeEmail(APIView):
             return Response(INVALID_CREDENTIALS)
 
         # change email
-        user_o = User.objects.filter(pk=summoner_o.user.pk).update(email=new_email)
-        Summoner.objects.filter(pk=summoner_o.pk).update(user=user_o)
+        User.objects.filter(pk=summoner_o.user.pk).update(email=new_email)
 
         # serialize the summoner object
         return_json = SummonerSerializer(summoner_o).data
@@ -215,8 +214,7 @@ class ChangePassword(APIView):
             return Response(INVALID_CREDENTIALS)
 
         # change password
-        user_o = User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
-        Summoner.objects.filter(pk=summoner_o.pk).update(user=user_o)
+        User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
 
         # return the users summoner object
         return Response(SummonerSerializer(summoner_o).data)
@@ -535,8 +533,7 @@ class ResetPassword(APIView):
         new_password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
 
         # assign the generated password to the user object
-        user_o = User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
-        Summoner.objects.filter(pk=summoner_o.pk).update(user=user_o)
+        User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
 
         # send email to user
         email = EmailMessage("Portal: Password Reset", 'New Password: ' + new_password, to=[summoner_o.user.email])
