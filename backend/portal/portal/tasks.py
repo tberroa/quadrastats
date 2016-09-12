@@ -81,9 +81,63 @@ def riot_request(region, args):
 
 
 @shared_task()
+def update_br():
+    return update("br")
+
+
+@shared_task()
+def update_eune():
+    return update("eune")
+
+
+@shared_task()
+def update_euw():
+    return update("euw")
+
+
+@shared_task()
+def update_jp():
+    return update("jp")
+
+
+@shared_task()
+def update_kr():
+    return update("kr")
+
+
+@shared_task()
+def update_lan():
+    return update("lan")
+
+
+@shared_task()
+def update_las():
+    return update("las")
+
+
+@shared_task()
+def update_na():
+    return update("na")
+
+
+@shared_task()
+def update_oce():
+    return update("oce")
+
+
+@shared_task()
+def update_ru():
+    return update("ru")
+
+
+@shared_task()
+def update_tr():
+    return update("tr")
+
+
 def update(region):
-    # get the 10 most recently acessed summoner objects
-    summoners = Summoner.objects.filter(region=region).order_by("-accessed")[:10]
+    # get the 50 most recently acessed summoner objects
+    summoners = Summoner.objects.filter(region=region).order_by("-accessed")[:50]
 
     # initialize list of lists for summoner ids
     summoner_ids_list = []

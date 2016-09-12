@@ -113,87 +113,50 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_RESULT_SERIALIZER = 'pickle'
-CELERY_DEFAULT_QUEUE = 'celery'
-CELERY_QUEUES = (
-    Queue('celery', routing_key='celery'),
-    Queue('celery_br', routing_key='celery_br'),
-    Queue('celery_eune', routing_key='celery_eune'),
-    Queue('celery_euw', routing_key='celery_euw'),
-    Queue('celery_jp', routing_key='celery_jp'),
-    Queue('celery_kr', routing_key='celery_kr'),
-    Queue('celery_lan', routing_key='celery_lan'),
-    Queue('celery_las', routing_key='celery_las'),
-    Queue('celery_na', routing_key='celery_na'),
-    Queue('celery_oce', routing_key='celery_oce'),
-    Queue('celery_ru', routing_key='celery_ru'),
-    Queue('celery_tr', routing_key='celery_tr'),
-)
 CELERYBEAT_SCHEDULE = {
     'update_br': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["br"],
-        'options': {'queue': 'celery_br'}
+        'task': 'portal.tasks.update_br',
+        'schedule': timedelta(minutes=20)
     },
     'update_eune': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["eune"],
-        'options': {'queue': 'celery_eune'}
+        'task': 'portal.tasks.update_eune',
+        'schedule': timedelta(minutes=20)
     },
     'update_euw': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["euw"],
-        'options': {'queue': 'celery_euw'}
+        'task': 'portal.tasks.update_euw',
+        'schedule': timedelta(minutes=20)
     },
     'update_jp': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["jp"],
-        'options': {'queue': 'celery_jp'}
+        'task': 'portal.tasks.update_jp',
+        'schedule': timedelta(minutes=20)
     },
     'update_kr': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["kr"],
-        'options': {'queue': 'celery_kr'}
+        'task': 'portal.tasks.update_kr',
+        'schedule': timedelta(minutes=20)
     },
     'update_lan': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["lan"],
-        'options': {'queue': 'celery_lan'}
+        'task': 'portal.tasks.update_lan',
+        'schedule': timedelta(minutes=20)
     },
     'update_las': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["las"],
-        'options': {'queue': 'celery_las'}
+        'task': 'portal.tasks.update_las',
+        'schedule': timedelta(minutes=20)
     },
     'update_na': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["na"],
-        'options': {'queue': 'celery_na'}
+        'task': 'portal.tasks.update_na',
+        'schedule': timedelta(minutes=20)
     },
     'update_oce': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["oce"],
-        'options': {'queue': 'celery_oce'}
+        'task': 'portal.tasks.update_oce',
+        'schedule': timedelta(minutes=20)
     },
     'update_ru': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["ru"],
-        'options': {'queue': 'celery_ru'}
+        'task': 'portal.tasks.update_ru',
+        'schedule': timedelta(minutes=20)
     },
     'update_tr': {
-        'task': 'portal.tasks.update',
-        'schedule': timedelta(minutes=20),
-        'args': ["tr"],
-        'options': {'queue': 'celery_tr'}
+        'task': 'portal.tasks.update_tr',
+        'schedule': timedelta(minutes=20)
     },
 }
 
