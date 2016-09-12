@@ -22,11 +22,11 @@ while read name; do
     BODY="{\"region\":\"na\",\"user_key\":\"frosiph\",\"friend_key\":\"$NAME\"}"
 
     # make add friend api call
-    curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_ADD >> results/friends &
+    curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_ADD >> results/friends
 
     # make remove friend api call
-    curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_REMOVE >> results/friends &
-done <config/summoner_names
+    curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_REMOVE >> results/friends
+done <config/names_na_unranked
 
 # print end of test
 echo "Add/Remove Friend Test Complete"
