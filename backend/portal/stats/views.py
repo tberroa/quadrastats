@@ -1,5 +1,4 @@
 from django.core.cache import cache
-from django.views.decorators.csrf import csrf_exempt
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.tasks import format_key
 from rest_framework.response import Response
@@ -9,7 +8,7 @@ from stats.models import SeasonStats
 from stats.serializers import MatchStatsSerializer
 from stats.serializers import SeasonStatsSerializer
 
-@csrf_exempt
+
 class GetMatchStats(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -46,7 +45,6 @@ class GetMatchStats(APIView):
         return Response(MatchStatsSerializer(stats, many=True).data)
 
 
-@csrf_exempt
 class GetSeasonStats(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
