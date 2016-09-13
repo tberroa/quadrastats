@@ -1,9 +1,6 @@
 from __future__ import absolute_import
 
-import json
-import requests
 import string
-import time
 from cassiopeia import baseriotapi
 from cassiopeia.type.api.exception import APIError
 from celery import shared_task

@@ -3,10 +3,8 @@ import string
 from cassiopeia.type.api.exception import APIError
 from datetime import datetime
 from django.contrib.auth import hashers
-from django.core import serializers
 from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
-from django.shortcuts import render
 from portal.errors import FRIEND_ALREADY_LISTED
 from portal.errors import FRIEND_EQUALS_USER
 from portal.errors import FRIEND_LIMIT_REACHED

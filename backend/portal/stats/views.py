@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.tasks import format_key
 from rest_framework.response import Response

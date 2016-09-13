@@ -1,6 +1,5 @@
 import os
 from datetime import timedelta
-from kombu import Queue
 from portal.keys import DJANGO_SECRET_KEY
 from portal.keys import EMAIL_PASSWORD
 from portal.keys import RDS_PASSWORD
@@ -8,7 +7,7 @@ from portal.keys import RDS_PASSWORD
 # django settings
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = DJANGO_SECRET_KEY
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'summoners',

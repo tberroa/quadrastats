@@ -10,5 +10,4 @@ kombu==3.0.35
 PyMySQL==0.7.9
 pytz==2016.6.1
 redis==2.10.5
-requests==2.11.1
 SQLAlchemy==1.0.15
