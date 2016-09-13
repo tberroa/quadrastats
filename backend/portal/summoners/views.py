@@ -569,3 +569,39 @@ class ResetPassword(APIView):
 
         # return the users summoner object
         return Response(SummonerSerializer(summoner_o).data)
+
+
+class Test1(APIView):
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def post(request, format=None):
+        # extract data
+        data = request.data
+        region = data.get("region")
+        key = data.get("key")
+
+        # ensure the data is valid
+        if None in (region, key):
+            return Response(INVALID_REQUEST_FORMAT)
+
+        # ensure proper key format
+        key = format_key(key)
+
+        try:
+            # request summoner data from riot
+            args = {"request": 1, "key": key}
+            riot_response = riot_request(region, args)
+        except APIError as e:
+            if e.error_code == 404:
+                return Response(SUMMONER_DOES_NOT_EXIST)
+            else:
+                return Response(INVALID_RIOT_RESPONSE)
+
+        try:
+            # extract the summoner
+            summoner = riot_response.get(key)
+        except AttributeError:
+            return Response(INVALID_RIOT_RESPONSE)
+
+        # return summoner object
+        return Response(summoner.name)
