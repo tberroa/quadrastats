@@ -16,6 +16,7 @@ from portal.errors import INVALID_RIOT_RESPONSE
 from portal.errors import RUNE_PAGE_CODE_NOT_FOUND
 from portal.errors import SUMMONER_ALREADY_REGISTERED
 from portal.errors import SUMMONER_DOES_NOT_EXIST
+from portal.errors import SUMMONER_NOT_IN_DATABASE
 from portal.errors import SUMMONER_NOT_RANKED
 from portal.errors import SUMMONER_NOT_REGISTERED
 from portal.tasks import format_key
@@ -55,7 +56,7 @@ class AddFriend(APIView):
             user_o = Summoner.objects.get(region=region, key=user_key)
             Summoner.objects.filter(pk=user_o.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(SUMMONER_DOES_NOT_EXIST)
+            return Response(SUMMONER_NOT_IN_DATABASE)
 
         # check if user is at friend limit or if friend is already listed 
         if user_o.friends is not None:
@@ -75,14 +76,29 @@ class AddFriend(APIView):
                 # summoner not in database, request summoner data from riot
                 args = {"request": 1, "key": friend_key}
                 riot_response = riot_request(region, args)
+            except APIError as e:
+                if e.error_code == 404:
+                    return Response(SUMMONER_DOES_NOT_EXIST)
+                else:
+                    return Response(INVALID_RIOT_RESPONSE)
 
+            try:
                 # extract the summoner
                 friend = riot_response.get(friend_key)
+            except AttributeError:
+                return Response(INVALID_RIOT_RESPONSE)
 
+            try:
                 # use the summoner id to get the friends league information
                 args = {"request": 4, "summoner_ids": friend.id}
                 riot_response = riot_request(region, args)
+            except APIError as e:
+                if e.error_code == 404:
+                    return Response(SUMMONER_NOT_RANKED)
+                else:
+                    return Response(INVALID_RIOT_RESPONSE)
 
+            try:
                 # extract the league data
                 leagues = riot_response.get(str(friend.id))
 
@@ -120,7 +136,7 @@ class AddFriend(APIView):
                     losses=losses,
                     series=series,
                     profile_icon=friend.profileIconId)
-            except (APIError, AttributeError, IntegrityError):
+            except (AttributeError, IntegrityError):
                 return Response(INVALID_RIOT_RESPONSE)
 
         # add the friends key to the users friend list
@@ -157,7 +173,7 @@ class ChangeEmail(APIView):
             summoner_o = Summoner.objects.get(region=region, key=key)
             Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(SUMMONER_DOES_NOT_EXIST)
+            return Response(SUMMONER_NOT_IN_DATABASE)
 
         # make sure user object exists
         if summoner_o.user is None:
@@ -203,7 +219,7 @@ class ChangePassword(APIView):
             summoner_o = Summoner.objects.get(region=region, key=key)
             Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(SUMMONER_DOES_NOT_EXIST)
+            return Response(SUMMONER_NOT_IN_DATABASE)
 
         # make sure user object exists
         if summoner_o.user is None:
@@ -246,7 +262,7 @@ class GetSummoners(APIView):
                 # append summoner object to array
                 summoners.append(summoner_o)
             except Summoner.DoesNotExist:
-                return Response(SUMMONER_DOES_NOT_EXIST)
+                return Response(SUMMONER_NOT_IN_DATABASE)
 
         # remove duplicates
         summoners = set(summoners)
@@ -277,7 +293,7 @@ class LoginUser(APIView):
             summoner_o = Summoner.objects.get(region=region, key=key)
             Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(SUMMONER_DOES_NOT_EXIST)
+            return Response(SUMMONER_NOT_IN_DATABASE)
 
         # make sure user object exists
         if summoner_o.user is None:
@@ -341,13 +357,19 @@ class RegisterUser(APIView):
                 # summoner not in database, request summoner data from riot
                 args = {"request": 1, "key": key}
                 riot_response = riot_request(region, args)
+            except APIError as e:
+                if e.error_code == 404:
+                    return Response(SUMMONER_DOES_NOT_EXIST)
+                else:
+                    return Response(INVALID_RIOT_RESPONSE)
 
+            try:
                 # extract the summoner
                 summoner = riot_response.get(key)
 
                 # get the summoner id
                 summoner_id = summoner.id
-            except (APIError, AttributeError):
+            except AttributeError:
                 return Response(INVALID_RIOT_RESPONSE)
 
         try:
@@ -393,7 +415,13 @@ class RegisterUser(APIView):
             # summoner object did not already exist, use summoner id to get league information
             args = {"request": 4, "summoner_ids": summoner_id}
             riot_response = riot_request(region, args)
+        except APIError as e:
+            if e.error_code == 404:
+                return Response(SUMMONER_NOT_RANKED)
+            else:
+                return Response(INVALID_RIOT_RESPONSE)
 
+        try:
             # extract the league data
             leagues = riot_response.get(str(summoner_id))
 
@@ -444,7 +472,7 @@ class RegisterUser(APIView):
 
             # return the users summoner object with the email included
             return Response(return_json)
-        except (APIError, AttributeError, IntegrityError):
+        except (AttributeError, IntegrityError):
             return Response(INVALID_RIOT_RESPONSE)
 
 
@@ -475,7 +503,7 @@ class RemoveFriend(APIView):
             user_o = Summoner.objects.get(region=region, key=user_key)
             Summoner.objects.filter(pk=user_o.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(SUMMONER_DOES_NOT_EXIST)
+            return Response(SUMMONER_NOT_IN_DATABASE)
 
         # remove the friends key from the users friend list
         friends = user_o.friends.split(",")
@@ -519,7 +547,7 @@ class ResetPassword(APIView):
             summoner_o = Summoner.objects.get(region=region, key=key)
             Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
         except Summoner.DoesNotExist:
-            return Response(SUMMONER_DOES_NOT_EXIST)
+            return Response(SUMMONER_NOT_IN_DATABASE)
 
         # make sure the user object exists
         if summoner_o.user is None:

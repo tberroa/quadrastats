@@ -16,6 +16,8 @@ SUMMONER_ALREADY_REGISTERED = {"error": 85,
                                "message": "summoner already registered"}
 SUMMONER_DOES_NOT_EXIST = {"error": 90,
                            "message": "summoner does not exist"}
+SUMMONER_NOT_IN_DATABASE = {"error": 92,
+                           "message": "summoner not in database"}
 SUMMONER_NOT_RANKED = {"error": 94,
                        "message": "summoner not ranked"}
 SUMMONER_NOT_REGISTERED = {"error": 95,
