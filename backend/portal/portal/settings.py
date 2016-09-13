@@ -57,28 +57,8 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    'django.contrib.auth.hashers.BCryptPasswordHasher',
-    'django.contrib.auth.hashers.SHA1PasswordHasher',
     'django.contrib.auth.hashers.MD5PasswordHasher',
-    'django.contrib.auth.hashers.CryptPasswordHasher',
 ]
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -100,71 +80,6 @@ REST_FRAMEWORK = {
         'anon': '500000/sec',
         'user': '500000/sec'
     }
-}
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
-
-# celery settings
-BROKER_URL = 'redis://localhost:6379/0'
-BROKER_TRANSPORT_OPTIONS = {
-    'fanout_prefix': True,
-    'fanout_patterns': True,
-}
-CELERY_ACCEPT_CONTENT = ['pickle']
-CELERY_TASK_SERIALIZER = 'pickle'
-CELERY_RESULT_SERIALIZER = 'pickle'
-CELERYBEAT_SCHEDULE = {
-    'update_br': {
-        'task': 'portal.tasks.update_br',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_eune': {
-        'task': 'portal.tasks.update_eune',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_euw': {
-        'task': 'portal.tasks.update_euw',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_jp': {
-        'task': 'portal.tasks.update_jp',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_kr': {
-        'task': 'portal.tasks.update_kr',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_lan': {
-        'task': 'portal.tasks.update_lan',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_las': {
-        'task': 'portal.tasks.update_las',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_na': {
-        'task': 'portal.tasks.update_na',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_oce': {
-        'task': 'portal.tasks.update_oce',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_ru': {
-        'task': 'portal.tasks.update_ru',
-        'schedule': timedelta(minutes=20)
-    },
-    'update_tr': {
-        'task': 'portal.tasks.update_tr',
-        'schedule': timedelta(minutes=20)
-    },
 }
 
 # email settings
