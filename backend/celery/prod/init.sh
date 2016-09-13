@@ -3,6 +3,9 @@
 # set user
 USER=ec2-user
 
+# restart apache server
+sudo service httpd restart
+
 # set up configuration
 sudo /home/${USER}/portal/backend/celery/prod/./update.sh
 
