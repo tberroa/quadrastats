@@ -1,9 +1,6 @@
-from __future__ import absolute_import
-
 import string
 from cassiopeia import baseriotapi
 from cassiopeia.type.api.exception import APIError
-from celery import shared_task
 from django.db.utils import IntegrityError
 from portal.keys import RIOT_API_KEY
 from stats.models import MatchStats
@@ -75,62 +72,6 @@ def riot_request(region, args):
 
     # return response
     return riot_response
-
-
-@shared_task()
-def update_br():
-    return update("br")
-
-
-@shared_task()
-def update_eune():
-    return update("eune")
-
-
-@shared_task()
-def update_euw():
-    return update("euw")
-
-
-@shared_task()
-def update_jp():
-    return update("jp")
-
-
-@shared_task()
-def update_kr():
-    return update("kr")
-
-
-@shared_task()
-def update_lan():
-    return update("lan")
-
-
-@shared_task()
-def update_las():
-    return update("las")
-
-
-@shared_task()
-def update_na():
-    return update("na")
-
-
-@shared_task()
-def update_oce():
-    return update("oce")
-
-
-@shared_task()
-def update_ru():
-    return update("ru")
-
-
-@shared_task()
-def update_tr():
-    return update("tr")
-
 
 def update(region):
     # get the 50 most recently acessed summoner objects

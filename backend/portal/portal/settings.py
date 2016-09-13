@@ -1,5 +1,4 @@
 import os
-from datetime import timedelta
 from portal.keys import DJANGO_SECRET_KEY
 from portal.keys import EMAIL_PASSWORD
 from portal.keys import RDS_PASSWORD
@@ -12,7 +11,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'summoners',
     'stats',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -21,10 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 MIDDLEWARE_CLASSES = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -71,16 +67,6 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-REST_FRAMEWORK = {
-    'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
-    ),
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': '500000/sec',
-        'user': '500000/sec'
-    }
-}
 
 # email settings
 DEFAULT_FROM_EMAIL = 'tberroa@outlook.com'

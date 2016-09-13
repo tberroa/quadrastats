@@ -5,12 +5,8 @@ League of Legends app for easily comparing in-game stats and player performance.
 **Required Libraries**
 - awsebcli
 - cassiopeia
-- celery
 - django
-- django-redis
-- djangorestframework
 - pymysql
-- redis
 
 **Setting Up For Linux Development**
 - Make sure python is installed

@@ -17,8 +17,8 @@ from portal.errors import SUMMONER_DOES_NOT_EXIST
 from portal.errors import SUMMONER_NOT_IN_DATABASE
 from portal.errors import SUMMONER_NOT_RANKED
 from portal.errors import SUMMONER_NOT_REGISTERED
-from portal.tasks import format_key
-from portal.tasks import riot_request
+from portal.riot import format_key
+from portal.riot import riot_request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from summoners.models import Summoner

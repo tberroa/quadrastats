@@ -1,6 +1,6 @@
 from django.core.cache import cache
 from portal.errors import INVALID_REQUEST_FORMAT
-from portal.tasks import format_key
+from portal.riot import format_key
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from stats.models import MatchStats
