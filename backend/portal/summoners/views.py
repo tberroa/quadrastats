@@ -5,6 +5,7 @@ from datetime import datetime
 from django.contrib.auth import hashers
 from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
+from django.views.decorators.csrf import csrf_exempt
 from portal.errors import FRIEND_ALREADY_LISTED
 from portal.errors import FRIEND_EQUALS_USER
 from portal.errors import FRIEND_LIMIT_REACHED
@@ -27,6 +28,7 @@ from summoners.serializers import SummonerSerializer
 from summoners.serializers import UserSerializer
 
 
+@csrf_exempt
 class AddFriend(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -148,6 +150,7 @@ class AddFriend(APIView):
         return Response(SummonerSerializer(friend_o).data)
 
 
+@csrf_exempt
 class ChangeEmail(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -194,6 +197,7 @@ class ChangeEmail(APIView):
         return Response(return_json)
 
 
+@csrf_exempt
 class ChangePassword(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -234,6 +238,7 @@ class ChangePassword(APIView):
         return Response(SummonerSerializer(summoner_o).data)
 
 
+@csrf_exempt
 class GetSummoners(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -269,6 +274,7 @@ class GetSummoners(APIView):
         return Response(SummonerSerializer(summoners, many=True).data)
 
 
+@csrf_exempt
 class LoginUser(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -314,6 +320,7 @@ class LoginUser(APIView):
         return Response(return_json)
 
 
+@csrf_exempt
 class RegisterUser(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -474,6 +481,7 @@ class RegisterUser(APIView):
             return Response(INVALID_RIOT_RESPONSE)
 
 
+@csrf_exempt
 class RemoveFriend(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -523,6 +531,7 @@ class RemoveFriend(APIView):
         return Response(SummonerSerializer(user_o).data)
 
 
+@csrf_exempt
 class ResetPassword(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
@@ -569,6 +578,7 @@ class ResetPassword(APIView):
         return Response(SummonerSerializer(summoner_o).data)
 
 
+@csrf_exempt
 class Test1(APIView):
     # noinspection PyUnusedLocal
     @staticmethod
