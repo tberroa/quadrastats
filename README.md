@@ -1,8 +1,17 @@
 # Portal
 League of Legends app for easily comparing in-game stats and player performance.
 
-
-SETTING UP FOR DEVELOPMENT - Linux
+## Backend
+**Required Libraries**
+- cassiopeia
+- celery
+- django
+- django-redis
+- djangorestframework
+- pymysql
+- redis
+- requests
+**Setting Up For Linux Development**
 - Make sure python is installed
 - Install git: sudo apt-get install git
 - Clone repo in home directory: git clone http://github.com/tberroa/portal

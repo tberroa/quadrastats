@@ -5,10 +5,10 @@ from portal.keys import DJANGO_SECRET_KEY
 from portal.keys import EMAIL_PASSWORD
 from portal.keys import RDS_PASSWORD
 
-# Django Settings
+# django settings
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = DJANGO_SECRET_KEY
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'summoners',
@@ -102,14 +102,22 @@ REST_FRAMEWORK = {
         'user': '500000/sec'
     }
 }
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
-# Celery Settings
+# celery settings
 BROKER_URL = 'redis://localhost:6379/0'
 BROKER_TRANSPORT_OPTIONS = {
     'fanout_prefix': True,
     'fanout_patterns': True,
 }
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_RESULT_SERIALIZER = 'pickle'
@@ -160,7 +168,7 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-# Email Settings
+# email settings
 DEFAULT_FROM_EMAIL = 'tberroa@outlook.com'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp-mail.outlook.com'
