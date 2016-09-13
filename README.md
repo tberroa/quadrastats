@@ -11,6 +11,7 @@ League of Legends app for easily comparing in-game stats and player performance.
 - pymysql
 - redis
 - requests
+
 **Setting Up For Linux Development**
 - Make sure python is installed
 - Install git: sudo apt-get install git
