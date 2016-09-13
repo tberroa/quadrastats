@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.tasks import format_key
 from rest_framework.response import Response
@@ -16,32 +17,31 @@ class GetMatchStats(APIView):
         data = request.data
         region = data.get("region")
         keys = data.get("keys")
-        champion = data.get("champion")
-        lane = data.get("lane")
-        role = data.get("role")
 
         # ensure the data is valid
         if None in (region, keys):
             return Response(INVALID_REQUEST_FORMAT)
 
-        # initialize list for storing the requested match stats
+        # initialize list for storing the requested stats
         stats = []
 
         # iterate over the list of keys
         for key in keys:
-            # construct the query based on given parameters
-            query = MatchStats.objects.filter(summoner_key=format_key(key)).order_by("-match_creation")
-            if champion is not None and champion != 0:
-                query = query.filter(champion=champion)
-            if lane is not None:
-                query = query.filter(lane=lane)
-            if role is not None:
-                query = query.filter(role=role)
+            # ensure proper key format
+            key = format_key(key)
 
-            # execute query, only store the 20 most recent entries
-            stats += query[:20]
+            try:
+                # get the stats from the cache
+                stats.extend(cache.get(region+key+"match"))
+            except TypeError:
+                # get the stats from the database
+                query = MatchStats.objects.filter(region=region, summoner_key=key).order_by("-match_creation")[:20]
+                stats.extend(query)
 
-        # return the list of match stats
+                # store stats in the cache
+                cache.set(region+key+"match", query, None)
+
+        # return the stats
         return Response(MatchStatsSerializer(stats, many=True).data)
 
 
@@ -53,24 +53,29 @@ class GetSeasonStats(APIView):
         data = request.data
         region = data.get("region")
         keys = data.get("keys")
-        champion = data.get("champion")
 
         # ensure the data is valid
         if None in (region, keys):
             return Response(INVALID_REQUEST_FORMAT)
 
-        # initialize list for storing the requested season stats
+        # initialize list for storing the requested stats
         stats = []
 
         # iterate over the list of keys
         for key in keys:
-            # construct the query based on given parameters
-            query = SeasonStats.objects.filter(summoner_key=format_key(key))
-            if champion is not None:
-                query = query.filter(champion=champion)
+            # ensure proper key format
+            key = format_key(key)
 
-            # execute query and append to list of season stats
-            stats += query
+            try:
+                # get the stats from the cache
+                stats.extend(cache.get(region+key+"season"))
+            except TypeError:
+                # get the stats from the database
+                query = SeasonStats.objects.filter(region=region, summoner_key=key)
+                stats.extend(query)
 
-        # return the list of season stats
+                # store stats in the cache
+                cache.set(region+key+"season", query, None)
+
+        # return the stats
         return Response(SeasonStatsSerializer(stats, many=True).data)
