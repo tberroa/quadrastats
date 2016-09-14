@@ -234,10 +234,7 @@ Get Match Stats
 Request:
 {
     "region" : "na",
-    "keys" : ["frosiph"],
-    "champion" : 8,
-    "lane" : "TOP",
-    "role" : null
+    "keys" : ["frosiph"]
 } 
 Response:
 [
@@ -329,8 +326,7 @@ Get Season Stats
 Request:
 {
     "region" : "na",
-    "keys" : ["frosiph"],
-    "champion" : 8
+    "keys" : ["frosiph"]
 }
 Response:
 [
