@@ -1,16 +1,14 @@
 from django.conf.urls import url
-from rest_framework.urlpatterns import format_suffix_patterns
 from summoners import views
 
 urlpatterns = [
-    url(r'^add-friend/$', views.AddFriend.as_view()),
-    url(r'^change-email/$', views.ChangeEmail.as_view()),
-    url(r'^change-password/$', views.ChangePassword.as_view()),
-    url(r'^get/$', views.GetSummoners.as_view()),
-    url(r'^login/$', views.LoginUser.as_view()),
-    url(r'^register/$', views.RegisterUser.as_view()),
-    url(r'^remove-friend/$', views.RemoveFriend.as_view()),
-    url(r'^reset-password/$', views.ResetPassword.as_view()),
-    url(r'^test1/$', views.Test1.as_view()),
+    url(r'^add-friend/$', views.add_friend),
+    url(r'^change-email/$', views.change_email),
+    url(r'^change-password/$', views.change_password),
+    url(r'^get/$', views.get_summoners),
+    url(r'^login/$', views.login_user),
+    url(r'^register/$', views.register_user),
+    url(r'^remove-friend/$', views.remove_friend),
+    url(r'^reset-password/$', views.reset_password),
+    url(r'^test1/$', views.test1),
 ]
-urlpatterns = format_suffix_patterns(urlpatterns)

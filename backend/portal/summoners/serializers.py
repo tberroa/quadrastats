@@ -1,18 +1,16 @@
-from rest_framework import serializers
-from summoners.models import Summoner
-from summoners.models import User
+from django.core import serializers
+from django.forms.models import model_to_dict
 
 
-class SummonerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Summoner
-        fields = '__all__'
-        extra_kwargs = {'user': {'write_only': True}}
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
-        extra_kwargs = {'email': {'write_only': True},
-                        'password': {'write_only': True}}
+def summoner_serializer(summoner, many):
+    if many is None or many is False:
+        serial_summoner = model_to_dict(summoner)
+        serial_summoner.pop("user", None)
+        return serial_summoner
+    elif many is True:
+        summoners = []
+        for entry in summoner:
+            serial_summoner = model_to_dict(entry)
+            serial_summoner.pop("user", None)
+            stats_list.extend(serial_summoner)
+        return summoners

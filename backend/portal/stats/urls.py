@@ -2,6 +2,6 @@ from django.conf.urls import url
 from stats import views
 
 urlpatterns = [
-    url(r'^match/$', views.GetMatchStats.as_view()),
-    url(r'^season/$', views.GetSeasonStats.as_view()),
+    url(r'^match.json', views.get_match_stats),
+    url(r'^season.json', views.get_season_stats),
 ]

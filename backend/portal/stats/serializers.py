@@ -1,15 +1,9 @@
-from rest_framework import serializers
-from stats.models import MatchStats
-from stats.models import SeasonStats
+from django.core import serializers
+from django.forms.models import model_to_dict
 
 
-class MatchStatsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MatchStats
-        fields = '__all__'
-
-
-class SeasonStatsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SeasonStats
-        fields = '__all__'
+def stats_serializer(stats):
+    stats_list = []
+    for entry in stats:
+        stats_list.extend(model_to_dict(entry))
+    return stats_list
