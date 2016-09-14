@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import HttpResponse
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.riot import format_key
 from stats.models import MatchStats
@@ -11,7 +11,7 @@ def get_match_stats(request):
     if request.method == "POST":
         pass
     else:
-        return JsonResponse(INVALID_REQUEST_FORMAT)
+        return HttpResponse(INVALID_REQUEST_FORMAT)
 
     # extract data
     data = json.loads(request.body.decode('utf-8'))
@@ -20,7 +20,7 @@ def get_match_stats(request):
 
     # ensure the data is valid
     if None in (region, keys):
-        return JsonResponse(INVALID_REQUEST_FORMAT)
+        return HttpResponse(INVALID_REQUEST_FORMAT)
 
     # initialize list for storing the requested stats
     stats = []
@@ -35,7 +35,7 @@ def get_match_stats(request):
         stats.extend(query)
 
     # return the stats
-    return JsonResponse(stats_serializer(stats))
+    return HttpResponse(stats_serializer(stats))
 
 
 def get_season_stats(request):
@@ -43,7 +43,7 @@ def get_season_stats(request):
     if request.method == "POST":
         pass
     else:
-        return JsonResponse(INVALID_REQUEST_FORMAT)
+        return HttpResponse(INVALID_REQUEST_FORMAT)
 
     # extract data
     data = json.loads(request.body.decode('utf-8'))
@@ -52,7 +52,7 @@ def get_season_stats(request):
 
     # ensure the data is valid
     if None in (region, keys):
-        return JsonResponse(INVALID_REQUEST_FORMAT)
+        return HttpResponse(INVALID_REQUEST_FORMAT)
 
     # initialize list for storing the requested stats
     stats = []
@@ -67,4 +67,4 @@ def get_season_stats(request):
         stats.extend(query)
 
     # return the stats
-    return JsonResponse(stats_serializer(stats))
+    return HttpResponse(stats_serializer(stats))
