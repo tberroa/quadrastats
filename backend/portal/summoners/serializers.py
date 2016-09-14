@@ -12,5 +12,5 @@ def summoner_serializer(summoner, many):
         for entry in summoner:
             serial_summoner = model_to_dict(entry)
             serial_summoner.pop("user", None)
-            stats_list.extend(serial_summoner)
+            summoners.extend(serial_summoner)
         return summoners
