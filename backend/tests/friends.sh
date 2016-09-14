@@ -26,7 +26,7 @@ while read name; do
 
     # make remove friend api call
     curl -w $FORMAT -s -H "Content-Type: application/json" -X POST -d $BODY $URL_REMOVE >> results/friends
-done <config/names_na_unranked
+done <config/names_na
 
 # print end of test
 echo "Add/Remove Friend Test Complete"
