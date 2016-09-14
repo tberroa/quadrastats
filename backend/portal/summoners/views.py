@@ -1,3 +1,4 @@
+import json
 import random
 import string
 from cassiopeia.type.api.exception import APIError
@@ -5,6 +6,7 @@ from datetime import datetime
 from django.contrib.auth import hashers
 from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
+from django.http import HttpResponse
 from django.http import JsonResponse
 from portal.errors import FRIEND_ALREADY_LISTED
 from portal.errors import FRIEND_EQUALS_USER
@@ -26,8 +28,14 @@ from summoners.serializers import summoner_serializer
 
 
 def add_friend(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     user_key = data.get("user_key")
     friend_key = data.get("friend_key")
@@ -140,12 +148,18 @@ def add_friend(request):
     Summoner.objects.filter(pk=user_o.pk).update(friends=user_o.friends)
 
     # return the friends summoner object
-    return JsonResponse(summoner_serializer(friend_o))
+    return JsonResponse(summoner_serializer(friend_o, False))
 
 
 def change_email(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     key = data.get("key")
     password = data.get("password")
@@ -177,7 +191,7 @@ def change_email(request):
     User.objects.filter(pk=summoner_o.user.pk).update(email=new_email)
 
     # serialize the summoner object
-    return_json = summoner_serializer(summoner_o)
+    return_json = summoner_serializer(summoner_o, False)
 
     # include the email
     return_json.update({"email": new_email})
@@ -187,8 +201,14 @@ def change_email(request):
 
 
 def change_password(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     key = data.get("key")
     current_password = data.get("current_password")
@@ -220,12 +240,18 @@ def change_password(request):
     User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
 
     # return the users summoner object
-    return JsonResponse(summoner_serializer(summoner_o))
+    return JsonResponse(summoner_serializer(summoner_o, False))
 
 
 def get_summoners(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     keys = data.get("keys")
 
@@ -252,12 +278,18 @@ def get_summoners(request):
     summoners = set(summoners)
 
     # return the requested summoner objects
-    return JsonResponse(summoner_serializer(summoners, many=True))
+    return JsonResponse(summoner_serializer(summoners, True))
 
 
 def login_user(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     key = data.get("key")
     password = data.get("password")
@@ -288,7 +320,7 @@ def login_user(request):
     email = summoner_o.user.email
 
     # serialize the summoner object
-    return_json = summoner_serializer(summoner_o)
+    return_json = summoner_serializer(summoner_o, False)
 
     # include the email
     return_json.update({"email": email})
@@ -298,8 +330,14 @@ def login_user(request):
 
 
 def register_user(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     key = data.get("key")
     email = data.get("email")
@@ -381,7 +419,7 @@ def register_user(request):
         Summoner.objects.filter(pk=summoner_o.pk).update(user=summoner_o.user)
 
         # serialize the summoner object
-        return_json = summoner_serializer(summoner_o)
+        return_json = summoner_serializer(summoner_o, False)
 
         # include the email
         return_json.update({"email": email})
@@ -443,7 +481,7 @@ def register_user(request):
             profile_icon=summoner.profileIconId)
 
         # serialize the summoner object
-        return_json = summoner_serializer(summoner_o)
+        return_json = summoner_serializer(summoner_o, False)
 
         # include the email
         return_json.update({"email": email})
@@ -455,8 +493,14 @@ def register_user(request):
 
 
 def remove_friend(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     user_key = data.get("user_key")
     friend_key = data.get("friend_key")
@@ -497,12 +541,18 @@ def remove_friend(request):
     Summoner.objects.filter(pk=user_o.pk).update(friends=user_o.friends)
 
     # return the users updated summoner object
-    return JsonResponse(summoner_serializer(user_o))
+    return JsonResponse(summoner_serializer(user_o, False))
 
 
 def reset_password(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     key = data.get("key")
     email = data.get("email")
@@ -540,12 +590,18 @@ def reset_password(request):
     email.send(fail_silently=False)
 
     # return the users summoner object
-    return JsonResponse(summoner_serializer(summoner_o))
+    return JsonResponse(summoner_serializer(summoner_o, False))
 
 
 def test1(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     key = data.get("key")
 

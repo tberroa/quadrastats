@@ -3,7 +3,7 @@ from django.forms.models import model_to_dict
 
 
 def summoner_serializer(summoner, many):
-    if many is None or many is False:
+    if many is False:
         serial_summoner = model_to_dict(summoner)
         serial_summoner.pop("user", None)
         return serial_summoner

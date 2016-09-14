@@ -7,8 +7,14 @@ from stats.serializers import stats_serializer
 
 
 def get_match_stats(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     keys = data.get("keys")
 
@@ -33,8 +39,14 @@ def get_match_stats(request):
 
 
 def get_season_stats(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return JsonResponse(INVALID_REQUEST_FORMAT)
+
     # extract data
-    data = request.data
+    data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
     keys = data.get("keys")
 
