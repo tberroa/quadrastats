@@ -6,7 +6,6 @@ from datetime import datetime
 from django.contrib.auth import hashers
 from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
-from django.http import HttpResponse
 from django.http import JsonResponse
 from portal.errors import FRIEND_ALREADY_LISTED
 from portal.errors import FRIEND_EQUALS_USER
@@ -629,4 +628,4 @@ def test1(request):
         return JsonResponse(INVALID_RIOT_RESPONSE)
 
     # return summoner object
-    return JsonResponse(summoner.name)
+    return JsonResponse(FRIEND_EQUALS_USER)
