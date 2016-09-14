@@ -9,7 +9,7 @@ rm -f results/login
 # constants
 BODY='{"region":"na","key":"frosiph","password":"123456"}'
 FORMAT="@config/curl-format"
-URL=portal-domain.us-east-1.elasticbeanstalk.com/summoners/login/
+URL=portal-domain.us-east-1.elasticbeanstalk.com/summoners/login.json
 
 # print start of test
 echo "Starting Login Test"
