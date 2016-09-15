@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponse
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.riot import format_key
@@ -11,7 +12,7 @@ def get_match_stats(request):
     if request.method == "POST":
         pass
     else:
-        return HttpResponse(INVALID_REQUEST_FORMAT)
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
 
     # extract data
     data = json.loads(request.body.decode('utf-8'))
@@ -20,7 +21,7 @@ def get_match_stats(request):
 
     # ensure the data is valid
     if None in (region, keys):
-        return HttpResponse(INVALID_REQUEST_FORMAT)
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
 
     # initialize list for storing the requested stats
     stats = []
@@ -43,7 +44,7 @@ def get_season_stats(request):
     if request.method == "POST":
         pass
     else:
-        return HttpResponse(INVALID_REQUEST_FORMAT)
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
 
     # extract data
     data = json.loads(request.body.decode('utf-8'))
@@ -52,7 +53,7 @@ def get_season_stats(request):
 
     # ensure the data is valid
     if None in (region, keys):
-        return HttpResponse(INVALID_REQUEST_FORMAT)
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
 
     # initialize list for storing the requested stats
     stats = []
