@@ -6,10 +6,10 @@ from django.http import HttpResponse
 from portal.keys import SUPER_USER_PASSWORD
 from portal.riot import update
 
-#try:
-#    User.objects.get(username='tberroa')
-#except User.DoesNotExist:
-#    User.objects.create_superuser(username='tberroa', email='tberroa@outlook.com', password=SUPER_USER_PASSWORD)
+try:
+    User.objects.get(username='tberroa')
+except User.DoesNotExist:
+    User.objects.create_superuser(username='tberroa', email='tberroa@outlook.com', password=SUPER_USER_PASSWORD)
 
 
 def loaderio(request):
