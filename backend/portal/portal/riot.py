@@ -1,7 +1,11 @@
+import json
 import string
 from cassiopeia import baseriotapi
 from cassiopeia.type.api.exception import APIError
 from django.db.utils import IntegrityError
+from django.http import HttpResponse
+from portal.errors import INVALID_REQUEST_FORMAT
+from portal.errors import SUMMONER_NOT_IN_DATABASE
 from portal.keys import RIOT_API_KEY
 from stats.models import MatchStats
 from stats.models import SeasonStats
@@ -73,37 +77,40 @@ def riot_request(region, args):
     # return response
     return riot_response
 
-def update(region):
-    # get the 50 most recently acessed summoner objects
-    summoners = Summoner.objects.filter(region=region).order_by("-accessed")[:50]
 
-    # initialize list of lists for summoner ids
-    summoner_ids_list = []
+def update(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
 
-    # iterate over the summoners
-    for summoner in summoners:
-        # iterate over the list of lists looking for a spot to insert the current id
-        inserted = False
-        for summoner_ids in summoner_ids_list:
-            if len(summoner_ids) < 10:
-                summoner_ids.append(str(summoner.summoner_id))
-                inserted = True
+    # extract data
+    data = json.loads(request.body.decode('utf-8'))
+    region = data.get("region")
+    key = data.get("key")
 
-        # if a spot wasn't found, create a new list
-        if not inserted:
-            summoner_ids = [str(summoner.summoner_id)]
-            summoner_ids_list.append(summoner_ids)
+    # ensure the data is valid
+    if None in (region, key):
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
 
-        # update the summoners season stats
-        update_season(summoner)
+    # ensure proper key format
+    key = format_key(key)
 
-        # update the summoners match stats
-        update_match(summoner)
+    try:
+        # get summoner object
+        summoner_o = Summoner.objects.get(region=region, key=key)
+    except Summoner.DoesNotExist:
+        return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
 
-    # update the league stats for summoners 10 at a time
-    for summoner_ids in summoner_ids_list:
-        summoner_ids = ",".join(summoner_ids)
-        update_league(region, summoner_ids)
+    # update the summoners season stats
+    update_season(summoner_o)
+
+    # update the summoners match stats
+    update_match(summoner_o)
+
+    # update the summoners league stats
+    update_league(region, str(summoner_o.summoner_id))
 
     # successful return
     return True
