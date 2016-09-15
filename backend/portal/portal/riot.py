@@ -10,6 +10,7 @@ from portal.keys import RIOT_API_KEY
 from stats.models import MatchStats
 from stats.models import SeasonStats
 from summoners.models import Summoner
+from summoners.serializers import summoner_serializer
 
 QUEUE = "TEAM_BUILDER_DRAFT_RANKED_5x5"
 SEASON = "SEASON2016"
@@ -103,17 +104,23 @@ def update(request):
     except Summoner.DoesNotExist:
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
 
-    # update the summoners season stats
-    update_season(summoner_o)
+    # update the summoners league stats
+    update_league(region, str(summoner_o.summoner_id))
 
     # update the summoners match stats
     update_match(summoner_o)
 
-    # update the summoners league stats
-    update_league(region, str(summoner_o.summoner_id))
+    # update the summoners season stats
+    update_season(summoner_o)
 
-    # successful return
-    return True
+    try:
+        # get updated summoner object
+        summoner_o = Summoner.objects.get(region=region, key=key)
+    except Summoner.DoesNotExist:
+        return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
+
+    # return updated summoner object
+    return HttpResponse(summoner_serializer(summoner_o, None, False))
 
 
 def update_league(region, summoner_ids):
