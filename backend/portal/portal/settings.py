@@ -8,12 +8,12 @@ ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'portaldb',
         'USER': 'tberroa',
         'PASSWORD': RDS_PASSWORD,
         'HOST': 'portaldb.cflq9mp1c8f1.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
+        'PORT': '3306',
     }
 }
 DEBUG = False
