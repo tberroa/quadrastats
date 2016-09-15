@@ -10,7 +10,7 @@ from summoners.models import Summoner
 QUEUE = "TEAM_BUILDER_DRAFT_RANKED_5x5"
 SEASON = "SEASON2016"
 baseriotapi.set_api_key(RIOT_API_KEY)
-baseriotapi.set_rate_limits((240, 10), (14400, 600))
+baseriotapi.set_rate_limits((285, 10), (17100, 600))
 
 
 def format_key(key):

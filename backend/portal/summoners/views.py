@@ -603,5 +603,34 @@ def test1(request):
     except AttributeError:
         return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
 
-    # return summoner object
+    # return
+    return HttpResponse(json.dumps(FRIEND_EQUALS_USER))
+
+
+def test2(request):
+    # make sure its a post
+    if request.method == "POST":
+        pass
+    else:
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
+
+    # extract data
+    data = json.loads(request.body.decode('utf-8'))
+    region = data.get("region")
+    key = data.get("key")
+
+    # ensure the data is valid
+    if None in (region, key):
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
+
+    # ensure proper key format
+    key = format_key(key)
+
+    try:
+        # get summoner object
+        summoner_o = Summoner.objects.get(region=region, key=key)
+    except Summoner.DoesNotExist:
+        return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
+
+    # return
     return HttpResponse(json.dumps(FRIEND_EQUALS_USER))

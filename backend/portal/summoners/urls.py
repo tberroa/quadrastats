@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^remove-friend.json', views.remove_friend),
     url(r'^reset-password.json', views.reset_password),
     url(r'^test1.json', views.test1),
+    url(r'^test2.json', views.test2),
 ]
