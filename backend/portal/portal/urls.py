@@ -3,6 +3,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from portal.keys import SUPER_USER_PASSWORD
 from portal.riot import update
 
@@ -18,8 +19,8 @@ def loaderio(request):
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^loaderio-89fb758787fb03c2be250691d3565029/', loaderio),
+    url(r'^loaderio-89fb758787fb03c2be250691d3565029/', csrf_exempt(loaderio)),
     url(r'^stats/', include('stats.urls')),
     url(r'^summoners/', include('summoners.urls')),
-    url(r'^update.json', update),
+    url(r'^update.json', csrf_exempt(update)),
 ]
