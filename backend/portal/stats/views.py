@@ -43,10 +43,10 @@ def get_match_stats(request):
         if result is not None:
             stats += result
         else:
-            keys_extra += key
+            keys_extra.append(key)
 
     # look through the database if required
-    if not keys_extra:
+    if keys_extra:
         # turn list of extra keys into list of Q objects
         queries = [Q(region=region, summoner_key=key) for key in keys_extra]
 
