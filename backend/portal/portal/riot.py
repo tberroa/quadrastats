@@ -105,13 +105,13 @@ def update(request):
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
 
     # update the summoners league stats
-    #update_league(region, str(summoner_o.summoner_id))
+    update_league(region, str(summoner_o.summoner_id))
 
     # update the summoners match stats
     update_match(summoner_o)
 
     # update the summoners season stats
-    #update_season(summoner_o)
+    update_season(summoner_o)
 
     try:
         # get updated summoner object
