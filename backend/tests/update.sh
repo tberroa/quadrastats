@@ -18,7 +18,7 @@ echo "Starting Update Test"
 
 # execute test
 for i in {1..1}; do
-  curl -w $FORMAT -s -X POST -d $BODY $URL_DEV >> $RESULTS_FILE &
+  curl -w $FORMAT -s -X POST -d $BODY $URL_PROD >> $RESULTS_FILE &
 done  
 
 # print end of test
