@@ -105,13 +105,13 @@ def update(request):
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
 
     # update the summoners league stats
-    update_league(region, str(summoner_o.summoner_id))
+    #update_league(region, str(summoner_o.summoner_id))
 
     # update the summoners match stats
     update_match(summoner_o)
 
     # update the summoners season stats
-    update_season(summoner_o)
+    #update_season(summoner_o)
 
     try:
         # get updated summoner object
@@ -197,7 +197,7 @@ def update_match(summoner_o):
         # iterate over the matches looking for new matches
         match_details = []
         for match in matches:
-            if not MatchStats.objects.get(region=region, summoner_id=summoner_id, match_id=match.matchId).exists():
+            if not MatchStats.objects.filter(region=region, summoner_id=summoner_id, match_id=match.matchId).exists():
                 args = {"request": 3, "match_id": match.matchId}
                 riot_response = riot_request(region, args)
                 if riot_response.matchDuration > 600:
@@ -381,7 +381,7 @@ def update_season(summoner_o):
 
     # iterate over list of stats
     for entry in stats_by_champion:
-        if SeasonStats.objects.get(region=region, summoner_id=summoner_id, champion=entry.id).exists():
+        if SeasonStats.objects.filter(region=region, summoner_id=summoner_id, champion=entry.id).exists():
             try:
                 # update the stats
                 SeasonStats.objects.filter(region=region, summoner_id=summoner_id, champion=entry.id).update(
