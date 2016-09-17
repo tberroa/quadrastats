@@ -6,7 +6,7 @@ from portal.keys import RDS_PASSWORD
 # django settings
 ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE = {
+CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': 'portal.vf9jgc.cfg.use1.cache.amazonaws.com:11211',
