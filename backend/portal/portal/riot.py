@@ -2,6 +2,7 @@ import json
 import string
 from cassiopeia import baseriotapi
 from cassiopeia.type.api.exception import APIError
+from django.core.cache import cache
 from django.db.models import Q
 from django.db.utils import IntegrityError
 from django.http import HttpResponse
@@ -364,19 +365,16 @@ def update_match(summoner_o):
     # create the new stats
     MatchStats.objects.bulk_create(new_stats)
 
-    # collect all the stats found for this summoner
+    # collect the 20 newest stats for this summoner
     query = Q(region=region, summoner_id=summoner_id)
-    stats_all = MatchStats.objects.filter(query).order_by("-match_creation")
+    stats_current = list(MatchStats.objects.filter(query).order_by("-match_creation")[:20])
 
-    # organize into the newest 20 and the extras
-    stats_current = list(stats_all[:20])
-    stats_outdated = stats_all[20:]
-
-    # cache the newest 20 stats
+    # cache the 20 newest stats
     cache.set(region + summoner_o.key + "match", stats_current, None)
 
     # delete the extras
-    MatchStats.objects._raw_delete(stats_outdated)
+    pks = [x.pk for x in stats_current]
+    MatchStats.objects.exclude(pk__in=pks).delete()
 
     # successful return
     return True
@@ -476,7 +474,7 @@ def update_season(summoner_o):
 
     # collect all the stats found for this summoner
     query = Q(region=region, summoner_id=summoner_id)
-    stats_all = SeasonStats.objects.filter(query)
+    stats_all = list(SeasonStats.objects.filter(query))
 
     # cache the stats
     cache.set(region + summoner_o.key + "season", stats_all, None)
