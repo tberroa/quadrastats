@@ -2,6 +2,7 @@ import json
 import string
 from cassiopeia import baseriotapi
 from cassiopeia.type.api.exception import APIError
+from django.db.models import Q
 from django.db.utils import IntegrityError
 from django.http import HttpResponse
 from portal.errors import INVALID_REQUEST_FORMAT
@@ -171,7 +172,7 @@ def update_league(region, summoner_ids):
                         wins=wins,
                         losses=losses,
                         series=series)
-        except (APIError, AttributeError, IntegrityError):
+        except (AttributeError, IntegrityError):
             pass
 
     # successful return
@@ -204,6 +205,9 @@ def update_match(summoner_o):
                     match_details.append(riot_response)
     except (APIError, AttributeError):
         return False
+
+    # intialize list for new stats
+    new_stats = []
 
     # iterate over the match details
     for match_detail in match_details:
@@ -270,8 +274,8 @@ def update_match(summoner_o):
                 cs_diff_at_ten = None
                 cs_per_min = None
 
-            # create a new match stats object
-            MatchStats.objects.create(
+            # append match stats object to list of new stats
+            new_stats.append(MatchStats(
                 # identity info
                 region=summoner_o.region,
                 summoner_key=summoner_o.key,
@@ -353,9 +357,26 @@ def update_match(summoner_o):
                 kill_participation=kill_participation,
                 team_kills=team_kills,
                 team_deaths=team_deaths,
-                team_assists=team_assists)
-        except (APIError, AttributeError, IntegrityError, TypeError):
+                team_assists=team_assists))
+        except (AttributeError, IntegrityError, TypeError):
             pass
+
+    # create the new stats
+    MatchStats.objects.bulk_create(new_stats)
+
+    # collect all the stats found for this summoner
+    query = Q(region=region, summoner_id=summoner_id)
+    stats_all = MatchStats.objects.filter(query).order_by("-match_creation")
+
+    # organize into the newest 20 and the extras
+    stats_current = list(stats_all[:20])
+    stats_outdated = stats_all[20:]
+
+    # cache the newest 20 stats
+    cache.set(region + summoner_o.key + "match", stats_current, None)
+
+    # delete the extras
+    MatchStats.objects._raw_delete(stats_outdated)
 
     # successful return
     return True
@@ -450,8 +471,15 @@ def update_season(summoner_o):
             except (AttributeError, IntegrityError):
                 pass
 
-    # query the database to create new stats
+    # create the new stats
     SeasonStats.objects.bulk_create(new_stats)
+
+    # collect all the stats found for this summoner
+    query = Q(region=region, summoner_id=summoner_id)
+    stats_all = SeasonStats.objects.filter(query)
+
+    # cache the stats
+    cache.set(region + summoner_o.key + "season", stats_all, None)
 
     # successful return
     return True
