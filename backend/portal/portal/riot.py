@@ -365,16 +365,20 @@ def update_match(summoner_o):
     # create the new stats
     MatchStats.objects.bulk_create(new_stats)
 
-    # collect the 20 newest stats for this summoner
+    # collect all stats for this summoner
     query = Q(region=region, summoner_id=summoner_id)
-    stats_current = list(MatchStats.objects.filter(query).order_by("-match_creation")[:20])
+    stats_all = MatchStats.objects.filter(query).order_by("-match_creation")
+
+    # organize into 20 newest and extras
+    stats_current = list(stats_all[:20])
+    stats_outdated = stats_all[20:]
 
     # cache the 20 newest stats
     cache.set(region + summoner_o.key + "match", stats_current, None)
 
     # delete the extras
-    pks = [x.pk for x in stats_current]
-    MatchStats.objects.exclude(pk__in=pks).delete()
+    for entry in stats_outdated:
+        entry.delete()
 
     # successful return
     return True
