@@ -173,6 +173,10 @@ def update_league(region, summoner_ids):
                         wins=wins,
                         losses=losses,
                         series=series)
+
+            # cache the updated summoner object
+            summoner_o = Summoner.objects.get(region=region, summoner_id=summoner_ids[index])
+            cache.set(region + summoner_o.key + "summoner", summoner_o, None)
         except (AttributeError, IntegrityError):
             pass
 
