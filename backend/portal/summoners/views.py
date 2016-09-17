@@ -4,6 +4,7 @@ import string
 from cassiopeia.type.api.exception import APIError
 from datetime import datetime
 from django.contrib.auth import hashers
+from django.core.cache import cache
 from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
 from django.http import HttpResponse
@@ -53,7 +54,10 @@ def add_friend(request):
 
     try:
         # get the users summoner object
-        user_o = Summoner.objects.get(region=region, key=user_key)
+        user_o = cache.get(region + user_key + "summoner")
+        if user_o is None:
+            user_o = Summoner.objects.get(region=region, key=user_key)
+            cache.set(region + user_key + "summoner", user_o, None)
         Summoner.objects.filter(pk=user_o.pk).update(accessed=datetime.now())
     except Summoner.DoesNotExist:
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
@@ -69,7 +73,10 @@ def add_friend(request):
 
     try:
         # get the friends summoner object
-        friend_o = Summoner.objects.get(region=region, key=friend_key)
+        friend_o = cache.get(region + friend_key + "summoner")
+        if friend_o is None:
+            friend_o = Summoner.objects.get(region=region, key=friend_key)
+            cache.set(region + friend_key + "summoner", friend_o, None)
         Summoner.objects.filter(pk=friend_o.pk).update(accessed=datetime.now())
     except Summoner.DoesNotExist:
         try:
@@ -173,7 +180,10 @@ def change_email(request):
 
     try:
         # get summoner object
-        summoner_o = Summoner.objects.get(region=region, key=key)
+        summoner_o = cache.get(region + key + "summoner")
+        if summoner_o is None:
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            cache.set(region + key + "summoner", summoner_o, None)
         Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
     except Summoner.DoesNotExist:
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
@@ -216,7 +226,10 @@ def change_password(request):
 
     try:
         # get summoner object
-        summoner_o = Summoner.objects.get(region=region, key=key)
+        summoner_o = cache.get(region + key + "summoner")
+        if summoner_o is None:
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            cache.set(region + key + "summoner", summoner_o, None)
         Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
     except Summoner.DoesNotExist:
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
@@ -257,9 +270,15 @@ def get_summoners(request):
 
     # iterate over each key
     for key in keys:
+        # ensure proper key format
+        key = format_key(key)
+
         try:
             # get summoner object
-            summoner_o = Summoner.objects.get(region=region, key=format_key(key))
+            summoner_o = cache.get(region + key + "summoner")
+            if summoner_o is None:
+                summoner_o = Summoner.objects.get(region=region, key=key)
+                cache.set(region + key + "summoner", summoner_o, None)
             Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
 
             # append summoner object to array
@@ -296,7 +315,10 @@ def login_user(request):
 
     try:
         # get the summoner object
-        summoner_o = Summoner.objects.get(region=region, key=key)
+        summoner_o = cache.get(region + key + "summoner")
+        if summoner_o is None:
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            cache.set(region + key + "summoner", summoner_o, None)
         Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
     except Summoner.DoesNotExist:
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
@@ -346,7 +368,10 @@ def register_user(request):
 
     try:
         # get the summoner object
-        summoner_o = Summoner.objects.get(region=region, key=key)
+        summoner_o = cache.get(region + key + "summoner")
+        if summoner_o is None:
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            cache.set(region + key + "summoner", summoner_o, None)
         Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
 
         # check if the user object already exists
@@ -494,7 +519,10 @@ def remove_friend(request):
 
     try:
         # get the users summoner object
-        user_o = Summoner.objects.get(region=region, key=user_key)
+        user_o = cache.get(region + user_key + "summoner")
+        if user_o is None:
+            user_o = Summoner.objects.get(region=region, key=user_key)
+            cache.set(region + user_key + "summoner", user_o, None)
         Summoner.objects.filter(pk=user_o.pk).update(accessed=datetime.now())
     except Summoner.DoesNotExist:
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
@@ -541,7 +569,10 @@ def reset_password(request):
 
     try:
         # get summoner object
-        summoner_o = Summoner.objects.get(region=region, key=key)
+        summoner_o = cache.get(region + key + "summoner")
+        if summoner_o is None:
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            cache.set(region + key + "summoner", summoner_o, None)
         Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
     except Summoner.DoesNotExist:
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
@@ -628,7 +659,10 @@ def test2(request):
 
     try:
         # get summoner object
-        summoner_o = Summoner.objects.get(region=region, key=key)
+        summoner_o = cache.get(region + key + "summoner")
+        if summoner_o is None:
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            cache.set(region + key + "summoner", summoner_o, None)
     except Summoner.DoesNotExist:
         return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
 
