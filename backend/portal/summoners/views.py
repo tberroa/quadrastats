@@ -152,6 +152,7 @@ def add_friend(request):
     else:
         user_o.friends = friend_key
     Summoner.objects.filter(pk=user_o.pk).update(friends=user_o.friends)
+    cache.set(region + user_key + "summoner", user_o, None)
 
     # return the friends summoner object
     return HttpResponse(summoner_serializer(friend_o, None, False))
@@ -542,6 +543,7 @@ def remove_friend(request):
     if user_o.friends != "" and user_o.friends[len(user_o.friends) - 1] == ",":
         user_o.friends = user_o.friends[:len(user_o.friends) - 1]
     Summoner.objects.filter(pk=user_o.pk).update(friends=user_o.friends)
+    cache.set(region + user_key + "summoner", user_o, None)
 
     # return the users updated summoner object
     return HttpResponse(summoner_serializer(user_o, None, False))
