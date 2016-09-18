@@ -125,6 +125,60 @@ def update(request):
     return HttpResponse(summoner_serializer(summoner_o, None, False))
 
 
+def update_all():
+    # get the 10 most recently accessed summoners
+    summoners_o = list(Summoner.objects.all().order_by("-accessed")[:10])
+
+    # initialize dictionary required for updating league information
+    summoner_ids_dict = dict()
+
+    # populate dictionary
+    for summoner_o in summoners_o:
+        # check if this is the first summoner for the region
+        if summoner_ids_dict.get(summoner_o.region) is None:
+            # initialize a list which will hold multiple lists
+            summoner_ids_list = []
+
+            # initialize the first list within the list of lists
+            summoner_ids = [str(summoner_o.summoner_id)]
+
+            # insert the list into the list of lists
+            summoner_ids_list.append(summoner_ids)
+
+            # insert the list of lists into the dictionary
+            summoner_ids_dict[summoner_o.region] = summoner_ids_list
+        else:
+            # get the list of lists of summoner ids for this region
+            summoner_ids_list = summoner_ids_dict.get(summoner_o.region)
+
+            # iterate over the list of lists looking for a spot to insert the current id
+            inserted = False
+            for summoner_ids in summoner_ids_list:
+                if len(summoner_ids) < 10:
+                    summoner_ids.append(str(summoner_o.summoner_id))
+                    inserted = True
+
+            # if a spot wasn't found, create a new list
+            if not inserted:
+                summoner_ids = [str(summoner_o.summoner_id)]
+                summoner_ids_list.append(summoner_ids)
+
+    # update league information
+    for region in summoner_ids_dict:
+        summoner_ids_list = summoner_ids_dict.get(region)
+        for summoner_ids in summoner_ids_list:
+            summoner_ids = ",".join(summoner_ids)
+            update_league(region, summoner_ids)
+
+    # update match and season stats
+    for summoner_o in summoners_o:
+        update_match(summoner_o)
+        update_season(summoner_o)
+
+    # successful return
+    return True
+
+
 def update_league(region, summoner_ids):
     try:
         # request league information from riot
