@@ -1,6 +1,9 @@
+import boto
 import json
 import random
 import string
+from boto.sqs.connection import SQSConnection
+from boto.sqs.message import Message
 from cassiopeia.type.api.exception import APIError
 from datetime import datetime
 from django.contrib.auth import hashers
@@ -20,6 +23,8 @@ from portal.errors import SUMMONER_DOES_NOT_EXIST
 from portal.errors import SUMMONER_NOT_IN_DATABASE
 from portal.errors import SUMMONER_NOT_RANKED
 from portal.errors import SUMMONER_NOT_REGISTERED
+from portal.keys import AWS_ACCESS_KEY_ID
+from portal.keys import AWS_SECRET_ACCESS_KEY
 from portal.riot import format_key
 from portal.riot import riot_request
 from summoners.models import Summoner
@@ -143,6 +148,13 @@ def add_friend(request):
                 losses=losses,
                 series=series,
                 profile_icon=friend.profileIconId)
+
+            # update the newly created summoner
+            conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+            queue = conn.get_queue("portal-worker")
+            message = Message()
+            message.set_body({"region":region,"key":friend_key})
+            queue.write(message)
         except (AttributeError, IntegrityError):
             return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
 
@@ -486,6 +498,13 @@ def register_user(request):
             losses=losses,
             series=series,
             profile_icon=summoner.profileIconId)
+
+        # update the newly created summoner
+        conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+        queue = conn.get_queue("portal-worker")
+        message = Message()
+        message.set_body({"region":region,"key":key})
+        queue.write(message)
 
         # return the users summoner object with the email included
         return HttpResponse(summoner_serializer(summoner_o, email, False))
