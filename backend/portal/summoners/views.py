@@ -151,7 +151,7 @@ def add_friend(request):
 
             # update the newly created summoner
             conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-            queue = conn.get_queue("portal-worker")
+            queue = conn.get_queue("portal")
             message = Message()
             message.set_body({"region":region,"key":friend_key})
             queue.write(message)
@@ -501,7 +501,7 @@ def register_user(request):
 
         # update the newly created summoner
         conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-        queue = conn.get_queue("portal-worker")
+        queue = conn.get_queue("portal")
         message = Message()
         message.set_body({"region":region,"key":key})
         queue.write(message)

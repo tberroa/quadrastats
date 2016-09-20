@@ -17,7 +17,7 @@ DATABASES = {
         'NAME': 'portaldb',
         'USER': 'tberroa',
         'PASSWORD': RDS_PASSWORD,
-        'HOST': 'portaldb.cflq9mp1c8f1.us-east-1.rds.amazonaws.com',
+        'HOST': 'portal.cflq9mp1c8f1.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
