@@ -38,3 +38,6 @@ class Summoner(models.Model):
 
     def __str__(self):
         return self.region + "," + self.name
+
+    class Meta:
+        unique_together = ["region", "summoner_id"]

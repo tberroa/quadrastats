@@ -91,6 +91,9 @@ class MatchStats(models.Model):
     def __str__(self):
         return self.region + "," + self.summoner_name + "," + str(self.match_id)
 
+    class Meta:
+        unique_together = ["region", "summoner_id", "match_id"]
+
 
 class SeasonStats(models.Model):
     class Meta:
@@ -127,3 +130,6 @@ class SeasonStats(models.Model):
 
     def __str__(self):
         return self.region + "," + self.summoner_name + "," + str(self.champion)
+
+    class Meta:
+        unique_together = ["region", "summoner_id", "champion"]
