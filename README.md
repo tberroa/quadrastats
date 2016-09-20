@@ -4,6 +4,7 @@ League of Legends app for easily comparing in-game stats and player performance.
 ## Backend
 **Required Libraries**
 - awsebcli
+- boto
 - cassiopeia
 - django
 - pymysql
@@ -19,5 +20,7 @@ League of Legends app for easily comparing in-game stats and player performance.
 - Create python3 virtual environment in /backend: virtualenv -p python3 myvenv
 - Activate myvenv and pip install requirements: pip install -r requirements.txt
 - Create file /backend/portal/keys.py
+- Create file /backend/worker/keys.py
 - Set up AWS Elastic Beanstalk files in /backend/portal: eb init
+- Set up AWS Elastic Beanstalk files in /backend/worker: eb init
 
