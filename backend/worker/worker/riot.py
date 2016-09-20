@@ -117,9 +117,10 @@ def update(request):
     return HttpResponse(status=200)
 
 
-def update_all():
-    # get the 10 most recently accessed summoners
-    summoners_o = list(Summoner.objects.all().order_by("-accessed")[:10])
+@require_POST
+def update_all(request):
+    # get the 100 most recently accessed summoners
+    summoners_o = list(Summoner.objects.all().order_by("-accessed")[:100])
 
     # initialize dictionary required for updating league information
     summoner_ids_dict = dict()
@@ -168,7 +169,7 @@ def update_all():
         update_season(summoner_o)
 
     # successful return
-    return True
+    return HttpResponse(status=200)
 
 
 def update_league(region, summoner_ids):
