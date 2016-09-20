@@ -93,6 +93,8 @@ class MatchStats(models.Model):
 
     class Meta:
         unique_together = ["region", "summoner_id", "match_id"]
+        verbose_name = "match stats"
+        verbose_name_plural = "match stats"
 
 
 class SeasonStats(models.Model):
@@ -133,3 +135,5 @@ class SeasonStats(models.Model):
 
     class Meta:
         unique_together = ["region", "summoner_id", "champion"]
+        verbose_name = "season stats"
+        verbose_name_plural = "season stats"

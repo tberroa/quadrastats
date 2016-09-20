@@ -3,7 +3,9 @@ from django.db import models
 
 class MatchStats(models.Model):
     class Meta:
-        verbose_name_plural = 'Match Stats'
+        unique_together = ["region", "summoner_id", "match_id"]
+        verbose_name = "Match Stats"
+        verbose_name_plural = "Match Stats"
 
     # identity info
     region = models.CharField(max_length=4)
@@ -91,13 +93,12 @@ class MatchStats(models.Model):
     def __str__(self):
         return self.region + "," + self.summoner_name + "," + str(self.match_id)
 
-    class Meta:
-        unique_together = ["region", "summoner_id", "match_id"]
-
 
 class SeasonStats(models.Model):
     class Meta:
-        verbose_name_plural = 'Season Stats'
+        unique_together = ["region", "summoner_id", "champion"]
+        verbose_name = "Season Stats"
+        verbose_name_plural = "Season Stats"
 
     # identity info
     region = models.CharField(max_length=4)
@@ -130,6 +131,3 @@ class SeasonStats(models.Model):
 
     def __str__(self):
         return self.region + "," + self.summoner_name + "," + str(self.champion)
-
-    class Meta:
-        unique_together = ["region", "summoner_id", "champion"]

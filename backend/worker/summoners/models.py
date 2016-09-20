@@ -15,6 +15,10 @@ class User(models.Model):
     def __str__(self):
         return self.email + "," + str(self.created)
 
+    class Meta:
+        verbose_name = "user"
+        verbose_name_plural = "users"
+
 
 class Summoner(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
@@ -41,3 +45,5 @@ class Summoner(models.Model):
 
     class Meta:
         unique_together = ["region", "summoner_id"]
+        verbose_name = "summoner"
+        verbose_name_plural = "summoners"
