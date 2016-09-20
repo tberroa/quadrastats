@@ -15,6 +15,7 @@ from django.views.decorators.http import require_POST
 from portal.errors import FRIEND_ALREADY_LISTED
 from portal.errors import FRIEND_EQUALS_USER
 from portal.errors import FRIEND_LIMIT_REACHED
+from portal.errors import INTERNAL_PROCESSING_ERROR
 from portal.errors import INVALID_CREDENTIALS
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.errors import INVALID_RIOT_RESPONSE
@@ -130,7 +131,10 @@ def add_friend(request):
                     losses = entry.losses
                     if entry.miniSeries is not None:
                         series = entry.miniSeries.progress
+        except AttributeError:
+            return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
 
+        try:
             # use the gathered information to create a summoner object
             friend_o = Summoner.objects.create(
                 region=region,
@@ -144,15 +148,15 @@ def add_friend(request):
                 losses=losses,
                 series=series,
                 profile_icon=friend.profileIconId)
+        except IntegrityError:
+            return HttpResponse(json.dumps(INTERNAL_PROCESSING_ERROR))
 
-            # update the newly created summoner
-            conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-            queue = conn.get_queue("portal")
-            message = RawMessage()
-            message.set_body(json.dumps({"region":region,"key":friend_key}))
-            queue.write(message)
-        except (AttributeError, IntegrityError):
-            return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+        # update the newly created summoner
+        conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+        queue = conn.get_queue("portal")
+        message = RawMessage()
+        message.set_body(json.dumps({"region":region,"key":friend_key}))
+        queue.write(message)
 
     # add the friends key to the users friend list
     if user_o.friends != "":
@@ -451,10 +455,13 @@ def register_user(request):
                 losses = entry.losses
                 if entry.miniSeries is not None:
                     series = entry.miniSeries.progress
+    except AttributeError:
+        return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
 
-        # create a new user object
-        user_o = User.objects.create(email=email, password=password)
+    # create a new user object
+    user_o = User.objects.create(email=email, password=password)
 
+    try:
         # use the gathered information to create a summoner object
         summoner_o = Summoner.objects.create(
             user=user_o,
@@ -469,18 +476,18 @@ def register_user(request):
             losses=losses,
             series=series,
             profile_icon=summoner.profileIconId)
+    except IntegrityError:
+        return HttpResponse(json.dumps(INTERNAL_PROCESSING_ERROR))
 
-        # update the newly created summoner
-        conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-        queue = conn.get_queue("portal")
-        message = RawMessage()
-        message.set_body(json.dumps({"region":region,"key":key}))
-        queue.write(message)
+    # update the newly created summoner
+    conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+    queue = conn.get_queue("portal")
+    message = RawMessage()
+    message.set_body(json.dumps({"region":region,"key":key}))
+    queue.write(message)
 
-        # return the users summoner object with the email included
-        return HttpResponse(summoner_serializer(summoner_o, email, False))
-    except (AttributeError, IntegrityError):
-        return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+    # return the users summoner object with the email included
+    return HttpResponse(summoner_serializer(summoner_o, email, False))
 
 
 @require_POST

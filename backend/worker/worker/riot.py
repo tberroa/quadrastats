@@ -414,7 +414,10 @@ def update_match(summoner_o):
             pass
 
     # create the new stats
-    MatchStats.objects.bulk_create(new_stats)
+    try:
+        MatchStats.objects.bulk_create(new_stats)
+    except IntegrityError:
+        pass
 
     # collect all stats for this summoner
     query = Q(region=region, summoner_id=summoner_id)
@@ -525,7 +528,10 @@ def update_season(summoner_o):
                 pass
 
     # create the new stats
-    SeasonStats.objects.bulk_create(new_stats)
+    try:
+        SeasonStats.objects.bulk_create(new_stats)
+    except IntegrityError:
+        pass
 
     # collect all the stats found for this summoner
     query = Q(region=region, summoner_id=summoner_id)
