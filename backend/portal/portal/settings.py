@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-LANGUAGE_CODE = 'en-us'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -88,9 +87,7 @@ TEMPLATES = [
     },
 ]
 TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = False
+USE_I18N = False
 SECRET_KEY = DJANGO_SECRET_KEY
 STATIC_ROOT = BASE_DIR + '/static/'
 STATIC_URL = '/static/'
