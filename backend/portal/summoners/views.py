@@ -3,7 +3,7 @@ import json
 import random
 import string
 from boto.sqs.connection import SQSConnection
-from boto.sqs.message import Message
+from boto.sqs.message import RawMessage
 from cassiopeia.type.api.exception import APIError
 from datetime import datetime
 from django.contrib.auth import hashers
@@ -152,8 +152,8 @@ def add_friend(request):
             # update the newly created summoner
             conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
             queue = conn.get_queue("portal")
-            message = Message()
-            message.set_body({"region":region,"key":friend_key})
+            message = RawMessage()
+            message.set_body(json.dumps({"region":region,"key":friend_key}))
             queue.write(message)
         except (AttributeError, IntegrityError):
             return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
@@ -502,8 +502,8 @@ def register_user(request):
         # update the newly created summoner
         conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
         queue = conn.get_queue("portal")
-        message = Message()
-        message.set_body({"region":region,"key":key})
+        message = RawMessage()
+        message.set_body(json.dumps({"region":region,"key":key}))
         queue.write(message)
 
         # return the users summoner object with the email included
