@@ -2,6 +2,7 @@ import json
 from django.core.cache import cache
 from django.db.models import Q
 from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.riot import format_key
 from stats.models import MatchStats
@@ -9,13 +10,8 @@ from stats.models import SeasonStats
 from stats.serializers import stats_serializer
 
 
+@require_POST
 def get_match_stats(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -72,13 +68,8 @@ def get_match_stats(request):
     return HttpResponse(stats_serializer(stats))
 
 
+@require_POST
 def get_season_stats(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")

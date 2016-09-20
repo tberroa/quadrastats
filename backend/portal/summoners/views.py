@@ -11,6 +11,7 @@ from django.core.cache import cache
 from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
 from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 from portal.errors import FRIEND_ALREADY_LISTED
 from portal.errors import FRIEND_EQUALS_USER
 from portal.errors import FRIEND_LIMIT_REACHED
@@ -32,13 +33,8 @@ from summoners.models import User
 from summoners.serializers import summoner_serializer
 
 
+@require_POST
 def add_friend(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -170,13 +166,8 @@ def add_friend(request):
     return HttpResponse(summoner_serializer(friend_o, None, False))
 
 
+@require_POST
 def change_email(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -216,13 +207,8 @@ def change_email(request):
     return HttpResponse(summoner_serializer(summoner_o, new_email, False))
 
 
+@require_POST
 def change_password(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -262,13 +248,8 @@ def change_password(request):
     return HttpResponse(summoner_serializer(summoner_o, None, False))
 
 
+@require_POST
 def get_summoners(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -306,13 +287,8 @@ def get_summoners(request):
     return HttpResponse(summoner_serializer(summoners, None, True))
 
 
+@require_POST
 def login_user(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -351,13 +327,8 @@ def login_user(request):
     return HttpResponse(summoner_serializer(summoner_o, email, False))
 
 
+@require_POST
 def register_user(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -512,13 +483,8 @@ def register_user(request):
         return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
 
 
+@require_POST
 def remove_friend(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -568,13 +534,8 @@ def remove_friend(request):
     return HttpResponse(summoner_serializer(user_o, None, False))
 
 
+@require_POST
 def reset_password(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -620,13 +581,8 @@ def reset_password(request):
     return HttpResponse(summoner_serializer(summoner_o, None, False))
 
 
+@require_POST
 def test1(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
@@ -659,13 +615,8 @@ def test1(request):
     return HttpResponse(json.dumps(FRIEND_EQUALS_USER))
 
 
+@require_POST
 def test2(request):
-    # make sure its a post
-    if request.method == "POST":
-        pass
-    else:
-        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
-
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
