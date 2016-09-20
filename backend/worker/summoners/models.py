@@ -3,6 +3,10 @@ from django.db import models
 
 
 class User(models.Model):
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+
     email = models.EmailField(max_length=256)
     password = models.CharField(max_length=256)
     created = models.DateTimeField(null=True, blank=True)
@@ -15,12 +19,13 @@ class User(models.Model):
     def __str__(self):
         return self.email + "," + str(self.created)
 
-    class Meta:
-        verbose_name = "user"
-        verbose_name_plural = "users"
-
 
 class Summoner(models.Model):
+    class Meta:
+        unique_together = ["region", "summoner_id"]
+        verbose_name = "Summoner"
+        verbose_name_plural = "Summoners"
+
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
     region = models.CharField(max_length=4)
     key = models.CharField(max_length=32)
@@ -42,8 +47,3 @@ class Summoner(models.Model):
 
     def __str__(self):
         return self.region + "," + self.name
-
-    class Meta:
-        unique_together = ["region", "summoner_id"]
-        verbose_name = "summoner"
-        verbose_name_plural = "summoners"
