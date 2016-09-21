@@ -7,10 +7,10 @@ from django.db.models import Q
 from django.db.utils import IntegrityError
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
-from worker.keys import RIOT_API_KEY
 from stats.models import MatchStats
 from stats.models import SeasonStats
 from summoners.models import Summoner
+from worker.keys import RIOT_API_KEY
 
 QUEUE = "TEAM_BUILDER_DRAFT_RANKED_5x5"
 SEASON = "SEASON2016"
@@ -77,6 +77,7 @@ def riot_request(region, args):
 
     # return response
     return riot_response
+
 
 @require_POST
 def update(request):

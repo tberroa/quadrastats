@@ -155,7 +155,7 @@ def add_friend(request):
         conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
         queue = conn.get_queue("portal")
         message = RawMessage()
-        message.set_body(json.dumps({"region":region,"key":friend_key}))
+        message.set_body(json.dumps({"region": region, "key": friend_key}))
         queue.write(message)
 
     # add the friends key to the users friend list
@@ -483,7 +483,7 @@ def register_user(request):
     conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
     queue = conn.get_queue("portal")
     message = RawMessage()
-    message.set_body(json.dumps({"region":region,"key":key}))
+    message.set_body(json.dumps({"region": region, "key": key}))
     queue.write(message)
 
     # return the users summoner object with the email included

@@ -10,7 +10,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': 'portal.vf9jgc.cfg.use1.cache.amazonaws.com:11211',
-     }
+    }
 }
 DATABASES = {
     'default': {
@@ -43,12 +43,12 @@ LOGGING = {
     },
     'handlers': {
         'default': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
             'filename': '/var/log/django.log',
             'maxBytes': 5242880,
-            'formatter':'standard',
-        },  
+            'formatter': 'standard',
+        },
     },
     'loggers': {
         'django': {
