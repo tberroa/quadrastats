@@ -155,7 +155,7 @@ def add_friend(request):
         conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
         queue = conn.get_queue("portal")
         message = RawMessage()
-        message.set_body(json.dumps({"region": region, "key": friend_key}))
+        message.set_body(json.dumps({"region": region, "keys": [friend_key]}))
         queue.write(message)
 
     # add the friends key to the users friend list
@@ -263,8 +263,8 @@ def get_summoners(request):
     if None in (region, keys):
         return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
 
-    # initialize empty array, to be populated with requested summoner objects
-    summoners = []
+    # initialize empty list for requested summoner objects
+    summoners_o = []
 
     # iterate over each key
     for key in keys:
@@ -279,16 +279,16 @@ def get_summoners(request):
                 cache.set(region + key + "summoner", summoner_o, None)
             Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
 
-            # append summoner object to array
-            summoners.append(summoner_o)
+            # append summoner object to list
+            summoners_o.append(summoner_o)
         except Summoner.DoesNotExist:
             return HttpResponse(json.dumps(SUMMONER_NOT_IN_DATABASE))
 
     # remove duplicates
-    summoners = set(summoners)
+    summoners_o = set(summoners_o)
 
     # return the requested summoner objects
-    return HttpResponse(summoner_serializer(summoners, None, True))
+    return HttpResponse(summoner_serializer(summoners_o, None, True))
 
 
 @require_POST
@@ -483,7 +483,7 @@ def register_user(request):
     conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
     queue = conn.get_queue("portal")
     message = RawMessage()
-    message.set_body(json.dumps({"region": region, "key": key}))
+    message.set_body(json.dumps({"region": region, "keys": [key]}))
     queue.write(message)
 
     # return the users summoner object with the email included

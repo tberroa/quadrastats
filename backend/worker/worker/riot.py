@@ -84,35 +84,59 @@ def update(request):
     # extract data
     data = json.loads(request.body.decode('utf-8'))
     region = data.get("region")
-    key = data.get("key")
+    keys = data.get("keys")
 
     # ensure the data is valid
-    if None in (region, key):
+    if None in (region, keys):
         return HttpResponse(status=400)
 
-    # ensure proper key format
-    key = format_key(key)
+    # initialize empty list for summoner objects
+    summoners_o = []
 
-    try:
-        # get summoner object
-        summoner_o = Summoner.objects.get(region=region, key=key)
-    except Summoner.DoesNotExist:
-        return HttpResponse(status=400)
+    # iterate over each key
+    for key in keys:
+        # ensure proper key format
+        key = format_key(key)
+
+        try:
+            # get summoner object
+            summoner_o = cache.get(region + key + "summoner")
+            if summoner_o is None:
+                summoner_o = Summoner.objects.get(region=region, key=key)
+                cache.set(region + key + "summoner", summoner_o, None)
+            Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
+
+            # append summoner object to list
+            summoners_o.append(summoner_o)
+        except Summoner.DoesNotExist:
+            return HttpResponse(status=400)
+
+    # initialize list of lists required for updating league information
+    summoner_ids_list = []
+
+    # populate list of lists
+    for summoner_o in summoners_o:
+        # iterate over the list of lists looking for a spot to insert the current id
+        inserted = False
+        for summoner_ids in summoner_ids_list:
+            if len(summoner_ids) < 10:
+                summoner_ids.append(str(summoner_o.summoner_id))
+                inserted = True
+
+        # if a spot wasn't found, create a new list
+        if not inserted:
+            summoner_ids = [str(summoner_o.summoner_id)]
+            summoner_ids_list.append(summoner_ids)
 
     # update the summoners league stats
-    update_league(region, str(summoner_o.summoner_id))
+    for summoner_ids in summoner_ids_list:
+        summoner_ids = ",".join(summoner_ids)
+        update_league(region, summoner_ids)
 
-    # update the summoners match stats
-    update_match(summoner_o)
-
-    # update the summoners season stats
-    update_season(summoner_o)
-
-    try:
-        # get updated summoner object
-        summoner_o = Summoner.objects.get(region=region, key=key)
-    except Summoner.DoesNotExist:
-        return HttpResponse(status=400)
+    # update match and season stats
+    for summoner_o in summoners_o:
+        update_match(summoner_o)
+        update_season(summoner_o)
 
     # successful return
     return HttpResponse(status=200)
