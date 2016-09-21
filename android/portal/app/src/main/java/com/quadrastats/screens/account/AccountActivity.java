@@ -21,6 +21,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,14 @@ public class AccountActivity extends BaseActivity {
                 }
             }
         });
+
+        // initialize loading spinner
+        int screenWidth = ScreenUtil.screenWidth(this);
+        ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        loadingSpinner.getLayoutParams().width = (25 * screenWidth) / 100;
+        loadingSpinner.getLayoutParams().height = (25 * screenWidth) / 100;
+        loadingSpinner.setLayoutParams(loadingSpinner.getLayoutParams());
+        loadingSpinner.setVisibility(View.GONE);
 
         // initialize views
         TextView emailView = (TextView) findViewById(R.id.email_view);
@@ -340,6 +349,10 @@ public class AccountActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // turn loading spinner off
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.GONE);
+
             if (postResponse.valid) {
                 User user = ModelUtil.fromJson(postResponse.body, User.class);
                 TextView emailView = (TextView) findViewById(R.id.email_view);
@@ -347,6 +360,13 @@ public class AccountActivity extends BaseActivity {
             } else { // display error
                 Toast.makeText(AccountActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // turn loading spinner on
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.VISIBLE);
         }
     }
 
@@ -380,12 +400,23 @@ public class AccountActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // turn loading spinner off
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.GONE);
+
             if (postResponse.valid) {
                 String message = getString(R.string.ma_successful_change);
                 Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
                 Toast.makeText(AccountActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // turn loading spinner on
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.VISIBLE);
         }
     }
 }

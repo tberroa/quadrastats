@@ -187,12 +187,23 @@ public class SignInActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // turn loading spinner off
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.GONE);
+
             if (postResponse.valid) {
                 String message = getString(R.string.auth_successful_reset);
                 Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
                 Toast.makeText(SignInActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // turn loading spinner on
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.VISIBLE);
         }
     }
 
