@@ -14,8 +14,11 @@ public class Constants {
     public static final int ERR_INVALID_CREDENTIALS = 70;
     public static final int ERR_INVALID_REQUEST_FORMAT = 75;
     public static final int ERR_INVALID_RIOT_RESPONSE = 80;
+    public static final int ERR_RUNE_PAGE_CODE_NOT_FOUND = 83;
     public static final int ERR_SUMMONER_ALREADY_REGISTERED = 85;
     public static final int ERR_SUMMONER_DOES_NOT_EXIST = 90;
+    public static final int ERR_SUMMONER_NOT_IN_DATABASE = 92;
+    public static final int ERR_SUMMONER_NOT_RANKED = 94;
     public static final int ERR_SUMMONER_NOT_REGISTERED = 95;
     public static final String POS_BOT = "DUO_CARRY";
     public static final String POS_JUNGLE = "JUNGLE";
@@ -49,6 +52,7 @@ public class Constants {
     public static final int UI_DIALOG_WIDTH = 95;
     public static final String UI_NO_ITEM = "NO_ITEM";
     public static final String UI_RELOAD = "-80";
+    public static final double UPDATE_FREQUENCY = 3600000;
     public static final String URL_CHAMPION = "/img/champion/";
     public static final String URL_DATA_DRAGON = "http://ddragon.leagueoflegends.com/cdn/";
     public static final String URL_IMAGE_TYPE = ".png";

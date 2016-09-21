@@ -65,7 +65,8 @@
     <string name="ma_new_password">New Password</string>
     <string name="ma_confirm_new_password">Confirm New Password</string>
     <string name="ma_password_mismatch">Password mismatch</string>
-    <string name="ma_successful_change">Password successfully changed</string>
+    <string name="ma_successful_email_change">Email successfully changed</string>
+    <string name="ma_successful_password_change">Password successfully changed</string>
 
     <!-- manage friends activity -->
     <string name="mf_activity_title">Manage Friends</string>
@@ -75,6 +76,7 @@
         Are you sure you want to remove this summoner from your friends list?
     </string>
     <string name="mf_add_friend">Add Friend</string>
+    <string name="mf_update">Update</string>
     <string name="mf_bronze">Bronze</string>
     <string name="mf_silver">Silver</string>
     <string name="mf_gold">Gold</string>
@@ -82,6 +84,16 @@
     <string name="mf_diamond">Diamond</string>
     <string name="mf_master">Master</string>
     <string name="mf_challenger">Challenger</string>
+    <string name="mf_friend_added_success">Friend added successfully</string>
+    <string name="mf_friend_removed_success">Friend removed successfully</string>
+    <string name="mf_summoner_sync_success">Summoners synced successfully</string>
+    <string name="mf_update_success">Update triggered successfully</string>
+    <string name="mf_update_confirm">
+        Are you sure you want to trigger a stats update? You can only do this once per hour.
+    </string>
+    <string name="mf_update_denied">
+        You have recently triggered a stats update and need to wait longer before you can do so again.
+    </string>
 
     <!-- base stats activity -->
     <string name="bs_loading">Loading&#8230;</string>
@@ -193,8 +205,10 @@
     <string name="err_invalid_credentials">Invalid credentials</string>
     <string name="err_invalid_request_format">Invalid request format</string>
     <string name="err_invalid_riot_response">Invalid response from Riot servers</string>
+    <string name="err_rune_page_code_not_found">Rune page code not found</string>
     <string name="err_summoner_already_registered">Summoner already registered</string>
-    <string name="err_summoner_does_not_exist">Summoner not registered</string>
+    <string name="err_summoner_not_in_database">Summoner not in database</string>
+    <string name="err_summoner_not_ranked">Summoner not ranked</string>
     <string name="err_summoner_not_registered">Summoner not registered</string>
 
     <!-- content descriptions -->

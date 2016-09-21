@@ -67,11 +67,20 @@ public class ScreenUtil {
                 case Constants.ERR_INVALID_RIOT_RESPONSE:
                     httpResponse.error = context.getString(R.string.err_invalid_riot_response);
                     return httpResponse;
+                case Constants.ERR_RUNE_PAGE_CODE_NOT_FOUND:
+                    httpResponse.error = context.getString(R.string.err_rune_page_code_not_found);
+                    return httpResponse;
                 case Constants.ERR_SUMMONER_ALREADY_REGISTERED:
                     httpResponse.error = context.getString(R.string.err_summoner_already_registered);
                     return httpResponse;
                 case Constants.ERR_SUMMONER_DOES_NOT_EXIST:
                     httpResponse.error = context.getString(R.string.err_summoner_does_not_exist);
+                    return httpResponse;
+                case Constants.ERR_SUMMONER_NOT_IN_DATABASE:
+                    httpResponse.error = context.getString(R.string.err_summoner_not_in_database);
+                    return httpResponse;
+                case Constants.ERR_SUMMONER_NOT_RANKED:
+                    httpResponse.error = context.getString(R.string.err_summoner_not_ranked);
                     return httpResponse;
                 case Constants.ERR_SUMMONER_NOT_REGISTERED:
                     httpResponse.error = context.getString(R.string.err_summoner_not_registered);

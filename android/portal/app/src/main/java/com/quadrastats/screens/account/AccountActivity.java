@@ -357,6 +357,8 @@ public class AccountActivity extends BaseActivity {
                 User user = ModelUtil.fromJson(postResponse.body, User.class);
                 TextView emailView = (TextView) findViewById(R.id.email_view);
                 emailView.setText(user.email);
+                String message = getString(R.string.ma_successful_email_change);
+                Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
                 Toast.makeText(AccountActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             }
@@ -405,7 +407,7 @@ public class AccountActivity extends BaseActivity {
             loadingSpinner.setVisibility(View.GONE);
 
             if (postResponse.valid) {
-                String message = getString(R.string.ma_successful_change);
+                String message = getString(R.string.ma_successful_password_change);
                 Toast.makeText(AccountActivity.this, message, Toast.LENGTH_SHORT).show();
             } else { // display error
                 Toast.makeText(AccountActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
