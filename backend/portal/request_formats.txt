@@ -35,7 +35,7 @@ Request:
    "region" : "na",
    "key" : "frosiph",
    "password" : "123456",
-   "new_email": "tom.berroa@gmail.com"
+   "new_email": "tomberroa@gmail.com"
 }
 Response:
 {
@@ -53,7 +53,7 @@ Response:
     "profile_icon": 539,
     "friends": "acruz,clapyohands,economite,thedelusion,xluunatic,anniebot,luciaron",
     "accessed": "2016-08-11T15:30:39.309999",
-    "email": "tom.berroa@gmail.com"
+    "email": "tomberroa@gmail.com"
 }
 
 ---------------------------------------------------
@@ -137,7 +137,7 @@ Response:
     "profile_icon": 539,
     "friends": "acruz,clapyohands,economite,thedelusion,xluunatic,anniebot,luciaron",
     "accessed": "2016-08-11T15:33:12.216039",
-    "email": "tom.berroa@gmail.com"
+    "email": "tomberroa@gmail.com"
 }
 
 ---------------------------------------------------
@@ -360,7 +360,22 @@ Response:
     }
 ]
 
+---------------------------------------------------
 
+===================== OTHERS ======================
+
+---------------------------------------------------
+
+Update
+Request:
+{ 
+    "region" : "na",
+    "keys" : ["frosiph"]
+}
+Response:
+"success"
+
+---------------------------------------------------
 
 
 
