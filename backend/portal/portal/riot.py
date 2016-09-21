@@ -3,6 +3,7 @@ import string
 from boto.sqs.connection import SQSConnection
 from boto.sqs.message import RawMessage
 from cassiopeia import baseriotapi
+from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from portal.errors import INVALID_REQUEST_FORMAT
 from portal.keys import AWS_ACCESS_KEY_ID

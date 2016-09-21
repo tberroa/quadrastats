@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # constants
-BODY='{"region":"na","keys":["frosiph", "fans"]}'
+BODY='{"region":"na","keys":["frosiph"]}'
 FORMAT="@config/curl-format"
 RESULTS_FILE=results/get_summoners
 URL_DEV=127.0.0.1:8000/summoners/get.json
