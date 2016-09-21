@@ -207,6 +207,7 @@
     <string name="err_invalid_riot_response">Invalid response from Riot servers</string>
     <string name="err_rune_page_code_not_found">Rune page code not found</string>
     <string name="err_summoner_already_registered">Summoner already registered</string>
+    <string name="err_summoner_does_not_exist">Summoner does not exist</string>
     <string name="err_summoner_not_in_database">Summoner not in database</string>
     <string name="err_summoner_not_ranked">Summoner not ranked</string>
     <string name="err_summoner_not_registered">Summoner not registered</string>
