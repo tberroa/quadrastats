@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -543,6 +544,10 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 }
             });
 
+            // initialize countdown view
+            TextView countdownView = (TextView) findViewById(R.id.countdown_view);
+            countdownView.setVisibility(View.GONE);
+
             // calculate the time elapsed since last update
             double timeElapsed = System.currentTimeMillis() - updateTime;
 
@@ -562,6 +567,34 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             } else {
                 yesButton.setEnabled(true);
             }
+
+            // set countdown if required
+            if (timeElapsed < Constants.UPDATE_FREQUENCY) {
+                countdownView.setVisibility(View.VISIBLE);
+                long timeLeft = (long) (Constants.UPDATE_FREQUENCY - timeElapsed);
+                new CountDownTimer(timeLeft, 1000) {
+                    public void onFinish() {
+                        countdownView.setVisibility(View.GONE);
+                        messageView.setText(getString(R.string.mf_update_confirm));
+                        yesButton.setEnabled(true);
+                    }
+
+                    public void onTick(long millisUntilFinished) {
+                        long seconds = (millisUntilFinished / 1000) % 60;
+                        long minutes = (millisUntilFinished / (1000 * 60)) % 60;
+                        String secondsString = String.valueOf(seconds);
+                        String minutesString = String.valueOf(minutes);
+                        if (seconds < 10) {
+                            secondsString = "0" + secondsString;
+                        }
+                        if (minutes < 10) {
+                            minutesString = "0" + minutesString;
+                        }
+                        String viewText = minutesString + " : " + secondsString;
+                        countdownView.setText(viewText);
+                    }
+                }.start();
+            }
         }
     }
 
@@ -578,7 +611,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             // create list of keys
             List<String> keys = new ArrayList<>();
             keys.add(user.key);
-            if (!"".equals(user.friends)){
+            if (!"".equals(user.friends)) {
                 keys.addAll(Arrays.asList(user.friends.split(",")));
             }
 
