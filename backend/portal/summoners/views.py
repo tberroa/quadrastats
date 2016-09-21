@@ -581,7 +581,7 @@ def reset_password(request):
     User.objects.filter(pk=summoner_o.user.pk).update(password=hashers.make_password(new_password))
 
     # send email to user
-    email = EmailMessage("Portal: Password Reset", 'New Password: ' + new_password, to=[summoner_o.user.email])
+    email = EmailMessage("QuadraStats: Password Reset", 'New Password: ' + new_password, to=[summoner_o.user.email])
     email.send(fail_silently=False)
 
     # return the users summoner object
