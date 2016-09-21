@@ -1,5 +1,12 @@
+import json
 import string
+from boto.sqs.connection import SQSConnection
+from boto.sqs.message import RawMessage
 from cassiopeia import baseriotapi
+from django.views.decorators.http import require_POST
+from portal.errors import INVALID_REQUEST_FORMAT
+from portal.keys import AWS_ACCESS_KEY_ID
+from portal.keys import AWS_SECRET_ACCESS_KEY
 from portal.keys import RIOT_API_KEY
 
 QUEUE = "TEAM_BUILDER_DRAFT_RANKED_5x5"
@@ -45,3 +52,25 @@ def riot_request(region, args):
 
     # return response
     return riot_response
+
+
+@require_POST
+def update(request):
+    # extract data
+    data = json.loads(request.body.decode('utf-8'))
+    region = data.get("region")
+    keys = data.get("keys")
+
+    # ensure the data is valid
+    if None in (region, keys):
+        return HttpResponse(INVALID_REQUEST_FORMAT)
+
+    # update the summoners
+    conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+    queue = conn.get_queue("portal")
+    message = RawMessage()
+    message.set_body(json.dumps({"region": region, "keys": keys}))
+    queue.write(message)
+
+    # successful return
+    return HttpResponse("success")
