@@ -98,9 +98,9 @@ STATICFILES_FINDERS = [
 WSGI_APPLICATION = 'portal.wsgi.application'
 
 # email settings
-DEFAULT_FROM_EMAIL = 'tberroa@outlook.com'
+DEFAULT_FROM_EMAIL = 'quadrastats@outlook.com'
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
-EMAIL_HOST_USER = 'tberroa@outlook.com'
+EMAIL_HOST_USER = 'quadrastats@outlook.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
