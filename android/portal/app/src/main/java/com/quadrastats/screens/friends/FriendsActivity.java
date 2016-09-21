@@ -33,6 +33,7 @@ import com.quadrastats.data.UserData;
 import com.quadrastats.models.ModelUtil;
 import com.quadrastats.models.requests.ReqFriend;
 import com.quadrastats.models.requests.ReqGetSummoners;
+import com.quadrastats.models.requests.ReqUpdate;
 import com.quadrastats.models.summoner.Summoner;
 import com.quadrastats.network.Http;
 import com.quadrastats.network.HttpResponse;
@@ -574,128 +575,31 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             // get user
             Summoner user = localDB.summoner(userData.getId(FriendsActivity.this));
 
-            // create request object for getting the users updated summoner object from the server
-            ReqGetSummoners requestUpdatedUser = new ReqGetSummoners();
-            requestUpdatedUser.region = user.region;
-            requestUpdatedUser.keys = new ArrayList<>();
-            requestUpdatedUser.keys.add(user.key);
-
-            // make the request
-            HttpResponse postResponse1 = null;
-            try {
-                String url = Constants.URL_GET_SUMMONERS;
-                postResponse1 = new Http().post(url, ModelUtil.toJson(requestUpdatedUser, ReqGetSummoners.class));
-            } catch (IOException e) {
-                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
+            // create list of keys
+            List<String> keys = new ArrayList<>();
+            keys.add(user.key);
+            if (!"".equals(user.friends)){
+                keys.addAll(Arrays.asList(user.friends.split(",")));
             }
 
-            // handle the response
-            postResponse1 = ScreenUtil.responseHandler(FriendsActivity.this, postResponse1);
-
-            // update the original user object
-            if (postResponse1.valid) {
-                Type type = new TypeToken<List<Summoner>>() {
-                }.getType();
-                List<Summoner> updatedUserList = ModelUtil.fromJsonList(postResponse1.body, type);
-                Summoner updatedUser = updatedUserList.get(0);
-                user.tier = updatedUser.tier;
-                user.division = updatedUser.division;
-                user.lp = updatedUser.lp;
-                user.wins = updatedUser.wins;
-                user.losses = updatedUser.losses;
-                user.series = updatedUser.series;
-                user.profile_icon = updatedUser.profile_icon;
-                user.friends = updatedUser.friends;
-                user.save();
-            } else {
-                return postResponse1;
-            }
-
-            // check if the updated user has no friends
-            if ("".equals(user.friends)) {
-                // empty the friends list
-                ActiveAndroid.beginTransaction();
-                try {
-                    for (ListIterator<Summoner> iFriend = friends.listIterator(); iFriend.hasNext(); ) {
-                        int i = iFriend.nextIndex();
-                        Summoner friend = iFriend.next();
-                        if (i != 0) {
-                            friend.delete();
-                            iFriend.remove();
-                        }
-                    }
-                    ActiveAndroid.setTransactionSuccessful();
-                } finally {
-                    ActiveAndroid.endTransaction();
-                }
-                return postResponse1;
-            }
-
-            // use the updated user to create request object for getting the friends updated objects from the server
-            ReqGetSummoners request = new ReqGetSummoners();
+            // create request object
+            ReqUpdate request = new ReqUpdate();
             request.region = user.region;
-            request.keys = new ArrayList<>(Arrays.asList(user.friends.split(",")));
+            request.keys = keys;
 
             // make the request
-            HttpResponse postResponse2 = null;
+            HttpResponse postResponse = null;
             try {
-                String url = Constants.URL_GET_SUMMONERS;
-                postResponse2 = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
+                String url = Constants.URL_UPDATE;
+                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqUpdate.class));
             } catch (IOException e) {
                 Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
             }
 
             // handle the response
-            postResponse2 = ScreenUtil.responseHandler(FriendsActivity.this, postResponse2);
+            postResponse = ScreenUtil.responseHandler(FriendsActivity.this, postResponse);
 
-            // update the friend summoner objects
-            if (postResponse2.valid) {
-                Type type = new TypeToken<List<Summoner>>() {
-                }.getType();
-                List<Summoner> updatedFriends = ModelUtil.fromJsonList(postResponse2.body, type);
-                ActiveAndroid.beginTransaction();
-                try {
-                    // update the original friends that are on the new list and delete any not on the new list
-                    for (ListIterator<Summoner> iFriend = friends.listIterator(); iFriend.hasNext(); ) {
-                        int i = iFriend.nextIndex();
-                        Summoner friend = iFriend.next();
-                        if (i != 0) {
-                            boolean found = false;
-                            for (Iterator<Summoner> iUFriend = updatedFriends.listIterator(); iUFriend.hasNext(); ) {
-                                Summoner updatedFriend = iUFriend.next();
-                                if (friend.key.equals(updatedFriend.key)) {
-                                    found = true;
-                                    friend.tier = updatedFriend.tier;
-                                    friend.division = updatedFriend.division;
-                                    friend.lp = updatedFriend.lp;
-                                    friend.wins = updatedFriend.wins;
-                                    friend.losses = updatedFriend.losses;
-                                    friend.series = updatedFriend.series;
-                                    friend.profile_icon = updatedFriend.profile_icon;
-                                    friend.save();
-                                    iUFriend.remove();
-                                    break;
-                                }
-                            }
-                            if (!found) {
-                                friend.delete();
-                                iFriend.remove();
-                            }
-                        }
-                    }
-
-                    // if the new list has new friends, save them locally and add to list of friends for adapter
-                    for (Summoner updatedFriend : updatedFriends) {
-                        updatedFriend.save();
-                        friends.add(updatedFriend);
-                    }
-                    ActiveAndroid.setTransactionSuccessful();
-                } finally {
-                    ActiveAndroid.endTransaction();
-                }
-            }
-
-            return postResponse2;
+            return postResponse;
         }
 
         @Override
@@ -707,6 +611,9 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             if (!postResponse.valid) {
                 Toast.makeText(FriendsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
             } else {
+                // set update time
+                updateTime = System.currentTimeMillis();
+
                 // display success
                 String message = getString(R.string.mf_update_success);
                 Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -736,9 +643,6 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
 
             // set busy flag
             busy = true;
-
-            // set update time
-            updateTime = System.currentTimeMillis();
         }
     }
 

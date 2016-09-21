@@ -81,6 +81,7 @@ public class Constants {
     public static final String URL_RESET_PASSWORD = URL_BASE + "summoners/reset-password.json";
     public static final String URL_GET_MATCH_STATS = URL_BASE + "stats/match.json";
     public static final String URL_GET_SEASON_STATS = URL_BASE + "stats/season.json";
+    public static final String URL_UPDATE = URL_BASE + "update.json";
     private static final String URL_STATIC_BASE = "https://global.api.pvp.net/api/lol/static-data/na/v1.2";
     public static final String URL_GET_CHAMPIONS = URL_STATIC_BASE + "/champion?api_key=" + Keys.RIOT_API_KEY;
 
