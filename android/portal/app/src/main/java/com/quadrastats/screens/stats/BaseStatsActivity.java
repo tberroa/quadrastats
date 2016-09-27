@@ -50,6 +50,7 @@ import java.util.Map;
 
 public class BaseStatsActivity extends BaseActivity implements OnRefreshListener {
 
+    private boolean cancelled;
     private boolean useDataSwipeLayout;
 
     @Override
@@ -61,6 +62,12 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelled = true;
     }
 
     @Override
@@ -194,6 +201,11 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
 
         @Override
         protected void onPostExecute(Boolean[] result) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             // clear swipe refresh layouts
             SwipeRefreshLayout dataSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.data_swipe_layout);
             dataSwipeLayout.setRefreshing(false);
@@ -305,6 +317,11 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
 
         @Override
         protected void onPostExecute(Boolean[] result) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             // clear swipe refresh layouts
             SwipeRefreshLayout dataSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.data_swipe_layout);
             dataSwipeLayout.setRefreshing(false);
@@ -390,6 +407,11 @@ public class BaseStatsActivity extends BaseActivity implements OnRefreshListener
 
         @Override
         protected void onPostExecute(List<String> keys) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             loadingView.setVisibility(View.GONE);
 
             // display no friends layout if user has no friends

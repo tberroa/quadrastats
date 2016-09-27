@@ -55,6 +55,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
     private static double updateTime;
     private boolean add;
     private boolean busy;
+    private boolean cancelled;
     private List<Summoner> friends;
     private FriendsAdapter friendsAdapter;
 
@@ -128,6 +129,12 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
         swipeLayout.setOnRefreshListener(this);
 
         new ViewInitialization().execute();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelled = true;
     }
 
     @Override
@@ -288,6 +295,11 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             if (postResponse.valid) {
                 if (add) {
                     // update list view
@@ -480,6 +492,11 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             // turn off refresh animation
             SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
             swipeLayout.setRefreshing(false);
@@ -637,6 +654,11 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             // update adapter
             friendsAdapter.notifyDataSetChanged();
 
@@ -698,6 +720,11 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
 
         @Override
         protected void onPostExecute(List<Summoner> friends) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             // insert user to the beginning of the friends list
             friends.add(0, user);
             FriendsActivity.this.friends = friends;

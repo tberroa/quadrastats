@@ -35,6 +35,7 @@ import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private boolean cancelled;
     private boolean inView;
     private Button registerButton;
 
@@ -154,6 +155,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelled = true;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         inView = true;
@@ -189,6 +196,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             // turn loading spinner off
             ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
             loadingSpinner.setVisibility(View.GONE);

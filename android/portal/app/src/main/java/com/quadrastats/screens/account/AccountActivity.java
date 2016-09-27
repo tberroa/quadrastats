@@ -47,6 +47,8 @@ import java.util.List;
 
 public class AccountActivity extends BaseActivity {
 
+    private boolean cancelled;
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -120,6 +122,12 @@ public class AccountActivity extends BaseActivity {
                 AuthUtil.signOut(AccountActivity.this);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelled = true;
     }
 
     private void changeEmailDone(List<EditText> inputFields, ChangeEmailDialog dialog) {
@@ -349,6 +357,11 @@ public class AccountActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             // turn loading spinner off
             ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
             loadingSpinner.setVisibility(View.GONE);
@@ -402,6 +415,11 @@ public class AccountActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(HttpResponse postResponse) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
             // turn loading spinner off
             ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
             loadingSpinner.setVisibility(View.GONE);
