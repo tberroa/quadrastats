@@ -163,43 +163,5 @@
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
         </com.balysv.materialripple.MaterialRippleLayout>
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:mrl_rippleOverlay="true">
-
-            <FrameLayout
-                android:id="@+id/team_splyce_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/team_splyce_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_small"
-                    android:contentDescription="@string/image_view_description"/>
-
-                <ImageView
-                    android:id="@+id/team_splyce_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|start"
-                    android:layout_marginStart="@dimen/spacing_large"
-                    android:contentDescription="@string/image_view_description"
-                    android:src="@drawable/splyce_icon"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@color/black_transparent"
-                    android:gravity="start"
-                    android:padding="@dimen/spacing_standard"
-                    android:text="@string/team_splyce"
-                    android:textSize="@dimen/text_size_massive"/>
-            </FrameLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
     </LinearLayout>
 </ScrollView>

@@ -3,7 +3,6 @@ package com.quadrastats.screens;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.quadrastats.R;
-import com.quadrastats.data.Constants;
 import com.quadrastats.data.LocalDB;
 import com.quadrastats.data.RiotData;
 import com.quadrastats.data.UserData;
@@ -88,16 +86,6 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
                     public void run() {
                         startActivity(new Intent(BaseActivity.this, WFActivity.class));
                         finish();
-                    }
-                });
-                drawer.closeDrawers();
-                break;
-            case R.id.team_splyce:
-                toggle.runWhenIdle(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.SPLYCE_SITE));
-                        startActivity(browserIntent);
                     }
                 });
                 drawer.closeDrawers();

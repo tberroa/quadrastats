@@ -44,13 +44,4 @@
             android:icon="@drawable/ic_nav_gwf"
             android:title="@string/gwf_activity_title"/>
     </group>
-
-    <group
-        android:id="@+id/item6"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/team_splyce"
-            android:icon="@drawable/splyce_icon"
-            android:title="@string/team_splyce"/>
-    </group>
 </menu>
