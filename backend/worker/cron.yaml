@@ -2,4 +2,4 @@ version: 1
 cron:
  - name: "update_all"
    url: "/update_all"
-   schedule: "*/30 * * * *"
+   schedule: "*/1 * * * *"

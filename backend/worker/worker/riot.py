@@ -145,8 +145,8 @@ def update(request):
 
 @require_POST
 def update_all(request):
-    # get the 100 most recently accessed summoners
-    summoners_o = list(Summoner.objects.all().order_by("-accessed")[:100])
+    # get the 5 least recently accessed summoners
+    summoners_o = list(Summoner.objects.all().order_by("accessed")[:5])
 
     # initialize dictionary required for updating league information
     summoner_ids_dict = dict()
