@@ -160,8 +160,12 @@ def update(request):
 
 @require_POST
 def update_all(request):
-    # get the 5 least recently accessed summoners
-    summoners_o = list(Summoner.objects.all().order_by("accessed")[:5])
+    # get the 10 least recently accessed summoners
+    summoners_o = list(Summoner.objects.all().order_by("accessed")[:10])
+
+    # update date accessed
+    for summoner_o in summoners_o:
+        Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
 
     # initialize dictionary required for updating league information
     summoner_ids_dict = dict()
