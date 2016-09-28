@@ -132,12 +132,27 @@ def update(request):
     # update the summoners league stats
     for summoner_ids in summoner_ids_list:
         summoner_ids = ",".join(summoner_ids)
-        update_league(region, summoner_ids)
+        attempt = 0
+        success = False
+        while ((not success) and (attempt < 10)):
+            success = update_league(region, summoner_ids)
+            attempt += 1
 
-    # update match and season stats
+    # update season stats
     for summoner_o in summoners_o:
-        update_match(summoner_o)
-        update_season(summoner_o)
+        attempt = 0
+        success = False
+        while ((not success) and (attempt < 10)):
+            success = update_season(summoner_o)
+            attempt += 1
+
+    # update match stats
+    for summoner_o in summoners_o:
+        attempt = 0
+        success = False
+        while ((not success) and (attempt < 10)):
+            success = update_match(summoner_o)
+            attempt += 1
 
     # successful return
     return HttpResponse(status=200)
@@ -187,12 +202,27 @@ def update_all(request):
         summoner_ids_list = summoner_ids_dict.get(region)
         for summoner_ids in summoner_ids_list:
             summoner_ids = ",".join(summoner_ids)
-            update_league(region, summoner_ids)
+            attempt = 0
+            success = False
+            while ((not success) and (attempt < 10)):
+                success = update_league(region, summoner_ids)
+                attempt += 1
 
-    # update match and season stats
+    # update season stats
     for summoner_o in summoners_o:
-        update_match(summoner_o)
-        update_season(summoner_o)
+        attempt = 0
+        success = False
+        while ((not success) and (attempt < 10)):
+            success = update_season(summoner_o)
+            attempt += 1
+
+    # update match stats
+    for summoner_o in summoners_o:
+        attempt = 0
+        success = False
+        while ((not success) and (attempt < 10)):
+            success = update_match(summoner_o)
+            attempt += 1
 
     # successful return
     return HttpResponse(status=200)
