@@ -297,7 +297,7 @@ def update_match(summoner_o):
     match_details = []
     for match in matches:
         try:
-            if not MatchStats.objects.filter(region=region, summoner_id=summoner_id, match_id=match_id).exists():
+            if not MatchStats.objects.filter(region=region, summoner_id=summoner_id, match_id=match.matchId).exists():
                 args = {"request": 3, "match_id": match.matchId}
                 riot_response = riot_request(region, args)
                 if riot_response.matchDuration > 600:
