@@ -281,23 +281,30 @@ def update_match(summoner_o):
         # request match list from riot
         args = {"request": 2, "summoner_id": summoner_id}
         riot_response = riot_request(region, args)
+    except APIError:
+        return False
 
+    try:
         # extract the matches
         matches = riot_response.matches
 
         # slice out the 20 most recent games
         matches = matches[:20]
+    except AttributeError:
+        return False
 
-        # iterate over the matches looking for new matches
-        match_details = []
-        for match in matches:
-            if not MatchStats.objects.filter(region=region, summoner_id=summoner_id, match_id=match.matchId).exists():
+    # iterate over the matches looking for new matches
+    match_details = []
+    for match in matches:
+        try:
+            if not MatchStats.objects.filter(region=region, summoner_id=summoner_id, match_id=match_id).exists():
                 args = {"request": 3, "match_id": match.matchId}
                 riot_response = riot_request(region, args)
                 if riot_response.matchDuration > 600:
                     match_details.append(riot_response)
-    except (APIError, AttributeError):
-        return False
+        except (APIError, AttributeError):
+            continue
+
 
     # intialize list for new stats
     new_stats = []
