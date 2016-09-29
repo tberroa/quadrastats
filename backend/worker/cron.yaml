@@ -1,5 +1,8 @@
 version: 1
 cron:
- - name: "update_all"
-   url: "/update_all"
+ - name: "update_active"
+   url: "/update_active"
+   schedule: "*/1 * * * *"
+ - name: "update_nonactive"
+   url: "/update_nonactive"
    schedule: "*/1 * * * *"

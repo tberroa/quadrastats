@@ -112,61 +112,42 @@ def update(request):
         except Summoner.DoesNotExist:
             return HttpResponse(status=400)
 
-    # initialize list of lists required for updating league information
-    summoner_ids_list = []
-
-    # populate list of lists
-    for summoner_o in summoners_o:
-        # iterate over the list of lists looking for a spot to insert the current id
-        inserted = False
-        for summoner_ids in summoner_ids_list:
-            if len(summoner_ids) < 10:
-                summoner_ids.append(str(summoner_o.summoner_id))
-                inserted = True
-
-        # if a spot wasn't found, create a new list
-        if not inserted:
-            summoner_ids = [str(summoner_o.summoner_id)]
-            summoner_ids_list.append(summoner_ids)
-
-    # update the summoners league stats
-    for summoner_ids in summoner_ids_list:
-        summoner_ids = ",".join(summoner_ids)
-        attempt = 0
-        success = False
-        while ((not success) and (attempt < 10)):
-            success = update_league(region, summoner_ids)
-            attempt += 1
-
-    # update season stats
-    for summoner_o in summoners_o:
-        attempt = 0
-        success = False
-        while ((not success) and (attempt < 10)):
-            success = update_season(summoner_o)
-            attempt += 1
-
-    # update match stats
-    for summoner_o in summoners_o:
-        attempt = 0
-        success = False
-        while ((not success) and (attempt < 10)):
-            success = update_match(summoner_o)
-            attempt += 1
+    # update
+    update_all(summoners_o)
 
     # successful return
     return HttpResponse(status=200)
 
 
 @require_POST
-def update_all(request):
-    # get the 10 least recently accessed summoners
-    summoners_o = list(Summoner.objects.all().order_by("accessed")[:10])
+def update_active(request):
+    # get the 20 most recently accessed summoners
+    summoners_o = list(Summoner.objects.all().order_by("-accessed")[:20])
+
+    # update
+    update_all(summoners_o)
+
+    # successful return
+    return HttpResponse(status=200)
+
+
+@require_POST
+def update_nonactive(request):
+    # get the 20 least recently accessed summoners
+    summoners_o = list(Summoner.objects.all().order_by("accessed")[:20])
 
     # update date accessed
     for summoner_o in summoners_o:
         Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
 
+    # update
+    update_all(summoners_o)
+
+    # successful return
+    return HttpResponse(status=200)
+
+
+def update_all(summoners_o):
     # initialize dictionary required for updating league information
     summoner_ids_dict = dict()
 
@@ -208,7 +189,7 @@ def update_all(request):
             summoner_ids = ",".join(summoner_ids)
             attempt = 0
             success = False
-            while ((not success) and (attempt < 10)):
+            while ((not success) and (attempt < 20)):
                 success = update_league(region, summoner_ids)
                 attempt += 1
 
@@ -216,7 +197,7 @@ def update_all(request):
     for summoner_o in summoners_o:
         attempt = 0
         success = False
-        while ((not success) and (attempt < 10)):
+        while ((not success) and (attempt < 20)):
             success = update_season(summoner_o)
             attempt += 1
 
@@ -224,12 +205,12 @@ def update_all(request):
     for summoner_o in summoners_o:
         attempt = 0
         success = False
-        while ((not success) and (attempt < 10)):
+        while ((not success) and (attempt < 20)):
             success = update_match(summoner_o)
             attempt += 1
 
     # successful return
-    return HttpResponse(status=200)
+    return True
 
 
 def update_league(region, summoner_ids):
