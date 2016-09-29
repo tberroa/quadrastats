@@ -121,8 +121,8 @@ def update(request):
 
 @require_POST
 def update_active(request):
-    # get the 20 most recently accessed summoners
-    summoners_o = list(Summoner.objects.all().order_by("-accessed")[:20])
+    # get the 10 most recently accessed summoners
+    summoners_o = list(Summoner.objects.all().order_by("-accessed")[:10])
 
     # update
     update_all(summoners_o)
@@ -133,8 +133,8 @@ def update_active(request):
 
 @require_POST
 def update_nonactive(request):
-    # get the 20 least recently accessed summoners
-    summoners_o = list(Summoner.objects.all().order_by("accessed")[:20])
+    # get the 10 least recently accessed summoners
+    summoners_o = list(Summoner.objects.all().order_by("accessed")[:10])
 
     # update date accessed
     for summoner_o in summoners_o:
@@ -189,7 +189,7 @@ def update_all(summoners_o):
             summoner_ids = ",".join(summoner_ids)
             attempt = 0
             success = False
-            while ((not success) and (attempt < 20)):
+            while ((not success) and (attempt < 10)):
                 success = update_league(region, summoner_ids)
                 attempt += 1
 
@@ -197,7 +197,7 @@ def update_all(summoners_o):
     for summoner_o in summoners_o:
         attempt = 0
         success = False
-        while ((not success) and (attempt < 20)):
+        while ((not success) and (attempt < 10)):
             success = update_season(summoner_o)
             attempt += 1
 
@@ -205,7 +205,7 @@ def update_all(summoners_o):
     for summoner_o in summoners_o:
         attempt = 0
         success = False
-        while ((not success) and (attempt < 20)):
+        while ((not success) and (attempt < 10)):
             success = update_match(summoner_o)
             attempt += 1
 
