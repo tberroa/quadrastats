@@ -296,14 +296,19 @@ def update_match(summoner_o):
     # iterate over the matches looking for new matches
     match_details = []
     for match in matches:
-        try:
-            if not MatchStats.objects.filter(region=region, summoner_id=summoner_id, match_id=match.matchId).exists():
-                args = {"request": 3, "match_id": match.matchId}
-                riot_response = riot_request(region, args)
-                if riot_response.matchDuration > 600:
-                    match_details.append(riot_response)
-        except (APIError, AttributeError):
-            continue
+        attempt = 0
+        success = False
+        while ((not success) and (attempt < 10)):
+            try:
+                if not MatchStats.objects.filter(region=region, summoner_id=summoner_id, match_id=match.matchId).exists():
+                    args = {"request": 3, "match_id": match.matchId}
+                    riot_response = riot_request(region, args)
+                    if riot_response.matchDuration > 600:
+                        match_details.append(riot_response)
+                    succss = True
+            except (APIError, AttributeError):
+                pass
+            attempt += 1
 
 
     # intialize list for new stats
