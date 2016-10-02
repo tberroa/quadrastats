@@ -21,6 +21,7 @@ League of Legends app for easily comparing in-game stats and player performance.
 - Activate myvenv and pip install requirements: pip install -r requirements.txt
 - Create file /backend/portal/keys.py
 - Create file /backend/worker/keys.py
+- Create log file: sudo touch /var/log/django.log
+- Set up log file permissions: sudo chmod 666 /var/log/django.log
 - Set up AWS Elastic Beanstalk files in /backend/portal: eb init
 - Set up AWS Elastic Beanstalk files in /backend/worker: eb init
-
