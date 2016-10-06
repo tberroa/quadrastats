@@ -22,8 +22,8 @@ import com.quadrastats.data.LocalDB;
 import com.quadrastats.data.RiotData;
 import com.quadrastats.data.UserData;
 import com.quadrastats.models.summoner.Summoner;
-import com.quadrastats.screens.account.AccountActivity;
 import com.quadrastats.screens.friends.FriendsActivity;
+import com.quadrastats.screens.misc.MiscActivity;
 import com.quadrastats.screens.stats.recent.RecentActivity;
 import com.quadrastats.screens.stats.season.SeasonActivity;
 import com.quadrastats.screens.stats.withfriends.WFActivity;
@@ -44,7 +44,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
                 toggle.runWhenIdle(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(BaseActivity.this, AccountActivity.class));
+                        startActivity(new Intent(BaseActivity.this, MiscActivity.class));
                         finish();
                     }
                 });

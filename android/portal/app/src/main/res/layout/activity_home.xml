@@ -21,36 +21,6 @@
             app:mrl_rippleOverlay="true">
 
             <FrameLayout
-                android:id="@+id/manage_account_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/manage_account_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_small"
-                    android:contentDescription="@string/image_view_description"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@color/black_transparent"
-                    android:gravity="start"
-                    android:padding="@dimen/spacing_standard"
-                    android:text="@string/ma_activity_title"
-                    android:textSize="@dimen/text_size_massive"/>
-            </FrameLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_small"
-            app:mrl_rippleOverlay="true">
-
-            <FrameLayout
                 android:id="@+id/manage_friends_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -160,6 +130,36 @@
                     android:gravity="start"
                     android:padding="@dimen/spacing_standard"
                     android:text="@string/gwf_activity_title"
+                    android:textSize="@dimen/text_size_massive"/>
+            </FrameLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            app:mrl_rippleOverlay="true">
+
+            <FrameLayout
+                android:id="@+id/manage_account_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/manage_account_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:contentDescription="@string/image_view_description"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/black_transparent"
+                    android:gravity="start"
+                    android:padding="@dimen/spacing_standard"
+                    android:text="@string/misc_activity_title"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
         </com.balysv.materialripple.MaterialRippleLayout>

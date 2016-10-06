@@ -13,7 +13,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/email_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large"
@@ -23,6 +22,7 @@
             android:paddingEnd="@dimen/spacing_tiny"
             android:paddingStart="@dimen/spacing_tiny"
             android:paddingTop="@dimen/spacing_huge"
+            android:text="@string/misc_banner"
             android:textSize="@dimen/text_size_huge"/>
 
         <LinearLayout
@@ -46,7 +46,7 @@
                     app:mrl_rippleOverlay="true">
 
                     <ImageView
-                        android:id="@+id/change_email_button"
+                        android:id="@+id/about_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/image_view_description"
@@ -62,7 +62,7 @@
                     android:background="@color/black_transparent"
                     android:gravity="center"
                     android:padding="@dimen/spacing_standard"
-                    android:text="@string/ma_change_email"
+                    android:text="@string/misc_about"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
 
@@ -79,7 +79,7 @@
                     app:mrl_rippleOverlay="true">
 
                     <ImageView
-                        android:id="@+id/change_password_button"
+                        android:id="@+id/help_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/image_view_description"
@@ -95,7 +95,7 @@
                     android:background="@color/black_transparent"
                     android:gravity="center"
                     android:padding="@dimen/spacing_standard"
-                    android:text="@string/ma_change_password"
+                    android:text="@string/misc_help"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
         </LinearLayout>
@@ -139,7 +139,7 @@
                     android:background="@color/black_transparent"
                     android:gravity="center"
                     android:padding="@dimen/spacing_standard"
-                    android:text="@string/ma_licenses"
+                    android:text="@string/misc_licenses"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
 
@@ -172,7 +172,7 @@
                     android:background="@color/black_transparent"
                     android:gravity="center"
                     android:padding="@dimen/spacing_standard"
-                    android:text="@string/ma_sign_out"
+                    android:text="@string/misc_change_summoner"
                     android:textSize="@dimen/text_size_massive"/>
             </FrameLayout>
         </LinearLayout>

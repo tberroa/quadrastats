@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group
-        android:id="@+id/item1"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/view_profile"
-            android:icon="@drawable/ic_nav_account"
-            android:title="@string/ma_activity_title"/>
-    </group>
-
-    <group
         android:id="@+id/item2"
         android:checkableBehavior="single">
         <item
@@ -43,5 +34,14 @@
             android:id="@+id/with_friends"
             android:icon="@drawable/ic_nav_gwf"
             android:title="@string/gwf_activity_title"/>
+    </group>
+
+    <group
+        android:id="@+id/item1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/view_profile"
+            android:icon="@drawable/ic_nav_account"
+            android:title="@string/misc_activity_title"/>
     </group>
 </menu>

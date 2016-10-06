@@ -15,7 +15,7 @@
     <string name="region_ru">Russia</string>
     <string name="region_tr">Turkey</string>
 
-    <!-- authentication activities -->
+    <!-- authentication activity -->
     <string name="auth_summoner_name">Summoner Name</string>
     <string name="auth_select_region">Select Region</string>
     <string-array name="auth_select_region_array">
@@ -34,14 +34,6 @@
 
     <!-- base activity -->
     <string name="b_menu">Menu</string>
-
-    <!-- manage account activity -->
-    <string name="ma_activity_title">Manage Account</string>
-    <string name="ma_change_email">Change Email</string>
-    <string name="ma_change_password">Change Password</string>
-    <string name="ma_sign_out">Sign Out</string>
-    <string name="ma_licenses">Licenses</string>
-    <string name="ma_license_info">License Information</string>
 
     <!-- manage friends activity -->
     <string name="mf_activity_title">Manage Friends</string>
@@ -160,6 +152,51 @@
     <string name="gwf_dmg_taken_per_death">Damage Taken Per Death</string>
     <string name="gwf_wards">Wards Bought/Placed/Killed</string>
 
+    <!-- miscellaneous activity -->
+    <string name="misc_activity_title">Miscellaneous</string>
+    <string name="misc_banner">Stats That Matter</string>
+    <string name="misc_about">About</string>
+    <string name="misc_about_title">About QuadraStats</string>
+    <string name="misc_about_info">
+        \t The idea for QuadraStats was born out of a need for convenience.
+        Prior to QuadraStats, to compare stats between summoners required
+        opening multiple browser tabs and hunting down each stat individually
+        across all tabs. In addition, League stat websites don\'t have a nice
+        interface for easily comparing stats. Therefore, the main focus of
+        QuadraStats is to fill that hole so summoners across the globe can have
+        an easier time bragging to friends about how much better they are.
+    </string>
+    <string name="misc_about_version">Version 1.1.0</string>
+    <string name="misc_help">Help</string>
+    <string name="misc_help_info_1">
+        <b>I Clicked Update But See No New Stats</b> \n
+        An update trigger starts the updating process but it takes time to
+        complete. Go to a stats section and swipe down to check if the new stats
+        are in.
+    </string>
+    <string name="misc_help_info_2">
+        <b>Some Games Are Missing</b> \n
+        Unfortunately there are sometimes problems with the Riot API which causes
+        games to be missed. Missed games can be recovered on the next automatic
+        update or upon a user triggered update.
+    </string>
+    <string name="misc_help_info_3">
+        <b>Remove Friends</b> \n
+        Press on a friend within the manage friends section to remove them.
+    </string>
+    <string name="misc_help_info_4">
+        <b>Get Recent Game Averages</b> \n
+        Long press on any chart in the recent games section.
+    </string>
+    <string name="misc_help_info_5">
+        <b>Plot Only Who You Care About</b> \n
+        Press on the legend in either recent games or season totals to
+        select which summoners to plot.
+    </string>
+    <string name="misc_licenses">Licenses</string>
+    <string name="misc_license_info">License Information</string>
+    <string name="misc_change_summoner">Change Summoner</string>
+
     <!-- generic button labels -->
     <string name="button_done">Done</string>
     <string name="button_yes">Yes</string>
@@ -189,7 +226,7 @@
 
     <!-- Legal and Licenses -->
     <string name="legal_copyright">
-        &#169; Copyright 2016 Thomas Berroa All Rights Reserved.
+        &#169; Copyright 2016 Thomas Berroa. All Rights Reserved.
     </string>
     <string name="legal_riot_notice">
         QuadraStats isn\'t endorsed by Riot Games and doesn\'t reflect the views

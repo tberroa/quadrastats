@@ -47,7 +47,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/HomeBackground"/>
         <activity
-            android:name="com.quadrastats.screens.account.AccountActivity"
+            android:name=".screens.misc.MiscActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AccountBackground"/>
         <activity

@@ -1,4 +1,4 @@
-package com.quadrastats.screens.account;
+package com.quadrastats.screens.misc;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -23,7 +23,7 @@ import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.authentication.AuthUtil;
 import com.quadrastats.screens.home.HomeActivity;
 
-public class AccountActivity extends BaseActivity {
+public class MiscActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
@@ -39,11 +39,11 @@ public class AccountActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account);
+        setContentView(R.layout.activity_misc);
 
         // initialize the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.ma_activity_title);
+        toolbar.setTitle(R.string.misc_activity_title);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_back_button));
         toolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class AccountActivity extends BaseActivity {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 } else {
-                    startActivity(new Intent(AccountActivity.this, HomeActivity.class));
+                    startActivity(new Intent(MiscActivity.this, HomeActivity.class));
                     finish();
                 }
             }
@@ -67,8 +67,22 @@ public class AccountActivity extends BaseActivity {
         loadingSpinner.setVisibility(View.GONE);
 
         // initialize buttons
+        ImageView aboutButton = (ImageView) findViewById(R.id.about_button);
+        ImageView helpButton = (ImageView) findViewById(R.id.help_button);
         ImageView licenseButton = (ImageView) findViewById(R.id.license_button);
         ImageView signOutButton = (ImageView) findViewById(R.id.sign_out_button);
+        aboutButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AboutDialog().show();
+            }
+        });
+        helpButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new HelpDialog().show();
+            }
+        });
         licenseButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,9 +91,68 @@ public class AccountActivity extends BaseActivity {
         });
         signOutButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                AuthUtil.signOut(AccountActivity.this);
+                AuthUtil.signOut(MiscActivity.this);
             }
         });
+    }
+
+    private class AboutDialog extends Dialog {
+
+        AboutDialog() {
+            super(MiscActivity.this, R.style.AppTheme_Dialog);
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.dialog_about);
+            setCancelable(true);
+        }
+    }
+
+    private class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.HelpViewHolder> {
+
+        @Override
+        public int getItemCount() {
+            return 1;
+        }
+
+        @Override
+        public void onBindViewHolder(HelpViewHolder viewHolder, int i) {
+        }
+
+        @Override
+        public HelpViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            Context context = viewGroup.getContext();
+            View v = LayoutInflater.from(context).inflate(R.layout.view_help, viewGroup, false);
+            return new HelpViewHolder(v);
+        }
+
+        class HelpViewHolder extends RecyclerView.ViewHolder {
+
+            HelpViewHolder(View itemView) {
+                super(itemView);
+            }
+        }
+    }
+
+    private class HelpDialog extends Dialog {
+
+        HelpDialog() {
+            super(MiscActivity.this, R.style.AppTheme_Dialog);
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.dialog_help);
+            setCancelable(true);
+
+            // initialize recycler view
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            recyclerView.setAdapter(new HelpAdapter());
+            recyclerView.setLayoutManager(new LinearLayoutManager(MiscActivity.this));
+        }
     }
 
     private class LicenseAdapter extends RecyclerView.Adapter<LicenseAdapter.LicenseViewHolder> {
@@ -111,7 +184,7 @@ public class AccountActivity extends BaseActivity {
     private class LicenseDialog extends Dialog {
 
         LicenseDialog() {
-            super(AccountActivity.this, R.style.AppTheme_Dialog);
+            super(MiscActivity.this, R.style.AppTheme_Dialog);
         }
 
         @Override
@@ -123,7 +196,7 @@ public class AccountActivity extends BaseActivity {
             // initialize recycler view
             RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             recyclerView.setAdapter(new LicenseAdapter());
-            recyclerView.setLayoutManager(new LinearLayoutManager(AccountActivity.this));
+            recyclerView.setLayoutManager(new LinearLayoutManager(MiscActivity.this));
         }
     }
 }

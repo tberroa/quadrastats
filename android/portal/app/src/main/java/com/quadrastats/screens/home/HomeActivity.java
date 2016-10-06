@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import com.quadrastats.R;
 import com.quadrastats.screens.BaseActivity;
 import com.quadrastats.screens.ScreenUtil;
-import com.quadrastats.screens.account.AccountActivity;
 import com.quadrastats.screens.friends.FriendsActivity;
+import com.quadrastats.screens.misc.MiscActivity;
 import com.quadrastats.screens.stats.recent.RecentActivity;
 import com.quadrastats.screens.stats.season.SeasonActivity;
 import com.quadrastats.screens.stats.withfriends.WFActivity;
@@ -94,7 +94,7 @@ public class HomeActivity extends BaseActivity {
         manageAccountLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, AccountActivity.class));
+                startActivity(new Intent(HomeActivity.this, MiscActivity.class));
                 finish();
             }
         });
