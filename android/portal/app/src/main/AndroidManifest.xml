@@ -36,10 +36,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.quadrastats.screens.authentication.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AuthBackground"/>
-        <activity
             android:name="com.quadrastats.screens.authentication.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashBackground"/>

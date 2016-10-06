@@ -10,7 +10,6 @@
     <dimen name="spacing_massive">45dp</dimen>
 
     <!-- rounded corners -->
-    <dimen name="radius_tiny">3dp</dimen>
     <dimen name="radius_standard">15dp</dimen>
     <dimen name="radius_large">45dp</dimen>
 

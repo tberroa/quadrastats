@@ -8,8 +8,6 @@ import java.util.List;
 public class ReqSeasonStats {
 
     @Expose
-    public Integer champion;
-    @Expose
     public List<String> keys;
     @Expose
     public String region;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,20 +30,6 @@
             android:textSize="@dimen/text_size_large"
             android:theme="@style/AppTheme.EditText"/>
 
-        <EditText
-            android:id="@+id/password_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_huge"
-            android:ems="12"
-            android:gravity="center"
-            android:hint="@string/auth_password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:textColorHint="@color/white"
-            android:textSize="@dimen/text_size_large"
-            android:theme="@style/AppTheme.EditText"/>
-
         <Spinner
             android:id="@+id/region_select_spinner"
             android:layout_width="match_parent"
@@ -57,44 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_standard"
-            android:text="@string/auth_sign_in"
+            android:text="@string/button_go"
             android:textSize="@dimen/text_size_huge"/>
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/reset_password_ripple"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mrl_rippleColor="@color/white"
-            app:mrl_rippleDimension="@dimen/radius_tiny"
-            app:mrl_rippleDuration="150"
-            app:mrl_rippleRoundedCorners="@dimen/radius_large">
-
-            <TextView
-                android:id="@+id/reset_password_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_large"
-                android:text="@string/auth_reset_password"
-                android:textSize="@dimen/text_size_standard"/>
-        </com.balysv.materialripple.MaterialRippleLayout>
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_large"
-            app:mrl_rippleColor="@color/white"
-            app:mrl_rippleDimension="@dimen/radius_tiny"
-            app:mrl_rippleDuration="150"
-            app:mrl_rippleRoundedCorners="@dimen/radius_large">
-
-            <TextView
-                android:id="@+id/go_to_register_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_large"
-                android:text="@string/auth_go_to_register"
-                android:textSize="@dimen/text_size_standard"/>
-        </com.balysv.materialripple.MaterialRippleLayout>
     </LinearLayout>
 
     <ProgressBar

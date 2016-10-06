@@ -8,9 +8,8 @@ import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -25,15 +24,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.ActiveAndroid;
-import com.google.gson.reflect.TypeToken;
 import com.quadrastats.R;
 import com.quadrastats.data.Constants;
 import com.quadrastats.data.LocalDB;
 import com.quadrastats.data.UserData;
 import com.quadrastats.models.ModelUtil;
-import com.quadrastats.models.requests.ReqFriend;
-import com.quadrastats.models.requests.ReqGetSummoners;
+import com.quadrastats.models.requests.ReqAddFriend;
 import com.quadrastats.models.requests.ReqUpdate;
 import com.quadrastats.models.summoner.Summoner;
 import com.quadrastats.network.Http;
@@ -43,17 +39,14 @@ import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.home.HomeActivity;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-public class FriendsActivity extends BaseActivity implements OnRefreshListener {
+public class FriendsActivity extends BaseActivity {
 
     private static double updateTime;
-    private boolean add;
     private boolean busy;
     private boolean cancelled;
     private List<Summoner> friends;
@@ -124,10 +117,6 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
         loadingSpinner.setLayoutParams(loadingSpinner.getLayoutParams());
         loadingSpinner.setVisibility(View.GONE);
 
-        // initialize swipe layout
-        SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
-        swipeLayout.setOnRefreshListener(this);
-
         new ViewInitialization().execute();
     }
 
@@ -137,14 +126,92 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
         cancelled = true;
     }
 
-    @Override
-    public void onRefresh() {
-        SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
-        if (busy) {
-            swipeLayout.setRefreshing(false);
-        } else {
-            swipeLayout.setRefreshing(true);
-            new SyncSummoners().execute();
+    private class AddFriend extends AsyncTask<String, Void, HttpResponse> {
+
+        Summoner friend;
+        String friendKey;
+        Summoner user;
+
+        @Override
+        protected HttpResponse doInBackground(String... params) {
+            LocalDB localDB = new LocalDB();
+            UserData userData = new UserData();
+
+            // store friend key
+            friendKey = params[0];
+
+            // create the request object
+            user = localDB.summoner(userData.getId(FriendsActivity.this));
+            ReqAddFriend request = new ReqAddFriend();
+            request.region = user.region;
+            request.key = friendKey;
+
+            // make the request
+            HttpResponse postResponse = null;
+            try {
+                String url;
+                url = Constants.URL_ADD_FRIEND;
+                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqAddFriend.class));
+            } catch (IOException e) {
+                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
+            }
+
+            // handle the response
+            postResponse = ScreenUtil.responseHandler(FriendsActivity.this, postResponse);
+
+            // a successful request requires further local database operations, do those here
+            if (postResponse.valid) {
+                // save the new friend summoner object
+                friend = ModelUtil.fromJson(postResponse.body, Summoner.class);
+                friend.save();
+
+                // add the new friend to the users local summoner object friend list
+                user.addFriend(friend.key);
+                user.save();
+            }
+
+            return postResponse;
+        }
+
+        @Override
+        protected void onPostExecute(HttpResponse postResponse) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
+            if (postResponse.valid) {
+                // update list view
+                friends.add(friend);
+                friendsAdapter.notifyDataSetChanged();
+
+                // make sure the no friends message is gone
+                TextView noFriends = (TextView) findViewById(R.id.no_friends_view);
+                noFriends.setVisibility(View.GONE);
+
+                // display success
+                String message = getString(R.string.mf_friend_added_success);
+                Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
+            } else { // display error
+                Toast.makeText(FriendsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
+            }
+
+            // lower busy flag
+            busy = false;
+
+            // turn loading spinner off
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // turn loading spinner on
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.VISIBLE);
+
+            // set busy flag
+            busy = true;
         }
     }
 
@@ -166,8 +233,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
                         String friendKey = friendKeyField.getText().toString();
-                        add = true;
-                        new RequestFriendOp().execute(friendKey);
+                        new AddFriend().execute(friendKey);
                         dismiss();
                     }
                     return false;
@@ -181,8 +247,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                 @Override
                 public void onClick(View v) {
                     String friendKey = friendKeyField.getText().toString();
-                    add = true;
-                    new RequestFriendOp().execute(friendKey);
+                    new AddFriend().execute(friendKey);
                     dismiss();
                 }
             });
@@ -192,6 +257,87 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                     dismiss();
                 }
             });
+        }
+    }
+
+    private class RemoveFriend extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            LocalDB localDB = new LocalDB();
+            UserData userData = new UserData();
+
+            // extract friend key
+            String friendKey = params[0];
+
+            // get the users summoner object
+            Summoner user = localDB.summoner(userData.getId(FriendsActivity.this));
+
+            // convert the users friend list into a list
+            List<String> friends = Arrays.asList(user.friends.split(","));
+
+            // delete the friend from the friends list
+            for (Iterator<String> iterator = friends.listIterator(); iterator.hasNext(); ) {
+                String key = iterator.next();
+                if (key.equals(friendKey)) {
+                    iterator.remove();
+                    break;
+                }
+            }
+
+            // update the users summoner object
+            user.friends = TextUtils.join(",", friends);
+            user.save();
+
+            // delete the friend from local database
+            localDB.summoner(friendKey).delete();
+
+            return friendKey;
+        }
+
+        @Override
+        protected void onPostExecute(String friendKey) {
+            // check if canceled
+            if (cancelled) {
+                return;
+            }
+
+            // update list view
+            for (Iterator<Summoner> iterator = friends.listIterator(); iterator.hasNext(); ) {
+                String key = iterator.next().key;
+                if (key.equals(friendKey)) {
+                    iterator.remove();
+                    break;
+                }
+            }
+            friendsAdapter.notifyDataSetChanged();
+
+            // check if friends list is empty
+            if (friends.size() == 1) {
+                TextView noFriends = (TextView) findViewById(R.id.no_friends_view);
+                noFriends.setVisibility(View.VISIBLE);
+            }
+
+            // display success
+            String message = getString(R.string.mf_friend_removed_success);
+            Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
+
+            // lower busy flag
+            busy = false;
+
+            // turn loading spinner off
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // turn loading spinner on
+            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.VISIBLE);
+
+            // set busy flag
+            busy = true;
         }
     }
 
@@ -216,8 +362,7 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
             yesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    add = false;
-                    new RequestFriendOp().execute(friends.get(position).key);
+                    new RemoveFriend().execute(friends.get(position).key);
                     dismiss();
                 }
             });
@@ -227,308 +372,6 @@ public class FriendsActivity extends BaseActivity implements OnRefreshListener {
                     dismiss();
                 }
             });
-        }
-    }
-
-    private class RequestFriendOp extends AsyncTask<String, Void, HttpResponse> {
-
-        Summoner friend;
-        String friendKey;
-        Summoner user;
-
-        @Override
-        protected HttpResponse doInBackground(String... params) {
-            LocalDB localDB = new LocalDB();
-            UserData userData = new UserData();
-
-            // store friend key
-            friendKey = params[0];
-
-            // create the request object
-            user = localDB.summoner(userData.getId(FriendsActivity.this));
-            ReqFriend request = new ReqFriend();
-            request.region = user.region;
-            request.user_key = user.key;
-            request.friend_key = friendKey;
-
-            // make the request
-            HttpResponse postResponse = null;
-            try {
-                String url;
-                if (add) {
-                    url = Constants.URL_ADD_FRIEND;
-                } else {
-                    url = Constants.URL_REMOVE_FRIEND;
-                }
-                postResponse = new Http().post(url, ModelUtil.toJson(request, ReqFriend.class));
-            } catch (IOException e) {
-                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-            }
-
-            // handle the response
-            postResponse = ScreenUtil.responseHandler(FriendsActivity.this, postResponse);
-
-            // a successful request requires further local database operations, do those here
-            if (postResponse.valid && add) {
-                // save the new friend summoner object
-                friend = ModelUtil.fromJson(postResponse.body, Summoner.class);
-                friend.save();
-
-                // add the new friend to the users local summoner object friend list
-                user.addFriend(friend.key);
-                user.save();
-            } else if (postResponse.valid && !add) {
-                // get the users updated friend list from the returned object
-                Summoner updatedUser = ModelUtil.fromJson(postResponse.body, Summoner.class);
-                user.friends = updatedUser.friends;
-
-                // profile icon might have updated too
-                user.profile_icon = updatedUser.profile_icon;
-                user.save();
-
-                // delete the friend from local database
-                localDB.summoner(request.friend_key).delete();
-            }
-
-            return postResponse;
-        }
-
-        @Override
-        protected void onPostExecute(HttpResponse postResponse) {
-            // check if canceled
-            if (cancelled) {
-                return;
-            }
-
-            if (postResponse.valid) {
-                if (add) {
-                    // update list view
-                    friends.add(friend);
-                    friendsAdapter.notifyDataSetChanged();
-
-                    // make sure the no friends message is gone
-                    TextView noFriends = (TextView) findViewById(R.id.no_friends_view);
-                    noFriends.setVisibility(View.GONE);
-
-                    // display success
-                    String message = getString(R.string.mf_friend_added_success);
-                    Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
-                } else { // remove friend operation
-                    // update list view
-                    for (Iterator<Summoner> iterator = friends.listIterator(); iterator.hasNext(); ) {
-                        String key = iterator.next().key;
-                        if (key.equals(friendKey)) {
-                            iterator.remove();
-                        }
-                    }
-                    friendsAdapter.notifyDataSetChanged();
-
-                    // check if friends list is empty
-                    if (friends.size() == 1) {
-                        TextView noFriends = (TextView) findViewById(R.id.no_friends_view);
-                        noFriends.setVisibility(View.VISIBLE);
-                    }
-
-                    // display success
-                    String message = getString(R.string.mf_friend_removed_success);
-                    Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
-                }
-            } else { // display error
-                Toast.makeText(FriendsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
-            }
-
-            // lower busy flag
-            busy = false;
-
-            // turn loading spinner off
-            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
-            loadingSpinner.setVisibility(View.GONE);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // turn loading spinner on
-            ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
-            loadingSpinner.setVisibility(View.VISIBLE);
-
-            // set busy flag
-            busy = true;
-        }
-    }
-
-    private class SyncSummoners extends AsyncTask<Void, Void, HttpResponse> {
-
-        @Override
-        protected HttpResponse doInBackground(Void... params) {
-            LocalDB localDB = new LocalDB();
-            UserData userData = new UserData();
-
-            // get user
-            Summoner user = localDB.summoner(userData.getId(FriendsActivity.this));
-
-            // create request object for getting the users updated summoner object from the server
-            ReqGetSummoners requestUpdatedUser = new ReqGetSummoners();
-            requestUpdatedUser.region = user.region;
-            requestUpdatedUser.keys = new ArrayList<>();
-            requestUpdatedUser.keys.add(user.key);
-
-            // make the request
-            HttpResponse postResponse1 = null;
-            try {
-                String url = Constants.URL_GET_SUMMONERS;
-                postResponse1 = new Http().post(url, ModelUtil.toJson(requestUpdatedUser, ReqGetSummoners.class));
-            } catch (IOException e) {
-                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-            }
-
-            // handle the response
-            postResponse1 = ScreenUtil.responseHandler(FriendsActivity.this, postResponse1);
-
-            // update the original user object
-            if (postResponse1.valid) {
-                Type type = new TypeToken<List<Summoner>>() {
-                }.getType();
-                List<Summoner> updatedUserList = ModelUtil.fromJsonList(postResponse1.body, type);
-                Summoner updatedUser = updatedUserList.get(0);
-                user.tier = updatedUser.tier;
-                user.division = updatedUser.division;
-                user.lp = updatedUser.lp;
-                user.wins = updatedUser.wins;
-                user.losses = updatedUser.losses;
-                user.series = updatedUser.series;
-                user.profile_icon = updatedUser.profile_icon;
-                user.friends = updatedUser.friends;
-                user.save();
-            } else {
-                return postResponse1;
-            }
-
-            // check if the updated user has no friends
-            if ("".equals(user.friends)) {
-                // empty the friends list
-                ActiveAndroid.beginTransaction();
-                try {
-                    for (ListIterator<Summoner> iFriend = friends.listIterator(); iFriend.hasNext(); ) {
-                        int i = iFriend.nextIndex();
-                        Summoner friend = iFriend.next();
-                        if (i != 0) {
-                            friend.delete();
-                            iFriend.remove();
-                        }
-                    }
-                    ActiveAndroid.setTransactionSuccessful();
-                } finally {
-                    ActiveAndroid.endTransaction();
-                }
-                return postResponse1;
-            }
-
-            // use the updated user to create request object for getting the friends updated objects from the server
-            ReqGetSummoners request = new ReqGetSummoners();
-            request.region = user.region;
-            request.keys = new ArrayList<>(Arrays.asList(user.friends.split(",")));
-
-            // make the request
-            HttpResponse postResponse2 = null;
-            try {
-                String url = Constants.URL_GET_SUMMONERS;
-                postResponse2 = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
-            } catch (IOException e) {
-                Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-            }
-
-            // handle the response
-            postResponse2 = ScreenUtil.responseHandler(FriendsActivity.this, postResponse2);
-
-            // update the friend summoner objects
-            if (postResponse2.valid) {
-                Type type = new TypeToken<List<Summoner>>() {
-                }.getType();
-                List<Summoner> updatedFriends = ModelUtil.fromJsonList(postResponse2.body, type);
-                ActiveAndroid.beginTransaction();
-                try {
-                    // update the original friends that are on the new list and delete any not on the new list
-                    for (ListIterator<Summoner> iFriend = friends.listIterator(); iFriend.hasNext(); ) {
-                        int i = iFriend.nextIndex();
-                        Summoner friend = iFriend.next();
-                        if (i != 0) {
-                            boolean found = false;
-                            for (Iterator<Summoner> iUFriend = updatedFriends.listIterator(); iUFriend.hasNext(); ) {
-                                Summoner updatedFriend = iUFriend.next();
-                                if (friend.key.equals(updatedFriend.key)) {
-                                    found = true;
-                                    friend.tier = updatedFriend.tier;
-                                    friend.division = updatedFriend.division;
-                                    friend.lp = updatedFriend.lp;
-                                    friend.wins = updatedFriend.wins;
-                                    friend.losses = updatedFriend.losses;
-                                    friend.series = updatedFriend.series;
-                                    friend.profile_icon = updatedFriend.profile_icon;
-                                    friend.save();
-                                    iUFriend.remove();
-                                    break;
-                                }
-                            }
-                            if (!found) {
-                                friend.delete();
-                                iFriend.remove();
-                            }
-                        }
-                    }
-
-                    // if the new list has new friends, save them locally and add to list of friends for adapter
-                    for (Summoner updatedFriend : updatedFriends) {
-                        updatedFriend.save();
-                        friends.add(updatedFriend);
-                    }
-                    ActiveAndroid.setTransactionSuccessful();
-                } finally {
-                    ActiveAndroid.endTransaction();
-                }
-            }
-
-            return postResponse2;
-        }
-
-        @Override
-        protected void onPostExecute(HttpResponse postResponse) {
-            // check if canceled
-            if (cancelled) {
-                return;
-            }
-
-            // turn off refresh animation
-            SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
-            swipeLayout.setRefreshing(false);
-
-            // update adapter
-            friendsAdapter.notifyDataSetChanged();
-
-            // check if an error occurred
-            if (!postResponse.valid) {
-                Toast.makeText(FriendsActivity.this, postResponse.error, Toast.LENGTH_SHORT).show();
-            } else {
-                // display success
-                String message = getString(R.string.mf_summoner_sync_success);
-                Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-
-            // check if user has no friends
-            TextView noFriends = (TextView) findViewById(R.id.no_friends_view);
-            if (friends.size() == 1) {
-                noFriends.setVisibility(View.VISIBLE);
-            } else {
-                noFriends.setVisibility(View.GONE);
-            }
-
-            // lower busy flag
-            busy = false;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // set busy flag
-            busy = true;
         }
     }
 

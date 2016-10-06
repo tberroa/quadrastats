@@ -10,7 +10,6 @@
     <dimen name="spacing_massive">30dp</dimen>
 
     <!-- rounded corners -->
-    <dimen name="radius_tiny">2dp</dimen>
     <dimen name="radius_standard">10dp</dimen>
     <dimen name="radius_large">30dp</dimen>
 

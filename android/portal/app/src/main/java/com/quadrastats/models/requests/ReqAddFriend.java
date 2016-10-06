@@ -3,12 +3,10 @@ package com.quadrastats.models.requests;
 import com.google.gson.annotations.Expose;
 
 @SuppressWarnings({"unused", "InstanceVariableNamingConvention"})
-public class ReqFriend {
+public class ReqAddFriend {
 
     @Expose
-    public String friend_key;
+    public String key;
     @Expose
     public String region;
-    @Expose
-    public String user_key;
 }

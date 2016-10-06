@@ -13,8 +13,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.activeandroid.ActiveAndroid;
-import com.google.gson.reflect.TypeToken;
 import com.quadrastats.R;
 import com.quadrastats.data.Constants;
 import com.quadrastats.data.RiotData;
@@ -22,22 +20,14 @@ import com.quadrastats.data.UserData;
 import com.quadrastats.models.ModelUtil;
 import com.quadrastats.models.datadragon.Champion;
 import com.quadrastats.models.datadragon.Champions;
-import com.quadrastats.models.requests.ReqGetSummoners;
-import com.quadrastats.models.requests.ReqMatchStats;
-import com.quadrastats.models.requests.ReqSeasonStats;
-import com.quadrastats.models.stats.MatchStats;
-import com.quadrastats.models.stats.SeasonStats;
 import com.quadrastats.models.summoner.Summoner;
-import com.quadrastats.models.summoner.User;
 import com.quadrastats.network.Http;
 import com.quadrastats.network.HttpResponse;
 import com.quadrastats.screens.ScreenUtil;
 import com.quadrastats.screens.home.HomeActivity;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -51,7 +41,6 @@ public class SplashActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private boolean ready;
     private Summoner summoner;
-    private User user;
 
     @Override
     public void onBackPressed() {
@@ -68,11 +57,9 @@ public class SplashActivity extends AppCompatActivity {
             moveTaskToBack(true);
         }
 
-        // extract summoner and user objects
+        // extract users summoner object
         String summonerJson = getIntent().getExtras().getString("summoner");
-        String userJson = getIntent().getExtras().getString("user");
         summoner = ModelUtil.fromJson(summonerJson, Summoner.class);
-        user = ModelUtil.fromJson(userJson, User.class);
 
         // initialize progress bar
         progressBar = (ProgressBar) findViewById(R.id.splash_progress_bar);
@@ -152,132 +139,9 @@ public class SplashActivity extends AppCompatActivity {
                 errorMessage = postResponse1.error;
                 return true;
             }
-            publishProgress(250);
-
-            // 2. get and save locally each friend summoner object
-            if (!"".equals(summoner.friends)) {
-                // create the request object
-                ReqGetSummoners request = new ReqGetSummoners();
-                request.region = summoner.region;
-                request.keys = new ArrayList<>(Arrays.asList(summoner.friends.split(",")));
-
-                // make the request
-                HttpResponse postResponse2 = null;
-                try {
-                    String url = Constants.URL_GET_SUMMONERS;
-                    postResponse2 = new Http().post(url, ModelUtil.toJson(request, ReqGetSummoners.class));
-                } catch (IOException e) {
-                    Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-                }
-
-                // handle the response
-                postResponse2 = ScreenUtil.responseHandler(SplashActivity.this, postResponse2);
-
-                // save
-                if (postResponse2.valid) {
-                    Type type = new TypeToken<List<Summoner>>() {
-                    }.getType();
-                    List<Summoner> friends = ModelUtil.fromJsonList(postResponse2.body, type);
-                    ActiveAndroid.beginTransaction();
-                    try {
-                        for (Summoner friend : friends) {
-                            friend.save();
-                        }
-                        ActiveAndroid.setTransactionSuccessful();
-                    } finally {
-                        ActiveAndroid.endTransaction();
-                    }
-                } else {
-                    errorMessage = postResponse2.error;
-                    return true;
-                }
-            }
-            publishProgress(500);
-
-            // 3. get match stats for user and friends
-            if (!"".equals(summoner.friends)) {
-                // create the request object
-                ReqMatchStats request = new ReqMatchStats();
-                request.region = summoner.region;
-                String keys = summoner.key + "," + summoner.friends;
-                request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
-
-                // make the request
-                HttpResponse postResponse3 = null;
-                try {
-                    String url = Constants.URL_GET_MATCH_STATS;
-                    postResponse3 = new Http().post(url, ModelUtil.toJson(request, ReqMatchStats.class));
-                } catch (IOException e) {
-                    Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-                }
-
-                // handle the response
-                postResponse3 = ScreenUtil.responseHandler(SplashActivity.this, postResponse3);
-
-                // save
-                if (postResponse3.valid) {
-                    Type type = new TypeToken<List<MatchStats>>() {
-                    }.getType();
-                    List<MatchStats> matchStatsList = ModelUtil.fromJsonList(postResponse3.body, type);
-                    ActiveAndroid.beginTransaction();
-                    try {
-                        for (MatchStats matchStats : matchStatsList) {
-                            matchStats.save();
-                        }
-                        ActiveAndroid.setTransactionSuccessful();
-                    } finally {
-                        ActiveAndroid.endTransaction();
-                    }
-                } else {
-                    errorMessage = postResponse3.error;
-                    return true;
-                }
-            }
-            publishProgress(750);
-
-            // 4. get season stats for user and friends
-            if (!"".equals(summoner.friends)) {
-                // create the request object
-                ReqSeasonStats request = new ReqSeasonStats();
-                request.region = summoner.region;
-                String keys = summoner.key + "," + summoner.friends;
-                request.keys = new ArrayList<>(Arrays.asList(keys.split(",")));
-
-                // make the request
-                HttpResponse postResponse4 = null;
-                try {
-                    String url = Constants.URL_GET_SEASON_STATS;
-                    postResponse4 = new Http().post(url, ModelUtil.toJson(request, ReqSeasonStats.class));
-                } catch (IOException e) {
-                    Log.e(Constants.TAG_EXCEPTIONS, "@" + getClass().getSimpleName() + ": " + e.getMessage());
-                }
-
-                // handle the response
-                postResponse4 = ScreenUtil.responseHandler(SplashActivity.this, postResponse4);
-
-                // save
-                if (postResponse4.valid) {
-                    Type type = new TypeToken<List<SeasonStats>>() {
-                    }.getType();
-                    List<SeasonStats> seasonsStatsList = ModelUtil.fromJsonList(postResponse4.body, type);
-                    ActiveAndroid.beginTransaction();
-                    try {
-                        for (SeasonStats seasonStats : seasonsStatsList) {
-                            seasonStats.save();
-                        }
-                        ActiveAndroid.setTransactionSuccessful();
-                    } finally {
-                        ActiveAndroid.endTransaction();
-                    }
-                } else {
-                    errorMessage = postResponse4.error;
-                    return true;
-                }
-            }
             publishProgress(1000);
 
             // save user data
-            userData.setEmail(SplashActivity.this, user.email);
             userData.setId(SplashActivity.this, summoner.summoner_id);
             userData.setSignInStatus(SplashActivity.this, true);
 

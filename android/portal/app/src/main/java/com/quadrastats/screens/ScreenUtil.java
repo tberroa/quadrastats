@@ -46,32 +46,14 @@ public class ScreenUtil {
             httpResponse.valid = false;
             ReqError reqError = ModelUtil.fromJson(httpResponse.body, ReqError.class);
             switch (reqError.error) {
-                case Constants.ERR_FRIEND_ALREADY_LISTED:
-                    httpResponse.error = context.getString(R.string.err_friend_already_listed);
-                    return httpResponse;
-                case Constants.ERR_FRIEND_EQUALS_USER:
-                    httpResponse.error = context.getString(R.string.err_friend_equals_user);
-                    return httpResponse;
-                case Constants.ERR_FRIEND_LIMIT_REACHED:
-                    httpResponse.error = context.getString(R.string.err_friend_limit_reached);
-                    return httpResponse;
                 case Constants.ERR_INTERNAL_ERROR:
                     httpResponse.error = context.getString(R.string.err_internal_error);
-                    return httpResponse;
-                case Constants.ERR_INVALID_CREDENTIALS:
-                    httpResponse.error = context.getString(R.string.err_invalid_credentials);
                     return httpResponse;
                 case Constants.ERR_INVALID_REQUEST_FORMAT:
                     httpResponse.error = context.getString(R.string.err_invalid_request_format);
                     return httpResponse;
                 case Constants.ERR_INVALID_RIOT_RESPONSE:
                     httpResponse.error = context.getString(R.string.err_invalid_riot_response);
-                    return httpResponse;
-                case Constants.ERR_RUNE_PAGE_CODE_NOT_FOUND:
-                    httpResponse.error = context.getString(R.string.err_rune_page_code_not_found);
-                    return httpResponse;
-                case Constants.ERR_SUMMONER_ALREADY_REGISTERED:
-                    httpResponse.error = context.getString(R.string.err_summoner_already_registered);
                     return httpResponse;
                 case Constants.ERR_SUMMONER_DOES_NOT_EXIST:
                     httpResponse.error = context.getString(R.string.err_summoner_does_not_exist);
@@ -81,9 +63,6 @@ public class ScreenUtil {
                     return httpResponse;
                 case Constants.ERR_SUMMONER_NOT_RANKED:
                     httpResponse.error = context.getString(R.string.err_summoner_not_ranked);
-                    return httpResponse;
-                case Constants.ERR_SUMMONER_NOT_REGISTERED:
-                    httpResponse.error = context.getString(R.string.err_summoner_not_registered);
                     return httpResponse;
                 default:
                     httpResponse.error = reqError.message;

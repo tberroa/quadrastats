@@ -17,22 +17,6 @@
 
     <!-- authentication activities -->
     <string name="auth_summoner_name">Summoner Name</string>
-    <string name="auth_email">Email</string>
-    <string name="auth_password">Password</string>
-    <string name="auth_confirm_password">Confirm password</string>
-    <string name="auth_password_mismatch">Password mismatch</string>
-    <string name="auth_empty_field">Field cannot be empty</string>
-    <string name="auth_sign_in">Sign In</string>
-    <string name="auth_register">Register</string>
-    <string name="auth_reset_password">Reset Password</string>
-    <string name="auth_successful_reset">Password successfully reset</string>
-    <string name="auth_go_to_register">No account yet? Register</string>
-    <string name="auth_go_to_sign_in">Already have an account? Sign In</string>
-    <string name="auth_validate_ownership_instructions">
-        Almost done! Change one of your rune pages to the number below in order
-        to prove ownership of the summoner account. After changing your rune page, wait
-        about five seconds before pressing DONE to allow for the Riot servers to update.
-    </string>
     <string name="auth_select_region">Select Region</string>
     <string-array name="auth_select_region_array">
         <item>@string/auth_select_region</item>
@@ -58,14 +42,6 @@
     <string name="ma_sign_out">Sign Out</string>
     <string name="ma_licenses">Licenses</string>
     <string name="ma_license_info">License Information</string>
-    <string name="ma_new_email">New Email</string>
-    <string name="ma_password">Password</string>
-    <string name="ma_current_password">Current Password</string>
-    <string name="ma_new_password">New Password</string>
-    <string name="ma_confirm_new_password">Confirm New Password</string>
-    <string name="ma_password_mismatch">Password mismatch</string>
-    <string name="ma_successful_email_change">Email successfully changed</string>
-    <string name="ma_successful_password_change">Password successfully changed</string>
 
     <!-- manage friends activity -->
     <string name="mf_activity_title">Manage Friends</string>
@@ -85,7 +61,6 @@
     <string name="mf_challenger">Challenger</string>
     <string name="mf_friend_added_success">Friend added successfully</string>
     <string name="mf_friend_removed_success">Friend removed successfully</string>
-    <string name="mf_summoner_sync_success">Summoners synced successfully</string>
     <string name="mf_update_success">Update triggered successfully</string>
     <string name="mf_update_confirm">
         Are you sure you want to trigger a stats update? You can only do this once per hour.
