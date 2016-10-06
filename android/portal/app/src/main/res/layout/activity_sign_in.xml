@@ -24,7 +24,7 @@
             android:ems="12"
             android:gravity="center"
             android:hint="@string/auth_summoner_name"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:textColorHint="@color/white"
             android:textSize="@dimen/text_size_large"

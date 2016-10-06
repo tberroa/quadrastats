@@ -163,6 +163,9 @@ public class SignInActivity extends AppCompatActivity {
                 // get the summoner object
                 Summoner summoner = ModelUtil.fromJson(postResponse.body, Summoner.class);
 
+                // clear friends list - backwards compatibility requirement
+                summoner.friends = "";
+
                 // sign in
                 AuthUtil.signIn(SignInActivity.this, summoner, inView);
             } else { // display error

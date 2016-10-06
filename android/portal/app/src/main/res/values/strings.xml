@@ -61,6 +61,9 @@
     <string name="mf_challenger">Challenger</string>
     <string name="mf_friend_added_success">Friend added successfully</string>
     <string name="mf_friend_removed_success">Friend removed successfully</string>
+    <string name="mf_friend_already_listed">Friend already listed</string>
+    <string name="mf_friend_equals_user">Cannot add yourself as a friend</string>
+    <string name="mf_friend_limit_reached">Friend limit reached</string>
     <string name="mf_update_success">Update triggered successfully</string>
     <string name="mf_update_confirm">
         Are you sure you want to trigger a stats update? You can only do this once per hour.
@@ -172,19 +175,12 @@
     <string name="err_must_select_one">Must select at least one</string>
 
     <!-- backend error messages -->
-    <string name="err_friend_already_listed">Friend already listed</string>
-    <string name="err_friend_equals_user">Cannot add yourself as a friend</string>
-    <string name="err_friend_limit_reached">Friend limit reached</string>
     <string name="err_internal_error">Internal processing error</string>
-    <string name="err_invalid_credentials">Invalid credentials</string>
     <string name="err_invalid_request_format">Invalid request format</string>
     <string name="err_invalid_riot_response">Invalid response from Riot servers</string>
-    <string name="err_rune_page_code_not_found">Rune page code not found</string>
-    <string name="err_summoner_already_registered">Summoner already registered</string>
     <string name="err_summoner_does_not_exist">Summoner does not exist</string>
     <string name="err_summoner_not_in_database">Summoner not in database</string>
     <string name="err_summoner_not_ranked">Summoner not ranked</string>
-    <string name="err_summoner_not_registered">Summoner not registered</string>
 
     <!-- content descriptions -->
     <string name="drawer_open">Open Drawer</string>

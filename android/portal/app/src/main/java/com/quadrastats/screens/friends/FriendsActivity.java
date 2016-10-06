@@ -128,20 +128,42 @@ public class FriendsActivity extends BaseActivity {
 
     private class AddFriend extends AsyncTask<String, Void, HttpResponse> {
 
+        int error;
         Summoner friend;
-        String friendKey;
-        Summoner user;
 
         @Override
         protected HttpResponse doInBackground(String... params) {
             LocalDB localDB = new LocalDB();
             UserData userData = new UserData();
 
-            // store friend key
-            friendKey = params[0];
+            // get user
+            Summoner user = localDB.summoner(userData.getId(FriendsActivity.this));
+
+            // extract friend key
+            String friendKey = params[0];
+
+            // check if user is trying to add themselves
+            if (friendKey.equals(user.key)) {
+                error = 1;
+                return null;
+            }
+
+            // check if this friend is already listed
+            List<String> friends = Arrays.asList(user.friends.split(","));
+            for (String friend : friends) {
+                if (friend.equals(friendKey)) {
+                    error = 2;
+                    return null;
+                }
+            }
+
+            // check if the friend limit has been reached
+            if (friends.size() >= 20) {
+                error = 3;
+                return null;
+            }
 
             // create the request object
-            user = localDB.summoner(userData.getId(FriendsActivity.this));
             ReqAddFriend request = new ReqAddFriend();
             request.region = user.region;
             request.key = friendKey;
@@ -180,7 +202,22 @@ public class FriendsActivity extends BaseActivity {
                 return;
             }
 
-            if (postResponse.valid) {
+            // check if error occurred
+            if (error > 0) {
+                String message = "";
+                switch (error) {
+                    case 1:
+                        message = getString(R.string.mf_friend_equals_user);
+                        break;
+                    case 2:
+                        message = getString(R.string.mf_friend_already_listed);
+                        break;
+                    case 3:
+                        message = getString(R.string.mf_friend_limit_reached);
+                        break;
+                }
+                Toast.makeText(FriendsActivity.this, message, Toast.LENGTH_SHORT).show();
+            } else if (postResponse.valid) {
                 // update list view
                 friends.add(friend);
                 friendsAdapter.notifyDataSetChanged();
@@ -274,7 +311,7 @@ public class FriendsActivity extends BaseActivity {
             Summoner user = localDB.summoner(userData.getId(FriendsActivity.this));
 
             // convert the users friend list into a list
-            List<String> friends = Arrays.asList(user.friends.split(","));
+            List<String> friends = new ArrayList<>(Arrays.asList(user.friends.split(",")));
 
             // delete the friend from the friends list
             for (Iterator<String> iterator = friends.listIterator(); iterator.hasNext(); ) {
