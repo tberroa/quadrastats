@@ -171,6 +171,122 @@ def add_friend(request):
 
 
 @require_POST
+def add_friend_1_1(request):
+    # extract data
+    data = json.loads(request.body.decode('utf-8'))
+    region = data.get("region")
+    key = data.get("key")
+
+    # ensure the data is valid
+    if None in (region, key):
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
+
+    # ensure proper key format
+    key = format_key(key)
+
+    try:
+        # get the summoner object
+        summoner_o = cache.get(region + key + "summoner")
+        if summoner_o is None:
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            cache.set(region + key + "summoner", summoner_o, None)
+        Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
+
+        # return the summoner object
+        return HttpResponse(summoner_serializer(summoner_o, None, False))
+    except Summoner.DoesNotExist:
+        pass
+
+    try:
+        # summoner not in database, request summoner data from riot
+        args = {"request": 1, "key": key}
+        riot_response = riot_request(region, args)
+    except APIError as e:
+        if e.error_code == 404:
+            return HttpResponse(json.dumps(SUMMONER_DOES_NOT_EXIST))
+        else:
+            return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+
+    try:
+        # extract the summoner
+        summoner = riot_response.get(key)
+
+        # extract summoner fields
+        summoner_id = summoner.id
+        name = summoner.name
+        profile_icon = summoner.profileIconId
+    except AttributeError:
+        return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+
+    try:
+        # use summoner id to get league information
+        args = {"request": 4, "summoner_ids": summoner_id}
+        riot_response = riot_request(region, args)
+    except APIError as e:
+        if e.error_code == 404:
+            return HttpResponse(json.dumps(SUMMONER_NOT_RANKED))
+        else:
+            return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+
+    try:
+        # extract the league data
+        leagues = riot_response.get(str(summoner_id))
+
+        # iterate over the leagues looking for the dynamic queue league
+        league = None
+        for item in leagues:
+            if item.queue == "RANKED_SOLO_5x5":
+                league = item
+
+        # ensure the dynamic queue league was found
+        if league is None:
+            return HttpResponse(json.dumps(SUMMONER_NOT_RANKED))
+
+        # iterate over the league entries to get more detailed information
+        division, lp, wins, losses, series = None, None, None, None, ""
+        for entry in league.entries:
+            if entry.playerOrTeamId == str(summoner_id):
+                division = entry.division
+                lp = entry.leaguePoints
+                wins = entry.wins
+                losses = entry.losses
+                if entry.miniSeries is not None:
+                    series = entry.miniSeries.progress
+
+        # extract the tier information
+        tier = league.tier
+    except AttributeError:
+        return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+
+    try:
+        # use the gathered information to create a summoner object
+        summoner_o = Summoner.objects.create(
+            region=region,
+            key=key,
+            name=name,
+            summoner_id=summoner_id,
+            tier=tier,
+            division=division,
+            lp=lp,
+            wins=wins,
+            losses=losses,
+            series=series,
+            profile_icon=profile_icon)
+    except IntegrityError:
+        return HttpResponse(json.dumps(INTERNAL_PROCESSING_ERROR))
+
+    # update the newly created summoner
+    conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+    queue = conn.get_queue("portal")
+    message = RawMessage()
+    message.set_body(json.dumps({"region": region, "keys": [key]}))
+    queue.write(message)
+
+    # return the summoner object
+    return HttpResponse(summoner_serializer(summoner_o, None, False))
+
+
+@require_POST
 def change_email(request):
     # extract data
     data = json.loads(request.body.decode('utf-8'))
@@ -329,6 +445,122 @@ def login_user(request):
 
     # return the users summoner object with the email included
     return HttpResponse(summoner_serializer(summoner_o, email, False))
+
+
+@require_POST
+def login_user_1_1(request):
+    # extract data
+    data = json.loads(request.body.decode('utf-8'))
+    region = data.get("region")
+    key = data.get("key")
+
+    # ensure the data is valid
+    if None in (region, key):
+        return HttpResponse(json.dumps(INVALID_REQUEST_FORMAT))
+
+    # ensure proper key format
+    key = format_key(key)
+
+    try:
+        # get the summoner object
+        summoner_o = cache.get(region + key + "summoner")
+        if summoner_o is None:
+            summoner_o = Summoner.objects.get(region=region, key=key)
+            cache.set(region + key + "summoner", summoner_o, None)
+        Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
+
+        # return the users summoner object
+        return HttpResponse(summoner_serializer(summoner_o, None, False))
+    except Summoner.DoesNotExist:
+        pass
+
+    try:
+        # summoner not in database, request summoner data from riot
+        args = {"request": 1, "key": key}
+        riot_response = riot_request(region, args)
+    except APIError as e:
+        if e.error_code == 404:
+            return HttpResponse(json.dumps(SUMMONER_DOES_NOT_EXIST))
+        else:
+            return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+
+    try:
+        # extract the summoner
+        summoner = riot_response.get(key)
+
+        # extract summoner fields
+        summoner_id = summoner.id
+        name = summoner.name
+        profile_icon = summoner.profileIconId
+    except AttributeError:
+        return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+
+    try:
+        # use summoner id to get league information
+        args = {"request": 4, "summoner_ids": summoner_id}
+        riot_response = riot_request(region, args)
+    except APIError as e:
+        if e.error_code == 404:
+            return HttpResponse(json.dumps(SUMMONER_NOT_RANKED))
+        else:
+            return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+
+    try:
+        # extract the league data
+        leagues = riot_response.get(str(summoner_id))
+
+        # iterate over the leagues looking for the dynamic queue league
+        league = None
+        for item in leagues:
+            if item.queue == "RANKED_SOLO_5x5":
+                league = item
+
+        # ensure the dynamic queue league was found
+        if league is None:
+            return HttpResponse(json.dumps(SUMMONER_NOT_RANKED))
+
+        # iterate over the league entries to get more detailed information
+        division, lp, wins, losses, series = None, None, None, None, ""
+        for entry in league.entries:
+            if entry.playerOrTeamId == str(summoner_id):
+                division = entry.division
+                lp = entry.leaguePoints
+                wins = entry.wins
+                losses = entry.losses
+                if entry.miniSeries is not None:
+                    series = entry.miniSeries.progress
+
+        # extract the tier information
+        tier = league.tier
+    except AttributeError:
+        return HttpResponse(json.dumps(INVALID_RIOT_RESPONSE))
+
+    try:
+        # use the gathered information to create a summoner object
+        summoner_o = Summoner.objects.create(
+            region=region,
+            key=key,
+            name=name,
+            summoner_id=summoner_id,
+            tier=tier,
+            division=division,
+            lp=lp,
+            wins=wins,
+            losses=losses,
+            series=series,
+            profile_icon=profile_icon)
+    except IntegrityError:
+        return HttpResponse(json.dumps(INTERNAL_PROCESSING_ERROR))
+
+    # update the newly created summoner
+    conn = SQSConnection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+    queue = conn.get_queue("portal")
+    message = RawMessage()
+    message.set_body(json.dumps({"region": region, "keys": [key]}))
+    queue.write(message)
+
+    # return the users summoner object
+    return HttpResponse(summoner_serializer(summoner_o, None, False))
 
 
 @require_POST

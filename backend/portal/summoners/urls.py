@@ -3,10 +3,12 @@ from django.views.decorators.csrf import csrf_exempt
 from summoners import views
 
 urlpatterns = [
+    url(r'^add-friend_1_1.json', csrf_exempt(views.add_friend_1_1)),
     url(r'^add-friend.json', csrf_exempt(views.add_friend)),
     url(r'^change-email.json', csrf_exempt(views.change_email)),
     url(r'^change-password.json', csrf_exempt(views.change_password)),
     url(r'^get.json', csrf_exempt(views.get_summoners)),
+    url(r'^login_1_1.json', csrf_exempt(views.login_user_1_1)),
     url(r'^login.json', csrf_exempt(views.login_user)),
     url(r'^register.json', csrf_exempt(views.register_user)),
     url(r'^remove-friend.json', csrf_exempt(views.remove_friend)),
