@@ -1,7 +1,6 @@
 # Portal
 League of Legends app for easily comparing in-game stats and player performance.
 
-![alt tag](http://quadrastats.altervista.org/images/b1_friends.png)
 - Check out app at http://quadrastats.com
 
 ## Backend
