@@ -11,9 +11,10 @@ from django.views.decorators.http import require_POST
 from stats.models import MatchStats
 from stats.models import SeasonStats
 from summoners.models import Summoner
+from threading import Thread
 from worker.keys import RIOT_API_KEY
 
-QUEUE = "TEAM_BUILDER_DRAFT_RANKED_5x5"
+QUEUE = "TEAM_BUILDER_RANKED_SOLO"
 SEASON = "SEASON2016"
 baseriotapi.set_api_key(RIOT_API_KEY)
 baseriotapi.set_rate_limits((270, 10), (16200, 600))
@@ -133,18 +134,22 @@ def update_active(request):
 
 @require_POST
 def update_nonactive(request):
-    # get the 10 least recently accessed summoners
-    summoners_o = list(Summoner.objects.all().order_by("accessed")[:10])
+    # create a new thread to update all summoners
+    thread = Thread(target = update_nonactive_async)
 
-    # update date accessed
-    for summoner_o in summoners_o:
-        Summoner.objects.filter(pk=summoner_o.pk).update(accessed=datetime.now())
-
-    # update
-    update_all(summoners_o)
+    # run the thread
+    thread.start;
 
     # successful return
     return HttpResponse(status=200)
+
+def update_nonactive_async():
+    # get all summoners in order from nonactive to active
+    summoners_o = list(Summoner.objects.all().order_by("accessed"))
+
+    # update each summoner
+    for summoner_o in summoners_o:
+      update_all(summoner_o)
 
 
 def update_all(summoners_o):
