@@ -1,6 +1,6 @@
 ![portal](resources/icon_logo.png)
 
-# App Preview
+# App Views
 ### Compare Stats to Friends and Pros
 ![portal](resources/app_view_row_1.png)
 
@@ -8,7 +8,7 @@
 ![portal](resources/app_view_row_2.png)
 
 ### Many Different Stats and Customizable Plotting
-![portal](resources/app_view_row_2.png)
+![portal](resources/app_view_row_3.png)
 
 # Backend
 ### System Diagram
