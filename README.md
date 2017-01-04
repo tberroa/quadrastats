@@ -1,6 +1,6 @@
-![portal](resources/icon_logo.png)
+# ![portal](resources/icon_logo.png)
 
-# App Views
+# App
 ### Compare Stats to Friends and Pros
 ![portal](resources/app_view_row_1.png)
 
