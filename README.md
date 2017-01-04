@@ -1,4 +1,10 @@
 # ![portal](resources/icon_logo.png)
+Mobile application for League of Legends players. The goal is to make 
+comparing player performance easy.
+
+The project is no longer being maintained and has been taken down due 
+to server costs. If you are interested in picking up where I left off, 
+email me at tberroa@outlook.com to chat.
 
 # App
 ### Compare Stats to Friends and Pros
@@ -41,7 +47,7 @@
 # License
 MIT License
 
-Copyright (c) 2017 Thomas Berroa
+Copyright © 2017 Thomas Berroa
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
