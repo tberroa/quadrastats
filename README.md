@@ -1,5 +1,24 @@
 ![portal](resources/icon_logo.png)
 
+# App Preview
+### Compare Stats to Friends and Pros
+![portal](resources/b1_friends.png)
+![portal](resources/b1_recent.png)
+![portal](resources/b1_season.png)
+![portal](resources/b1_with_friends.png)
+
+### Break Stats Down By Role and Champion
+![portal](resources/b2_filter.png)
+![portal](resources/b2_recent_filtered.png)
+![portal](resources/b2_season_filtered.png)
+![portal](resources/b2_win_rates_filtered.png)
+
+### Many Different Stats and Customizable Plotting
+![portal](resources/b3_first_tower.png)
+![portal](resources/b3_kills.png)
+![portal](resources/b3_plot_summoners.png)
+![portal](resources/b3_wards_bought.png)
+
 # Backend
 ### System Diagram
 ![portal](resources/system.png)
