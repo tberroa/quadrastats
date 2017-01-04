@@ -4,10 +4,10 @@ League of Legends app for easily comparing in-game stats and player performance.
 - Check out app at http://quadrastats.com
 
 ## Backend
-**System Diagram**
+**System Diagram**  
 ![portal](resources/system.png)
 
-**Required Libraries**
+**Required Libraries**  
 - awsebcli
 - boto
 - cassiopeia
@@ -15,7 +15,7 @@ League of Legends app for easily comparing in-game stats and player performance.
 - pymysql
 - python-memcached
 
-**Setting Up For Linux Development**
+**Setting Up For Linux Development**  
 1. Make sure python is installed
 2. Install git: sudo apt-get install git
 3. Clone repo in home directory: git clone http://github.com/tberroa/portal
