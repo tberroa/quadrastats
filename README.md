@@ -2,13 +2,13 @@
 
 # App Preview
 ### Compare Stats to Friends and Pros
-![portal](resources/test.png)
+![portal](resources/app_view_row_1.png)
 
 ### Break Stats Down By Role and Champion
-![portal](resources/test.png)
+![portal](resources/app_view_row_2.png)
 
 ### Many Different Stats and Customizable Plotting
-![portal](resources/test.png)
+![portal](resources/app_view_row_2.png)
 
 # Backend
 ### System Diagram
