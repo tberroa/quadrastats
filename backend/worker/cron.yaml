@@ -2,7 +2,7 @@ version: 1
 cron:
  - name: "update_active"
    url: "/update_active"
-   schedule: "*/1 * * * *"
+   schedule: "*/5 * * * *"
  - name: "update_nonactive"
    url: "/update_nonactive"
-   schedule: "*/1 * * * *"
+   schedule: "* */12 * * *"
