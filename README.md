@@ -1,6 +1,8 @@
 # Portal
 League of Legends app for easily comparing in-game stats and player performance.
 
+# ![portal](resources/system.png)
+
 - Check out app at http://quadrastats.com
 
 ## Backend
