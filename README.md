@@ -7,7 +7,7 @@ League of Legends app for easily comparing in-game stats and player performance.
 **System Diagram**  
 ![portal](resources/system.png)
 
-**Required Libraries**  
+**Required Libraries**
 - awsebcli
 - boto
 - cassiopeia
@@ -15,10 +15,11 @@ League of Legends app for easily comparing in-game stats and player performance.
 - pymysql
 - python-memcached
 
-**Setting Up For Linux Development**  
-1. Make sure python is installed
-2. Install git: sudo apt-get install git
-3. Clone repo in home directory: git clone http://github.com/tberroa/portal
+**Setting Up For Linux Development**
+
+1. Make sure python is installed  
+2. Install git: sudo apt-get install git  
+3. Clone repo in home directory: git clone http://github.com/tberroa/portal  
 4. Install pip: sudo apt-get install python-pip
 5. Install python3-dev: sudo apt-get install python3-dev
 6. Install virtualenv: sudo pip install virtualenv
@@ -30,3 +31,11 @@ League of Legends app for easily comparing in-game stats and player performance.
 12. Set up log file permissions: sudo chmod 666 /var/log/django.log
 13. Set up AWS Elastic Beanstalk files in /backend/portal: eb init
 14. Set up AWS Elastic Beanstalk files in /backend/worker: eb init
+
+
+1. First ordered list item
+2. Another item
+..* Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+..1. Ordered sub-list
+4. And another item.
