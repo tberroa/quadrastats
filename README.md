@@ -44,18 +44,37 @@ email me at tberroa@outlook.com to chat.
 13. Set up AWS Elastic Beanstalk files in /backend/portal: eb init
 14. Set up AWS Elastic Beanstalk files in /backend/worker: eb init
 
-# Tests
-### Server & API Tests
+# Server & API Tests
+### Apache
+At 3000 calls per second, server performance begins to degrade due 
+to EC2 nano memory constraints. The server comfortably handles 2000 
+calls per second.
 ![portal](resources/test_apache.png)
 
+### Riot API
+The Cassiopeia library is properly respecting the Riot rate limit.
+The server comfortably handles 285 calls per second to the Riot API.
 ![portal](resources/test_riot_api.png)
 
+### Database
+Database performance begins to degrade at 1000 calls per second.
+Database comfortable handles 500 calls per second. Operation is a 
+simple SELECT query.
 ![portal](resources/test_database.png)
 
+### Login Endpoint
+Login performance begins to degrade at 500 calls per second due to hashing costs on the EC2 CPU.
+The server comfortably handles 200 calls per second to the login endpoint.
 ![portal](resources/test_login.png)
 
+### Get Match Stats Endpoint (for 10 summoners)
+Get match stats cached performance is very good up to 200 calls per second.
+Get match stats non-cached performance at the same 200 calls per second is noticeably worse.
 ![portal](resources/test_get_match_stats_10.png)
 
+### Get Season Stats Endpoint (for 10 summoners)
+Get season stats cached performance is very good up to 230 calls per second.
+Get season stats non-cached performance at the same 230 calls per second is noticeably worse.
 ![portal](resources/test_get_season_stats_10.png)
 
 # License
