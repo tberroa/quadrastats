@@ -46,23 +46,17 @@ email me at tberroa@outlook.com to chat.
 
 # Tests
 ### Server & API Tests
-![portal](resources/test_apache_3000.png)
-![portal](resources/test_apache_2000.png)
+![portal](resources/test_apache.png)
 
-![portal](resources/test_riot_api_500.png)
-![portal](resources/test_riot_api_285.png)
+![portal](resources/test_riot_api.png)
 
-![portal](resources/test_database_1000.png)
-![portal](resources/test_database_500.png)
+![portal](resources/test_database.png)
 
-![portal](resources/test_login_500.png)
-![portal](resources/test_login_200.png)
+![portal](resources/test_login.png)
 
-![portal](resources/test_get_match_stats_cached_10_200.png)
-![portal](resources/test_get_match_stats_10_200.png)
+![portal](resources/test_get_match_stats_10.png)
 
-![portal](resources/test_get_season_stats_cached_10_230.png)
-![portal](resources/test_get_season_stats_10_230.png)
+![portal](resources/test_get_season_stats_10.png)
 
 # License
 MIT License
